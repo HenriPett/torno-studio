@@ -452,6 +452,35 @@
         "sidecarSha256": "4dd4c396929878576a452e08693e3e85d87e3d80377b9d2af3f42e02f581f196",
         "historyAfterApprovalSha256": "ce340dd2e42f915949060f75a0041e8e8aa85a8e4dc16a39b6167cd22f4e6d47"
       }
+    },
+    {
+      "contentId": "torno-artigo-pt-20261016-migracao-dados-validacao",
+      "intentId": "data-migration-business-validation-pt",
+      "locale": "pt-BR",
+      "path": "/blog/migracao-dados-validacao-troca-sistema/",
+      "contentRevision": "7558a4d1482fb7dfbf8cfccc495efa997de243f8d82d8f5ac182c6489710a86d",
+      "approvedBy": "Codex editorial coordinator (Henrique delegated)",
+      "approvedAt": "2026-10-16T21:06:44Z",
+      "reviewedBy": "independent Codex editorial reviewer",
+      "reviewedAt": "2026-10-16T21:06:44Z",
+      "authorizationEvidence": {
+        "runId": "blog-2026-10-16-18h-cloud",
+        "scope": "Editorial article and its two original diagrams only",
+        "source": "Henrique authorization relayed in 2026-10-16 18h cloud execution instruction",
+        "editorialReview": "Independent factual and visual GO after source, image and draft inspection; final HTML and diff gate pending",
+        "authorAttribution": "none; no claim that Henrique wrote the article",
+        "publicationEvidence": null
+      },
+      "assets": [
+        {
+          "path": "migracao-validacao.svg",
+          "sha256": "bcdc6a98a684b4cf149ca19fa933508c94f9e3455ffc09dc1578b55e320fee97"
+        },
+        {
+          "path": "migracao-corte.svg",
+          "sha256": "eb3c29b70e8bce51a62b79fad2bba12dfa9fdf97ea229e809d5b6db99c695513"
+        }
+      ]
     }
   ]
 }

@@ -447,3 +447,12 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 | intenção / medição | GO qualitativo de Trilha para `postlaunch-software-operating-cost-pt` preservado. A home Product Evolution conserva planos/preços/contratação; este artigo trata faturas de provedores, manutenção/suporte e evolução pós-go-live. O HOLD `app-web-mvp-cost-pt` continua válido. Demanda/volume quantitativo, dificuldade e GSC/indexação/consultas/impressões/posição: **SEM DADO**. |
 
 **Deduplicação:** este evento promove apenas `content_id + locale` da manutenção pós-lançamento. Não republica planilhas, critérios, ERP ou evidências antes de refazer sistema; não altera suas datas de primeira publicação, não reabre o custo de construção do MVP e não cria versão EN.
+
+
+### Rodada 18h — validação de migração de dados (2026-10-16)
+
+- Evento `release-approved:torno-artigo-pt-20261016-migracao-dados-validacao:2026-10-16T21:06:44Z`; execução `blog-2026-10-16-18h-cloud`, registrado em 2026-10-16T21:06:44Z (18h em America/Sao_Paulo). Intenção `data-migration-business-validation-pt`, keyword qualitativa “migração de dados entre sistemas”, URL planejada `/blog/migracao-dados-validacao-troca-sistema/`.
+- Decisão `new_distinct_intent`: esta ficha responde quais evidências o comprador exige antes de liberar dados na troca de sistema. O artigo de ERP trata briefing de integração, o de reconstrução trata decidir reparar ou refazer, e o de aceite de MVP trata entregáveis gerais. O HOLD `app-web-mvp-cost-pt` permanece. SERP qualitativa e fontes no registro de execução; volume, dificuldade, GSC, ranking e indexação: SEM DADO.
+- Estado editorial `review` no Markdown, incluível no release por aprovação hash-bound `7558a4d1482fb7dfbf8cfccc495efa997de243f8d82d8f5ac182c6489710a86d`. Revisão factual e visual independente: GO registrado pela coordenação; aprovador operacional Codex sob autorização editorial de Henrique nesta rodada. Não atribuir autoria do texto a Henrique.
+- Diagramas originais `migracao-validacao.svg` (bcdc6a98a684b4cf149ca19fa933508c94f9e3455ffc09dc1578b55e320fee97) e `migracao-corte.svg` (eb3c29b70e8bce51a62b79fad2bba12dfa9fdf97ea229e809d5b6db99c695513); alt e legendas no Markdown; arte própria, sem terceiros.
+- `first_published_at=null`, `verified_at=null`, `evidence_of_publication=null` até observação pública. Push, build ou sitemap local não provam publicação.

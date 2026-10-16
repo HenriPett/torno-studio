@@ -40,6 +40,15 @@ const RELEASE_ALLOWLIST = [
     ],
   },
   {content_id:maintenanceId,intent_id:'postlaunch-software-operating-cost-pt',locale:'pt-BR',path:maintenancePath,canonical_url:BLOG_ORIGIN+maintenancePath,digest:maintenanceHashes.body,digestScope:'file',assets:[{path:'orcamento-apos-lancamento.svg',digest:maintenanceHashes.svg}]},
+  {
+    content_id: 'torno-artigo-pt-20261016-migracao-dados-validacao', intent_id: 'data-migration-business-validation-pt', locale: 'pt-BR',
+    path: '/blog/migracao-dados-validacao-troca-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/migracao-dados-validacao-troca-sistema/`,
+    digest: '7558a4d1482fb7dfbf8cfccc495efa997de243f8d82d8f5ac182c6489710a86d', digestScope: 'file',
+    assets: [
+      { path: 'migracao-validacao.svg', digest: 'bcdc6a98a684b4cf149ca19fa933508c94f9e3455ffc09dc1578b55e320fee97' },
+      { path: 'migracao-corte.svg', digest: 'eb3c29b70e8bce51a62b79fad2bba12dfa9fdf97ea229e809d5b6db99c695513' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -272,6 +281,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261015-integracao-erp-briefing': [
         {asset:'./integracao-erp-fluxo.svg',alt:'Mapa hipotético: aprovação comercial no CRM gera envio ao ERP; identificador e situação retornam ao CRM. É preciso definir onde cada cadastro pode ser alterado.',caption:'Exemplo hipotético. Direção dos dados e permissões devem ser confirmadas para os sistemas envolvidos.',className:['blog-figure','blog-figure--erp']},
         {asset:'./integracao-erp-pendencias.svg',alt:'Briefing em três grupos: confirmado com documentação; a confirmar com responsável e impacto; fora da primeira etapa com exclusões registradas.',caption:'Modelo de organização do briefing. Os itens são ilustrativos, sem relação com um cliente real.',className:['blog-figure','blog-figure--erp']},
+      ],
+      'torno-artigo-pt-20261016-migracao-dados-validacao': [
+        {asset:'./migracao-validacao.svg',alt:'Fluxo de migração: origem e mapa, ensaio, conciliação e decisão de corte; divergências retornam à correção e a novos testes.',caption:'A decisão de corte depende do ensaio e da conciliação; divergências pedem nova validação. Crédito: Torno.',className:['blog-figure']},
+        {asset:'./migracao-corte.svg',alt:'Etapas do corte: controlar gravações, concluir alterações e conciliar, decidir entre liberar e retornar e abrir o destino; retorno posterior exige preservar novas gravações.',caption:'Combine checagens, liberação e condições de retorno antes da troca. Crédito: Torno.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
