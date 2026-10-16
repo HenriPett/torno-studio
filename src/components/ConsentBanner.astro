@@ -1,0 +1,344 @@
+---
+/**
+ * Banner de consentimento (docs/consent/SPEC.md §4, DESIGN §13). 1º nível: faixa fixa no rodapé da viewport.
+ * 2º nível: <dialog> modal com as categorias. Tudo nasce `hidden`/fechado: sem JS nada aparece e nada carrega.
+ * Lógica em src/scripts/consent.ts (Compasso); UI e a11y em src/scripts/consent-ui.ts.
+ *
+ * Categorias (DESIGN §13.2, SPEC §9): Necessários, Medição e Publicidade. O script monta a escolha a partir
+ * das checkboxes presentes no diálogo.
+ * Só renderiza com PUBLIC_GADS_ID (decisão do Compasso): sem ele não há banner, a Medição nunca é concedida e os CTAs
+ * seguem como link normal, que é a degradação segura (dev/preview sem env).
+ */
+import { site } from '../config/site';
+import { getCopy, pathFor, type Locale } from '../lib/i18n';
+import ExternalLink from './ui/ExternalLink.astro';
+import Icon from './ui/Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { consent } = getCopy(locale);
+const { dialog } = consent;
+
+/** Ordem do diálogo; `field` = campo do registro ts-consent (SPEC §3.2). */
+const CATEGORIES = [
+  { id: 'necessary', field: null },
+  { id: 'measurement', field: 'medicao' },
+  { id: 'advertising', field: 'publicidade' },
+] as const;
+
+const consentEnabled = Boolean(site.gadsId);
+const policyHref = `${pathFor('privacy', locale)}#cookies`;
+---
+
+{
+  consentEnabled && (
+    <>
+      <div class="consent-bar" role="region" aria-label={consent.regionLabel} data-consent-banner hidden>
+        <div class="container consent-bar__inner">
+          <p class="consent-bar__text">
+            {consent.text}{' '}
+            <a class="link" href={policyHref}>
+              {consent.policyLink}
+            </a>
+          </p>
+          <div class="consent-actions consent-actions--bar">
+            <button type="button" class="consent-btn" data-consent-action="accept">{consent.accept}</button>
+            <button type="button" class="consent-btn" data-consent-action="reject">{consent.reject}</button>
+            <button type="button" class="consent-btn" data-consent-action="customize">{consent.customize}</button>
+          </div>
+        </div>
+      </div>
+
+      <dialog class="consent-dialog" data-consent-dialog aria-labelledby="consent-title" aria-describedby="consent-intro">
+        <div class="consent-dialog__head">
+          <h2 id="consent-title" class="consent-dialog__title" tabindex="-1" data-consent-title>
+            {dialog.title}
+          </h2>
+          <button type="button" class="consent-dialog__close" aria-label={dialog.close} data-consent-close>
+            <Icon name="close" class="consent-dialog__close-icon" />
+          </button>
+        </div>
+        <p id="consent-intro" class="consent-dialog__intro">{dialog.intro}</p>
+        {CATEGORIES.map(({ id, field }) => {
+          const category = dialog.categories[id];
+          return (
+            <fieldset class="consent-cat" data-consent-category={id}>
+              {field === null ? (
+                <legend class="consent-cat__row">
+                  <span class="consent-cat__name">{category.name}</span>
+                  <span class="consent-cat__always">{dialog.alwaysOn}</span>
+                </legend>
+              ) : (
+                <>
+                  <legend class="visually-hidden">{category.name}</legend>
+                  <label class="consent-cat__row consent-cat__label">
+                    <input type="checkbox" name={field} />
+                    <span class="consent-cat__name">{category.name}</span>
+                  </label>
+                </>
+              )}
+              <p class="consent-cat__desc">{category.description}</p>
+              {category.vendors.length > 0 && (
+                <ul class="consent-cat__vendors">
+                  {category.vendors.map((vendor) => (
+                    <li>
+                      <ExternalLink href={vendor.url}>{vendor.label}</ExternalLink>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </fieldset>
+          );
+        })}
+        <div class="consent-actions consent-actions--dialog">
+          <button type="button" class="consent-btn" data-consent-action="reject-all">{dialog.rejectAll}</button>
+          <button type="button" class="consent-btn" data-consent-action="accept-all">{dialog.acceptAll}</button>
+          <button type="button" class="consent-btn" data-consent-action="save">{dialog.save}</button>
+        </div>
+      </dialog>
+
+      <p class="visually-hidden" aria-live="polite" data-consent-live data-message={consent.saved ?? ''} />
+    </>
+  )
+}
+
+<script>
+  import { initConsentUi } from '../scripts/consent-ui';
+
+  initConsentUi();
+</script>
+
+<style>
+  /* Com a faixa aberta, o fim da página e o foco não ficam atrás dela (WCAG 2.4.11). */
+  :global(html) {
+    scroll-padding-block-end: var(--consent-h, 0px);
+  }
+
+  :global(body) {
+    padding-block-end: var(--consent-h, 0px);
+  }
+
+  .consent-bar {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 20;
+    background-color: var(--color-surface);
+    border-block-start: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .consent-bar__inner {
+    display: grid;
+    gap: var(--space-2);
+    padding-block: var(--space-3);
+  }
+
+  .consent-bar__text {
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    color: var(--color-text);
+  }
+
+  .consent-actions {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .consent-actions--bar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Os 3 botões de cada nível são idênticos: Secundário, mesmo tamanho e peso (§13.1). */
+  .consent-btn {
+    min-block-size: var(--tap-min);
+    padding: var(--space-1);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: 1.2;
+    text-wrap: balance;
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .consent-btn:active {
+    border-color: var(--color-text);
+  }
+
+  @media (hover: hover) {
+    .consent-btn:hover {
+      background-color: var(--color-surface-sunken);
+    }
+  }
+
+  @media (min-width: 40em) {
+    .consent-bar__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-5);
+    }
+
+    .consent-actions--bar {
+      grid-template-columns: repeat(3, minmax(8.5rem, 1fr));
+    }
+
+    .consent-actions--dialog {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .consent-dialog {
+    inline-size: min(32rem, calc(100% - 2 * var(--space-4)));
+    max-inline-size: none;
+    max-block-size: calc(100dvh - 2 * var(--space-4));
+    overflow-y: auto;
+    margin: auto;
+    padding: var(--space-5);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+  }
+
+  .consent-dialog::backdrop {
+    background-color: var(--color-backdrop);
+  }
+
+  .consent-dialog__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .consent-dialog__title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    padding-block-start: var(--space-2);
+  }
+
+  .consent-dialog__close {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--tap-min);
+    block-size: var(--tap-min);
+    padding: 0;
+    background-color: transparent;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    .consent-dialog__close:hover {
+      background-color: var(--color-surface-sunken);
+    }
+  }
+
+  .consent-dialog__close :global(.consent-dialog__close-icon) {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+  }
+
+  .consent-dialog__intro {
+    margin-block-start: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .consent-cat {
+    margin: 0;
+    padding: var(--space-4) 0;
+    border: 0;
+    border-block-start: var(--border-width) solid var(--color-border);
+    min-inline-size: 0;
+  }
+
+  .consent-cat:first-of-type {
+    margin-block-start: var(--space-4);
+  }
+
+  .consent-cat__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    inline-size: 100%;
+    min-block-size: var(--tap-min);
+    padding: 0;
+  }
+
+  /* Legend flutuante: no fluxo normal, ele não carrega o espaço extra do topo do fieldset. */
+  legend.consent-cat__row {
+    float: inline-start;
+    justify-content: space-between;
+  }
+
+  .consent-cat__desc {
+    clear: both;
+  }
+
+  .consent-cat__label {
+    cursor: pointer;
+  }
+
+  .consent-cat__label input {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    flex: none;
+    margin: 0;
+    accent-color: var(--color-accent);
+  }
+
+  @media (hover: hover) {
+    .consent-cat__label:hover .consent-cat__name {
+      color: var(--color-accent-text);
+    }
+  }
+
+  .consent-cat__name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+  }
+
+  .consent-cat__always {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  .consent-cat__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .consent-cat__vendors {
+    display: flex;
+    flex-wrap: wrap;
+    margin-block-start: var(--space-2);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+  }
+
+  .consent-cat__vendors li:not(:last-child)::after {
+    content: '·';
+    margin-inline: var(--space-2);
+    color: var(--color-border-strong);
+  }
+
+  .consent-actions--dialog {
+    padding-block-start: var(--space-4);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+</style>

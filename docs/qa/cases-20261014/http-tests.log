@@ -1,0 +1,20 @@
+
+Running 7 tests using 4 workers
+
+(node:31206) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31207) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31205) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/qa/cases-http.spec.ts:8:5 › /en/cases/loopt/: SEO, fonte, imagem e saída para contratação (36ms)
+  ✓  2 [chromium] › tests/qa/cases-http.spec.ts:8:5 › /en/cases/bom-capital/: SEO, fonte, imagem e saída para contratação (38ms)
+  ✓  3 [chromium] › tests/qa/cases-http.spec.ts:8:5 › /cases/bom-capital/: SEO, fonte, imagem e saída para contratação (37ms)
+  ✓  4 [chromium] › tests/qa/cases-http.spec.ts:8:5 › /cases/loopt/: SEO, fonte, imagem e saída para contratação (35ms)
+  ✓  6 [chromium] › tests/qa/cases-http.spec.ts:45:1 › home PT/EN liga cada card ao case e fontes continuam separadas (25ms)
+  ✓  7 [chromium] › tests/qa/cases-http.spec.ts:8:5 › /en/cases/ascende/: SEO, fonte, imagem e saída para contratação (24ms)
+  ✓  5 [chromium] › tests/qa/cases-http.spec.ts:8:5 › /cases/ascende/: SEO, fonte, imagem e saída para contratação (28ms)
+
+  7 passed (453ms)

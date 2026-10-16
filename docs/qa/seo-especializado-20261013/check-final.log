@@ -1,0 +1,19 @@
+
+> projeto-50k-site@0.1.0 check
+> astro check
+
+
+Auto-generating collections for folders in "src/content/" that are not defined as collections.
+This is deprecated, so you should define these collections yourself in "src/content.config.ts".
+The following collections have been auto-generated: seo
+
+19:30:38 [content] Syncing content
+19:30:38 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/seo"
+19:30:38 [content] Synced content
+19:30:38 [types] Generated 5.03s
+19:30:38 [check] Getting diagnostics for Astro files in /Users/henriquepett/Downloads/pessoal/projeto-50k-site...
+Result (88 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+

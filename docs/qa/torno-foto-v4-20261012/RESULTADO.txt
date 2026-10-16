@@ -1,0 +1,58 @@
+TORNO-FOTO-V4-20261012 — publicado e confirmado
+
+PT: https://tornostudio.com/
+EN: https://tornostudio.com/en/
+Deploy de produção: 6acd6513597ee18230ffae7f (ready)
+Registro: https://app.netlify.com/projects/tornostudio/deploys/6acd6513597ee18230ffae7f
+Preview aprovado: https://6acd640f9fdc0cdd14953b17--tornostudio.netlify.app/
+
+Fonte ÚNICA aprovada, conferida e inspecionada:
+/Users/henriquepett/Documents/Codex/2026-10-12/task/approved-photo/henrique-sobretudo-quadrada-v4.png
+PNG 900x900 RGB, 1270466 bytes
+SHA256 91f25f9541cc08c4c2716883f3d08f91a434b26538593ace124297069dca20fc
+
+Conversão sharp 0.34.5 para WebP lossless, sem resize, geração ou retoque.
+Comparação de pixels RGB decodificados PNG/WebP: idênticos.
+WebP fonte: 907652 bytes
+SHA256 f245b5ee83f3b602404fdd5de8e06cd1ba9a80c8d25d32e719110adb0fd3e586
+Astro gerou AVIF/WebP/JPEG em 96/160/192/320/480, quadrados.
+
+Mudanças em relação ao snapshot REEL autorizado:
+1. src/assets/henrique-pett.webp: foto substituída.
+2. src/components/sections/FounderPhoto.astro: somente comentário da dimensão
+   da fonte corrigido de 960 para 900; código, estilos, alt e sizes intactos.
+
+Preservação comprovada:
+- Baseline produção REEL 6acd5b0514764dd859c55082.
+- Commit isolado REEL 8bdbc08a4a2fdab954e2e464c02905c2f92c48f9 intacto.
+- Todos os arquivos-fonte inicialmente iguais ao snapshot autorizado REEL.
+- HTML das homes idêntico fora de picture; REEL preservado byte a byte.
+- Todos os arquivos não relacionados à foto no artefato final são idênticos.
+- Alterações alheias PLANO-DEV/tests/REEL/docs C1 preservadas.
+- Nenhuma gravação no .git protegido; original HEAD continua 0ce2f5c e índice vazio.
+  Sem novo commit/push/remoto/CI. Proveniência registrada por snapshots e SHA256.
+
+Validação:
+- astro check/build: 75 arquivos; zero erros, avisos e hints.
+- 15 variantes dimensionadas/verificadas; 16 assets foto incluindo fonte WebP.
+- Afinador aprovou retrato PT/EN em 360x844,390x844,1280x900, claro/escuro:
+  12 combinações e 24 capturas foto/REEL. Face sem corte inadequado no círculo,
+  nitidez/carregamento e slots de 96/160 preservados.
+- Preview e produção: todas as 32 respostas HTTP são idênticas ao artefato;
+  PT/EN e todos os arquivos de imagem HTTP 200.
+- Netlify confirma deploy ativo ready e Edge Function preservada.
+
+Ressalva preexistente, fora do escopo e não corrigida:
+Afinador reproduziu no baseline REEL inconsistência de cores de alguns
+componentes ao alternar tema e redimensionar. CSS do baseline e V4 igual.
+Aprovação limitada à foto, não aprovação geral da alternância de tema.
+Evidências baseline-390-light-portrait.png e baseline-light-dom.html.
+
+Limitações: QA pelo portal, sem Chromium local/cross-browser/Lighthouse novo;
+restrição de launch já estabelecida na sessão. Sem leitura currentSrc pelo
+portal por CSP; sem alegar decoder PIL/sips AVIF. Metadados AVIF conferidos
+por sharp/ispe e imagem renderizada no portal. Sem teste de agendamento.
+
+Evidências: report.json, conversion.json, variants.json, audit.json,
+preview-http.json, production-http.json, source-sha256.json, build.log,
+visual/, approved-source.png, source-snapshot.tar.gz e artifact.tar.gz.

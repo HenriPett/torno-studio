@@ -1,0 +1,74 @@
+{
+  "ticket": "TORNO-FOTO-V4-20261012",
+  "status": "published_verified",
+  "approved_source": "/Users/henriquepett/Documents/Codex/2026-10-12/task/approved-photo/henrique-sobretudo-quadrada-v4.png",
+  "conversion": {
+    "source_sha256": "91f25f9541cc08c4c2716883f3d08f91a434b26538593ace124297069dca20fc",
+    "webp_sha256": "f245b5ee83f3b602404fdd5de8e06cd1ba9a80c8d25d32e719110adb0fd3e586",
+    "webp_bytes": 907652,
+    "conversion": "sharp 0.34.5 lossless WebP, no resize/retouch/generation",
+    "decoded_RGB_pixels_identical": true
+  },
+  "baseline_deploy": "6acd5b0514764dd859c55082",
+  "baseline_isolated_commit": "8bdbc08a4a2fdab954e2e464c02905c2f92c48f9",
+  "new_commit": null,
+  "git": "Original .git read-only; no Git writes attempted; no canonical remote or CI. Source snapshot and artifact carry exact provenance.",
+  "changed_files": [
+    "src/assets/henrique-pett.webp",
+    "src/components/sections/FounderPhoto.astro (only source dimension comment 960 -> 900)"
+  ],
+  "preservation": "All current source files matched authorized REEL snapshot before editing. Homes are identical outside picture; REEL block exact HTML preserved. Every other non-photo artifact byte-identical.",
+  "build": "astro check + build: 75 files, zero errors/warnings/hints; existing public production environment unchanged",
+  "responsive_variants": "AVIF/WebP/JPEG x 96/160/192/320/480 + lossless 900 WebP source; square dimensions verified with sharp metadata",
+  "preview": {
+    "site_id": "297530a9-272e-492f-9398-36e96f6dc992",
+    "site_name": "tornostudio",
+    "deploy_id": "6acd640f9fdc0cdd14953b17",
+    "deploy_url": "https://6acd640f9fdc0cdd14953b17--tornostudio.netlify.app",
+    "logs": "https://app.netlify.com/projects/tornostudio/deploys/6acd640f9fdc0cdd14953b17",
+    "function_logs": "https://app.netlify.com/projects/tornostudio/logs/functions?scope=deploy:6acd640f9fdc0cdd14953b17",
+    "edge_function_logs": "https://app.netlify.com/projects/tornostudio/logs/edge-functions?scope=deployid:6acd640f9fdc0cdd14953b17"
+  },
+  "http_preview": "32 files including both homes and all images byte-identical, HTTP200",
+  "limitations": [
+    "No new Git commit/push/CI (protected original .git); REEL isolated commit preserved.",
+    "Chromium/Lighthouse not rerun after established sandbox launch restriction; visual QA via Maestri portal.",
+    "No account or external communication operations; no booking/conversion test."
+  ],
+  "visual_qa": {
+    "reviewer": "Afinador",
+    "verdict": "Approved for photo substitution only",
+    "matrix": "PT/EN x 360x844,390x844,1280x900 x dark/light",
+    "screenshots_matrix": 24,
+    "checks": "face recognizable, no circle clipping of eyes/mouth/chin, image loading/clarity, same 96/160 slots, alt/srcsets, REEL preserved",
+    "preexisting_issue": "Medium: some elements retain old theme colors after toggling and resizing. Reproduced on REEL baseline 6acd5b0514764dd859c55082; CSS URLs unchanged. Not a V4 regression; not fixed outside photo scope. Evidence baseline-390-light-portrait.png and baseline-light-dom.html.",
+    "limitations": "Portal browser only; no local Chromium or cross-browser; no currentSrc due CSP; AVIF rendered in portal, metadata verified by sharp/ispe, no PIL/sips decode claim; no booking flow."
+  },
+  "production": {
+    "site_id": "297530a9-272e-492f-9398-36e96f6dc992",
+    "site_name": "tornostudio",
+    "deploy_id": "6acd6513597ee18230ffae7f",
+    "deploy_url": "https://6acd6513597ee18230ffae7f--tornostudio.netlify.app",
+    "logs": "https://app.netlify.com/projects/tornostudio/deploys/6acd6513597ee18230ffae7f",
+    "function_logs": "https://app.netlify.com/projects/tornostudio/logs/functions",
+    "edge_function_logs": "https://app.netlify.com/projects/tornostudio/logs/edge-functions",
+    "url": "https://tornostudio.com"
+  },
+  "production_metadata": {
+    "id": "6acd6513597ee18230ffae7f",
+    "state": "ready",
+    "title": "TORNO-FOTO-V4-20261012: source SHA256 91f25f9541cc08c4c2716883f3d08f91a434b26538593ace124297069dca20fc; preserves REEL 8bdbc08; visual QA approved",
+    "edge_functions_present": true,
+    "commit_ref": null
+  },
+  "final_checks": {
+    "all_32_production_files_byte_identical": true,
+    "pt_en_http": 200,
+    "all_16_photo_assets_http": 200,
+    "photo_derivatives": 15,
+    "original_head_unchanged": "0ce2f5ce42b026dc5e7bfa2d49ef9b82d2b92ab9",
+    "isolated_reel_commit_preserved": "8bdbc08a4a2fdab954e2e464c02905c2f92c48f9",
+    "original_index_empty": true,
+    "other_source_file_hashes_unchanged": true
+  }
+}

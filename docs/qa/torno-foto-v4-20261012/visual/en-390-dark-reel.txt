@@ -1,0 +1,6 @@
+viewport: 390x844  url: https://6acd640f9fdc0cdd14953b17--tornostudio.netlify.app/en/  title: Fractional Founding Engineer | Torno Studio
+@e1 a "Torno Studio" href=https://6acd640f9fdc0cdd14953b17--tornostudio.netlify.app/en [17,10 87x44]
+@e2 a "PT — Switch language to Portuguese" href=https://6acd640f9fdc0cdd14953b17--tornostudio.netlify.app/ [203,10 44x44]
+@e3 a "Book call" href=https://calendly.com/henriquepett/45min [263,10 93x44]
+@e4 main "FRACTIONAL FOUNDING ENGINEER Ship your product without hirin" [0,-3966 373x11017]
+@e5 a "Book a 45-min scoping call (free)" href=https://calendly.com/henriquepett/45min [17,613 339x48]

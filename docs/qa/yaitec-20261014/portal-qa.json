@@ -1,0 +1,150 @@
+[
+  {
+    "url": "/",
+    "width": 359,
+    "scroll": 342,
+    "h1": 1,
+    "ctaBottom": 452,
+    "sections": [
+      "inicio",
+      "problema",
+      "quem",
+      "precos",
+      "garantias",
+      "metodo",
+      "nao-e-para",
+      "faq",
+      "contato"
+    ],
+    "labels": true,
+    "links": [
+      "#precos",
+      "/recuperacao-de-projeto/",
+      "/lovable-em-producao/",
+      "#precos"
+    ],
+    "booking": [
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min"
+    ],
+    "email": "mailto:henriquepett@gmail.com",
+    "faq": 10,
+    "images": false,
+    "screenshot": "docs/qa/yaitec-20261014/home-pt-359.png",
+    "images_note": "Foto lazy fora da viewport; inspecionada separadamente na se\u00e7\u00e3o Quem sou."
+  },
+  {
+    "url": "/",
+    "width": 1280,
+    "scroll": 1263,
+    "h1": 1,
+    "ctaBottom": 503,
+    "sections": [
+      "inicio",
+      "problema",
+      "quem",
+      "precos",
+      "garantias",
+      "metodo",
+      "nao-e-para",
+      "faq",
+      "contato"
+    ],
+    "labels": true,
+    "links": [
+      "#precos",
+      "/recuperacao-de-projeto/",
+      "/lovable-em-producao/",
+      "#precos"
+    ],
+    "booking": [
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min"
+    ],
+    "email": "mailto:henriquepett@gmail.com",
+    "faq": 10,
+    "images": false,
+    "screenshot": "docs/qa/yaitec-20261014/home-pt-1280.png",
+    "images_note": "Foto lazy fora da viewport; inspecionada separadamente na se\u00e7\u00e3o Quem sou."
+  },
+  {
+    "url": "/en/",
+    "width": 359,
+    "scroll": 342,
+    "h1": 1,
+    "ctaBottom": 466,
+    "sections": [
+      "inicio",
+      "problema",
+      "quem",
+      "precos",
+      "garantias",
+      "metodo",
+      "nao-e-para",
+      "faq",
+      "contato"
+    ],
+    "labels": true,
+    "links": [
+      "#precos",
+      "/en/software-project-rescue/",
+      "/en/lovable-to-production/",
+      "#precos"
+    ],
+    "booking": [
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min"
+    ],
+    "email": "mailto:henriquepett@gmail.com",
+    "faq": 10,
+    "images": false,
+    "screenshot": "docs/qa/yaitec-20261014/home-en-359.png",
+    "images_note": "Foto lazy fora da viewport; inspecionada separadamente na se\u00e7\u00e3o Quem sou."
+  },
+  {
+    "url": "/en/",
+    "width": 1280,
+    "scroll": 1263,
+    "h1": 1,
+    "ctaBottom": 503,
+    "sections": [
+      "inicio",
+      "problema",
+      "quem",
+      "precos",
+      "garantias",
+      "metodo",
+      "nao-e-para",
+      "faq",
+      "contato"
+    ],
+    "labels": true,
+    "links": [
+      "#precos",
+      "/en/software-project-rescue/",
+      "/en/lovable-to-production/",
+      "#precos"
+    ],
+    "booking": [
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min",
+      "https://calendly.com/henriquepett/45min"
+    ],
+    "email": "mailto:henriquepett@gmail.com",
+    "faq": 10,
+    "images": false,
+    "screenshot": "docs/qa/yaitec-20261014/home-en-1280.png",
+    "images_note": "Foto lazy fora da viewport; inspecionada separadamente na se\u00e7\u00e3o Quem sou."
+  }
+]

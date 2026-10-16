@@ -1,0 +1,42 @@
+{
+  "/recuperacao-de-projeto/": {
+    "h1": "Seu projeto travou. A operação precisa continuar.",
+    "canonical": "https://tornostudio.com/recuperacao-de-projeto/",
+    "html_bytes": 28381,
+    "internal_links_resolve": true
+  },
+  "/en/software-project-rescue/": {
+    "h1": "A stalled build should not decide your next milestone.",
+    "canonical": "https://tornostudio.com/en/software-project-rescue/",
+    "html_bytes": 28229,
+    "internal_links_resolve": true
+  },
+  "/lovable-em-producao/": {
+    "h1": "Seu app Lovable precisa funcionar na operação real.",
+    "canonical": "https://tornostudio.com/lovable-em-producao/",
+    "html_bytes": 29444,
+    "internal_links_resolve": true
+  },
+  "/en/lovable-to-production/": {
+    "h1": "Bring your Lovable app into a production workflow.",
+    "canonical": "https://tornostudio.com/en/lovable-to-production/",
+    "html_bytes": 29269,
+    "internal_links_resolve": true
+  },
+  "/guias/rls-multiempresa/": {
+    "h1": "RLS multiempresa no Supabase: permissões e teste executável",
+    "canonical": "https://tornostudio.com/guias/rls-multiempresa/",
+    "html_bytes": 36422,
+    "internal_links_resolve": true
+  },
+  "/en/guides/multi-tenant-rls/": {
+    "h1": "Multi-tenant Supabase RLS: permissions and executable tests",
+    "canonical": "https://tornostudio.com/en/guides/multi-tenant-rls/",
+    "html_bytes": 36205,
+    "internal_links_resolve": true
+  },
+  "preservation": {
+    "photo_and_reel_exact_html": true,
+    "tracking_source_unchanged": true
+  }
+}

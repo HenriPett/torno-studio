@@ -1,0 +1,53 @@
+---
+/** Monograma até haver foto (DESIGN §6.12): SVG inline, iniciais do nome do copy (photoAlt). */
+interface Props {
+  name: string;
+  /** "md": 96/160 px (Quem constrói da home); "sm": 64 px fixo (landing, DESIGN §14.7). */
+  size?: 'md' | 'sm';
+}
+
+const { name, size = 'md' } = Astro.props;
+const initials = name
+  .split(/\s+/)
+  .filter(Boolean)
+  .map((part) => part[0]?.toUpperCase() ?? '')
+  .filter((_, index, all) => index === 0 || index === all.length - 1)
+  .join('');
+---
+
+<svg class:list={['monogram', `monogram--${size}`]} viewBox="0 0 160 160" role="img" aria-label={name}>
+  <circle cx="80" cy="80" r="80" class="monogram__bg"></circle>
+  <text x="80" y="80" dy="0.35em" text-anchor="middle" class="monogram__text">{initials}</text>
+</svg>
+
+<style>
+  .monogram {
+    inline-size: 6rem;
+    block-size: 6rem;
+    flex: none;
+    border-radius: var(--radius-full);
+  }
+
+  .monogram__bg {
+    fill: var(--color-accent-subtle);
+  }
+
+  .monogram__text {
+    fill: var(--color-accent-text);
+    font-family: var(--font-sans);
+    font-size: 56px;
+    font-weight: var(--weight-semibold);
+  }
+
+  @media (min-width: 64em) {
+    .monogram--md {
+      inline-size: 10rem;
+      block-size: 10rem;
+    }
+  }
+
+  .monogram--sm {
+    inline-size: 4rem;
+    block-size: 4rem;
+  }
+</style>

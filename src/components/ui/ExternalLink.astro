@@ -1,0 +1,16 @@
+---
+/**
+ * Link externo (DESIGN §6.10): variante Link com "↗" em SVG 12 px decorativo. Mesma aba, sem target="_blank":
+ * por isso não leva rel="noopener" (só tem efeito com nova aba). O Referrer-Policy do netlify.toml já limita o referrer.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a class:list={['link', className]} href={href}><slot /><Icon name="external" class="link__icon" /></a>

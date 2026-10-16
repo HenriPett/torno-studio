@@ -1,0 +1,310 @@
+{
+  "/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "d41ebfe87c9160c28fb4e3c572f6198bf6d5c9ed0acb45db7f4413657a9f9adb",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 71406
+  },
+  "/sitemap-0.xml": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "4c9a9aa571b12b6bdc15046f0a9dee086c01f6ea7a9e0f9183955a2eeaf7b77c",
+    "content_type": "application/xml",
+    "bytes": 3843
+  },
+  "/404.html": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "8472a5aa1e3f30f840604cdacb1523283437cf70ffea58ef5a61a5fa302f6d72",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 13448
+  },
+  "/sitemap-index.xml": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "2234ae6c75e3b9bc2f46e67f6035640bab8bdc2585711c85f4aed40027b92812",
+    "content_type": "application/xml",
+    "bytes": 186
+  },
+  "/robots.txt": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "9f2f29298d6a9c1eb50f1234a539c045dce5a06a6914e672a070bc01445916bf",
+    "content_type": "text/plain; charset=UTF-8",
+    "bytes": 75
+  },
+  "/favicon.svg": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "b68af9966b4990995639b320d7f10b2aaedba500f65e1bf253126de85b3ad75a",
+    "content_type": "image/svg+xml",
+    "bytes": 184
+  },
+  "/guias/rls-multiempresa/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "905ead01cfef50374b78b5751b3ede913acd5c7b82dc09fa9a078f2cc7722408",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 36087
+  },
+  "/recuperacao-de-projeto/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "5b723e5de0176e3060cb4f4a4f813214043a74c2aa076121757c3da1291a43a6",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 28027
+  },
+  "/privacidade/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "082e7a82761a6aea0f743e347274b7c99561bf652a8753b687b89732bbb5ed69",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 31954
+  },
+  "/diagnostico/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "1a0f6285edc8d2c65b0f35136b4b5d353047cd546456acc81fd6d31a078de989",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 49048
+  },
+  "/examples/rls-multiempresa/run-wasm.mjs": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "73955929a6b93a679ad832d02568089962cc5311dfe9adbcc929af644af19b76",
+    "content_type": "application/javascript; charset=UTF-8",
+    "bytes": 1790
+  },
+  "/examples/rls-multiempresa/schema.sql": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "524640539a3e44e7bdce203deefee7e6f24fd0b2017490e9d5252fd9dc884792",
+    "content_type": "application/sql",
+    "bytes": 3107
+  },
+  "/examples/rls-multiempresa/run-local.sh": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "22f23b59c5f4558771caa91d654a64052f6c85df39353c73c425bca1285b8cfb",
+    "content_type": "application/x-sh",
+    "bytes": 812
+  },
+  "/examples/rls-multiempresa/README.txt": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "3727fbcf695fa2b47152ef144272226e3d13660fe0ad3130cb8c44319804435a",
+    "content_type": "text/plain; charset=UTF-8",
+    "bytes": 4895
+  },
+  "/examples/rls-multiempresa/bootstrap-local.sql": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "560868637707280f07f600524d324ffa5713dab2863546cb0f62b101788c151d",
+    "content_type": "application/sql",
+    "bytes": 691
+  },
+  "/examples/rls-multiempresa/tests.sql": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "a2aaa2031b165fcec3095b0a70f73a681d8dd2ff1a58c6595b67d821fc5de83a",
+    "content_type": "application/sql",
+    "bytes": 19159
+  },
+  "/lovable-em-producao/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "4cfaa3e9d8d0e85abc2907b29730d5abb8aeb356bde577809cc724f93f0a1071",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 29081
+  },
+  "/_astro/henrique-pett.B6ylgfAe_1lgE4y.avif": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "7086ce8fc8de360e4753eeb664ab5d7f1a8b9cb89300b5707a6d4ca85f76cf5d",
+    "content_type": "image/avif",
+    "bytes": 6111
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z14dz2z.webp": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "fecd27cce9efe4be1f6d168e13d72c21bd0cfaeac78a0019864affffb2a6be7a",
+    "content_type": "image/webp",
+    "bytes": 39892
+  },
+  "/_astro/index.tgBi4Xrt.css": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "52db54cb69aadbd144335d80fac9d29e19699c2315aa6e7aa887afca068b1db9",
+    "content_type": "text/css; charset=UTF-8",
+    "bytes": 13417
+  },
+  "/_astro/henrique-pett.B6ylgfAe_ZJmjey.webp": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "cb78ab52d267816c1f9047a4f0fe924d9c064dd715e06f5117b364297edd0923",
+    "content_type": "image/webp",
+    "bytes": 2674
+  },
+  "/_astro/index.Cq5OOBD5.css": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "6b2a13098248e34bfc4038f6ce3b62460fde49b175908d680084bcbd76dafcf1",
+    "content_type": "text/css; charset=UTF-8",
+    "bytes": 17184
+  },
+  "/_astro/ibm-plex-sans-latin-wght-normal.IvpUvPa2.woff2": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "e2291e842cf5af167122a22881a740c7f2dda7716f1e8cd76680264f4a859470",
+    "content_type": "font/woff2",
+    "bytes": 45712
+  },
+  "/_astro/ConsentBanner.astro_astro_type_script_index_0_lang.BkV4oSKu.js": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "3aa271826a323138539e96162b53010674da90ecfd445fadecbc04549e49da0d",
+    "content_type": "application/javascript; charset=UTF-8",
+    "bytes": 5774
+  },
+  "/_astro/henrique-pett.B6ylgfAe_oDPBP.jpeg": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "166cbf1c063dd6ec790334838dc8fb4bae33ea2fc6ce3f90ed20f1a68c9ddca9",
+    "content_type": "image/jpeg",
+    "bytes": 7241
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z1SITQe.avif": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "aecf6514a0bebe495476911acab209d6132ab2cbe7115bf103cf3318a64d4a33",
+    "content_type": "image/avif",
+    "bytes": 12280
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z1oIIxS.avif": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "c262fe58eb0bb6b04b83a8c051bc91cd2e78b7d4f5381f81f4f3bb5f83025602",
+    "content_type": "image/avif",
+    "bytes": 4603
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z2kdRPT.webp": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "53267009af38612b6ffba17c943771e892ddbc798d3c3ee468131b8d87df1938",
+    "content_type": "image/webp",
+    "bytes": 8872
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z2sUaV3.avif": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "9de08ddb5bdebd86b4198f27397f93c9f149c51b3fd62ec361da8e4b81d6ec5c",
+    "content_type": "image/avif",
+    "bytes": 21854
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z5lkFv.jpeg": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "3e6befd2db01da76dc00cdecda49808ba2e07b1835f16b7a8aa786f8f2a8de0b",
+    "content_type": "image/jpeg",
+    "bytes": 24160
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z27Ep.webp": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "1a3a514f23ce802b0256f9c2e436a7a74f68e3ad7685800580480871e54d8859",
+    "content_type": "image/webp",
+    "bytes": 6386
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z8x4Yt.jpeg": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "284b4064c6982df07f022f8e700b7db2c6a51dc4513b9ec5c1157b7e0e736a77",
+    "content_type": "image/jpeg",
+    "bytes": 3137
+  },
+  "/_astro/henrique-pett.B6ylgfAe_ZEwAKk.jpeg": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "81c8049970095b4ccf4601a40d7d3e3bdd5bfaa5093ddfda7d6e547f74b6f96c",
+    "content_type": "image/jpeg",
+    "bytes": 48460
+  },
+  "/_astro/henrique-pett.B6ylgfAe.webp": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "f245b5ee83f3b602404fdd5de8e06cd1ba9a80c8d25d32e719110adb0fd3e586",
+    "content_type": "image/webp",
+    "bytes": 907652
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Z1UwTyE.jpeg": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "7db3be5b172338450438110ebc305353b34ca72c4e88412fb4a9120018b62b67",
+    "content_type": "image/jpeg",
+    "bytes": 9937
+  },
+  "/_astro/henrique-pett.B6ylgfAe_Zu2iWK.webp": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "b4f3392bc15e61a67707aea0d43c3f575e373049a2940019911da7ffa61a4cf4",
+    "content_type": "image/webp",
+    "bytes": 21412
+  },
+  "/_astro/henrique-pett.B6ylgfAe_3UOep.avif": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "1b077cbf75d5fd3a6868687bddcde98613af629251769a77308cc093cd521523",
+    "content_type": "image/avif",
+    "bytes": 2169
+  },
+  "/en/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "cd55ad1aa66be75c7fcb8988b25645b3ba520009eb17eeeceb1f31f81548ecc3",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 70527
+  },
+  "/en/privacy/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "1035728e2f624fecee9fcab3e5f1383939e42714bd33d6551f4091569e0ae114",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 31499
+  },
+  "/en/guides/multi-tenant-rls/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "727fc2e5d1d5afa8a455c1d6f32675784e9abd4549b7e2dd70dbd4c6cea539d7",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 35577
+  },
+  "/en/software-project-rescue/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "bc17398839d81692027bbb98bce5bf453b6883fadb361495c33d3dcf06432edd",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 27631
+  },
+  "/en/lovable-to-production/": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "7bd0863e73ff555794b3b2f6e0dc6a4704b97ba8ffe3ef9a2b1cb8b594e590b3",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 28643
+  },
+  "/og/en.png": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "e4a07f5a2d8b84f68074c1e0d4ce570c4ef605ab5fc1d7e91fc73aa2ee9d8d42",
+    "content_type": "image/png",
+    "bytes": 35851
+  },
+  "/og/pt-BR.png": {
+    "status": 200,
+    "bytes_equal": true,
+    "sha256": "c7da35b04624899181807371da5132cf059fe33121e11bc82c5afd7a5cd85b7f",
+    "content_type": "image/png",
+    "bytes": 37920
+  }
+}

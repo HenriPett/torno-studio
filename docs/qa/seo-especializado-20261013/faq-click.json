@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/recuperacao-de-projeto/",
+    "click_opens": true,
+    "click_closes": true
+  },
+  {
+    "path": "/en/software-project-rescue/",
+    "click_opens": true,
+    "click_closes": true
+  },
+  {
+    "path": "/lovable-em-producao/",
+    "click_opens": true,
+    "click_closes": true
+  },
+  {
+    "path": "/en/lovable-to-production/",
+    "click_opens": true,
+    "click_closes": true
+  }
+]

@@ -1,0 +1,213 @@
+{
+  "checkedAtUtc": "2026-10-15T13:27:28.677688+00:00",
+  "production": "https://tornostudio.com",
+  "deployId": "6ad0ca2a4a4dafb0c6955f29",
+  "routes": {
+    "/": {
+      "status": 200,
+      "url": "https://tornostudio.com/",
+      "bytes": 69408,
+      "sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "artifactSha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/blog/": {
+      "status": 200,
+      "url": "https://tornostudio.com/blog/",
+      "bytes": 18376,
+      "sha256": "92710e85825504423b6544fc77cd60e538ccc10333c19ef6bdf6e34b8a930f78",
+      "artifactSha256": "92710e85825504423b6544fc77cd60e538ccc10333c19ef6bdf6e34b8a930f78",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/en/blog/": {
+      "status": 200,
+      "url": "https://tornostudio.com/en/blog/",
+      "bytes": 17492,
+      "sha256": "115a6881d93baae2b88c1b3538eec621bf8c048573e1eb1ee4664ea708be1775",
+      "artifactSha256": "115a6881d93baae2b88c1b3538eec621bf8c048573e1eb1ee4664ea708be1775",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/blog/quando-automatizar-processos-planilhas/": {
+      "status": 200,
+      "url": "https://tornostudio.com/blog/quando-automatizar-processos-planilhas/",
+      "bytes": 29073,
+      "sha256": "ac00891f235c180392807d8b5c8e31cd53c6033a8f2777c830cde1dcce59c1de",
+      "artifactSha256": "ac00891f235c180392807d8b5c8e31cd53c6033a8f2777c830cde1dcce59c1de",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/blog/criterios-aceite-mvp/": {
+      "status": 200,
+      "url": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+      "bytes": 29427,
+      "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "artifactSha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/cases/loopt/": {
+      "status": 200,
+      "url": "https://tornostudio.com/cases/loopt/",
+      "bytes": 28558,
+      "sha256": "891b2704def91904fda28392d3fea82faa4f58d358f6f95bc80edd5cc6d2f3b9",
+      "artifactSha256": "891b2704def91904fda28392d3fea82faa4f58d358f6f95bc80edd5cc6d2f3b9",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/cases/bom-capital/": {
+      "status": 200,
+      "url": "https://tornostudio.com/cases/bom-capital/",
+      "bytes": 26071,
+      "sha256": "c320e42734ba4043a7721813be60f68fdbf2dd11cb4ddf688732d2fff13dfcbd",
+      "artifactSha256": "c320e42734ba4043a7721813be60f68fdbf2dd11cb4ddf688732d2fff13dfcbd",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/cases/ascende/": {
+      "status": 200,
+      "url": "https://tornostudio.com/cases/ascende/",
+      "bytes": 26334,
+      "sha256": "63024b19a3f72dc813232ad958b210f06ca8f2e897a487e62f29bf68a12ba77c",
+      "artifactSha256": "63024b19a3f72dc813232ad958b210f06ca8f2e897a487e62f29bf68a12ba77c",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/en/cases/loopt/": {
+      "status": 200,
+      "url": "https://tornostudio.com/en/cases/loopt/",
+      "bytes": 28050,
+      "sha256": "73ba9c849c1b9946d14768fe41ed9bcd7228b043ac908df1e28ab1047e420130",
+      "artifactSha256": "73ba9c849c1b9946d14768fe41ed9bcd7228b043ac908df1e28ab1047e420130",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/en/cases/bom-capital/": {
+      "status": 200,
+      "url": "https://tornostudio.com/en/cases/bom-capital/",
+      "bytes": 25645,
+      "sha256": "c259da61bc8a02f983004824603f7b7bde8311edd0adba75421c895aae33fdb0",
+      "artifactSha256": "c259da61bc8a02f983004824603f7b7bde8311edd0adba75421c895aae33fdb0",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    },
+    "/en/cases/ascende/": {
+      "status": 200,
+      "url": "https://tornostudio.com/en/cases/ascende/",
+      "bytes": 25949,
+      "sha256": "a71baa8f2947089bf4466087a16496519f14cf560a0828e32898c85ef6ec82ca",
+      "artifactSha256": "a71baa8f2947089bf4466087a16496519f14cf560a0828e32898c85ef6ec82ca",
+      "artifactMatch": true,
+      "xRobotsTag": ""
+    }
+  },
+  "checks": {
+    "api_receipt_deploy_edge_hash": true,
+    "local_manifests_exact": true,
+    "route:/": true,
+    "route:/blog/": true,
+    "route:/en/blog/": true,
+    "route:/blog/quando-automatizar-processos-planilhas/": true,
+    "route:/blog/criterios-aceite-mvp/": true,
+    "route:/cases/loopt/": true,
+    "route:/cases/bom-capital/": true,
+    "route:/cases/ascende/": true,
+    "route:/en/cases/loopt/": true,
+    "route:/en/cases/bom-capital/": true,
+    "route:/en/cases/ascende/": true,
+    "article_metadata": true,
+    "article_indexable": true,
+    "figure_caption_alt": true,
+    "schema_no_author_dates": true,
+    "article_links_exact": true,
+    "svg_delivery": true,
+    "indices_article_locale": true,
+    "sitemap_20_preserves_19": true,
+    "robots_article_allowed": true
+  },
+  "article": {
+    "title": "Critérios de aceite para MVP: guia para contratar | Torno",
+    "description": "Defina critérios de aceite antes de contratar um MVP. Veja exemplos, uma ficha de escopo e como validar integrações sem depender de promessas vagas.",
+    "canonical": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+    "h1": [
+      "Critérios de aceite para MVP: como definir antes de contratar"
+    ],
+    "hreflangs": [],
+    "metaRobots": null,
+    "xRobotsTag": "",
+    "figureCount": 1,
+    "caption": "Diagrama original preparado para este artigo. Os cenários são hipotéticos.",
+    "alt": "Diagrama de critérios de aceite para portal de pedidos hipotético: contexto, ação, resultado e evidência; três cenários: pedido válido, informação incompleta e nova tentativa após perda da resposta.",
+    "imageSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+    "blogPosting": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+        "mainEntityOfPage": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+        "headline": "Critérios de aceite para MVP: como definir antes de contratar",
+        "description": "Defina critérios de aceite antes de contratar um MVP. Veja exemplos, uma ficha de escopo e como validar integrações sem depender de promessas vagas.",
+        "inLanguage": "pt-BR"
+      }
+    ],
+    "articleLinks": [
+      "https://calendly.com/henriquepett/45min",
+      "https://cucumber.io/docs/gherkin/reference/",
+      "https://docs.stripe.com/api/idempotent_requests",
+      "https://scrumguides.org/scrum-guide.html#increment",
+      "https://tornostudio.com/#precos"
+    ]
+  },
+  "svg": {
+    "path": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+    "status": 200,
+    "contentType": "image/svg+xml",
+    "bytes": 2622,
+    "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582",
+    "artifactSha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582"
+  },
+  "sitemap": {
+    "status": 200,
+    "count": 20,
+    "unique": 20,
+    "sha256": "a998caae73033ee5bbd6e00f1c82c7fc44351e62a0bd66e5ae9c0b5127a3883c",
+    "artifactSha256": "a998caae73033ee5bbd6e00f1c82c7fc44351e62a0bd66e5ae9c0b5127a3883c",
+    "added": [
+      "https://tornostudio.com/blog/criterios-aceite-mvp/"
+    ],
+    "removed": [],
+    "urls": [
+      "https://tornostudio.com/",
+      "https://tornostudio.com/blog/",
+      "https://tornostudio.com/blog/criterios-aceite-mvp/",
+      "https://tornostudio.com/blog/quando-automatizar-processos-planilhas/",
+      "https://tornostudio.com/cases/ascende/",
+      "https://tornostudio.com/cases/bom-capital/",
+      "https://tornostudio.com/cases/loopt/",
+      "https://tornostudio.com/en/",
+      "https://tornostudio.com/en/blog/",
+      "https://tornostudio.com/en/cases/ascende/",
+      "https://tornostudio.com/en/cases/bom-capital/",
+      "https://tornostudio.com/en/cases/loopt/",
+      "https://tornostudio.com/en/guides/multi-tenant-rls/",
+      "https://tornostudio.com/en/lovable-to-production/",
+      "https://tornostudio.com/en/privacy/",
+      "https://tornostudio.com/en/software-project-rescue/",
+      "https://tornostudio.com/guias/rls-multiempresa/",
+      "https://tornostudio.com/lovable-em-producao/",
+      "https://tornostudio.com/privacidade/",
+      "https://tornostudio.com/recuperacao-de-projeto/"
+    ]
+  },
+  "robots": {
+    "status": 200,
+    "sha256": "9f2f29298d6a9c1eb50f1234a539c045dce5a06a6914e672a070bc01445916bf",
+    "artifactSha256": "9f2f29298d6a9c1eb50f1234a539c045dce5a06a6914e672a070bc01445916bf",
+    "articleAllowed": true
+  },
+  "passed": 22,
+  "total": 22,
+  "gate": "PASS"
+}

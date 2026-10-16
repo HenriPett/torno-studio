@@ -1,0 +1,76 @@
+---
+/**
+ * Preço de um degrau (DESIGN §6.7): valor de pricing.ts via formatMoney, rótulos do copy.
+ * "a partir de" vai num span acima do valor, mas antes dele no DOM (leitor de tela lê na ordem).
+ * Valores textuais (Grátis, Custom quote) usam o mesmo slot.
+ */
+import { formatMoney, type Price } from '../../config/pricing';
+import { getCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  price: Price;
+  locale: Locale;
+  /** Recorrência na mesma linha do valor ("/mês"). */
+  suffix?: string | undefined;
+}
+
+const { price, locale, suffix } = Astro.props;
+const labels = getCopy(locale).ladder.priceLabels;
+
+let prefix = '';
+let value = '';
+let after = '';
+switch (price.kind) {
+  case 'free':
+    value = labels.free;
+    break;
+  case 'custom':
+    value = labels.custom;
+    break;
+  case 'fixed':
+    value = formatMoney(price.amount, locale);
+    break;
+  case 'from': {
+    const [before = '', rest = ''] = labels.from.split('{price}');
+    prefix = before.trim();
+    after = rest.trim();
+    value = formatMoney(price.amount, locale);
+    break;
+  }
+}
+---
+
+<p class="price" data-price={price.kind}>
+  {prefix && <span class="price__prefix">{prefix} </span>}
+  <span class="price__value tnum">{value}</span>{after && <span class="price__suffix"> {after}</span>}{
+    suffix && <span class="price__suffix">{suffix}</span>
+  }
+</p>
+
+<style>
+  .price {
+    text-align: end;
+    line-height: var(--leading-tight);
+  }
+
+  .price__prefix {
+    display: block;
+    margin-block-end: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+  }
+
+  .price__value {
+    font-size: var(--text-price);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+  }
+
+  .price__suffix {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+</style>

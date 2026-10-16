@@ -1,0 +1,10 @@
+---
+import CaseStudy from '../../components/cases/CaseStudy.astro';
+import { caseStudies, type CaseSlug } from '../../content/cases';
+export function getStaticPaths() {
+ return Object.keys(caseStudies['pt-BR']).map(slug => ({ params: { slug }, props: { slug } }));
+}
+interface Props { slug: CaseSlug }
+const { slug } = Astro.props;
+---
+<CaseStudy locale="pt-BR" slug={slug} />

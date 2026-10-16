@@ -1,0 +1,144 @@
+---
+/** Tabela de planos do Product Evolution (DESIGN §6.8): <table> real, 3 colunas, sem scroll em 360 px. */
+import { formatMoney, pricing } from '../../config/pricing';
+import { fill, getCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { ladder } = getCopy(locale);
+const { evolution } = pricing[locale];
+const { table } = ladder.evolution;
+const overage = `${formatMoney(evolution.overagePerHour, locale)}${ladder.units.perHour}`;
+---
+
+<div class="evolution">
+  <table class="evolution__table">
+    <caption>{table.caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{table.headers.plan}</th>
+        <th scope="col" class="num">{table.headers.hours}</th>
+        <th scope="col" class="num">{table.headers.price}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        evolution.plans.map((plan) => {
+          const copy = ladder.evolution.plans[plan.id];
+          return (
+            <tr data-plan={plan.id}>
+              <th scope="row">
+                <span class="evolution__name">{copy.name}</span>
+                <span class="evolution__desc">{copy.description}</span>
+              </th>
+              <td class="num tnum">{fill(ladder.units.hoursPerMonth, { n: plan.hoursCap })}</td>
+              <td class="num tnum evolution__price">{formatMoney(plan.monthly, locale)}</td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+  <p class="evolution__rules">{fill(ladder.evolution.rulesNote, { overage })}</p>
+</div>
+
+<style>
+  .evolution {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .evolution__table {
+    inline-size: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  caption {
+    padding-block-end: var(--space-3);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    text-align: start;
+  }
+
+  th,
+  td {
+    padding: var(--space-3);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .num {
+    text-align: end;
+  }
+
+  td.num {
+    white-space: nowrap;
+  }
+
+  /* 320 px (zoom 400%): menos respiro lateral para as 3 colunas caberem sem scroll. */
+  @media (max-width: 39.99em) {
+    th,
+    td {
+      padding-inline: var(--space-2);
+    }
+  }
+
+  thead th {
+    background-color: var(--color-surface-sunken);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  tbody tr + tr {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  tbody th {
+    font-weight: var(--weight-regular);
+  }
+
+  .evolution__name {
+    display: block;
+    font-weight: var(--weight-semibold);
+  }
+
+  .evolution__desc {
+    display: block;
+    margin-block-start: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .evolution__price {
+    font-weight: var(--weight-semibold);
+  }
+
+  .evolution__rules {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+  }
+
+  @media (min-width: 64em) {
+    .evolution {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--space-gutter);
+      align-items: end;
+    }
+
+    .evolution__table {
+      grid-column: 1 / span 8;
+    }
+
+    .evolution__rules {
+      grid-column: 9 / -1;
+    }
+  }
+</style>

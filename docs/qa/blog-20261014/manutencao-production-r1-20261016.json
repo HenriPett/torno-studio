@@ -1,0 +1,237 @@
+{
+  "checkedAtUtc": "2026-10-16T12:34:51.127683+00:00",
+  "productionDeployId": "6ad2188019acbbe7b53eec26",
+  "publishedAt": "2026-10-16T12:33:45.462Z",
+  "receiptSha256": "8316e8f9c93706253b2a862d48a8811e8865f315f781b3162921c395d30d0c86",
+  "sourceManifestHash": "5172af52bf3c6d975d838dcfe2392dd33f58058ecc23ec63f8f8cd306f4fca76",
+  "artifactManifestHash": "0ab359df4a66eab85a693c82dfbfdb58cfdd9be4c27efe16a4529e4344995389",
+  "checks": {
+    "receipt_sha_deploy_edge_hashes": true,
+    "all_14_html_http_artifact_indexable": true,
+    "10_protected_4_articles_6_cases": true,
+    "article_title_description_h1": true,
+    "blogposting_no_author_dates_byline_en": true,
+    "figure_position_alt_caption_equivalent": true,
+    "svg_http_sha": true,
+    "links_sources_prices_cta": true,
+    "sitemap23_preserves22": true
+  },
+  "routes": {
+    "/blog/custo-manutencao-software-apos-lancamento/": {
+      "path": "/blog/custo-manutencao-software-apos-lancamento/",
+      "status": 200,
+      "bytes": 31884,
+      "sha256": "8eddf030116919eab0f897ba17316ddf5ca955c3e1e3108d57a87033cf08d728",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/quando-automatizar-processos-planilhas/": {
+      "path": "/blog/quando-automatizar-processos-planilhas/",
+      "status": 200,
+      "bytes": 29073,
+      "sha256": "ac00891f235c180392807d8b5c8e31cd53c6033a8f2777c830cde1dcce59c1de",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/quando-automatizar-processos-planilhas/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/criterios-aceite-mvp/": {
+      "path": "/blog/criterios-aceite-mvp/",
+      "status": 200,
+      "bytes": 29427,
+      "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/integracao-erp-briefing-orcamento/": {
+      "path": "/blog/integracao-erp-briefing-orcamento/",
+      "status": 200,
+      "bytes": 29795,
+      "sha256": "0ae43432e54655c0dd5a05972600aaa9dca9c18062eb2dc64c8893db82c1a162",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/antes-de-refazer-sistema-evidencias/": {
+      "path": "/blog/antes-de-refazer-sistema-evidencias/",
+      "status": 200,
+      "bytes": 32520,
+      "sha256": "75fd3139a24df89bf27299ca417066697839e068f78c0c6868aa445ae3ff48de",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/cases/loopt/": {
+      "path": "/cases/loopt/",
+      "status": 200,
+      "bytes": 28558,
+      "sha256": "891b2704def91904fda28392d3fea82faa4f58d358f6f95bc80edd5cc6d2f3b9",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/loopt/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/cases/bom-capital/": {
+      "path": "/cases/bom-capital/",
+      "status": 200,
+      "bytes": 26071,
+      "sha256": "c320e42734ba4043a7721813be60f68fdbf2dd11cb4ddf688732d2fff13dfcbd",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/bom-capital/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/cases/ascende/": {
+      "path": "/cases/ascende/",
+      "status": 200,
+      "bytes": 26334,
+      "sha256": "63024b19a3f72dc813232ad958b210f06ca8f2e897a487e62f29bf68a12ba77c",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/ascende/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/cases/loopt/": {
+      "path": "/en/cases/loopt/",
+      "status": 200,
+      "bytes": 28050,
+      "sha256": "73ba9c849c1b9946d14768fe41ed9bcd7228b043ac908df1e28ab1047e420130",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/loopt/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/cases/bom-capital/": {
+      "path": "/en/cases/bom-capital/",
+      "status": 200,
+      "bytes": 25645,
+      "sha256": "c259da61bc8a02f983004824603f7b7bde8311edd0adba75421c895aae33fdb0",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/bom-capital/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/cases/ascende/": {
+      "path": "/en/cases/ascende/",
+      "status": 200,
+      "bytes": 25949,
+      "sha256": "a71baa8f2947089bf4466087a16496519f14cf560a0828e32898c85ef6ec82ca",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/ascende/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/": {
+      "path": "/blog/",
+      "status": 200,
+      "bytes": 19547,
+      "sha256": "71cd0af5749bab4f5ad71b9758075fa393e2b13f350cae7d3cf861d54889853c",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/blog/": {
+      "path": "/en/blog/",
+      "status": 200,
+      "bytes": 17492,
+      "sha256": "115a6881d93baae2b88c1b3538eec621bf8c048573e1eb1ee4664ea708be1775",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/blog/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/": {
+      "path": "/",
+      "status": 200,
+      "bytes": 69408,
+      "sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    }
+  },
+  "article": {
+    "title": "Custo de manutenção de software após o lançamento | Torno",
+    "description": "Planeje o custo recorrente de um software web após o lançamento: serviços de operação, suporte, correções e evolução, com premissas e responsáveis.",
+    "h1": [
+      "Custo de manutenção de software: o que prever após o lançamento"
+    ],
+    "schema": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/",
+        "mainEntityOfPage": "https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/",
+        "headline": "Custo de manutenção de software: o que prever após o lançamento",
+        "description": "Planeje o custo recorrente de um software web após o lançamento: serviços de operação, suporte, correções e evolução, com premissas e responsáveis.",
+        "inLanguage": "pt-BR"
+      }
+    ],
+    "figure": {
+      "src": "/_astro/orcamento-apos-lancamento.Diq0z4bO_22sYfi.svg",
+      "alt": "Orçamento pós-lançamento organizado em faturas de provedores, manutenção e suporte, e evolução funcional, conforme contratação. Cenários hipotéticos; valores a cotar não equivalem a zero.",
+      "caption": "Esquema conceitual para os cenários hipotéticos do artigo. As parcelas dependem da arquitetura, do uso e dos contratos; evolução exige escopo e aprovação próprios. Diagrama original Torno Studio.",
+      "equivalentId": "maintenance-figure-equivalent",
+      "equivalentText": "Para comparar o orçamento na mesma janela de tempo, identifique as faturas dos provedores, o trabalho contratado de manutenção e suporte e as mudanças de produto aprovadas separadamente. Uma parcela não contratada não oferece cobertura implícita. Valores ainda a cotar permanecem desconhecidos, não iguais a zero. Os cenários são hipotéticos e não representam preços de mercado ou uma proposta do Torno Studio."
+    },
+    "links": [
+      "https://calendly.com/henriquepett/45min",
+      "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+      "https://supabase.com/docs/guides/platform/cost-control",
+      "https://tornostudio.com/#precos"
+    ]
+  },
+  "asset": {
+    "path": "/_astro/orcamento-apos-lancamento.Diq0z4bO_22sYfi.svg",
+    "status": 200,
+    "contentType": "image/svg+xml",
+    "bytes": 3934,
+    "sha256": "36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d",
+    "artifactMatch": true,
+    "manifestMatch": true
+  },
+  "sitemap": {
+    "status": 200,
+    "count": 23,
+    "unique": 23,
+    "preserved22": 22,
+    "added": [
+      "https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/"
+    ],
+    "removed": [],
+    "sha256": "7482490cded09127fb8ea1903bb4f47a817b3a0be9739cc120055180a592bad7"
+  },
+  "passed": 9,
+  "total": 9,
+  "provenance": {
+    "qaGatePath": "/private/tmp/torno-blog-manutencao-qa-gate-r1.json",
+    "qaGateSha256": "013a36863e1c69b09fcc18368476a9da1239ab5452ec16d4485b07e5adfeda33",
+    "netlifyApiAttempt": {
+      "url": "https://api.netlify.com/api/v1/deploys/6ad2188019acbbe7b53eec26",
+      "status": 401,
+      "note": "Sem credencial; state/Edge sustentados pelo recibo de produção hash-bound, não por consulta API própria."
+    }
+  }
+}

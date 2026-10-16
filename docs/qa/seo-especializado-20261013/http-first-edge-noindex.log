@@ -1,0 +1,221 @@
+
+Running 8 tests using 1 worker
+
+(node:55688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/qa/specialized-seo.spec.ts:178:1 › @http Sitemap: 10 URLs, pares exatos, sem diagnóstico; robots permite crawler (624ms)
+  ✘  2 tests/qa/specialized-seo.spec.ts:241:24 › @http /recuperacao-de-projeto/ HTML, SEO, schema, conteúdo e links (252ms)
+(node:55692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/qa/specialized-seo.spec.ts:241:24 › @http /en/software-project-rescue/ HTML, SEO, schema, conteúdo e links (375ms)
+(node:55708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/qa/specialized-seo.spec.ts:241:24 › @http /lovable-em-producao/ HTML, SEO, schema, conteúdo e links (498ms)
+(node:55709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 tests/qa/specialized-seo.spec.ts:241:24 › @http /en/lovable-to-production/ HTML, SEO, schema, conteúdo e links (355ms)
+(node:55725) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 tests/qa/specialized-seo.spec.ts:241:24 › @http /guias/rls-multiempresa/ HTML, SEO, schema, conteúdo e links (303ms)
+(node:55745) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  7 tests/qa/specialized-seo.spec.ts:241:24 › @http /en/guides/multi-tenant-rls/ HTML, SEO, schema, conteúdo e links (320ms)
+(node:55750) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  8 tests/qa/specialized-seo.spec.ts:307:1 › @http diagnóstico noindex e descoberta nas homes (1.0s)
+
+
+  1) tests/qa/specialized-seo.spec.ts:241:24 › @http /recuperacao-de-projeto/ HTML, SEO, schema, conteúdo e links 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /noindex|\bnone\b/i
+    Received string:      " noindex"
+
+      257 |   });
+      258 |   const directives = nodes('meta').filter(n => /^(robots|googlebot)$/i.test(attr(n, 'name'))).map(n => attr(n, 'content')).join(' ') + ' ' + (response.headers()['x-robots-tag'] ?? '');
+    > 259 |   if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
+          |                                        ^
+      260 |   else expect(directives).toMatch(/noindex/i);
+      261 |   expect(nodes('h1')).toHaveLength(1);
+      262 |   expect(text(nodes('title')[0]).length).toBeGreaterThan(10);
+        at /Users/henriquepett/Downloads/pessoal/projeto-50k-site/tests/qa/specialized-seo.spec.ts:259:40
+
+    attachment #1: html (text/html) ────────────────────────────────────────────────────────────────
+    <!DOCTYPE html><html lang="pt-BR"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+             Só cria a fila; não faz requisição nem grava cookie. src...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-recu-08513-SEO-schema-conteúdo-e-links/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-recu-08513-SEO-schema-conteúdo-e-links/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-recu-08513-SEO-schema-conteúdo-e-links/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/qa/specialized-seo.spec.ts:241:24 › @http /en/software-project-rescue/ HTML, SEO, schema, conteúdo e links 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /noindex|\bnone\b/i
+    Received string:      " noindex"
+
+      257 |   });
+      258 |   const directives = nodes('meta').filter(n => /^(robots|googlebot)$/i.test(attr(n, 'name'))).map(n => attr(n, 'content')).join(' ') + ' ' + (response.headers()['x-robots-tag'] ?? '');
+    > 259 |   if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
+          |                                        ^
+      260 |   else expect(directives).toMatch(/noindex/i);
+      261 |   expect(nodes('h1')).toHaveLength(1);
+      262 |   expect(text(nodes('title')[0]).length).toBeGreaterThan(10);
+        at /Users/henriquepett/Downloads/pessoal/projeto-50k-site/tests/qa/specialized-seo.spec.ts:259:40
+
+    attachment #1: html (text/html) ────────────────────────────────────────────────────────────────
+    <!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+             Só cria a fila; não faz requisição nem grava cookie. src/sc...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-s-3cc03-SEO-schema-conteúdo-e-links/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-s-3cc03-SEO-schema-conteúdo-e-links/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-s-3cc03-SEO-schema-conteúdo-e-links/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/qa/specialized-seo.spec.ts:241:24 › @http /lovable-em-producao/ HTML, SEO, schema, conteúdo e links 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /noindex|\bnone\b/i
+    Received string:      " noindex"
+
+      257 |   });
+      258 |   const directives = nodes('meta').filter(n => /^(robots|googlebot)$/i.test(attr(n, 'name'))).map(n => attr(n, 'content')).join(' ') + ' ' + (response.headers()['x-robots-tag'] ?? '');
+    > 259 |   if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
+          |                                        ^
+      260 |   else expect(directives).toMatch(/noindex/i);
+      261 |   expect(nodes('h1')).toHaveLength(1);
+      262 |   expect(text(nodes('title')[0]).length).toBeGreaterThan(10);
+        at /Users/henriquepett/Downloads/pessoal/projeto-50k-site/tests/qa/specialized-seo.spec.ts:259:40
+
+    attachment #1: html (text/html) ────────────────────────────────────────────────────────────────
+    <!DOCTYPE html><html lang="pt-BR"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+             Só cria a fila; não faz requisição nem grava cookie. src...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-lova-529f6-SEO-schema-conteúdo-e-links/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-lova-529f6-SEO-schema-conteúdo-e-links/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-lova-529f6-SEO-schema-conteúdo-e-links/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/qa/specialized-seo.spec.ts:241:24 › @http /en/lovable-to-production/ HTML, SEO, schema, conteúdo e links 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /noindex|\bnone\b/i
+    Received string:      " noindex"
+
+      257 |   });
+      258 |   const directives = nodes('meta').filter(n => /^(robots|googlebot)$/i.test(attr(n, 'name'))).map(n => attr(n, 'content')).join(' ') + ' ' + (response.headers()['x-robots-tag'] ?? '');
+    > 259 |   if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
+          |                                        ^
+      260 |   else expect(directives).toMatch(/noindex/i);
+      261 |   expect(nodes('h1')).toHaveLength(1);
+      262 |   expect(text(nodes('title')[0]).length).toBeGreaterThan(10);
+        at /Users/henriquepett/Downloads/pessoal/projeto-50k-site/tests/qa/specialized-seo.spec.ts:259:40
+
+    attachment #1: html (text/html) ────────────────────────────────────────────────────────────────
+    <!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+             Só cria a fila; não faz requisição nem grava cookie. src/sc...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-l-01d24-SEO-schema-conteúdo-e-links/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-l-01d24-SEO-schema-conteúdo-e-links/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-l-01d24-SEO-schema-conteúdo-e-links/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/qa/specialized-seo.spec.ts:241:24 › @http /guias/rls-multiempresa/ HTML, SEO, schema, conteúdo e links 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /noindex|\bnone\b/i
+    Received string:      " noindex"
+
+      257 |   });
+      258 |   const directives = nodes('meta').filter(n => /^(robots|googlebot)$/i.test(attr(n, 'name'))).map(n => attr(n, 'content')).join(' ') + ' ' + (response.headers()['x-robots-tag'] ?? '');
+    > 259 |   if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
+          |                                        ^
+      260 |   else expect(directives).toMatch(/noindex/i);
+      261 |   expect(nodes('h1')).toHaveLength(1);
+      262 |   expect(text(nodes('title')[0]).length).toBeGreaterThan(10);
+        at /Users/henriquepett/Downloads/pessoal/projeto-50k-site/tests/qa/specialized-seo.spec.ts:259:40
+
+    attachment #1: html (text/html) ────────────────────────────────────────────────────────────────
+    <!DOCTYPE html><html lang="pt-BR"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+             Só cria a fila; não faz requisição nem grava cookie. src...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-guia-e0dfe-SEO-schema-conteúdo-e-links/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-guia-e0dfe-SEO-schema-conteúdo-e-links/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-guia-e0dfe-SEO-schema-conteúdo-e-links/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/qa/specialized-seo.spec.ts:241:24 › @http /en/guides/multi-tenant-rls/ HTML, SEO, schema, conteúdo e links 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /noindex|\bnone\b/i
+    Received string:      " noindex"
+
+      257 |   });
+      258 |   const directives = nodes('meta').filter(n => /^(robots|googlebot)$/i.test(attr(n, 'name'))).map(n => attr(n, 'content')).join(' ') + ' ' + (response.headers()['x-robots-tag'] ?? '');
+    > 259 |   if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
+          |                                        ^
+      260 |   else expect(directives).toMatch(/noindex/i);
+      261 |   expect(nodes('h1')).toHaveLength(1);
+      262 |   expect(text(nodes('title')[0]).length).toBeGreaterThan(10);
+        at /Users/henriquepett/Downloads/pessoal/projeto-50k-site/tests/qa/specialized-seo.spec.ts:259:40
+
+    attachment #1: html (text/html) ────────────────────────────────────────────────────────────────
+    <!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+             Só cria a fila; não faz requisição nem grava cookie. src/sc...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-g-29045-SEO-schema-conteúdo-e-links/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-g-29045-SEO-schema-conteúdo-e-links/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/qa/seo-especializado-20261013/test-results/specialized-seo--http-en-g-29045-SEO-schema-conteúdo-e-links/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    tests/qa/specialized-seo.spec.ts:241:24 › @http /recuperacao-de-projeto/ HTML, SEO, schema, conteúdo e links 
+    tests/qa/specialized-seo.spec.ts:241:24 › @http /en/software-project-rescue/ HTML, SEO, schema, conteúdo e links 
+    tests/qa/specialized-seo.spec.ts:241:24 › @http /lovable-em-producao/ HTML, SEO, schema, conteúdo e links 
+    tests/qa/specialized-seo.spec.ts:241:24 › @http /en/lovable-to-production/ HTML, SEO, schema, conteúdo e links 
+    tests/qa/specialized-seo.spec.ts:241:24 › @http /guias/rls-multiempresa/ HTML, SEO, schema, conteúdo e links 
+    tests/qa/specialized-seo.spec.ts:241:24 › @http /en/guides/multi-tenant-rls/ HTML, SEO, schema, conteúdo e links 
+  2 passed (6.6s)

@@ -1,0 +1,6 @@
+{
+  "recurse": true,
+  "retry": true,
+  "skip": ["^https?://(?!(localhost|127\\.0\\.0\\.1)[:/])", "^http://localhost:4321/"],
+  "verbosity": "error"
+}

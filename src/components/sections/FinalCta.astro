@@ -1,0 +1,91 @@
+---
+/**
+ * CTA final + contato (`#contato`, DESIGN §7.9). `#agendar` é o destino de fallback dos CTAs sem
+ * PUBLIC_BOOKING_URL (bookingHref). E-mail só se definido; LinkedIn só se houver URL.
+ */
+import { site } from '../../config/site';
+import { getCopy, type Locale } from '../../lib/i18n';
+import BookingCta from '../ui/BookingCta.astro';
+import ExternalLink from '../ui/ExternalLink.astro';
+
+interface Props {
+  locale: Locale;
+  /** Texto próprio e sem linha de contato (landing de campanha, DESIGN §14.8). */
+  campaign?: { title: string; body: string; cta: string };
+}
+
+const { locale, campaign } = Astro.props;
+const finalCta = campaign ?? getCopy(locale).finalCta;
+const homeCopy = getCopy(locale).finalCta;
+const showContact = !campaign && Boolean(site.contactEmail || site.linkedinUrl);
+---
+
+<section id="contato" class="section final-cta" aria-labelledby="contato-title">
+  <div class="container">
+    <div class="final-cta__inner">
+      <h2 id="contato-title" class="h2">{finalCta.title}</h2>
+      <p class="lead final-cta__body">{finalCta.body}</p>
+      <div id="agendar" class="actions final-cta__actions">
+        <BookingCta locale={locale} arrow>{finalCta.cta}</BookingCta>
+      </div>
+      {
+        showContact && (
+          <ul class="final-cta__contact">
+            {site.contactEmail && (
+              <li>
+                {homeCopy.emailLead}{' '}
+                <a class="link" href={`mailto:${site.contactEmail}`}>
+                  {site.contactEmail}
+                </a>
+              </li>
+            )}
+            {site.linkedinUrl && (
+              <li>
+                {homeCopy.linkedin.lead} <ExternalLink href={site.linkedinUrl}>{homeCopy.linkedin.label}</ExternalLink>
+              </li>
+            )}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    background-color: var(--color-accent-subtle);
+  }
+
+  .final-cta__inner {
+    max-inline-size: calc(var(--container-max) * 8 / 12);
+  }
+
+  .final-cta__body {
+    margin-block-start: var(--space-3);
+    color: var(--color-text);
+    max-inline-size: var(--measure);
+  }
+
+  .final-cta__actions {
+    margin-block-start: var(--space-6);
+    scroll-margin-top: calc(var(--header-height) + var(--space-4));
+  }
+
+  .final-cta__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-block-start: var(--space-5);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+  }
+
+  .final-cta__contact li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.25em;
+    min-block-size: var(--tap-min);
+  }
+</style>

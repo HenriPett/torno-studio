@@ -1,0 +1,157 @@
+---
+/** Quem constrói (`#quem`, DESIGN §7.5): foto (ou monograma), bio em 1ª pessoa, cases (público primeiro), links. */
+import { site } from '../../config/site';
+import { getCopy, type Locale } from '../../lib/i18n';
+import ExternalLink from '../ui/ExternalLink.astro';
+import CaseCard from './CaseCard.astro';
+import FounderPhoto from './FounderPhoto.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { about } = getCopy(locale);
+const order = { published: 0, 'self-reported': 1, 'own-project': 2 } as const;
+const cases = [...about.cases].sort((a, b) => order[a.kind] - order[b.kind]);
+const links = [
+  site.linkedinUrl && { href: site.linkedinUrl, label: about.linkedinLabel },
+  site.githubUrl && { href: site.githubUrl, label: about.githubLabel },
+].filter((link): link is { href: string; label: string } => Boolean(link));
+---
+
+<section id="quem" class="section about" aria-labelledby="quem-title">
+  <div class="container about__grid">
+    <div class="about__head">
+      <div class="about__mono"><FounderPhoto alt={about.photoAlt} /></div>
+      <h2 id="quem-title" class="h2 about__title">{about.title}</h2>
+    </div>
+    {/* Links logo após o título no DOM: no desktop ficam sob o monograma, e a ordem de foco segue a visual (WCAG 2.4.3). */}
+    {
+      links.length > 0 && (
+        <ul class="about__links">
+          {links.map((link) => (
+            <li>
+              <ExternalLink href={link.href} class="link--target">{link.label}</ExternalLink>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <div class="about__content">
+      <div class="about__bio">
+        {about.bio.map((paragraph) => <p class="body">{paragraph}</p>)}
+      </div>
+      <h3 class="h3 about__cases-title">{about.casesTitle}</h3>
+      <div class="about__cases">
+        {cases.map((item) => <CaseCard item={item} />)}
+      </div>
+      <p class="body about__article">{about.article}</p>
+      <p class="about__footnote">{about.casesFootnote}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  /* Mobile: links entre o H2 e a bio, a --space-4 de cada lado (DESIGN §7.5). */
+  .about__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  /* Mobile: monograma 96 px à esquerda do H2. */
+  .about__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  /* A foto (ou o monograma) não encolhe ao lado de um H2 longo. */
+  .about__mono {
+    flex: none;
+  }
+
+  .about__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+  }
+
+  .about__links li {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--tap-min);
+  }
+
+  .about__bio > * + * {
+    margin-block-start: var(--space-4);
+  }
+
+  .about__cases-title {
+    margin-block-start: var(--space-7);
+  }
+
+  .about__cases {
+    display: grid;
+    gap: var(--space-4);
+    margin-block-start: var(--space-4);
+  }
+
+  .about__article {
+    margin-block-start: var(--space-6);
+  }
+
+  .about__footnote {
+    margin-block-start: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+  }
+
+  @media (min-width: 64em) {
+    .about__grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: auto auto 1fr;
+      gap: var(--space-6) var(--space-gutter);
+    }
+
+    .about__head {
+      display: contents;
+    }
+
+    .about__mono {
+      grid-column: 1 / span 4;
+      grid-row: 1 / span 2;
+    }
+
+    .about__title {
+      grid-column: 5 / -1;
+      grid-row: 1;
+      align-self: start;
+    }
+
+    .about__content {
+      grid-column: 5 / -1;
+      grid-row: 2 / span 2;
+    }
+
+    .about__links {
+      grid-column: 1 / span 4;
+      grid-row: 3;
+      align-self: start;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .about__cases {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+  }
+</style>

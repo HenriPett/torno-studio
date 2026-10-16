@@ -1,0 +1,30 @@
+{
+  "https://pglite.dev/docs/": {
+    "status": 200,
+    "final_url": "https://pglite.dev/docs/"
+  },
+  "https://docs.lovable.dev/features/security": {
+    "status": 200,
+    "final_url": "https://docs.lovable.dev/features/security"
+  },
+  "https://supabase.com/docs/guides/database/postgres/row-level-security": {
+    "status": 200,
+    "final_url": "https://supabase.com/docs/guides/database/postgres/row-level-security"
+  },
+  "https://docs.lovable.dev/introduction/support-policy": {
+    "status": 200,
+    "final_url": "https://docs.lovable.dev/introduction/support-policy"
+  },
+  "https://www.postgresql.org/docs/current/ddl-rowsecurity.html": {
+    "status": 200,
+    "final_url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html"
+  },
+  "https://supabase.com/docs/guides/troubleshooting/identify-lovable-cloud-or-supabase-backend": {
+    "status": 200,
+    "final_url": "https://supabase.com/docs/guides/troubleshooting/identify-lovable-cloud-or-supabase-backend"
+  },
+  "https://docs.lovable.dev/features/payments": {
+    "status": 200,
+    "final_url": "https://docs.lovable.dev/features/payments"
+  }
+}

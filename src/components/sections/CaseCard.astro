@@ -1,0 +1,94 @@
+---
+/**
+ * Case (DESIGN §6.10). Fonte pública: métricas (−27%, +21%) em <strong> acento + rótulo de fonte com link.
+ * Relato autodeclarado e projeto próprio: texto corrido, sem destaque numérico nem selo.
+ */
+import { site } from '../../config/site';
+import type { CaseItem } from '../../content/types';
+import ExternalLink from '../ui/ExternalLink.astro';
+
+interface Props {
+  item: CaseItem;
+  /** Nível do título: 4 sob o H3 "O que já construí" (home); 3 direto sob o H2 (landing, Provas). */
+  level?: 3 | 4;
+}
+
+const { item, level = 4 } = Astro.props;
+const Heading = level === 3 ? 'h3' : 'h4';
+const authorized = item.whenAuthorized?.requires === 'loopt' && site.looptAuthorized;
+const title = authorized && item.whenAuthorized ? item.whenAuthorized.title : item.title;
+const body = authorized && item.whenAuthorized ? item.whenAuthorized.body : item.body;
+
+/** Só no case publicado: separa as métricas percentuais para destacá-las. */
+const METRIC = /([−+-]\d+(?:[.,]\d+)?\s?%)/;
+const parts =
+  item.kind === 'published'
+    ? body.split(METRIC).map((text, index) => ({ text, metric: index % 2 === 1 }))
+    : [{ text: body, metric: false }];
+---
+
+<article class="case" data-kind={item.kind}>
+  <Heading class="case__title">{title}</Heading>
+  <p class="case__body">
+    {parts.map((part) => (part.metric ? <strong class="case__metric tnum">{part.text}</strong> : part.text))}
+  </p>
+  <p class="case__source">
+    {
+      item.source.url && item.source.linkLabel ? (
+        <>
+          {item.source.label} ·{' '}
+          <ExternalLink href={item.source.url} class="link--target">
+            {item.source.linkLabel}
+          </ExternalLink>
+        </>
+      ) : item.source.url ? (
+        <ExternalLink href={item.source.url} class="link--target">
+          {item.source.label}
+        </ExternalLink>
+      ) : (
+        item.source.label
+      )
+    }
+  </p>
+  {item.detail && <a class="link link--target case__detail" href={item.detail.href}>{item.detail.label} →</a>}
+</article>
+
+<style>
+  .case {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .case__title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .case__body {
+    color: var(--color-text-muted);
+    text-wrap: pretty;
+  }
+
+  .case__metric {
+    font-weight: 650;
+    color: var(--color-accent-text);
+  }
+
+  /* Mesma altura (alvo de 44 px do link) com ou sem link, para os rodapés dos cards se alinharem. */
+  .case__source {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.3em;
+    min-block-size: var(--tap-min);
+    margin-block-start: auto;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

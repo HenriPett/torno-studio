@@ -1,0 +1,43 @@
+---
+/**
+ * Provas (`#provas`, DESIGN §14.6): só os cases do copy da landing (Bom.Capital como relato sem link; Ascende
+ * como projeto próprio com link). Mesmo card dos cases da home; 2 colunas a partir de 640 px.
+ */
+import type { CaseItem } from '../../content/types';
+import CaseCard from '../sections/CaseCard.astro';
+
+interface Props {
+  content: { title: string; items: CaseItem[] };
+}
+
+const { content } = Astro.props;
+---
+
+<section id="provas" class="section proofs" aria-labelledby="provas-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="provas-title" class="h2">{content.title}</h2>
+    </div>
+    <div class="proofs__grid">
+      {content.items.map((item) => <CaseCard item={item} level={3} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proofs {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .proofs__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 40em) {
+    .proofs__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+  }
+</style>

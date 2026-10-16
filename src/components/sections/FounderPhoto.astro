@@ -1,0 +1,58 @@
+---
+/**
+ * Foto do fundador (DESIGN §6.12): astro:assets em AVIF/WebP, quadrada, 96 px no mobile e 160 px no desktop.
+ * A fonte otimizada tem 900 px; variantes até 480 px cobrem o slot desktop em telas 3x.
+ */
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import Monogram from './Monogram.astro';
+
+interface Props {
+  alt: string;
+}
+
+const { alt } = Astro.props;
+const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/henrique-pett.{jpg,jpeg,png,webp}', {
+  eager: true,
+});
+const photo = Object.values(photos)[0]?.default;
+const widths = photo ? [96, 160, 192, 320, 480].filter((w) => w <= photo.width) : [];
+---
+
+{
+  photo ? (
+    <Picture
+      src={photo}
+      alt={alt}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpeg"
+      widths={widths}
+      sizes="(min-width: 64em) 160px, 96px"
+      width={160}
+      height={160}
+      loading="lazy"
+      decoding="async"
+      class="founder-photo"
+    />
+  ) : (
+    <Monogram name={alt} />
+  )
+}
+
+<style>
+  .founder-photo {
+    display: block;
+    inline-size: 6rem;
+    block-size: 6rem;
+    flex: none;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+  }
+
+  @media (min-width: 64em) {
+    .founder-photo {
+      inline-size: 10rem;
+      block-size: 10rem;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+/** Como eu trabalho (`#metodo`, DESIGN §7.6): o único lugar com vocabulário de IA (prova de método). */
+import { getCopy, type Locale } from '../../lib/i18n';
+import type { IconName } from '../ui/Icon.astro';
+import IconList from '../ui/IconList.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { method } = getCopy(locale);
+
+/** Agentes de código, testes/deploy, decisões por escrito, especialistas. */
+const ICONS: IconName[] = ['terminal', 'check', 'gear', 'network'];
+---
+
+<section id="metodo" class="section section--sunken" aria-labelledby="metodo-title">
+  <div class="container">
+    <div class="section-head method__head">
+      <h2 id="metodo-title" class="h2">{method.title}</h2>
+      <p class="lead">{method.intro}</p>
+    </div>
+    <IconList items={method.items} icons={ICONS} layout="grid" gridFrom="tablet" />
+    <p class="method__closing">{method.closing}</p>
+  </div>
+</section>
+
+<style>
+  .method__head {
+    max-inline-size: calc(var(--container-max) * 8 / 12);
+  }
+
+  .method__head .lead {
+    max-inline-size: var(--measure);
+  }
+
+  .method__closing {
+    margin-block-start: var(--space-6);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    max-inline-size: var(--measure);
+  }
+</style>

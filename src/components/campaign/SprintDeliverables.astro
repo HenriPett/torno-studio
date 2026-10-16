@@ -1,0 +1,61 @@
+---
+/**
+ * O que sai do Product Sprint (`#sprint`, DESIGN §14.5): rótulo à esquerda no desktop, entregáveis com "✓"
+ * (§6.9) em 2 colunas quando forem 4 ou 6 (com número ímpar, 1 coluna), e nota com o badge da home.
+ */
+import type { TitledItem } from '../../content/types';
+import { getCopy, type Locale } from '../../lib/i18n';
+import IconList from '../ui/IconList.astro';
+
+interface Props {
+  locale: Locale;
+  content: { title: string; intro?: string | undefined; items: TitledItem[]; note: string };
+}
+
+const { locale, content } = Astro.props;
+const badge = getCopy(locale).ladder.steps.sprint.badge;
+const icons = content.items.map(() => 'checkCircle' as const);
+const layout = content.items.length % 2 === 0 ? 'grid' : 'rows';
+---
+
+<section id="sprint" class="section" aria-labelledby="sprint-title">
+  <div class="container split">
+    <div class="split__label section-head">
+      <h2 id="sprint-title" class="h2">{content.title}</h2>
+      {content.intro && <p class="lead">{content.intro}</p>}
+    </div>
+    <div class="split__content">
+      <IconList items={content.items} icons={icons} layout={layout} />
+      <p class="sprint__note">
+        {badge && <span class="sprint__badge">{badge}</span>}
+        <span class="sprint__note-text">{content.note}</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sprint__note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin-block-start: var(--space-6);
+  }
+
+  /* Badge §6.6, o mesmo do degrau Product Sprint. */
+  .sprint__badge {
+    padding: var(--space-1) var(--space-2);
+    background-color: var(--color-accent-subtle);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-text);
+  }
+
+  .sprint__note-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+  }
+</style>

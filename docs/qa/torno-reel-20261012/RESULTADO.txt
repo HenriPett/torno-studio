@@ -1,0 +1,55 @@
+TORNO-REEL-20261012 — publicado e verificado
+
+Melhoria: bloco positivo de autoqualificação PT/EN com título e três bullets,
+após a tabela Evolution e antes do CTA da oferta. Recomendação editorial
+Farol, hipótese de clareza; nenhuma alegação de conversão. Oferta, preços,
+termos, agenda, diagnóstico e foto C1 preservados.
+
+Produção PT: https://tornostudio.com/
+Produção EN: https://tornostudio.com/en/
+Deploy: 6acd5b0514764dd859c55082 (ready)
+Registro: https://app.netlify.com/projects/tornostudio/deploys/6acd5b0514764dd859c55082
+Preview: https://6acd598035084d048d68c172--tornostudio.netlify.app/
+
+Commit: 8bdbc08a4a2fdab954e2e464c02905c2f92c48f9
+Parent: 0ce2f5ce42b026dc5e7bfa2d49ef9b82d2b92ab9
+Branch main APENAS no clone /private/tmp/torno-reel-commit-20261012.
+Original main não avançada: .git é somente leitura nesta sessão.
+Sem remoto canônico/CI em Git e Netlify. Nenhum SHA remoto publicado.
+O título do deploy vincula o SHA e o overlay; commit_ref nativo é null.
+Bundle verificável e patch do commit estão nesta pasta.
+
+Arquivos no commit:
+- src/components/sections/Ladder.astro
+- src/content/pt-BR.ts
+- src/content/en.ts
+- src/content/types.ts
+
+Artefato: commit acima + overlay C1 já publicado, incluindo FounderPhoto,
+WebP e remoção JPG. PLANO-DEV e tests/sections preexistentes preservados no
+snapshot, sem efeito no conteúdo servido. Fonte e artefato arquivados;
+manifestos SHA-256 e diferenças explícitas em report.json/audit.json.
+Build com configuração pública de produção existente, Node 24.21.0/npm 11.19.0.
+
+Verificação:
+- astro check/build: 75 arquivos, zero erros/avisos/hints.
+- 6 testes sem navegador passaram (copy/preços e regras do contador).
+- Linkinator: 25 links internos, sem falhas; externos excluídos pela configuração.
+- Auditoria: texto, links, imagens e hreflang das seis páginas preservados,
+  exceto novo bloco nas homes; 15 variantes da foto iguais à produção anterior.
+- Afinador aprovou QA visual PT/EN, 360/390/1280, claro/escuro reais;
+  24 capturas bloco/retrato mais 2 do diagnóstico. Capturas inválidas excluídas.
+- Produção: HTTP 200 PT/EN, todos os 32 arquivos idênticos ao artefato aprovado.
+- Deploy ativo ready, Edge Function preservada; índice original vazio e hashes
+  preexistentes intactos. Auditoria independente confirmou as duas homes.
+
+Limitações:
+- 34 testes de navegador impedidos pelo launch Chromium (MachPort permission
+  denied), 5 skipped; não são aprovados. Lighthouse não reexecutado.
+- QA visual não substitui auditoria automatizada de acessibilidade.
+- Não houve submissão/clique de agenda nem teste do fluxo Calendly/conversão.
+- Sem push/CI; commit existe no clone isolado e no bundle, não na main original.
+
+Evidência detalhada: report.json, audit.json, production-audit.json,
+source-sha256.json, preexisting-sha256.json, logs, visual/, improvement.bundle,
+improvement.patch, source-snapshot.tar.gz e artifact.tar.gz.

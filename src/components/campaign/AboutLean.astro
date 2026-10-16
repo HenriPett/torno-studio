@@ -1,0 +1,54 @@
+---
+/**
+ * Quem constrói, versão da landing (`#quem`, DESIGN §14.7): monograma de 64 px não clicável ao lado do H2 e bio
+ * em 1ª pessoa. Sem foto (padrão da SPEC) e sem nenhum link (LinkedIn, GitHub ou site pessoal).
+ */
+import { getCopy, type Locale } from '../../lib/i18n';
+import Monogram from '../sections/Monogram.astro';
+
+interface Props {
+  locale: Locale;
+  content: { title: string; bio: string[] };
+}
+
+const { locale, content } = Astro.props;
+const name = getCopy(locale).about.photoAlt;
+---
+
+<section id="quem" class="section section--sunken" aria-labelledby="quem-title">
+  <div class="container">
+    <div class="about-lean">
+      <div class="about-lean__head">
+        <Monogram name={name} size="sm" />
+        <h2 id="quem-title" class="h2">{content.title}</h2>
+      </div>
+      <div class="about-lean__bio">
+        {content.bio.map((paragraph) => <p class="body">{paragraph}</p>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-lean {
+    max-inline-size: var(--measure);
+  }
+
+  .about-lean__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .about-lean__head :global(.monogram) {
+    flex: none;
+  }
+
+  .about-lean__bio {
+    margin-block-start: var(--space-5);
+  }
+
+  .about-lean__bio > * + * {
+    margin-block-start: var(--space-4);
+  }
+</style>

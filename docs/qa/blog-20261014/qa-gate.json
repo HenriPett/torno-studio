@@ -1,0 +1,15 @@
+{
+  "approved": true,
+  "approvedBy": "Batuta",
+  "deployId": "6acfe455ce78d78ac97cc565",
+  "artifactManifestHash": "e9f3348370ce58805cd9853949ef17eb6787f021883b534deb85e4b0ab2718df",
+  "edgeBundleHash": "335d2d93c1edad52a3fdd6590cfcc965ed3659faa5c65a0b4252dfa406e08b79",
+  "technicalReview": "PASS Ritmo v5-final source/artifact and Edge scripts",
+  "functionalQA": "PASS Afinador release12/12 integrity4/4 fixture7/7 negatives9/9 previewHTTP5/5; docs/qa/blog-20261014/GATE.md",
+  "visualReview": "PASS Timbre v5-final and exact-source private fixture; 90/90 product files",
+  "limitations": [
+    "Chromium launch blocked: Lighthouse >=95 and axe not measured",
+    "Physical keyboard scrolling not proven through Portal"
+  ],
+  "scope": "Two empty blog indexes PT/EN, zero public articles"
+}

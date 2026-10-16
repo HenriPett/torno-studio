@@ -1,0 +1,7 @@
+---
+import BlogArticle from '../../../components/blog/BlogArticle.astro';
+import { publicBlogEntries } from '../../../lib/blog';
+export async function getStaticPaths() { return (await publicBlogEntries('en')).map(({meta,entry})=>({params:{slug:meta.slug},props:{meta,entry}})); }
+const {meta,entry}=Astro.props;
+---
+<BlogArticle meta={meta} entry={entry} />

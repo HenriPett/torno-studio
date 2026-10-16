@@ -1,0 +1,207 @@
+---
+/** Corpo de /privacidade/ e /en/privacy/ (DESIGN §7.11): coluna de 65ch, sem CTA no meio do texto. */
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import ExternalLink from './ui/ExternalLink.astro';
+import { site } from '../config/site';
+import { getCopy, pathFor, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const { privacy } = copy;
+const { cookies } = privacy;
+const COLUMNS = ['name', 'vendor', 'purpose', 'category', 'duration'] as const;
+const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: 'UTC' }).format(
+  new Date(`${privacy.updated}T00:00:00Z`),
+);
+---
+
+<Base locale={locale} routeId="privacy" title={copy.meta.privacy.title} description={copy.meta.privacy.description}>
+  <Header locale={locale} routeId="privacy" />
+  <main id="conteudo" class="section" tabindex="-1">
+    <article class="container legal">
+      <h1 class="legal__title">{privacy.title}</h1>
+      <p class="meta">{privacy.updatedLabel} <time datetime={privacy.updated}>{updated}</time></p>
+      {
+        privacy.sections.map((section) => (
+          <section>
+            <h2 class="legal__h2">{section.title}</h2>
+            <p class="body">{section.body}</p>
+          </section>
+        ))
+      }
+      {/* Tabela de cookies: destino do link do banner de consentimento (#cookies). Linhas vêm do copy. */}
+      <section id="cookies" aria-labelledby="cookies-title">
+        <h2 id="cookies-title" class="legal__h2">{cookies.title}</h2>
+        <p class="body">{cookies.intro}</p>
+        {
+          cookies.rows.length > 0 && (
+            <table class="cookies">
+              <caption class="visually-hidden">{cookies.caption}</caption>
+              <thead>
+                <tr>
+                  {COLUMNS.map((key) => (
+                    <th scope="col">{cookies.headers[key]}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {cookies.rows.map((row) => (
+                  <tr>
+                    {COLUMNS.map((key) =>
+                      key === 'name' ? (
+                        <th scope="row" data-label={cookies.headers[key]}>
+                          <code>{row[key]}</code>
+                        </th>
+                      ) : (
+                        <td data-label={cookies.headers[key]}>{row[key]}</td>
+                      ),
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )
+        }
+      </section>
+      {/* Sempre há um canal de contato: e-mail (obrigatório em produção) ou, sem ele, o LinkedIn. */}
+      <section>
+        <h2 class="legal__h2">{privacy.contact.title}</h2>
+        {site.contactEmail ? (
+          <p class="body" data-contact="email">
+            <a class="link" href={`mailto:${site.contactEmail}`}>
+              {site.contactEmail}
+            </a>
+          </p>
+        ) : (
+          <p class="body" data-contact="linkedin">
+            {privacy.contact.linkedinFallback.lead}{' '}
+            <ExternalLink href={site.linkedinUrl}>{privacy.contact.linkedinFallback.label}</ExternalLink>.
+          </p>
+        )}
+        {site.legalEntity && (
+          <p class="body">
+            {privacy.contact.controllerLabel}: {site.legalEntity.name}, {site.legalEntity.id}
+          </p>
+        )}
+      </section>
+      <p class="legal__back"><a class="link" href={pathFor('home', locale)}>{privacy.backLink}</a></p>
+    </article>
+  </main>
+  <Footer locale={locale} routeId="privacy" />
+</Base>
+
+<style>
+  .legal {
+    max-inline-size: calc(var(--measure) + 2 * var(--container-pad));
+  }
+
+  .legal__title {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .legal > .meta {
+    margin-block-start: var(--space-3);
+  }
+
+  .legal section {
+    margin-block-start: var(--space-6);
+  }
+
+  .legal__h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .legal__h2 + .body,
+  .legal .body + .body {
+    margin-block-start: var(--space-3);
+  }
+
+  .cookies {
+    inline-size: 100%;
+    margin-block-start: var(--space-4);
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .cookies th,
+  .cookies td {
+    padding: var(--space-2) var(--space-3);
+    text-align: start;
+    vertical-align: top;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .cookies thead th {
+    background-color: var(--color-surface-sunken);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  .cookies tbody th {
+    font-weight: var(--weight-regular);
+  }
+
+  .cookies code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    overflow-wrap: anywhere;
+  }
+
+  /* < 640: 5 colunas não cabem; cada linha vira um bloco com o rótulo da coluna antes do valor. */
+  @media (max-width: 39.99em) {
+    .cookies thead {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    .cookies tr,
+    .cookies th,
+    .cookies td {
+      display: block;
+    }
+
+    .cookies tr {
+      padding-block: var(--space-2);
+      border-block-end: var(--border-width) solid var(--color-border);
+    }
+
+    .cookies tbody th,
+    .cookies td {
+      display: grid;
+      grid-template-columns: 7rem minmax(0, 1fr);
+      gap: var(--space-2);
+      padding: var(--space-1) 0;
+      border: 0;
+    }
+
+    .cookies tbody th::before,
+    .cookies td::before {
+      content: attr(data-label);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-muted);
+    }
+  }
+
+  .legal__back {
+    margin-block-start: var(--space-7);
+  }
+
+  .legal__back a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-min);
+  }
+</style>

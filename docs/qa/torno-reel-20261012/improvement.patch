@@ -1,0 +1,101 @@
+diff --git a/src/components/sections/Ladder.astro b/src/components/sections/Ladder.astro
+index 303b068..4a5fcdc 100644
+--- a/src/components/sections/Ladder.astro
++++ b/src/components/sections/Ladder.astro
+@@ -45,12 +45,20 @@ const steps = pricing[locale].steps.map((step) => ({
+     </div>
+     {
+       ctas && (
+-        <div class="ladder__cta actions">
+-          <BookingCta locale={locale} arrow>
+-            {ladder.cta}
+-          </BookingCta>
+-          <p class="meta">{ladder.ctaNote}</p>
+-        </div>
++        <>
++          <div class="ladder__fit">
++            <h3 class="h3">{ladder.workingTogether.title}</h3>
++            <ul class="dash-list">
++              {ladder.workingTogether.items.map((item) => <li>{item}</li>)}
++            </ul>
++          </div>
++          <div class="ladder__cta actions">
++            <BookingCta locale={locale} arrow>
++              {ladder.cta}
++            </BookingCta>
++            <p class="meta">{ladder.ctaNote}</p>
++          </div>
++        </>
+       )
+     }
+   </div>
+@@ -66,6 +74,19 @@ const steps = pricing[locale].steps.map((step) => ({
+     margin-block-start: var(--space-7);
+   }
+ 
++  .ladder__fit {
++    margin-block-start: var(--space-7);
++    max-inline-size: var(--measure);
++  }
++
++  .ladder__fit .dash-list {
++    margin-block-start: var(--space-4);
++  }
++
++  .ladder__fit li + li {
++    margin-block-start: var(--space-3);
++  }
++
+   .ladder__cta {
+     margin-block-start: var(--space-7);
+   }
+diff --git a/src/content/en.ts b/src/content/en.ts
+index 4d565d0..79f2448 100644
+--- a/src/content/en.ts
++++ b/src/content/en.ts
+@@ -207,6 +207,14 @@ export const en: SiteCopy = {
+       rulesNote: "Billed monthly in advance, 3-month minimum. Unused hours don't roll over. Extra hours: {overage}.",
+     },
+     cta: 'Book a 45-min scoping call (free)',
++    workingTogether: {
++      title: "You’ll probably enjoy working with me if…",
++      items: [
++        "You want to solve a business problem with a clearly scoped MVP, integration or internal tool.",
++        "You want to take part in decisions and are open to questioning priorities, assumptions and risks with me.",
++        "You prefer to agree on a feasible delivery, with clear scope and acceptance criteria.",
++      ],
++    },
+     ctaNote: "Not sure which step fits? That's what the call is for.",
+   },
+ 
+diff --git a/src/content/pt-BR.ts b/src/content/pt-BR.ts
+index 76f8021..d7f3d8a 100644
+--- a/src/content/pt-BR.ts
++++ b/src/content/pt-BR.ts
+@@ -211,6 +211,14 @@ export const ptBR: SiteCopy = {
+       rulesNote: 'Mensal antecipado, mínimo de 3 meses. Horas não usadas não acumulam. Hora excedente: {overage}.',
+     },
+     cta: 'Agendar diagnóstico (45 min, grátis)',
++    workingTogether: {
++      title: "Você provavelmente vai gostar de trabalhar comigo se…",
++      items: [
++        "Quer resolver um problema de negócio com um MVP, uma integração ou uma ferramenta interna de escopo fechado.",
++        "Quer participar das decisões e está aberto a questionar comigo prioridades, premissas e riscos.",
++        "Prefere combinar uma entrega viável, com escopo e critérios de aceite claros.",
++      ],
++    },
+     ctaNote: 'Não sabe qual degrau é o seu? É para isso que serve o diagnóstico.',
+   },
+ 
+diff --git a/src/content/types.ts b/src/content/types.ts
+index db0a3d4..57d6810 100644
+--- a/src/content/types.ts
++++ b/src/content/types.ts
+@@ -226,6 +226,7 @@ export interface SiteCopy {
+       rulesNote: string;
+     };
+     cta: string;
++    workingTogether: { title: string; items: string[] };
+     ctaNote: string;
+   };
+ 

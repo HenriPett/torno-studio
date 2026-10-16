@@ -1,0 +1,90 @@
+{
+  "retestStartedAtUtc": "2026-10-15T13:30:39.889200+00:00",
+  "deployId": "6ad0ca2a4a4dafb0c6955f29",
+  "expectedSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+  "expectedSrcHex": "2f5f617374726f2f746f726e6f2e4230766c504b43475f5a37566547312e737667",
+  "distHtmlSha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+  "distAssetPath": "/private/tmp/torno-blog-release-criteria-mvp-v3-approved-20261015-r1/dist/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+  "distAssetBytes": 2622,
+  "distAssetSha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582",
+  "origins": {
+    "production": {
+      "article": {
+        "observedAtUtc": "2026-10-15T13:30:40.277983+00:00",
+        "status": 200,
+        "finalUrl": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+        "headers": {
+          "cache-control": "public,max-age=0,must-revalidate",
+          "content-length": "29427",
+          "content-type": "text/html; charset=UTF-8",
+          "date": "Thu, 15 Oct 2026 13:30:40 GMT",
+          "etag": "\"7ca38983e0c3fe8c76b8a8ba667779a3-ssl\"",
+          "server": "Netlify",
+          "x-nf-request-id": "01M4ZW3ZCNJ2D4KMGFGVKKGC2N"
+        },
+        "bytes": 29427,
+        "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8"
+      },
+      "imgSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+      "srcOccursInRawHtml": true,
+      "srcSuffixHex": "43475f5a37566547312e737667",
+      "asset": {
+        "observedAtUtc": "2026-10-15T13:30:40.394475+00:00",
+        "status": 200,
+        "finalUrl": "https://tornostudio.com/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+        "headers": {
+          "cache-control": "public,max-age=31536000,immutable",
+          "content-length": "2622",
+          "content-type": "image/svg+xml",
+          "date": "Thu, 15 Oct 2026 13:30:40 GMT",
+          "etag": "\"44345886475ff1ef69e88935150f25cf-ssl\"",
+          "server": "Netlify",
+          "x-nf-request-id": "01M4ZW3ZGRZ32JSXKQT49RWS2W"
+        },
+        "bytes": 2622,
+        "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582"
+      },
+      "pass": true
+    },
+    "draft": {
+      "article": {
+        "observedAtUtc": "2026-10-15T13:30:40.852079+00:00",
+        "status": 200,
+        "finalUrl": "https://6ad0ca2a4a4dafb0c6955f29--tornostudio.netlify.app/blog/criterios-aceite-mvp/",
+        "headers": {
+          "cache-control": "public,max-age=0,must-revalidate",
+          "content-length": "29427",
+          "content-type": "text/html; charset=UTF-8",
+          "date": "Thu, 15 Oct 2026 13:30:40 GMT",
+          "etag": "\"7ca38983e0c3fe8c76b8a8ba667779a3-ssl\"",
+          "server": "Netlify",
+          "x-nf-request-id": "01M4ZW3ZP9DJQSJTZZ45NE86XJ"
+        },
+        "bytes": 29427,
+        "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8"
+      },
+      "imgSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+      "srcOccursInRawHtml": true,
+      "srcSuffixHex": "43475f5a37566547312e737667",
+      "asset": {
+        "observedAtUtc": "2026-10-15T13:30:41.080969+00:00",
+        "status": 200,
+        "finalUrl": "https://6ad0ca2a4a4dafb0c6955f29--tornostudio.netlify.app/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+        "headers": {
+          "cache-control": "public,max-age=31536000,immutable",
+          "content-length": "2622",
+          "content-type": "image/svg+xml",
+          "date": "Thu, 15 Oct 2026 13:30:41 GMT",
+          "etag": "\"44345886475ff1ef69e88935150f25cf-ssl\"",
+          "server": "Netlify",
+          "x-nf-request-id": "01M4ZW4027BT3H283FG41Q8HRB"
+        },
+        "bytes": 2622,
+        "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582"
+      },
+      "pass": true
+    }
+  },
+  "gate": "PASS",
+  "retestFinishedAtUtc": "2026-10-15T13:30:41.081031+00:00"
+}

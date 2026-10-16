@@ -1,0 +1,13 @@
+viewport: 360x844  url: https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en/guides/multi-tenant-rls/  title: Multi-tenant Supabase RLS: permissions and executable tests
+@e1 a "Torno Studio" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,10 87x44]
+@e2 a "PT — Switch language to Portuguese" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/gu [174,10 44x44]
+@e3 a "Book call" href=https://calendly.com/henriquepett/45min [234,10 93x44]
+@e4 main "Technical guide · Henrique Pett · October 13, 2026 Multi-ten" [0,-5505 343x7964]
+@e5 a "run-local.sh" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ex [40,72 86x20]
+@e6 a "bootstrap-local.sql" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ex [40,105 137x20]
+@e7 a "schema.sql" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ex [40,138 82x20]
+@e8 a "tests.sql" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ex [40,171 61x20]
+@e9 pre "Run command" [16,210 311x56]
+@e10 a "run-wasm.mjs" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ex [16,284 253x45]
+@e11 a "Instructions and WASM alternative (PT/EN)" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ex [16,350 308x20]
+@e12 pre "SQL" [16,462 311x1151]

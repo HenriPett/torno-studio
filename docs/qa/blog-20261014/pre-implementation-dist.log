@@ -1,0 +1,13 @@
+FAIL sitemap mantém as 16 URLs existentes e acrescenta apenas os dois índices: esperadas 18 URLs; encontradas 16
+FAIL índice /blog/: vazio real, metadata, i18n e CTA: ENOENT: no such file or directory, stat '/Users/henriquepett/Downloads/pessoal/projeto-50k-site/dist/blog/index.html'
+FAIL índice /en/blog/: vazio real, metadata, i18n e CTA: ENOENT: no such file or directory, stat '/Users/henriquepett/Downloads/pessoal/projeto-50k-site/dist/en/blog/index.html'
+FAIL navegação interna do blog resolve no artefato: ENOENT: no such file or directory, stat '/Users/henriquepett/Downloads/pessoal/projeto-50k-site/dist/blog/index.html'
+PASS sem artefatos de artigo ou pauta histórica no release zero-artigos
+FAIL regressão case /cases/loopt/: conteúdo, SEO, imagem e oferta: canonical case incorreto
+FAIL regressão case /en/cases/loopt/: conteúdo, SEO, imagem e oferta: canonical case incorreto
+FAIL regressão case /cases/bom-capital/: conteúdo, SEO, imagem e oferta: canonical case incorreto
+FAIL regressão case /en/cases/bom-capital/: conteúdo, SEO, imagem e oferta: canonical case incorreto
+FAIL regressão case /cases/ascende/: conteúdo, SEO, imagem e oferta: canonical case incorreto
+FAIL regressão case /en/cases/ascende/: conteúdo, SEO, imagem e oferta: canonical case incorreto
+FAIL home PT/EN: retrato, consentimento e descoberta do blog: preferências de consentimento ausentes em /
+RESULT 1/12 checks passed

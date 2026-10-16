@@ -1,0 +1,52 @@
+---
+/**
+ * Corpo da landing, compartilhado por / e /en/ (PLANO-DEV §2.2, DESIGN §7).
+ * Ordem das seções e âncoras iguais nos dois idiomas.
+ */
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import About from './sections/About.astro';
+import Faq from './sections/Faq.astro';
+import FinalCta from './sections/FinalCta.astro';
+import Guarantees from './sections/Guarantees.astro';
+import Hero from './sections/Hero.astro';
+import Ladder from './sections/Ladder.astro';
+import Method from './sections/Method.astro';
+import NotFor from './sections/NotFor.astro';
+import Problem from './sections/Problem.astro';
+import Testimonials from './sections/Testimonials.astro';
+import { getCopy, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+---
+
+<Base
+  locale={locale}
+  routeId="home"
+  title={copy.meta.home.title}
+  description={copy.meta.home.description}
+  ogTitle={copy.og.title}
+  ogDescription={copy.og.description}
+>
+  <Header locale={locale} routeId="home" />
+  <main id="conteudo" tabindex="-1">
+    <Hero locale={locale} />
+    <Problem locale={locale} />
+    <About locale={locale} />
+    <Ladder locale={locale} />
+    <Guarantees locale={locale} />
+    {/* Slot oculto (regra 5): sem filhos e com PUBLIC_SHOW_TESTIMONIALS=false, não renderiza nada. */}
+    <Testimonials locale={locale} />
+    <Method locale={locale} />
+    <NotFor locale={locale} />
+    <Faq locale={locale} />
+    <FinalCta locale={locale} />
+  </main>
+  <Footer locale={locale} routeId="home" />
+</Base>

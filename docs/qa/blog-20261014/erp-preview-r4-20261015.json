@@ -1,0 +1,253 @@
+{
+  "checkedAtUtc": "2026-10-15T16:49:45.428065+00:00",
+  "deployId": "6ad1037cbc0d231dd73df930",
+  "base": "https://6ad1037cbc0d231dd73df930--tornostudio.netlify.app",
+  "checks": {
+    "receipt_hashes_edge": true,
+    "receipt_preview_six_routes": true,
+    "route:/blog/integracao-erp-briefing-orcamento/": true,
+    "route:/blog/quando-automatizar-processos-planilhas/": true,
+    "route:/blog/criterios-aceite-mvp/": true,
+    "route:/cases/loopt/": true,
+    "route:/cases/bom-capital/": true,
+    "route:/cases/ascende/": true,
+    "route:/en/cases/loopt/": true,
+    "route:/en/cases/bom-capital/": true,
+    "route:/en/cases/ascende/": true,
+    "route:/blog/": true,
+    "route:/en/blog/": true,
+    "route:/": true,
+    "seo_metadata": true,
+    "schema_no_author_dates": true,
+    "figures_and_captions": true,
+    "editorial_links": true,
+    "svg1": true,
+    "svg2": true,
+    "sitemap21": true,
+    "production_baseline20": true,
+    "mobile360_min328": false,
+    "mobile390_min328": true,
+    "desktop_max480": true
+  },
+  "routes": {
+    "/blog/integracao-erp-briefing-orcamento/": {
+      "status": 200,
+      "bytes": 29522,
+      "sha256": "56afc35cc9c04eca8ce889da1a9738bba3d68016c0c1b1aa34dcbec687c3a82e",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/blog/quando-automatizar-processos-planilhas/": {
+      "status": 200,
+      "bytes": 29073,
+      "sha256": "ac00891f235c180392807d8b5c8e31cd53c6033a8f2777c830cde1dcce59c1de",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/quando-automatizar-processos-planilhas/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/blog/criterios-aceite-mvp/": {
+      "status": 200,
+      "bytes": 29427,
+      "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/cases/loopt/": {
+      "status": 200,
+      "bytes": 28558,
+      "sha256": "891b2704def91904fda28392d3fea82faa4f58d358f6f95bc80edd5cc6d2f3b9",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/loopt/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/cases/bom-capital/": {
+      "status": 200,
+      "bytes": 26071,
+      "sha256": "c320e42734ba4043a7721813be60f68fdbf2dd11cb4ddf688732d2fff13dfcbd",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/bom-capital/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/cases/ascende/": {
+      "status": 200,
+      "bytes": 26334,
+      "sha256": "63024b19a3f72dc813232ad958b210f06ca8f2e897a487e62f29bf68a12ba77c",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/ascende/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/en/cases/loopt/": {
+      "status": 200,
+      "bytes": 28050,
+      "sha256": "73ba9c849c1b9946d14768fe41ed9bcd7228b043ac908df1e28ab1047e420130",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/loopt/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/en/cases/bom-capital/": {
+      "status": 200,
+      "bytes": 25645,
+      "sha256": "c259da61bc8a02f983004824603f7b7bde8311edd0adba75421c895aae33fdb0",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/bom-capital/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/en/cases/ascende/": {
+      "status": 200,
+      "bytes": 25949,
+      "sha256": "a71baa8f2947089bf4466087a16496519f14cf560a0828e32898c85ef6ec82ca",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/ascende/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/blog/": {
+      "status": 200,
+      "bytes": 18752,
+      "sha256": "b4b501bc333f0d899f77a3f0f085cb889573d8c31316a2fd34a15d5d6b22f38a",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/en/blog/": {
+      "status": 200,
+      "bytes": 17492,
+      "sha256": "115a6881d93baae2b88c1b3538eec621bf8c048573e1eb1ee4664ea708be1775",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/blog/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    },
+    "/": {
+      "status": 200,
+      "bytes": 69408,
+      "sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/",
+      "canonicalSelf": true,
+      "xRobotsTag": "noindex"
+    }
+  },
+  "assets": {
+    "/_astro/integracao-erp-fluxo.CJXjnJ5K_Z1O1Dlw.svg": {
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2062,
+      "sha256": "cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c",
+      "artifactSha256": "cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c",
+      "match": true
+    },
+    "/_astro/integracao-erp-pendencias.CUPyqtvX_Z1O1Dlw.svg": {
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2079,
+      "sha256": "47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785",
+      "artifactSha256": "47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785",
+      "match": true
+    }
+  },
+  "browser": {
+    "viewport360": {
+      "figure1": {
+        "x": 16,
+        "width": 311,
+        "height": 555
+      },
+      "figure2": {
+        "x": 16,
+        "width": 311,
+        "height": 555
+      }
+    },
+    "viewport390": {
+      "figure1": {
+        "x": 17,
+        "width": 339,
+        "height": 604
+      },
+      "figure2": {
+        "x": 17,
+        "width": 339,
+        "height": 604
+      }
+    },
+    "viewport1280": {
+      "figure1": {
+        "x": 323,
+        "width": 480,
+        "height": 856
+      }
+    },
+    "observedBy": "Maestri portal snapshot; screenshots show no text or caption clipping"
+  },
+  "article": {
+    "title": "Integração com ERP: briefing para orçamento | Torno",
+    "description": "Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências.",
+    "h1": [
+      "Integração com ERP: o que reunir antes de pedir orçamento"
+    ],
+    "canonical": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+    "figures": [
+      {
+        "src": "/_astro/integracao-erp-fluxo.CJXjnJ5K_Z1O1Dlw.svg",
+        "alt": "Mapa hipotético: aprovação comercial no CRM gera envio ao ERP; identificador e situação retornam ao CRM. É preciso definir onde cada cadastro pode ser alterado.",
+        "caption": "Exemplo hipotético. Direção dos dados e permissões devem ser confirmadas para os sistemas envolvidos."
+      },
+      {
+        "src": "/_astro/integracao-erp-pendencias.CUPyqtvX_Z1O1Dlw.svg",
+        "alt": "Briefing em três grupos: confirmado com documentação; a confirmar com responsável e impacto; fora da primeira etapa com exclusões registradas.",
+        "caption": "Modelo de organização do briefing. Os itens são ilustrativos, sem relação com um cliente real."
+      }
+    ],
+    "schema": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+        "mainEntityOfPage": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+        "headline": "Integração com ERP: o que reunir antes de pedir orçamento",
+        "description": "Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências.",
+        "inLanguage": "pt-BR"
+      }
+    ],
+    "links": [
+      "https://calendly.com/henriquepett/45min",
+      "https://developer.bling.com.br/limites",
+      "https://developer.bling.com.br/webhooks",
+      "https://developer.omie.com.br/",
+      "https://tornostudio.com/blog/criterios-aceite-mvp/"
+    ]
+  },
+  "sitemap": {
+    "status": 200,
+    "count": 21,
+    "unique": 21,
+    "added": [
+      "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/"
+    ],
+    "removed": [],
+    "sha256": "828be6a48425bf82f9e56e035a9d8b5ee4af37d5c768ef5d12e76fad9b1fe7d4",
+    "artifactSha256": "828be6a48425bf82f9e56e035a9d8b5ee4af37d5c768ef5d12e76fad9b1fe7d4"
+  },
+  "productionSitemap": {
+    "status": 200,
+    "count": 20,
+    "unique": 20,
+    "matchesPrior20": true,
+    "newArticlePresent": false
+  },
+  "passed": 24,
+  "total": 25,
+  "gate": "HOLD"
+}

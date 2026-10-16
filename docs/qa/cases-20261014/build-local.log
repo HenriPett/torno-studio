@@ -1,0 +1,127 @@
+
+> projeto-50k-site@0.1.0 build
+> astro check && astro build
+
+09:19:26 [vite] Re-optimizing dependencies because vite config has changed
+
+Auto-generating collections for folders in "src/content/" that are not defined as collections.
+This is deprecated, so you should define these collections yourself in "src/content.config.ts".
+The following collections have been auto-generated: seo
+
+09:19:26 [content] Syncing content
+09:19:26 [content] Astro config changed
+09:19:26 [content] Clearing content store
+09:19:26 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/seo"
+09:19:26 [content] Synced content
+09:19:26 [types] Generated 134ms
+09:19:26 [check] Getting diagnostics for Astro files in /Users/henriquepett/Downloads/pessoal/projeto-50k-site...
+Result (94 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+09:19:30 [WARN] [env-guard] PUBLIC_BOOKING_URL vazio: CTA de agenda usa o placeholder "#agendar".
+09:19:30 [WARN] [env-guard] PUBLIC_LEGAL_NAME vazio: linha do controlador some da página de privacidade.
+09:19:30 [WARN] [env-guard] PUBLIC_LEGAL_ID vazio: linha do controlador some da página de privacidade.
+09:19:30 [WARN] [env-guard] PUBLIC_CONTACT_EMAIL vazio: privacidade usa o LinkedIn como canal de contato.
+09:19:30 [WARN] [env-guard] PUBLIC_SITE_BRAND vazio: marca usa o placeholder "[Marca]".
+
+Auto-generating collections for folders in "src/content/" that are not defined as collections.
+This is deprecated, so you should define these collections yourself in "src/content.config.ts".
+The following collections have been auto-generated: seo
+
+09:19:30 [content] Syncing content
+09:19:30 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/seo"
+09:19:30 [content] Synced content
+09:19:30 [types] Generated 19ms
+09:19:30 [build] output: "static"
+09:19:30 [build] mode: "static"
+09:19:30 [build] directory: /Users/henriquepett/Downloads/pessoal/projeto-50k-site/dist/
+09:19:30 [build] Collecting build info...
+09:19:30 [build] ✓ Completed in 32ms.
+09:19:30 [build] Building static entrypoints...
+09:19:31 [vite] ✓ built in 646ms
+09:19:31 [build] ✓ Completed in 664ms.
+
+ building client (vite) 
+09:19:31 [vite] transforming...
+09:19:31 [vite] ✓ 4 modules transformed.
+09:19:31 [vite] rendering chunks...
+09:19:31 [vite] computing gzip size...
+09:19:31 [vite] dist/_astro/ConsentBanner.astro_astro_type_script_index_0_lang.CcPf8UUN.js  5.74 kB │ gzip: 2.55 kB
+09:19:31 [vite] ✓ built in 18ms
+
+ generating static routes 
+09:19:31 ▶ src/pages/404.astro
+09:19:31   └─ /404.html (+5ms) 
+09:19:31 ▶ src/pages/cases/[slug].astro
+09:19:31   ├─ /cases/loopt/index.html (+5ms) 
+09:19:31   ├─ /cases/bom-capital/index.html (+2ms) 
+09:19:31   └─ /cases/ascende/index.html (+1ms) 
+09:19:31 ▶ src/pages/diagnostico.astro
+09:19:31   └─ /diagnostico/index.html (+4ms) 
+09:19:31 ▶ src/pages/en/cases/[slug].astro
+09:19:31   ├─ /en/cases/loopt/index.html (+2ms) 
+09:19:31   ├─ /en/cases/bom-capital/index.html (+2ms) 
+09:19:31   └─ /en/cases/ascende/index.html (+1ms) 
+09:19:31 ▶ src/pages/en/guides/multi-tenant-rls.astro
+09:19:31   └─ /en/guides/multi-tenant-rls/index.html (+2ms) 
+09:19:31 ▶ src/pages/en/index.astro
+09:19:31   └─ /en/index.html (+5ms) 
+09:19:31 ▶ src/pages/en/lovable-to-production.astro
+09:19:31   └─ /en/lovable-to-production/index.html (+2ms) 
+09:19:31 ▶ src/pages/en/privacy.astro
+09:19:31   └─ /en/privacy/index.html (+2ms) 
+09:19:31 ▶ src/pages/en/software-project-rescue.astro
+09:19:31   └─ /en/software-project-rescue/index.html (+1ms) 
+09:19:31 ▶ src/pages/guias/rls-multiempresa.astro
+09:19:31   └─ /guias/rls-multiempresa/index.html (+1ms) 
+09:19:31 ▶ src/pages/index.astro
+09:19:31   └─ /index.html (+3ms) 
+09:19:31 ▶ src/pages/lovable-em-producao.astro
+09:19:31   └─ /lovable-em-producao/index.html (+1ms) 
+09:19:31 λ src/pages/og/[locale].png.ts
+09:19:31   ├─ /og/pt-BR.png/ (+1.45s) 
+09:19:33   └─ /og/en.png/ (+253ms) 
+09:19:33 λ src/pages/og/cases/[id].png.ts
+09:19:33   ├─ /og/cases/loopt-pt-BR.png/ (+146ms) 
+09:19:33   ├─ /og/cases/bom-capital-pt-BR.png/ (+146ms) 
+09:19:33   ├─ /og/cases/ascende-pt-BR.png/ (+134ms) 
+09:19:33   ├─ /og/cases/loopt-en.png/ (+129ms) 
+09:19:33   ├─ /og/cases/bom-capital-en.png/ (+131ms) 
+09:19:33   └─ /og/cases/ascende-en.png/ (+138ms) 
+09:19:34 ▶ src/pages/privacidade.astro
+09:19:34   └─ /privacidade/index.html (+2ms) 
+09:19:34 ▶ src/pages/recuperacao-de-projeto.astro
+09:19:34   └─ /recuperacao-de-projeto/index.html (+1ms) 
+09:19:34 λ src/pages/robots.txt.ts
+09:19:34   └─ /robots.txt (+0ms) 
+09:19:34 ✓ Completed in 2.64s.
+
+ generating optimized images 
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z1oIIxS.avif (reused cache entry) (+74ms) (1/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_3UOep.avif (reused cache entry) (+0ms) (2/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_1lgE4y.avif (reused cache entry) (+0ms) (3/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z1SITQe.avif (reused cache entry) (+1ms) (4/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z2sUaV3.avif (reused cache entry) (+1ms) (5/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z27Ep.webp (reused cache entry) (+1ms) (6/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_ZJmjey.webp (reused cache entry) (+0ms) (7/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z2kdRPT.webp (reused cache entry) (+0ms) (8/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Zu2iWK.webp (reused cache entry) (+1ms) (9/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z14dz2z.webp (reused cache entry) (+1ms) (10/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_oDPBP.jpeg (reused cache entry) (+1ms) (11/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z8x4Yt.jpeg (reused cache entry) (+1ms) (12/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z1UwTyE.jpeg (reused cache entry) (+1ms) (13/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_Z5lkFv.jpeg (reused cache entry) (+1ms) (14/21)
+09:19:34   ▶ /_astro/henrique-pett.B6ylgfAe_ZEwAKk.jpeg (reused cache entry) (+1ms) (15/21)
+09:19:34   ▶ /_astro/ascende-public-site.CDOG7A2S_1CztTA.webp (before: 57kB, after: 51kB) (+171ms) (16/21)
+09:19:34   ▶ /_astro/loopt-public-site.BxpzY5cx_107Pzo.webp (before: 97kB, after: 82kB) (+173ms) (17/21)
+09:19:34   ▶ /_astro/ascende-public-site.CDOG7A2S_ZOPGBV.webp (before: 57kB, after: 13kB) (+26ms) (18/21)
+09:19:34   ▶ /_astro/loopt-public-site.BxpzY5cx_kL4CW.webp (before: 97kB, after: 21kB) (+28ms) (19/21)
+09:19:34   ▶ /_astro/ascende-public-site.CDOG7A2S_ZPw3K3.webp (before: 57kB, after: 23kB) (+42ms) (20/21)
+09:19:34   ▶ /_astro/loopt-public-site.BxpzY5cx_1N6PRn.webp (before: 97kB, after: 38kB) (+46ms) (21/21)
+09:19:34 ✓ Completed in 249ms.
+
+09:19:34 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+09:19:34 [build] 18 page(s) built in 3.63s
+09:19:34 [build] Complete!

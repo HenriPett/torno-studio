@@ -1,0 +1,19 @@
+ROUTE / 200 bytes 69408 artifact_match True
+ROUTE /blog/ 200 bytes 18376 artifact_match True
+ROUTE /en/blog/ 200 bytes 17492 artifact_match True
+ROUTE /blog/quando-automatizar-processos-planilhas/ 200 bytes 29073 artifact_match True
+ROUTE /blog/criterios-aceite-mvp/ 200 bytes 29427 artifact_match True
+ROUTE /cases/loopt/ 200 bytes 28558 artifact_match True
+ROUTE /cases/bom-capital/ 200 bytes 26071 artifact_match True
+ROUTE /cases/ascende/ 200 bytes 26334 artifact_match True
+ROUTE /en/cases/loopt/ 200 bytes 28050 artifact_match True
+ROUTE /en/cases/bom-capital/ 200 bytes 25645 artifact_match True
+ROUTE /en/cases/ascende/ 200 bytes 25949 artifact_match True
+ARTICLE title Critérios de aceite para MVP: guia para contratar | Torno canonical https://tornostudio.com/blog/criterios-aceite-mvp/ h1_count 1 figure_count 1 schema_postings 1 indexable True
+ARTICLE_LINKS 5 expected_match True
+SVG /_astro/torno.B0vlPKCG_Z7VeG1.svg 200 image/svg+xml bytes 2622 artifact_match True
+INDICES pt_has_article True en_has_article False
+SITEMAP 200 count 20 unique 20 added ['https://tornostudio.com/blog/criterios-aceite-mvp/'] removed []
+ROBOTS 200 artifact_match True article_allowed True
+CHECKS 22 / 22 GATE PASS
+EVIDENCE /Users/henriquepett/Downloads/pessoal/projeto-50k-site/docs/qa/blog-20261014/production-criteria-v3-20261015.json

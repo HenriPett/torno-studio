@@ -1,0 +1,331 @@
+---
+/**
+ * Degrau da escada (DESIGN §6.7). Principal: círculo com numeral. Alternativo: círculo tracejado
+ * com "ou" e o mesmo "ou" visualmente oculto antes do nome, para leitor de tela.
+ */
+import type { LadderStep } from '../../config/pricing';
+import { bookingHref, getCopy, type Locale } from '../../lib/i18n';
+import Icon from '../ui/Icon.astro';
+import Price from '../ui/Price.astro';
+
+interface Props {
+  step: LadderStep;
+  locale: Locale;
+  /** Numeral do degrau principal; null = alternativo ao anterior. */
+  number: number | null;
+  /** Link "Agendar diagnóstico" do degrau 1. Falso na landing de campanha (DESIGN §14.1). */
+  cta?: boolean;
+}
+
+const { step, locale, number, cta = true } = Astro.props;
+const { ladder } = getCopy(locale);
+const copy = ladder.steps[step.id];
+const isAlt = number === null;
+const suffix = step.id === 'evolution' ? ladder.units.perMonth : undefined;
+---
+
+<li class:list={['rung', isAlt ? 'rung--alt' : 'rung--main']} data-step={step.id}>
+  <span class="rung__marker" aria-hidden="true">{isAlt ? ladder.labels.altStep : number}</span>
+  <h3 class="rung__name">
+    {isAlt && <span class="visually-hidden">{ladder.labels.altStep} </span>}{copy.name}
+  </h3>
+  <p class="rung__time meta">{copy.timeline}</p>
+  <div class="rung__price">
+    <Price price={step.price} locale={locale} suffix={suffix} />
+  </div>
+  <div class="rung__body">
+    <p class="rung__summary">{copy.summary}</p>
+    {copy.badge && <p class="rung__badge">{copy.badge}</p>}
+    {
+      cta && step.id === 'diagnostic' && (
+        <p class="rung__cta">
+          <a class="link" href={bookingHref(locale)} data-booking-cta>
+            {ladder.diagnosticCta}
+            <Icon name="arrowRight" class="link__icon" />
+          </a>
+        </p>
+      )
+    }
+    <details class="rung__details">
+      <summary>
+        {ladder.labels.included}
+        <Icon name="plus" class="rung__plus" />
+      </summary>
+      <div class="rung__details-body">
+        <ul class="rung__included">
+          {
+            copy.included.map((item) => (
+              <li>
+                <Icon name="tick" class="rung__tick" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="rung__payment"><strong>{ladder.labels.payment}:</strong> {copy.payment}</p>
+        {copy.note && <p class="rung__note">{copy.note.text}</p>}
+      </div>
+    </details>
+  </div>
+</li>
+
+<style>
+  .rung {
+    --rung-pad: var(--space-6);
+    --rung-marker: 2rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--rung-marker) minmax(0, 1fr) auto;
+    grid-template-areas:
+      'marker name price'
+      '. time time'
+      '. body body';
+    column-gap: var(--space-4);
+    padding-block-start: var(--rung-pad);
+  }
+
+  .rung--alt {
+    --rung-pad: var(--space-4);
+  }
+
+  .rung:first-child {
+    --rung-pad: 0px;
+  }
+
+  /* Trilho: linha vertical decorativa ligando os círculos. */
+  .rung::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(var(--rung-marker) / 2 - 1px);
+    inline-size: 2px;
+    background-color: var(--color-border-strong);
+  }
+
+  .rung:first-child::before {
+    inset-block-start: calc(var(--rung-pad) + var(--rung-marker) / 2);
+  }
+
+  .rung:last-child::before {
+    inset-block-end: auto;
+    block-size: calc(var(--rung-pad) + var(--rung-marker) / 2);
+  }
+
+  .rung__marker {
+    grid-area: marker;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    inline-size: var(--rung-marker);
+    block-size: var(--rung-marker);
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface-sunken);
+    border: 1.5px solid var(--color-accent);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-text);
+    font-feature-settings: var(--font-features-numeric);
+  }
+
+  .rung--alt .rung__marker {
+    border-style: dashed;
+    border-color: var(--color-border-strong);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .rung__name {
+    grid-area: name;
+    align-self: center;
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .rung__time {
+    grid-area: time;
+    margin-block-start: var(--space-1);
+  }
+
+  .rung__price {
+    grid-area: price;
+    align-self: start;
+  }
+
+  .rung__body {
+    grid-area: body;
+    margin-block-start: var(--space-2);
+  }
+
+  .rung__summary {
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+  }
+
+  .rung__badge {
+    display: inline-block;
+    margin-block-start: var(--space-3);
+    padding: var(--space-1) var(--space-2);
+    background-color: var(--color-accent-subtle);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-text);
+  }
+
+  .rung__cta {
+    margin-block-start: var(--space-3);
+    font-weight: var(--weight-semibold);
+  }
+
+  .rung__cta .link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-block-size: var(--tap-min);
+  }
+
+  .rung__details {
+    margin-block-start: var(--space-2);
+  }
+
+  .rung__details summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-block-size: var(--tap-min);
+    list-style: none;
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-text);
+    text-underline-offset: 0.2em;
+  }
+
+  .rung__details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (hover: hover) {
+    .rung__details summary:hover {
+      text-decoration-line: underline;
+    }
+  }
+
+  .rung__details :global(.rung__plus) {
+    inline-size: 1rem;
+    block-size: 1rem;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .rung__details[open] :global(.rung__plus) {
+    transform: rotate(45deg);
+  }
+
+  .rung__details-body {
+    padding-block-start: var(--space-3);
+    max-inline-size: var(--measure);
+  }
+
+  .rung__included {
+    list-style: none;
+    padding: 0;
+  }
+
+  .rung__included li {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    column-gap: var(--space-2);
+  }
+
+  .rung__included li + li {
+    margin-block-start: var(--space-2);
+  }
+
+  .rung__included :global(.rung__tick) {
+    inline-size: 1rem;
+    block-size: 1rem;
+    margin-block-start: 0.3em;
+    color: var(--color-accent-text);
+  }
+
+  .rung__payment {
+    margin-block-start: var(--space-3);
+  }
+
+  .rung__payment strong {
+    font-weight: var(--weight-semibold);
+  }
+
+  .rung__note {
+    margin-block-start: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 40em) {
+    .rung {
+      grid-template-columns: var(--rung-marker) auto minmax(0, 1fr) auto;
+      grid-template-areas:
+        'marker name time price'
+        '. body body body';
+    }
+
+    .rung__time {
+      align-self: center;
+      margin-block-start: 0;
+    }
+
+    .rung__time::before {
+      content: '·';
+      margin-inline-end: var(--space-2);
+      color: var(--color-border-strong);
+    }
+  }
+
+  @media (min-width: 64em) {
+    .rung {
+      --rung-pad: var(--space-6);
+      grid-template-columns: 3rem minmax(0, 1fr) 10rem 12.5rem;
+      grid-template-areas:
+        'marker name time price'
+        'marker body . price';
+      column-gap: var(--space-gutter);
+      padding-block-end: var(--space-5);
+      border-block-start: var(--border-width) solid var(--color-border);
+    }
+
+    /* Alternativo: mais perto do degrau anterior e sem divisória, lido como variação dele. */
+    .rung--alt {
+      --rung-pad: var(--space-4);
+      border-block-start: 0;
+    }
+
+    .rung:first-child {
+      --rung-pad: 0px;
+      border-block-start: 0;
+    }
+
+    .rung:last-child::before {
+      block-size: calc(var(--rung-pad) + var(--rung-marker) / 2);
+    }
+
+    .rung__marker {
+      align-self: start;
+    }
+
+    .rung__time {
+      align-self: start;
+      padding-block-start: 0.35em;
+    }
+
+    .rung__time::before {
+      content: none;
+    }
+
+    .rung__name {
+      align-self: start;
+    }
+  }
+</style>

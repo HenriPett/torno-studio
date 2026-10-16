@@ -1,0 +1,5 @@
+PASS produção /blog/ e /en/blog/: HTTP 200, canonical self, indexáveis e vazios
+PASS produção sitemap: 16 URLs preservadas + 2 índices, nenhum post
+PASS produção seis cases PT/EN: HTTP 200 e canonical self
+PASS produção fixture privada: três rotas HTTP 404
+RESULT 4/4 checks passed

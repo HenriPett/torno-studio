@@ -1,0 +1,151 @@
+---
+/**
+ * Header fixo (DESIGN §6.2, §7.0). Sem menu hambúrguer.
+ * < 640: wordmark · idioma · CTA curto. 640–1199: + tema, CTA longo. ≥ 1200: + nav de âncoras.
+ */
+import { NAV_SECTION_IDS } from '../content/types';
+import { getCopy, pathFor, type Locale, type RouteId } from '../lib/i18n';
+import BookingCta from './ui/BookingCta.astro';
+import LangSwitch from './ui/LangSwitch.astro';
+import ThemeToggle from './ui/ThemeToggle.astro';
+import Wordmark from './ui/Wordmark.astro';
+
+interface Props {
+  locale: Locale;
+  routeId: RouteId;
+  /** null hides unavailable article translation; undefined preserves route behavior. */
+  languageHref?: string | null;
+  /** Landing de campanha (DESIGN §14.2): marca como texto + CTA; sem nav, seletor de idioma nem toggle. */
+  lean?: boolean;
+}
+
+const { locale, routeId, languageHref, lean = false } = Astro.props;
+const copy = getCopy(locale);
+const home = pathFor('home', locale);
+---
+
+<header class:list={['site-header', lean && 'site-header--lean']}>
+  <div class="container site-header__inner">
+    <div class="site-header__brand">
+      <Wordmark href={lean ? undefined : home} />
+    </div>
+    {
+      !lean && (
+        <>
+          <nav class="site-header__nav" aria-label={copy.header.navLabel}>
+            <ul>
+              {NAV_SECTION_IDS.map((id) => (
+                <li>
+                  <a href={`${home}#${id}`}>{copy.header.nav[id]}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <LangSwitch locale={locale} routeId={routeId} href={languageHref} />
+          <div class="site-header__theme">
+            <ThemeToggle label={copy.common.themeToggleLabel} />
+          </div>
+        </>
+      )
+    }
+    <BookingCta locale={locale} size="md" class="site-header__cta">
+      <span class="site-header__cta-long">{copy.common.bookingCtaHeader}</span>
+      <span class="site-header__cta-short">{copy.common.bookingCtaHeaderMobile}</span>
+    </BookingCta>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--color-bg);
+    box-shadow: var(--shadow-header);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-block-size: var(--header-height);
+    padding-block: var(--space-2);
+  }
+
+  /* A marca é o item que encolhe; os controles à direita não. */
+  .site-header__brand {
+    display: flex;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+
+  .site-header__nav,
+  .site-header__theme,
+  .site-header__cta-long {
+    display: none;
+  }
+
+  :global(.site-header__cta) {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  /* Sem a nav (que empurrava o CTA a partir de 1200 px), o CTA vai à direita sozinho (DESIGN §14.2). */
+  .site-header--lean :global(.site-header__cta) {
+    margin-inline-start: auto;
+  }
+
+  @media (min-width: 40em) {
+    .site-header__theme {
+      display: flex;
+      flex: none;
+    }
+
+    .site-header__cta-long {
+      display: inline;
+    }
+
+    .site-header__cta-short {
+      display: none;
+    }
+  }
+
+  @media (min-width: 75em) {
+    .site-header__brand {
+      flex: 0 1 auto;
+    }
+
+    .site-header__nav {
+      display: block;
+      flex: 1 1 auto;
+    }
+  }
+
+  .site-header__nav ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+  }
+
+  .site-header__nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--tap-min);
+    min-block-size: var(--tap-min);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    text-decoration: none;
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) {
+    .site-header__nav a:hover {
+      text-decoration-line: underline;
+    }
+  }
+</style>

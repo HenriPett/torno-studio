@@ -1,0 +1,15 @@
+PASS receipts_hash_edge
+PASS preview_verified_sha_eight
+PASS all_14_preview_html_http_artifact_noindex
+PASS 10_protected_production_bytes
+PASS seo_title_description_h1
+PASS blogposting_no_author_dates_byline_en
+PASS figure_position_alt_caption_equivalent
+PASS svg_http_sha
+PASS links_sources_cta
+PASS sitemap23_preserves22
+PASS production_baseline22_new404
+CHECKS 11 / 11
+SVG /_astro/orcamento-apos-lancamento.Diq0z4bO_22sYfi.svg 200 3934 36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d
+SITEMAP 23 PRESERVED 22 ADDED ['https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/'] PRODUCTION 22 NEW_SLUG 404
+EVIDENCE /Users/henriquepett/Downloads/pessoal/projeto-50k-site/docs/qa/blog-20261014/manutencao-preview-r1-20261016.json

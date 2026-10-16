@@ -1,0 +1,137 @@
+{
+  "pages": [
+    {
+      "url": "https://tornostudio.com/",
+      "status": 200,
+      "new_portrait": true
+    },
+    {
+      "url": "https://tornostudio.com/en/",
+      "status": 200,
+      "new_portrait": true
+    }
+  ],
+  "assets": [
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_1jWl1M.jpeg",
+      "status": 200,
+      "bytes": 4155,
+      "type": "image/jpeg",
+      "sha256": "2f696ccaee751e697b21e5d9704e11f4108eeb54498785b2c3c5b19fe32ff6a2",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_2gz9tv.avif",
+      "status": 200,
+      "bytes": 2094,
+      "type": "image/avif",
+      "sha256": "178a2a9a10ddefac451cf2b9dab2567dd221cdf128b0e64b2cfecb7e4ebfb866",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_OW9Ir.jpeg",
+      "status": 200,
+      "bytes": 11649,
+      "type": "image/jpeg",
+      "sha256": "b186e8840014d86b84be25ed19ae10e2b2a3c2cf92653f3b4c3c973f24de2996",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_UgmJx.webp",
+      "status": 200,
+      "bytes": 2632,
+      "type": "image/webp",
+      "sha256": "6e0742ec9c13af584e9785cb9234f556685d37d1074f1cbed92b2caae5e31889",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z10ep9H.jpeg",
+      "status": 200,
+      "bytes": 5342,
+      "type": "image/jpeg",
+      "sha256": "ee5fe45d2c6d8dd7f5f6a0948110754fc348c0598ff7f924493bab43f6bceaee",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z1JMcKg.jpeg",
+      "status": 200,
+      "bytes": 2073,
+      "type": "image/jpeg",
+      "sha256": "66d13ab591ec51508ecac74fe257ae1e5e74b0d034892d36f42751c92bfe7c0e",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z1oUnqW.webp",
+      "status": 200,
+      "bytes": 3252,
+      "type": "image/webp",
+      "sha256": "340017ecf49dc2441f726b13f02ca6a6bf1a5da81189891aa43c8e1ef0037dfe",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z1xBFw6.avif",
+      "status": 200,
+      "bytes": 6741,
+      "type": "image/avif",
+      "sha256": "d20ea015896d1724e23383d40657653cc46e87893a30be4db9eb73cac54359ee",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z1xjiwn.avif",
+      "status": 200,
+      "bytes": 1103,
+      "type": "image/avif",
+      "sha256": "572b93e6682b7a931facb04ccbc96bab8b3c74887541ad3798b2f0ed9062c52d",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z2lBr0l.webp",
+      "status": 200,
+      "bytes": 1336,
+      "type": "image/webp",
+      "sha256": "109d13de587b399601f21d05f41737e4f8f357765fdc6aac120ba62f0810f0de",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Z8U4CC.webp",
+      "status": 200,
+      "bytes": 13290,
+      "type": "image/webp",
+      "sha256": "b8664a914bbd29e2677cdf405e2c444ff2636a7ffc88da9ea572de24b1585fbd",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_ZXqprh.avif",
+      "status": 200,
+      "bytes": 3820,
+      "type": "image/avif",
+      "sha256": "cc42492a94ff89eced2d136d02053cd6bb4b83c2c53600cf9bbb3a72fcf27c9d",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_Ztqe8V.avif",
+      "status": 200,
+      "bytes": 1746,
+      "type": "image/avif",
+      "sha256": "f9b3823814b1081f35936bb776ae2787a850b08c9d4fea19cfed1032d596f758",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_fKSDC.jpeg",
+      "status": 200,
+      "bytes": 22672,
+      "type": "image/jpeg",
+      "sha256": "0ebe780b82db8b42eb0bc935e429e44e1f0363b9d842e4bf625ed1c1327cbbbe",
+      "matches_build": true
+    },
+    {
+      "url": "https://tornostudio.com/_astro/henrique-pett.BZuyzAkP_qgbrc.webp",
+      "status": 200,
+      "bytes": 6996,
+      "type": "image/webp",
+      "sha256": "eaf3097a42b61f5e0362af2598fe0cbdfe3bb5c718b21a8846a0b3a43ff7a37d",
+      "matches_build": true
+    }
+  ],
+  "source_sha256": "d0604b67699c70d9fb0009db86bd890fa2e2f559ba5a45151aecbc78428fd197"
+}

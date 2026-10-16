@@ -1,0 +1,68 @@
+[
+  {
+    "url": "http://127.0.0.1:4332/cases/loopt/",
+    "width": 390,
+    "state": "{\"width\":390,\"scrollWidth\":373,\"images\":[{\"loaded\":true,\"alt\":\"Captura do site público da Loopt apresentando sequenciamento, posicionamento e execução.\"}],\"h1\":\"Loopt: do modelo de IA à operação do pátio\"}",
+    "screenshot": "docs/qa/cases-20261014/loopt-390.png"
+  },
+  {
+    "url": "http://127.0.0.1:4332/cases/ascende/",
+    "width": 390,
+    "state": "{\"width\":390,\"scrollWidth\":373,\"images\":[{\"loaded\":true,\"alt\":\"Captura da página pública do Ascende, com a proposta de reunir corpo, dinheiro e mente.\"}],\"h1\":\"Ascende: uma frase que vira registros organizados\"}",
+    "screenshot": "docs/qa/cases-20261014/ascende-390.png"
+  },
+  {
+    "url": "http://127.0.0.1:4332/cases/bom-capital/",
+    "width": 390,
+    "state": "{\"width\":390,\"scrollWidth\":373,\"images\":[],\"h1\":\"Bom.Capital: da proposta de crédito à resposta em menos de 2 horas\"}",
+    "screenshot": "docs/qa/cases-20261014/bom-capital-390.png"
+  },
+  {
+    "url": "http://127.0.0.1:4332/en/cases/loopt/",
+    "width": 390,
+    "state": "{\"width\":390,\"scrollWidth\":373,\"images\":[{\"loaded\":true,\"alt\":\"Screenshot of the public Loopt website describing sequencing, positioning and execution.\"}],\"h1\":\"Loopt: from an ML model to yard operations\"}"
+  },
+  {
+    "url": "http://127.0.0.1:4332/en/cases/ascende/",
+    "width": 390,
+    "state": "{\"width\":390,\"scrollWidth\":373,\"images\":[{\"loaded\":true,\"alt\":\"Screenshot of Ascende’s public website presenting body, money and mind in a single app.\"}],\"h1\":\"Ascende: one sentence becomes organized records\"}"
+  },
+  {
+    "url": "http://127.0.0.1:4332/en/cases/bom-capital/",
+    "width": 390,
+    "state": "{\"width\":390,\"scrollWidth\":373,\"images\":[],\"h1\":\"Bom.Capital: from a credit application to a response in under 2 hours\"}"
+  },
+  {
+    "url": "http://127.0.0.1:4332/cases/loopt/",
+    "width": 1440,
+    "state": "{\"width\":1440,\"scrollWidth\":1423,\"images\":[{\"loaded\":true,\"alt\":\"Captura do site público da Loopt apresentando sequenciamento, posicionamento e execução.\"}],\"h1\":\"Loopt: do modelo de IA à operação do pátio\"}",
+    "screenshot": "docs/qa/cases-20261014/loopt-1440.png"
+  },
+  {
+    "url": "http://127.0.0.1:4332/cases/ascende/",
+    "width": 1440,
+    "state": "{\"width\":1440,\"scrollWidth\":1423,\"images\":[{\"loaded\":true,\"alt\":\"Captura da página pública do Ascende, com a proposta de reunir corpo, dinheiro e mente.\"}],\"h1\":\"Ascende: uma frase que vira registros organizados\"}",
+    "screenshot": "docs/qa/cases-20261014/ascende-1440.png"
+  },
+  {
+    "url": "http://127.0.0.1:4332/cases/bom-capital/",
+    "width": 1440,
+    "state": "{\"width\":1440,\"scrollWidth\":1423,\"images\":[],\"h1\":\"Bom.Capital: da proposta de crédito à resposta em menos de 2 horas\"}",
+    "screenshot": "docs/qa/cases-20261014/bom-capital-1440.png"
+  },
+  {
+    "url": "http://127.0.0.1:4332/en/cases/loopt/",
+    "width": 1440,
+    "state": "{\"width\":1440,\"scrollWidth\":1423,\"images\":[{\"loaded\":true,\"alt\":\"Screenshot of the public Loopt website describing sequencing, positioning and execution.\"}],\"h1\":\"Loopt: from an ML model to yard operations\"}"
+  },
+  {
+    "url": "http://127.0.0.1:4332/en/cases/ascende/",
+    "width": 1440,
+    "state": "{\"width\":1440,\"scrollWidth\":1423,\"images\":[{\"loaded\":true,\"alt\":\"Screenshot of Ascende’s public website presenting body, money and mind in a single app.\"}],\"h1\":\"Ascende: one sentence becomes organized records\"}"
+  },
+  {
+    "url": "http://127.0.0.1:4332/en/cases/bom-capital/",
+    "width": 1440,
+    "state": "{\"width\":1440,\"scrollWidth\":1423,\"images\":[],\"h1\":\"Bom.Capital: from a credit application to a response in under 2 hours\"}"
+  }
+]

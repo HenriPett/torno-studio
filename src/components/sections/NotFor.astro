@@ -1,0 +1,38 @@
+---
+/** Para quem não é (`#nao-e-para`, DESIGN §7.7): filtro honesto, marcador "—" sem ícone de proibido. */
+import { getCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { notFor } = getCopy(locale);
+---
+
+<section id="nao-e-para" class="section" aria-labelledby="nao-e-para-title">
+  <div class="container split">
+    <div class="split__label section-head">
+      <h2 id="nao-e-para-title" class="h2">{notFor.title}</h2>
+      <p class="lead">{notFor.intro}</p>
+    </div>
+    <ul class="split__content dash-list not-for">
+      {notFor.items.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .not-for > li {
+    padding-block: var(--space-3);
+    max-inline-size: var(--measure);
+  }
+
+  .not-for > li::before {
+    inset-block-start: var(--space-3);
+  }
+
+  .not-for > li + li {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+</style>

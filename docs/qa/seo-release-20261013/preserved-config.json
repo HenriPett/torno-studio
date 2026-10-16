@@ -1,0 +1,13 @@
+{
+  "baseline": "6acd6513597ee18230ffae7f",
+  "unchanged_sha256": {
+    "src/scripts/consent.ts": "798a12481af7d1c0e491dcf7ea1ff13fab81aa2bb152a97f47f29fce47b51074",
+    "src/scripts/consent-ui.ts": "26e0ede70cbabfbcc2bbdd71393a48f47998d78fa2f78e21a7322564a828179c",
+    "src/components/ConsentBanner.astro": "475d8517213643d83505af8ee7ac41cce94d80a4548d43d2e707d2e590e6335e",
+    "src/components/ui/BookingCta.astro": "96b5867d654b50b92110cd87744c79297ec92703eed0451d16ee4f57ca5859c2",
+    "src/config/site.ts": "841e2df072d1dfb6460647404793308057edbe59eb21a4da517d40262ab0a702",
+    "src/config/pricing.ts": "c20eda75b525a34705cce77da0c5cc4d8185a0c62de9d0021ca41b48887a8513",
+    "netlify.toml": "4980e9a51a4951ae5c5fe513b41a49a05b31ff5f9debb221f2dd407d29a7bc13",
+    "netlify/edge-functions/count-diagnostico.ts": "a23ef3c49236b82214b0e3b2dfe5c659a7a15d4bb01df3433eb0f7788c3721e9"
+  }
+}

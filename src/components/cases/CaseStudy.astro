@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import ResultChart from './ResultChart.astro';
+import { caseStudies, type CaseSlug } from '../../content/cases';
+import { pathFor, type Locale } from '../../lib/i18n';
+import looptShot from '../../assets/cases/loopt-public-site.webp';
+import ascendeShot from '../../assets/cases/ascende-public-site.webp';
+interface Props { locale: Locale; slug: CaseSlug }
+const { locale, slug } = Astro.props;
+const c = caseStudies[locale][slug];
+const en = locale === 'en';
+const text = (pt:string, english:string) => en ? english : pt;
+const screenshot = c.screenshot === 'loopt' ? looptShot : ascendeShot;
+const related = Object.entries(caseStudies[locale]).filter(([key]) => key !== slug);
+---
+<Base locale={locale} routeId={c.routeId} title={`Case ${c.name} | {brand}`} description={c.description} ogTitle={c.title} ogImagePath={`/og/cases/${slug}-${locale}.png`} ogImageAlt={c.title}>
+  <Header locale={locale} routeId={c.routeId} />
+  <main id="conteudo" tabindex="-1" class="case-study">
+    <section class="section case-hero" aria-labelledby="case-title">
+      <div class="container">
+        <a class="link link--target" href={`${pathFor('home',locale)}#quem`}>← {text('Voltar aos projetos','Back to projects')}</a>
+        <p class="eyebrow case-category">{c.category}</p>
+        <h1 id="case-title">{c.title}</h1>
+        <p class="lead case-intro">{c.intro}</p>
+        <dl class="case-facts">
+          {[[text('Minha atuação','My role'),c.role],[text('O projeto','The project'),c.scope],[text('A evidência','The evidence'),c.evidence]].map(([label,value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+        </dl>
+        <nav class="case-jump" aria-label={text('Nesta página','On this page')}>
+          <a class="link link--target" href="#participacao">{text('Minha participação','My contribution')}</a>
+          <a class="link link--target" href="#resultados">{text('Resultados e evidências','Results and evidence')}</a>
+          <a class="link link--target" href="#fontes">{text('Fontes','Sources')}</a>
+        </nav>
+      </div>
+    </section>
+    {c.screenshot && <div class="container case-capture">
+      <figure>
+        <div class="browser-bar"><span aria-hidden="true">● ● ●</span><span>{c.screenshot === 'loopt' ? 'loopt.com.br' : 'ascende.site'}</span><span>{text('Captura real','Actual screenshot')}</span></div>
+        <a href={screenshot.src} target="_blank" rel="noopener" aria-label={text('Abrir captura em tamanho maior','Open larger screenshot')}>
+          <Image src={screenshot} alt={c.screenshotAlt} widths={[640,960,1600]} sizes="(max-width: 48em) 94vw, 1120px" format="webp" loading="lazy" />
+        </a>
+        <figcaption>{c.screenshotCaption}</figcaption>
+      </figure>
+    </div>}
+    <section class="section" aria-labelledby="context-title">
+      <div class="container narrative"><h2 id="context-title">{c.contextTitle}</h2><div class="prose">{c.context.map(p=><p>{p}</p>)}</div></div>
+    </section>
+    <section id="participacao" class="section section--sunken" aria-labelledby="work-title">
+      <div class="container"><p class="eyebrow">{text('Minha participação','My contribution')}</p><h2 id="work-title">{c.workTitle}</h2>
+        <div class="work-grid">{c.work.map(([title,body],i)=><article><span class="step-number" aria-hidden="true">0{i+1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="flow-title">
+      <div class="container"><h2 id="flow-title">{c.flowTitle}</h2>
+        {slug === 'ascende' && <p class="example-input">{text('“Gastei R$ 47 no mercado, treinei pernas e dormi 6 horas.”','“I spent R$47 on groceries, trained legs and slept 6 hours.”')}</p>}
+        <ol class="case-flow">{c.flow.map(([title,body],i)=><li><span class="meta">0{i+1}</span><h3>{title}</h3><p>{body}</p></li>)}</ol>
+        <p class="caption">{c.flowNote}</p>
+      </div>
+    </section>
+    <section id="resultados" class="section section--sunken" aria-labelledby="results-title">
+      <div class="container narrative"><div><p class="eyebrow">{text('O resultado','The outcome')}</p><h2 id="results-title">{c.resultsTitle}</h2><p class="result-intro">{c.resultsIntro}</p></div>
+        <div class="result-detail">
+          {slug !== 'ascende' ? <ResultChart kind={slug} locale={locale} /> : <div class="product-outcome"><span class="product-mark" aria-hidden="true">↗</span><h3>{text('Da ideia ao produto no ar','From idea to a live product')}</h3><ul><li>{text('Aplicação web e acesso à conta','Web app and account access')}</li><li>{text('Captura de registros e Conselheiro de IA','Record capture and AI advisor')}</li><li>{text('Integrações descritas e produto publicado','Documented integrations and a published product')}</li></ul><a class="link link--target" href="https://ascende.site/" target="_blank" rel="noopener">{text('Conhecer o produto','Explore the product')} ↗</a></div>}
+          <p class="evidence-note">{c.resultsNote}</p>
+        </div>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="learning-title"><div class="container narrative"><h2 id="learning-title">{c.takeawayTitle}</h2><p>{c.takeaway}</p></div></section>
+    <section id="fontes" class="section sources" aria-labelledby="sources-title"><div class="container narrative"><h2 id="sources-title">{text('Fontes e contexto','Sources and context')}</h2><div class="prose"><p>{c.sourceNote}</p>{c.sources.length>0 && <ul>{c.sources.map(([label,url])=><li><a class="link link--target" href={url} target="_blank" rel="noopener">{label} ↗</a></li>)}</ul>}<p class="caption">{text('Case preparado em 14 de outubro de 2026.','Case study prepared October 14, 2026.')}</p></div></div></section>
+    <section class="section final-case-cta" aria-labelledby="cta-title"><div class="container"><h2 id="cta-title">{c.ctaTitle}</h2><p>{c.ctaBody}</p><div class="actions"><BookingCta locale={locale}>{text('Agendar diagnóstico — 45 min, grátis','Book a free 45-minute diagnostic')}</BookingCta></div></div></section>
+    <nav class="container related-cases" aria-label={text('Outros cases','Other case studies')}>
+      <p class="eyebrow">{text('Outros projetos','Other projects')}</p><div>{related.map(([,item])=><a class="link link--target" href={pathFor(item.routeId,locale)}>{item.name} →</a>)}</div>
+    </nav>
+  </main>
+  <Footer locale={locale} routeId={c.routeId} />
+</Base>
+<style>
+.case-hero { padding-block-end:var(--space-6); }
+.case-category { margin-block:var(--space-6) var(--space-3); }
+h1 { max-inline-size:24ch; font-size:clamp(2rem,1.2rem + 3vw,3.75rem); line-height:1.08; letter-spacing:var(--tracking-tight); text-wrap:balance; }
+h2 { font-size:var(--text-2xl); line-height:var(--leading-snug); text-wrap:balance; }
+h3 { font-size:var(--text-xl); line-height:var(--leading-snug); }
+.case-intro { max-inline-size:70ch; margin-block-start:var(--space-5); }
+.case-facts { display:grid; gap:var(--space-4); margin-block-start:var(--space-6); padding-block:var(--space-5); border-block:1px solid var(--color-border); }
+.case-facts dt { font-size:var(--text-xs); color:var(--color-text-muted); margin-block-end:var(--space-2); }
+.case-facts dd { font-weight:var(--weight-medium); }
+.case-jump { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-5); margin-block-start:var(--space-3); }
+.case-capture figure { margin:0; }
+.browser-bar { display:flex; justify-content:space-between; gap:var(--space-3); background:var(--color-surface-sunken); border:1px solid var(--color-border); border-radius:var(--radius-md) var(--radius-md) 0 0; padding:var(--space-3) var(--space-4); font-size:var(--text-xs); color:var(--color-text-muted); }
+.case-capture img { display:block; width:100%; height:auto; border:1px solid var(--color-border); }
+figcaption,.caption { margin-block-start:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted); max-inline-size:85ch; }
+.narrative { display:grid; gap:var(--space-5); }
+.prose > * + * { margin-block-start:var(--space-4); }
+p { max-inline-size:var(--measure); }
+.work-grid { display:grid; gap:var(--space-5); margin-block-start:var(--space-6); }
+.work-grid article { background:var(--color-surface); padding:var(--space-5); border:1px solid var(--color-border); border-radius:var(--radius-md); }
+.step-number { color:var(--color-accent-text); font-size:var(--text-sm); }
+.work-grid h3 { margin-block:var(--space-3); }
+.work-grid p { color:var(--color-text-muted); }
+.case-flow { display:grid; gap:var(--space-4); list-style:none; padding:0; margin-block-start:var(--space-5); }
+.case-flow li { border-inline-start:3px solid var(--color-accent-text); padding:var(--space-4); background:var(--color-surface-sunken); }
+.case-flow h3 { margin-block:var(--space-2); }
+.case-flow p { font-size:var(--text-sm); color:var(--color-text-muted); }
+.example-input { margin-block-start:var(--space-5); padding:var(--space-5); border:1px solid var(--color-border-strong); border-radius:var(--radius-md); font-size:var(--text-lg); }
+.result-intro { margin-block-start:var(--space-4); }
+.evidence-note { font-size:var(--text-sm); color:var(--color-text-muted); margin-block-start:var(--space-4); }
+.product-outcome { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-5); }
+.product-mark { display:block; color:var(--color-accent-text); font-size:3rem; }
+.product-outcome ul { margin-block:var(--space-4); padding-inline-start:1.2rem; }
+.product-outcome li + li { margin-block-start:var(--space-2); }
+.sources { border-block-start:1px solid var(--color-border); }
+.sources ul { list-style:none; padding:0; }
+.final-case-cta { background:var(--color-accent-subtle); }
+.final-case-cta h2 { max-inline-size:32ch; }
+.final-case-cta p { margin-block:var(--space-4); }
+.related-cases { padding-block:var(--space-6); }
+.related-cases div { display:flex; gap:var(--space-6); margin-block-start:var(--space-3); flex-wrap:wrap; }
+@media(min-width:48em) { .case-facts,.work-grid,.case-flow { grid-template-columns:repeat(3,minmax(0,1fr)); } .narrative { grid-template-columns:minmax(0,4fr) minmax(0,7fr); column-gap:var(--space-7); } }
+</style>

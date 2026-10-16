@@ -1,0 +1,89 @@
+---
+/**
+ * 404 bilíngue (DESIGN §7.11): um só arquivo (a Netlify serve dist/404.html), bloco PT e bloco EN
+ * empilhados, cada um com seu `lang` e seu link. Sem ilustração.
+ */
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import Wordmark from '../components/ui/Wordmark.astro';
+import { fill, getCopy, htmlLang, locales, pathFor } from '../lib/i18n';
+
+const pt = getCopy('pt-BR');
+---
+
+<Base locale="pt-BR" title={pt.meta.notFound.title} description={pt.meta.notFound.description} noindex>
+  <header class="nf-header">
+    <div class="container nf-header__inner">
+      <Wordmark href={pathFor('home', 'pt-BR')} />
+    </div>
+  </header>
+  <main id="conteudo" class="section" tabindex="-1">
+    <div class="container nf">
+      {
+        locales.map((locale) => {
+          const copy = getCopy(locale);
+          return (
+            <section lang={htmlLang[locale]} class="nf__block">
+              {locale === 'pt-BR' ? (
+                <h1 class="nf__title nf__title--main">{copy.notFound.title}</h1>
+              ) : (
+                <h2 class="nf__title">{copy.notFound.title}</h2>
+              )}
+              <p class="body muted">{fill(copy.notFound.body)}</p>
+              <p>
+                <a class="link nf__link" href={pathFor('home', locale)}>
+                  {copy.notFound.homeLink}
+                </a>
+              </p>
+            </section>
+          );
+        })
+      }
+    </div>
+  </main>
+  <Footer locale="pt-BR" routeId="home" />
+</Base>
+
+<style>
+  .nf-header {
+    box-shadow: var(--shadow-header);
+  }
+
+  .nf-header__inner {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--header-height);
+  }
+
+  .nf {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .nf__block > * + * {
+    margin-block-start: var(--space-3);
+  }
+
+  .nf__block + .nf__block {
+    padding-block-start: var(--space-7);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .nf__title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .nf__title--main {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .nf__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-min);
+  }
+</style>

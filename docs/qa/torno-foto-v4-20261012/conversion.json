@@ -1,0 +1,7 @@
+{
+  "source_sha256": "91f25f9541cc08c4c2716883f3d08f91a434b26538593ace124297069dca20fc",
+  "webp_sha256": "f245b5ee83f3b602404fdd5de8e06cd1ba9a80c8d25d32e719110adb0fd3e586",
+  "webp_bytes": 907652,
+  "conversion": "sharp 0.34.5 lossless WebP, no resize/retouch/generation",
+  "decoded_RGB_pixels_identical": true
+}

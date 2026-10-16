@@ -1,0 +1,25 @@
+{
+  "id": "6acfe455ce78d78ac97cc565",
+  "artifactManifestHash": "e9f3348370ce58805cd9853949ef17eb6787f021883b534deb85e4b0ab2718df",
+  "edgeBundleHash": "335d2d93c1edad52a3fdd6590cfcc965ed3659faa5c65a0b4252dfa406e08b79",
+  "checks": [
+    {
+      "path": "/blog/",
+      "status": 200,
+      "noindex": true,
+      "artifactMatches": true
+    },
+    {
+      "path": "/en/blog/",
+      "status": 200,
+      "noindex": true,
+      "artifactMatches": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "noindex": true,
+      "artifactMatches": true
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+---
+/**
+ * Layout base: <html lang> e <head> (title, meta, canonical, hreflang, OG). Sem analytics no cliente (PLANO-DEV §5.6).
+ * `routeId` liga a página às suas versões nos dois idiomas; sem routeId (ex.: 404) não há
+ * canonical/hreflang e a página é sempre noindex.
+ */
+
+import { BLOG_ORIGIN } from '../config/blog.mjs';
+import '../styles/reset.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+// Fonte única (DESIGN §4): IBM Plex Sans Variable, eixo wght, SÓ o subset latin (PT e EN cabem nele).
+// O @font-face é escrito aqui, e não via wght.css do fontsource, que traz 6 subsets.
+import ConsentBanner from '../components/ConsentBanner.astro';
+import fontUrl from '@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url';
+
+import { site, SITE_BRAND } from '../config/site';
+import { alternatesFor, fill, getCopy, htmlLang, isCampaignRoute, locales, ogLocale, pathFor, type Locale, type RouteId } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  routeId?: RouteId;
+  title: string;
+  description: string;
+  /** og:title/og:description, quando diferentes do <title>/description (home). */
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImagePath?: string;
+  ogImageAlt?: string;
+  /** Força noindex mesmo com PUBLIC_ALLOW_INDEXING=true. */
+  noindex?: boolean;
+  editorial?: { canonical: string; alternates: { hreflang: string; href: string }[]; schema: Record<string, unknown>; article: boolean };
+}
+
+const { locale, routeId, title, description, ogTitle, ogDescription, ogImagePath, ogImageAlt, noindex = false, editorial } = Astro.props;
+const copy = getCopy(locale);
+const siteUrl = routeId === 'blog' || editorial ? new URL(BLOG_ORIGIN) : (Astro.site ?? new URL(Astro.url.origin));
+
+const pageTitle = fill(title);
+const pageDescription = fill(description);
+const ogTitleText = fill(ogTitle ?? title);
+const ogDescriptionText = fill(ogDescription ?? description);
+const campaign = routeId ? isCampaignRoute(routeId) : false;
+if (editorial && routeId) throw new Error('[blog] editorial and routeId are mutually exclusive');
+const canonical = editorial?.canonical ?? (routeId && !campaign ? new URL(pathFor(routeId, locale), siteUrl).href : null);
+const alternates = editorial?.alternates ?? (routeId ? alternatesFor(routeId, siteUrl) : []);
+// Landing de campanha: sempre "noindex, follow" (DIAGNOSTICO-SPEC). Demais: noindex,nofollow fora de produção.
+const robots = campaign ? 'noindex, follow' : !site.allowIndexing || noindex || (!routeId && !editorial) ? 'noindex, nofollow' : null;
+
+// OG image por idioma, gerada no build por src/pages/og/[locale].png.ts (DESIGN §6.15).
+const ogImage = new URL(ogImagePath ?? `/og/${locale}.png`, siteUrl).href;
+
+// Only describe entities actually present in these pages. No ratings, client
+// results or unconditional offers: commercial eligibility depends on scope.
+const structuredData = editorial?.schema ?? (routeId === 'blog' && canonical ? { '@context': 'https://schema.org', '@type': 'CollectionPage', url: canonical, name: pageTitle, description: pageDescription, inLanguage: htmlLang[locale] } : null) ?? (canonical && (routeId === 'rlsGuide' || routeId?.startsWith('case')) ? {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${canonical}#article`,
+  url: canonical,
+  mainEntityOfPage: canonical,
+  headline: pageTitle,
+  description: pageDescription,
+  inLanguage: htmlLang[locale],
+  author: { '@type': 'Person', name: 'Henrique Pett' },
+  datePublished: routeId === 'rlsGuide' ? '2026-10-13' : '2026-10-14',
+} : canonical && (routeId === 'recovery' || routeId === 'lovableProduction') ? {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${canonical}#service`,
+  url: canonical,
+  name: pageTitle,
+  description: pageDescription,
+  provider: { '@type': 'Person', name: 'Henrique Pett' },
+} : null);
+
+
+// unicode-range do subset latin, igual ao do fontsource.
+const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:normal;font-display:swap;font-weight:100 700;src:url(${fontUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
+---
+
+<!doctype html>
+<html lang={htmlLang[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Consent Mode v2 básico (docs/consent/SPEC.md §3.1): tudo negado antes de qualquer coisa do Google.
+         Só cria a fila; não faz requisição nem grava cookie. src/scripts/consent.ts aplica a escolha. -->
+    <script is:inline>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
+    </script>
+    <!-- Tema salvo pelo toggle antes da 1ª pintura (DESIGN §3); sem JS vale prefers-color-scheme. -->
+    <script is:inline>
+      try{var t=localStorage.getItem('theme');if(t=='light'||t=='dark')document.documentElement.dataset.theme=t}catch(e){}
+    </script>
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFace} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    {robots && <meta name="robots" content={robots} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="color-scheme" content="light dark" />
+
+    <meta property="og:type" content={editorial?.article ? 'article' : 'website'} />
+    <meta property="og:site_name" content={SITE_BRAND} />
+    <meta property="og:title" content={ogTitleText} />
+    <meta property="og:description" content={ogDescriptionText} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:locale" content={ogLocale[locale]} />
+    {
+      locales
+        .filter((other) => other !== locale && (!editorial || alternates.some(a => a.hreflang === other)))
+        .map((other) => <meta property="og:locale:alternate" content={ogLocale[other]} />)
+    }
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt ?? fill(copy.og.imageAlt)} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />}
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link visually-hidden" href="#conteudo">{copy.common.skipToContent}</a>
+    <!-- Faixa de consentimento logo após o skip link: 1º grupo na ordem de Tab (DESIGN §13.1). -->
+    <ConsentBanner locale={locale} />
+    <slot />
+    <!-- Único JS da página (DESIGN §6.4), minificado à mão (§10: ≤ 1 KB): mostra os [data-theme-toggle];
+         no clique alterna data-theme no <html> e grava localStorage; s() mantém aria-pressed
+         (true = tema efetivo escuro; WCAG 4.1.2) na carga, no clique e no change do sistema. -->
+    <script is:inline>
+      (function(){var r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)'),b=document.querySelectorAll('[data-theme-toggle]'),c=function(){return r.dataset.theme||(m.matches?'dark':'light')},s=function(){b.forEach(function(x){x.setAttribute('aria-pressed',c()=='dark')})};b.forEach(function(x){x.hidden=!1;x.onclick=function(){var n=c()=='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}s()}});m.addEventListener('change',s);s()})();
+    </script>
+  </body>
+</html>

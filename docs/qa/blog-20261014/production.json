@@ -1,0 +1,42 @@
+{
+  "id": "6acff8bd6dccb98caf26f5cd",
+  "previous": "6acfe455ce78d78ac97cc565",
+  "url": "https://tornostudio.com",
+  "state": "ready",
+  "edge": true,
+  "publishedAt": "2026-10-14T21:49:58.068Z",
+  "artifactManifestHash": "15b1e3a7f9123b78411017b2350fe7fd87fba6ad10a42b1a73bdacdf53c7cf0e",
+  "sourceManifestHash": "994c7b592ad7eb8a64fcfa6655f77f9dc89d0cad5ef1672cd5dccc3d91a6cfb1",
+  "releaseApprovalManifestHash": "f71d6e77b13653a98332b4f68237cfad0004a2d63024f912da70a9b08bea6131",
+  "edgeBundleHash": "335d2d93c1edad52a3fdd6590cfcc965ed3659faa5c65a0b4252dfa406e08b79",
+  "article": {
+    "contentId": "torno-artigo-pt-20261014-planilhas",
+    "intentId": "spreadsheet-to-system-pt",
+    "sha256": "a84d4826d4b1d68efc03767aea2c09dd2ba8386a7b1ddaee87f235cc15974d66",
+    "path": "/blog/quando-automatizar-processos-planilhas/"
+  },
+  "sitemapUrlCount": 19,
+  "sitemapUrls": [
+    "https://tornostudio.com/",
+    "https://tornostudio.com/blog/",
+    "https://tornostudio.com/blog/quando-automatizar-processos-planilhas/",
+    "https://tornostudio.com/cases/ascende/",
+    "https://tornostudio.com/cases/bom-capital/",
+    "https://tornostudio.com/cases/loopt/",
+    "https://tornostudio.com/en/",
+    "https://tornostudio.com/en/blog/",
+    "https://tornostudio.com/en/cases/ascende/",
+    "https://tornostudio.com/en/cases/bom-capital/",
+    "https://tornostudio.com/en/cases/loopt/",
+    "https://tornostudio.com/en/guides/multi-tenant-rls/",
+    "https://tornostudio.com/en/lovable-to-production/",
+    "https://tornostudio.com/en/privacy/",
+    "https://tornostudio.com/en/software-project-rescue/",
+    "https://tornostudio.com/guias/rls-multiempresa/",
+    "https://tornostudio.com/lovable-em-producao/",
+    "https://tornostudio.com/privacidade/",
+    "https://tornostudio.com/recuperacao-de-projeto/"
+  ],
+  "observedAt": "2026-10-14T21:52:14.808Z",
+  "test": "production-http-article-r3.log"
+}

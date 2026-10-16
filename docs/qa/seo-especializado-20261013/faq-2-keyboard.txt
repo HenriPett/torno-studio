@@ -1,0 +1,8 @@
+viewport: 360x844  url: https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/lovable-em-producao/  title: Lovable em produção: escopo, preço e aceite | Torno Studio
+@e1 a "Torno Studio" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ [16,10 87x44]
+@e2 a "EN — Mudar idioma para inglês" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [178,10 44x44]
+@e3 a "Agendar" href=https://calendly.com/henriquepett/45min [238,10 89x44]
+@e4 main "LOVABLE EM PRODUÇÃO Seu app Lovable precisa funcionar na ope" [0,-5987 343x6728]
+@e5 a "Agendar diagnóstico — 45 min, grátis" href=https://calendly.com/henriquepett/45min [16,10 311x48]
+@e6 a "O projeto travou após uma agência ou tentativa própria?" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/re [16,150 311x50]
+@e7 a "Torno Studio" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ [16,790 87x44]

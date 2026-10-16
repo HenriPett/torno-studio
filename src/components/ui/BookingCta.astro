@@ -1,0 +1,34 @@
+---
+/**
+ * CTA de agenda (DESIGN §6.3): link estilizado como botão primário, sempre via bookingHref(locale).
+ * Mesma aba. Sem PUBLIC_BOOKING_URL, em dev, ganha data-placeholder.
+ */
+import { campaignRoutes, routes } from '../../config/routes.mjs';
+import { site } from '../../config/site';
+import { bookingHref, type Locale } from '../../lib/i18n';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+  size?: 'md' | 'lg';
+  /** Seta "→" opcional, só no primário lg. */
+  arrow?: boolean;
+  class?: string;
+}
+
+const { locale, size = 'lg', arrow = false, class: className } = Astro.props;
+const placeholder = import.meta.env.DEV && !site.bookingUrl;
+// Sem PUBLIC_BOOKING_URL (dev/preview), numa landing de campanha o fallback é o CTA final da própria página,
+// não /#agendar da home, que seria uma saída da landing (DESIGN §14).
+const onCampaign = campaignRoutes.some((id) => routes[id][locale] === Astro.url.pathname);
+const href = !site.bookingUrl && onCampaign ? '#contato' : bookingHref(locale);
+---
+
+<a
+  class:list={['btn', 'btn--primary', size === 'lg' && 'btn--lg', className]}
+  href={href}
+  data-booking-cta
+  data-placeholder={placeholder || undefined}
+>
+  <slot />{arrow && <Icon name="arrowRight" class="btn__icon" />}
+</a>

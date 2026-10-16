@@ -1,0 +1,20 @@
+
+> projeto-50k-site@0.1.0 build
+> astro check && astro build
+
+17:06:47 [vite] Re-optimizing dependencies because vite config has changed
+17:06:47 [content] Syncing content
+17:06:47 [content] Synced content
+17:06:47 [types] Generated 510ms
+17:06:47 [check] Getting diagnostics for Astro files in /private/tmp/torno-blog-qa-20261014-r2...
+[96mastro.config.mjs[0m:[93m94[0m:[93m18[0m - [91merror[0m[90m ts(7006): [0mParameter 'url' implicitly has an 'any' type.
+
+[7m94[0m const blogUrl = (url) => /^\/(?:en\/)?blog\//.test(new URL(url).pathname) ? new URL(new URL(url).pathname, BLOG_ORIGIN).href : url;
+[7m  [0m [91m                 ~~~[0m
+
+Result (90 files): 
+- 1 error
+- 0 warnings
+- 0 hints
+
+

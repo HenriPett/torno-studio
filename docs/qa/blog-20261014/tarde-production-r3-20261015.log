@@ -1,0 +1,14 @@
+PASS production_receipt_api_edge_hashes
+PASS all_13_html_http_artifact_indexable
+PASS nine_protected_and_six_cases
+PASS article_seo_h1
+PASS blogposting_no_author_dates_byline
+PASS no_fake_en
+PASS figures_svg_hashes
+PASS links_sources_cta
+PASS sitemap22_preserves21
+CHECKS 9 / 9
+SVG /_astro/evidencias-decisao.Cw0T1GlU_15GaVk.svg 200 2487 07c35b5fa17ec1c9e19705050c19553469529a08b6039efe5d4d9e24d357c67b
+SVG /_astro/exemplo-aprovacao.BLXjBXeo_BT9L.svg 200 2450 6b2e9d913c417974600f2550a3bedb623aa827d5e3668424844a02e6a228607b
+SITEMAP 22 PRESERVED 21 ADDED ['https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/']
+EVIDENCE /Users/henriquepett/Downloads/pessoal/projeto-50k-site/docs/qa/blog-20261014/tarde-production-r3-20261015.json

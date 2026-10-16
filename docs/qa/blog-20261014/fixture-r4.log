@@ -1,0 +1,8 @@
+PASS fixture: apenas publicados elegíveis entram no sitemap
+PASS fixture: índices mostram apenas artigos do próprio idioma
+PASS fixture publicada /blog/qa-registro-de-handover/: HTML/SEO/schema
+PASS fixture publicada /blog/qa-par-equivalente/: HTML/SEO/schema
+PASS fixture publicada /en/blog/qa-equivalent-pair/: HTML/SEO/schema
+PASS fixture: draft/review/approved/hold/retired/no_go/futuro não vazam
+PASS fixture: blocos largos acessíveis por teclado
+RESULT 7/7 checks passed

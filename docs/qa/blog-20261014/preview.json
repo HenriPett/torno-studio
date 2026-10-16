@@ -1,0 +1,10 @@
+{
+  "id": "6acfe455ce78d78ac97cc565",
+  "url": "https://6acfe455ce78d78ac97cc565--tornostudio.netlify.app",
+  "state": "ready",
+  "edge": true,
+  "previous": "6acf74b406c100fbad5c86ef",
+  "artifactManifestHash": "e9f3348370ce58805cd9853949ef17eb6787f021883b534deb85e4b0ab2718df",
+  "sourceManifestHash": "db7a732010d50b90770dc1979c2b93b1e0aeb64e41629386055a7c5ac7b2f785",
+  "edgeBundleHash": "335d2d93c1edad52a3fdd6590cfcc965ed3659faa5c65a0b4252dfa406e08b79"
+}

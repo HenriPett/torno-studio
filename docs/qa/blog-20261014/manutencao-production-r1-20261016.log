@@ -1,0 +1,15 @@
+PASS receipt_sha_deploy_edge_hashes
+PASS all_14_html_http_artifact_indexable
+PASS 10_protected_4_articles_6_cases
+PASS article_title_description_h1
+PASS blogposting_no_author_dates_byline_en
+PASS figure_position_alt_caption_equivalent
+PASS svg_http_sha
+PASS links_sources_prices_cta
+PASS sitemap23_preserves22
+CHECKS 9 / 9
+SVG /_astro/orcamento-apos-lancamento.Diq0z4bO_22sYfi.svg 200 3934 36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d
+SITEMAP 23 PRESERVED 22 ADDED ['https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/']
+EVIDENCE /Users/henriquepett/Downloads/pessoal/projeto-50k-site/docs/qa/blog-20261014/manutencao-production-r1-20261016.json
+QA_GATE_SHA256 013a36863e1c69b09fcc18368476a9da1239ab5452ec16d4485b07e5adfeda33
+NETLIFY_API_GET_DEPLOY 401 unauthenticated; Edge/status from production receipt SHA 8316e8f9c93706253b2a862d48a8811e8865f315f781b3162921c395d30d0c86

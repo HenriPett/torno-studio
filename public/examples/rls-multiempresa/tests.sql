@@ -1,0 +1,181 @@
+-- All assertions run as a non-owner NOSUPERUSER NOBYPASSRLS role,
+-- except fixture setup, explicit revocation, and the bypass demonstration.
+\set ON_ERROR_STOP on
+select version();
+create function pg_temp.check_rows(label text, query text, expected bigint)
+returns void language plpgsql security invoker as $$
+declare actual bigint;
+begin
+  execute query;
+  get diagnostics actual = row_count;
+  if actual <> expected then
+    raise exception '%: expected % rows, got %', label, expected, actual;
+  end if;
+  raise notice 'PASS % (% rows)', label, actual;
+end $$;
+create function pg_temp.denied(label text, query text)
+returns void language plpgsql security invoker as $$
+begin
+  begin
+    execute query;
+  exception when insufficient_privilege then
+    raise notice 'PASS % (SQLSTATE 42501)', label;
+    return;
+  end;
+  raise exception '%: expected SQLSTATE 42501', label;
+end $$;
+insert into public.companies values ('10000000-0000-0000-0000-000000000001','Synthetic A'),('10000000-0000-0000-0000-000000000002','Synthetic B');
+insert into auth.users values ('20000000-0000-0000-0000-000000000001'),('20000000-0000-0000-0000-000000000002'),('20000000-0000-0000-0000-000000000003'),('20000000-0000-0000-0000-000000000004'),('20000000-0000-0000-0000-000000000005');
+insert into public.memberships values ('10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000001','editor'),('10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000002','viewer'),('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000003','editor'),('10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000004','editor'),('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000004','editor');
+insert into public.documents values ('30000000-0000-0000-0000-000000000001','10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000001','A'),('30000000-0000-0000-0000-000000000002','10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000003','B');
+set role authenticated;
+do $$ begin
+  if current_user <> 'authenticated' or exists (
+    select 1 from pg_roles where rolname = current_user and (rolsuper or rolbypassrls)
+  ) or exists (select 1 from pg_tables where schemaname='public' and tableowner=current_user)
+  then raise exception 'Invalid test role'; end if;
+  raise notice 'PASS non-owner, non-superuser, non-BYPASSRLS';
+end $$;
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000001',false);
+select pg_temp.check_rows('editor A / company 1 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('editor A / company 1 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('editor A / company 1 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000001'$q$, 1);
+begin;
+select pg_temp.check_rows('editor A / company 1 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000001'$q$, 1);
+rollback;
+begin;
+select pg_temp.check_rows('editor A / company 1 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000111','10000000-0000-0000-0000-000000000001','created')$q$, 1);
+rollback;
+select pg_temp.check_rows('editor A / company 2 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000002'$q$, 0);
+select pg_temp.check_rows('editor A / company 2 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000002'$q$, 0);
+select pg_temp.check_rows('editor A / company 2 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000002'$q$, 0);
+begin;
+select pg_temp.check_rows('editor A / company 2 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000002'$q$, 0);
+rollback;
+select pg_temp.denied('editor A / company 2 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000112','10000000-0000-0000-0000-000000000002','created')$q$);
+select pg_temp.denied('editor A membership insert', $q$insert into public.memberships values ('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000005','editor')$q$);
+select pg_temp.denied('editor A membership update', $q$update public.memberships set permission='editor' where user_id='20000000-0000-0000-0000-000000000001'$q$);
+select pg_temp.denied('editor A membership delete', $q$delete from public.memberships where user_id='20000000-0000-0000-0000-000000000001'$q$);
+select pg_temp.denied('editor A membership reassociation', $q$update public.memberships set company_id='10000000-0000-0000-0000-000000000002' where company_id='10000000-0000-0000-0000-000000000001'$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000002',false);
+select pg_temp.check_rows('viewer A / company 1 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('viewer A / company 1 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('viewer A / company 1 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000001'$q$, 0);
+begin;
+select pg_temp.check_rows('viewer A / company 1 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000001'$q$, 0);
+rollback;
+select pg_temp.denied('viewer A / company 1 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000121','10000000-0000-0000-0000-000000000001','created')$q$);
+select pg_temp.check_rows('viewer A / company 2 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000002'$q$, 0);
+select pg_temp.check_rows('viewer A / company 2 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000002'$q$, 0);
+select pg_temp.check_rows('viewer A / company 2 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000002'$q$, 0);
+begin;
+select pg_temp.check_rows('viewer A / company 2 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000002'$q$, 0);
+rollback;
+select pg_temp.denied('viewer A / company 2 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000122','10000000-0000-0000-0000-000000000002','created')$q$);
+select pg_temp.denied('viewer A membership insert', $q$insert into public.memberships values ('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000005','editor')$q$);
+select pg_temp.denied('viewer A membership update', $q$update public.memberships set permission='editor' where user_id='20000000-0000-0000-0000-000000000002'$q$);
+select pg_temp.denied('viewer A membership delete', $q$delete from public.memberships where user_id='20000000-0000-0000-0000-000000000002'$q$);
+select pg_temp.denied('viewer A membership reassociation', $q$update public.memberships set company_id='10000000-0000-0000-0000-000000000002' where company_id='10000000-0000-0000-0000-000000000001'$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000003',false);
+select pg_temp.check_rows('editor B / company 1 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.check_rows('editor B / company 1 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.check_rows('editor B / company 1 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000001'$q$, 0);
+begin;
+select pg_temp.check_rows('editor B / company 1 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000001'$q$, 0);
+rollback;
+select pg_temp.denied('editor B / company 1 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000131','10000000-0000-0000-0000-000000000001','created')$q$);
+select pg_temp.check_rows('editor B / company 2 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000002'$q$, 1);
+select pg_temp.check_rows('editor B / company 2 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000002'$q$, 1);
+select pg_temp.check_rows('editor B / company 2 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000002'$q$, 1);
+begin;
+select pg_temp.check_rows('editor B / company 2 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000002'$q$, 1);
+rollback;
+begin;
+select pg_temp.check_rows('editor B / company 2 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000132','10000000-0000-0000-0000-000000000002','created')$q$, 1);
+rollback;
+select pg_temp.denied('editor B membership insert', $q$insert into public.memberships values ('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000005','editor')$q$);
+select pg_temp.denied('editor B membership update', $q$update public.memberships set permission='editor' where user_id='20000000-0000-0000-0000-000000000003'$q$);
+select pg_temp.denied('editor B membership delete', $q$delete from public.memberships where user_id='20000000-0000-0000-0000-000000000003'$q$);
+select pg_temp.denied('editor B membership reassociation', $q$update public.memberships set company_id='10000000-0000-0000-0000-000000000002' where company_id='10000000-0000-0000-0000-000000000001'$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000004',false);
+select pg_temp.check_rows('editor A+B / company 1 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('editor A+B / company 1 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('editor A+B / company 1 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000001'$q$, 1);
+begin;
+select pg_temp.check_rows('editor A+B / company 1 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000001'$q$, 1);
+rollback;
+begin;
+select pg_temp.check_rows('editor A+B / company 1 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000141','10000000-0000-0000-0000-000000000001','created')$q$, 1);
+rollback;
+select pg_temp.check_rows('editor A+B / company 2 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000002'$q$, 1);
+select pg_temp.check_rows('editor A+B / company 2 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000002'$q$, 1);
+select pg_temp.check_rows('editor A+B / company 2 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000002'$q$, 1);
+begin;
+select pg_temp.check_rows('editor A+B / company 2 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000002'$q$, 1);
+rollback;
+begin;
+select pg_temp.check_rows('editor A+B / company 2 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000142','10000000-0000-0000-0000-000000000002','created')$q$, 1);
+rollback;
+select pg_temp.denied('editor A+B membership insert', $q$insert into public.memberships values ('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000005','editor')$q$);
+select pg_temp.denied('editor A+B membership update', $q$update public.memberships set permission='editor' where user_id='20000000-0000-0000-0000-000000000004'$q$);
+select pg_temp.denied('editor A+B membership delete', $q$delete from public.memberships where user_id='20000000-0000-0000-0000-000000000004'$q$);
+select pg_temp.denied('editor A+B membership reassociation', $q$update public.memberships set company_id='10000000-0000-0000-0000-000000000002' where company_id='10000000-0000-0000-0000-000000000001'$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000005',false);
+select pg_temp.check_rows('outsider / company 1 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.check_rows('outsider / company 1 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.check_rows('outsider / company 1 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000001'$q$, 0);
+begin;
+select pg_temp.check_rows('outsider / company 1 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000001'$q$, 0);
+rollback;
+select pg_temp.denied('outsider / company 1 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000151','10000000-0000-0000-0000-000000000001','created')$q$);
+select pg_temp.check_rows('outsider / company 2 read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000002'$q$, 0);
+select pg_temp.check_rows('outsider / company 2 company read', $q$select * from public.companies where id='10000000-0000-0000-0000-000000000002'$q$, 0);
+select pg_temp.check_rows('outsider / company 2 update', $q$update public.documents set title='updated' where id='30000000-0000-0000-0000-000000000002'$q$, 0);
+begin;
+select pg_temp.check_rows('outsider / company 2 delete', $q$delete from public.documents where id='30000000-0000-0000-0000-000000000002'$q$, 0);
+rollback;
+select pg_temp.denied('outsider / company 2 insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000152','10000000-0000-0000-0000-000000000002','created')$q$);
+select pg_temp.denied('outsider membership insert', $q$insert into public.memberships values ('10000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000005','editor')$q$);
+select pg_temp.denied('outsider membership update', $q$update public.memberships set permission='editor' where user_id='20000000-0000-0000-0000-000000000005'$q$);
+select pg_temp.denied('outsider membership delete', $q$delete from public.memberships where user_id='20000000-0000-0000-0000-000000000005'$q$);
+select pg_temp.denied('outsider membership reassociation', $q$update public.memberships set company_id='10000000-0000-0000-0000-000000000002' where company_id='10000000-0000-0000-0000-000000000001'$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000001',false);
+select pg_temp.denied('user 1 tenant transfer', $q$update public.documents set company_id='10000000-0000-0000-0000-000000000002' where id='30000000-0000-0000-0000-000000000001'$q$);
+select pg_temp.denied('user 1 owner transfer', $q$update public.documents set created_by='20000000-0000-0000-0000-000000000003' where id='30000000-0000-0000-0000-000000000001'$q$);
+select pg_temp.denied('user 1 creator spoof on insert', $q$insert into public.documents values ('30000000-0000-0000-0000-000000000091','10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000003','spoof')$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000004',false);
+select pg_temp.denied('user 4 tenant transfer', $q$update public.documents set company_id='10000000-0000-0000-0000-000000000002' where id='30000000-0000-0000-0000-000000000001'$q$);
+select pg_temp.denied('user 4 owner transfer', $q$update public.documents set created_by='20000000-0000-0000-0000-000000000003' where id='30000000-0000-0000-0000-000000000001'$q$);
+select pg_temp.denied('user 4 creator spoof on insert', $q$insert into public.documents values ('30000000-0000-0000-0000-000000000094','10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000003','spoof')$q$);
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000004',false);
+reset role;
+update public.memberships set permission='viewer' where user_id='20000000-0000-0000-0000-000000000004' and company_id='10000000-0000-0000-0000-000000000001';
+set role authenticated;
+select pg_temp.check_rows('downgrade keeps read', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 1);
+select pg_temp.check_rows('downgrade blocks update', $q$update public.documents set title='denied' where company_id='10000000-0000-0000-0000-000000000001'$q$, 0);
+reset role;
+delete from public.memberships where user_id='20000000-0000-0000-0000-000000000004' and company_id='10000000-0000-0000-0000-000000000001';
+set role authenticated;
+select pg_temp.check_rows('revoked A invisible', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.check_rows('revocation preserves B', $q$select * from public.documents where company_id='10000000-0000-0000-0000-000000000002'$q$, 1);
+select pg_temp.check_rows('revoked update', $q$update public.documents set title='denied' where company_id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.check_rows('revoked delete', $q$delete from public.documents where company_id='10000000-0000-0000-0000-000000000001'$q$, 0);
+select pg_temp.denied('revoked insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000099','10000000-0000-0000-0000-000000000001','denied')$q$);
+select set_config('request.jwt.claim.sub','',false);
+select pg_temp.check_rows('null identity cannot read', $q$select * from public.documents$q$, 0);
+select pg_temp.check_rows('null identity cannot update', $q$update public.documents set title='denied'$q$, 0);
+select pg_temp.check_rows('null identity cannot delete', $q$delete from public.documents$q$, 0);
+select pg_temp.denied('null identity cannot insert', $q$insert into public.documents(id,company_id,created_by,title) values ('30000000-0000-0000-0000-000000000098','10000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000001','denied')$q$);
+reset role;
+set role anon;
+select pg_temp.denied('anon read', $q$select * from public.documents$q$);
+select pg_temp.denied('anon insert', $q$insert into public.documents(id,company_id,title) values ('30000000-0000-0000-0000-000000000097','10000000-0000-0000-0000-000000000001','denied')$q$);
+select pg_temp.denied('anon update', $q$update public.documents set title='denied'$q$);
+select pg_temp.denied('anon delete', $q$delete from public.documents$q$);
+reset role;
+grant select on public.documents to demo_service_role;
+set role demo_service_role;
+select pg_temp.check_rows('BYPASSRLS demonstrates exposure', $q$select * from public.documents$q$, 2);
+reset role;
+select pg_temp.check_rows('final fixtures intact', $q$select * from public.documents$q$, 2);
+\echo RLS_DEMO_ALL_ASSERTIONS_PASSED

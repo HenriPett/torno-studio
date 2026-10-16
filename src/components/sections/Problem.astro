@@ -1,0 +1,37 @@
+---
+import { getCopy, type Locale } from '../../lib/i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const { problem } = getCopy(locale);
+---
+
+<section id="problema" class="section opportunities" aria-labelledby="problema-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="problema-title" class="h2">{problem.title}</h2>
+      <p class="lead">{problem.intro}</p>
+    </div>
+    <div class="opportunities__grid">
+      {problem.items.map((item, index) => (
+        <article class="opportunity">
+          <span class="opportunity__number meta" aria-hidden="true">0{index + 1}</span>
+          <h3 class="h3">{item.title}</h3>
+          <p>{item.body}</p>
+          <p class="opportunity__example">{item.example}</p>
+          <a class="link link--target" href={item.href}>{item.link}<span aria-hidden="true"> →</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .opportunities { border-block-start: var(--border-width) solid var(--color-border); }
+  .opportunities__grid { display: grid; gap: var(--space-4); margin-block-start: var(--space-6); }
+  .opportunity { display: flex; flex-direction: column; align-items: start; gap: var(--space-3); padding: var(--space-5); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+  .opportunity__number { color: var(--color-accent-text); }
+  .opportunity p { color: var(--color-text-muted); }
+  .opportunity__example { border-block-start: var(--border-width) solid var(--color-border); padding-block-start: var(--space-3); font-size: var(--text-sm); }
+  .opportunity a { margin-block-start: auto; }
+  @media (min-width: 48em) { .opportunities__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

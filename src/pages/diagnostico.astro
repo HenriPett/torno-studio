@@ -1,0 +1,37 @@
+---
+/**
+ * Landing da campanha do Google Ads (docs/landing/DIAGNOSTICO-SPEC.md, DESIGN §14). Só PT; noindex,follow; fora
+ * do sitemap. Objetivo único: agendar o diagnóstico. O CTA aparece só no header, no hero e no final; sem nav,
+ * seletor de idioma, LinkedIn ou GitHub; links de saída só ascende.site e a política.
+ * Texto: SiteCopy.diagnostico (Mote). Preços: os mesmos da home (pricing.ts, componente da escada).
+ */
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import AboutLean from '../components/campaign/AboutLean.astro';
+import Proofs from '../components/campaign/Proofs.astro';
+import SprintDeliverables from '../components/campaign/SprintDeliverables.astro';
+import Faq from '../components/sections/Faq.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import Hero from '../components/sections/Hero.astro';
+import Ladder from '../components/sections/Ladder.astro';
+import { getCopy } from '../lib/i18n';
+
+const locale = 'pt-BR';
+const copy = getCopy(locale).diagnostico;
+if (!copy) throw new Error('SiteCopy pt-BR sem diagnostico');
+---
+
+<Base locale={locale} routeId="diagnostico" title={copy.meta.title} description={copy.meta.description}>
+  <Header locale={locale} routeId="diagnostico" lean />
+  <main id="conteudo" tabindex="-1">
+    <Hero locale={locale} campaign={copy.hero} />
+    <Ladder locale={locale} title={copy.ladder.title} intro={copy.ladder.intro} ctas={false} />
+    <SprintDeliverables locale={locale} content={copy.sprint} />
+    <Proofs content={copy.proofs} />
+    <AboutLean locale={locale} content={copy.about} />
+    <Faq locale={locale} content={copy.faq} />
+    <FinalCta locale={locale} campaign={copy.finalCta} />
+  </main>
+  <Footer locale={locale} routeId="diagnostico" lean />
+</Base>

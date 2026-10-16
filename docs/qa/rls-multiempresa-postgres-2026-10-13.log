@@ -1,0 +1,4 @@
+2026-10-13 19:22:44.841 -03 [50199] FATAL:  could not create shared memory segment: Operation not permitted
+2026-10-13 19:22:44.841 -03 [50199] DETAIL:  Failed system call was shmget(key=283806205, size=56, 03600).
+child process exited with exit code 1
+initdb: removing data directory "/tmp/rls-guide.gZwf3s/data"

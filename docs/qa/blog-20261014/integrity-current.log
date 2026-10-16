@@ -1,0 +1,5 @@
+PASS preservado netlify/edge-functions/count-diagnostico.ts
+PASS preservado src/components/ConsentBanner.astro
+PASS preservado src/config/pricing.ts
+PASS preservado netlify.toml
+RESULT 4/4 checks passed

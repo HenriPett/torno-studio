@@ -1,0 +1,6 @@
+PASS preview /blog/: canonical produção, noindex, vazio
+PASS preview /en/blog/: canonical produção, noindex, vazio
+PASS preview sitemap: 16 URLs preservadas + 2 índices, nenhum post
+PASS preview seis cases PT/EN: HTTP 200 e canonical produção
+PASS preview sem rota da fixture privada
+RESULT 5/5 checks passed

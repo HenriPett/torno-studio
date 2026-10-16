@@ -1,0 +1,14 @@
+PASS production_receipt_hashes_edge
+PASS all_12_html_http_artifact
+PASS eight_protected_html
+PASS article_seo_h1
+PASS no_fictitious_en
+PASS schema_no_author_dates_byline
+PASS figures_and_svg_sha
+PASS editorial_links
+PASS sitemap21_preserve20
+CHECKS 9 / 9
+SVG /_astro/integracao-erp-fluxo.CJXjnJ5K_Z1O1Dlw.svg 200 2062 cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c
+SVG /_astro/integracao-erp-pendencias.CUPyqtvX_Z1O1Dlw.svg 200 2079 47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785
+SITEMAP 21 PRESERVED 20 ADDED ['https://tornostudio.com/blog/integracao-erp-briefing-orcamento/']
+EVIDENCE /Users/henriquepett/Downloads/pessoal/projeto-50k-site/docs/qa/blog-20261014/erp-production-r5-20261015.json

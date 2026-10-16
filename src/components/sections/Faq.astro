@@ -1,0 +1,91 @@
+---
+/** FAQ (`#faq`, DESIGN §6.11, §7.8): <details> nativo, todas fechadas, funciona sem JS. */
+import { getCopy, type Locale } from '../../lib/i18n';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  locale: Locale;
+  /** Título e perguntas próprios (landing de campanha); por padrão, os da home. */
+  content?: { title: string; items: { question: string; answer: string }[] };
+}
+
+const { locale, content } = Astro.props;
+const faq = content ?? getCopy(locale).faq;
+---
+
+<section id="faq" class="section" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="faq-title" class="h2">{faq.title}</h2>
+    </div>
+    <div class="faq">
+      {
+        faq.items.map((item) => (
+          <details class="faq__item">
+            <summary>
+              <h3 class="faq__q">{item.question}</h3>
+              <Icon name="plus" class="faq__icon" />
+            </summary>
+            <p class="faq__a body">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__item {
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-block-size: 3.5rem;
+    padding-block: var(--space-4);
+    list-style: none;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (hover: hover) {
+    .faq__item summary:hover {
+      color: var(--color-accent-text);
+    }
+  }
+
+  .faq__q {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    text-wrap: pretty;
+  }
+
+  .faq__item :global(.faq__icon) {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    flex: none;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .faq__item[open] :global(.faq__icon) {
+    transform: rotate(45deg);
+  }
+
+  .faq__a {
+    padding-block-end: var(--space-5);
+  }
+
+  @media (min-width: 64em) {
+    .faq {
+      max-inline-size: calc(var(--container-max) * 8 / 12);
+    }
+  }
+</style>

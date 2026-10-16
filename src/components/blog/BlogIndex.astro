@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import { publicBlogEntries } from '../../lib/blog';
+import type { Locale } from '../../lib/i18n';
+interface Props { locale: Locale }
+const {locale}=Astro.props;
+const en=locale==='en';
+const articles=await publicBlogEntries(locale);
+const description=en?'Notes on custom software, product decisions, and getting systems into production.':'Textos sobre software sob medida, decisões de produto e o trabalho de colocar sistemas em produção.';
+---
+<Base locale={locale} routeId="blog" title="Blog | {brand}" description={description}>
+  <Header locale={locale} routeId="blog" />
+  <main id="conteudo" tabindex="-1" class="container blog-index">
+    <h1>Blog</h1>
+    <p class="lead introduction">{description}</p>
+    {articles.length ? <ul class="articles">{articles.map(({meta})=><li><h2><a class="link link--target" href={meta.path}>{meta.data.h1}</a></h2><p>{meta.data.summary}</p></li>)}</ul> : <p class="empty">{en?'No articles are available in English yet.':'Ainda não há artigos publicados em português.'}</p>}
+    <section class="blog-cta" aria-labelledby="blog-cta-title">
+      <h2 id="blog-cta-title">{en?'Have a project in mind?':'Tem um projeto em mente?'}</h2>
+      <p>{en?'Tell me what you need to build or improve. I can help define the next step.':'Conte o que precisa construir ou melhorar. Eu ajudo a definir o próximo passo.'}</p>
+      <BookingCta locale={locale}>{en?'Book a 45-min scoping call (free)':'Agendar diagnóstico (45 min, grátis)'}</BookingCta>
+    </section>
+  </main>
+  <Footer locale={locale} routeId="blog" />
+</Base>
+<style>
+.blog-index { max-inline-size:54rem; padding-block:var(--space-8); }
+h1 { font-size:var(--text-3xl); line-height:var(--leading-tight); max-inline-size:22ch; }
+.introduction { margin-block-start:var(--space-5); max-inline-size:var(--measure-narrow); }
+.empty,.articles { margin-block-start:var(--space-7); border-block-start:1px solid var(--color-border); padding-block-start:var(--space-6); }
+.articles { list-style:none; padding-inline:0; }
+.articles li + li { margin-block-start:var(--space-6); }
+h2 { font-size:var(--text-2xl); line-height:var(--leading-snug); }
+p { max-inline-size:var(--measure); }
+.blog-cta { margin-block-start:var(--space-8); padding:var(--space-5); background:var(--color-accent-subtle); border-radius:var(--radius-md); }
+.blog-cta h2 { font-size:var(--text-xl); }
+.blog-cta p { margin-block:var(--space-4); font-size:var(--text-base); }
+</style>

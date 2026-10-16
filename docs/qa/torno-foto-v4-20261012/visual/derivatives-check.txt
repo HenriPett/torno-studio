@@ -1,0 +1,15 @@
+avif 96w HTTP 200 bytes 2169 
+avif 160w HTTP 200 bytes 4603 
+avif 192w HTTP 200 bytes 6111 
+avif 320w HTTP 200 bytes 12280 
+avif 480w HTTP 200 bytes 21854 
+webp 96w HTTP 200 bytes 2674   pixelWidth: 96   pixelHeight: 96
+webp 160w HTTP 200 bytes 6386   pixelWidth: 160   pixelHeight: 160
+webp 192w HTTP 200 bytes 8872   pixelWidth: 192   pixelHeight: 192
+webp 320w HTTP 200 bytes 21412   pixelWidth: 320   pixelHeight: 320
+webp 480w HTTP 200 bytes 39892   pixelWidth: 480   pixelHeight: 480
+jpeg 96w HTTP 200 bytes 3137   pixelWidth: 96   pixelHeight: 96
+jpeg 160w HTTP 200 bytes 7241   pixelWidth: 160   pixelHeight: 160
+jpeg 192w HTTP 200 bytes 9937   pixelWidth: 192   pixelHeight: 192
+jpeg 320w HTTP 200 bytes 24160   pixelWidth: 320   pixelHeight: 320
+jpeg 480w HTTP 200 bytes 48460   pixelWidth: 480   pixelHeight: 480

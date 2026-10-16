@@ -1,0 +1,57 @@
+---
+import type { Locale } from '../../lib/i18n';
+interface Props { kind: 'loopt' | 'bom-capital'; locale: Locale }
+const { kind, locale } = Astro.props;
+const en = locale === 'en';
+const text = (pt: string, english: string) => en ? english : pt;
+const bom = kind === 'bom-capital';
+const max = bom ? 48 : 140;
+const groups = bom ? [{title:text('Tempo entre proposta e resposta','Time from application to response'), rows:[
+  {label:text('Antes · média','Before · average'), value:48, display:'48 h', after:false},
+  {label:text('Depois · relatado','After · reported'), value:2, display:'< 2 h', after:true},
+]}] : [
+ {title:text('Movimentos improdutivos · −27%','Unproductive moves · −27%'),rows:[
+  {label:text('Referência','Baseline'),value:100,display:'100',after:false},
+  {label:text('Com a solução','With the solution'),value:73,display:'73',after:true},
+ ]},
+ {title:text('Produtividade · +21%','Productivity · +21%'),rows:[
+  {label:text('Referência','Baseline'),value:100,display:'100',after:false},
+  {label:text('Com a solução','With the solution'),value:121,display:'121',after:true},
+ ]},
+];
+---
+<figure class="result-chart" aria-labelledby="chart-caption">
+  <figcaption id="chart-caption">
+    <span class="eyebrow">{bom ? text('Relato profissional','Professional account') : text('Resultado publicado · segundo a Loopt','Published result · according to Loopt')}</span>
+    <p>{bom ? text('Horas por processo. Escala de 0 a 48 h.','Hours per process. Scale from 0 to 48 h.') : text('Índices normalizados: cada indicador começa em 100.','Normalized indices: each indicator starts at 100.')}</p>
+  </figcaption>
+  {groups.map(group => <div class="chart-group">
+    <h3>{group.title}</h3>
+    <dl>{group.rows.map(row => <div class="chart-row">
+      <dt>{row.label}</dt>
+      <dd>
+        <div class="chart-track" aria-hidden="true"><span class:list={['chart-bar', row.after && 'chart-bar--after', bom && row.after && 'chart-bar--bound']} style={`width:${row.value / max * 100}%`}></span></div>
+        <span class="chart-value tnum">{row.display}</span>
+      </dd>
+    </div>)}</dl>
+    <div class="chart-axis" aria-hidden="true">{(bom ? [0,12,24,36,48] : [0,35,70,105,140]).map(tick => <span>{tick}</span>)}</div>
+  </div>)}
+  <p class="chart-note">{bom ? text('A barra tracejada marca o limite de 2 h. O valor relatado está abaixo dele; não há uma duração exata disponível.','The dashed bar marks the 2 h bound. The reported value is below it; no exact duration is available.') : text('100 → 73 representa a redução de 27%; 100 → 121 representa o aumento de 21%. Não são contagens absolutas nem uma série temporal.','100 → 73 represents a 27% reduction; 100 → 121 represents a 21% increase. These are not absolute counts or a time series.')}</p>
+</figure>
+<style>
+.result-chart { padding:var(--space-5); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); }
+figcaption p { margin-block-start:var(--space-2); color:var(--color-text-muted); }
+.chart-group { margin-block-start:var(--space-6); }
+h3 { font-size:var(--text-lg); margin-block-end:var(--space-4); }
+.chart-row + .chart-row { margin-block-start:var(--space-4); }
+dt { font-size:var(--text-sm); margin-block-end:var(--space-2); }
+dd { display:grid; grid-template-columns:minmax(0,1fr) 4.5rem; gap:var(--space-3); align-items:center; }
+.chart-track { height:30px; background:var(--color-surface-sunken); }
+.chart-bar { display:block; height:100%; background:var(--color-text-muted); }
+.chart-bar--after { background:var(--color-accent-text); }
+.chart-bar--bound { background:transparent; border:2px dashed var(--color-accent-text); }
+.chart-value { font-weight:var(--weight-semibold); }
+.chart-axis { display:flex; justify-content:space-between; margin-inline-end:calc(4.5rem + var(--space-3)); padding-block-start:var(--space-2); font-size:var(--text-xs); color:var(--color-text-muted); border-top:1px solid var(--color-border-strong); margin-block-start:var(--space-3); }
+.chart-note { font-size:var(--text-sm); color:var(--color-text-muted); margin-block-start:var(--space-5); }
+@media(min-width:48em) { .result-chart { padding:var(--space-6); } }
+</style>

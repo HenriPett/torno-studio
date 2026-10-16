@@ -1,0 +1,33 @@
+
+Running 20 tests using 4 workers
+
+(node:97415) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:97413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:97412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:97414) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/qa/seo.spec.ts:57:5 › / › S3 robots meta: indexável (34ms)
+  ✓   1 [chromium] › tests/qa/seo.spec.ts:64:5 › / › S4 title, description e OG por idioma (38ms)
+  ✓   3 [chromium] › tests/qa/seo.spec.ts:28:5 › / › S1 canonical absoluto e auto-referente; lang correto (38ms)
+  ✓   4 [chromium] › tests/qa/seo.spec.ts:39:5 › / › S2 hreflang recíproco (pt-BR, en, x-default -> en) (56ms)
+  ✓   5 [chromium] › tests/qa/seo.spec.ts:77:5 › / › S5 og:image 1200×630 PNG existe e responde 200 (31ms)
+  ✓   6 [chromium] › tests/qa/seo.spec.ts:28:5 › /en/ › S1 canonical absoluto e auto-referente; lang correto (26ms)
+  ✓   7 [chromium] › tests/qa/seo.spec.ts:39:5 › /en/ › S2 hreflang recíproco (pt-BR, en, x-default -> en) (25ms)
+  ✓   8 [chromium] › tests/qa/seo.spec.ts:57:5 › /en/ › S3 robots meta: indexável (21ms)
+  ✓  10 [chromium] › tests/qa/seo.spec.ts:28:5 › /privacidade/ › S1 canonical absoluto e auto-referente; lang correto (31ms)
+  ✓   9 [chromium] › tests/qa/seo.spec.ts:64:5 › /en/ › S4 title, description e OG por idioma (41ms)
+  ✓  11 [chromium] › tests/qa/seo.spec.ts:77:5 › /en/ › S5 og:image 1200×630 PNG existe e responde 200 (43ms)
+  ✓  13 [chromium] › tests/qa/seo.spec.ts:57:5 › /privacidade/ › S3 robots meta: indexável (7ms)
+  ✓  12 [chromium] › tests/qa/seo.spec.ts:39:5 › /privacidade/ › S2 hreflang recíproco (pt-BR, en, x-default -> en) (26ms)
+  ✓  14 [chromium] › tests/qa/seo.spec.ts:64:5 › /privacidade/ › S4 title, description e OG por idioma (9ms)
+  ✓  15 [chromium] › tests/qa/seo.spec.ts:77:5 › /privacidade/ › S5 og:image 1200×630 PNG existe e responde 200 (13ms)
+  ✓  17 [chromium] › tests/qa/seo.spec.ts:39:5 › /en/privacy/ › S2 hreflang recíproco (pt-BR, en, x-default -> en) (12ms)
+  ✓  16 [chromium] › tests/qa/seo.spec.ts:28:5 › /en/privacy/ › S1 canonical absoluto e auto-referente; lang correto (10ms)
+  ✓  18 [chromium] › tests/qa/seo.spec.ts:57:5 › /en/privacy/ › S3 robots meta: indexável (9ms)
+  ✓  19 [chromium] › tests/qa/seo.spec.ts:64:5 › /en/privacy/ › S4 title, description e OG por idioma (10ms)
+  ✓  20 [chromium] › tests/qa/seo.spec.ts:77:5 › /en/privacy/ › S5 og:image 1200×630 PNG existe e responde 200 (11ms)
+
+  20 passed (631ms)

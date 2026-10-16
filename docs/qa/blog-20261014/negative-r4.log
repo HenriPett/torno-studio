@@ -1,0 +1,19 @@
+  expected rejection: ISO timestamp with timezone required
+PASS fail-closed invalid-timezone
+  expected rejection: invalid date
+PASS fail-closed invalid-calendar
+  expected rejection: duplicate path or intention
+PASS fail-closed duplicate-canonical
+  expected rejection: reserved intention
+PASS fail-closed reserved-intent
+  expected rejection: translation intention/locale mismatch
+PASS fail-closed mismatched-translation-intent
+  expected rejection: broken or invisible link
+PASS fail-closed markdown-link-to-draft
+  expected rejection: no_go slug
+PASS fail-closed historic-no-go-slug
+  expected rejection: author_name required for release
+PASS fail-closed missing-author
+FAIL fail-closed missing-release-approval: rejeição pelo motivo errado em missing-release-approval: Fixture output cannot be a release
+
+RESULT 8/9 checks passed

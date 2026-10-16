@@ -1,0 +1,72 @@
+---
+/**
+ * Lista de itens com ícone (DESIGN §6.9): Problema, Garantias, Método.
+ * `layout`: "rows" = 1 coluna separada por borda; "grid" = 2 colunas a partir de `gridFrom`.
+ */
+import type { TitledItem } from '../../content/types';
+import Icon, { type IconName } from './Icon.astro';
+
+interface Props {
+  items: TitledItem[];
+  /** Um ícone por item, na mesma ordem. Falta de ícone quebra o build (paridade com o copy). */
+  icons: readonly IconName[];
+  layout?: 'rows' | 'grid';
+  /** Breakpoint da grade 2 colunas: "tablet" (≥ 640) ou "desktop" (≥ 1024). */
+  gridFrom?: 'tablet' | 'desktop';
+}
+
+const { items, icons, layout = 'rows', gridFrom = 'desktop' } = Astro.props;
+if (items.length > icons.length) {
+  throw new Error(`IconList: ${items.length} itens e só ${icons.length} ícones`);
+}
+---
+
+<ul class:list={['icon-list', `icon-list--${layout}`, layout === 'grid' && `icon-list--from-${gridFrom}`]}>
+  {
+    items.map((item, index) => (
+      <li class="icon-item">
+        <Icon name={icons[index] ?? 'check'} />
+        <div>
+          <h3 class="h3 icon-item__title">{item.title}</h3>
+          <p class="icon-item__body">{item.body}</p>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .icon-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .icon-list--rows > li {
+    padding-block: var(--space-5);
+  }
+
+  .icon-list--rows > li:first-child {
+    padding-block-start: 0;
+  }
+
+  .icon-list--rows > li + li {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .icon-list--grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 40em) {
+    .icon-list--from-tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64em) {
+    .icon-list--from-desktop {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

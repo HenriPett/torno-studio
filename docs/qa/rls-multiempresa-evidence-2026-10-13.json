@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-13",
+  "owner": "Compasso",
+  "status": "implemented and verified; no deployment",
+  "pages": [
+    "/guias/rls-multiempresa/",
+    "/en/guides/multi-tenant-rls/"
+  ],
+  "sql_execution": {
+    "engine": "PostgreSQL 18.6 WASM, PGlite 0.5.9",
+    "node": "26.9.0",
+    "assertions_passed": 94,
+    "exit_code": 0,
+    "log": "docs/qa/rls-multiempresa-wasm-2026-10-13.log",
+    "public_runner": "public/examples/rls-multiempresa/run-wasm.mjs",
+    "role": "authenticated: non-owner, NOSUPERUSER, NOBYPASSRLS",
+    "auth": "synthetic Supabase auth.uid()/auth.users, NOT Supabase/JWT/HTTP integration",
+    "reproduce": "public/examples/rls-multiempresa/README.txt"
+  },
+  "negative_control": {
+    "mutation": "disable RLS on documents in isolated copy",
+    "exit_code": 1,
+    "expected_failure": "editor A / company 2 read: expected 0 rows, got 1",
+    "log": "docs/qa/rls-multiempresa-mutation-2026-10-13.log"
+  },
+  "native_block": {
+    "engine": "PostgreSQL 18.1 Homebrew",
+    "stage": "initdb bootstrap",
+    "error": "shmget: Operation not permitted",
+    "supported_alternative_attempted": "initdb -c shared_memory_type=mmap -c dynamic_shared_memory_type=mmap (flags verified by initdb --help); same error",
+    "docker": "daemon unavailable",
+    "existing_postgres": "pg_isready /tmp:5432 no response"
+  },
+  "site_validation": {
+    "astro_check": "88 files, 0 errors, 0 warnings, 0 hints",
+    "build": "12 pages built, exit 0",
+    "browser_QA": "handoff to Batuta/Afinador; not claimed here",
+    "sql_not_inferred_from_build": true
+  },
+  "review_changes": [
+    "Table owner normally bypasses RLS; FORCE subjects owner, not superuser/BYPASSRLS",
+    "CTA: free 45-minute triage, not technical audit",
+    "Manual conversation attribution, no new tracking",
+    "No duplicate JSON-LD; central Base schema owned by Ritmo",
+    "Native sandbox diagnostics only README/evidence; public guide gives runtime/version/count/date and scope limits",
+    "Explicit public run-wasm.mjs download link separate from four native runner files"
+  ],
+  "scope_preserved": [
+    "routes",
+    "shared Base/Header/Footer/BookingCta",
+    "commercial pages and seo content",
+    "existing dirty photo/Ladder/content/prices/ICP"
+  ],
+  "sources": [
+    "https://supabase.com/docs/guides/database/postgres/row-level-security",
+    "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+    "https://docs.lovable.dev/features/security",
+    "https://supabase.com/docs/guides/troubleshooting/identify-lovable-cloud-or-supabase-backend",
+    "https://pglite.dev/docs/"
+  ],
+  "sha256": {
+    "docs/qa/rls-multiempresa-astro-check-2026-10-13.log": "65229707f23239db2eafcc4930aedcdfef4c01ad360d6f26ea86e086e613bd28",
+    "docs/qa/rls-multiempresa-build-2026-10-13.log": "ef4b6f550c36fd8d3e3f8e84040ba335a09c09e163928b6d85dcef00c64a0555",
+    "docs/qa/rls-multiempresa-mutation-2026-10-13.log": "892228217fe44dd91affc08178cb1c5fa8c53624666b0833d61bfe9525a7d848",
+    "docs/qa/rls-multiempresa-postgres-2026-10-13.log": "b8029deb40d7dccc861dc05383049f6e39fb44c87d1016f0a9d10859ad91754f",
+    "docs/qa/rls-multiempresa-wasm-2026-10-13.log": "be6af5d4b789ab48defdbbf6d7538b27d7ef3da928d40bb4b607e4993eb110a2",
+    "public/examples/rls-multiempresa/README.txt": "3727fbcf695fa2b47152ef144272226e3d13660fe0ad3130cb8c44319804435a",
+    "public/examples/rls-multiempresa/bootstrap-local.sql": "560868637707280f07f600524d324ffa5713dab2863546cb0f62b101788c151d",
+    "public/examples/rls-multiempresa/run-local.sh": "22f23b59c5f4558771caa91d654a64052f6c85df39353c73c425bca1285b8cfb",
+    "public/examples/rls-multiempresa/run-wasm.mjs": "73955929a6b93a679ad832d02568089962cc5311dfe9adbcc929af644af19b76",
+    "public/examples/rls-multiempresa/schema.sql": "524640539a3e44e7bdce203deefee7e6f24fd0b2017490e9d5252fd9dc884792",
+    "public/examples/rls-multiempresa/tests.sql": "a2aaa2031b165fcec3095b0a70f73a681d8dd2ff1a58c6595b67d821fc5de83a",
+    "scripts/test-rls-local.sh": "05bf25c7bb4cda88cee331785242ca58bc26f0f9c7d7646096d0470e6c99fcdc",
+    "src/components/seo-guide/RlsGuide.astro": "15f6019a65a36893d4dba95d8519a900d797bfc46f4e308c2f60467a2d1b2a74",
+    "src/components/seo-guide/content.ts": "f94dd9707c5b3482d2cf75e116be9bf51bc5bf4ea2839d2225153ef18599d9d1",
+    "src/pages/en/guides/multi-tenant-rls.astro": "da4841aece027cc1b25df918d5fc1ce40d233d430df437313fc8a4b4c48abc23",
+    "src/pages/guias/rls-multiempresa.astro": "136ce69eaf9807de6fcc6cd65c7619fbc0a2aefd00d961ceefe698dea4b9ebee"
+  }
+}

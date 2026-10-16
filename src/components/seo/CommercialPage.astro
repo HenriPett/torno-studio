@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import { commercial, type CommercialRoute } from '../../content/seo/commercial';
+import { pricing, formatPrice, type StepId } from '../../config/pricing';
+import { pathFor, type Locale } from '../../lib/i18n';
+interface Props { locale: Locale; routeId: CommercialRoute }
+const { locale, routeId } = Astro.props;
+const c = commercial[locale][routeId];
+const en = locale === 'en';
+const lovable = routeId === 'lovableProduction';
+const text = (pt: string, english: string) => en ? english : pt;
+const price = (id: StepId) => formatPrice(pricing[locale].steps.find(step => step.id === id)!.price, locale, {
+  free: text('grátis', 'free'), from: text('a partir de {price}', 'from {price}'), custom: text('Sob consulta', 'Custom quote'),
+});
+const duration = pricing[locale].steps.find(step => step.id === 'productionReady')!.duration!;
+const cta = text('Agendar diagnóstico — 45 min, grátis', 'Book a free 45-minute diagnostic');
+const limit = text('Uma conversa sobre contexto, impacto e fit. Não é auditoria técnica gratuita nem pentest.', 'A conversation about context, impact and fit. This is not a free technical audit or penetration test.');
+---
+<Base locale={locale} routeId={routeId} title={c.title} description={c.description}>
+  <Header locale={locale} routeId={routeId} />
+  <main id="conteudo" tabindex="-1">
+    <section class="section hero" aria-labelledby="page-title">
+      <div class="container stack">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <h1 id="page-title">{c.heading}</h1>
+        <p class="lead">{c.intro}</p>
+        <div class="actions"><BookingCta locale={locale}>{cta}</BookingCta><a class="link link--target" href="#escopo">{text('Ver escopo e preços', 'See scope and pricing')}</a></div>
+        <p class="muted">{limit}</p>
+        <p>{text('Eu sou Henrique Pett, Product Engineer. Você fala diretamente com quem define e implementa a entrega.', 'I’m Henrique Pett, a Product Engineer. You work directly with the person who scopes and implements the delivery.')} <a class="link" href={`${pathFor('home', locale)}#quem`}>{text('Conheça minha trajetória', 'Read my background')}</a>.</p>
+      </div>
+    </section>
+    <section class="section section--sunken" aria-labelledby="context-title">
+      <div class="container split">
+        <div class="split__label stack"><h2 id="context-title">{c.contextTitle}</h2><p>{c.context}</p></div>
+        <div class="split__content stack"><h3>{text('O que eu preciso entender', 'What I need to understand')}</h3><ul>{c.inventory.map(item => <li>{item}</li>)}</ul></div>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="decision-title">
+      <div class="container stack">
+        <h2 id="decision-title">{text('Reparar ou reconstruir?', 'Repair or rebuild?')}</h2>
+        <div class="cards"><article class="card stack"><h3>{text('Preservar e corrigir', 'Retain and repair')}</h3><p>{c.repair}</p></article><article class="card stack"><h3>{text('Replanejar antes de executar', 'Rescope before execution')}</h3><p>{c.rebuild}</p></article></div>
+      </div>
+    </section>
+    <section class="section section--sunken" aria-labelledby="delivery-title">
+      <div class="container stack">
+        <h2 id="delivery-title">{text('O que torna a entrega verificável', 'What makes delivery verifiable')}</h2>
+        <p>{text('Esta é a estrutura de aceite que adapto ao seu projeto.', 'This is the acceptance structure I adapt to your project.')}</p>
+        <dl class="deliverables">{c.delivery.map(([title, body]) => <div><dt>{title}</dt><dd>{body}</dd></div>)}</dl>
+        <p><a class="link link--target" href={pathFor('rlsGuide', locale)}>{text('Ver guia de permissões entre empresas', 'Read the multi-tenant permissions guide')}</a></p>
+      </div>
+    </section>
+    {lovable && <section class="section" aria-labelledby="native-title"><div class="container stack">
+      <h2 id="native-title">{text('Começar pelos recursos que já existem', 'Start with the tools already available')}</h2>
+      <p>{text('O Quick scan verifica regras de banco, dependências e exposição de MCP. O Deep scan inclui lógica, permissões, dados e pagamentos. Eu aproveito os achados e correções elegíveis; a matriz de aceite documenta os cenários específicos da sua operação.', 'Quick scan checks database rules, dependencies and MCP exposure. Deep scan also reviews logic, permissions, data and payments. I use existing findings and eligible fixes; acceptance criteria document your specific business scenarios.')}</p>
+      <p>{text('Pagamentos nativos e integrações próprias entram no inventário separadamente. Eu confirmo o caminho usado pelo app antes de delimitar testes e mudanças.', 'Native payments and custom integrations are inventoried separately. I confirm the path your app uses before scoping tests and changes.')}</p>
+      <p class="muted">{text('Referências oficiais consultadas em 13/10/2026:', 'Official references reviewed October 13, 2026:')} <a class="link" href="https://docs.lovable.dev/features/security">Lovable Security</a> · <a class="link" href="https://docs.lovable.dev/features/payments">Payments</a> · <a class="link" href="https://docs.lovable.dev/introduction/support-policy">Support policy</a>.</p>
+    </div></section>}
+    <section id="escopo" class="section" aria-labelledby="price-title">
+      <div class="container stack">
+        <h2 id="price-title">{text('Preço depende do enquadramento, não da origem', 'Pricing follows scope, not the tool or vendor')}</h2>
+        <p>{c.fit}</p>
+        <div class="cards">
+          <article class="card stack"><h3>Production-Ready</h3><p class="price">{price('productionReady')}</p><p>{text(`Para protótipo aproveitável e escopo compatível: ${duration.min}–${duration.max} semanas. Confirmo o enquadramento antes da contratação. 50% no início e 50% na entrega.`, `For a usable prototype and compatible scope: ${duration.min}–${duration.max} weeks. I confirm eligibility before contracting. 50% at start and 50% on delivery.`)}</p></article>
+          <article class="card stack"><h3>Product Sprint</h3><p class="price">{price('sprint')}</p><p>{text('Para legado incerto ou escopo ainda indefinido. Duas semanas para definir problema, prioridades e plano de execução; 100% antecipado. Não equivale a auditoria técnica integral.', 'For an uncertain inherited system or undefined scope. Two weeks to define the problem, priorities and execution plan; 100% upfront. This is not a comprehensive technical audit.')}</p></article>
+        </div>
+        <p>{text('Se for necessário um novo MVP, o MVP Core é', 'If a new MVP is needed, MVP Core is')} <strong>{price('mvpCore')}</strong>{text(', com contratação e escopo próprios. O Sprint é 100% abatido do MVP contratado em até 30 dias; seus entregáveis são seus.', ', with a separate scope and contract. The Sprint is fully credited toward an MVP signed within 30 days; its deliverables are yours.')}</p>
+        <a class="link link--target" href={`${pathFor('home', locale)}#precos`}>{text('Ver todas as ofertas e condições', 'See all offers and terms')}</a>
+        <h3>{text('O que fica fora', 'What is excluded')}</h3><ul class="dash-list">{c.exclusions.map(item => <li>{item}</li>)}</ul>
+      </div>
+    </section>
+    <section id="contato" class="section" aria-labelledby="cta-title"><div class="container stack">
+      <h2 id="cta-title">{text('Vamos delimitar o próximo passo.', 'Let’s define the next step.')}</h2>
+      <p>{text('Na conversa, traga o fluxo travado, impacto, usuários ou piloto, prazo, quem decide e a faixa de orçamento da oferta. Confirme se pode autorizar acesso ao código. Não envie senhas, chaves ou dados de clientes; eventuais acessos serão combinados por convite e permissões adequadas.', 'Bring the blocked workflow, business impact, users or pilot, deadline, decision-maker and budget range for the offer. Confirm whether you can authorize source access. Do not send passwords, keys or customer data; any access will be arranged through invitations and appropriate permissions.')}</p>
+      <div class="actions"><BookingCta locale={locale}>{cta}</BookingCta></div><p class="muted">{limit}</p>
+      <a class="link link--target" href={pathFor(lovable ? 'recovery' : 'lovableProduction', locale)}>{lovable ? text('O projeto travou após uma agência ou tentativa própria?', 'Stalled after an agency engagement or a DIY build?') : text('Seu ponto de partida é um app Lovable?', 'Starting from a Lovable app?')}</a>
+    </div></section>
+    <section class="section section--sunken" aria-labelledby="faq-title"><div class="container stack"><h2 id="faq-title">{text('Antes de conversar', 'Before we talk')}</h2>{c.faq.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+  </main>
+  <Footer locale={locale} routeId={routeId} />
+</Base>
+<style>
+  .stack > * + * { margin-block-start: var(--space-5); }
+  h1 { max-inline-size: 18ch; font-size: var(--text-3xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); text-wrap: balance; }
+  h2 { font-size: var(--text-2xl); line-height: var(--leading-snug); max-inline-size: 30ch; text-wrap: balance; }
+  h3 { font-size: var(--text-xl); line-height: var(--leading-snug); }
+  p, li, dd { max-inline-size: var(--measure); }
+  .lead { font-size: var(--text-lg); max-inline-size: 60ch; color: var(--color-text-muted); }
+  .eyebrow { color: var(--color-accent-text); text-transform: uppercase; letter-spacing: var(--tracking-caps); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
+  .muted { color: var(--color-text-muted); font-size: var(--text-sm); }
+  ul { padding-inline-start: var(--space-5); }
+  li + li { margin-block-start: var(--space-3); }
+  .cards { display: grid; gap: var(--space-5); }
+  .card { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+  .price { font-size: var(--text-price); font-weight: var(--weight-semibold); font-feature-settings: var(--font-features-numeric); }
+  .deliverables > div { padding-block: var(--space-5); border-block-end: 1px solid var(--color-border); }
+  dt { font-weight: var(--weight-semibold); font-size: var(--text-lg); }
+  dd { margin-block-start: var(--space-2); }
+  details { border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); padding: var(--space-4); max-inline-size: 75ch; }
+  summary { cursor: pointer; font-weight: var(--weight-semibold); min-block-size: var(--tap-min); align-content: center; }
+  details p { margin-block-start: var(--space-3); }
+  @media (min-width: 48em) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

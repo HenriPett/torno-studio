@@ -1,0 +1,127 @@
+
+> projeto-50k-site@0.1.0 build
+> astro check && astro build
+
+17:07:11 [vite] Re-optimizing dependencies because vite config has changed
+17:07:12 [content] Syncing content
+17:07:12 [content] Synced content
+17:07:12 [types] Generated 455ms
+17:07:12 [check] Getting diagnostics for Astro files in /private/tmp/torno-blog-qa-20261014-r3...
+Result (90 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+17:07:23 [vite] Re-optimizing dependencies because vite config has changed
+17:07:23 [content] Syncing content
+17:07:23 [content] Synced content
+17:07:23 [types] Generated 332ms
+17:07:23 [build] output: "static"
+17:07:23 [build] mode: "static"
+17:07:23 [build] directory: /private/tmp/torno-blog-qa-20261014-r3/dist/
+17:07:23 [build] Collecting build info...
+17:07:23 [build] ✓ Completed in 347ms.
+17:07:23 [build] Building static entrypoints...
+17:07:25 [vite] ✓ built in 1.37s
+17:07:25 [build] ✓ Completed in 1.39s.
+
+ building client (vite) 
+17:07:25 [vite] transforming...
+17:07:25 [vite] ✓ 4 modules transformed.
+17:07:25 [vite] rendering chunks...
+17:07:25 [vite] computing gzip size...
+17:07:25 [vite] dist/_astro/ConsentBanner.astro_astro_type_script_index_0_lang.BkV4oSKu.js  5.77 kB │ gzip: 2.58 kB
+17:07:25 [vite] ✓ built in 26ms
+
+ generating static routes 
+17:07:25 ▶ src/pages/404.astro
+17:07:25   └─ /404.html (+6ms) 
+17:07:25 ▶ src/pages/blog/[slug].astro
+17:07:25   ├─ /blog/qa-par-equivalente/index.html (+3ms) 
+17:07:25   └─ /blog/qa-registro-de-handover/index.html (+2ms) 
+17:07:25 ▶ src/pages/blog/index.astro
+17:07:25   └─ /blog/index.html (+2ms) 
+17:07:25 ▶ src/pages/cases/[slug].astro
+17:07:25   ├─ /cases/loopt/index.html (+5ms) 
+17:07:25   ├─ /cases/bom-capital/index.html (+1ms) 
+17:07:25   └─ /cases/ascende/index.html (+1ms) 
+17:07:25 ▶ src/pages/diagnostico.astro
+17:07:25   └─ /diagnostico/index.html (+3ms) 
+17:07:25 ▶ src/pages/en/blog/[slug].astro
+17:07:25   └─ /en/blog/qa-equivalent-pair/index.html (+2ms) 
+17:07:25 ▶ src/pages/en/blog/index.astro
+17:07:25   └─ /en/blog/index.html (+3ms) 
+17:07:25 ▶ src/pages/en/cases/[slug].astro
+17:07:25   ├─ /en/cases/loopt/index.html (+2ms) 
+17:07:25   ├─ /en/cases/bom-capital/index.html (+1ms) 
+17:07:25   └─ /en/cases/ascende/index.html (+1ms) 
+17:07:25 ▶ src/pages/en/guides/multi-tenant-rls.astro
+17:07:25   └─ /en/guides/multi-tenant-rls/index.html (+1ms) 
+17:07:25 ▶ src/pages/en/index.astro
+17:07:25   └─ /en/index.html (+8ms) 
+17:07:25 ▶ src/pages/en/lovable-to-production.astro
+17:07:25   └─ /en/lovable-to-production/index.html (+3ms) 
+17:07:25 ▶ src/pages/en/privacy.astro
+17:07:25   └─ /en/privacy/index.html (+3ms) 
+17:07:25 ▶ src/pages/en/software-project-rescue.astro
+17:07:25   └─ /en/software-project-rescue/index.html (+1ms) 
+17:07:25 ▶ src/pages/guias/rls-multiempresa.astro
+17:07:25   └─ /guias/rls-multiempresa/index.html (+1ms) 
+17:07:25 ▶ src/pages/index.astro
+17:07:25   └─ /index.html (+5ms) 
+17:07:25 ▶ src/pages/lovable-em-producao.astro
+17:07:25   └─ /lovable-em-producao/index.html (+2ms) 
+17:07:25 λ src/pages/og/[locale].png.ts
+17:07:25   ├─ /og/pt-BR.png/ (+733ms) 
+17:07:26   └─ /og/en.png/ (+560ms) 
+17:07:26 λ src/pages/og/cases/[id].png.ts
+17:07:26   ├─ /og/cases/loopt-pt-BR.png/ (+337ms) 
+17:07:27   ├─ /og/cases/bom-capital-pt-BR.png/ (+184ms) 
+17:07:27   ├─ /og/cases/ascende-pt-BR.png/ (+446ms) 
+17:07:27   ├─ /og/cases/loopt-en.png/ (+423ms) 
+17:07:28   ├─ /og/cases/bom-capital-en.png/ (+250ms) 
+17:07:28   └─ /og/cases/ascende-en.png/ (+215ms) 
+17:07:28 ▶ src/pages/privacidade.astro
+17:07:28   └─ /privacidade/index.html (+4ms) 
+17:07:28 ▶ src/pages/recuperacao-de-projeto.astro
+17:07:28   └─ /recuperacao-de-projeto/index.html (+17ms) 
+17:07:28 λ src/pages/robots.txt.ts
+17:07:28   └─ /robots.txt (+3ms) 
+17:07:28 ✓ Completed in 3.34s.
+
+ generating optimized images 
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z1oIIxS.avif (reused cache entry) (+2ms) (1/21)
+17:07:28   ▶ /_astro/ascende-public-site.CDOG7A2S_1CztTA.webp (reused cache entry) (+3ms) (2/21)
+17:07:28   ▶ /_astro/loopt-public-site.BxpzY5cx_107Pzo.webp (reused cache entry) (+4ms) (3/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_3UOep.avif (reused cache entry) (+1ms) (4/21)
+17:07:28   ▶ /_astro/ascende-public-site.CDOG7A2S_ZOPGBV.webp (reused cache entry) (+1ms) (5/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_1lgE4y.avif (reused cache entry) (+1ms) (6/21)
+17:07:28   ▶ /_astro/loopt-public-site.BxpzY5cx_kL4CW.webp (reused cache entry) (+1ms) (7/21)
+17:07:28   ▶ /_astro/ascende-public-site.CDOG7A2S_ZPw3K3.webp (reused cache entry) (+1ms) (8/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z1SITQe.avif (reused cache entry) (+2ms) (9/21)
+17:07:28   ▶ /_astro/loopt-public-site.BxpzY5cx_1N6PRn.webp (reused cache entry) (+2ms) (10/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z2sUaV3.avif (reused cache entry) (+1ms) (11/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z27Ep.webp (reused cache entry) (+1ms) (12/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_ZJmjey.webp (reused cache entry) (+1ms) (13/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z2kdRPT.webp (reused cache entry) (+1ms) (14/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Zu2iWK.webp (reused cache entry) (+2ms) (15/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z14dz2z.webp (reused cache entry) (+8ms) (16/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_oDPBP.jpeg (reused cache entry) (+1ms) (17/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z8x4Yt.jpeg (reused cache entry) (+1ms) (18/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z1UwTyE.jpeg (reused cache entry) (+1ms) (19/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_Z5lkFv.jpeg (reused cache entry) (+0ms) (20/21)
+17:07:28   ▶ /_astro/henrique-pett.B6ylgfAe_ZEwAKk.jpeg (reused cache entry) (+0ms) (21/21)
+17:07:28 ✓ Completed in 25ms.
+
+17:07:28 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+17:07:28 [ERROR] [blog-link-guard] An unhandled error occurred while running the "astro:build:done" hook
+[blog] link escapes output
+  Location:
+    /private/tmp/torno-blog-qa-20261014-r3/src/config/blog.mjs:12:33
+  Stack trace:
+    at fail (file:///private/tmp/torno-blog-qa-20261014-r3/src/config/blog.mjs:12:33)
+    at async astro:build:done (file:///private/tmp/torno-blog-qa-20261014-r3/astro.config.mjs?t=1792008443453:120:82)
+    at async runHookInternal (file:///Users/henriquepett/Downloads/pessoal/projeto-50k-site/node_modules/astro/dist/integrations/hooks.js:51:5)
+    at async AstroBuilder.build (file:///Users/henriquepett/Downloads/pessoal/projeto-50k-site/node_modules/astro/dist/core/build/index.js:167:5)
+    at async build (file:///Users/henriquepett/Downloads/pessoal/projeto-50k-site/node_modules/astro/dist/core/build/index.js:45:3)
+

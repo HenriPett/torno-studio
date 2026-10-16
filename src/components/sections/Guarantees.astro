@@ -1,0 +1,66 @@
+---
+/** Garantias e regras (`#garantias`, DESIGN §7.4): 6 itens (2 × 3 no desktop) + caixa "o que fica fora". */
+import { getCopy, type Locale } from '../../lib/i18n';
+import type { IconName } from '../ui/Icon.astro';
+import IconList from '../ui/IconList.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { guarantees } = getCopy(locale);
+
+/** Mesma ordem nos dois idiomas: garantia, escopo, conta do cliente, marcos, 1 MVP, demo semanal. */
+const ICONS: IconName[] = ['shield', 'document', 'cloudKey', 'milestones', 'one', 'demo'];
+---
+
+<section id="garantias" class="section" aria-labelledby="garantias-title">
+  <div class="container split">
+    <div class="split__label section-head">
+      <h2 id="garantias-title" class="h2">{guarantees.title}</h2>
+      <p class="lead">{guarantees.intro}</p>
+    </div>
+    <div class="split__content guarantees__content">
+      <IconList items={guarantees.items} icons={ICONS} layout="grid" />
+      <div class="guarantees__out">
+        <h3 class="h3">{guarantees.exclusionsTitle}</h3>
+        <ul class="dash-list guarantees__list">
+          {guarantees.exclusions.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .guarantees__content {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .guarantees__out {
+    padding: var(--space-5);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .guarantees__list {
+    margin-block-start: var(--space-4);
+  }
+
+  .guarantees__list > li {
+    break-inside: avoid;
+  }
+
+  .guarantees__list > li + li {
+    margin-block-start: var(--space-3);
+  }
+
+  @media (min-width: 64em) {
+    .guarantees__list {
+      columns: 2;
+      column-gap: var(--space-6);
+    }
+  }
+</style>

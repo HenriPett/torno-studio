@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-14",
+  "routes": [
+    "/cases/loopt/",
+    "/cases/ascende/",
+    "/cases/bom-capital/"
+  ],
+  "languages": [
+    "pt-BR",
+    "en"
+  ],
+  "build": "astro check 0 errors; astro build passed",
+  "http_tests": 7,
+  "responsive_dom_checks": 12,
+  "visual_review": [
+    "Loopt screenshot desktop/mobile",
+    "Ascende screenshot desktop/mobile",
+    "Bom.Capital chart desktop/mobile",
+    "Bom.Capital EN Open Graph"
+  ],
+  "sources": {
+    "loopt": {
+      "screenshot": "https://loopt.com.br/",
+      "metrics": "https://mundologistica.com.br/noticias/loopt-ia-terminais-de-conteineres",
+      "values": [
+        "-27% unproductive moves",
+        "+21% productivity"
+      ],
+      "attribution": "Company/team results, not individual causal attribution"
+    },
+    "bom-capital": {
+      "source": "Founder CV and professional account",
+      "values": [
+        "48h average before",
+        "under 2h after"
+      ],
+      "chart": "Upper bound 2h, dashed; no exact duration"
+    },
+    "ascende": {
+      "screenshot": "https://ascende.site/",
+      "source": "Public product page and project README",
+      "result": "Published product, no fabricated commercial metrics"
+    }
+  },
+  "browser_automation": "Maestri Portal visual/DOM checks; Playwright request API checks, no browser launch"
+}

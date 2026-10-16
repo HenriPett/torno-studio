@@ -1,0 +1,153 @@
+/*
+ * Design tokens: landing "Founding Engineer sob demanda".
+ * Spec: docs/design/DESIGN.md. Owner: Timbre (Product Designer).
+ *
+ * Theme resolution:
+ *   1. :root                    → light (default)
+ *   2. prefers-color-scheme dark → dark, unless <html data-theme="light">
+ *   3. <html data-theme="dark"> → dark, regardless of the OS
+ * The toggle only sets/removes data-theme on <html>. Contrast values (WCAG 2.2)
+ * are documented in DESIGN.md §3; all text pairs ≥ 4.5:1, UI borders ≥ 3:1.
+ */
+
+/* Font: 1 variable family, self-hosted via @fontsource-variable/ibm-plex-sans
+   (weights 100–700, latin subset). Import the CSS once in the base layout. */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- Color: light ---------- */
+  --color-bg: #f7f6f2; /* page, warm paper */
+  --color-surface: #ffffff; /* cards, header */
+  --color-surface-sunken: #eeece6; /* alternating sections, code, table header */
+  --color-text: #16181a; /* 16.5:1 on bg */
+  --color-text-muted: #52575c; /* 6.7:1 on bg, 6.2:1 on sunken */
+  --color-border: #dcd9d1; /* decorative dividers only (not for UI affordance) */
+  --color-border-strong: #7c8187; /* UI boundaries: buttons, details, toggle; 3.6:1 */
+  --color-accent: #1c5a49; /* primary button bg, rail, links; 7.4:1 on bg */
+  --color-accent-hover: #154536;
+  --color-accent-active: #0f352a;
+  --color-on-accent: #ffffff; /* 8.0:1 on accent */
+  --color-accent-subtle: #e2ede8; /* badge bg, highlighted rung */
+  --color-accent-text: #1c5a49; /* links and accent text on any surface */
+  --color-warn-text: #8a4b0f; /* "fica fora" / not-for markers; 6.3:1 */
+  --color-focus: #1c5a49; /* focus ring; 7.4:1 on bg */
+  --color-placeholder-bg: #fff4d6; /* dev-only placeholder highlight */
+  --color-backdrop: rgb(22 24 26 / 0.55); /* <dialog>::backdrop (consent, 2nd level) */
+
+  /* ---------- Typography ---------- */
+  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-features-numeric: "tnum" 1, "lnum" 1; /* prices, metrics, hours */
+
+  /* Fluid type scale: 360px → 1280px viewport. */
+  --text-xs: 0.8125rem; /* 13px: legal, footnotes */
+  --text-sm: 0.875rem; /* 14px: meta, badges, labels */
+  --text-base: clamp(1rem, 0.961rem + 0.174vw, 1.0625rem); /* 16 → 17px body */
+  --text-lg: clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem); /* 18 → 20 lead */
+  --text-xl: clamp(1.25rem, 1.152rem + 0.435vw, 1.5rem); /* 20 → 24 h3 */
+  --text-2xl: clamp(1.5rem, 1.304rem + 0.87vw, 2rem); /* 24 → 32 h2 */
+  --text-3xl: clamp(1.75rem, 1.457rem + 1.304vw, 2.5rem); /* 28 → 40 h1 hero */
+  --text-price: clamp(1.375rem, 1.277rem + 0.435vw, 1.625rem); /* 22 → 26 */
+  --text-brand: clamp(0.9375rem, 0.898rem + 0.174vw, 1.0625rem); /* 15 → 17 wordmark */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 680; /* variable axis: only headings + wordmark */
+
+  --leading-tight: 1.15; /* h1, wordmark */
+  --leading-snug: 1.3; /* h2, h3, prices */
+  --leading-normal: 1.6; /* body */
+  --tracking-tight: -0.015em; /* h1, h2 */
+  --tracking-brand: -0.01em;
+  --tracking-caps: 0.06em; /* eyebrow, overline (uppercase) */
+
+  --measure: 65ch; /* body copy */
+  --measure-narrow: 44ch; /* lead / subtitles */
+  --measure-headline: 22ch; /* hero h1 */
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.5rem; /* 24 */
+  --space-6: 2rem; /* 32 */
+  --space-7: 3rem; /* 48 */
+  --space-8: 4rem; /* 64 */
+  --space-9: 6rem; /* 96 */
+  --space-section: clamp(4rem, 3.217rem + 3.478vw, 6rem); /* 64 → 96 block padding */
+  --space-gutter: clamp(1rem, 0.739rem + 1.159vw, 1.5rem); /* 16 → 24 */
+
+  /* ---------- Layout ---------- */
+  --container-max: 70rem; /* 1120px content */
+  --container-pad: clamp(1rem, 0.217rem + 3.478vw, 2rem); /* 16 → 32 page margin */
+  --header-height: 4rem; /* 64px, fits a 2-line wordmark on mobile */
+  --tap-min: 2.75rem; /* 44px minimum target */
+
+  /* ---------- Shape & elevation ---------- */
+  --radius-sm: 4px; /* badges, focus ring */
+  --radius-md: 8px; /* buttons, cards, details */
+  --radius-full: 999px; /* monogram, toggle */
+  --border-width: 1px;
+  --focus-ring: 2px solid var(--color-focus);
+  --focus-offset: 2px;
+  --shadow-header: 0 1px 0 var(--color-border); /* hairline, no blur */
+
+  /* ---------- Motion ---------- */
+  --duration-fast: 120ms; /* hover, color */
+  --duration-base: 200ms; /* details open, theme */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #111315;
+    --color-surface: #181b1e;
+    --color-surface-sunken: #0b0d0e;
+    --color-text: #eceae4; /* 15.5:1 on bg */
+    --color-text-muted: #a4a9ae; /* 7.9:1 on bg */
+    --color-border: #2c3034;
+    --color-border-strong: #737a80; /* 4.3:1 on bg */
+    --color-accent: #7fcdb0;
+    --color-accent-hover: #a0dcc5;
+    --color-accent-active: #b8e6d4;
+    --color-on-accent: #0b1f18; /* 9.2:1 on accent */
+    --color-accent-subtle: #16302a;
+    --color-accent-text: #8fd5ba; /* 11:1 on bg */
+    --color-warn-text: #e8b27a;
+    --color-focus: #8fd5ba;
+    --color-placeholder-bg: #3a2f12;
+    --color-backdrop: rgb(0 0 0 / 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #111315;
+  --color-surface: #181b1e;
+  --color-surface-sunken: #0b0d0e;
+  --color-text: #eceae4;
+  --color-text-muted: #a4a9ae;
+  --color-border: #2c3034;
+  --color-border-strong: #737a80;
+  --color-accent: #7fcdb0;
+  --color-accent-hover: #a0dcc5;
+  --color-accent-active: #b8e6d4;
+  --color-on-accent: #0b1f18;
+  --color-accent-subtle: #16302a;
+  --color-accent-text: #8fd5ba;
+  --color-warn-text: #e8b27a;
+  --color-focus: #8fd5ba;
+  --color-placeholder-bg: #3a2f12;
+  --color-backdrop: rgb(0 0 0 / 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+  }
+}

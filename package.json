@@ -1,0 +1,37 @@
+{
+  "name": "projeto-50k-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "astro build && playwright test",
+    "links": "linkinator dist --config linkinator.config.json",
+    "lhci": "PUBLIC_ALLOW_INDEXING=true astro build && lhci autorun",
+    "visitas": "node scripts/visitas.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/ibm-plex-sans": "5.3.0",
+    "@netlify/blobs": "11.1.0",
+    "astro": "5.18.2",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.64.0",
+    "@resvg/resvg-js": "2.6.2",
+    "linkinator": "8.1.0",
+    "satori": "0.33.4",
+    "typescript": "5.9.3"
+  }
+}

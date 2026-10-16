@@ -1,0 +1,82 @@
+{
+  "index.html": {
+    "copy_except_fit_equal": true,
+    "links_images_hreflang_equal": true,
+    "fit_present": true
+  },
+  "en/index.html": {
+    "copy_except_fit_equal": true,
+    "links_images_hreflang_equal": true,
+    "fit_present": true
+  },
+  "diagnostico/index.html": {
+    "copy_except_fit_equal": true,
+    "links_images_hreflang_equal": true,
+    "fit_present": false
+  },
+  "privacidade/index.html": {
+    "copy_except_fit_equal": true,
+    "links_images_hreflang_equal": true,
+    "fit_present": false
+  },
+  "en/privacy/index.html": {
+    "copy_except_fit_equal": true,
+    "links_images_hreflang_equal": true,
+    "fit_present": false
+  },
+  "404.html": {
+    "copy_except_fit_equal": true,
+    "links_images_hreflang_equal": true,
+    "fit_present": false
+  },
+  "/": {
+    "preview_status": 200,
+    "preview_bytes_match_artifact": true,
+    "previous_production_text_except_fit_equal": true,
+    "portrait_markup_equal": true
+  },
+  "/en/": {
+    "preview_status": 200,
+    "preview_bytes_match_artifact": true,
+    "previous_production_text_except_fit_equal": true,
+    "portrait_markup_equal": true
+  },
+  "portrait_variants": {
+    "count": 16,
+    "preview_and_previous_production_bytes_equal": true
+  },
+  "artifact_sha256": {
+    "404.html": "84ef3300d2ff93092d0f47847cb53bd483f8334d53499dc4551d8f63559c4893",
+    "_astro/ConsentBanner.astro_astro_type_script_index_0_lang.BkV4oSKu.js": "3aa271826a323138539e96162b53010674da90ecfd445fadecbc04549e49da0d",
+    "_astro/henrique-pett.BZuyzAkP.webp": "8b8d7c2263b986a7a60f3cc9ae85fcbb7894081fa8f2f48cb077d3a4d333acd7",
+    "_astro/henrique-pett.BZuyzAkP_1jWl1M.jpeg": "2f696ccaee751e697b21e5d9704e11f4108eeb54498785b2c3c5b19fe32ff6a2",
+    "_astro/henrique-pett.BZuyzAkP_2gz9tv.avif": "178a2a9a10ddefac451cf2b9dab2567dd221cdf128b0e64b2cfecb7e4ebfb866",
+    "_astro/henrique-pett.BZuyzAkP_OW9Ir.jpeg": "b186e8840014d86b84be25ed19ae10e2b2a3c2cf92653f3b4c3c973f24de2996",
+    "_astro/henrique-pett.BZuyzAkP_UgmJx.webp": "6e0742ec9c13af584e9785cb9234f556685d37d1074f1cbed92b2caae5e31889",
+    "_astro/henrique-pett.BZuyzAkP_Z10ep9H.jpeg": "ee5fe45d2c6d8dd7f5f6a0948110754fc348c0598ff7f924493bab43f6bceaee",
+    "_astro/henrique-pett.BZuyzAkP_Z1JMcKg.jpeg": "66d13ab591ec51508ecac74fe257ae1e5e74b0d034892d36f42751c92bfe7c0e",
+    "_astro/henrique-pett.BZuyzAkP_Z1oUnqW.webp": "340017ecf49dc2441f726b13f02ca6a6bf1a5da81189891aa43c8e1ef0037dfe",
+    "_astro/henrique-pett.BZuyzAkP_Z1xBFw6.avif": "d20ea015896d1724e23383d40657653cc46e87893a30be4db9eb73cac54359ee",
+    "_astro/henrique-pett.BZuyzAkP_Z1xjiwn.avif": "572b93e6682b7a931facb04ccbc96bab8b3c74887541ad3798b2f0ed9062c52d",
+    "_astro/henrique-pett.BZuyzAkP_Z2lBr0l.webp": "109d13de587b399601f21d05f41737e4f8f357765fdc6aac120ba62f0810f0de",
+    "_astro/henrique-pett.BZuyzAkP_Z8U4CC.webp": "b8664a914bbd29e2677cdf405e2c444ff2636a7ffc88da9ea572de24b1585fbd",
+    "_astro/henrique-pett.BZuyzAkP_ZXqprh.avif": "cc42492a94ff89eced2d136d02053cd6bb4b83c2c53600cf9bbb3a72fcf27c9d",
+    "_astro/henrique-pett.BZuyzAkP_Ztqe8V.avif": "f9b3823814b1081f35936bb776ae2787a850b08c9d4fea19cfed1032d596f758",
+    "_astro/henrique-pett.BZuyzAkP_fKSDC.jpeg": "0ebe780b82db8b42eb0bc935e429e44e1f0363b9d842e4bf625ed1c1327cbbbe",
+    "_astro/henrique-pett.BZuyzAkP_qgbrc.webp": "eaf3097a42b61f5e0362af2598fe0cbdfe3bb5c718b21a8846a0b3a43ff7a37d",
+    "_astro/ibm-plex-sans-latin-wght-normal.IvpUvPa2.woff2": "e2291e842cf5af167122a22881a740c7f2dda7716f1e8cd76680264f4a859470",
+    "_astro/index.Cq5OOBD5.css": "6b2a13098248e34bfc4038f6ce3b62460fde49b175908d680084bcbd76dafcf1",
+    "_astro/index.tgBi4Xrt.css": "52db54cb69aadbd144335d80fac9d29e19699c2315aa6e7aa887afca068b1db9",
+    "diagnostico/index.html": "1a0f6285edc8d2c65b0f35136b4b5d353047cd546456acc81fd6d31a078de989",
+    "en/index.html": "251029e6a79860d87523590d6eadd8bd53f9d9d927ae7578cb4e4abe04cd45ee",
+    "en/privacy/index.html": "558eb544d1cae733239ff0e2e20b3a75a2f253b736c1b3a2f27c737313bd8a01",
+    "favicon.svg": "b68af9966b4990995639b320d7f10b2aaedba500f65e1bf253126de85b3ad75a",
+    "index.html": "343fe7fb3efaa2d82aa228fc2d91ed5a4c7fded10819c14d191113848f3da1bd",
+    "og/en.png": "e4a07f5a2d8b84f68074c1e0d4ce570c4ef605ab5fc1d7e91fc73aa2ee9d8d42",
+    "og/pt-BR.png": "c7da35b04624899181807371da5132cf059fe33121e11bc82c5afd7a5cd85b7f",
+    "privacidade/index.html": "7f0c21eafdc240c6262fa179c6517aef19f5e1363c3b0f162b22b4e39af5646a",
+    "robots.txt": "9f2f29298d6a9c1eb50f1234a539c045dce5a06a6914e672a070bc01445916bf",
+    "sitemap-0.xml": "c9b73b3fc5dea2f86dab3c9c203449cf8379743429eba812e8da29782a1e45bd",
+    "sitemap-index.xml": "2234ae6c75e3b9bc2f46e67f6035640bab8bdc2585711c85f4aed40027b92812"
+  }
+}

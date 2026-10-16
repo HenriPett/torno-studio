@@ -1,0 +1,46 @@
+---
+/**
+ * Depoimentos/logos (BRIEFING §3, regra 5). Pronto mas OCULTO: com PUBLIC_SHOW_TESTIMONIALS != "true"
+ * não renderiza nada. Não há conteúdo de exemplo: os itens entram pelo slot quando existirem clientes reais.
+ */
+import { site } from '../../config/site';
+import { getCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { testimonials } = getCopy(locale);
+const hasContent = Astro.slots.has('default');
+---
+
+{
+  site.showTestimonials && hasContent && (
+    <section id="depoimentos" class="section" aria-labelledby="depoimentos-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="depoimentos-title" class="h2">
+            {testimonials.title}
+          </h2>
+        </div>
+        <div class="testimonials">
+          <slot />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .testimonials {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 64em) {
+    .testimonials {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

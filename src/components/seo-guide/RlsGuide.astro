@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import type { Locale } from '../../lib/i18n';
+import { guideCopy } from './content';
+import schema from '../../../public/examples/rls-multiempresa/schema.sql?raw';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = guideCopy[locale];
+const files = ['run-local.sh', 'bootstrap-local.sql', 'schema.sql', 'tests.sql'];
+const sources = [
+  ['Supabase — Row Level Security', 'https://supabase.com/docs/guides/database/postgres/row-level-security'],
+  ['PostgreSQL — Row Security Policies', 'https://www.postgresql.org/docs/current/ddl-rowsecurity.html'],
+  ['Lovable — Security overview', 'https://docs.lovable.dev/features/security'],
+  ['Supabase — Identifying Lovable Cloud or Supabase', 'https://supabase.com/docs/guides/troubleshooting/identify-lovable-cloud-or-supabase-backend'],
+  ['PGlite — PostgreSQL WASM', 'https://pglite.dev/docs/'],
+];
+---
+<Base locale={locale} routeId="rlsGuide" title={copy.title} description={copy.description}>
+  <Header locale={locale} routeId="rlsGuide" />
+  <main id="conteudo" tabindex="-1" class="section">
+    <article class="container guide">
+      <p class="meta">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+      <p class="intro">{copy.intro}</p>
+      <nav aria-label={copy.toc} class="contents">
+        <p><strong>{copy.toc}</strong></p>
+        <ol>{copy.sections.map(section => <li><a href={`#${section.id}`}>{section.title.replace(/^\d\. /, '')}</a></li>)}</ol>
+      </nav>
+      {copy.sections.map(section => (
+        <section id={section.id} aria-labelledby={`${section.id}-title`}>
+          <h2 id={`${section.id}-title`}>{section.title}</h2>
+          {section.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+          {section.id === 'matriz' && (
+            <div class="table-scroll" tabindex="0" role="region" aria-label={copy.matrixCaption}>
+              <table>
+                <caption>{copy.matrixCaption}</caption>
+                <thead><tr>{copy.headers.map(label => <th scope="col">{label}</th>)}</tr></thead>
+                <tbody>{copy.rows.map(row => <tr><th scope="row">{row[0]}</th><td>{row[1]}</td><td>{row[2]}</td></tr>)}</tbody>
+              </table>
+            </div>
+          )}
+          {section.id === 'executar' && (
+            <>
+              <h3>{copy.download}</h3>
+              <ul>{files.map(file => <li><a href={`/examples/rls-multiempresa/${file}`} download>{file}</a></li>)}</ul>
+              <pre tabindex="0" aria-label={locale === 'en' ? 'Run command' : 'Comando de execução'}><code>bash run-local.sh</code></pre>
+              <p>{locale === 'en' ? 'PostgreSQL WASM alternative: ' : 'Alternativa PostgreSQL WASM: '}<a href="/examples/rls-multiempresa/run-wasm.mjs" download>run-wasm.mjs</a></p>
+              <p><a href="/examples/rls-multiempresa/README.txt">{locale === 'en' ? 'Instructions and WASM alternative (PT/EN)' : 'Instruções e alternativa WASM (PT/EN)'}</a></p>
+              <details><summary>{copy.sql}</summary><pre tabindex="0" aria-label="SQL"><code>{schema}</code></pre></details>
+            </>
+          )}
+        </section>
+      ))}
+      <section aria-labelledby="sources-title"><h2 id="sources-title">{copy.sources}</h2>
+        <ul>{sources.map(([label, url]) => <li><a href={url}>{label}</a></li>)}</ul>
+      </section>
+      <section class="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">{copy.ctaTitle}</h2><p>{copy.cta}</p>
+        <p>{copy.bookingNote}</p>
+        <BookingCta locale={locale}>{copy.book}</BookingCta>
+        <p class="meta">{copy.origin}</p>
+        <ul><li><a href={copy.rescuePath}>{copy.rescue}</a></li><li><a href={copy.productionPath}>{copy.production}</a></li></ul>
+      </section>
+    </article>
+  </main>
+  <Footer locale={locale} routeId="rlsGuide" />
+</Base>
+<style>
+  .guide { max-inline-size: 54rem; }
+  h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin-block: var(--space-4) var(--space-5); }
+  h2 { font-size: var(--text-2xl); line-height: var(--leading-snug); }
+  h3 { font-size: var(--text-xl); margin-block-start: var(--space-5); }
+  p, ul, ol { margin-block-start: var(--space-4); }
+  li + li { margin-block-start: var(--space-2); }
+  ul, ol { padding-inline-start: var(--space-5); }
+  .intro { font-size: var(--text-lg); }
+  .contents, .contact { padding: var(--space-5); background: var(--color-surface-sunken); border-radius: var(--radius-md); }
+  .contents { margin-block-start: var(--space-6); }
+  section { margin-block-start: var(--space-7); scroll-margin-block-start: calc(var(--header-height) + var(--space-4)); }
+  a { color: var(--color-accent-text); text-underline-offset: .2em; overflow-wrap: anywhere; }
+  .table-scroll { overflow-x: auto; margin-block-start: var(--space-5); }
+  table { inline-size: 100%; border-collapse: collapse; }
+  caption { text-align: start; margin-block-end: var(--space-3); }
+  th, td { text-align: start; padding: var(--space-3); border-block-end: 1px solid var(--color-border); }
+  thead { background: var(--color-surface-sunken); }
+  pre { max-inline-size: 100%; overflow-x: auto; padding: var(--space-4); margin-block-start: var(--space-4); background: var(--color-surface-sunken); font-size: var(--text-sm); border: 1px solid var(--color-border); }
+  details { margin-block-start: var(--space-5); }
+  summary { cursor: pointer; padding-block: var(--space-3); }
+  .contact :global(.btn) { margin-block-start: var(--space-5); max-inline-size: 100%; white-space: normal; }
+</style>

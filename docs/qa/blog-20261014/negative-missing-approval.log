@@ -1,0 +1,3 @@
+  expected rejection: release_approved_by required for release
+PASS fail-closed missing-release-approval
+RESULT 1/1 checks passed

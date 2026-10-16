@@ -1,0 +1,6 @@
+PASS produção /blog/ e /en/blog/: HTTP 200, canonical self, indexáveis e estado por idioma
+PASS produção sitemap: 18 URLs baseline preservadas + artigo PT aprovado
+PASS produção artigo PT: identidade/hash, HTTP, canonical, indexabilidade, schema e links
+PASS produção seis cases PT/EN: HTTP 200 e canonical self
+PASS produção fixture privada: três rotas HTTP 404
+RESULT 5/5 checks passed

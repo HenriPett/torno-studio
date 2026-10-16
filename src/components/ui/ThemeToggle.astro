@@ -1,0 +1,45 @@
+---
+/**
+ * ThemeToggle (DESIGN §6.4). Nasce `hidden`; o script inline do Base.astro o mostra e liga o clique.
+ * Sem JS o botão não aparece e vale prefers-color-scheme. O script mantém aria-pressed (true = escuro).
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle aria-label={label} hidden>
+  <Icon name="theme" class="theme-toggle__icon" />
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--tap-min);
+    block-size: var(--tap-min);
+    padding: 0;
+    background-color: transparent;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .theme-toggle:hover {
+      background-color: var(--color-surface-sunken);
+    }
+  }
+
+  .theme-toggle :global(.theme-toggle__icon) {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+  }
+</style>

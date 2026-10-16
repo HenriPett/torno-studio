@@ -1,0 +1,131 @@
+{
+  "task": "SEO especializado Torno 2026-10-13",
+  "status": "published_verified",
+  "preview": {
+    "site_id": "297530a9-272e-492f-9398-36e96f6dc992",
+    "site_name": "tornostudio",
+    "deploy_id": "6aceb0964d6310adcb4cf102",
+    "deploy_url": "https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app",
+    "logs": "https://app.netlify.com/projects/tornostudio/deploys/6aceb0964d6310adcb4cf102",
+    "function_logs": "https://app.netlify.com/projects/tornostudio/logs/functions?scope=deploy:6aceb0964d6310adcb4cf102",
+    "edge_function_logs": "https://app.netlify.com/projects/tornostudio/logs/edge-functions?scope=deployid:6aceb0964d6310adcb4cf102"
+  },
+  "release_directory": "/private/tmp/torno-seo-release-20261013",
+  "source_checkout": "/Users/henriquepett/Downloads/pessoal/projeto-50k-site",
+  "canonical_origin": "https://tornostudio.com",
+  "routes": [
+    "/recuperacao-de-projeto/",
+    "/lovable-em-producao/",
+    "/en/software-project-rescue/",
+    "/en/lovable-to-production/",
+    "/guias/rls-multiempresa/",
+    "/en/guides/multi-tenant-rls/"
+  ],
+  "changes": [
+    "Four bilingual commercial pages distinguishing prior agency/DIY origin from tool, scoped recovery and Production-Ready",
+    "Bilingual multi-tenant RLS guide and downloadable SQL/native/WASM runners",
+    "Home/footer and contextual internal links; ten sitemap URLs and reciprocal language pairs",
+    "Faithful Service and Article structured data, no ratings or invented results"
+  ],
+  "preservation": [
+    "ICP and pricing unchanged",
+    "CTA and consent code unchanged; origin identified manually during conversation; no new tracking",
+    "Existing founder photo and REEL qualification block preserved",
+    "Netlify security headers and diagnosis counter edge function preserved"
+  ],
+  "checks": {
+    "build": "npm run build exit 0 with production Netlify environment in isolated release",
+    "static_artifact": "6 route metadata + graph links/anchors PASS; photo/REEL exact HTML preserved",
+    "preview_integrity": "44/44 files HTTP200 and byte-identical to release",
+    "legacy_seo_http": "22 passed; no browser launch",
+    "sql": "94 assertions passed PostgreSQL18.6 WASM/PGlite0.5.9; independent Crivo reproduction; negative control fails as expected",
+    "crivo": "Final approval source and production release HTML; independent SQL94PASS; no pending semantic issue",
+    "afinador": "Approved with documented limitations: VEREDITO.md; 36 captures; consent reject/save/reopen/revoke and Escape/focus; language pairs; CTA reaches Calendly without booking/conversion",
+    "specialized_http": "8 passed (8.0s); preview edge noindex separate from production HTML indexing",
+    "preview_visual": "36 captures: six routes at 360/1280; no material clipping; SQL block scrolls; FAQ click opens/closes",
+    "production_integrity": "44/44 files HTTP200 byte-identical to approved release; six new routes and homes have no X-Robots-Tag noindex; edge function present",
+    "official_source_links": "7/7 official links HTTP200",
+    "root_independent_production": "PASS: six HTTP200, self canonical, one H1, no meta or header noindex, all in sitemap"
+  },
+  "limitations": [
+    "Chromium launch blocked by macOS sandbox; no new Lighthouse/axe automated browser scores",
+    "PageSpeed Insights public API 429 quota exhausted; no repeated runner attempts",
+    "Native PostgreSQL initdb blocked shmget; WASM test uses simulated auth, not Supabase/JWT/API/production E2E",
+    "Search Console requires Google login; crawlability/publication do not establish indexing",
+    "Original .git read-only by session filesystem policy; no commit/push to original main attempted; exact source/artifact hashes recorded",
+    "FAQ Tab/Enter/Space behavior inconclusive through synthetic portal events; native details markup retained and click verified",
+    "Portal CSP prevents full network/sessionStorage instrumentation; baseline consent/attribution code unchanged and manual flow checked; no booking/conversion submitted"
+  ],
+  "approval_basis": "Root explicitly authorized publication after Crivo and Afinador gates with viable equivalent manual/HTTP review; unavailable LH documented, not automatic blocker",
+  "production": {
+    "site_id": "297530a9-272e-492f-9398-36e96f6dc992",
+    "site_name": "tornostudio",
+    "deploy_id": "6aceb29d426017fb2e033d8f",
+    "deploy_url": "https://6aceb29d426017fb2e033d8f--tornostudio.netlify.app",
+    "logs": "https://app.netlify.com/projects/tornostudio/deploys/6aceb29d426017fb2e033d8f",
+    "function_logs": "https://app.netlify.com/projects/tornostudio/logs/functions",
+    "edge_function_logs": "https://app.netlify.com/projects/tornostudio/logs/edge-functions",
+    "url": "https://tornostudio.com"
+  },
+  "production_metadata": {
+    "id": "6aceb29d426017fb2e033d8f",
+    "state": "ready",
+    "context": "production",
+    "edge_functions_present": true,
+    "created_at": "2026-10-13T22:37:17.010Z",
+    "published_at": "2026-10-13T22:37:18.559Z",
+    "title": "SEO especializado Torno: Crivo and Afinador approved; six routes and RLS 94 assertions",
+    "deploy_ssl_url": "https://6aceb29d426017fb2e033d8f--tornostudio.netlify.app"
+  },
+  "review_documents": [
+    "docs/qa/seo-especializado-20261013/VEREDITO.md",
+    "docs/qa/rls-multiempresa-evidence-2026-10-13.json",
+    "../projeto-50k/research/99-auditoria.md §E1",
+    "../projeto-50k/marketing/seo/especializado-2026-10-13/verificacao-producao-root.json"
+  ],
+  "indexing": "Published and technically crawlable; search-engine indexing not verified. GSC login pending with project Maestro.",
+  "publication_by_url": {
+    "https://tornostudio.com/recuperacao-de-projeto/": {
+      "published_at": "2026-10-13T22:37:18.559Z",
+      "local_date": "2026-10-13",
+      "day30": "2026-11-12",
+      "day60": "2026-12-12",
+      "day90": "2027-01-11"
+    },
+    "https://tornostudio.com/lovable-em-producao/": {
+      "published_at": "2026-10-13T22:37:18.559Z",
+      "local_date": "2026-10-13",
+      "day30": "2026-11-12",
+      "day60": "2026-12-12",
+      "day90": "2027-01-11"
+    },
+    "https://tornostudio.com/en/software-project-rescue/": {
+      "published_at": "2026-10-13T22:37:18.559Z",
+      "local_date": "2026-10-13",
+      "day30": "2026-11-12",
+      "day60": "2026-12-12",
+      "day90": "2027-01-11"
+    },
+    "https://tornostudio.com/en/lovable-to-production/": {
+      "published_at": "2026-10-13T22:37:18.559Z",
+      "local_date": "2026-10-13",
+      "day30": "2026-11-12",
+      "day60": "2026-12-12",
+      "day90": "2027-01-11"
+    },
+    "https://tornostudio.com/guias/rls-multiempresa/": {
+      "published_at": "2026-10-13T22:37:18.559Z",
+      "local_date": "2026-10-13",
+      "day30": "2026-11-12",
+      "day60": "2026-12-12",
+      "day90": "2027-01-11"
+    },
+    "https://tornostudio.com/en/guides/multi-tenant-rls/": {
+      "published_at": "2026-10-13T22:37:18.559Z",
+      "local_date": "2026-10-13",
+      "day30": "2026-11-12",
+      "day60": "2026-12-12",
+      "day90": "2027-01-11"
+    }
+  }
+}

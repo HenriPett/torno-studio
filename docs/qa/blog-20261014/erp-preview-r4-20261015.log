@@ -1,0 +1,20 @@
+RECEIPTS hash_edge True six_routes True
+ROUTE /blog/integracao-erp-briefing-orcamento/ 200 bytes 29522 artifact True canonical_self True
+ROUTE /blog/quando-automatizar-processos-planilhas/ 200 bytes 29073 artifact True canonical_self True
+ROUTE /blog/criterios-aceite-mvp/ 200 bytes 29427 artifact True canonical_self True
+ROUTE /cases/loopt/ 200 bytes 28558 artifact True canonical_self True
+ROUTE /cases/bom-capital/ 200 bytes 26071 artifact True canonical_self True
+ROUTE /cases/ascende/ 200 bytes 26334 artifact True canonical_self True
+ROUTE /en/cases/loopt/ 200 bytes 28050 artifact True canonical_self True
+ROUTE /en/cases/bom-capital/ 200 bytes 25645 artifact True canonical_self True
+ROUTE /en/cases/ascende/ 200 bytes 25949 artifact True canonical_self True
+ROUTE /blog/ 200 bytes 18752 artifact True canonical_self True
+ROUTE /en/blog/ 200 bytes 17492 artifact True canonical_self True
+ROUTE / 200 bytes 69408 artifact True canonical_self True
+ARTICLE seo True schema True figures True links True
+SVG 1 /_astro/integracao-erp-fluxo.CJXjnJ5K_Z1O1Dlw.svg 200 image/svg+xml bytes 2062 artifact_match True
+SVG 2 /_astro/integracao-erp-pendencias.CUPyqtvX_Z1O1Dlw.svg 200 image/svg+xml bytes 2079 artifact_match True
+SITEMAP 200 21 unique 21 added ['https://tornostudio.com/blog/integracao-erp-briefing-orcamento/'] removed []
+PRODUCTION_SITEMAP 200 20 matches_prior20 True new_article_present False
+BROWSER 360 widths 311 311 min328 False 390 widths 339 339 desktop max480 True
+CHECKS 24 / 25 GATE HOLD EVIDENCE /Users/henriquepett/Downloads/pessoal/projeto-50k-site/docs/qa/blog-20261014/erp-preview-r4-20261015.json

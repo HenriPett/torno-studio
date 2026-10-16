@@ -1,0 +1,77 @@
+
+> projeto-50k-site@0.1.0 build
+> astro check && astro build
+
+19:04:19 [vite] Re-optimizing dependencies because vite config has changed
+19:04:19 [content] Syncing content
+19:04:19 [content] Astro config changed
+19:04:19 [content] Clearing content store
+19:04:19 [content] Synced content
+19:04:19 [types] Generated 200ms
+19:04:19 [check] Getting diagnostics for Astro files in /private/tmp/torno-reel-release...
+Result (75 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+19:04:23 [content] Syncing content
+19:04:23 [content] Synced content
+19:04:23 [types] Generated 21ms
+19:04:23 [build] output: "static"
+19:04:23 [build] mode: "static"
+19:04:23 [build] directory: /private/tmp/torno-reel-release/dist/
+19:04:23 [build] Collecting build info...
+19:04:23 [build] ✓ Completed in 30ms.
+19:04:23 [build] Building static entrypoints...
+19:04:24 [vite] ✓ built in 645ms
+19:04:24 [build] ✓ Completed in 665ms.
+
+ building client (vite) 
+19:04:24 [vite] transforming...
+19:04:24 [vite] ✓ 4 modules transformed.
+19:04:24 [vite] rendering chunks...
+19:04:24 [vite] computing gzip size...
+19:04:24 [vite] dist/_astro/ConsentBanner.astro_astro_type_script_index_0_lang.BkV4oSKu.js  5.77 kB │ gzip: 2.58 kB
+19:04:24 [vite] ✓ built in 22ms
+
+ generating static routes 
+19:04:24 ▶ src/pages/404.astro
+19:04:24   └─ /404.html (+6ms) 
+19:04:24 ▶ src/pages/diagnostico.astro
+19:04:24   └─ /diagnostico/index.html (+5ms) 
+19:04:24 ▶ src/pages/en/index.astro
+19:04:24   └─ /en/index.html (+7ms) 
+19:04:24 ▶ src/pages/en/privacy.astro
+19:04:24   └─ /en/privacy/index.html (+3ms) 
+19:04:24 ▶ src/pages/index.astro
+19:04:24   └─ /index.html (+3ms) 
+19:04:24 λ src/pages/og/[locale].png.ts
+19:04:24   ├─ /og/pt-BR.png/ (+1.55s) 
+19:04:25   └─ /og/en.png/ (+164ms) 
+19:04:26 ▶ src/pages/privacidade.astro
+19:04:26   └─ /privacidade/index.html (+3ms) 
+19:04:26 λ src/pages/robots.txt.ts
+19:04:26   └─ /robots.txt (+1ms) 
+19:04:26 ✓ Completed in 1.82s.
+
+ generating optimized images 
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Ztqe8V.avif (reused cache entry) (+1ms) (1/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z1xjiwn.avif (reused cache entry) (+0ms) (2/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_2gz9tv.avif (reused cache entry) (+1ms) (3/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_ZXqprh.avif (reused cache entry) (+1ms) (4/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z1xBFw6.avif (reused cache entry) (+0ms) (5/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_UgmJx.webp (reused cache entry) (+0ms) (6/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z2lBr0l.webp (reused cache entry) (+0ms) (7/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z1oUnqW.webp (reused cache entry) (+0ms) (8/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_qgbrc.webp (reused cache entry) (+0ms) (9/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z8U4CC.webp (reused cache entry) (+1ms) (10/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_1jWl1M.jpeg (reused cache entry) (+0ms) (11/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z1JMcKg.jpeg (reused cache entry) (+0ms) (12/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_Z10ep9H.jpeg (reused cache entry) (+1ms) (13/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_OW9Ir.jpeg (reused cache entry) (+0ms) (14/15)
+19:04:26   ▶ /_astro/henrique-pett.BZuyzAkP_fKSDC.jpeg (reused cache entry) (+0ms) (15/15)
+19:04:26 ✓ Completed in 8ms.
+
+19:04:26 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+19:04:26 [build] 6 page(s) built in 2.56s
+19:04:26 [build] Complete!

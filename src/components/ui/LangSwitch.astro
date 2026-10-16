@@ -1,0 +1,44 @@
+---
+/**
+ * Seletor de idioma (DESIGN §6.5): mostra só o outro idioma e leva à página equivalente.
+ * Nome acessível = texto visível + rótulo oculto (WCAG 2.5.3).
+ */
+import { getCopy, htmlLang, otherLocale, pathFor, type Locale, type RouteId } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  routeId: RouteId;
+  href?: string | null | undefined;
+}
+
+const { locale, routeId, href } = Astro.props;
+const copy = getCopy(locale);
+const other = otherLocale(locale);
+---
+
+{href !== null && <a class="lang-switch" href={href ?? pathFor(routeId, other)} hreflang={htmlLang[other]} data-lang-switch>
+  <span lang={htmlLang[other]}>{copy.common.languageSwitchShort}</span><span class="visually-hidden">
+    — {copy.common.languageSwitchLabel}</span
+  >
+</a>}
+
+<style>
+  .lang-switch {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    min-inline-size: var(--tap-min);
+    min-block-size: var(--tap-min);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    text-decoration: none;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (hover: hover) {
+    .lang-switch:hover {
+      text-decoration-line: underline;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+{
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/en/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/diagnostico/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/recuperacao-de-projeto/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/lovable-em-producao/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/guias/rls-multiempresa/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/en/software-project-rescue/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/en/lovable-to-production/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/en/guides/multi-tenant-rls/",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/sitemap-0.xml",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "artifact_matches": true,
+      "csp": true
+    }
+  ],
+  "preserved": [
+    "src/config/pricing.ts",
+    "src/config/site.ts",
+    "src/components/ui/BookingCta.astro",
+    "src/components/ConsentBanner.astro",
+    "src/scripts/consent.ts",
+    "src/scripts/consent-ui.ts",
+    "netlify.toml",
+    "netlify/edge-functions/count-diagnostico.ts"
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/recuperacao-de-projeto/",
+    "enter_opens": false,
+    "space_closes": true,
+    "snapshot": "viewport: 360x844  url: https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/recuperacao-de-projeto/  title: Recuperação de projeto de software travado | Torno Studio\n@e1 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ [16,10 87x44]\n@e2 a \"EN — Mudar idioma para inglês\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [178,10 44x44]\n@e3 a \"Agendar\" href=https://calendly.com/henriquepett/45min [238,10 89x44]\n@e4 main \"RECUPERAÇÃO DE PROJETO Seu projeto travou. A operação precis\" [0,-5430 343x6174]\n@e5 a \"Agendar diagnóstico — 45 min, grátis\" href=https://calendly.com/henriquepett/45min [16,13 311x48]\n@e6 a \"Seu ponto de partida é um app Lovable?\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/lo [16,153 287x44]\n@e7 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ [16,793 87x44]"
+  },
+  {
+    "path": "/en/software-project-rescue/",
+    "enter_opens": false,
+    "space_closes": true,
+    "snapshot": "viewport: 360x844  url: https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en/software-project-rescue/  title: Software project rescue: scope and delivery | Torno Studio\n@e1 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,10 87x44]\n@e2 a \"PT — Switch language to Portuguese\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/re [174,10 44x44]\n@e3 a \"Book call\" href=https://calendly.com/henriquepett/45min [234,10 93x44]\n@e4 main \"SOFTWARE PROJECT RESCUE A stalled build should not decide yo\" [0,-5319 343x6063]\n@e5 a \"Book a free 45-minute diagnostic\" href=https://calendly.com/henriquepett/45min [16,13 311x48]\n@e6 a \"Starting from a Lovable app?\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,153 204x44]\n@e7 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,793 87x44]"
+  },
+  {
+    "path": "/lovable-em-producao/",
+    "enter_opens": false,
+    "space_closes": true,
+    "snapshot": "viewport: 360x844  url: https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/lovable-em-producao/  title: Lovable em produção: escopo, preço e aceite | Torno Studio\n@e1 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ [16,10 87x44]\n@e2 a \"EN — Mudar idioma para inglês\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [178,10 44x44]\n@e3 a \"Agendar\" href=https://calendly.com/henriquepett/45min [238,10 89x44]\n@e4 main \"LOVABLE EM PRODUÇÃO Seu app Lovable precisa funcionar na ope\" [0,-5987 343x6728]\n@e5 a \"Agendar diagnóstico — 45 min, grátis\" href=https://calendly.com/henriquepett/45min [16,10 311x48]\n@e6 a \"O projeto travou após uma agência ou tentativa própria?\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/re [16,150 311x50]\n@e7 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/ [16,790 87x44]"
+  },
+  {
+    "path": "/en/lovable-to-production/",
+    "enter_opens": false,
+    "space_closes": true,
+    "snapshot": "viewport: 360x844  url: https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en/lovable-to-production/  title: Lovable to production: readiness and scope | Torno Studio\n@e1 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,10 87x44]\n@e2 a \"PT — Switch language to Portuguese\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/lo [174,10 44x44]\n@e3 a \"Book call\" href=https://calendly.com/henriquepett/45min [234,10 93x44]\n@e4 main \"LOVABLE TO PRODUCTION Bring your Lovable app into a producti\" [0,-5832 343x6573]\n@e5 a \"Book a free 45-minute diagnostic\" href=https://calendly.com/henriquepett/45min [16,10 311x48]\n@e6 a \"Stalled after an agency engagement or a DIY build?\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,150 311x50]\n@e7 a \"Torno Studio\" href=https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app/en [16,790 87x44]"
+  }
+]

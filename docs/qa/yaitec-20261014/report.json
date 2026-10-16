@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-14",
+  "sources": [
+    "https://www.yaitec.com/pt/",
+    "https://www.yaitec.com/pt/servicos/automation"
+  ],
+  "assessment": "Clareza dos casos de uso, prova social e contato simples. Resultados comerciais do concorrente não verificados.",
+  "changed": [
+    "Hero e metadados PT; abertura EN mais curta",
+    "Quatro situações com exemplos e links de contratação",
+    "Experiência antes dos preços, identificada como anterior ao studio",
+    "E-mail no hero",
+    "FAQ sobre processo único e recuperação"
+  ],
+  "checks": {
+    "build": "astro check + build passed",
+    "seo_request_tests": 20,
+    "pricing_tests": 2,
+    "browser_suite": "Blocked: Chromium MachPortRendezvousServer Permission denied; not counted as passing",
+    "portal": "PT/EN at 360 and 1280; no horizontal overflow; one H1; labeled sections; 5 booking CTAs to same existing URL; 4 opportunity cards; light/dark inspected; founder photo loaded when scrolled into view",
+    "preview_http": "11 routes byte-identical to tested build; CSP and indexability verified",
+    "production_http": "11 routes byte-identical to tested build",
+    "preserved": "Pricing, consent, booking, infrastructure and edge counter"
+  },
+  "measurement": "Conversion uplift not yet measured; compare qualified conversations, proposals and receipts in CRM."
+}

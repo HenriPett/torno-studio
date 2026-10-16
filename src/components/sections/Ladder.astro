@@ -1,0 +1,120 @@
+---
+/**
+ * Como funciona: a escada (`#precos`, DESIGN §7.3). Ordem do pricing.ts (não reordenar por preço).
+ * Principais numerados 1–4; Production-Ready e MVP Plus são alternativos ao degrau anterior.
+ */
+import { pricing, type StepId } from '../../config/pricing';
+import { getCopy, type Locale } from '../../lib/i18n';
+import BookingCta from '../ui/BookingCta.astro';
+import EvolutionTable from './EvolutionTable.astro';
+import Rung from './Rung.astro';
+
+interface Props {
+  locale: Locale;
+  /** H2 e intro próprios (landing de campanha); por padrão, os da home. */
+  title?: string | undefined;
+  intro?: string | undefined;
+  /** CTAs da escada (link do degrau 1 e botão pós-escada). Falso na landing de campanha (DESIGN §14.1). */
+  ctas?: boolean;
+}
+
+const { locale, ctas = true } = Astro.props;
+const { ladder } = getCopy(locale);
+const title = Astro.props.title ?? ladder.title;
+const intro = Astro.props.intro ?? ladder.intro;
+
+const ALT_STEPS: ReadonlySet<StepId> = new Set(['productionReady', 'mvpPlus']);
+let main = 0;
+const steps = pricing[locale].steps.map((step) => ({
+  step,
+  number: ALT_STEPS.has(step.id) ? null : ++main,
+}));
+---
+
+<section id="precos" class="section section--sunken" aria-labelledby="precos-title">
+  <div class="container">
+    <div class="ladder__head section-head">
+      <h2 id="precos-title" class="h2">{title}</h2>
+      <p class="lead">{intro}</p>
+    </div>
+    <ol class="ladder">
+      {steps.map(({ step, number }) => <Rung step={step} locale={locale} number={number} cta={ctas} />)}
+    </ol>
+    <div class="ladder__evolution">
+      <EvolutionTable locale={locale} />
+    </div>
+    {
+      ctas && (
+        <>
+          <div class="ladder__fit">
+            <h3 class="h3">{ladder.workingTogether.title}</h3>
+            <ul class="dash-list">
+              {ladder.workingTogether.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+          <div class="ladder__cta actions">
+            <BookingCta locale={locale} arrow>
+              {ladder.cta}
+            </BookingCta>
+            <p class="meta">{ladder.ctaNote}</p>
+          </div>
+        </>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .ladder {
+    list-style: none;
+    padding: 0;
+  }
+
+  .ladder__evolution {
+    margin-block-start: var(--space-7);
+  }
+
+  .ladder__fit {
+    margin-block-start: var(--space-7);
+    max-inline-size: var(--measure);
+  }
+
+  .ladder__fit .dash-list {
+    margin-block-start: var(--space-4);
+  }
+
+  .ladder__fit li + li {
+    margin-block-start: var(--space-3);
+  }
+
+  .ladder__cta {
+    margin-block-start: var(--space-7);
+  }
+
+  @media (min-width: 40em) {
+    .ladder__cta {
+      gap: var(--space-5);
+    }
+  }
+
+  @media (min-width: 64em) {
+    .ladder__head {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--space-gutter);
+      align-items: end;
+    }
+
+    .ladder__head > * {
+      margin-block-start: 0;
+    }
+
+    .ladder__head h2 {
+      grid-column: 1 / span 6;
+    }
+
+    .ladder__head .lead {
+      grid-column: 7 / -1;
+    }
+  }
+</style>

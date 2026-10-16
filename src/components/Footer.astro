@@ -1,0 +1,152 @@
+---
+/**
+ * Footer (DESIGN §7.10). Sempre tem o ThemeToggle (no mobile ele só existe aqui).
+ * Links vazios (LinkedIn/GitHub) não renderizam.
+ */
+import { site } from '../config/site';
+import { fill, getCopy, type Locale, pathFor, type RouteId } from '../lib/i18n';
+import LangSwitch from './ui/LangSwitch.astro';
+import ThemeToggle from './ui/ThemeToggle.astro';
+import Wordmark from './ui/Wordmark.astro';
+
+interface Props {
+  locale: Locale;
+  routeId: RouteId;
+  /** null hides unavailable article translation; undefined preserves route behavior. */
+  languageHref?: string | null;
+  /** Landing de campanha (DESIGN §14.9): marca como texto; só Privacidade e Preferências; sem LinkedIn/GitHub nem idioma. */
+  lean?: boolean;
+}
+
+const { locale, routeId, languageHref, lean = false } = Astro.props;
+const copy = getCopy(locale);
+const year = new Date().getFullYear();
+/** Mesma condição do ConsentBanner: sem categoria opcional ativa não há o que reabrir. */
+const consentEnabled = Boolean(site.gadsId);
+const links = [
+  { href: pathFor('privacy', locale), label: copy.footer.privacyLink },
+  !lean && { href: pathFor('blog', locale), label: 'Blog' },
+  !lean && { href: pathFor('recovery', locale), label: locale === 'en' ? 'Software project rescue' : 'Recuperação de projeto' },
+  !lean && { href: pathFor('lovableProduction', locale), label: locale === 'en' ? 'Lovable to production' : 'Lovable em produção' },
+  !lean && { href: pathFor('rlsGuide', locale), label: locale === 'en' ? 'Multi-tenant permissions guide' : 'Guia de permissões multiempresa' },
+  !lean && site.linkedinUrl && { href: site.linkedinUrl, label: copy.footer.linkedinLabel },
+  !lean && site.githubUrl && { href: site.githubUrl, label: copy.footer.githubLabel },
+].filter((link): link is { href: string; label: string } => Boolean(link));
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <Wordmark href={lean ? undefined : pathFor('home', locale)} />
+    </div>
+    <ul class="site-footer__links">
+      {
+        links.map((link, index) => (
+          <>
+            <li>
+              <a class="link link--target" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+            {/* Reabre o 2º nível do consentimento; logo depois de Privacidade, oculto sem JS (DESIGN §13.3). */}
+            {index === 0 && consentEnabled && (
+              <li>
+                <button type="button" class="link link--target link--button" data-consent-open hidden>
+                  {copy.consent.footerLink}
+                </button>
+              </li>
+            )}
+          </>
+        ))
+      }
+    </ul>
+    <div class="site-footer__about">
+      <p class="site-footer__tagline">{fill(copy.footer.tagline)}</p>
+      <p class="site-footer__copy">{fill(copy.footer.copyright, { year })}</p>
+    </div>
+    <div class="site-footer__controls">
+      {!lean && <LangSwitch locale={locale} routeId={routeId} href={languageHref} />}
+      <ThemeToggle label={copy.common.themeToggleLabel} />
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-bg);
+    border-block-start: var(--border-width) solid var(--color-border);
+    padding-block: var(--space-7);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-areas: 'brand' 'about' 'links' 'controls';
+  }
+
+  .site-footer__brand {
+    grid-area: brand;
+    display: flex;
+    min-inline-size: 0;
+  }
+
+  .site-footer__about {
+    grid-area: about;
+  }
+
+  .site-footer__links {
+    grid-area: links;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    list-style: none;
+    padding: 0;
+    font-size: var(--text-sm);
+  }
+
+  .link--button {
+    padding: 0;
+    background: none;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .site-footer__controls {
+    grid-area: controls;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .site-footer__tagline {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+  }
+
+  .site-footer__copy {
+    margin-block-start: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 64em) {
+    .site-footer__grid {
+      grid-template-columns: minmax(12rem, 1fr) minmax(0, 2fr);
+      grid-template-areas: 'brand links' 'about controls';
+      align-items: center;
+      column-gap: var(--space-7);
+    }
+
+    .site-footer__links {
+      justify-self: stretch;
+      justify-content: flex-end;
+      min-inline-size: 0;
+    }
+
+    .site-footer__controls {
+      justify-self: end;
+    }
+  }
+</style>

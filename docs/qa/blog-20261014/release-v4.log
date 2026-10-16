@@ -1,0 +1,13 @@
+PASS sitemap mantém as 16 URLs existentes e acrescenta apenas os dois índices
+PASS índice /blog/: vazio real, metadata, i18n e CTA
+PASS índice /en/blog/: vazio real, metadata, i18n e CTA
+PASS navegação interna do blog resolve no artefato
+PASS sem artefatos de artigo ou pauta histórica no release zero-artigos
+PASS regressão case /cases/loopt/: conteúdo, SEO, imagem e oferta
+PASS regressão case /en/cases/loopt/: conteúdo, SEO, imagem e oferta
+PASS regressão case /cases/bom-capital/: conteúdo, SEO, imagem e oferta
+PASS regressão case /en/cases/bom-capital/: conteúdo, SEO, imagem e oferta
+PASS regressão case /cases/ascende/: conteúdo, SEO, imagem e oferta
+PASS regressão case /en/cases/ascende/: conteúdo, SEO, imagem e oferta
+PASS home PT/EN: retrato, consentimento e descoberta do blog
+RESULT 12/12 checks passed

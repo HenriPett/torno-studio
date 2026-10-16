@@ -1,0 +1,234 @@
+{
+  "checkedAtUtc": "2026-10-15T22:43:30.845737+00:00",
+  "productionDeployId": "6ad15581ccdee6d89b2ad52f",
+  "publishedAt": "2026-10-15T22:42:52.096Z",
+  "sourceManifestHash": "c0ae1de647d7a5af50c50e8f990ee53168a536b8c02ef0a887dd4ff67752e435",
+  "artifactManifestHash": "8e47c35ad2e4a1a187389d02e5b1e0c637555cb10ea6895e6a0d6aad9cadc3e0",
+  "checks": {
+    "production_receipt_api_edge_hashes": true,
+    "all_13_html_http_artifact_indexable": true,
+    "nine_protected_and_six_cases": true,
+    "article_seo_h1": true,
+    "blogposting_no_author_dates_byline": true,
+    "no_fake_en": true,
+    "figures_svg_hashes": true,
+    "links_sources_cta": true,
+    "sitemap22_preserves21": true
+  },
+  "routes": {
+    "/blog/antes-de-refazer-sistema-evidencias/": {
+      "path": "/blog/antes-de-refazer-sistema-evidencias/",
+      "status": 200,
+      "bytes": 32520,
+      "sha256": "75fd3139a24df89bf27299ca417066697839e068f78c0c6868aa445ae3ff48de",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/quando-automatizar-processos-planilhas/": {
+      "path": "/blog/quando-automatizar-processos-planilhas/",
+      "status": 200,
+      "bytes": 29073,
+      "sha256": "ac00891f235c180392807d8b5c8e31cd53c6033a8f2777c830cde1dcce59c1de",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/quando-automatizar-processos-planilhas/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/criterios-aceite-mvp/": {
+      "path": "/blog/criterios-aceite-mvp/",
+      "status": 200,
+      "bytes": 29427,
+      "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/integracao-erp-briefing-orcamento/": {
+      "path": "/blog/integracao-erp-briefing-orcamento/",
+      "status": 200,
+      "bytes": 29795,
+      "sha256": "0ae43432e54655c0dd5a05972600aaa9dca9c18062eb2dc64c8893db82c1a162",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/cases/loopt/": {
+      "path": "/cases/loopt/",
+      "status": 200,
+      "bytes": 28558,
+      "sha256": "891b2704def91904fda28392d3fea82faa4f58d358f6f95bc80edd5cc6d2f3b9",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/loopt/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/cases/bom-capital/": {
+      "path": "/cases/bom-capital/",
+      "status": 200,
+      "bytes": 26071,
+      "sha256": "c320e42734ba4043a7721813be60f68fdbf2dd11cb4ddf688732d2fff13dfcbd",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/bom-capital/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/cases/ascende/": {
+      "path": "/cases/ascende/",
+      "status": 200,
+      "bytes": 26334,
+      "sha256": "63024b19a3f72dc813232ad958b210f06ca8f2e897a487e62f29bf68a12ba77c",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/cases/ascende/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/cases/loopt/": {
+      "path": "/en/cases/loopt/",
+      "status": 200,
+      "bytes": 28050,
+      "sha256": "73ba9c849c1b9946d14768fe41ed9bcd7228b043ac908df1e28ab1047e420130",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/loopt/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/cases/bom-capital/": {
+      "path": "/en/cases/bom-capital/",
+      "status": 200,
+      "bytes": 25645,
+      "sha256": "c259da61bc8a02f983004824603f7b7bde8311edd0adba75421c895aae33fdb0",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/bom-capital/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/cases/ascende/": {
+      "path": "/en/cases/ascende/",
+      "status": 200,
+      "bytes": 25949,
+      "sha256": "a71baa8f2947089bf4466087a16496519f14cf560a0828e32898c85ef6ec82ca",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/cases/ascende/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/blog/": {
+      "path": "/blog/",
+      "status": 200,
+      "bytes": 19105,
+      "sha256": "185b6f26369cf206f10011272297ca9e09bdece483b8efa72700ddbb1a02012b",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/blog/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/en/blog/": {
+      "path": "/en/blog/",
+      "status": 200,
+      "bytes": 17492,
+      "sha256": "115a6881d93baae2b88c1b3538eec621bf8c048573e1eb1ee4664ea708be1775",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/en/blog/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    },
+    "/": {
+      "path": "/",
+      "status": 200,
+      "bytes": 69408,
+      "sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "artifactMatch": true,
+      "canonical": "https://tornostudio.com/",
+      "canonicalSelf": true,
+      "xRobotsTag": null,
+      "metaRobots": null
+    }
+  },
+  "article": {
+    "title": "Refazer um sistema? 7 evidências para decidir | Torno",
+    "description": "Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências.",
+    "h1": [
+      "Antes de refazer um sistema: 7 evidências para decidir"
+    ],
+    "schema": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/",
+        "mainEntityOfPage": "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/",
+        "headline": "Antes de refazer um sistema: 7 evidências para decidir",
+        "description": "Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências.",
+        "inLanguage": "pt-BR"
+      }
+    ],
+    "figures": [
+      {
+        "src": "/_astro/evidencias-decisao.Cw0T1GlU_15GaVk.svg",
+        "alt": "Sequência de avaliação: reproduzir o fluxo, localizar dependências, testar recuperação e comparar alternativas.",
+        "caption": "Figura 1. Evidências que conectam o problema operacional à decisão de investimento. Diagrama original Torno Studio."
+      },
+      {
+        "src": "/_astro/exemplo-aprovacao.BLXjBXeo_BT9L.svg",
+        "alt": "Exemplo hipotético: preservar cadastro e histórico, investigar a regra de aprovação e verificar os relatórios afetados.",
+        "caption": "Figura 2. Exemplo hipotético, sem dados de clientes: o limite da correção depende das relações entre os módulos. Diagrama original Torno Studio."
+      }
+    ],
+    "links": [
+      "https://calendly.com/henriquepett/45min",
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_backing_up_data_periodic_recovery_testing_data.html",
+      "https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig",
+      "https://martinfowler.com/bliki/RefactoringBoundary.html",
+      "https://sre.google/sre-book/testing-reliability/",
+      "https://tornostudio.com/recuperacao-de-projeto/"
+    ]
+  },
+  "assets": [
+    {
+      "path": "/_astro/evidencias-decisao.Cw0T1GlU_15GaVk.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2487,
+      "sha256": "07c35b5fa17ec1c9e19705050c19553469529a08b6039efe5d4d9e24d357c67b",
+      "artifactMatch": true,
+      "manifestMatch": true
+    },
+    {
+      "path": "/_astro/exemplo-aprovacao.BLXjBXeo_BT9L.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2450,
+      "sha256": "6b2e9d913c417974600f2550a3bedb623aa827d5e3668424844a02e6a228607b",
+      "artifactMatch": true,
+      "manifestMatch": true
+    }
+  ],
+  "sitemap": {
+    "status": 200,
+    "count": 22,
+    "unique": 22,
+    "preserved21": 21,
+    "added": [
+      "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/"
+    ],
+    "removed": [],
+    "sha256": "f13a30ad8db80c24e05a27cffc2815459e820df6dc5aeac97ac151a534b47314"
+  },
+  "passed": 9,
+  "total": 9
+}

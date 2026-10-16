@@ -1,0 +1,9 @@
+{
+  "site_id": "297530a9-272e-492f-9398-36e96f6dc992",
+  "site_name": "tornostudio",
+  "deploy_id": "6aceb0964d6310adcb4cf102",
+  "deploy_url": "https://6aceb0964d6310adcb4cf102--tornostudio.netlify.app",
+  "logs": "https://app.netlify.com/projects/tornostudio/deploys/6aceb0964d6310adcb4cf102",
+  "function_logs": "https://app.netlify.com/projects/tornostudio/logs/functions?scope=deploy:6aceb0964d6310adcb4cf102",
+  "edge_function_logs": "https://app.netlify.com/projects/tornostudio/logs/edge-functions?scope=deployid:6aceb0964d6310adcb4cf102"
+}

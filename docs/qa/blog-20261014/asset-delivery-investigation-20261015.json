@@ -1,0 +1,139 @@
+{
+  "checkedAtUtc": "2026-10-15T13:28:54.144590+00:00",
+  "page": "/blog/criterios-aceite-mvp/",
+  "origins": {
+    "production": {
+      "pageResponse": {
+        "status": 200,
+        "finalUrl": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "129",
+          "Cache-Control": "public,max-age=0,must-revalidate",
+          "Cache-Status": "\"Netlify Edge\"; hit; ttl=31535871",
+          "Content-Length": "29427",
+          "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+          "Content-Type": "text/html; charset=UTF-8",
+          "Cross-Origin-Opener-Policy": "same-origin",
+          "Date": "Thu, 15 Oct 2026 13:28:54 GMT",
+          "Etag": "\"7ca38983e0c3fe8c76b8a8ba667779a3-ssl\"",
+          "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+          "Server": "Netlify",
+          "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+          "Vary": "Accept-Encoding",
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "DENY",
+          "X-Nf-Request-Id": "01M4ZW0QW4BKW0CS9ZQVK0R0J1",
+          "Connection": "close"
+        },
+        "bytes": 29427,
+        "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+        "bodyPrefix": "<!DOCTYPE html><html lang=\"pt-BR\"> <head><meta charset=\"utf-8\"><meta name=\"viewp"
+      },
+      "liveImgSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+      "liveHtmlSha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "imgSrcMatchesArtifact": true,
+      "assetResponse": {
+        "status": 200,
+        "finalUrl": "https://tornostudio.com/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "0",
+          "Cache-Control": "public,max-age=31536000,immutable",
+          "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+          "Content-Length": "2622",
+          "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+          "Content-Type": "image/svg+xml",
+          "Cross-Origin-Opener-Policy": "same-origin",
+          "Date": "Thu, 15 Oct 2026 13:28:54 GMT",
+          "Etag": "\"44345886475ff1ef69e88935150f25cf-ssl\"",
+          "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+          "Server": "Netlify",
+          "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+          "Vary": "Accept-Encoding",
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "DENY",
+          "X-Nf-Request-Id": "01M4ZW0R8DGM8T7WB2K0VGX0CW",
+          "Connection": "close"
+        },
+        "bytes": 2622,
+        "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582",
+        "bodyPrefix": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"1160\" viewBox=\"0 0 6"
+      }
+    },
+    "draft": {
+      "pageResponse": {
+        "status": 200,
+        "finalUrl": "https://6ad0ca2a4a4dafb0c6955f29--tornostudio.netlify.app/blog/criterios-aceite-mvp/",
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "0",
+          "Cache-Control": "public,max-age=0,must-revalidate",
+          "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+          "Content-Length": "29427",
+          "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+          "Content-Type": "text/html; charset=UTF-8",
+          "Cross-Origin-Opener-Policy": "same-origin",
+          "Date": "Thu, 15 Oct 2026 13:28:55 GMT",
+          "Etag": "\"7ca38983e0c3fe8c76b8a8ba667779a3-ssl\"",
+          "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+          "Server": "Netlify",
+          "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+          "Vary": "Accept-Encoding",
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "DENY",
+          "X-Nf-Request-Id": "01M4ZW0RFNXX1DZ243TMCDQW1T",
+          "X-Robots-Tag": "noindex",
+          "Connection": "close"
+        },
+        "bytes": 29427,
+        "sha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+        "bodyPrefix": "<!DOCTYPE html><html lang=\"pt-BR\"> <head><meta charset=\"utf-8\"><meta name=\"viewp"
+      },
+      "liveImgSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+      "liveHtmlSha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+      "imgSrcMatchesArtifact": true,
+      "assetResponse": {
+        "status": 200,
+        "finalUrl": "https://6ad0ca2a4a4dafb0c6955f29--tornostudio.netlify.app/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "0",
+          "Cache-Control": "public,max-age=31536000,immutable",
+          "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+          "Content-Length": "2622",
+          "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+          "Content-Type": "image/svg+xml",
+          "Cross-Origin-Opener-Policy": "same-origin",
+          "Date": "Thu, 15 Oct 2026 13:28:55 GMT",
+          "Etag": "\"44345886475ff1ef69e88935150f25cf-ssl\"",
+          "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+          "Server": "Netlify",
+          "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+          "Vary": "Accept-Encoding",
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "DENY",
+          "X-Nf-Request-Id": "01M4ZW0RZ87CKJ06AV19MTXCDT",
+          "X-Robots-Tag": "noindex",
+          "Connection": "close"
+        },
+        "bytes": 2622,
+        "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582",
+        "bodyPrefix": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"1160\" viewBox=\"0 0 6"
+      }
+    }
+  },
+  "artifact": {
+    "htmlSha256": "4d0da2ae68a0202501063472a8b98967ae286394adc1a7014e5397b3927c9fb8",
+    "imgSrc": "/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+    "assetPath": "/private/tmp/torno-blog-release-criteria-mvp-v3-approved-20261015-r1/dist/_astro/torno.B0vlPKCG_Z7VeG1.svg",
+    "assetExists": true,
+    "assetBytes": 2622,
+    "assetSha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582",
+    "manifestSha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582"
+  }
+}

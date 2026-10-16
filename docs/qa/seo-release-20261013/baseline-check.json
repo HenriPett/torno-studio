@@ -1,0 +1,12 @@
+{
+  "baseline": "6acd6513597ee18230ffae7f",
+  "comparison": "SHA256 current working tree against last released source, early SEO checkpoint",
+  "differences": [
+    "src/components/Footer.astro",
+    "src/config/routes.d.mts",
+    "src/config/routes.mjs",
+    "tests/qa/seo.spec.ts"
+  ],
+  "original_git_head": "0ce2f5ce42b026dc5e7bfa2d49ef9b82d2b92ab9",
+  "git_limit": "Original .git is read-only by session permissions; no original git mutation attempted."
+}
