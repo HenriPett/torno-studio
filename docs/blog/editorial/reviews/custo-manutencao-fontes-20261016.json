@@ -1,0 +1,76 @@
+{
+  "purpose": "Rastreio editorial da cópia de manutenção pós-go-live; SHA do corpo HTTP recebido, sem converter o HTML.",
+  "sources": [
+    {
+      "id": "aws-cost-optimization",
+      "requested_url": "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+      "final_url": "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+      "http_status": 200,
+      "body_sha256": "59a3aa73b8d448d04492e13564f5044884934f3e8fd54a40c3fec960136aebfe",
+      "body_bytes": 15956,
+      "checked_at_utc": "2026-10-16T12:03:14Z",
+      "content_type": "text/html",
+      "markers": [
+        {
+          "text": "Expenditure and usage awareness",
+          "found": true
+        },
+        {
+          "text": "Optimize over time",
+          "found": true
+        }
+      ],
+      "limits": "Orientação de gestão de custos para workloads AWS; não informa preço, arquitetura nem escopo contratual do Torno Studio."
+    },
+    {
+      "id": "supabase-cost-control",
+      "requested_url": "https://supabase.com/docs/guides/platform/cost-control",
+      "final_url": "https://supabase.com/docs/guides/platform/cost-control",
+      "http_status": 200,
+      "body_sha256": "73fb7cc5ec697c47b9872c3aab143ec13d1354405c9e8606982f186ccf12ff81",
+      "body_bytes": 167573,
+      "checked_at_utc": "2026-10-16T12:03:15Z",
+      "content_type": "text/html; charset=utf-8",
+      "markers": [
+        {
+          "text": "The Spend Cap can protect you from these unexpected costs for certain usage items.",
+          "found": true
+        },
+        {
+          "text": "Usage items that are predictable and explicitly opted into by the user are excluded.",
+          "found": true
+        },
+        {
+          "text": "The Spend Cap doesn't allow for fine-grained cost control",
+          "found": true
+        }
+      ],
+      "limits": "Regra específica da Supabase, sujeita a mudanças; não limita a fatura de outros provedores nem define preço do projeto."
+    },
+    {
+      "id": "torno-home",
+      "requested_url": "https://tornostudio.com/",
+      "final_url": "https://tornostudio.com/",
+      "http_status": 200,
+      "body_sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "body_bytes": 69408,
+      "checked_at_utc": "2026-10-16T12:03:15Z",
+      "content_type": "text/html; charset=UTF-8",
+      "markers": [
+        {
+          "text": "Product Evolution",
+          "found": true
+        },
+        {
+          "text": "Garantia de 60 dias para bugs",
+          "found": true
+        },
+        {
+          "text": "Funcionalidade nova não é bug",
+          "found": true
+        }
+      ],
+      "limits": "Oferta publicada na home na data da consulta; preço e escopo devem ser rechecados antes de contratar. A garantia citada é para bugs do MVP, não cobertura geral de infraestrutura."
+    }
+  ]
+}

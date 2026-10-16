@@ -1,0 +1,19 @@
+# Reconsulta de fontes — rascunho sobre automação de planilhas
+
+**Estado:** evidência factual reconsultada antes da publicação autorizada; por si só, não valida intenção/volume, aprovação editorial nem publicação. **Responsável pela reconsulta:** Farol. **Briefing recebido:** `/Users/henriquepett/Documents/Codex/2026-10-14/task/torno-artigo-20261014-para-maestro.md` (SHA-256 comunicado pela coordenação: `5bed770bfd9d1dfdc88d634cd213a75686216c2bc6b348bfd0868d846b7ba172`). Os horários abaixo foram capturados durante novas requisições HTTP, não atribuídos retroativamente à pesquisa do briefing. Respostas, destinos, hashes e verificações textuais estão em [`ARTIGO-PLANILHAS-20261014-FONTES-HTTP.json`](ARTIGO-PLANILHAS-20261014-FONTES-HTTP.json).
+
+| Fonte primária | `checked_at` UTC real | Correspondência e limite |
+|---|---|---|
+| [Google Docs Editors Help — proteção de planilhas](https://support.google.com/docs/answer/1218656) | `2026-10-14T21:17:29+00:00` | [FATO] A página diz que proteger planilha/intervalo não deve ser medida de segurança e permite imprimir, copiar, colar e exportar cópias. Sustenta apenas a ressalva sobre proteção no Google Sheets; não é análise de todos os controles de segurança do Workspace. HTTP 200. |
+| [Google for Developers — cotas do Apps Script](https://developers.google.com/apps-script/guides/services/quotas) | `2026-10-14T21:17:45+00:00` | [FATO] Exceder cota/limite pode lançar exceção e parar execução; cotas podem mudar sem aviso. A página indica atualização em 03/09/2026. O corpo proposto não reproduz número de cota nem estende o fato a outros produtos. HTTP 200. |
+| [Microsoft Learn — recomendações de automação](https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/automate-tasks) | `2026-10-14T21:17:30+00:00` | [FATO] Recomenda ferramenta pronta quando atende à necessidade e ressalta custo de construir/manter automação própria. É orientação de arquitetura do Power Platform; não comprova retorno financeiro universal nem uma escolha para caso específico. Página indica atualização em 08/04/2026. HTTP 200. |
+| [Home Torno Studio](https://tornostudio.com/) | `2026-10-14T21:17:30+00:00` | [FATO] A home apresenta automação de processos, conexão de sistemas, diagnóstico de 45 minutos e a possibilidade de começar por um processo específico. Não promete implementar no diagnóstico. HTTP 200. |
+
+**Exemplo numérico:** [HIPÓTESE] `600 × 4 ÷ 60 = 40 h`; `600 × 1 ÷ 60 + 4 = 14 h` residuais; `40 − 14 = 26 h` de capacidade recuperada; `26 × R$ 50 = R$ 1.300` de valor hipotético da capacidade. Não é case, economia de caixa, ROI observado, preço do Torno nem previsão de ganho.
+
+**Gates ainda abertos:** a decisão NO-GO anterior de `spreadsheet-to-system-pt` pertence à Trilha; sem decisão explícita dela, nenhuma pauta/slug entra em release. O contrato editorial vigente exige autor **pessoa real com contribuição verificável**. Portanto “Torno Studio” institucional não está autorizado como assinatura pelo contrato atual, e Henrique Pett não pode ser atribuído sem autoria real. Verso revisou o corpo em leitura real, mas essa revisão não cria autoria nem GO de publicação.
+
+
+## Reconsulta pré-publicação (14/10/2026)
+
+Farol repetiu as quatro requisições originais antes da revisão final. `checked_at` UTC real: Google Sheets `2026-10-14T21:29:34+00:00`; Apps Script `2026-10-14T21:29:35+00:00`; Microsoft Learn `2026-10-14T21:29:35+00:00`; home Torno `2026-10-14T21:29:36+00:00`. As quatro respostas foram HTTP 200. Os hashes de Google Sheets e Apps Script mudaram em relação à coleta de 21:17 UTC, mas os marcadores relevantes continuam presentes; Microsoft Learn e home mantêm o mesmo hash e marcadores. As duas coletas e hashes estão preservados em `latest_recheck` e `sources` no JSON vinculado. Essa reconsulta não altera a decisão SEO: `spreadsheet-to-system-pt` continua NO-GO histórico e demanda/volume da formulação nova continua SEM DADO.

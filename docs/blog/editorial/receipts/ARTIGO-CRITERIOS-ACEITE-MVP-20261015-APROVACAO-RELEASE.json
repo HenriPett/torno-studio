@@ -1,0 +1,91 @@
+{
+  "event_id": "release-approved:torno-artigo-pt-20261015-criterios-aceite-mvp:2026-10-15T11:36:05Z",
+  "recorded_at_utc": "2026-10-15T11:36:05Z",
+  "state_before": "draft",
+  "state_after": "approved",
+  "content_id": "torno-artigo-pt-20261015-criterios-aceite-mvp",
+  "intent_id": "software-vendor-choice-pt",
+  "locale": "pt-BR",
+  "type": "artigo",
+  "working_title": "Critérios de aceite para MVP: como definir antes de contratar",
+  "proposed_path": "/blog/criterios-aceite-mvp/",
+  "canonical_url_planned": "https://tornostudio.com/blog/criterios-aceite-mvp/",
+  "url_reserved_for_this_approved_content": true,
+  "approved_content": {
+    "path": "/private/tmp/torno-blog-article-review/torno-criterios-aceite-mvp.md",
+    "bytes": 7795,
+    "lines": 78,
+    "sha256": "b63aa2587d0ff3cccf3d8d8af37b647c2358f4fea2a5169c91bd2b278bd393f6"
+  },
+  "assets": [
+    {
+      "path": "torno.svg",
+      "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582",
+      "used_by_markdown": "./torno.svg"
+    },
+    {
+      "path": "torno.png",
+      "sha256": "aea3031445187a09fbb29158146fd009c850617c1a389c61cb9d05beb24fbd8e",
+      "role": "visual QA/export variant"
+    },
+    {
+      "path": "torno-360.png",
+      "sha256": "87add3052f29afc09bee950f6e835437c9115eb4d257e96fdc4e976f067dc45f",
+      "role": "visual QA/export variant"
+    }
+  ],
+  "sources": [
+    {
+      "path": "marketing/blog/ARTIGO-CRITERIOS-ACEITE-MVP-20261015-FONTES-HTTP.json",
+      "sha256": "171c6b697391b85250ee9e44bcd9de1cded79f4b4c1d55e032b128e6eebe48dd"
+    },
+    {
+      "path": "marketing/blog/ARTIGO-CRITERIOS-ACEITE-MVP-20261015-REVISAO-FONTES.md",
+      "sha256": "bd8c600b75bb25cce7bac9bf0c876c6198a5122872288447ee4883c794350033"
+    }
+  ],
+  "editorial_review": {
+    "reviewer": "Verso",
+    "status": "PASS claim-by-claim",
+    "reviewed_at_utc": "2026-10-15T11:33:53Z",
+    "markdown_sha256": "b63aa2587d0ff3cccf3d8d8af37b647c2358f4fea2a5169c91bd2b278bd393f6"
+  },
+  "intent_decision": {
+    "owner": "Trilha",
+    "status": "GO qualitativo",
+    "decided_at_utc": "2026-10-15T11:28:11Z",
+    "intent_id": "software-vendor-choice-pt",
+    "demand": "SEM DADO",
+    "no_search_volume_inference": true
+  },
+  "release_approval": {
+    "release_approved_by": "Farol (delegado operacional autorizado por Henrique)",
+    "release_approved_at_utc": "2026-10-15T11:36:05Z",
+    "approval_scope": "Incluir exatamente o Markdown e asset SVG acima na próxima versão do artefato/release do blog.",
+    "evidence": [
+      "Autorização permanente de Henrique comunicada em 2026-10-14, documentada no histórico de coordenação.",
+      "Autorização operacional específica de Henrique comunicada em 2026-10-15: publicar após gates; instrução deste turno determina registrar inclusão do conteúdo exato e encaminhar GO formal a Batuta.",
+      "Este recibo vincula a autorização ao hash final PASS de Verso; não atribui revisão pessoal/hash a Henrique e não reaproveita aprovação de artigo anterior."
+    ]
+  },
+  "author_name": null,
+  "author_basis": null,
+  "byline": "omitted",
+  "publication": {
+    "first_published_at": null,
+    "canonical_observed": null,
+    "evidence_of_publication": null,
+    "gsc_indexation": "SEM DADO"
+  },
+  "seo": {
+    "existing_intent": "software-vendor-choice-pt",
+    "quantitative_demand": "SEM DADO",
+    "no_new_intent_id": true
+  },
+  "notes": [
+    "This is approval for inclusion in a release, not evidence of deployment or indexing.",
+    "No English translation is approved.",
+    "No fabricated case, ROI, or personal authorship.",
+    "Approval applies only to the exact body and hashes listed here."
+  ]
+}

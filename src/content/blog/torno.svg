@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1160" viewBox="0 0 640 1160" role="img" aria-labelledby="title desc">
+<title id="title">Do escopo ao aceite verificável</title>
+<desc id="desc">Modelo com contexto, ação, resultado e evidência. Três cenários de um portal hipotético: pedido válido, informação incompleta e nova tentativa após perda da resposta.</desc>
+<rect width="640" height="1160" fill="#f5f2e9" rx="24"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#172b2b">
+<text x="36" y="54" font-size="20" font-weight="700" letter-spacing="2">TORNO · MODELO DE ACEITE</text>
+<text x="36" y="102" font-size="35" font-weight="700">Como verificar a entrega</text>
+<text x="36" y="140" font-size="23">Exemplo hipotético: portal de pedidos</text>
+<rect x="32" y="174" width="576" height="276" rx="18" fill="#173c3c"/>
+<g fill="#fff" font-size="26">
+<text x="56" y="219"><tspan font-weight="700">1. Contexto</tspan><tspan> · qual situação?</tspan></text>
+<text x="56" y="282"><tspan font-weight="700">2. Ação</tspan><tspan> · o que acontece?</tspan></text>
+<text x="56" y="345"><tspan font-weight="700">3. Resultado</tspan><tspan> · o que conferir?</tspan></text>
+<text x="56" y="408"><tspan font-weight="700">4. Evidência</tspan><tspan> · como comprovar?</tspan></text>
+</g>
+<text x="36" y="499" font-size="25" font-weight="700">Teste também as exceções</text>
+<rect x="32" y="522" width="576" height="146" rx="16" fill="#fff" stroke="#b4c6bd"/>
+<text x="54" y="558" font-size="25" font-weight="700">A · Pedido válido</text>
+<text x="54" y="596" font-size="24">Envio → identificador e estado</text>
+<text x="54" y="632" font-size="24">coerentes nos dois sistemas.</text>
+<rect x="32" y="686" width="576" height="146" rx="16" fill="#fff" stroke="#b4c6bd"/>
+<text x="54" y="722" font-size="25" font-weight="700">B · Informação incompleta</text>
+<text x="54" y="760" font-size="24">Sem endereço → envio bloqueado;</text>
+<text x="54" y="796" font-size="24">itens preenchidos preservados.</text>
+<rect x="32" y="850" width="576" height="146" rx="16" fill="#fff" stroke="#b4c6bd"/>
+<text x="54" y="886" font-size="25" font-weight="700">C · Resposta perdida</text>
+<text x="54" y="924" font-size="24">Nova tentativa → um único pedido.</text>
+<text x="54" y="960" font-size="24">Verificar o suporte da integração.</text>
+<text x="36" y="1042" font-size="24" font-weight="700">Antes de orçar, combine:</text>
+<text x="36" y="1080" font-size="24">quem valida, em qual ambiente</text>
+<text x="36" y="1116" font-size="24">e com quais dados de teste.</text>
+</g>
+</svg>

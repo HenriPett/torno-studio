@@ -3,16 +3,49 @@ import { readFile, readdir, mkdir, writeFile, rename, stat } from 'node:fs/promi
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { parse } from 'yaml';
+import {maintenanceOverlay,verifyMaintenanceApproval,insertMaintenanceFigure,validateMaintenanceHtml,maintenanceId,maintenanceHashes,maintenancePath} from './blog-maintenance.mjs';
 export const BLOG_ORIGIN = 'https://tornostudio.com';
 export const BLOG_STATES = ['draft','review','approved','published','hold_cannibalization','retired','no_go'];
 export const blogIndexPath = locale => locale === 'en' ? '/en/blog/' : '/blog/';
 const reserved = new Set(['recovery-commercial','lovable-production-commercial','rls-multitenant-howto']);
 const blockedSlugs = new Set(['quanto-custa-sistema-sob-medida','prototipo-para-producao']);
+const RELEASE_ALLOWLIST = [
+  {
+    content_id: 'torno-artigo-pt-20261014-planilhas', intent_id: 'spreadsheet-to-system-pt', locale: 'pt-BR',
+    path: '/blog/quando-automatizar-processos-planilhas/', canonical_url: `${BLOG_ORIGIN}/blog/quando-automatizar-processos-planilhas/`,
+    digest: 'a84d4826d4b1d68efc03767aea2c09dd2ba8386a7b1ddaee87f235cc15974d66', digestScope: 'file',
+  },
+  {
+    content_id: 'torno-artigo-pt-20261015-criterios-aceite-mvp', intent_id: 'software-vendor-choice-pt', locale: 'pt-BR',
+    path: '/blog/criterios-aceite-mvp/', canonical_url: `${BLOG_ORIGIN}/blog/criterios-aceite-mvp/`,
+    digest: 'bfee8c6b195d2ee2b3946327aa0e010348921bde6edc64c29169ab00e5d151e2', digestScope: 'body',
+    asset: { path: 'torno.svg', digest: '77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582' },
+  },
+  {
+    content_id: 'torno-artigo-pt-20261015-integracao-erp-briefing', intent_id: 'erp-integration-prequote-brief-pt', locale: 'pt-BR',
+    path: '/blog/integracao-erp-briefing-orcamento/', canonical_url: `${BLOG_ORIGIN}/blog/integracao-erp-briefing-orcamento/`,
+    digest: '133f80ab8567ba74e30f4a178000ec0414b8a2771b182e052ef85d991deaf235', digestScope: 'body',
+    assets: [
+      { path: 'integracao-erp-fluxo.svg', digest: 'cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c' },
+      { path: 'integracao-erp-pendencias.svg', digest: '47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785' },
+    ],
+  },
+  {
+    content_id: 'torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias', intent_id: 'existing-system-rebuild-evidence-pt', locale: 'pt-BR',
+    path: '/blog/antes-de-refazer-sistema-evidencias/', canonical_url: `${BLOG_ORIGIN}/blog/antes-de-refazer-sistema-evidencias/`,
+    digest: '3b64339e8b72d2d8b3359b3275c568e5d6924261bd09de3cec630e705a93d79d', digestScope: 'body',
+    assets: [
+      { path: 'evidencias-decisao.svg', digest: '07c35b5fa17ec1c9e19705050c19553469529a08b6039efe5d4d9e24d357c67b' },
+      { path: 'exemplo-aprovacao.svg', digest: '6b2e9d913c417974600f2550a3bedb623aa827d5e3668424844a02e6a228607b' },
+    ],
+  },
+  {content_id:maintenanceId,intent_id:'postlaunch-software-operating-cost-pt',locale:'pt-BR',path:maintenancePath,canonical_url:BLOG_ORIGIN+maintenancePath,digest:maintenanceHashes.body,digestScope:'file',assets:[{path:'orcamento-apos-lancamento.svg',digest:maintenanceHashes.svg}]},
+];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
 const text = value => typeof value === 'string' && value.trim().length > 0;
 export function timestamp(value, label) {
-  if (!text(value) || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) fail(`${label}: ISO timestamp with timezone required`);
+  if (!text(value) || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) fail(`${label}: ISO timestamp with timezone required`);
   const day = value.slice(0,10);
   if (new Date(`${day}T00:00:00Z`).toISOString().slice(0,10) !== day || !Number.isFinite(Date.parse(value))) fail(`${label}: invalid date`);
   return Date.parse(value);
@@ -31,7 +64,9 @@ export function validateRecord(data, body, buildAt, releaseApproval = null) {
   const isCandidate = ['approved','published'].includes(d.status);
   if (!isCandidate) return false;
   if (d.status === 'approved' && !releaseApproval) return false;
-  for (const key of ['working_title','h1','summary','primary_question','proposed_path','canonical_url','url_owner','audience','buyer_stage','scope','not_scope','author_name','author_basis','reviewer','reviewed_at','release_approved_by','release_approved_at','release_approval_evidence']) if (!text(d[key])) fail(`${d.content_id}: ${key} required for release`);
+  for (const key of ['working_title','h1','summary','primary_question','proposed_path','canonical_url','url_owner','audience','buyer_stage','scope','not_scope','reviewer','reviewed_at','release_approved_by','release_approved_at','release_approval_evidence']) if (!text(d[key])) fail(`${d.content_id}: ${key} required for release`);
+  const authorName=text(d.author_name); const authorBasis=text(d.author_basis);
+  if (authorName !== authorBasis || (d.author_name != null && !authorName) || (d.author_basis != null && !authorBasis)) fail(`${d.content_id}: author fields must both be absent/null or verified together`);
   if (!text(body)) fail('body required for release');
   if (reserved.has(d.intent_id)) fail(`reserved intention: ${d.intent_id}`);
   const prefix = blogIndexPath(d.locale);
@@ -42,8 +77,8 @@ export function validateRecord(data, body, buildAt, releaseApproval = null) {
   if (!Array.isArray(d.claims_and_sources) || !Array.isArray(d.internal_links)) fail('sources and internal_links arrays required');
   for (const source of d.claims_and_sources) {
     if (!source || !['FATO','ESTIMATIVA','HIPÓTESE'].includes(source.classification) || !text(source.claim) || !text(source.reference) || !text(source.entity) || !text(source.limit)) fail('invalid claim/source');
-    timestamp(source.checked_at,'source.checked_at');
-    if (Date.parse(source.checked_at)>now) fail('future source check');
+    if (source.checked_at != null) { timestamp(source.checked_at,'source.checked_at'); if (Date.parse(source.checked_at)>now) fail('future source check'); }
+    else if (/^https?:\/\//i.test(source.reference)) fail('external source requires checked_at');
   }
   for (const link of d.internal_links) if (!link || !text(link.path) || !text(link.reason)) fail('internal link requires path/reason');
   if (d.status === 'published') {
@@ -69,27 +104,81 @@ async function markdownFiles(dir) {
 export async function prepareBlogManifest(root, buildAt) {
   const source=path.join(root,'src/content/blog');
   let approvals={entries:[]};
-  try { approvals=JSON.parse(await readFile(path.join(root,'.astro/blog-release-approval.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT')throw e; }
+  try { approvals=JSON.parse(await readFile(path.join(root,'src/config/blog-release-approval.json'),'utf8')); }
+  catch(e) {
+    if(e.code!=='ENOENT')throw e;
+    // Isolated QA fixtures may supply their own temporary approval file.
+    try { approvals=JSON.parse(await readFile(path.join(root,'.astro/blog-release-approval.json'),'utf8')); }
+    catch(fallbackError) { if(fallbackError.code!=='ENOENT')throw fallbackError; }
+  }
   if(!Array.isArray(approvals.entries))fail('invalid release approval manifest');
+  let privateFixture=false;
+  try { await stat(path.join(root,'PRIVATE_FIXTURE_DO_NOT_DEPLOY')); privateFixture=true; } catch(e) { if(e.code!=='ENOENT')throw e; }
   const entries=[];const ids=new Set();const paths=new Set();const intents=new Set();
   const sourceHashes={};
   for(const file of await markdownFiles(source)) {
     const raw=await readFile(file,'utf8');
     const match=raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)([\s\S]*)$/);
     if(!match)fail(`frontmatter missing: ${file}`);
-    const d=parse(match[1],{uniqueKeys:true});
+    const d=await maintenanceOverlay(root,file,raw,parse(match[1],{uniqueKeys:true}));
     const approval=approvals.entries.find(a=>a.contentId===d.content_id && a.locale===d.locale);
-    if(approval && (approval.contentRevision!==sha256(raw) || approval.path!==d.proposed_path || !text(approval.approvedBy) || !text(approval.approvedAt)))fail('release approval hash/path mismatch');
+    const sourceHash=sha256(raw);
+    const bodyHash=sha256(match[2]);
+    const allowed=RELEASE_ALLOWLIST.find(row=>row.content_id===d.content_id);
+    const releaseDigest=allowed?.digestScope==='body'?bodyHash:sourceHash;
+    if (!privateFixture && (d.status==='approved' || d.status==='published' || approval)) {
+      if (!allowed || d.intent_id!==allowed.intent_id || d.locale!==allowed.locale || d.proposed_path!==allowed.path || d.canonical_url!==allowed.canonical_url || releaseDigest!==allowed.digest) fail('article outside the exact release allowlist');
+    }
+    if(approval && (approval.contentRevision!==releaseDigest || approval.path!==d.proposed_path || approval.contentId!==d.content_id || approval.intentId!==d.intent_id || !text(approval.approvedBy) || !text(approval.approvedAt)))fail('release approval hash/path mismatch');
+    if(approval && !privateFixture && d.content_id==='torno-artigo-pt-20261014-planilhas' && (approval.reviewedBy!=='Verso' || approval.reviewedAt!=='2026-10-14T21:33:40Z' || approval.approvedBy!=='Henrique' || approval.approvedAt!=='2026-10-14T21:28:02Z' || approval.authorizationEvidence?.operational?.authorizedBy!=='Henrique' || approval.authorizationEvidence?.operational?.authorizedAt!=='2026-10-14T21:28:02Z' || approval.authorizationEvidence?.operational?.instruction!=='documente a decisão de release como autorização de Henrique 21:28:02Z vinculada ao hash Verso' || approval.authorizationEvidence?.business?.owner!=='Trilha' || approval.authorizationEvidence?.business?.recordedAt!=='2026-10-14T21:28:02Z' || approval.authorizationEvidence?.editorial?.reviewer!=='Verso' || approval.authorizationEvidence?.editorial?.reviewedAt!=='2026-10-14T21:33:40Z' || approval.authorizationEvidence?.editorial?.sha256!==releaseDigest))fail('release approval provenance mismatch');
+    if(approval && !privateFixture && d.content_id==='torno-artigo-pt-20261015-criterios-aceite-mvp') {
+      const ev=approval.authorizationEvidence??{};const prov=ev.authorization_provenance??{};const metadata=approval.metadata??{};const addendum=approval.metadataAddendum??{};
+      const approvedFiles=[{path:'torno-criterios-aceite-mvp.md',sha256:releaseDigest},{path:'torno.svg',sha256:allowed.asset.digest}];
+      if(d.seo_title!=='Critérios de aceite para MVP: guia para contratar | Torno' || d.seo_description!=='Defina critérios de aceite antes de contratar um MVP. Veja exemplos, uma ficha de escopo e como validar integrações sem depender de promessas vagas.' || metadata.title!==d.seo_title || metadata.description!==d.seo_description || approval.approvedBy!=='Farol (delegado operacional)' || approval.approvedAt!=='2026-10-15T12:35:03Z' || approval.reviewedBy!=='Verso' || approval.reviewedAt!=='2026-10-15T12:34:07Z' || approval.approvalScope!=='Somente Markdown e SVG entram no artefato; PNGs não entram no runtime público.' || ev.related_evidence?.verso_review!=='PASS factual/editorial claim-by-claim on saved bytes at 2026-10-15T12:34:07Z for body SHA-256 '+releaseDigest || prov.standing_authorization?.authorized_by!=='Henrique' || prov.standing_authorization?.authorized_date!=='2026-10-14' || prov.specific_operational_delegation?.authorized_by!=='Henrique' || prov.specific_operational_delegation?.authorized_at_utc!=='2026-10-15T11:24:34Z' || prov.prior_delegated_release_approval?.approved_at_utc!=='2026-10-15T11:36:05Z' || prov.current_delegated_release_approval?.approved_by!=='Farol (delegado operacional)' || prov.current_delegated_release_approval?.approved_at_utc!=='2026-10-15T12:35:03Z' || prov.editorial_review_by_henrique!==false || prov.personal_hash_approval_by_henrique!==false || addendum.sha256!=='ec2c57444bc88cf22fc251c98c1c48da3333686ea4b13005526e90df6c8df939' || addendum.recordedAt!=='2026-10-15T12:35:03Z' || addendum.seo_title!==d.seo_title || addendum.seo_description!==d.seo_description || approval.sources?.historySha256!=='16ce0a52c466e8f33a454317103d93289b5e8fa9e77f57c326e462aecf3cf5b9' || approval.sources?.releaseAddendumV3Sha256!==addendum.sha256 || approval.sources?.previousMetadataAddendumSha256!=='8fdabafcadec3fd2b74f468db58592d9a86464e8d3aa985259de1b944080e82a' || approval.sources?.previousReleaseReceiptSha256!=='fc4d6924b7494f80393eb2f5eedaf2449f089512f7c5813e1f90ecd899af83b9' || ev.release_addendum_v3?.sha256!==addendum.sha256 || JSON.stringify(approval.assets)!==JSON.stringify([{path:'torno.svg',sha256:allowed.asset.digest}]) || JSON.stringify(approval.approvedFiles)!==JSON.stringify(approvedFiles) || JSON.stringify(approval.excludedAssets)!==JSON.stringify(['torno.png','torno-360.png'])) fail('new article approval metadata/provenance/asset scope mismatch');
+      if(sha256(await readFile(path.join(root,'src/content/blog','torno.svg')))!==allowed.asset.digest)fail('approved SVG asset hash mismatch');
+    }
+    if(approval && !privateFixture && d.content_id==='torno-artigo-pt-20261015-integracao-erp-briefing') {
+      const expectedReceipt='3ee53dbabb278cd403ff0c13098bc2a51d1a218f9661e4cc294ca932256e086d';
+      const expectedTitle='Integração com ERP: briefing para orçamento | Torno';
+      const expectedDescription='Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências.';
+      const expectedH1='Integração com ERP: o que reunir antes de pedir orçamento';
+      const expectedAssets=allowed.assets.map(a=>({path:a.path,sha256:a.digest}));
+      const expectedFiles=[{path:'integracao-erp-briefing-final.md',sha256:releaseDigest},...expectedAssets];
+      const ev=approval.authorizationEvidence??{};const prov=ev.authorizationProvenance??{};
+      if(d.h1!==expectedH1||d.seo_title!==expectedTitle||d.seo_description!==expectedDescription||approval.contentRevision!==allowed.digest||approval.approvedBy!=='Farol (delegado operacional)'||approval.approvedAt!=='2026-10-15T16:30:30Z'||approval.reviewedBy!=='Verso'||approval.reviewedAt!=='2026-10-15T16:26:47Z'||approval.approvalScope!=='Somente os dois SVGs acima no artigo público; PNGs de conferência excluídos.'||approval.metadata?.title!==expectedTitle||approval.metadata?.description!==expectedDescription||approval.metadata?.h1!==expectedH1||approval.metadata?.canonical!==allowed.canonical_url||ev.receiptSha256!==expectedReceipt||ev.intentDecision?.decided_at_utc!=='2026-10-15T16:28:10Z'||ev.editorialReview?.markdown_sha256!==allowed.digest||ev.visualReview?.timbre_adjudication!=='PASS somente como figuras editoriais, sem editar os dois SVGs'||prov.standing_authorization?.authorized_by!=='Henrique'||prov.delegated_release_approval?.release_approved_at_utc!=='2026-10-15T16:30:30Z'||prov.editorial_review_by_henrique!==false||prov.personal_hash_approval_by_henrique!==false||approval.sources?.releaseReceiptSha256!==expectedReceipt||approval.sources?.sourceReviewSha256!=='2692db14b2ce2bb29a541568cd048b08ed728c33f943b018fbdfa85ca1314134'||JSON.stringify(approval.assets)!==JSON.stringify(expectedAssets)||JSON.stringify(approval.approvedFiles)!==JSON.stringify(expectedFiles)||JSON.stringify(approval.excludedAssets)!==JSON.stringify(['*.png']))fail('ERP approval metadata/provenance/asset scope mismatch');
+      for(const asset of allowed.assets)if(sha256(await readFile(path.join(root,'src/content/blog',asset.path)))!==asset.digest)fail('ERP approved SVG asset hash mismatch: '+asset.path);
+    }
+    if(approval && !privateFixture && d.content_id==='torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias') {
+      const receiptHash='64df680bc7dadb73fe15842c0820cb9fca0ca12a25c89a8ff423275d018eaaa5';
+      const sourceHash='57aa070426cc1c010dedf721e9b64e748dc32bc2e5051fd97181cca94b01bc71';
+      const assetManifestHash='4bd3335396355b191e3bc1bd9d43d926baf2374812db901c91b7e6e070cc05fb';
+      const historyHash='a95898b8542f12fe7d93c8fec83edd88025d103794848e290f5e944eaae7d2fb';
+      const title='Refazer um sistema? 7 evidências para decidir | Torno';
+      const description='Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências.';
+      const h1='Antes de refazer um sistema: 7 evidências para decidir';
+      const assets=allowed.assets.map(a=>({path:a.path,sha256:a.digest}));
+      const files=[{path:'antes-de-refazer-sistema-evidencias.md',sha256:releaseDigest},...assets];
+      const ev=approval.authorizationEvidence??{};const prov=ev.authorizationProvenance??{};
+      if(d.h1!==h1||d.seo_title!==title||d.seo_description!==description||d.summary!=='Peça evidências sobre o sistema existente antes de aprovar uma correção ou reconstrução.'||approval.contentRevision!==allowed.digest||approval.approvedBy!=='Farol (delegado operacional)'||approval.approvedAt!=='2026-10-15T22:28:58Z'||approval.reviewedBy!=='Verso'||approval.reviewedAt!=='2026-10-15T22:25:20Z'||approval.approvalScope!=='Somente Markdown final e os dois SVGs corrigidos são conteúdo público aprovado; quatro PNGs 360/1080 são exportações de QA, excluídas do runtime.'||approval.metadata?.title!==title||approval.metadata?.description!==description||approval.metadata?.h1!==h1||approval.metadata?.canonical!==allowed.canonical_url||ev.receiptSha256!==receiptHash||ev.intentDecision?.final_decided_at_utc!=='2026-10-15T22:28:11Z'||ev.editorialReview?.markdown_sha256!==allowed.digest||ev.editorialReview?.source_evidence_sha256!==sourceHash||ev.visualReview?.timbre_status!=='PASS GLOBAL dos dois SVGs corrigidos como figuras editoriais autocontidas'||prov.standing_authorization?.authorized_by!=='Henrique'||prov.delegated_release_approval?.release_approved_at_utc!=='2026-10-15T22:28:58Z'||prov.editorial_review_by_henrique!==false||prov.personal_hash_approval_by_henrique!==false||approval.sources?.releaseReceiptSha256!==receiptHash||approval.sources?.sourceReviewSha256!==sourceHash||approval.sources?.assetManifestSha256!==assetManifestHash||approval.sources?.historyAfterApprovalSha256!==historyHash||JSON.stringify(approval.assets)!==JSON.stringify(assets)||JSON.stringify(approval.approvedFiles)!==JSON.stringify(files)||JSON.stringify(approval.excludedAssets)!==JSON.stringify(['*.png']))fail('rebuild-evidence approval metadata/provenance/asset scope mismatch');
+      for(const asset of allowed.assets)if(sha256(await readFile(path.join(root,'src/content/blog',asset.path)))!==asset.digest)fail('rebuild-evidence approved SVG asset hash mismatch: '+asset.path);
+    }
+    if(d.content_id===maintenanceId && !privateFixture)await verifyMaintenanceApproval(root,approval,d);
     if(approval)timestamp(approval.approvedAt,'release decision');
-    const eligible=validateRecord(d,match[2],buildAt,approval);
+    let effective=d;
+    if (approval && d.status==='review') {
+      timestamp(approval.reviewedAt,'editorial review');
+      effective={...d,status:'approved',reviewer:approval.reviewedBy,reviewed_at:approval.reviewedAt,release_approved_by:approval.approvedBy,release_approved_at:approval.approvedAt,release_approval_evidence:JSON.stringify(approval.authorizationEvidence)};
+    }
+    const eligible=validateRecord(effective,match[2],buildAt,approval);
     if(ids.has(d.content_id))fail(`duplicate content_id: ${d.content_id}`);ids.add(d.content_id);
     const relative=path.relative(root,file);sourceHashes[relative]=sha256(raw);
     if(!eligible)continue;
     const key=`${d.intent_id}:${d.locale}`;
     if(paths.has(d.proposed_path)||intents.has(key))fail('duplicate path or intention');
     paths.add(d.proposed_path);intents.add(key);
-    entries.push({id:d.content_id,collectionId:path.relative(source,file).replace(/\.md$/,'').toLowerCase(),file:relative,hash:sha256(raw),path:d.proposed_path,slug:d.proposed_path.split('/').filter(Boolean).at(-1),locale:d.locale,data:d,alternates:[]});
+    entries.push({id:effective.content_id,collectionId:path.relative(source,file).replace(/\.md$/,'').toLowerCase(),file:relative,hash:sourceHash,contentHash:releaseDigest,path:effective.proposed_path,slug:effective.proposed_path.split('/').filter(Boolean).at(-1),locale:effective.locale,data:effective,alternates:[]});
   }
+  if (!privateFixture && (entries.length>RELEASE_ALLOWLIST.length || entries.some(e=>{const allowed=RELEASE_ALLOWLIST.find(row=>row.content_id===e.id);return !allowed||e.contentHash!==allowed.digest||e.path!==allowed.path||e.locale!==allowed.locale;}))) fail('manifest exceeds the exact article allowlist');
   for(const e of entries) {
     const d=e.data;
     if(d.translation_of == null)continue;
@@ -117,6 +206,37 @@ export async function prepareBlogManifest(root, buildAt) {
 export async function validateBlogOutput(root, manifest) {
   for(const e of manifest.entries) {
     const html=await readFile(path.join(root,e.path,'index.html'),'utf8');
+    if(e.id==='torno-artigo-pt-20261015-criterios-aceite-mvp') {
+      if(!/<figure\b/.test(html) || !/<figcaption\b/.test(html)) fail('approved criteria diagram must render semantic figure/figcaption');
+      if(!/<figure\b[^>]*>[\s\S]*?<img\b[^>]*alt="Diagrama de critérios de aceite para portal de pedidos hipotético: contexto, ação, resultado e evidência; três cenários: pedido válido, informação incompleta e nova tentativa após perda da resposta\."[^>]*src="\/_astro\/torno\.[^"]+\.svg"[^>]*>[\s\S]*?<figcaption\b[^>]*>(?:<em>)?Diagrama original preparado para este artigo\. Os cenários são hipotéticos\.(?:<\/em>)?<\/figcaption>[\s\S]*?<\/figure>/.test(html)) fail('approved criteria figure lost its exact alt, caption, or approved SVG');
+    }
+    if(e.id==='torno-artigo-pt-20261015-integracao-erp-briefing') {
+      const expected=[
+        ['integracao-erp-fluxo','Mapa hipotético: aprovação comercial no CRM gera envio ao ERP; identificador e situação retornam ao CRM. É preciso definir onde cada cadastro pode ser alterado.','Exemplo hipotético. Direção dos dados e permissões devem ser confirmadas para os sistemas envolvidos.'],
+        ['integracao-erp-pendencias','Briefing em três grupos: confirmado com documentação; a confirmar com responsável e impacto; fora da primeira etapa com exclusões registradas.','Modelo de organização do briefing. Os itens são ilustrativos, sem relação com um cliente real.'],
+      ];
+      const figures=[...html.matchAll(/<figure\b[^>]*class="[^"]*blog-figure--erp[^"]*"[^>]*>([\s\S]*?)<\/figure>/g)].map(m=>m[1]);
+      if(figures.length!==2)fail('ERP requires exactly two semantic editorial figures');
+      for(let i=0;i<2;i++){
+        const [name,alt,caption]=expected[i];const f=figures[i];
+        if(!f.includes('alt="'+alt+'"')||!new RegExp('src="/_astro/'+name+'\\.[^"/]+\\.svg"').test(f)||!f.includes('<figcaption')||!f.includes(caption))fail('ERP figure/alt/caption/SVG mismatch: '+name);
+      }
+      if(!html.includes('<title>Integração com ERP: briefing para orçamento | Torno</title>')||!html.includes('content="Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências."')||!html.includes('<link rel="canonical" href="https://tornostudio.com/blog/integracao-erp-briefing-orcamento/">')||[...html.matchAll(/<h1\b/g)].length!==1||/"author"|datePublished|dateModified|<time\b/.test(html))fail('ERP SEO/schema/byline/known-date mismatch');
+    }
+    if(e.id==='torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias') {
+      const expected=[
+        ['evidencias-decisao','Sequência de avaliação: reproduzir o fluxo, localizar dependências, testar recuperação e comparar alternativas.','Figura 1. Evidências que conectam o problema operacional à decisão de investimento. Diagrama original Torno Studio.'],
+        ['exemplo-aprovacao','Exemplo hipotético: preservar cadastro e histórico, investigar a regra de aprovação e verificar os relatórios afetados.','Figura 2. Exemplo hipotético, sem dados de clientes: o limite da correção depende das relações entre os módulos. Diagrama original Torno Studio.'],
+      ];
+      const figures=[...html.matchAll(/<figure\b[^>]*class="[^"]*blog-figure--rebuild[^"]*"[^>]*>([\s\S]*?)<\/figure>/g)].map(m=>m[1]);
+      if(figures.length!==2)fail('rebuild-evidence requires exactly two semantic editorial figures');
+      for(let i=0;i<2;i++){
+        const [name,alt,caption]=expected[i];const f=figures[i];
+        if(!f.includes('alt="'+alt+'"')||!new RegExp('src="/_astro/'+name+'\\.[^"/]+\\.svg"').test(f)||!f.includes('<figcaption')||!f.includes(caption))fail('rebuild-evidence figure/alt/caption/SVG mismatch: '+name);
+      }
+      if(!html.includes('<title>Refazer um sistema? 7 evidências para decidir | Torno</title>')||!html.includes('content="Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências."')||!html.includes('<link rel="canonical" href="https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/">')||[...html.matchAll(/<h1\b/g)].length!==1||/"author"|datePublished|dateModified|<time\b/.test(html))fail('rebuild-evidence SEO/schema/byline/date mismatch');
+    }
+    if(e.id===maintenanceId)await validateMaintenanceHtml(root,html);
     const urls=[...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)].map(m=>m[1]);
     urls.push(...e.data.internal_links.map(l=>l.path));
     for(const raw of urls) {
@@ -136,18 +256,63 @@ export async function validateBlogOutput(root, manifest) {
   }
 }
 
-/** Rehype: preserve table semantics inside a keyboard-accessible scroll region. */
+/** Remark: wrap only hash-approved article diagrams before Astro collects images. */
+export function blogCriteriaFigure() {
+  return (tree, file) => {
+    if(insertMaintenanceFigure(tree,file))return;
+    const id=file.data?.astro?.frontmatter?.content_id;
+    const configs={
+      'torno-artigo-pt-20261015-criterios-aceite-mvp': [
+        {asset:'./torno.svg',alt:'Diagrama de critérios de aceite para portal de pedidos hipotético: contexto, ação, resultado e evidência; três cenários: pedido válido, informação incompleta e nova tentativa após perda da resposta.',caption:'Diagrama original preparado para este artigo. Os cenários são hipotéticos.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias': [
+        {asset:'./evidencias-decisao.svg',alt:'Sequência de avaliação: reproduzir o fluxo, localizar dependências, testar recuperação e comparar alternativas.',caption:'Figura 1. Evidências que conectam o problema operacional à decisão de investimento. Diagrama original Torno Studio.',className:['blog-figure','blog-figure--rebuild']},
+        {asset:'./exemplo-aprovacao.svg',alt:'Exemplo hipotético: preservar cadastro e histórico, investigar a regra de aprovação e verificar os relatórios afetados.',caption:'Figura 2. Exemplo hipotético, sem dados de clientes: o limite da correção depende das relações entre os módulos. Diagrama original Torno Studio.',className:['blog-figure','blog-figure--rebuild']},
+      ],
+      'torno-artigo-pt-20261015-integracao-erp-briefing': [
+        {asset:'./integracao-erp-fluxo.svg',alt:'Mapa hipotético: aprovação comercial no CRM gera envio ao ERP; identificador e situação retornam ao CRM. É preciso definir onde cada cadastro pode ser alterado.',caption:'Exemplo hipotético. Direção dos dados e permissões devem ser confirmadas para os sistemas envolvidos.',className:['blog-figure','blog-figure--erp']},
+        {asset:'./integracao-erp-pendencias.svg',alt:'Briefing em três grupos: confirmado com documentação; a confirmar com responsável e impacto; fora da primeira etapa com exclusões registradas.',caption:'Modelo de organização do briefing. Os itens são ilustrativos, sem relação com um cliente real.',className:['blog-figure','blog-figure--erp']},
+      ],
+    };
+    const figures=configs[id];if(!figures)return;
+    const textOf=node=>node?.type==='text'?node.value:(node?.children??[]).map(textOf).join('');
+    const children=tree.children??[];
+    for(const cfg of figures){
+      let matched=false;
+      for(let i=0;i<children.length;i++){
+        const paragraph=children[i];if(paragraph?.type!=='paragraph')continue;
+        const image=paragraph.children?.find(n=>n.type==='image'&&n.alt===cfg.alt&&n.url===cfg.asset);
+        if(!image)continue;
+        let next=i+1;while(next<children.length&&children[next]?.type==='text'&&!String(children[next].value??'').trim())next++;
+        const cap=children[next];const emphasis=cap?.type==='paragraph'?cap.children?.find(n=>n.type==='emphasis'):null;
+        if(!emphasis||textOf(emphasis)!==cfg.caption)throw new Error('[blog] approved diagram lacks exact adjacent caption: '+cfg.asset);
+        cap.data={...(cap.data??{}),hName:'figcaption',hProperties:{...(cap.data?.hProperties??{}),className:['blog-figure-caption']}};
+        if(id==='torno-artigo-pt-20261015-integracao-erp-briefing'||id==='torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias'){
+          image.data={...(image.data??{}),hProperties:{...(image.data?.hProperties??{}),style:'display:block;inline-size:100%;max-inline-size:100%;block-size:auto;margin-inline:0'}};
+        }
+        const props={className:cfg.className};
+        if(id==='torno-artigo-pt-20261015-integracao-erp-briefing')props.style='max-inline-size:30rem;inline-size:100%;margin-inline:auto;padding:0';
+        const figure={type:'figure',data:{hName:'figure',hProperties:props},children:[image,cap]};
+        children.splice(i,next-i+1,figure);matched=true;break;
+      }
+      if(!matched)throw new Error('[blog] approved diagram missing from Markdown AST: '+cfg.asset);
+    }
+  };
+}
+
+/** Rehype: preserve tables inside keyboard-accessible scroll regions. */
 export function blogScrollableBlocks() {
   return (tree, file) => {
-    const filepath=String(file.path || file.history?.[0] || '').replaceAll('\\','/');
-    if(!filepath.includes('/content/blog/'))return;
-    const en=file.data?.astro?.frontmatter?.locale==='en';
+    const filepath=[file.path,...(file.history??[])].filter(Boolean).map(String).join(' ').replaceAll('\\','/');
+    const frontmatter=file.data?.astro?.frontmatter??{};
+    const blogFile=filepath.includes('/content/blog/')||String(frontmatter.content_id??'').startsWith('torno-artigo-pt-');
+    const en=frontmatter.locale==='en';
     const visit=node=>{
-      if(node.type==='element' && node.tagName==='pre'){node.properties??={};node.properties.tabIndex=0;}
+      if(blogFile && node.type==='element' && node.tagName==='pre'){node.properties??={};node.properties.tabIndex=0;}
       for(let i=0;i<(node.children??[]).length;i++){
         const child=node.children[i];
         visit(child);
-        if(child.type==='element' && child.tagName==='table'){
+        if(blogFile && child.type==='element' && child.tagName==='table'){
           node.children[i]={type:'element',tagName:'div',properties:{className:['blog-table-block']},children:[
             {type:'element',tagName:'p',properties:{className:['blog-table-hint']},children:[{type:'text',value:en?'Scroll horizontally if needed to see all columns.':'Se necessário, role horizontalmente para ver todas as colunas.'}]},
             {type:'element',tagName:'div',properties:{className:['blog-table-scroll'],tabIndex:0,role:'region',ariaLabel:en?'Scrollable table':'Tabela com rolagem horizontal'},children:[child]}

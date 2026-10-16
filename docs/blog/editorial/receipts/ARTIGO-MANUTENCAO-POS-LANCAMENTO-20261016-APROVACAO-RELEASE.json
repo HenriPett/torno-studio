@@ -1,0 +1,133 @@
+{
+  "event_id": "release-approved:torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento:2026-10-16T12:17:54Z",
+  "recorded_at_utc": "2026-10-16T12:17:54Z",
+  "state_before": "review",
+  "state_after": "approved",
+  "approval_kind": "inclusion_in_artifact_after_editorial_source_and_visual_review",
+  "content_id": "torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento",
+  "intent_id": "postlaunch-software-operating-cost-pt",
+  "locale": "pt-BR",
+  "type": "artigo",
+  "proposed_path": "/blog/custo-manutencao-software-apos-lancamento/",
+  "canonical_url_planned": "https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/",
+  "slug_reserved_or_implemented": false,
+  "h1_wrapper": "Custo de manutenção de software: o que prever após o lançamento",
+  "seo_title": "Custo de manutenção de software após o lançamento | Torno",
+  "seo_description": "Planeje o custo recorrente de um software web após o lançamento: serviços de operação, suporte, correções e evolução, com premissas e responsáveis.",
+  "summary": "Um roteiro para estimar o orçamento recorrente de um software web após o go-live, separando faturas de provedores, trabalho de manutenção e evolução funcional.",
+  "primary_question": "Como estimar o orçamento recorrente de operação e manutenção de um software web depois do lançamento, separando faturas de provedores, suporte e correções, e evolução funcional?",
+  "approved_content": {
+    "path": "/private/tmp/torno-blog-article-review/custo-manutencao-software-apos-lancamento-final.md",
+    "sha256": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8",
+    "bytes": 8142,
+    "lines": 60,
+    "markdown_preserved_byte_for_byte": true
+  },
+  "editorial_sheet": {
+    "path": "/Users/henriquepett/Downloads/pessoal/projeto-50k/marketing/blog/ARTIGO-MANUTENCAO-POS-LANCAMENTO-20261016-FICHA-EDITORIAL.md",
+    "sha256": "f3db6eb275824a45c3fec917772393cf84cec2be762a5523bd390e8acfaed5a4",
+    "decision_at_utc": "2026-10-16T12:08:24Z",
+    "status_before_receipt": "review"
+  },
+  "sources": {
+    "path": "/private/tmp/torno-blog-article-review/custo-manutencao-fontes-20261016.json",
+    "sha256": "29be5a5da81982d85e95edc2f91d02d845bcd1bbb760ea4fd4de779ac5ac8216",
+    "collection_limit": "HTTP status, final URLs, checked_at UTC, body hashes and markers recorded; full HTTP bodies not stored. AWS applies to AWS only; Supabase Spend Cap is partial; Torno home defines its own Product Evolution and 60-day MVP bug guarantee."
+  },
+  "approved_runtime_assets": [
+    {
+      "path": "/private/tmp/torno-blog-assets-manutencao-20261016-r1/orcamento-apos-lancamento.svg",
+      "sha256": "36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d",
+      "bytes": 3934,
+      "scope": "runtime SVG"
+    }
+  ],
+  "asset_integration": {
+    "sidecar_path": "/private/tmp/torno-blog-assets-manutencao-20261016-r1/sidecar.json",
+    "sidecar_sha256": "4dd4c396929878576a452e08693e3e85d87e3d80377b9d2af3f42e02f581f196",
+    "manifest_path": "/private/tmp/torno-blog-assets-manutencao-20261016-r1/manifest.json",
+    "manifest_sha256": "21301bdfee6fc0b0fb88dffd968cfa6df337e23ce4f7c0668b4f11205a81e7cc",
+    "placement": "After final paragraph beginning Os volumes, a franquia e a forma de cobrança são [HIPÓTESE] and before H2 Onde termina a garantia e começa um novo acordo.",
+    "body_modification_allowed": false,
+    "alt_caption_text_equivalent": "Exact values in hash-bound sidecar",
+    "qa_png_scope": "QA only; four renders excluded from runtime"
+  },
+  "intent_decision": {
+    "decided_by": "Trilha",
+    "qualitative_go_at_utc": "2026-10-16T11:24:31Z",
+    "final_go_at_utc": "2026-10-16T12:05:25Z",
+    "identity": "Post-launch recurring software operating cost, distinct from construction MVP cost draft on HOLD",
+    "overlap": "Moderate with home Product Evolution; home retains offer, plans and prices",
+    "quantitative_demand": "SEM DADO",
+    "gsc_indexation_queries_impressions_position": "SEM DADO",
+    "history_path": "/Users/henriquepett/Downloads/pessoal/projeto-50k/marketing/blog/HISTORICO-INTENCAO-URL.md",
+    "history_sha256_before_receipt": "0ae64c337c597c8c7c95b7ce8ae32b810a8c379aa98f1fdfac45a3263bc91cc4"
+  },
+  "editorial_review": {
+    "reviewer": "Verso",
+    "status": "PASS factual/editorial of exact Markdown bytes",
+    "reviewed_at_utc": "2026-10-16T12:06:26Z",
+    "markdown_sha256": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8",
+    "source_evidence_sha256": "29be5a5da81982d85e95edc2f91d02d845bcd1bbb760ea4fd4de779ac5ac8216",
+    "note": "Frontmatter contractual gaps are supplied by the separate hash-bound editorial sheet; Markdown body is unchanged."
+  },
+  "visual_review": {
+    "iris_status": "PASS visual read-only at 328/358/360/480; initial differences sent for design-owner adjudication",
+    "timbre_status": "PASS design-owner for original fixed editorial illustration",
+    "timbre_decided_at_local": "2026-10-16 09:16 BRT",
+    "design_rule": "Generic font stack and fixed SVG palette accepted for editorial illustration; future HTML UI, caption, links and CTA follow site tokens/IBM Plex.",
+    "placement_editorial_decision_by": "Trilha",
+    "placement_editorial_go_at_utc": "2026-10-16T12:16:56Z",
+    "integration_conditions": [
+      "Figure inserted at sidecar position with frozen Markdown intact",
+      "At least 328px useful width at viewport 360; maximum 480px desktop",
+      "Image 100% width and auto height without crop; adjacent alt/caption/text equivalent",
+      "Preview and production QA required"
+    ]
+  },
+  "authorization_provenance": {
+    "standing_authorization": {
+      "authorized_by": "Henrique",
+      "authorized_date": "2026-10-14",
+      "exact_authorized_at_utc": null,
+      "evidence": "Standing authorization to publish blog posts after gates, communicated in coordination; exact time not established."
+    },
+    "specific_instruction": {
+      "authorized_by": "Henrique via coordination",
+      "authorized_date": "2026-10-16",
+      "exact_authorized_at_utc": null,
+      "evidence": "Explicit Pode postar instruction for the separate post-launch maintenance article; the original construction-cost MVP article remains on HOLD. This is operational delegation, not personal review or hash approval by Henrique."
+    },
+    "delegated_release_approval": {
+      "release_approved_by": "Farol (delegado operacional)",
+      "release_approved_at_utc": "2026-10-16T12:17:54Z",
+      "release_approval_evidence": "This hash-bound receipt approves inclusion of the exact Markdown, one SVG and sidecar placement under the exact metadata above."
+    },
+    "editorial_review_by_henrique": false,
+    "personal_hash_approval_by_henrique": false
+  },
+  "author_name": null,
+  "author_basis": null,
+  "byline": "omitted",
+  "schema_author": "omitted",
+  "first_published_at": null,
+  "last_substantive_update_at": null,
+  "verified_at": null,
+  "evidence_of_publication": null,
+  "indexation_observation": "SEM DADO",
+  "translation_of": null,
+  "english_version": null,
+  "publication": {
+    "preview": null,
+    "production": null,
+    "published": false
+  },
+  "technical_gates_pending": [
+    "Revalidate current Netlify production and Edge before candidate and promotion",
+    "Integrate sidecar deterministically without modifying approved Markdown",
+    "Verify title, description, H1, canonical, BlogPosting without author or invented dates",
+    "Verify figure placement, alt, caption, text equivalent and mobile width",
+    "Verify SVG public SHA, links, sitemap and preservation of prior pages",
+    "Independent preview and production QA before recording published"
+  ]
+}

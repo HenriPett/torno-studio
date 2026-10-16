@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnv } from 'vite';
 
-import { blogScrollableBlocks, BLOG_ORIGIN, prepareBlogManifest, validateBlogOutput } from './src/config/blog.mjs';
+import { blogCriteriaFigure, blogScrollableBlocks, BLOG_ORIGIN, prepareBlogManifest, validateBlogOutput } from './src/config/blog.mjs';
 
 import { campaignRoutes, routes, locales, defaultLocale } from './src/config/routes.mjs';
 
@@ -104,7 +104,7 @@ const blogDates = new Map(blogManifest.entries.map(e => [e.data.canonical_url, e
 export default defineConfig({
   site,
   output: 'static',
-  markdown: { rehypePlugins: [blogScrollableBlocks] },
+  markdown: { remarkPlugins: [blogCriteriaFigure], rehypePlugins: [blogScrollableBlocks] },
   trailingSlash: 'always',
   build: { format: 'directory' },
   i18n: {

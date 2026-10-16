@@ -1,6 +1,8 @@
-# BLOG-TORNO-20261014 — arquitetura final e baseline
+# BLOG-TORNO-20261014 — registro histórico de arquitetura e baseline
 
-Responsável: Compasso. Estado: implementação entregue para revisão e QA; contratos Trilha/Mote recebidos e lidos. GO de implementação recebido; produção permanece gate QA de Batuta. Usuário já autorizou publicação da estrutura após QA: Batuta integra/promove sem nova confirmação. Artigos continuam fora do escopo.
+> **Registro de 14/10/2026; não descreve o estado atual do blog.** Naquela data os índices estavam vazios e artigos estavam fora daquele release. Desde então cinco artigos foram publicados e sua fonte está em `src/content/blog/`. Consulte [`README.md`](README.md), [`PUBLICACOES-2026-10-16.md`](PUBLICACOES-2026-10-16.md) e o espelho editorial em `editorial/` para o estado atual. As decisões datadas abaixo permanecem como histórico, não como instruções que removam ou revertam as publicações posteriores.
+
+Responsável pelo registro original: Compasso. A seção abaixo conserva a arquitetura e o baseline observados em 14/10/2026.
 
 ## Baseline verificado em 2026-10-14
 

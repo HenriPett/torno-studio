@@ -1,0 +1,121 @@
+{
+  "purpose": "Reconsulta factual, não aprovação editorial nem publicação",
+  "sources": [
+    {
+      "source": "google_sheets_protection",
+      "url": "https://support.google.com/docs/answer/1218656",
+      "started_at": "2026-10-14T21:17:28+00:00",
+      "checked_at": "2026-10-14T21:17:29+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/docs/answer/1218656",
+      "sha256_body": "c19c4d06bd4ef203b538dfff3ab5ba5cd3ed6ebce3475eb5b7343e6bf3575bef",
+      "markers": {
+        "shouldn’t be used as a security measure": true,
+        "print, copy, paste": true,
+        "export copies": true
+      }
+    },
+    {
+      "source": "apps_script_quotas",
+      "url": "https://developers.google.com/apps-script/guides/services/quotas",
+      "started_at": "2026-10-14T21:17:44+00:00",
+      "checked_at": "2026-10-14T21:17:45+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/apps-script/guides/services/quotas",
+      "sha256_body": "2c64b0749c862e38b5523b1babcfa26f40391d940405221b038b97eed191f89a",
+      "markers": {
+        "your script throws an exception and execution stops": true,
+        "subject to change at any time without notice": true,
+        "Last updated 2026-09-03 UTC": true
+      }
+    },
+    {
+      "source": "microsoft_automation",
+      "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/automate-tasks",
+      "started_at": "2026-10-14T21:17:30+00:00",
+      "checked_at": "2026-10-14T21:17:30+00:00",
+      "status": 200,
+      "final_url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/automate-tasks",
+      "sha256_body": "0e89157d09a28fec550039919ab585626b30354f0f9a077266023d0985a28696",
+      "markers": {
+        "off-the-shelf tools": true,
+        "management burden": true
+      }
+    },
+    {
+      "source": "torno_home",
+      "url": "https://tornostudio.com/",
+      "started_at": "2026-10-14T21:17:30+00:00",
+      "checked_at": "2026-10-14T21:17:30+00:00",
+      "status": 200,
+      "final_url": "https://tornostudio.com/",
+      "sha256_body": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "markers": {
+        "Automatizo processos": true,
+        "Diagnóstico": true,
+        "Podemos começar por um processo específico": true
+      }
+    }
+  ],
+  "latest_recheck": {
+    "purpose": "Reconsulta antes da publicação autorizada; fonte factual, não valida intenção/volume, aprovação editorial ou publicação.",
+    "captured_by": "Farol",
+    "sources": [
+      {
+        "source": "google_sheets_protection",
+        "url": "https://support.google.com/docs/answer/1218656",
+        "started_at": "2026-10-14T21:29:33+00:00",
+        "checked_at": "2026-10-14T21:29:34+00:00",
+        "status": 200,
+        "final_url": "https://support.google.com/docs/answer/1218656",
+        "sha256_body": "dd4079b4429ca3d5d9d379bb5a3aeac666621a8833a5872a77779a12c112332a",
+        "markers": {
+          "shouldn’t be used as a security measure": true,
+          "print, copy, paste": true,
+          "export copies": true
+        }
+      },
+      {
+        "source": "apps_script_quotas",
+        "url": "https://developers.google.com/apps-script/guides/services/quotas",
+        "started_at": "2026-10-14T21:29:34+00:00",
+        "checked_at": "2026-10-14T21:29:35+00:00",
+        "status": 200,
+        "final_url": "https://developers.google.com/apps-script/guides/services/quotas",
+        "sha256_body": "7666db90450429a511b8e5a9a7f91de91887d2a44097e81706f827271be3b7dd",
+        "markers": {
+          "your script throws an exception and execution stops": true,
+          "subject to change at any time without notice": true,
+          "Last updated 2026-09-03 UTC": true
+        }
+      },
+      {
+        "source": "microsoft_automation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/automate-tasks",
+        "started_at": "2026-10-14T21:29:35+00:00",
+        "checked_at": "2026-10-14T21:29:35+00:00",
+        "status": 200,
+        "final_url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/automate-tasks",
+        "sha256_body": "0e89157d09a28fec550039919ab585626b30354f0f9a077266023d0985a28696",
+        "markers": {
+          "off-the-shelf tools": true,
+          "management burden": true
+        }
+      },
+      {
+        "source": "torno_home",
+        "url": "https://tornostudio.com/",
+        "started_at": "2026-10-14T21:29:35+00:00",
+        "checked_at": "2026-10-14T21:29:36+00:00",
+        "status": 200,
+        "final_url": "https://tornostudio.com/",
+        "sha256_body": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+        "markers": {
+          "Automatizo processos": true,
+          "Diagnóstico": true,
+          "Podemos começar por um processo específico": true
+        }
+      }
+    ]
+  }
+}

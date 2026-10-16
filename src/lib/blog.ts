@@ -9,7 +9,7 @@ export async function publicBlogEntries(locale: BlogLocale) {
     if (sha256(await readFile(path.join(process.cwd(),file))) !== hash) throw new Error('[blog] source changed after manifest');
   }
   return manifest.entries.filter(e=>e.locale===locale).map(meta=>{
-    const entry=collection.find(e=>e.data.content_id===meta.id);
+    const entry=collection.find(e=>e.data.content_id===meta.id || (meta.id==='torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento' && e.id===meta.collectionId));
     if(!entry)throw new Error(`[blog] missing collection entry ${meta.id}`);
     return {meta,entry};
   });

@@ -1,0 +1,129 @@
+{
+  "event_id": "release-approved:torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias:2026-10-15T22:28:58Z",
+  "recorded_at_utc": "2026-10-15T22:28:58Z",
+  "state_before": "draft",
+  "state_after": "approved",
+  "approval_kind": "inclusion_in_artifact_after_editorial_and_design_review",
+  "content_id": "torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias",
+  "intent_id": "existing-system-rebuild-evidence-pt",
+  "locale": "pt-BR",
+  "type": "artigo",
+  "proposed_path": "/blog/antes-de-refazer-sistema-evidencias/",
+  "canonical_url_planned": "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/",
+  "slug_reserved_or_implemented": false,
+  "h1_wrapper": "Antes de refazer um sistema: 7 evidências para decidir",
+  "seo_title": "Refazer um sistema? 7 evidências para decidir | Torno",
+  "seo_description": "Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências.",
+  "summary": "Peça evidências sobre o sistema existente antes de aprovar uma correção ou reconstrução.",
+  "approved_content": {
+    "path": "/private/tmp/torno-blog-article-review/antes-de-refazer-sistema-evidencias.md",
+    "sha256": "3b64339e8b72d2d8b3359b3275c568e5d6924261bd09de3cec630e705a93d79d",
+    "bytes": 9220,
+    "lines": 98,
+    "source_package_article_sha256": "10d9a67d761e5442d1c2558859f5014c8270879de6b2494d29d08192f664ea5a",
+    "change_from_original": "Somente H1 corporal inicial e linha em branco removidos; H1 será emitido pelo wrapper."
+  },
+  "approved_runtime_assets": [
+    {
+      "path": "/private/tmp/torno-blog-assets-tarde-20261015-r1/evidencias-decisao.svg",
+      "sha256": "07c35b5fa17ec1c9e19705050c19553469529a08b6039efe5d4d9e24d357c67b",
+      "markdown_reference": "./evidencias-decisao.svg"
+    },
+    {
+      "path": "/private/tmp/torno-blog-assets-tarde-20261015-r1/exemplo-aprovacao.svg",
+      "sha256": "6b2e9d913c417974600f2550a3bedb623aa827d5e3668424844a02e6a228607b",
+      "markdown_reference": "./exemplo-aprovacao.svg"
+    }
+  ],
+  "asset_scope": "Somente Markdown final e os dois SVGs corrigidos são conteúdo público aprovado; quatro PNGs 360/1080 são exportações de QA, excluídas do runtime.",
+  "asset_evidence": {
+    "manifest_path": "/private/tmp/torno-blog-assets-tarde-20261015-r1/asset-manifest.json",
+    "manifest_sha256": "4bd3335396355b191e3bc1bd9d43d926baf2374812db901c91b7e6e070cc05fb",
+    "diff_path": "/private/tmp/torno-blog-assets-tarde-20261015-r1/asset-diff.patch",
+    "diff_sha256": "f56ee7325c050866941ea0b1b93477ad88e81284f0442645f751c8e7113810df",
+    "change": "Somente fonte dos créditos 12→15 em cada SVG; pacote original intacto."
+  },
+  "intent_decision": {
+    "decided_by": "Trilha",
+    "final_status": "GO editorial final qualitativo para new_distinct_intent",
+    "final_decided_at_utc": "2026-10-15T22:28:11Z",
+    "initial_decided_at_utc": "2026-10-15T22:23:16Z",
+    "history_path": "/Users/henriquepett/Downloads/pessoal/projeto-50k/marketing/blog/HISTORICO-INTENCAO-URL.md",
+    "history_sha256_before_receipt": "39b651ed7debf12454c49484b52c255080b46def969e1366c8ae504a2a4688a2",
+    "overlap": "Moderado com /recuperacao-de-projeto/, que conserva contratação, fit, escopo e preço; artigo mantém checklist de evidências antes de aceitar corrigir ou refazer.",
+    "serp_limit": "Amostra externa em português mostra concorrência e não comprova Google BR localizado, cobertura, posição ou vantagem de ranking.",
+    "quantitative_demand": "SEM DADO",
+    "gsc_indexation_queries_impressions_position": "SEM DADO"
+  },
+  "editorial_review": {
+    "reviewer": "Verso",
+    "status": "PASS factual/editorial dos bytes salvos",
+    "reviewed_at_utc": "2026-10-15T22:25:20Z",
+    "markdown_sha256": "3b64339e8b72d2d8b3359b3275c568e5d6924261bd09de3cec630e705a93d79d",
+    "source_evidence_path": "/private/tmp/torno-blog-article-review/refazer-sistema-fonte-check-20261015.json",
+    "source_evidence_sha256": "57aa070426cc1c010dedf721e9b64e748dc32bc2e5051fd97181cca94b01bc71",
+    "source_checked_at_utc": {
+      "google_sre": "2026-10-15T22:23:38.468763Z",
+      "aws_recovery": "2026-10-15T22:23:37.625187Z",
+      "fowler_refactoring": "2026-10-15T22:23:38.122341Z",
+      "microsoft_strangler": "2026-10-15T22:23:37.332897Z",
+      "torno_recovery": "2026-10-15T22:23:37.312753Z",
+      "torno_home": "2026-10-15T22:23:37.162272Z",
+      "calendly": "2026-10-15T22:23:37.891137Z"
+    },
+    "source_limit": "Quatro fontes primárias e home, landing de recuperação e Calendly: sete GET 200 registrados; corpos brutos não salvos, só hashes e trechos marcadores. CTA grátis/45 min sustentado pelo texto da home; Calendly não prova gratuidade ou disponibilidade. Sem caso, resultado ou diagnóstico individual inventado."
+  },
+  "visual_review": {
+    "iris_status": "PASS técnico read-only da correção dos créditos; HOLD de identidade anterior reconciliado pelo design owner",
+    "timbre_status": "PASS GLOBAL dos dois SVGs corrigidos como figuras editoriais autocontidas",
+    "timbre_decided_at_local": "2026-10-15 19:27 BRT",
+    "design_rule": "Tokens e IBM Plex da spec §4 regem UI HTML; estas ilustrações SVG não são controles. Sem exceção formal nem outra mudança de estilo.",
+    "integration_conditions": [
+      "figuras editoriais com alt e legenda hipotéticos adjacentes",
+      "largura útil de pelo menos 328px em viewport 360px",
+      "conferir layout e legibilidade no preview antes de promover"
+    ]
+  },
+  "authorization_provenance": {
+    "standing_authorization": {
+      "authorized_by": "Henrique",
+      "authorized_date": "2026-10-14",
+      "evidence": "Autorização permanente para publicação comunicada na coordenação do blog, condicionada aos gates; horário exato desta mensagem não atribuído."
+    },
+    "specific_instruction": {
+      "authorized_by": "Henrique via coordenação",
+      "authorized_date": "2026-10-15",
+      "exact_authorized_at_utc": null,
+      "evidence": "Pedido explícito atual para GO final Trilha e recibo próprio hash-bound destes bytes, seguido de integração somente após validação; não é revisão pessoal do corpo ou hash por Henrique."
+    },
+    "delegated_release_approval": {
+      "release_approved_by": "Farol (delegado operacional)",
+      "release_approved_at_utc": "2026-10-15T22:28:58Z",
+      "release_approval_evidence": "Este recibo aprova a inclusão apenas do conteúdo e assets identificados por hash, com metadados e intenção acima."
+    },
+    "editorial_review_by_henrique": false,
+    "personal_hash_approval_by_henrique": false
+  },
+  "author_name": null,
+  "author_basis": null,
+  "byline": "omitted",
+  "schema_author": "omitted",
+  "first_published_at": null,
+  "substantive_updated_at": null,
+  "evidence_of_publication": null,
+  "indexation_observation": "SEM DADO",
+  "translation_of": null,
+  "english_version": null,
+  "publication": {
+    "preview": null,
+    "production": null,
+    "published": false
+  },
+  "technical_gates_pending": [
+    "Revalidar produção Netlify e Edge imediatamente antes do candidate e da promoção",
+    "Conferir H1 único, SEO metadata, canonical, links e fonte no HTML",
+    "Conferir figure, alt, legenda e largura útil >=328px em mobile",
+    "Conferir hashes dos SVGs públicos, sitemap e preservação das URLs anteriores",
+    "QA independente de preview e produção antes de evento published"
+  ]
+}

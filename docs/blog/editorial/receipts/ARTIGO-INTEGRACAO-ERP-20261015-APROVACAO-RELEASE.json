@@ -1,0 +1,113 @@
+{
+  "event_id": "release-approved:torno-artigo-pt-20261015-integracao-erp-briefing:2026-10-15T16:30:30Z",
+  "recorded_at_utc": "2026-10-15T16:30:30Z",
+  "state_before": "draft",
+  "state_after": "approved",
+  "approval_kind": "inclusion_in_artifact_after_editorial_review",
+  "content_id": "torno-artigo-pt-20261015-integracao-erp-briefing",
+  "intent_id": "erp-integration-prequote-brief-pt",
+  "locale": "pt-BR",
+  "type": "artigo",
+  "proposed_path": "/blog/integracao-erp-briefing-orcamento/",
+  "canonical_url_planned": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/",
+  "slug_reserved_or_implemented": false,
+  "h1_wrapper": "Integração com ERP: o que reunir antes de pedir orçamento",
+  "seo_title": "Integração com ERP: briefing para orçamento | Torno",
+  "seo_description": "Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências.",
+  "approved_content": {
+    "path": "/private/tmp/torno-blog-article-review/integracao-erp-briefing-final.md",
+    "sha256": "133f80ab8567ba74e30f4a178000ec0414b8a2771b182e052ef85d991deaf235",
+    "bytes": 7437,
+    "lines": 71,
+    "source_briefing_sha256": "c831ffddd1c5b56afdca0e8be5fd9bfc9b1156abc04eefd2c2ae60a3b1b5040a",
+    "change_from_briefing": "Somente H1 inicial e linha em branco removidos; H1 será emitido pelo wrapper."
+  },
+  "approved_assets": [
+    {
+      "path": "/Users/henriquepett/Documents/Codex/2026-10-14/task/editorial-20261015-meiodia/integracao-erp-fluxo.svg",
+      "sha256": "cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c",
+      "markdown_reference": "./integracao-erp-fluxo.svg"
+    },
+    {
+      "path": "/Users/henriquepett/Documents/Codex/2026-10-14/task/editorial-20261015-meiodia/integracao-erp-pendencias.svg",
+      "sha256": "47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785",
+      "markdown_reference": "./integracao-erp-pendencias.svg"
+    }
+  ],
+  "asset_scope": "Somente os dois SVGs acima no artigo público; PNGs de conferência excluídos.",
+  "intent_decision": {
+    "decided_by": "Trilha",
+    "status": "GO editorial final para new_distinct_intent",
+    "decided_at_utc": "2026-10-15T16:28:10Z",
+    "history_path": "marketing/blog/HISTORICO-INTENCAO-URL.md",
+    "history_sha256_before_this_receipt": "599edf42118c5128f882864430ce2294ebcdea3b178e544f8134bb10f4dcaef8",
+    "quantitative_demand": "SEM DADO",
+    "gsc": "SEM DADO",
+    "external_serp_limit": "Amostra em português não comprova localização Google BR, posição ou cobertura; já há concorrência relevante."
+  },
+  "editorial_review": {
+    "reviewer": "Verso",
+    "status": "PASS factual/editorial on saved bytes",
+    "reviewed_at_utc": "2026-10-15T16:26:47Z",
+    "markdown_sha256": "133f80ab8567ba74e30f4a178000ec0414b8a2771b182e052ef85d991deaf235",
+    "source_review_path": "marketing/blog/ARTIGO-INTEGRACAO-ERP-20261015-REVISAO-FONTES.md",
+    "source_review_sha256": "2692db14b2ce2bb29a541568cd048b08ed728c33f943b018fbdfa85ca1314134",
+    "source_evidence_limit": "Verso reportou URLs finais, HTTP 200, checked_at, tamanho e SHA dos seis GETs do lote; nenhum JSON/snapshot HTTP foi salvo. Houve consultas web.run anteriores e três GETs complementares sem horário/hash próprios, descritos no relatório."
+  },
+  "visual_review": {
+    "iris_initial_status": "HOLD visual por identidade de fonte, paleta e raios nos SVGs originais",
+    "timbre_adjudication": "PASS somente como figuras editoriais, sem editar os dois SVGs",
+    "adjudication_at_utc": null,
+    "integration_conditions": [
+      "figure centralizada com max-inline-size 480px",
+      "img display block, width 100%, height auto, sem padding redutor",
+      "largura útil da figura de pelo menos 328px",
+      "alt e legenda hipotéticos adjacentes",
+      "reavaliar se largura útil cair abaixo de 328px ou se usada como controle de UI"
+    ]
+  },
+  "authorization_provenance": {
+    "standing_authorization": {
+      "authorized_by": "Henrique",
+      "authorized_date": "2026-10-14",
+      "evidence": "Autorização permanente de publicação comunicada por Henrique e registrada na coordenação do blog; publicação ainda condicionada aos gates."
+    },
+    "specific_erp_instruction": {
+      "authorized_by": "Henrique via coordenação",
+      "authorized_date": "2026-10-15",
+      "exact_authorized_at_utc": null,
+      "evidence": "Pedido deste turno para decidir GO/HOLD e, se GO após Verso e Íris/Timbre, emitir recibo ERP próprio vinculado aos hashes; horário exato da mensagem não atribuído."
+    },
+    "delegated_release_approval": {
+      "release_approved_by": "Farol (delegado operacional)",
+      "release_approved_at_utc": "2026-10-15T16:30:30Z",
+      "release_approval_evidence": "Este recibo vincula aprovação de inclusão exclusivamente ao Markdown final, dois SVGs, intenção e metadados identificados acima."
+    },
+    "editorial_review_by_henrique": false,
+    "personal_hash_approval_by_henrique": false
+  },
+  "author_name": null,
+  "author_basis": null,
+  "byline": "omitted",
+  "publication": {
+    "preview": null,
+    "production": null,
+    "published": false,
+    "first_published_at": null,
+    "substantive_updated_at": null,
+    "evidence_of_publication": null,
+    "indexation_observation": "SEM DADO"
+  },
+  "technical_gates_pending": [
+    "Revalidar baseline de produção e guard antes de qualquer candidate",
+    "Conferir no artefato H1 único, SEO metadata, canonical, fontes e links",
+    "Conferir figure/alt/legenda e largura útil >=328px em 360px e 390px",
+    "Conferir SVGs públicos por hash, sitemap e preservação de artigos/cases existentes",
+    "QA de preview e produção antes de registrar published"
+  ],
+  "notes": [
+    "Recibo próprio do artigo ERP; não reaproveita aprovação de planilhas ou critérios.",
+    "Aprova inclusão no artefato após revisão editorial, não é evidência de deploy ou indexação.",
+    "Sem autoria, byline, data ou tradução EN inventada."
+  ]
+}

@@ -1,0 +1,457 @@
+{
+  "entries": [
+    {
+      "contentId": "torno-artigo-pt-20261014-planilhas",
+      "intentId": "spreadsheet-to-system-pt",
+      "locale": "pt-BR",
+      "path": "/blog/quando-automatizar-processos-planilhas/",
+      "contentRevision": "a84d4826d4b1d68efc03767aea2c09dd2ba8386a7b1ddaee87f235cc15974d66",
+      "approvedBy": "Henrique",
+      "approvedAt": "2026-10-14T21:28:02Z",
+      "reviewedBy": "Verso",
+      "reviewedAt": "2026-10-14T21:33:40Z",
+      "authorizationEvidence": {
+        "operational": {
+          "authorizedBy": "Henrique",
+          "authorizedAt": "2026-10-14T21:28:02Z",
+          "instruction": "documente a decisão de release como autorização de Henrique 21:28:02Z vinculada ao hash Verso"
+        },
+        "business": {
+          "owner": "Trilha",
+          "decision": "GO de negócio para o artigo apesar do NO-GO SEO histórico; SEM DADO de volume permanece explícito.",
+          "recordedAt": "2026-10-14T21:28:02Z",
+          "source": "projeto-50k/marketing/blog/CONTRATO-EDITORIAL.md"
+        },
+        "editorial": {
+          "reviewer": "Verso",
+          "reviewedAt": "2026-10-14T21:33:40Z",
+          "sha256": "a84d4826d4b1d68efc03767aea2c09dd2ba8386a7b1ddaee87f235cc15974d66"
+        }
+      }
+    },
+    {
+      "contentId": "torno-artigo-pt-20261015-criterios-aceite-mvp",
+      "intentId": "software-vendor-choice-pt",
+      "locale": "pt-BR",
+      "path": "/blog/criterios-aceite-mvp/",
+      "contentRevision": "bfee8c6b195d2ee2b3946327aa0e010348921bde6edc64c29169ab00e5d151e2",
+      "approvedBy": "Farol (delegado operacional)",
+      "approvedAt": "2026-10-15T12:35:03Z",
+      "reviewedBy": "Verso",
+      "reviewedAt": "2026-10-15T12:34:07Z",
+      "authorizationEvidence": {
+        "authorization_provenance": {
+          "standing_authorization": {
+            "authorized_by": "Henrique",
+            "authorized_date": "2026-10-14",
+            "evidence_path": "marketing/blog/HISTORICO-INTENCAO-URL.md, evento de decisão de negócio do fundador",
+            "scope": "Autorização permanente de publicação, condicionada aos gates editoriais e de QA."
+          },
+          "specific_operational_delegation": {
+            "authorized_by": "Henrique",
+            "authorized_at_utc": "2026-10-15T11:24:34Z",
+            "evidence": "Registro Maestri recall blue indicado por Henrique; retomada 'Pode prosseguir' comunicada pela coordenação após o congelamento."
+          },
+          "prior_delegated_release_approval": {
+            "approved_by": "Farol (delegado operacional)",
+            "approved_at_utc": "2026-10-15T11:36:05Z",
+            "scope": "Aprovação anterior vinculada ao body SHA-256 b63aa2587d0ff3cccf3d8d8af37b647c2358f4fea2a5169c91bd2b278bd393f6; preservada como histórico, sem valer para os bytes finais."
+          },
+          "current_delegated_release_approval": {
+            "approved_by": "Farol (delegado operacional)",
+            "approved_at_utc": "2026-10-15T12:35:03Z",
+            "scope": "Incluir no artefato/release somente o Markdown final SHA-256 bfee8c6b195d2ee2b3946327aa0e010348921bde6edc64c29169ab00e5d151e2, SVG SHA-256 77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582 e metadados SEO exatos deste adendo, após PASS Verso e GO Trilha."
+          },
+          "editorial_review_by_henrique": false,
+          "personal_hash_approval_by_henrique": false
+        },
+        "related_evidence": {
+          "trail_decision": "Trilha GO qualitativo at 2026-10-15T11:28:11Z for software-vendor-choice-pt; demand SEM DADO.",
+          "verso_review": "PASS factual/editorial claim-by-claim on saved bytes at 2026-10-15T12:34:07Z for body SHA-256 bfee8c6b195d2ee2b3946327aa0e010348921bde6edc64c29169ab00e5d151e2"
+        },
+        "release_addendum_v3": {
+          "event_id": "release-addendum-v3:torno-artigo-pt-20261015-criterios-aceite-mvp:2026-10-15T12:35:03Z",
+          "path": "marketing/blog/ARTIGO-CRITERIOS-ACEITE-MVP-20261015-ADENDO-RELEASE-V3.json",
+          "sha256": "ec2c57444bc88cf22fc251c98c1c48da3333686ea4b13005526e90df6c8df939",
+          "recorded_at_utc": "2026-10-15T12:35:03Z"
+        }
+      },
+      "approvalScope": "Somente Markdown e SVG entram no artefato; PNGs não entram no runtime público.",
+      "metadata": {
+        "title": "Critérios de aceite para MVP: guia para contratar | Torno",
+        "description": "Defina critérios de aceite antes de contratar um MVP. Veja exemplos, uma ficha de escopo e como validar integrações sem depender de promessas vagas."
+      },
+      "metadataAddendum": {
+        "path": "marketing/blog/ARTIGO-CRITERIOS-ACEITE-MVP-20261015-ADENDO-RELEASE-V3.json",
+        "sha256": "ec2c57444bc88cf22fc251c98c1c48da3333686ea4b13005526e90df6c8df939",
+        "recordedAt": "2026-10-15T12:35:03Z",
+        "seo_title": "Critérios de aceite para MVP: guia para contratar | Torno",
+        "seo_description": "Defina critérios de aceite antes de contratar um MVP. Veja exemplos, uma ficha de escopo e como validar integrações sem depender de promessas vagas."
+      },
+      "approvedFiles": [
+        {
+          "path": "torno-criterios-aceite-mvp.md",
+          "sha256": "bfee8c6b195d2ee2b3946327aa0e010348921bde6edc64c29169ab00e5d151e2"
+        },
+        {
+          "path": "torno.svg",
+          "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582"
+        }
+      ],
+      "assets": [
+        {
+          "path": "torno.svg",
+          "sha256": "77d857000b37aa06cf03a1d61905b8b67cb3ef2c3df7ca2dd5d53b0185750582"
+        }
+      ],
+      "excludedAssets": [
+        "torno.png",
+        "torno-360.png"
+      ],
+      "sources": {
+        "previousReleaseReceiptSha256": "fc4d6924b7494f80393eb2f5eedaf2449f089512f7c5813e1f90ecd899af83b9",
+        "previousMetadataAddendumSha256": "8fdabafcadec3fd2b74f468db58592d9a86464e8d3aa985259de1b944080e82a",
+        "releaseAddendumV3Sha256": "ec2c57444bc88cf22fc251c98c1c48da3333686ea4b13005526e90df6c8df939",
+        "historySha256": "16ce0a52c466e8f33a454317103d93289b5e8fa9e77f57c326e462aecf3cf5b9",
+        "sourceReviews": [
+          {
+            "path": "marketing/blog/ARTIGO-CRITERIOS-ACEITE-MVP-20261015-FONTES-HTTP.json",
+            "sha256": "171c6b697391b85250ee9e44bcd9de1cded79f4b4c1d55e032b128e6eebe48dd"
+          },
+          {
+            "path": "marketing/blog/ARTIGO-CRITERIOS-ACEITE-MVP-20261015-REVISAO-FONTES.md",
+            "sha256": "bd8c600b75bb25cce7bac9bf0c876c6198a5122872288447ee4883c794350033e"
+          }
+        ]
+      }
+    },
+    {
+      "contentId": "torno-artigo-pt-20261015-integracao-erp-briefing",
+      "intentId": "erp-integration-prequote-brief-pt",
+      "locale": "pt-BR",
+      "path": "/blog/integracao-erp-briefing-orcamento/",
+      "contentRevision": "133f80ab8567ba74e30f4a178000ec0414b8a2771b182e052ef85d991deaf235",
+      "approvedBy": "Farol (delegado operacional)",
+      "approvedAt": "2026-10-15T16:30:30Z",
+      "reviewedBy": "Verso",
+      "reviewedAt": "2026-10-15T16:26:47Z",
+      "authorizationEvidence": {
+        "receiptEventId": "release-approved:torno-artigo-pt-20261015-integracao-erp-briefing:2026-10-15T16:30:30Z",
+        "receiptSha256": "3ee53dbabb278cd403ff0c13098bc2a51d1a218f9661e4cc294ca932256e086d",
+        "intentDecision": {
+          "decided_by": "Trilha",
+          "status": "GO editorial final para new_distinct_intent",
+          "decided_at_utc": "2026-10-15T16:28:10Z",
+          "history_path": "marketing/blog/HISTORICO-INTENCAO-URL.md",
+          "history_sha256_before_this_receipt": "599edf42118c5128f882864430ce2294ebcdea3b178e544f8134bb10f4dcaef8",
+          "quantitative_demand": "SEM DADO",
+          "gsc": "SEM DADO",
+          "external_serp_limit": "Amostra em português não comprova localização Google BR, posição ou cobertura; já há concorrência relevante."
+        },
+        "editorialReview": {
+          "reviewer": "Verso",
+          "status": "PASS factual/editorial on saved bytes",
+          "reviewed_at_utc": "2026-10-15T16:26:47Z",
+          "markdown_sha256": "133f80ab8567ba74e30f4a178000ec0414b8a2771b182e052ef85d991deaf235",
+          "source_review_path": "marketing/blog/ARTIGO-INTEGRACAO-ERP-20261015-REVISAO-FONTES.md",
+          "source_review_sha256": "2692db14b2ce2bb29a541568cd048b08ed728c33f943b018fbdfa85ca1314134",
+          "source_evidence_limit": "Verso reportou URLs finais, HTTP 200, checked_at, tamanho e SHA dos seis GETs do lote; nenhum JSON/snapshot HTTP foi salvo. Houve consultas web.run anteriores e três GETs complementares sem horário/hash próprios, descritos no relatório."
+        },
+        "visualReview": {
+          "iris_initial_status": "HOLD visual por identidade de fonte, paleta e raios nos SVGs originais",
+          "timbre_adjudication": "PASS somente como figuras editoriais, sem editar os dois SVGs",
+          "adjudication_at_utc": null,
+          "integration_conditions": [
+            "figure centralizada com max-inline-size 480px",
+            "img display block, width 100%, height auto, sem padding redutor",
+            "largura útil da figura de pelo menos 328px",
+            "alt e legenda hipotéticos adjacentes",
+            "reavaliar se largura útil cair abaixo de 328px ou se usada como controle de UI"
+          ]
+        },
+        "authorizationProvenance": {
+          "standing_authorization": {
+            "authorized_by": "Henrique",
+            "authorized_date": "2026-10-14",
+            "evidence": "Autorização permanente de publicação comunicada por Henrique e registrada na coordenação do blog; publicação ainda condicionada aos gates."
+          },
+          "specific_erp_instruction": {
+            "authorized_by": "Henrique via coordenação",
+            "authorized_date": "2026-10-15",
+            "exact_authorized_at_utc": null,
+            "evidence": "Pedido deste turno para decidir GO/HOLD e, se GO após Verso e Íris/Timbre, emitir recibo ERP próprio vinculado aos hashes; horário exato da mensagem não atribuído."
+          },
+          "delegated_release_approval": {
+            "release_approved_by": "Farol (delegado operacional)",
+            "release_approved_at_utc": "2026-10-15T16:30:30Z",
+            "release_approval_evidence": "Este recibo vincula aprovação de inclusão exclusivamente ao Markdown final, dois SVGs, intenção e metadados identificados acima."
+          },
+          "editorial_review_by_henrique": false,
+          "personal_hash_approval_by_henrique": false
+        }
+      },
+      "approvalScope": "Somente os dois SVGs acima no artigo público; PNGs de conferência excluídos.",
+      "metadata": {
+        "title": "Integração com ERP: briefing para orçamento | Torno",
+        "description": "Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências.",
+        "h1": "Integração com ERP: o que reunir antes de pedir orçamento",
+        "canonical": "https://tornostudio.com/blog/integracao-erp-briefing-orcamento/"
+      },
+      "approvedFiles": [
+        {
+          "path": "integracao-erp-briefing-final.md",
+          "sha256": "133f80ab8567ba74e30f4a178000ec0414b8a2771b182e052ef85d991deaf235"
+        },
+        {
+          "path": "integracao-erp-fluxo.svg",
+          "sha256": "cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c"
+        },
+        {
+          "path": "integracao-erp-pendencias.svg",
+          "sha256": "47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785"
+        }
+      ],
+      "assets": [
+        {
+          "path": "integracao-erp-fluxo.svg",
+          "sha256": "cf0aa5fe6c9d404e0e52692adc3ae6da37fd6f6771395f5b93acf70cee55ba3c"
+        },
+        {
+          "path": "integracao-erp-pendencias.svg",
+          "sha256": "47e42d7a89d4ec7185a22883894901ba97aaa8a9b8ea871779de3ab910734785"
+        }
+      ],
+      "excludedAssets": [
+        "*.png"
+      ],
+      "sources": {
+        "releaseReceiptSha256": "3ee53dbabb278cd403ff0c13098bc2a51d1a218f9661e4cc294ca932256e086d",
+        "sourceReviewSha256": "2692db14b2ce2bb29a541568cd048b08ed728c33f943b018fbdfa85ca1314134",
+        "historyBeforeReceiptSha256": "599edf42118c5128f882864430ce2294ebcdea3b178e544f8134bb10f4dcaef8"
+      }
+    },
+    {
+      "contentId": "torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias",
+      "intentId": "existing-system-rebuild-evidence-pt",
+      "locale": "pt-BR",
+      "path": "/blog/antes-de-refazer-sistema-evidencias/",
+      "contentRevision": "3b64339e8b72d2d8b3359b3275c568e5d6924261bd09de3cec630e705a93d79d",
+      "approvedBy": "Farol (delegado operacional)",
+      "approvedAt": "2026-10-15T22:28:58Z",
+      "reviewedBy": "Verso",
+      "reviewedAt": "2026-10-15T22:25:20Z",
+      "authorizationEvidence": {
+        "receiptEventId": "release-approved:torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias:2026-10-15T22:28:58Z",
+        "receiptSha256": "64df680bc7dadb73fe15842c0820cb9fca0ca12a25c89a8ff423275d018eaaa5",
+        "intentDecision": {
+          "decided_by": "Trilha",
+          "final_status": "GO editorial final qualitativo para new_distinct_intent",
+          "final_decided_at_utc": "2026-10-15T22:28:11Z",
+          "initial_decided_at_utc": "2026-10-15T22:23:16Z",
+          "history_path": "/Users/henriquepett/Downloads/pessoal/projeto-50k/marketing/blog/HISTORICO-INTENCAO-URL.md",
+          "history_sha256_before_receipt": "39b651ed7debf12454c49484b52c255080b46def969e1366c8ae504a2a4688a2",
+          "overlap": "Moderado com /recuperacao-de-projeto/, que conserva contratação, fit, escopo e preço; artigo mantém checklist de evidências antes de aceitar corrigir ou refazer.",
+          "serp_limit": "Amostra externa em português mostra concorrência e não comprova Google BR localizado, cobertura, posição ou vantagem de ranking.",
+          "quantitative_demand": "SEM DADO",
+          "gsc_indexation_queries_impressions_position": "SEM DADO"
+        },
+        "editorialReview": {
+          "reviewer": "Verso",
+          "status": "PASS factual/editorial dos bytes salvos",
+          "reviewed_at_utc": "2026-10-15T22:25:20Z",
+          "markdown_sha256": "3b64339e8b72d2d8b3359b3275c568e5d6924261bd09de3cec630e705a93d79d",
+          "source_evidence_path": "/private/tmp/torno-blog-article-review/refazer-sistema-fonte-check-20261015.json",
+          "source_evidence_sha256": "57aa070426cc1c010dedf721e9b64e748dc32bc2e5051fd97181cca94b01bc71",
+          "source_checked_at_utc": {
+            "google_sre": "2026-10-15T22:23:38.468763Z",
+            "aws_recovery": "2026-10-15T22:23:37.625187Z",
+            "fowler_refactoring": "2026-10-15T22:23:38.122341Z",
+            "microsoft_strangler": "2026-10-15T22:23:37.332897Z",
+            "torno_recovery": "2026-10-15T22:23:37.312753Z",
+            "torno_home": "2026-10-15T22:23:37.162272Z",
+            "calendly": "2026-10-15T22:23:37.891137Z"
+          },
+          "source_limit": "Quatro fontes primárias e home, landing de recuperação e Calendly: sete GET 200 registrados; corpos brutos não salvos, só hashes e trechos marcadores. CTA grátis/45 min sustentado pelo texto da home; Calendly não prova gratuidade ou disponibilidade. Sem caso, resultado ou diagnóstico individual inventado."
+        },
+        "visualReview": {
+          "iris_status": "PASS técnico read-only da correção dos créditos; HOLD de identidade anterior reconciliado pelo design owner",
+          "timbre_status": "PASS GLOBAL dos dois SVGs corrigidos como figuras editoriais autocontidas",
+          "timbre_decided_at_local": "2026-10-15 19:27 BRT",
+          "design_rule": "Tokens e IBM Plex da spec §4 regem UI HTML; estas ilustrações SVG não são controles. Sem exceção formal nem outra mudança de estilo.",
+          "integration_conditions": [
+            "figuras editoriais com alt e legenda hipotéticos adjacentes",
+            "largura útil de pelo menos 328px em viewport 360px",
+            "conferir layout e legibilidade no preview antes de promover"
+          ]
+        },
+        "authorizationProvenance": {
+          "standing_authorization": {
+            "authorized_by": "Henrique",
+            "authorized_date": "2026-10-14",
+            "evidence": "Autorização permanente para publicação comunicada na coordenação do blog, condicionada aos gates; horário exato desta mensagem não atribuído."
+          },
+          "specific_instruction": {
+            "authorized_by": "Henrique via coordenação",
+            "authorized_date": "2026-10-15",
+            "exact_authorized_at_utc": null,
+            "evidence": "Pedido explícito atual para GO final Trilha e recibo próprio hash-bound destes bytes, seguido de integração somente após validação; não é revisão pessoal do corpo ou hash por Henrique."
+          },
+          "delegated_release_approval": {
+            "release_approved_by": "Farol (delegado operacional)",
+            "release_approved_at_utc": "2026-10-15T22:28:58Z",
+            "release_approval_evidence": "Este recibo aprova a inclusão apenas do conteúdo e assets identificados por hash, com metadados e intenção acima."
+          },
+          "editorial_review_by_henrique": false,
+          "personal_hash_approval_by_henrique": false
+        }
+      },
+      "approvalScope": "Somente Markdown final e os dois SVGs corrigidos são conteúdo público aprovado; quatro PNGs 360/1080 são exportações de QA, excluídas do runtime.",
+      "metadata": {
+        "title": "Refazer um sistema? 7 evidências para decidir | Torno",
+        "description": "Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências.",
+        "h1": "Antes de refazer um sistema: 7 evidências para decidir",
+        "canonical": "https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/"
+      },
+      "approvedFiles": [
+        {
+          "path": "antes-de-refazer-sistema-evidencias.md",
+          "sha256": "3b64339e8b72d2d8b3359b3275c568e5d6924261bd09de3cec630e705a93d79d"
+        },
+        {
+          "path": "evidencias-decisao.svg",
+          "sha256": "07c35b5fa17ec1c9e19705050c19553469529a08b6039efe5d4d9e24d357c67b"
+        },
+        {
+          "path": "exemplo-aprovacao.svg",
+          "sha256": "6b2e9d913c417974600f2550a3bedb623aa827d5e3668424844a02e6a228607b"
+        }
+      ],
+      "assets": [
+        {
+          "path": "evidencias-decisao.svg",
+          "sha256": "07c35b5fa17ec1c9e19705050c19553469529a08b6039efe5d4d9e24d357c67b"
+        },
+        {
+          "path": "exemplo-aprovacao.svg",
+          "sha256": "6b2e9d913c417974600f2550a3bedb623aa827d5e3668424844a02e6a228607b"
+        }
+      ],
+      "excludedAssets": [
+        "*.png"
+      ],
+      "sources": {
+        "releaseReceiptSha256": "64df680bc7dadb73fe15842c0820cb9fca0ca12a25c89a8ff423275d018eaaa5",
+        "sourceReviewSha256": "57aa070426cc1c010dedf721e9b64e748dc32bc2e5051fd97181cca94b01bc71",
+        "assetManifestSha256": "4bd3335396355b191e3bc1bd9d43d926baf2374812db901c91b7e6e070cc05fb",
+        "historyAfterApprovalSha256": "a95898b8542f12fe7d93c8fec83edd88025d103794848e290f5e944eaae7d2fb"
+      }
+    },
+    {
+      "contentId": "torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento",
+      "intentId": "postlaunch-software-operating-cost-pt",
+      "locale": "pt-BR",
+      "path": "/blog/custo-manutencao-software-apos-lancamento/",
+      "contentRevision": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8",
+      "approvedBy": "Farol (delegado operacional)",
+      "approvedAt": "2026-10-16T12:17:54Z",
+      "reviewedBy": "Verso",
+      "reviewedAt": "2026-10-16T12:06:26Z",
+      "approvalScope": "Exact reviewed Markdown, one original SVG, and sidecar placement; QA PNGs excluded.",
+      "authorizationEvidence": {
+        "receiptSha256": "1ad6b673effde63ba2f9769e00b7377861c556331e260d0deb20a3d9277ed3cf",
+        "receiptEventId": "release-approved:torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento:2026-10-16T12:17:54Z",
+        "intentDecision": {
+          "decided_by": "Trilha",
+          "qualitative_go_at_utc": "2026-10-16T11:24:31Z",
+          "final_go_at_utc": "2026-10-16T12:05:25Z",
+          "identity": "Post-launch recurring software operating cost, distinct from construction MVP cost draft on HOLD",
+          "overlap": "Moderate with home Product Evolution; home retains offer, plans and prices",
+          "quantitative_demand": "SEM DADO",
+          "gsc_indexation_queries_impressions_position": "SEM DADO",
+          "history_path": "/Users/henriquepett/Downloads/pessoal/projeto-50k/marketing/blog/HISTORICO-INTENCAO-URL.md",
+          "history_sha256_before_receipt": "0ae64c337c597c8c7c95b7ce8ae32b810a8c379aa98f1fdfac45a3263bc91cc4"
+        },
+        "editorialReview": {
+          "reviewer": "Verso",
+          "status": "PASS factual/editorial of exact Markdown bytes",
+          "reviewed_at_utc": "2026-10-16T12:06:26Z",
+          "markdown_sha256": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8",
+          "source_evidence_sha256": "29be5a5da81982d85e95edc2f91d02d845bcd1bbb760ea4fd4de779ac5ac8216",
+          "note": "Frontmatter contractual gaps are supplied by the separate hash-bound editorial sheet; Markdown body is unchanged."
+        },
+        "visualReview": {
+          "iris_status": "PASS visual read-only at 328/358/360/480; initial differences sent for design-owner adjudication",
+          "timbre_status": "PASS design-owner for original fixed editorial illustration",
+          "timbre_decided_at_local": "2026-10-16 09:16 BRT",
+          "design_rule": "Generic font stack and fixed SVG palette accepted for editorial illustration; future HTML UI, caption, links and CTA follow site tokens/IBM Plex.",
+          "placement_editorial_decision_by": "Trilha",
+          "placement_editorial_go_at_utc": "2026-10-16T12:16:56Z",
+          "integration_conditions": [
+            "Figure inserted at sidecar position with frozen Markdown intact",
+            "At least 328px useful width at viewport 360; maximum 480px desktop",
+            "Image 100% width and auto height without crop; adjacent alt/caption/text equivalent",
+            "Preview and production QA required"
+          ]
+        },
+        "authorizationProvenance": {
+          "standing_authorization": {
+            "authorized_by": "Henrique",
+            "authorized_date": "2026-10-14",
+            "exact_authorized_at_utc": null,
+            "evidence": "Standing authorization to publish blog posts after gates, communicated in coordination; exact time not established."
+          },
+          "specific_instruction": {
+            "authorized_by": "Henrique via coordination",
+            "authorized_date": "2026-10-16",
+            "exact_authorized_at_utc": null,
+            "evidence": "Explicit Pode postar instruction for the separate post-launch maintenance article; the original construction-cost MVP article remains on HOLD. This is operational delegation, not personal review or hash approval by Henrique."
+          },
+          "delegated_release_approval": {
+            "release_approved_by": "Farol (delegado operacional)",
+            "release_approved_at_utc": "2026-10-16T12:17:54Z",
+            "release_approval_evidence": "This hash-bound receipt approves inclusion of the exact Markdown, one SVG and sidecar placement under the exact metadata above."
+          },
+          "editorial_review_by_henrique": false,
+          "personal_hash_approval_by_henrique": false
+        }
+      },
+      "metadata": {
+        "title": "Custo de manutenção de software após o lançamento | Torno",
+        "description": "Planeje o custo recorrente de um software web após o lançamento: serviços de operação, suporte, correções e evolução, com premissas e responsáveis.",
+        "h1": "Custo de manutenção de software: o que prever após o lançamento",
+        "canonical": "https://tornostudio.com/blog/custo-manutencao-software-apos-lancamento/"
+      },
+      "assets": [
+        {
+          "path": "orcamento-apos-lancamento.svg",
+          "sha256": "36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d"
+        }
+      ],
+      "approvedFiles": [
+        {
+          "path": "custo-manutencao-software-apos-lancamento-final.md",
+          "sha256": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8"
+        },
+        {
+          "path": "orcamento-apos-lancamento.svg",
+          "sha256": "36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d"
+        },
+        {
+          "path": "sidecar.json",
+          "sha256": "4dd4c396929878576a452e08693e3e85d87e3d80377b9d2af3f42e02f581f196"
+        }
+      ],
+      "excludedAssets": [
+        "*.png"
+      ],
+      "sources": {
+        "releaseReceiptSha256": "1ad6b673effde63ba2f9769e00b7377861c556331e260d0deb20a3d9277ed3cf",
+        "editorialSheetSha256": "f3db6eb275824a45c3fec917772393cf84cec2be762a5523bd390e8acfaed5a4",
+        "sourceReviewSha256": "29be5a5da81982d85e95edc2f91d02d845bcd1bbb760ea4fd4de779ac5ac8216",
+        "assetManifestSha256": "21301bdfee6fc0b0fb88dffd968cfa6df337e23ce4f7c0668b4f11205a81e7cc",
+        "sidecarSha256": "4dd4c396929878576a452e08693e3e85d87e3d80377b9d2af3f42e02f581f196",
+        "historyAfterApprovalSha256": "ce340dd2e42f915949060f75a0041e8e8aa85a8e4dc16a39b6167cd22f4e6d47"
+      }
+    }
+  ]
+}

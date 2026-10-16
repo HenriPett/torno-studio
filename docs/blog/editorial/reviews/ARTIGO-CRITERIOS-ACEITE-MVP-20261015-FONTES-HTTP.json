@@ -1,0 +1,198 @@
+{
+  "collection": "single source-by-source HTTP collection",
+  "collection_completed_at_utc": "2026-10-15T11:29:50.892Z",
+  "decision_context": {
+    "trilha_decision_at_utc": "2026-10-15T11:28:11Z",
+    "decision": "GO qualitativo no cluster existente; reutilizar software-vendor-choice-pt em draft; proposed_path não reservado; factual gate separado"
+  },
+  "sources": [
+    {
+      "key": "cucumber_gherkin",
+      "url": "https://cucumber.io/docs/gherkin/reference/",
+      "entity": "Cucumber",
+      "source_date": "not stated in captured page (to confirm from page metadata)",
+      "claim_to_check": "Given/When/Then",
+      "request_started_at_utc": "2026-10-15T11:29:46.886Z",
+      "checked_at_utc": "2026-10-15T11:29:47.290Z",
+      "http_status": 200,
+      "final_url": "https://cucumber.io/docs/gherkin/reference/",
+      "content_type": "text/html; charset=utf-8",
+      "etag": null,
+      "last_modified": null,
+      "body_sha256": "97ca4441b103eba620eb6a95e372ca4bbbabb6f6fd1b8201f1679e772218e8d2",
+      "bytes": 86569,
+      "markers": [
+        {
+          "marker": "Given",
+          "found": true,
+          "excerpt": "two steps Scenario: Maker starts a game When the Maker starts a game Then the Maker waits for a Breaker to join # The second example has three steps Scenario: Breaker joins a game Given the Maker has started a game with the word \"silky\" When the Breaker joins the Maker's game Then the Breaker must guess a word with 5 characters The trailing portion (after the keyword) of each step is matched to a code block, called a step definition . Please note that some keywords are followed by a colon ( : ) and some are not . If you add a colon af"
+        },
+        {
+          "marker": "When",
+          "found": true,
+          "excerpt": " used for indentation. The recommended indentation level is two spaces. Here is an example: Feature: Guess the word # The first example has two steps Scenario: Maker starts a game When the Maker starts a game Then the Maker waits for a Breaker to join # The second example has three steps Scenario: Breaker joins a game Given the Maker has started a game with the word \"silky\" When the Breaker joins the Maker's game Then the Breaker must guess a word with 5 characters The trailing portion (after the keyword) of each step is matched to a "
+        },
+        {
+          "marker": "Then",
+          "found": true,
+          "excerpt": "commended indentation level is two spaces. Here is an example: Feature: Guess the word # The first example has two steps Scenario: Maker starts a game When the Maker starts a game Then the Maker waits for a Breaker to join # The second example has three steps Scenario: Breaker joins a game Given the Maker has started a game with the word \"silky\" When the Breaker joins the Maker's game Then the Breaker must guess a word with 5 characters The trailing portion (after the keyword) of each step is matched to a code block, called a step def"
+        }
+      ]
+    },
+    {
+      "key": "stripe_idempotency",
+      "url": "https://docs.stripe.com/api/idempotent_requests",
+      "entity": "Stripe",
+      "source_date": "not stated in captured page (to confirm from page metadata)",
+      "claim_to_check": "Retry/idempotency behavior and limits",
+      "request_started_at_utc": "2026-10-15T11:29:47.302Z",
+      "checked_at_utc": "2026-10-15T11:29:49.252Z",
+      "http_status": 200,
+      "final_url": "https://docs.stripe.com/api/idempotent_requests",
+      "content_type": "text/html; charset=utf-8",
+      "etag": null,
+      "last_modified": null,
+      "body_sha256": "08972ff7646b56ee50b2a5be16e1684429709e54748d8ee701b07f155574f658",
+      "bytes": 1376474,
+      "markers": [
+        {
+          "marker": "idempotency",
+          "found": true,
+          "excerpt": "mate Forwarding Privacy Webhooks 2026-09-30 . endive API Reference Docs Support Sign in → Idempotent requests Ask about this section Copy for LLM View as Markdown The API supports idempotency for safely retrying requests without accidentally performing the same operation twice. When creating or updating an object, use an idempotency key. Then, if a connection error occurs, you can safely repeat the request without risk of creating a second object or performing the update twice. To perform an idempotent request, provide an additional I"
+        },
+        {
+          "marker": "retry",
+          "found": true,
+          "excerpt": " Webhooks 2026-09-30 . endive API Reference Docs Support Sign in → Idempotent requests Ask about this section Copy for LLM View as Markdown The API supports idempotency for safely retrying requests without accidentally performing the same operation twice. When creating or updating an object, use an idempotency key. Then, if a connection error occurs, you can safely repeat the request without risk of creating a second object or performing the update twice. To perform an idempotent request, provide an additional IdempotencyKey element t"
+        }
+      ]
+    },
+    {
+      "key": "scrum_guide",
+      "url": "https://scrumguides.org/scrum-guide.html#increment",
+      "entity": "Scrum.org / Scrum Guide",
+      "source_date": "not stated in captured page (to confirm from page metadata)",
+      "claim_to_check": "Definition of Done and quality commitment",
+      "request_started_at_utc": "2026-10-15T11:29:49.277Z",
+      "checked_at_utc": "2026-10-15T11:29:49.670Z",
+      "http_status": 200,
+      "final_url": "https://scrumguides.org/scrum-guide.html#increment",
+      "content_type": "text/html; charset=utf-8",
+      "etag": "\"6797bedc-887f\"",
+      "last_modified": "Mon, 27 Jan 2025 17:14:04 GMT",
+      "body_sha256": "64aade688c3f2bceb1051268310e1cdcf503ac424e052a07414f60cabea8bcc0",
+      "bytes": 34943,
+      "markers": [
+        {
+          "marker": "Definition of Done",
+          "found": true,
+          "excerpt": " and will vary with the domain of work. However, the Developers are always accountable for: Creating a plan for the Sprint, the Sprint Backlog; Instilling quality by adhering to a Definition of Done; Adapting their plan each day toward the Sprint Goal; and, Holding each other accountable as professionals. Product Owner The Product Owner is accountable for maximizing the value of the product resulting from the work of the Scrum Team. How this is done may vary widely across organizations, Scrum Teams, and individuals. The Product Owner "
+        },
+        {
+          "marker": "commitment to quality",
+          "found": false,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "key": "torno_home",
+      "url": "https://tornostudio.com/",
+      "entity": "Torno Studio",
+      "source_date": "not stated in captured page (to confirm from page metadata)",
+      "claim_to_check": "Product Sprint scope/acceptance/exclusions and separation from build",
+      "request_started_at_utc": "2026-10-15T11:29:49.674Z",
+      "checked_at_utc": "2026-10-15T11:29:49.974Z",
+      "http_status": 200,
+      "final_url": "https://tornostudio.com/",
+      "content_type": "text/html; charset=UTF-8",
+      "etag": "\"8639a5563728353bf538f66263d99260-ssl\"",
+      "last_modified": null,
+      "body_sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+      "bytes": 69408,
+      "markers": [
+        {
+          "marker": "Product Sprint",
+          "found": true,
+          "excerpt": "n, grátis) Ver preços Preços publicados Código na sua conta desde o dia 1 Garantia de 60 dias no MVP Prefere começar por mensagem? Conte seu problema por e-mail Diagnóstico Grátis Product Sprint R$ 6.000 MVP Core R$ 42.000 O que você precisa resolver agora? Podemos começar por um processo específico ou pelo produto que você já tem. Primeiro, entendo o problema e defino com você o que precisa funcionar. 01 Parar de copiar dados entre sistemas E-mails, documentos e planilhas viram um fluxo com conferência, histórico e revisão da equipe "
+        },
+        {
+          "marker": "critérios de aceite",
+          "found": true,
+          "excerpt": " Sprint 2 semanas R$ 6.000 O projeto do seu produto, pronto para construir e com preço fechado. 100% abatido do MVP O que inclui Problema e métrica de sucesso definidos Escopo com critérios de aceite e o que fica fora Arquitetura técnica Protótipo navegável do fluxo principal Plano de marcos com preço fechado do MVP Pagamento: 100% antecipado. 100% abatido do MVP se você assinar em até 30 dias. Os entregáveis são seus, mesmo se não seguir comigo. ou ou Production-Ready 2–3 semanas R$ 18.000 Para quem já tem um protótipo e precisa colo"
+        },
+        {
+          "marker": "construção",
+          "found": true,
+          "excerpt": "m portal, SaaS ou ferramenta interna para uma necessidade concreta. Defino a primeira versão com critérios para aceitar a entrega. O Sprint entrega escopo e protótipo navegável. A construção é uma etapa separada. Comparar etapas e preços → Quem constrói: Henrique Pett LinkedIn GitHub Desde 2021 passei por quase todas as funções de um produto de dados e IA: pesquisa de ML, full stack, ciência de dados, engenharia de ML e gestão de produto. Num produto de IA para terminais de contêiner, construí o modelo como engenheiro de ML e passei a"
+        }
+      ]
+    },
+    {
+      "key": "torno_calendly",
+      "url": "https://calendly.com/henriquepett/45min",
+      "entity": "Calendly / Henrique Pett",
+      "source_date": "not stated in captured page (to confirm from page metadata)",
+      "claim_to_check": "45-minute free diagnostic CTA",
+      "request_started_at_utc": "2026-10-15T11:29:49.981Z",
+      "checked_at_utc": "2026-10-15T11:29:50.891Z",
+      "http_status": 200,
+      "final_url": "https://calendly.com/henriquepett/45min",
+      "content_type": "text/html; charset=utf-8",
+      "etag": null,
+      "last_modified": null,
+      "body_sha256": "7450babebc349a8070fa8849517505eb1f78eb70073eb14ade114b4dceb93558",
+      "bytes": 2205,
+      "markers": [
+        {
+          "marker": "45",
+          "found": false,
+          "excerpt": null
+        },
+        {
+          "marker": "free",
+          "found": false,
+          "excerpt": null
+        },
+        {
+          "marker": "grátis",
+          "found": false,
+          "excerpt": null
+        }
+      ]
+    }
+  ],
+  "production_snapshot_home": {
+    "path": "/private/tmp/torno-blog-release-article-candidate-r3-20261014/dist/index.html",
+    "bytes": 69408,
+    "sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+    "live_response_sha256": "786353108ccaffa3d878688aef1b1505a1756d7714a259d09aafc86dc8cb9614",
+    "live_matches_snapshot": true,
+    "cta_observations_from_matching_production_html": [
+      {
+        "text": "Agendar diagnóstico (45 min, grátis)",
+        "href": "https://calendly.com/henriquepett/45min"
+      },
+      {
+        "text": "Escopo com critérios de aceite e o que fica fora",
+        "href": "Product Sprint scope"
+      },
+      {
+        "text": "O Sprint entrega escopo e protótipo navegável. A construção é uma etapa separada.",
+        "href": "Product Sprint/build distinction"
+      },
+      {
+        "text": "Comparar etapas e preços",
+        "href": "#precos"
+      }
+    ]
+  },
+  "limitations": [
+    "One HTTP response per URL; no retries.",
+    "Raw response body SHA-256 is captured; pages may include dynamic or CDN-generated content.",
+    "Source publication dates are recorded only if exposed in captured page/metadata; a date not found is not inferred.",
+    "Evidence supports only the listed claims and captured markers.",
+    "No demand or search-volume inference was performed.",
+    "Calendly target responded HTTP 200, but captured response body did not expose 45-minute/free markers; those labels are confirmed in the hash-identical live production home HTML, not independently in the Calendly response."
+  ]
+}

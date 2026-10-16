@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "asset_review_only",
+  "content_id": "torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento",
+  "intent_id": "postlaunch-software-operating-cost-pt",
+  "locale": "pt-BR",
+  "planned_path": "/blog/custo-manutencao-software-apos-lancamento/",
+  "source_bindings": {
+    "editorial_sheet_path": "/Users/henriquepett/Downloads/pessoal/projeto-50k/marketing/blog/ARTIGO-MANUTENCAO-POS-LANCAMENTO-20261016-FICHA-EDITORIAL.md",
+    "editorial_sheet_sha256": "f3db6eb275824a45c3fec917772393cf84cec2be762a5523bd390e8acfaed5a4",
+    "body_path": "/private/tmp/torno-blog-article-review/custo-manutencao-software-apos-lancamento-final.md",
+    "body_sha256": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8",
+    "sources_path": "/private/tmp/torno-blog-article-review/custo-manutencao-fontes-20261016.json",
+    "sources_sha256": "29be5a5da81982d85e95edc2f91d02d845bcd1bbb760ea4fd4de779ac5ac8216"
+  },
+  "asset": "orcamento-apos-lancamento.svg",
+  "placement": {
+    "after_section_heading_exact": "Duas propostas hipotéticas, calculadas na mesma janela",
+    "after_section_final_paragraph_prefix": "Os volumes, a franquia e a forma de cobrança são **[HIPÓTESE]**",
+    "before_heading_exact": "Onde termina a garantia e começa um novo acordo",
+    "integration": "Inserção determinística do figure pelo molde de artigo ou transformador restrito a este content_id; o Markdown vinculado permanece byte-intacto. Este sidecar não é publicação nem aprovação de release."
+  },
+  "alt": "Orçamento pós-lançamento organizado em faturas de provedores, manutenção e suporte, e evolução funcional, conforme contratação. Cenários hipotéticos; valores a cotar não equivalem a zero.",
+  "caption": "Esquema conceitual para os cenários hipotéticos do artigo. As parcelas dependem da arquitetura, do uso e dos contratos; evolução exige escopo e aprovação próprios. Diagrama original Torno Studio.",
+  "text_equivalent": "Para comparar o orçamento na mesma janela de tempo, identifique as faturas dos provedores, o trabalho contratado de manutenção e suporte e as mudanças de produto aprovadas separadamente. Uma parcela não contratada não oferece cobertura implícita. Valores ainda a cotar permanecem desconhecidos, não iguais a zero. Os cenários são hipotéticos e não representam preços de mercado ou uma proposta do Torno Studio.",
+  "semantics": {
+    "plus_sign": "Composição das parcelas aplicáveis conforme contratação; não indica que cada parcela é obrigatória em todo caso.",
+    "hypothetical": true,
+    "amounts": "Nenhum preço, percentual, média, caso de cliente ou ROI é apresentado.",
+    "unknown_values": "A cotar permanece desconhecido e não equivale a zero."
+  },
+  "provenance": {
+    "creator": "Torno Studio — composição original produzida para este artigo",
+    "basis": "Somente o corpo editorial vinculado e o conceito Íris aprovado para revisão de asset.",
+    "third_party_brands_or_assets": false,
+    "rights": "Arte vetorial original; uso editorial pelo Torno Studio. Nenhum elemento de terceiros incorporado.",
+    "typeface": "Pilhas genéricas Arial, Helvetica, sans-serif; nenhuma fonte foi embutida ou redistribuída. A rasterização usa a fonte substituta disponível no sistema do revisor, sem transferir arquivo tipográfico.",
+    "license": "Sem licença de fonte redistribuída ou dependência de fonte externa no SVG."
+  },
+  "visual_contract": {
+    "base_width_units": 360,
+    "body_min_font_units": 18,
+    "labels_notes_credit_min_font_units": 16,
+    "outer_margin_units": 20,
+    "desktop_max_render_width_px": 480,
+    "background": "#F7F5F0",
+    "foreground": "#17343D",
+    "color_is_not_only_channel": true
+  },
+  "delivery_scope": {
+    "runtime_asset": "orcamento-apos-lancamento.svg",
+    "qa_only": [
+      "render-328.png",
+      "render-358.png",
+      "render-360.png",
+      "render-480.png"
+    ],
+    "not_a_release_receipt": true,
+    "no_markdown_or_site_changes": true
+  }
+}

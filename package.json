@@ -11,6 +11,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "test:blog": "PUBLIC_SITE_URL=https://tornostudio.com PUBLIC_ALLOW_INDEXING=true PUBLIC_SITE_BRAND=Torno PUBLIC_BOOKING_URL=https://calendly.com/henriquepett/45min npm run build && node scripts/test-blog-release.mjs",
     "test": "astro build && playwright test",
     "links": "linkinator dist --config linkinator.config.json",
     "lhci": "PUBLIC_ALLOW_INDEXING=true astro build && lhci autorun",

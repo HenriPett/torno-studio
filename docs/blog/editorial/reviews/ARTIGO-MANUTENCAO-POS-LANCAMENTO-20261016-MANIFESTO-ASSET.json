@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "package": "torno-blog-assets-manutencao-20261016-r1",
+  "status": "asset_review_only",
+  "source_bindings": {
+    "body_sha256": "560cb0f8a33dbba8d7db6018507c9d2c122cf420da4d82a2382d88505f3757e8",
+    "editorial_sheet_sha256": "f3db6eb275824a45c3fec917772393cf84cec2be762a5523bd390e8acfaed5a4",
+    "sources_sha256": "29be5a5da81982d85e95edc2f91d02d845bcd1bbb760ea4fd4de779ac5ac8216"
+  },
+  "files": {
+    "orcamento-apos-lancamento.svg": {
+      "bytes": 3934,
+      "sha256": "36d16c69c5c75d61cdfc167adfb634c2b16b90ea037d3f76eece7144993d9c5d",
+      "scope": "runtime"
+    },
+    "sidecar.json": {
+      "bytes": 4050,
+      "sha256": "4dd4c396929878576a452e08693e3e85d87e3d80377b9d2af3f42e02f581f196",
+      "scope": "review"
+    },
+    "render-328.png": {
+      "bytes": 54187,
+      "sha256": "1d5a7448d7119cdea57cea0c3f434679299c9d5ab78c1d6e69c6d73d4aeb66f8",
+      "scope": "qa_only"
+    },
+    "render-358.png": {
+      "bytes": 60954,
+      "sha256": "6654f28b4c992d1f7be5f8d7be99b7f11520f03f4ef66d6cf2986864c8f55fa2",
+      "scope": "qa_only"
+    },
+    "render-360.png": {
+      "bytes": 60099,
+      "sha256": "1082c729d0f0548805da886cf6bfe3f70699b4f6c2348dddc45ceec6c77f5919",
+      "scope": "qa_only"
+    },
+    "render-480.png": {
+      "bytes": 85859,
+      "sha256": "2452b466f7b63a077abb042e419f5e283981c0009f70d191ba9ae0d2ebee4894",
+      "scope": "qa_only"
+    }
+  },
+  "qa": {
+    "renders_width_px": [
+      328,
+      358,
+      360,
+      480
+    ],
+    "render_engine": "sharp 0.34.5 / libvips, SVG rasterized without embedding fonts",
+    "svg_viewBox": "0 0 360 1020",
+    "minimum_text_size_units": 16,
+    "minimum_body_size_units": 18,
+    "outer_margin_units": 20,
+    "contrast_ratios": {
+      "primary_on_background": 12.08,
+      "primary_on_card": 13.17,
+      "secondary_on_card": 8.07,
+      "label_on_background": 6.95,
+      "border_against_card": 5.54,
+      "accent_against_card": 6.37,
+      "white_plus_on_primary": 13.17
+    },
+    "visual_inspection": "No clipping observed in 328, 358, 360 or 480 px render; three equal cards and captions remain readable."
+  }
+}
