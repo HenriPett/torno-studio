@@ -481,6 +481,32 @@
           "sha256": "eb3c29b70e8bce51a62b79fad2bba12dfa9fdf97ea229e809d5b6db99c695513"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261019-passagem-tecnica-fornecedor",
+      "intentId": "software-vendor-technical-handover-pt",
+      "locale": "pt-BR",
+      "path": "/blog/troca-fornecedor-software-passagem-tecnica/",
+      "contentRevision": "26e905dd66382c942f9f7a6ac4aa7295e5e4a2a25444eff92683eebf3126ff27",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-19T11:21:07Z",
+      "reviewedBy": "Revisor independente (agente)",
+      "reviewedAt": "2026-10-19T11:21:07Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 19/10/2026; commits editoriais e push autorizados após revisão e testes.",
+        "review": "Revisão independente factual/editorial e visual PASS registrada nesta rotina; nenhum review profissional ou aprovação pessoal por Henrique é alegado.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; publicar após validação de release."
+      },
+      "assets": [
+        {
+          "path": "torno-inventario-passagem.svg",
+          "sha256": "1dc68c171f143efecce997167a12e130640b60475599be227f3a482ead23d7f7"
+        },
+        {
+          "path": "torno-transferencia-verificacao.svg",
+          "sha256": "848ad3bf6aed68333cf6121825c9860b9de88d213af65082c07e355db2009da0"
+        }
+      ]
     }
   ]
 }

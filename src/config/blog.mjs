@@ -49,6 +49,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'migracao-corte.svg', digest: 'eb3c29b70e8bce51a62b79fad2bba12dfa9fdf97ea229e809d5b6db99c695513' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261019-passagem-tecnica-fornecedor', intent_id: 'software-vendor-technical-handover-pt', locale: 'pt-BR',
+    path: '/blog/troca-fornecedor-software-passagem-tecnica/', canonical_url: `${BLOG_ORIGIN}/blog/troca-fornecedor-software-passagem-tecnica/`,
+    digest: '26e905dd66382c942f9f7a6ac4aa7295e5e4a2a25444eff92683eebf3126ff27', digestScope: 'file',
+    assets: [
+      { path: 'torno-inventario-passagem.svg', digest: '1dc68c171f143efecce997167a12e130640b60475599be227f3a482ead23d7f7' },
+      { path: 'torno-transferencia-verificacao.svg', digest: '848ad3bf6aed68333cf6121825c9860b9de88d213af65082c07e355db2009da0' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -285,6 +294,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261016-migracao-dados-validacao': [
         {asset:'./migracao-validacao.svg',alt:'Fluxo de migração: origem e mapa, ensaio, conciliação e decisão de corte; divergências retornam à correção e a novos testes.',caption:'A decisão de corte depende do ensaio e da conciliação; divergências pedem nova validação. Crédito: Torno.',className:['blog-figure']},
         {asset:'./migracao-corte.svg',alt:'Etapas do corte: controlar gravações, concluir alterações e conciliar, decidir entre liberar e retornar e abrir o destino; retorno posterior exige preservar novas gravações.',caption:'Combine checagens, liberação e condições de retorno antes da troca. Crédito: Torno.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261019-passagem-tecnica-fornecedor': [
+        {asset:'./torno-inventario-passagem.svg',alt:'Inventário para trocar fornecedor de software em três grupos: código e histórico; ambientes e dados; acessos e responsáveis por cada conta.',caption:'Inventário ilustrativo dos ativos a localizar e verificar na passagem técnica. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-transferencia-verificacao.svg',alt:'Sequência de passagem técnica: mapear ativos e responsáveis, transferir acessos com registro, testar build, deploy e recuperação, e revogar acessos antigos após aceite.',caption:'Sequência ilustrativa de transferência e verificação, a adaptar ao contrato e ao risco. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
