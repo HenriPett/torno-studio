@@ -67,6 +67,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-fluxo-erro-intermitente.svg', digest: '8c8345c8eb14913042fedff85fe30820647597cbb73fa1fa7a38e2c278c7aa78' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261019-priorizar-mudancas-mvp', intent_id: 'post-launch-mvp-change-prioritization-pt', locale: 'pt-BR',
+    path: '/blog/mvp-pos-lancamento-priorizar-mudancas/', canonical_url: `${BLOG_ORIGIN}/blog/mvp-pos-lancamento-priorizar-mudancas/`,
+    digest: '665b96f5b6df7b8076203b693ebf5b929f06c9657a0e5ad0c8f1b7485590a8ae', digestScope: 'file',
+    assets: [
+      { path: 'torno-sinais-ficha-decisao.svg', digest: '621a15a61803c874da975258499ccb979fd2cad0675230e463ec9d286e8c1712' },
+      { path: 'torno-ciclo-priorizacao-mvp.svg', digest: '16a743ff23c57771738e81ac5efe906759723b722c69fa58fd51a21d6c4efa37' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -311,6 +320,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261019-erro-intermitente-evidencias': [
         {asset:'./torno-ficha-erro-intermitente.svg',alt:'Ficha de erro intermitente com três grupos: resultado esperado e observado, contexto da ocorrência e evidências sem dados sensíveis.',caption:'Campos para separar fatos observados de hipóteses num relato de erro intermitente. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-fluxo-erro-intermitente.svg',alt:'Quatro etapas para tratar evidências de erro intermitente: registrar, preservar com acesso controlado, investigar padrões e conferir o comportamento no cenário relatado.',caption:'Sequência ilustrativa de captura e verificação, com registro da incerteza quando o erro não se reproduz. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261019-priorizar-mudancas-mvp': [
+        {asset:'./torno-sinais-ficha-decisao.svg',alt:'Sinais de uso observado, relatos de pessoas e restrições técnicas convergem em uma ficha com hipótese, fontes, opção e motivo da decisão.',caption:'Modelo para reunir contexto antes de decidir uma mudança no MVP. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-ciclo-priorizacao-mvp.svg',alt:'Quatro etapas para decidir mudanças após o MVP: observar sinais, formular hipótese, testar em pequeno escopo e registrar a decisão e seus limites.',caption:'Sequência ilustrativa de decisão após uso real, sem pontuação ou resultado presumido. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

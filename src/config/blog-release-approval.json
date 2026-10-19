@@ -533,6 +533,32 @@
           "sha256": "8c8345c8eb14913042fedff85fe30820647597cbb73fa1fa7a38e2c278c7aa78"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261019-priorizar-mudancas-mvp",
+      "intentId": "post-launch-mvp-change-prioritization-pt",
+      "locale": "pt-BR",
+      "path": "/blog/mvp-pos-lancamento-priorizar-mudancas/",
+      "contentRevision": "665b96f5b6df7b8076203b693ebf5b929f06c9657a0e5ad0c8f1b7485590a8ae",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-19T21:04:33Z",
+      "reviewedBy": "Revisor independente (agente)",
+      "reviewedAt": "2026-10-19T21:04:33Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 19/10/2026, 18h BRT; commits editoriais e push na main autorizados após revisão e testes.",
+        "review": "Revisão independente factual/editorial e visual PASS inicial; verificação final de diff e release registrada no histórico editorial.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria ou aprovação pessoal de Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-sinais-ficha-decisao.svg",
+          "sha256": "621a15a61803c874da975258499ccb979fd2cad0675230e463ec9d286e8c1712"
+        },
+        {
+          "path": "torno-ciclo-priorizacao-mvp.svg",
+          "sha256": "16a743ff23c57771738e81ac5efe906759723b722c69fa58fd51a21d6c4efa37"
+        }
+      ]
     }
   ]
 }
