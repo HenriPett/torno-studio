@@ -58,6 +58,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-transferencia-verificacao.svg', digest: '848ad3bf6aed68333cf6121825c9860b9de88d213af65082c07e355db2009da0' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261019-erro-intermitente-evidencias', intent_id: 'intermittent-software-error-report-evidence-pt', locale: 'pt-BR',
+    path: '/blog/erro-intermitente-software-evidencias/', canonical_url: `${BLOG_ORIGIN}/blog/erro-intermitente-software-evidencias/`,
+    digest: '8c2fd8158c8ebf143cc081e1fc1230c16c182fbf41db6aae4e2a8d256feff6a8', digestScope: 'file',
+    assets: [
+      { path: 'torno-ficha-erro-intermitente.svg', digest: 'bd0c935014d8bdb09538dae92b69f6b0799996404e6e1c9e6cae2b4a71ebe351' },
+      { path: 'torno-fluxo-erro-intermitente.svg', digest: '8c8345c8eb14913042fedff85fe30820647597cbb73fa1fa7a38e2c278c7aa78' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -298,6 +307,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261019-passagem-tecnica-fornecedor': [
         {asset:'./torno-inventario-passagem.svg',alt:'Inventário para trocar fornecedor de software em três grupos: código e histórico; ambientes e dados; acessos e responsáveis por cada conta.',caption:'Inventário ilustrativo dos ativos a localizar e verificar na passagem técnica. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-transferencia-verificacao.svg',alt:'Sequência de passagem técnica: mapear ativos e responsáveis, transferir acessos com registro, testar build, deploy e recuperação, e revogar acessos antigos após aceite.',caption:'Sequência ilustrativa de transferência e verificação, a adaptar ao contrato e ao risco. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261019-erro-intermitente-evidencias': [
+        {asset:'./torno-ficha-erro-intermitente.svg',alt:'Ficha de erro intermitente com três grupos: resultado esperado e observado, contexto da ocorrência e evidências sem dados sensíveis.',caption:'Campos para separar fatos observados de hipóteses num relato de erro intermitente. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-fluxo-erro-intermitente.svg',alt:'Quatro etapas para tratar evidências de erro intermitente: registrar, preservar com acesso controlado, investigar padrões e conferir o comportamento no cenário relatado.',caption:'Sequência ilustrativa de captura e verificação, com registro da incerteza quando o erro não se reproduz. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

@@ -507,6 +507,32 @@
           "sha256": "848ad3bf6aed68333cf6121825c9860b9de88d213af65082c07e355db2009da0"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261019-erro-intermitente-evidencias",
+      "intentId": "intermittent-software-error-report-evidence-pt",
+      "locale": "pt-BR",
+      "path": "/blog/erro-intermitente-software-evidencias/",
+      "contentRevision": "8c2fd8158c8ebf143cc081e1fc1230c16c182fbf41db6aae4e2a8d256feff6a8",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-19T15:08:48Z",
+      "reviewedBy": "Revisor independente (agente)",
+      "reviewedAt": "2026-10-19T15:08:48Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 19/10/2026, meio-dia BRT; commits editoriais e push na main autorizados após revisão e testes.",
+        "review": "Revisão independente factual/editorial e visual PASS inicial; verificação final de diff e release registrada no histórico editorial.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria ou aprovação pessoal de Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-ficha-erro-intermitente.svg",
+          "sha256": "bd0c935014d8bdb09538dae92b69f6b0799996404e6e1c9e6cae2b4a71ebe351"
+        },
+        {
+          "path": "torno-fluxo-erro-intermitente.svg",
+          "sha256": "8c8345c8eb14913042fedff85fe30820647597cbb73fa1fa7a38e2c278c7aa78"
+        }
+      ]
     }
   ]
 }
