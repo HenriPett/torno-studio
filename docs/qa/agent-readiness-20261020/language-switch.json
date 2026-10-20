@@ -1,0 +1,18 @@
+[
+  {
+    "from": "/about/",
+    "to": "/en/about/"
+  },
+  {
+    "from": "/contact/",
+    "to": "/en/contact/"
+  },
+  {
+    "from": "/en/about/",
+    "to": "/about/"
+  },
+  {
+    "from": "/en/contact/",
+    "to": "/contact/"
+  }
+]

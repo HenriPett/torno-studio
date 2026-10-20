@@ -73,7 +73,11 @@ for (const extension of ['css','js','woff2','avif']) {
   const asset = assets.find(f => f.endsWith(`.${extension}`)); assert(asset);
   const response = await fetch(new URL(`/_astro/${asset}`, origin), { headers: { Accept: 'text/markdown' } });
   assert.equal(response.status, 200); assert(!(response.headers.get('content-type') || '').includes('text/markdown'));
-  const actual = Buffer.from(await response.arrayBuffer()); assert.deepEqual(actual, await readFile(resolve('dist/_astro', asset)));
+  const actual = Buffer.from(await response.arrayBuffer());
+  const htmlVariant = await fetch(new URL(`/_astro/${asset}`, origin), { headers: { Accept: 'text/html' } });
+  assert.equal(htmlVariant.status, 200);
+  assert.deepEqual(actual, Buffer.from(await htmlVariant.arrayBuffer()), 'Asset bytes must be identical for HTML/Markdown clients');
+  assert.equal(response.headers.get('content-type'), htmlVariant.headers.get('content-type'));
   record(`asset .${extension}`, { type: response.headers.get('content-type'), bytes: actual.length });
 }
 

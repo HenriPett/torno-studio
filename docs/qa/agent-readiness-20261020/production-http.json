@@ -1,0 +1,701 @@
+{
+  "origin": "https://tornostudio.com",
+  "checkedAt": "2026-10-20T20:00:32.302Z",
+  "checks": [
+    {
+      "name": "home negotiation text/markdown",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/html",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation */*",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation null",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation TEXT/MARKDOWN",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;q=0,text/*;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;Q=0,*/*;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;q=0.1,text/html;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;q=1,text/html;q=0.1",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;profile=\"x,y\";q=0,text/html;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/html",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/html",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "/404.html text/html",
+      "status": 200,
+      "chars": 13737
+    },
+    {
+      "name": "/404.html text/markdown",
+      "status": 200,
+      "chars": 302
+    },
+    {
+      "name": "/404.html direct Markdown",
+      "status": 200,
+      "chars": 302
+    },
+    {
+      "name": "/ text/html",
+      "status": 200,
+      "chars": 70229
+    },
+    {
+      "name": "/ text/markdown",
+      "status": 200,
+      "chars": 14570
+    },
+    {
+      "name": "/ direct Markdown",
+      "status": 200,
+      "chars": 14570
+    },
+    {
+      "name": "/about/ text/html",
+      "status": 200,
+      "chars": 20203
+    },
+    {
+      "name": "/about/ text/markdown",
+      "status": 200,
+      "chars": 1859
+    },
+    {
+      "name": "/about/ direct Markdown",
+      "status": 200,
+      "chars": 1859
+    },
+    {
+      "name": "/blog/ text/html",
+      "status": 200,
+      "chars": 22088
+    },
+    {
+      "name": "/blog/ text/markdown",
+      "status": 200,
+      "chars": 3158
+    },
+    {
+      "name": "/blog/ direct Markdown",
+      "status": 200,
+      "chars": 3158
+    },
+    {
+      "name": "/contact/ text/html",
+      "status": 200,
+      "chars": 20462
+    },
+    {
+      "name": "/contact/ text/markdown",
+      "status": 200,
+      "chars": 1970
+    },
+    {
+      "name": "/contact/ direct Markdown",
+      "status": 200,
+      "chars": 1970
+    },
+    {
+      "name": "/diagnostico/ text/html",
+      "status": 200,
+      "chars": 48777
+    },
+    {
+      "name": "/diagnostico/ text/markdown",
+      "status": 200,
+      "chars": 7444
+    },
+    {
+      "name": "/diagnostico/ direct Markdown",
+      "status": 200,
+      "chars": 7444
+    },
+    {
+      "name": "/en/ text/html",
+      "status": 200,
+      "chars": 69879
+    },
+    {
+      "name": "/en/ text/markdown",
+      "status": 200,
+      "chars": 14098
+    },
+    {
+      "name": "/en/ direct Markdown",
+      "status": 200,
+      "chars": 14098
+    },
+    {
+      "name": "/lovable-em-producao/ text/html",
+      "status": 200,
+      "chars": 29219
+    },
+    {
+      "name": "/lovable-em-producao/ text/markdown",
+      "status": 200,
+      "chars": 5898
+    },
+    {
+      "name": "/lovable-em-producao/ direct Markdown",
+      "status": 200,
+      "chars": 5898
+    },
+    {
+      "name": "/privacidade/ text/html",
+      "status": 200,
+      "chars": 32091
+    },
+    {
+      "name": "/privacidade/ text/markdown",
+      "status": 200,
+      "chars": 9218
+    },
+    {
+      "name": "/privacidade/ direct Markdown",
+      "status": 200,
+      "chars": 9218
+    },
+    {
+      "name": "/recuperacao-de-projeto/ text/html",
+      "status": 200,
+      "chars": 28187
+    },
+    {
+      "name": "/recuperacao-de-projeto/ text/markdown",
+      "status": 200,
+      "chars": 5266
+    },
+    {
+      "name": "/recuperacao-de-projeto/ direct Markdown",
+      "status": 200,
+      "chars": 5266
+    },
+    {
+      "name": "/blog/antes-de-refazer-sistema-evidencias/ text/html",
+      "status": 200,
+      "chars": 32424
+    },
+    {
+      "name": "/blog/antes-de-refazer-sistema-evidencias/ text/markdown",
+      "status": 200,
+      "chars": 9440
+    },
+    {
+      "name": "/blog/antes-de-refazer-sistema-evidencias/ direct Markdown",
+      "status": 200,
+      "chars": 9440
+    },
+    {
+      "name": "/blog/criterios-aceite-mvp/ text/html",
+      "status": 200,
+      "chars": 29422
+    },
+    {
+      "name": "/blog/criterios-aceite-mvp/ text/markdown",
+      "status": 200,
+      "chars": 8147
+    },
+    {
+      "name": "/blog/criterios-aceite-mvp/ direct Markdown",
+      "status": 200,
+      "chars": 8147
+    },
+    {
+      "name": "/blog/custo-manutencao-software-apos-lancamento/ text/html",
+      "status": 200,
+      "chars": 31902
+    },
+    {
+      "name": "/blog/custo-manutencao-software-apos-lancamento/ text/markdown",
+      "status": 200,
+      "chars": 10037
+    },
+    {
+      "name": "/blog/custo-manutencao-software-apos-lancamento/ direct Markdown",
+      "status": 200,
+      "chars": 10037
+    },
+    {
+      "name": "/blog/erro-intermitente-software-evidencias/ text/html",
+      "status": 200,
+      "chars": 30083
+    },
+    {
+      "name": "/blog/erro-intermitente-software-evidencias/ text/markdown",
+      "status": 200,
+      "chars": 8761
+    },
+    {
+      "name": "/blog/erro-intermitente-software-evidencias/ direct Markdown",
+      "status": 200,
+      "chars": 8761
+    },
+    {
+      "name": "/blog/integracao-erp-briefing-orcamento/ text/html",
+      "status": 200,
+      "chars": 30150
+    },
+    {
+      "name": "/blog/integracao-erp-briefing-orcamento/ text/markdown",
+      "status": 200,
+      "chars": 7826
+    },
+    {
+      "name": "/blog/integracao-erp-briefing-orcamento/ direct Markdown",
+      "status": 200,
+      "chars": 7826
+    },
+    {
+      "name": "/blog/integracao-evento-duplicado-regra-negocio/ text/html",
+      "status": 200,
+      "chars": 30361
+    },
+    {
+      "name": "/blog/integracao-evento-duplicado-regra-negocio/ text/markdown",
+      "status": 200,
+      "chars": 9308
+    },
+    {
+      "name": "/blog/integracao-evento-duplicado-regra-negocio/ direct Markdown",
+      "status": 200,
+      "chars": 9308
+    },
+    {
+      "name": "/blog/migracao-dados-validacao-troca-sistema/ text/html",
+      "status": 200,
+      "chars": 32298
+    },
+    {
+      "name": "/blog/migracao-dados-validacao-troca-sistema/ text/markdown",
+      "status": 200,
+      "chars": 10765
+    },
+    {
+      "name": "/blog/migracao-dados-validacao-troca-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 10765
+    },
+    {
+      "name": "/blog/mvp-pos-lancamento-priorizar-mudancas/ text/html",
+      "status": 200,
+      "chars": 29737
+    },
+    {
+      "name": "/blog/mvp-pos-lancamento-priorizar-mudancas/ text/markdown",
+      "status": 200,
+      "chars": 8453
+    },
+    {
+      "name": "/blog/mvp-pos-lancamento-priorizar-mudancas/ direct Markdown",
+      "status": 200,
+      "chars": 8453
+    },
+    {
+      "name": "/blog/prova-restauracao-backup-software/ text/html",
+      "status": 200,
+      "chars": 30101
+    },
+    {
+      "name": "/blog/prova-restauracao-backup-software/ text/markdown",
+      "status": 200,
+      "chars": 8861
+    },
+    {
+      "name": "/blog/prova-restauracao-backup-software/ direct Markdown",
+      "status": 200,
+      "chars": 8861
+    },
+    {
+      "name": "/blog/quando-automatizar-processos-planilhas/ text/html",
+      "status": 200,
+      "chars": 29163
+    },
+    {
+      "name": "/blog/quando-automatizar-processos-planilhas/ text/markdown",
+      "status": 200,
+      "chars": 7919
+    },
+    {
+      "name": "/blog/quando-automatizar-processos-planilhas/ direct Markdown",
+      "status": 200,
+      "chars": 7919
+    },
+    {
+      "name": "/blog/troca-fornecedor-software-passagem-tecnica/ text/html",
+      "status": 200,
+      "chars": 31963
+    },
+    {
+      "name": "/blog/troca-fornecedor-software-passagem-tecnica/ text/markdown",
+      "status": 200,
+      "chars": 10679
+    },
+    {
+      "name": "/blog/troca-fornecedor-software-passagem-tecnica/ direct Markdown",
+      "status": 200,
+      "chars": 10679
+    },
+    {
+      "name": "/cases/ascende/ text/html",
+      "status": 200,
+      "chars": 26441
+    },
+    {
+      "name": "/cases/ascende/ text/markdown",
+      "status": 200,
+      "chars": 4322
+    },
+    {
+      "name": "/cases/ascende/ direct Markdown",
+      "status": 200,
+      "chars": 4322
+    },
+    {
+      "name": "/cases/bom-capital/ text/html",
+      "status": 200,
+      "chars": 26209
+    },
+    {
+      "name": "/cases/bom-capital/ text/markdown",
+      "status": 200,
+      "chars": 3952
+    },
+    {
+      "name": "/cases/bom-capital/ direct Markdown",
+      "status": 200,
+      "chars": 3952
+    },
+    {
+      "name": "/cases/loopt/ text/html",
+      "status": 200,
+      "chars": 28620
+    },
+    {
+      "name": "/cases/loopt/ text/markdown",
+      "status": 200,
+      "chars": 4446
+    },
+    {
+      "name": "/cases/loopt/ direct Markdown",
+      "status": 200,
+      "chars": 4446
+    },
+    {
+      "name": "/en/about/ text/html",
+      "status": 200,
+      "chars": 20110
+    },
+    {
+      "name": "/en/about/ text/markdown",
+      "status": 200,
+      "chars": 1738
+    },
+    {
+      "name": "/en/about/ direct Markdown",
+      "status": 200,
+      "chars": 1738
+    },
+    {
+      "name": "/en/blog/ text/html",
+      "status": 200,
+      "chars": 17816
+    },
+    {
+      "name": "/en/blog/ text/markdown",
+      "status": 200,
+      "chars": 339
+    },
+    {
+      "name": "/en/blog/ direct Markdown",
+      "status": 200,
+      "chars": 339
+    },
+    {
+      "name": "/en/contact/ text/html",
+      "status": 200,
+      "chars": 20319
+    },
+    {
+      "name": "/en/contact/ text/markdown",
+      "status": 200,
+      "chars": 1875
+    },
+    {
+      "name": "/en/contact/ direct Markdown",
+      "status": 200,
+      "chars": 1875
+    },
+    {
+      "name": "/en/lovable-to-production/ text/html",
+      "status": 200,
+      "chars": 29069
+    },
+    {
+      "name": "/en/lovable-to-production/ text/markdown",
+      "status": 200,
+      "chars": 5753
+    },
+    {
+      "name": "/en/lovable-to-production/ direct Markdown",
+      "status": 200,
+      "chars": 5753
+    },
+    {
+      "name": "/en/privacy/ text/html",
+      "status": 200,
+      "chars": 31926
+    },
+    {
+      "name": "/en/privacy/ text/markdown",
+      "status": 200,
+      "chars": 8825
+    },
+    {
+      "name": "/en/privacy/ direct Markdown",
+      "status": 200,
+      "chars": 8825
+    },
+    {
+      "name": "/en/software-project-rescue/ text/html",
+      "status": 200,
+      "chars": 28059
+    },
+    {
+      "name": "/en/software-project-rescue/ text/markdown",
+      "status": 200,
+      "chars": 5171
+    },
+    {
+      "name": "/en/software-project-rescue/ direct Markdown",
+      "status": 200,
+      "chars": 5171
+    },
+    {
+      "name": "/guias/rls-multiempresa/ text/html",
+      "status": 200,
+      "chars": 36185
+    },
+    {
+      "name": "/guias/rls-multiempresa/ text/markdown",
+      "status": 200,
+      "chars": 12986
+    },
+    {
+      "name": "/guias/rls-multiempresa/ direct Markdown",
+      "status": 200,
+      "chars": 12986
+    },
+    {
+      "name": "/en/cases/ascende/ text/html",
+      "status": 200,
+      "chars": 26249
+    },
+    {
+      "name": "/en/cases/ascende/ text/markdown",
+      "status": 200,
+      "chars": 4235
+    },
+    {
+      "name": "/en/cases/ascende/ direct Markdown",
+      "status": 200,
+      "chars": 4235
+    },
+    {
+      "name": "/en/cases/bom-capital/ text/html",
+      "status": 200,
+      "chars": 25966
+    },
+    {
+      "name": "/en/cases/bom-capital/ text/markdown",
+      "status": 200,
+      "chars": 3790
+    },
+    {
+      "name": "/en/cases/bom-capital/ direct Markdown",
+      "status": 200,
+      "chars": 3790
+    },
+    {
+      "name": "/en/cases/loopt/ text/html",
+      "status": 200,
+      "chars": 28350
+    },
+    {
+      "name": "/en/cases/loopt/ text/markdown",
+      "status": 200,
+      "chars": 4232
+    },
+    {
+      "name": "/en/cases/loopt/ direct Markdown",
+      "status": 200,
+      "chars": 4232
+    },
+    {
+      "name": "/en/guides/multi-tenant-rls/ text/html",
+      "status": 200,
+      "chars": 35992
+    },
+    {
+      "name": "/en/guides/multi-tenant-rls/ text/markdown",
+      "status": 200,
+      "chars": 12807
+    },
+    {
+      "name": "/en/guides/multi-tenant-rls/ direct Markdown",
+      "status": 200,
+      "chars": 12807
+    },
+    {
+      "name": "404 text/markdown",
+      "status": 404,
+      "chars": 212
+    },
+    {
+      "name": "404 text/html",
+      "status": 404,
+      "chars": 13737
+    },
+    {
+      "name": "/privacy policy redirect",
+      "status": 301,
+      "final": "https://tornostudio.com/privacidade/"
+    },
+    {
+      "name": "/privacy/ policy redirect",
+      "status": 301,
+      "final": "https://tornostudio.com/privacidade/"
+    },
+    {
+      "name": "/robots.txt preserves machine/asset response",
+      "type": "text/plain; charset=UTF-8",
+      "chars": 75
+    },
+    {
+      "name": "/llms.txt preserves machine/asset response",
+      "type": "text/plain; charset=UTF-8",
+      "chars": 2649
+    },
+    {
+      "name": "/sitemap-index.xml preserves machine/asset response",
+      "type": "application/xml",
+      "chars": 186
+    },
+    {
+      "name": "/sitemap-0.xml preserves machine/asset response",
+      "type": "application/xml",
+      "chars": 8776
+    },
+    {
+      "name": "/favicon.svg preserves machine/asset response",
+      "type": "image/svg+xml",
+      "chars": 184
+    },
+    {
+      "name": "/og/pt-BR.png preserves machine/asset response",
+      "type": "image/png",
+      "chars": 33548
+    },
+    {
+      "name": "asset .css",
+      "type": "text/css; charset=UTF-8",
+      "bytes": 6799
+    },
+    {
+      "name": "asset .js",
+      "type": "application/javascript; charset=UTF-8",
+      "bytes": 5774
+    },
+    {
+      "name": "asset .woff2",
+      "type": "font/woff2",
+      "bytes": 45712
+    },
+    {
+      "name": "asset .avif",
+      "type": "image/avif",
+      "bytes": 6076
+    },
+    {
+      "name": "wire HEAD / text/html",
+      "bodyBytes": 0
+    },
+    {
+      "name": "wire HEAD / text/markdown",
+      "bodyBytes": 0
+    },
+    {
+      "name": "wire HEAD /__ora-404-probe-torno-agent-readiness-20261020 text/html",
+      "bodyBytes": 0
+    },
+    {
+      "name": "wire HEAD /__ora-404-probe-torno-agent-readiness-20261020 text/markdown",
+      "bodyBytes": 0
+    }
+  ]
+}

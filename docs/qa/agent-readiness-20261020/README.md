@@ -20,7 +20,7 @@ Implementação sobre a main remota `7e47d17`, já publicada antes desta tarefa.
 - Linkinator: 122 links, PASS.
 - Portal Maestri: 8 páginas × 2 larguras (360 e 1280), sem overflow horizontal e sem violações graves/críticas no axe WCAG A/AA. Dados em portal.json, capturas adjacentes.
 - Cookies: abrir Personalizar, verificar modal e foco, Recusar tudo, fechar e conferir ts-consent v2 com medicao/publicidade false: PASS.
-- A execução ampla de Playwright/Chromium pelo terminal foi impedida pelo sandbox do macOS (MachPortRendezvous bootstrap_check_in: Permission denied). Não é declarada como aprovada. As quatro novas verificações automáticas de acessibilidade/idioma seguem no repositório para execução em ambiente com navegador; o portal verificou acessibilidade e o modal no navegador disponível.
+- A execução ampla de Playwright/Chromium pelo terminal foi impedida pelo sandbox do macOS (MachPortRendezvous bootstrap_check_in: Permission denied). Não é declarada como aprovada. As quatro novas verificações automáticas de acessibilidade/idioma seguem no repositório para execução em ambiente com navegador; o portal verificou acessibilidade, o modal e os quatro destinos de idioma no navegador disponível (language-switch.json).
 
 Reprodução, com configuração pública de produção em .env (não versionada):
 
@@ -33,6 +33,16 @@ AGENT_BASE_URL=https://tornostudio.com AGENT_REPORT_PATH=docs/qa/agent-readiness
 ```
 
 A última checagem precisa de um deploy Netlify real: Astro preview não executa Edge Functions. Ela verifica variantes em ambas as ordens, todas as páginas/arquivos Markdown, 404, aliases, arquivos de máquina, assets e HEAD via conexão TLS HTTP/1.1 com contagem dos bytes após os headers.
+
+## Produção
+
+Publicado em 20/10/2026 às 19:59:13 UTC no deploy `6ad7c7ea4c019ea43d018dba`, commit `460a6da543052f05d6a2219cdfc3ab8cf4c6aedd`, estado ready e Edge Functions presentes (deployment.json).
+
+**137 verificações HTTP PASS** no domínio real (production-http.json): 35 documentos HTML públicos, incluindo a página de erro explícita, cada um nas variantes HTML, Markdown negociado e .md direto; paridade integral dos corpos Markdown com o build; negociação em ambas as ordens e matriz Accept/q; 404 real nas duas variantes; aliases 301 da política; robots, llms e dois sitemaps; imagens/estilos/scripts/fontes com mesmo MIME/bytes para clientes HTML e Markdown; noindex da campanha preservado. Quatro HEAD por TLS HTTP/1.1 (home/erro × HTML/MD) retornaram **zero bytes de corpo**. O endereço de erro desconhecido preserva HTTP 404; o arquivo explícito /404.html mantém o comportamento estático anterior.
+
+curl -sS -L -i executado separadamente para home Markdown, home HTML e caminho inexistente Markdown; headers e início dos corpos em curl-evidence.json. Contato público também conferido no portal após o deploy, com conteúdo, H1, um diálogo e sem overflow.
+
+Imagens AVIF produzidas pelo encoder do build Linux podem diferir em bytes do build macOS; a comparação relevante de preservação é entre Accept HTML/Markdown do mesmo deploy. CSS, JS, fonte e AVIF foram conferidos assim, sem alterar sua representação.
 
 ## Pendências reais
 

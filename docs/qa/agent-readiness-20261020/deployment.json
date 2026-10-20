@@ -1,0 +1,9 @@
+{
+  "id": "6ad7c7ea4c019ea43d018dba",
+  "state": "ready",
+  "commit_ref": "460a6da543052f05d6a2219cdfc3ab8cf4c6aedd",
+  "published_at": "2026-10-20T19:59:13.433Z",
+  "edge_functions_present": true,
+  "error_message": null,
+  "deploy_ssl_url": "https://main--tornostudio.netlify.app"
+}

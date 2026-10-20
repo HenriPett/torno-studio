@@ -1,0 +1,76 @@
+[
+  {
+    "name": "home-markdown",
+    "headers": [
+      "HTTP/2 200 ",
+      "age: 0",
+      "cache-control: no-store",
+      "cache-status: \"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+      "content-type: text/markdown; charset=utf-8",
+      "cross-origin-opener-policy: same-origin",
+      "date: Tue, 20 Oct 2026 19:59:29 GMT",
+      "link: </llms.txt>; rel=\"describedby\"",
+      "permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+      "referrer-policy: strict-origin-when-cross-origin",
+      "server: Netlify",
+      "strict-transport-security: max-age=63072000; includeSubDomains; preload",
+      "vary: Accept-Encoding, Accept",
+      "x-content-type-options: nosniff",
+      "x-frame-options: DENY",
+      "x-nf-request-id: 01M5DEBDF5HX0ZRCDRNTMYMKAX"
+    ],
+    "bodyCharacters": 14570,
+    "bodyStart": "> Torno Studio | Software sob medida, integrações e IA\n\nHenrique Pett · Desenvolvimento sob demanda\n\n# Software e IA para tirar sua operação do trabalho manual.\n\nAutomatizo processos, conecto sistemas e retomo produtos travados. Você fala direto comi"
+  },
+  {
+    "name": "home-html",
+    "headers": [
+      "HTTP/2 200 ",
+      "accept-ranges: bytes",
+      "age: 14",
+      "cache-control: public,max-age=0,must-revalidate",
+      "cache-status: \"Netlify Edge\"; hit; ttl=31535986",
+      "content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+      "content-type: text/html; charset=UTF-8",
+      "cross-origin-opener-policy: same-origin",
+      "date: Tue, 20 Oct 2026 19:59:42 GMT",
+      "etag: W/\"1eb058b9639fdde1c0ddd5a006bd35c7-ssl-df\"",
+      "permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+      "referrer-policy: strict-origin-when-cross-origin",
+      "server: Netlify",
+      "strict-transport-security: max-age=63072000; includeSubDomains; preload",
+      "vary: Accept-Encoding, Accept",
+      "x-content-type-options: nosniff",
+      "x-frame-options: DENY",
+      "x-nf-request-id: 01M5DEBWXABG9S6D7Q3BH6CE5S"
+    ],
+    "bodyCharacters": 70229,
+    "bodyStart": "<HTML body verified; omitted>"
+  },
+  {
+    "name": "404-markdown",
+    "headers": [
+      "HTTP/2 404 ",
+      "age: 0",
+      "cache-control: no-store",
+      "cache-status: \"Netlify Edge\"; fwd=miss; fwd-status=404; stored",
+      "content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https://assets.calendly.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br; connect-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.br https://calendly.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://calendly.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+      "content-type: text/markdown; charset=utf-8",
+      "cross-origin-opener-policy: same-origin",
+      "date: Tue, 20 Oct 2026 19:59:42 GMT",
+      "link: </llms.txt>; rel=\"describedby\"",
+      "permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+      "referrer-policy: strict-origin-when-cross-origin",
+      "server: Netlify",
+      "strict-transport-security: max-age=63072000; includeSubDomains; preload",
+      "vary: Accept-Encoding, Accept",
+      "x-content-type-options: nosniff",
+      "x-frame-options: DENY",
+      "x-nf-request-id: 01M5DEBX5R6Z8RWDSCX0YMGA9A",
+      "x-robots-tag: noindex"
+    ],
+    "bodyCharacters": 212,
+    "bodyStart": "# 404 — Página não encontrada / Page not found\n\nO endereço solicitado não existe. The requested page could not be found.\n\nConsulte [as instruções para agentes](/llms.txt) ou o [mapa do site](/sitemap-index.xml).\n"
+  }
+]
