@@ -76,6 +76,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-ciclo-priorizacao-mvp.svg', digest: '16a743ff23c57771738e81ac5efe906759723b722c69fa58fd51a21d6c4efa37' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261020-prova-restauracao-backup', intent_id: 'buyer-proof-software-backup-restore-pt', locale: 'pt-BR',
+    path: '/blog/prova-restauracao-backup-software/', canonical_url: `${BLOG_ORIGIN}/blog/prova-restauracao-backup-software/`,
+    digest: '3578ab18ab6527c8d5665df7bc3bd73f60adb8f0b911bee96fd819bb6949f6b4', digestScope: 'file',
+    assets: [
+      { path: 'torno-prova-fluxo-restauracao.svg', digest: '11b8fdbcf238328a154da8bb8591732739cb48f2b689c7631d04c9dd4b55d0b7' },
+      { path: 'torno-ficha-prova-restauracao.svg', digest: 'beea8223b20c5dce7fbe61875d036d8e1a94bdc016c41dfd5b08aa71386962c3' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -324,6 +333,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261019-priorizar-mudancas-mvp': [
         {asset:'./torno-sinais-ficha-decisao.svg',alt:'Sinais de uso observado, relatos de pessoas e restrições técnicas convergem em uma ficha com hipótese, fontes, opção e motivo da decisão.',caption:'Modelo para reunir contexto antes de decidir uma mudança no MVP. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-ciclo-priorizacao-mvp.svg',alt:'Quatro etapas para decidir mudanças após o MVP: observar sinais, formular hipótese, testar em pequeno escopo e registrar a decisão e seus limites.',caption:'Sequência ilustrativa de decisão após uso real, sem pontuação ou resultado presumido. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261020-prova-restauracao-backup': [
+        {asset:'./torno-prova-fluxo-restauracao.svg',alt:'Quatro partes da prova de restauração: identificar a cópia, demonstrar teste em ambiente separado, conferir dados e funções, e registrar o que passou, falhou ou ficou fora.',caption:'Peça evidências do teste controlado, das conferências e dos limites encontrados. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-ficha-prova-restauracao.svg',alt:'Ficha de leitura da prova de restauração com escopo, resultado, lacunas e próxima decisão, incluindo evidência e responsável.',caption:'Use escopo, resultado, lacunas e responsável para ler o relatório de restauração. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

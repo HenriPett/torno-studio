@@ -21,12 +21,13 @@ const expected = [
   ['torno-artigo-pt-20261019-passagem-tecnica-fornecedor', '/blog/troca-fornecedor-software-passagem-tecnica/', '26e905dd66382c942f9f7a6ac4aa7295e5e4a2a25444eff92683eebf3126ff27', ['torno-inventario-passagem.svg', 'torno-transferencia-verificacao.svg']],
   ['torno-artigo-pt-20261019-erro-intermitente-evidencias', '/blog/erro-intermitente-software-evidencias/', '8c2fd8158c8ebf143cc081e1fc1230c16c182fbf41db6aae4e2a8d256feff6a8', ['torno-ficha-erro-intermitente.svg', 'torno-fluxo-erro-intermitente.svg']],
   ['torno-artigo-pt-20261019-priorizar-mudancas-mvp', '/blog/mvp-pos-lancamento-priorizar-mudancas/', '665b96f5b6df7b8076203b693ebf5b929f06c9657a0e5ad0c8f1b7485590a8ae', ['torno-sinais-ficha-decisao.svg', 'torno-ciclo-priorizacao-mvp.svg']],
+  ['torno-artigo-pt-20261020-prova-restauracao-backup', '/blog/prova-restauracao-backup-software/', '3578ab18ab6527c8d5665df7bc3bd73f60adb8f0b911bee96fd819bb6949f6b4', ['torno-prova-fluxo-restauracao.svg', 'torno-ficha-prova-restauracao.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os nove artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os dez artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -36,7 +37,7 @@ checks.push(['manifesto inclui exatamente os nove artigos autorizados e suas apr
   }
 }]);
 
-checks.push(['sitemap contém 27 URLs únicas: baseline, dois índices e nove artigos PT', async () => {
+checks.push(['sitemap contém 28 URLs únicas: baseline, dois índices e dez artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();
