@@ -25,6 +25,10 @@ const legalId = str(env.PUBLIC_LEGAL_ID);
 
 export const site = {
   brand: SITE_BRAND,
+  organizationName: SITE_BRAND === 'Torno' ? 'Torno Studio' : SITE_BRAND,
+  organizationLinkedinUrl: 'https://www.linkedin.com/company/torno-studio-software/',
+  // Cidade da operação remota declarada pelo fundador; não é sede ou endereço postal.
+  operatingLocation: { city: 'Jaraguá do Sul', region: 'SC', country: 'BR' },
   /** URL absoluta do site, resolvida no astro.config.mjs (PUBLIC_SITE_URL > Netlify URL/DEPLOY_PRIME_URL > localhost). */
   url: import.meta.env.SITE,
 

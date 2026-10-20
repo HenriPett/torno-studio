@@ -5,6 +5,7 @@
  * canonical/hreflang e a página é sempre noindex.
  */
 
+import { organizationSchema } from '../lib/organization';
 import { BLOG_ORIGIN } from '../config/blog.mjs';
 import '../styles/reset.css';
 import '../styles/tokens.css';
@@ -52,7 +53,7 @@ const ogImage = new URL(ogImagePath ?? `/og/${locale}.png`, siteUrl).href;
 
 // Only describe entities actually present in these pages. No ratings, client
 // results or unconditional offers: commercial eligibility depends on scope.
-const structuredData = editorial?.schema ?? (routeId === 'blog' && canonical ? { '@context': 'https://schema.org', '@type': 'CollectionPage', url: canonical, name: pageTitle, description: pageDescription, inLanguage: htmlLang[locale] } : null) ?? (canonical && (routeId === 'rlsGuide' || routeId?.startsWith('case')) ? {
+const structuredData = (routeId === 'home' || routeId === 'about' || routeId === 'contact') ? organizationSchema(siteUrl, pageDescription, locale) : editorial?.schema ?? (routeId === 'blog' && canonical ? { '@context': 'https://schema.org', '@type': 'CollectionPage', url: canonical, name: pageTitle, description: pageDescription, inLanguage: htmlLang[locale] } : null) ?? (canonical && (routeId === 'rlsGuide' || routeId?.startsWith('case')) ? {
   '@context': 'https://schema.org',
   '@type': 'Article',
   '@id': `${canonical}#article`,
@@ -101,6 +102,8 @@ const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:nor
     {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="describedby" href="/llms.txt" />
+    {canonical && <link rel="alternate" type="text/markdown" href={`${new URL(canonical).pathname}index.md`} />}
     <meta name="color-scheme" content="light dark" />
 
     <meta property="og:type" content={editorial?.article ? 'article' : 'website'} />
@@ -130,6 +133,7 @@ const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:nor
     <!-- Faixa de consentimento logo após o skip link: 1º grupo na ordem de Tab (DESIGN §13.1). -->
     <ConsentBanner locale={locale} />
     <slot />
+    <ConsentBanner locale={locale} part="dialog" />
     <!-- Único JS da página (DESIGN §6.4), minificado à mão (§10: ≤ 1 KB): mostra os [data-theme-toggle];
          no clique alterna data-theme no <html> e grava localStorage; s() mantém aria-pressed
          (true = tema efetivo escuro; WCAG 4.1.2) na carga, no clique e no change do sistema. -->

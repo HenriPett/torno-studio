@@ -16,7 +16,7 @@ export const en: SiteCopy = {
 
   meta: {
     home: {
-      title: 'Fractional Founding Engineer | {brand}',
+      title: '{organization} | Custom software and AI engineering',
       description:
         'One senior product engineer, accountable end to end. Public pricing, fixed scope, and your code in your repo from day one.',
     },

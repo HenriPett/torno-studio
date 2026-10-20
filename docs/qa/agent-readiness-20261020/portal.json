@@ -1,0 +1,66 @@
+[
+  {
+    "details": "{\"path\":\"/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":8853,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":8531,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/about/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":1566,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/contact/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":1673,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/about/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":1441,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/contact/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":1578,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/privacidade/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":7345,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/privacy/\",\"width\":1280,\"scrollWidth\":1263,\"h1\":1,\"main\":7174,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":8853,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":8531,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/about/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":1566,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/contact/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":1673,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/about/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":1441,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/contact/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":1578,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/privacidade/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":7345,\"dialog\":1}",
+    "axe": "[]"
+  },
+  {
+    "details": "{\"path\":\"/en/privacy/\",\"width\":360,\"scrollWidth\":343,\"h1\":1,\"main\":7174,\"dialog\":1}",
+    "axe": "[]"
+  }
+]

@@ -23,7 +23,7 @@ export const otherLocale = (locale: Locale): Locale => (locale === 'pt-BR' ? 'en
 
 /** Troca {chave} pelos valores; {brand} é sempre SITE_BRAND. */
 export function fill(template: string, vars: Record<string, string | number> = {}): string {
-  const all: Record<string, string | number> = { brand: SITE_BRAND, ...vars };
+  const all: Record<string, string | number> = { brand: SITE_BRAND, organization: site.organizationName, ...vars };
   return template.replace(/\{(\w+)\}/g, (match, key: string) => (key in all ? String(all[key]) : match));
 }
 

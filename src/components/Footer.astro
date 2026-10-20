@@ -25,6 +25,8 @@ const year = new Date().getFullYear();
 const consentEnabled = Boolean(site.gadsId);
 const links = [
   { href: pathFor('privacy', locale), label: copy.footer.privacyLink },
+  !lean && { href: pathFor('about', locale), label: locale === 'en' ? 'About' : 'Sobre' },
+  !lean && { href: pathFor('contact', locale), label: locale === 'en' ? 'Contact' : 'Contato' },
   !lean && { href: pathFor('blog', locale), label: 'Blog' },
   !lean && { href: pathFor('recovery', locale), label: locale === 'en' ? 'Software project rescue' : 'Recuperação de projeto' },
   !lean && { href: pathFor('lovableProduction', locale), label: locale === 'en' ? 'Lovable to production' : 'Lovable em produção' },

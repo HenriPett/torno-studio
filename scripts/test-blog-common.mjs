@@ -5,6 +5,7 @@ import { parse } from 'parse5';
 export const origin = 'https://tornostudio.com';
 export const baselinePaths = [
   '/', '/en/',
+  '/about/', '/contact/', '/en/about/', '/en/contact/',
   '/cases/loopt/', '/cases/bom-capital/', '/cases/ascende/',
   '/en/cases/loopt/', '/en/cases/bom-capital/', '/en/cases/ascende/',
   '/recuperacao-de-projeto/', '/en/software-project-rescue/',

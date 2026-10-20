@@ -31,8 +31,13 @@
     "@lhci/cli": "0.15.1",
     "@playwright/test": "1.64.0",
     "@resvg/resvg-js": "2.6.2",
+    "hast-util-to-mdast": "^10.1.2",
     "linkinator": "8.1.0",
+    "mdast-util-gfm-table": "^2.0.0",
+    "mdast-util-to-markdown": "^2.2.0",
+    "rehype-parse": "^9.0.1",
     "satori": "0.33.4",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "unified": "^11.0.5"
   }
 }

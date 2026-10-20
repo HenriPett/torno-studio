@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import agentMarkdown from './scripts/agent-markdown.mjs';
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -114,6 +115,7 @@ export default defineConfig({
   },
   integrations: [
     envGuard(),
+    agentMarkdown(),
     sitemap({
       filter: (page) => links.has(blogUrl(page)),
       serialize: (item) => ({ ...item, url: blogUrl(item.url), links: links.get(blogUrl(item.url)) ?? [], ...(blogDates.get(blogUrl(item.url)) ? { lastmod: blogDates.get(blogUrl(item.url)) } : {}) }),

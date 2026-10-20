@@ -16,9 +16,10 @@ import Icon from './ui/Icon.astro';
 
 interface Props {
   locale: Locale;
+  part?: 'banner' | 'dialog';
 }
 
-const { locale } = Astro.props;
+const { locale, part = 'banner' } = Astro.props;
 const { consent } = getCopy(locale);
 const { dialog } = consent;
 
@@ -36,7 +37,7 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
 {
   consentEnabled && (
     <>
-      <div class="consent-bar" role="region" aria-label={consent.regionLabel} data-consent-banner hidden>
+      {part === 'banner' && <div class="consent-bar" role="region" aria-label={consent.regionLabel} data-consent-banner hidden>
         <div class="container consent-bar__inner">
           <p class="consent-bar__text">
             {consent.text}{' '}
@@ -50,8 +51,9 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
             <button type="button" class="consent-btn" data-consent-action="customize">{consent.customize}</button>
           </div>
         </div>
-      </div>
+      </div>}
 
+      {part === 'dialog' && <>
       <dialog class="consent-dialog" data-consent-dialog aria-labelledby="consent-title" aria-describedby="consent-intro">
         <div class="consent-dialog__head">
           <h2 id="consent-title" class="consent-dialog__title" tabindex="-1" data-consent-title>
@@ -101,6 +103,7 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
       </dialog>
 
       <p class="visually-hidden" aria-live="polite" data-consent-live data-message={consent.saved ?? ''} />
+      </>}
     </>
   )
 }

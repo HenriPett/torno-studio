@@ -38,7 +38,7 @@ checks.push(['manifesto inclui exatamente os onze artigos autorizados e suas apr
   }
 }]);
 
-checks.push(['sitemap contém 29 URLs únicas: baseline, dois índices e onze artigos PT', async () => {
+checks.push(['sitemap contém 33 URLs únicas: baseline com páginas institucionais, dois índices e onze artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();

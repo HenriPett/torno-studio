@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { site } from '../config/site';
+import { bookingHref, pathFor, type Locale } from '../lib/i18n';
+interface Props { locale: Locale; kind: 'about' | 'contact' }
+const { locale, kind } = Astro.props;
+const en = locale === 'en';
+const title = kind === 'about' ? (en ? `About ${site.organizationName}` : `Sobre a ${site.organizationName}`) : (en ? `Contact ${site.organizationName}` : `Contato com a ${site.organizationName}`);
+const sections = kind === 'about' ? (en ? [
+  ['Custom software with one accountable engineer', `${site.organizationName} is the software development studio led by Henrique Pett. Work covers web products, internal tools, integrations, process automation and applications with AI. You work directly with the engineer who evaluates the problem, defines a delivery and implements it through production.`],
+  ['Experience and delivery', 'Henrique’s experience includes software and AI for container terminal operations, credit analysis and his own web product, Ascende. The case studies explain his role and the context of each project. They describe professional experience, rather than a claim that every organization featured is a client of this studio.'],
+  ['How work starts', 'Start with a free 45-minute scoping call. When uncertainty needs investigation, a Product Sprint defines the flow, scope and acceptance criteria before a larger build. Implementation is priced separately where required. Offers have published conditions, and eligibility depends on the existing system and agreed scope. Code is kept in your account from day one.'],
+  ['Remote operation', 'Henrique works remotely from Jaraguá do Sul, Santa Catarina, Brazil. This identifies the founder’s operating city; it is not a registered office or a walk-in address. Contact and scheduling are available online.'],
+] : [
+  ['Software sob medida com um responsável técnico', `${site.organizationName} é o estúdio de desenvolvimento de software conduzido por Henrique Pett. O trabalho inclui produtos web, ferramentas internas, integrações, automação de processos e aplicações com IA. Você conversa diretamente com o engenheiro que avalia o problema, delimita a entrega e implementa o software até a produção.`],
+  ['Experiência e execução', 'A trajetória de Henrique inclui software e IA para operação de terminais de contêineres, análise de crédito e o Ascende, produto web próprio. Os cases apresentam o papel dele e o contexto de cada trabalho. São experiências profissionais; a presença de uma organização em um case não significa que ela contratou o estúdio.'],
+  ['Como o trabalho começa', 'O primeiro passo é um diagnóstico gratuito de 45 minutos. Quando há incerteza relevante, o Product Sprint define fluxo, escopo e critérios de aceite antes de uma construção maior. A implementação tem orçamento separado quando necessário. As ofertas têm condições publicadas e dependem da avaliação do sistema e do escopo combinado. O código fica na conta do cliente desde o primeiro dia.'],
+  ['Operação remota', 'Henrique trabalha remotamente a partir de Jaraguá do Sul, Santa Catarina, Brasil. Esta indicação se refere à cidade de operação do fundador, não a sede registrada ou endereço para atendimento presencial. O contato e o agendamento são feitos pelos canais online.'],
+]) : (en ? [
+  ['Talk about the problem you need to solve', 'Contact Henrique Pett to discuss a web product, a stalled software project, an integration or a manual workflow. The first conversation helps identify what needs to work, what already exists and what evidence will define a useful delivery. A free 45-minute scoping call is available through the published booking link.'],
+  ['What to include', 'Describe the current workflow, who uses it, the desired outcome and the systems involved. If you have existing code or a prototype, mention its state and the main failure you see. An expected deadline and investment range help assess fit. Keep passwords, tokens, customer records and other sensitive data out of your initial message. Access can be arranged separately if the project proceeds.'],
+  ['Scope and next steps', 'Sending a message or booking a call does not confirm a delivery date or an implementation contract. Scope, responsibilities, conditions and price are agreed after evaluating the problem. Public service descriptions and pricing are available on the homepage; a Product Sprint may be the appropriate first paid step when discovery is needed.'],
+  ['Remote contact', 'The studio is run remotely by Henrique Pett from Jaraguá do Sul, Santa Catarina, Brazil. This is the founder’s operating city, not an address for in-person visits. Use email or the scheduling link below. For data-related requests, see the privacy policy and its contact channel.'],
+] : [
+  ['Converse sobre o problema que precisa resolver', 'Fale com Henrique Pett para avaliar um produto web, um software travado, uma integração ou um fluxo manual. A primeira conversa ajuda a identificar o que precisa funcionar, o que já existe e quais evidências definem uma entrega útil. Há um diagnóstico gratuito de 45 minutos pelo link de agendamento publicado.'],
+  ['O que incluir no primeiro contato', 'Descreva o fluxo atual, quem usa, o resultado esperado e os sistemas envolvidos. Se houver código ou protótipo, conte o estado dele e a principal falha observada. Prazo desejado e faixa de investimento ajudam a avaliar o encaixe. Não envie senhas, tokens, dados de clientes ou outras informações sensíveis na primeira mensagem. Os acessos podem ser combinados separadamente se o projeto avançar.'],
+  ['Escopo e próximos passos', 'Enviar uma mensagem ou agendar uma conversa não confirma disponibilidade, data de entrega ou contrato de implementação. Escopo, responsabilidades, condições e preço são combinados após avaliar o problema. Os serviços e preços públicos estão na página inicial; o Product Sprint pode ser o primeiro passo pago quando houver necessidade de descoberta.'],
+  ['Contato remoto', 'O estúdio é conduzido remotamente por Henrique Pett a partir de Jaraguá do Sul, Santa Catarina, Brasil. Esta é a cidade de operação do fundador, não um endereço para visitas presenciais. Use o e-mail ou a agenda abaixo. Para solicitações relacionadas a dados pessoais, consulte a política de privacidade e seu canal de contato.'],
+]);
+---
+<Base locale={locale} routeId={kind} title={`${title} | Software ${en ? 'engineering' : 'sob medida'}`} description={kind === 'about' ? (en ? 'Meet Henrique Pett and the studio building custom software, integrations and AI applications, from discovery to production.' : 'Conheça Henrique Pett e o estúdio de software sob medida, integrações e IA, da descoberta até a produção.') : (en ? 'Contact Henrique Pett about custom software, integrations, automation or a stalled project. Official email and a free 45-minute scoping call.' : 'Fale com Henrique Pett sobre software sob medida, integrações, automação ou projetos travados. E-mail oficial e diagnóstico gratuito de 45 minutos.')}>
+  <Header locale={locale} routeId={kind} />
+  <main id="conteudo" class="section" tabindex="-1">
+    <article class="container trust">
+      <h1 class="h2">{title}</h1>
+      {sections.map(([heading, text]) => <section><h2 class="h3">{heading}</h2><p class="body">{text}</p></section>)}
+      <section>
+        <h2 class="h3">{en ? 'Official channels' : 'Canais oficiais'}</h2>
+        <ul>
+          {site.contactEmail && <li><a class="link link--target" href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></li>}
+          <li><a class="link link--target" href={bookingHref(locale)}>{en ? 'Book a free scoping call' : 'Agendar diagnóstico gratuito'}</a></li>
+          <li><a class="link link--target" href={site.organizationLinkedinUrl}>{site.organizationName} {en ? 'on LinkedIn' : 'no LinkedIn'}</a></li>
+          <li><a class="link link--target" href={pathFor('privacy', locale)}>{en ? 'Privacy policy' : 'Política de privacidade'}</a></li>
+          <li><a class="link link--target" href={pathFor('home', locale)}>{en ? 'Services and pricing' : 'Serviços e preços'}</a></li>
+          <li><a class="link link--target" href={pathFor(kind === 'about' ? 'contact' : 'about', locale)}>{kind === 'about' ? (en ? 'Contact' : 'Contato') : (en ? 'About' : 'Sobre')}</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+  <Footer locale={locale} routeId={kind} />
+</Base>
+<style>
+  .trust { max-inline-size: calc(var(--measure) + 2 * var(--container-pad)); }
+  .trust section { margin-block-start: var(--space-6); }
+  .trust h2 + p, .trust ul { margin-block-start: var(--space-3); }
+  .trust a { overflow-wrap: anywhere; }
+</style>

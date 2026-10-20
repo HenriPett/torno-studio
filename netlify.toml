@@ -48,3 +48,20 @@
   for = "/og/*"
   [headers.values]
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# Alias único da política existente; preserve canonical e âncoras como #cookies.
+[[redirects]]
+  from = "/privacy"
+  to = "/privacidade/"
+  status = 301
+[[redirects]]
+  from = "/privacy/"
+  to = "/privacidade/"
+  status = 301
+
+[[headers]]
+  for = "/*.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+    X-Robots-Tag = "noindex"
+    Link = '</llms.txt>; rel="describedby"'

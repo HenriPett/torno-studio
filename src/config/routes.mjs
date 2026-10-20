@@ -11,6 +11,8 @@ export const defaultLocale = 'pt-BR';
 export const routes = {
   blog: { 'pt-BR': '/blog/', en: '/en/blog/' },
   home: { 'pt-BR': '/', en: '/en/' },
+  about: { 'pt-BR': '/about/', en: '/en/about/' },
+  contact: { 'pt-BR': '/contact/', en: '/en/contact/' },
   recovery: { 'pt-BR': '/recuperacao-de-projeto/', en: '/en/software-project-rescue/' },
   lovableProduction: { 'pt-BR': '/lovable-em-producao/', en: '/en/lovable-to-production/' },
   rlsGuide: { 'pt-BR': '/guias/rls-multiempresa/', en: '/en/guides/multi-tenant-rls/' },

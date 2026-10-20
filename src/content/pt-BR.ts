@@ -18,7 +18,7 @@ export const ptBR: SiteCopy = {
 
   meta: {
     home: {
-      title: 'Software e IA para sua operação | {brand}',
+      title: '{organization} | Software sob medida, integrações e IA',
       description:
         'Automatize processos ou retome um software travado. Desenvolvimento com Henrique Pett, escopo fechado, preços publicados e código na sua conta.',
     },
