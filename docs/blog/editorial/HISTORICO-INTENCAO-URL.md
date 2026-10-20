@@ -463,3 +463,9 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 - Estado editorial `review` no Markdown, incluível no release por aprovação hash-bound `7558a4d1482fb7dfbf8cfccc495efa997de243f8d82d8f5ac182c6489710a86d`. Revisão factual e visual independente: GO registrado pela coordenação; aprovador operacional Codex sob autorização editorial de Henrique nesta rodada. Não atribuir autoria do texto a Henrique.
 - Diagramas originais `migracao-validacao.svg` (bcdc6a98a684b4cf149ca19fa933508c94f9e3455ffc09dc1578b55e320fee97) e `migracao-corte.svg` (eb3c29b70e8bce51a62b79fad2bba12dfa9fdf97ea229e809d5b6db99c695513); alt e legendas no Markdown; arte própria, sem terceiros.
 - `first_published_at=null`, `verified_at=null`, `evidence_of_publication=null` até observação pública. Push, build ou sitemap local não provam publicação.
+
+### 2026-10-20 18h BRT — teste de carga, evidências para liberar sistema
+
+- Rodada `2026-10-20-1800`, `content_id=torno-artigo-pt-20261020-teste-carga-evidencias`, `intent_id=buyer-load-test-evidence-pt`, locale `pt-BR`, path planejado `/blog/teste-carga-evidencias-liberar-sistema/`.
+- Intenção do comprador: conferir cenário, ambiente, critérios, erros, duração e limitações de um teste de carga antes de decidir a liberação. Distinta de aceite funcional genérico, erro intermitente, recuperação por backup e evento duplicado. Pesquisa de keywords e concorrentes qualitativa; fontes Grafana k6 oficiais e datas/limites no registro da rodada.
+- Markdown em `status: review` liberável somente pelo SHA-256 `2e3f8187960ac55bddd1fa2a918c68f2a419142c781963187d55bed8a33166d2`; SVGs `b408ead51a00b0cca37920ef5f408e6be223b84e17041fd39bae9a7daa36b4f8` e `f74cc41ffa7f3fbdbaec2934713624ba2f9ce6147c54a1cbd45241ce659f6c3a`. Revisão independente inicial PASS; diff staged final pendente. `first_published_at=null` até URL pública observada.

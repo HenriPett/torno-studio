@@ -94,6 +94,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'aceite-evidencias.svg', digest: '69d74175d95e5c5a5e3b41e9d87a6c2798501ac5a15c4a9dd0ec77a730e9d0b8' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261020-teste-carga-evidencias', intent_id: 'buyer-load-test-evidence-pt', locale: 'pt-BR',
+    path: '/blog/teste-carga-evidencias-liberar-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/teste-carga-evidencias-liberar-sistema/`,
+    digest: '2e3f8187960ac55bddd1fa2a918c68f2a419142c781963187d55bed8a33166d2', digestScope: 'file',
+    assets: [
+      { path: 'torno-carga-cenario.svg', digest: 'b408ead51a00b0cca37920ef5f408e6be223b84e17041fd39bae9a7daa36b4f8' },
+      { path: 'torno-carga-relatorio.svg', digest: 'f74cc41ffa7f3fbdbaec2934713624ba2f9ce6147c54a1cbd45241ce659f6c3a' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -346,6 +355,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261020-prova-restauracao-backup': [
         {asset:'./torno-prova-fluxo-restauracao.svg',alt:'Quatro partes da prova de restauração: identificar a cópia, demonstrar teste em ambiente separado, conferir dados e funções, e registrar o que passou, falhou ou ficou fora.',caption:'Peça evidências do teste controlado, das conferências e dos limites encontrados. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-ficha-prova-restauracao.svg',alt:'Ficha de leitura da prova de restauração com escopo, resultado, lacunas e próxima decisão, incluindo evidência e responsável.',caption:'Use escopo, resultado, lacunas e responsável para ler o relatório de restauração. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261020-teste-carga-evidencias': [
+        {asset:'./torno-carga-cenario.svg',alt:'Mapa de cenário para teste de carga: perfis e horários, ações e dados, ambiente e diferenças, dependências reais ou simuladas.',caption:'Diagrama original: descreva o cenário antes de interpretar a carga. Crédito: Torno, 2026.',className:['blog-figure']},
+        {asset:'./torno-carga-relatorio.svg',alt:'Leitura do relatório de carga: metas acordadas, falhas e percentis, limites do ensaio, decisão documentada e próximo teste.',caption:'Diagrama original: relacione resultados, limites e próxima decisão. Crédito: Torno, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261020-evento-duplicado': [
         {asset:'./mesmo-evento-efeito.svg',alt:'Exemplo fictício: a aprovação cria uma tarefa, sua reentrega deve preservar esse resultado e uma nova mudança no mesmo objeto precisa ser considerada conforme a regra.',caption:'Exemplo fictício de resultado a combinar: conferir o efeito da repetição e distinguir uma atualização legítima. Crédito: Torno Studio.',className:['blog-figure']},
