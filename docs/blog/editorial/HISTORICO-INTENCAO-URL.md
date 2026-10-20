@@ -448,6 +448,13 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 
 **Deduplicação:** este evento promove apenas `content_id + locale` da manutenção pós-lançamento. Não republica planilhas, critérios, ERP ou evidências antes de refazer sistema; não altera suas datas de primeira publicação, não reabre o custo de construção do MVP e não cria versão EN.
 
+### Rodada 12h — reentrega de evento na integração (2026-10-20)
+
+- Evento editorial `release-approved:torno-artigo-pt-20261020-evento-duplicado:2026-10-20T15:20:24Z`, rodada `2026-10-20-1200` em America/Sao_Paulo. `content_id=torno-artigo-pt-20261020-evento-duplicado`, `intent_id=buyer-integration-duplicate-event-acceptance-pt`, locale `pt-BR`; path planejado `/blog/integracao-evento-duplicado-regra-negocio/`.
+- Decisão qualitativa: artigo de compra/aceite sobre o efeito de negócio de uma reentrega, distinto do briefing ERP antes do orçamento, dos critérios gerais de aceite e do relato de erro intermitente. Volume, dificuldade, GSC, ranking e indexação: **sem dado**. Fontes, concorrência, público, imagens e limites no registro [`ROTINA-2026-10-20-1200.md`](ROTINA-2026-10-20-1200.md).
+- Markdown em `status: review`, incluível no artefato pelo SHA-256 exato `3c76f468d5d7133b8bec77e0b9503452da224f7b68adb9ca521b7435e61360e8`. Dois SVGs originais vinculados pelos SHA-256 `e9d287f0ac40375e6778bbdc9105a681bc663a03e81de495c45dfae1bfe2d876` e `69d74175d95e5c5a5e3b41e9d87a6c2798501ac5a15c4a9dd0ec77a730e9d0b8`. Revisão independente factual/editorial/visual inicial GO; aprovação operacional do integrador sob autorização editorial do usuário, sem autoria nem aprovação pessoal atribuída a Henrique. Revisão final do diff antes do push.
+- `first_published_at=null`, `evidence_of_publication=null` até observação pública. Build, push ou sitemap local isolados não comprovam publicação.
+
 
 ### Rodada 18h — validação de migração de dados (2026-10-16)
 

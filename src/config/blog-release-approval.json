@@ -585,6 +585,32 @@
           "sha256": "beea8223b20c5dce7fbe61875d036d8e1a94bdc016c41dfd5b08aa71386962c3"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261020-evento-duplicado",
+      "intentId": "buyer-integration-duplicate-event-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/integracao-evento-duplicado-regra-negocio/",
+      "contentRevision": "3c76f468d5d7133b8bec77e0b9503452da224f7b68adb9ca521b7435e61360e8",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-20T15:20:24Z",
+      "reviewedBy": "Revisor independente (agente)",
+      "reviewedAt": "2026-10-20T15:20:24Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 20/10/2026, 12h BRT; commits editoriais e push na main autorizados após revisão e testes.",
+        "review": "Revisão independente factual, editorial e visual PASS inicial nos bytes finais de Markdown e imagens; revisão final do diff e release deve anteceder o push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria ou aprovação pessoal de Henrique."
+      },
+      "assets": [
+        {
+          "path": "mesmo-evento-efeito.svg",
+          "sha256": "e9d287f0ac40375e6778bbdc9105a681bc663a03e81de495c45dfae1bfe2d876"
+        },
+        {
+          "path": "aceite-evidencias.svg",
+          "sha256": "69d74175d95e5c5a5e3b41e9d87a6c2798501ac5a15c4a9dd0ec77a730e9d0b8"
+        }
+      ]
     }
   ]
 }

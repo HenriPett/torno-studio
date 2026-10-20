@@ -85,6 +85,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-ficha-prova-restauracao.svg', digest: 'beea8223b20c5dce7fbe61875d036d8e1a94bdc016c41dfd5b08aa71386962c3' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261020-evento-duplicado', intent_id: 'buyer-integration-duplicate-event-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/integracao-evento-duplicado-regra-negocio/', canonical_url: `${BLOG_ORIGIN}/blog/integracao-evento-duplicado-regra-negocio/`,
+    digest: '3c76f468d5d7133b8bec77e0b9503452da224f7b68adb9ca521b7435e61360e8', digestScope: 'file',
+    assets: [
+      { path: 'mesmo-evento-efeito.svg', digest: 'e9d287f0ac40375e6778bbdc9105a681bc663a03e81de495c45dfae1bfe2d876' },
+      { path: 'aceite-evidencias.svg', digest: '69d74175d95e5c5a5e3b41e9d87a6c2798501ac5a15c4a9dd0ec77a730e9d0b8' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -337,6 +346,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261020-prova-restauracao-backup': [
         {asset:'./torno-prova-fluxo-restauracao.svg',alt:'Quatro partes da prova de restauração: identificar a cópia, demonstrar teste em ambiente separado, conferir dados e funções, e registrar o que passou, falhou ou ficou fora.',caption:'Peça evidências do teste controlado, das conferências e dos limites encontrados. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-ficha-prova-restauracao.svg',alt:'Ficha de leitura da prova de restauração com escopo, resultado, lacunas e próxima decisão, incluindo evidência e responsável.',caption:'Use escopo, resultado, lacunas e responsável para ler o relatório de restauração. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261020-evento-duplicado': [
+        {asset:'./mesmo-evento-efeito.svg',alt:'Exemplo fictício: a aprovação cria uma tarefa, sua reentrega deve preservar esse resultado e uma nova mudança no mesmo objeto precisa ser considerada conforme a regra.',caption:'Exemplo fictício de resultado a combinar: conferir o efeito da repetição e distinguir uma atualização legítima. Crédito: Torno Studio.',className:['blog-figure']},
+        {asset:'./aceite-evidencias.svg',alt:'Ficha visual de aceite com repetição e entregas próximas, falha antes ou após o registro, nova mudança legítima e conclusão com versão, efeitos conferidos e limites.',caption:'O teste de aceite reúne cenários, evidências e limites do que foi demonstrado. Crédito: Torno Studio.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
