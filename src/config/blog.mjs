@@ -112,6 +112,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'regra-cenarios-evidencia.svg', digest: '730ddedcba13d5b259cd13b92f4b413421746e8e7e8357323f9f7a7044a890ab' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261021-trilha-auditoria', intent_id: 'buyer-audit-trail-business-requirements-pt', locale: 'pt-BR',
+    path: '/blog/trilha-auditoria-sistema-requisitos-negocio/', canonical_url: `${BLOG_ORIGIN}/blog/trilha-auditoria-sistema-requisitos-negocio/`,
+    digest: '4c2410d08fe0b0be5f023540d35cae00b338bef54065efde7a21a4b8c2ecd359', digestScope: 'file',
+    assets: [
+      { path: 'ficha-evento-auditoria.svg', digest: '8274c5147b8ad9d085e6c7fcdc80febea5c3286105963d1010afcce11fa7b64e' },
+      { path: 'do-evento-a-evidencia.svg', digest: '2667097334d5c848846d03b88e22c49c9e1fd9d8073e7b23449963908a8d2b11' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -376,6 +385,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261021-permissoes-acesso': [
         {asset:'./matriz-permissoes.svg',alt:'Matriz ilustrativa com ações de operador na unidade e gestor na organização, distinguindo consulta, alteração, exportação e condições de acesso.',caption:'Matriz ilustrativa; papéis, escopos e condições precisam ser definidos para o software real. Crédito: Torno Studio.',className:['blog-figure']},
         {asset:'./regra-cenarios-evidencia.svg',alt:'Sequência para escrever a regra de acesso, conferir cenários permitidos e negados e registrar evidências do aceite com dados de teste.',caption:'Roteiro ilustrativo para verificar regras de acesso em ambiente autorizado, com dados de teste. Crédito: Torno Studio.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261021-trilha-auditoria': [
+        {asset:'./ficha-evento-auditoria.svg',alt:'Ficha de evento de um sistema fictício com alteração de status, conta de teste, pedido fictício, instante com fuso, resultado e identificadores para investigação.',caption:'Campos ilustrativos para discutir o registro de eventos; o exemplo usa um sistema fictício. Crédito: Torno Studio.',className:['blog-figure']},
+        {asset:'./do-evento-a-evidencia.svg',alt:'Três etapas para definir eventos, acesso e retenção, excluir dados desnecessários e demonstrar consulta e exportação com ações aceitas e negadas em ambiente de teste.',caption:'Roteiro ilustrativo para pedir uma demonstração com evidências e limites documentados. Crédito: Torno Studio.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

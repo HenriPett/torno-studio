@@ -663,6 +663,32 @@
           "sha256": "730ddedcba13d5b259cd13b92f4b413421746e8e7e8357323f9f7a7044a890ab"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261021-trilha-auditoria",
+      "intentId": "buyer-audit-trail-business-requirements-pt",
+      "locale": "pt-BR",
+      "path": "/blog/trilha-auditoria-sistema-requisitos-negocio/",
+      "contentRevision": "4c2410d08fe0b0be5f023540d35cae00b338bef54065efde7a21a4b8c2ecd359",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-21T15:06:44Z",
+      "reviewedBy": "Revisor independente (agente)",
+      "reviewedAt": "2026-10-21T15:06:44Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 21/10/2026, 12h BRT; commits editoriais e push na main autorizados após revisão e testes.",
+        "review": "Revisão independente factual, editorial e visual PASS dos bytes finais de Markdown e imagens; revisão final do diff staged antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria ou aprovação pessoal de Henrique."
+      },
+      "assets": [
+        {
+          "path": "ficha-evento-auditoria.svg",
+          "sha256": "8274c5147b8ad9d085e6c7fcdc80febea5c3286105963d1010afcce11fa7b64e"
+        },
+        {
+          "path": "do-evento-a-evidencia.svg",
+          "sha256": "2667097334d5c848846d03b88e22c49c9e1fd9d8073e7b23449963908a8d2b11"
+        }
+      ]
     }
   ]
 }
