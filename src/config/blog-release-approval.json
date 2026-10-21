@@ -689,6 +689,32 @@
           "sha256": "2667097334d5c848846d03b88e22c49c9e1fd9d8073e7b23449963908a8d2b11"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261021-plano-rollback",
+      "intentId": "buyer-release-rollback-plan-pt",
+      "locale": "pt-BR",
+      "path": "/blog/plano-rollback-atualizacao-sistema/",
+      "contentRevision": "1345bf9331cebbb888610f4ccb276ff143ac382c2d78df7e5d83ecd6e95f95c1",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-21T21:08:24Z",
+      "reviewedBy": "Revisor independente (agente Codex)",
+      "reviewedAt": "2026-10-21T21:08:24Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 21/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main de ambos os projetos autorizados, após revisão por agente diferente do autor.",
+        "review": "Revisão factual e revisão independente iniciais PASS do Markdown e dos dois SVGs identificados por SHA-256 em 2026-10-21; diff integrado e testes ainda sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria ou revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-rollback-gatilhos-responsaveis.svg",
+          "sha256": "5aea1d35e09545ce0f86b9bb2367d59ebe362446334e37766065d3048718e081"
+        },
+        {
+          "path": "torno-rollback-limites-verificacao.svg",
+          "sha256": "3fd31e622739f75e4105a052f945ad7abc1e662996c0e9a6755217c0f9715918"
+        }
+      ]
     }
   ]
 }

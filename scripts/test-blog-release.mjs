@@ -26,12 +26,13 @@ const expected = [
   ['torno-artigo-pt-20261020-teste-carga-evidencias', '/blog/teste-carga-evidencias-liberar-sistema/', '2e3f8187960ac55bddd1fa2a918c68f2a419142c781963187d55bed8a33166d2', ['torno-carga-cenario.svg', 'torno-carga-relatorio.svg']],
   ['torno-artigo-pt-20261021-permissoes-acesso', '/blog/permissoes-acesso-software-regras-negocio/', 'c1b602c5509387bf4dd3ee76a0ec6fa476a24b337710fa3e577ba5fa97ae1711', ['matriz-permissoes.svg', 'regra-cenarios-evidencia.svg']],
   ['torno-artigo-pt-20261021-trilha-auditoria', '/blog/trilha-auditoria-sistema-requisitos-negocio/', '4c2410d08fe0b0be5f023540d35cae00b338bef54065efde7a21a4b8c2ecd359', ['ficha-evento-auditoria.svg', 'do-evento-a-evidencia.svg']],
+  ['torno-artigo-pt-20261021-plano-rollback', '/blog/plano-rollback-atualizacao-sistema/', '1345bf9331cebbb888610f4ccb276ff143ac382c2d78df7e5d83ecd6e95f95c1', ['torno-rollback-gatilhos-responsaveis.svg', 'torno-rollback-limites-verificacao.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os quatorze artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os quinze artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -41,7 +42,7 @@ checks.push(['manifesto inclui exatamente os quatorze artigos autorizados e suas
   }
 }]);
 
-checks.push(['sitemap contém 36 URLs únicas: baseline com páginas institucionais, dois índices e quatorze artigos PT', async () => {
+checks.push(['sitemap contém 37 URLs únicas: baseline com páginas institucionais, dois índices e quinze artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();

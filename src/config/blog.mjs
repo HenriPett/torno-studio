@@ -121,6 +121,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'do-evento-a-evidencia.svg', digest: '2667097334d5c848846d03b88e22c49c9e1fd9d8073e7b23449963908a8d2b11' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261021-plano-rollback', intent_id: 'buyer-release-rollback-plan-pt', locale: 'pt-BR',
+    path: '/blog/plano-rollback-atualizacao-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/plano-rollback-atualizacao-sistema/`,
+    digest: '1345bf9331cebbb888610f4ccb276ff143ac382c2d78df7e5d83ecd6e95f95c1', digestScope: 'file',
+    assets: [
+      { path: 'torno-rollback-gatilhos-responsaveis.svg', digest: '5aea1d35e09545ce0f86b9bb2367d59ebe362446334e37766065d3048718e081' },
+      { path: 'torno-rollback-limites-verificacao.svg', digest: '3fd31e622739f75e4105a052f945ad7abc1e662996c0e9a6755217c0f9715918' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -389,6 +398,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261021-trilha-auditoria': [
         {asset:'./ficha-evento-auditoria.svg',alt:'Ficha de evento de um sistema fictício com alteração de status, conta de teste, pedido fictício, instante com fuso, resultado e identificadores para investigação.',caption:'Campos ilustrativos para discutir o registro de eventos; o exemplo usa um sistema fictício. Crédito: Torno Studio.',className:['blog-figure']},
         {asset:'./do-evento-a-evidencia.svg',alt:'Três etapas para definir eventos, acesso e retenção, excluir dados desnecessários e demonstrar consulta e exportação com ações aceitas e negadas em ambiente de teste.',caption:'Roteiro ilustrativo para pedir uma demonstração com evidências e limites documentados. Crédito: Torno Studio.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261021-plano-rollback': [
+        {asset:'./torno-rollback-gatilhos-responsaveis.svg',alt:'Quatro acordos para o plano de rollback: sinal e evidência, decisão e cobertura, execução e destino, validação e comunicação.',caption:'Proposta editorial para ligar sinais de ação às responsabilidades antes da publicação. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-rollback-limites-verificacao.svg',alt:'Quatro conferências do retorno de uma versão: compatibilidade dos dados, efeitos externos, ensaio pertinente e verificação após a reversão.',caption:'Proposta editorial para conferir os limites do retorno e guardar evidências da decisão e do resultado. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
