@@ -637,6 +637,32 @@
           "sha256": "f74cc41ffa7f3fbdbaec2934713624ba2f9ce6147c54a1cbd45241ce659f6c3a"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261021-permissoes-acesso",
+      "intentId": "buyer-access-permissions-business-rules-pt",
+      "locale": "pt-BR",
+      "path": "/blog/permissoes-acesso-software-regras-negocio/",
+      "contentRevision": "c1b602c5509387bf4dd3ee76a0ec6fa476a24b337710fa3e577ba5fa97ae1711",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-21T11:23:39Z",
+      "reviewedBy": "Revisor independente (agente)",
+      "reviewedAt": "2026-10-21T11:23:39Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 21/10/2026, 08h15 BRT; commits editoriais e push na main autorizados após revisão e testes.",
+        "review": "Revisão independente factual, editorial e visual PASS dos bytes finais de Markdown e imagens; revisão final do diff staged antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria ou aprovação pessoal de Henrique."
+      },
+      "assets": [
+        {
+          "path": "matriz-permissoes.svg",
+          "sha256": "04e92197932078473a72da7cc3a5463f9167e2cc6cdfb6a4f739ac1b7f522825"
+        },
+        {
+          "path": "regra-cenarios-evidencia.svg",
+          "sha256": "730ddedcba13d5b259cd13b92f4b413421746e8e7e8357323f9f7a7044a890ab"
+        }
+      ]
     }
   ]
 }

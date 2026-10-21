@@ -103,6 +103,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-carga-relatorio.svg', digest: 'f74cc41ffa7f3fbdbaec2934713624ba2f9ce6147c54a1cbd45241ce659f6c3a' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261021-permissoes-acesso', intent_id: 'buyer-access-permissions-business-rules-pt', locale: 'pt-BR',
+    path: '/blog/permissoes-acesso-software-regras-negocio/', canonical_url: `${BLOG_ORIGIN}/blog/permissoes-acesso-software-regras-negocio/`,
+    digest: 'c1b602c5509387bf4dd3ee76a0ec6fa476a24b337710fa3e577ba5fa97ae1711', digestScope: 'file',
+    assets: [
+      { path: 'matriz-permissoes.svg', digest: '04e92197932078473a72da7cc3a5463f9167e2cc6cdfb6a4f739ac1b7f522825' },
+      { path: 'regra-cenarios-evidencia.svg', digest: '730ddedcba13d5b259cd13b92f4b413421746e8e7e8357323f9f7a7044a890ab' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -363,6 +372,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261020-evento-duplicado': [
         {asset:'./mesmo-evento-efeito.svg',alt:'Exemplo fictício: a aprovação cria uma tarefa, sua reentrega deve preservar esse resultado e uma nova mudança no mesmo objeto precisa ser considerada conforme a regra.',caption:'Exemplo fictício de resultado a combinar: conferir o efeito da repetição e distinguir uma atualização legítima. Crédito: Torno Studio.',className:['blog-figure']},
         {asset:'./aceite-evidencias.svg',alt:'Ficha visual de aceite com repetição e entregas próximas, falha antes ou após o registro, nova mudança legítima e conclusão com versão, efeitos conferidos e limites.',caption:'O teste de aceite reúne cenários, evidências e limites do que foi demonstrado. Crédito: Torno Studio.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261021-permissoes-acesso': [
+        {asset:'./matriz-permissoes.svg',alt:'Matriz ilustrativa com ações de operador na unidade e gestor na organização, distinguindo consulta, alteração, exportação e condições de acesso.',caption:'Matriz ilustrativa; papéis, escopos e condições precisam ser definidos para o software real. Crédito: Torno Studio.',className:['blog-figure']},
+        {asset:'./regra-cenarios-evidencia.svg',alt:'Sequência para escrever a regra de acesso, conferir cenários permitidos e negados e registrar evidências do aceite com dados de teste.',caption:'Roteiro ilustrativo para verificar regras de acesso em ambiente autorizado, com dados de teste. Crédito: Torno Studio.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
