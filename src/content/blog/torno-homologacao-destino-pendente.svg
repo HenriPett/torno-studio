@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1180" viewBox="0 0 720 1180" role="img" aria-labelledby="title desc"><title id="title">Uma pendência antes do teste</title><desc id="desc">Fluxo editorial: destino confirmado permite executar o cenário nas condições definidas; destino a confirmar mantém o cenário pendente.</desc><rect width="720" height="1180" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · DECISÃO ANTES DO TESTE</text>
+<text x="36" y="116" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="36" font-weight="700">Destino ainda a confirmar?</text>
+<text x="36" y="163" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Uma linha aberta precisa de resposta técnica.</text>
+<rect x="32" y="210" width="656" height="140" rx="12" fill="#e2ede8" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="254" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="700">Antes de uma ação que sai do app</text>
+<text x="54" y="296" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Identifique destino, modo de teste e responsável.</text>
+<text x="54" y="329" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Inclua rotinas que executam em segundo plano.</text>
+<path d="M360 350 L360 391" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="32" y="392" width="656" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="434" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Destino ou condição não confirmados</text>
+<text x="54" y="478" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="400">Mantenha o cenário pendente.</text>
+<text x="54" y="515" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O clique não deve descobrir a configuração.</text>
+<path d="M360 542 L360 584" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="32" y="585" width="656" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="627" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">O responsável técnico verifica</text>
+<text x="54" y="671" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Registre a configuração e suas evidências.</text>
+<text x="54" y="708" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Execute só com as condições definidas.</text>
+<path d="M360 735 L360 777" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="32" y="778" width="656" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="820" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Interprete o resultado com seu limite</text>
+<text x="54" y="864" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Uma resposta simulada não demonstra</text>
+<text x="54" y="901" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">a troca real com o serviço externo.</text>
+<text x="36" y="998" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">Ficha do ensaio: versão, dados e perfil,</text>
+<text x="36" y="1037" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">dependências utilizadas e diferenças.</text>
+<text x="36" y="1115" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao sistema.</text>
+</svg>

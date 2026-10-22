@@ -741,6 +741,32 @@
           "sha256": "318327f4df29a6c80fbdc43b89dff5384e36a2f1017d1a580cce985b0d9da7bf"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261022-ambiente-homologacao",
+      "intentId": "buyer-staging-environment-readiness-pt",
+      "locale": "pt-BR",
+      "path": "/blog/ambiente-homologacao-conferir-antes-testar-sistema/",
+      "contentRevision": "0f0708be733aadb46390d2a0311c33b310ce6a88569b51ac12b379cde64dc7e0",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-22T15:05:55Z",
+      "reviewedBy": "Revisor independente (agente Codex)",
+      "reviewedAt": "2026-10-22T15:05:55Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 22/10/2026, meio-dia America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão por agente diferente do autor.",
+        "review": "Revisões factual e editorial independentes iniciais PASS do texto em 2026-10-22; imagens, diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-homologacao-conexoes-ambiente.svg",
+          "sha256": "e6d1ce9cb0e84e1cb2a7e86d5be462a3b2cc3080e8fcedd2d25a9498cae901e3"
+        },
+        {
+          "path": "torno-homologacao-destino-pendente.svg",
+          "sha256": "c23c1544eca71aecb3778c3e703e4801b2dd87b837e972c4920e1cc4ebb66718"
+        }
+      ]
     }
   ]
 }

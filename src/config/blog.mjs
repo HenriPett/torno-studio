@@ -139,6 +139,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-acessibilidade-evidencia-pendencias.svg', digest: '318327f4df29a6c80fbdc43b89dff5384e36a2f1017d1a580cce985b0d9da7bf' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261022-ambiente-homologacao', intent_id: 'buyer-staging-environment-readiness-pt', locale: 'pt-BR',
+    path: '/blog/ambiente-homologacao-conferir-antes-testar-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/ambiente-homologacao-conferir-antes-testar-sistema/`,
+    digest: '0f0708be733aadb46390d2a0311c33b310ce6a88569b51ac12b379cde64dc7e0', digestScope: 'file',
+    assets: [
+      { path: 'torno-homologacao-conexoes-ambiente.svg', digest: 'e6d1ce9cb0e84e1cb2a7e86d5be462a3b2cc3080e8fcedd2d25a9498cae901e3' },
+      { path: 'torno-homologacao-destino-pendente.svg', digest: 'c23c1544eca71aecb3778c3e703e4801b2dd87b837e972c4920e1cc4ebb66718' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -415,6 +424,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261022-acessibilidade-aceite': [
         {asset:'./torno-acessibilidade-fluxo-aceite.svg',alt:'Quatro acordos para o aceite: tarefa e perfil, estados e dependências, referência e alcance, demonstração humana do fluxo.',caption:'Proposta editorial para definir o fluxo; verificações iniciais não comprovam conformidade WCAG. Crédito: Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-acessibilidade-evidencia-pendencias.svg',alt:'Sequência para documentar o aceite: identificar o ensaio, comparar resultados, declarar o alcance e verificar a correção.',caption:'Relacione a evidência ao cenário avaliado e mantenha pendências com encaminhamento explícito. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261022-ambiente-homologacao': [
+        {asset:'./torno-homologacao-conexoes-ambiente.svg',alt:'Mapa de conferência liga a aplicação em homologação às perguntas sobre banco de dados, arquivos e serviços externos, incluindo possíveis ligações com produção.',caption:'Mapa editorial de perguntas ao responsável; não representa uma arquitetura real nem comprova isolamento. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-homologacao-destino-pendente.svg',alt:'Um destino não confirmado mantém o cenário pendente; o responsável verifica a configuração antes do teste, e o resultado deve declarar seus limites.',caption:'O destino de uma ação deve ser confirmado antes do cenário; uma simulação não prova a troca real. Crédito: Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
