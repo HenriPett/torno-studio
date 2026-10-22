@@ -130,6 +130,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-rollback-limites-verificacao.svg', digest: '3fd31e622739f75e4105a052f945ad7abc1e662996c0e9a6755217c0f9715918' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261022-acessibilidade-aceite', intent_id: 'buyer-software-accessibility-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/acessibilidade-software-sob-medida-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/acessibilidade-software-sob-medida-aceite/`,
+    digest: '8fa056dff85b9f0daa48406e139e005a516dedc58f02d97757cc177e280463f4', digestScope: 'file',
+    assets: [
+      { path: 'torno-acessibilidade-fluxo-aceite.svg', digest: 'b2c6fc34dcf03b4acae09e12e7b7ae03fea3c32a08f43305d51c973abe5f5ae7' },
+      { path: 'torno-acessibilidade-evidencia-pendencias.svg', digest: '318327f4df29a6c80fbdc43b89dff5384e36a2f1017d1a580cce985b0d9da7bf' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -402,6 +411,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261021-plano-rollback': [
         {asset:'./torno-rollback-gatilhos-responsaveis.svg',alt:'Quatro acordos para o plano de rollback: sinal e evidência, decisão e cobertura, execução e destino, validação e comunicação.',caption:'Proposta editorial para ligar sinais de ação às responsabilidades antes da publicação. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-rollback-limites-verificacao.svg',alt:'Quatro conferências do retorno de uma versão: compatibilidade dos dados, efeitos externos, ensaio pertinente e verificação após a reversão.',caption:'Proposta editorial para conferir os limites do retorno e guardar evidências da decisão e do resultado. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261022-acessibilidade-aceite': [
+        {asset:'./torno-acessibilidade-fluxo-aceite.svg',alt:'Quatro acordos para o aceite: tarefa e perfil, estados e dependências, referência e alcance, demonstração humana do fluxo.',caption:'Proposta editorial para definir o fluxo; verificações iniciais não comprovam conformidade WCAG. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-acessibilidade-evidencia-pendencias.svg',alt:'Sequência para documentar o aceite: identificar o ensaio, comparar resultados, declarar o alcance e verificar a correção.',caption:'Relacione a evidência ao cenário avaliado e mantenha pendências com encaminhamento explícito. Crédito: Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

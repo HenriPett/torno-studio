@@ -715,6 +715,32 @@
           "sha256": "3fd31e622739f75e4105a052f945ad7abc1e662996c0e9a6755217c0f9715918"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261022-acessibilidade-aceite",
+      "intentId": "buyer-software-accessibility-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/acessibilidade-software-sob-medida-aceite/",
+      "contentRevision": "8fa056dff85b9f0daa48406e139e005a516dedc58f02d97757cc177e280463f4",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-22T11:25:48Z",
+      "reviewedBy": "Revisor independente (agente Codex)",
+      "reviewedAt": "2026-10-22T11:25:48Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 22/10/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main de ambos os projetos autorizados, após revisão por agente diferente do autor.",
+        "review": "Revisão factual e revisão independente iniciais PASS dos bytes finais de Markdown e dois SVGs em 2026-10-22; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-acessibilidade-fluxo-aceite.svg",
+          "sha256": "b2c6fc34dcf03b4acae09e12e7b7ae03fea3c32a08f43305d51c973abe5f5ae7"
+        },
+        {
+          "path": "torno-acessibilidade-evidencia-pendencias.svg",
+          "sha256": "318327f4df29a6c80fbdc43b89dff5384e36a2f1017d1a580cce985b0d9da7bf"
+        }
+      ]
     }
   ]
 }

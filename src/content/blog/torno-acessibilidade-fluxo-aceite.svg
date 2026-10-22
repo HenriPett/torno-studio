@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1060" viewBox="0 0 720 1060" role="img" aria-labelledby="title desc"><title id="title">Combine o fluxo do aceite</title><desc id="desc">Escolha uma tarefa do começo ao fim. Proposta editorial para adaptar ao produto.</desc><rect width="720" height="1060" fill="#f7f6f2"/>
+<text x="36" y="56" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">TORNO · GUIA VISUAL</text>
+<text x="36" y="120" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="34" font-weight="700">Combine o fluxo do aceite</text>
+<text x="36" y="166" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Escolha uma tarefa do começo ao fim.</text>
+<rect x="32" y="210" width="656" height="154" rx="14" fill="#fff" stroke="#dcd9d1" stroke-width="2"/><rect x="48" y="232" width="54" height="54" rx="12" fill="#e2ede8"/>
+<text x="65" y="269" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">1</text>
+<text x="120" y="254" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Tarefa e perfil</text>
+<text x="120" y="296" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Defina início e conclusão esperada.</text>
+<text x="120" y="330" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Inclua os perfis que usam o fluxo.</text>
+<rect x="32" y="386" width="656" height="154" rx="14" fill="#fff" stroke="#dcd9d1" stroke-width="2"/><rect x="48" y="408" width="54" height="54" rx="12" fill="#e2ede8"/>
+<text x="65" y="445" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">2</text>
+<text x="120" y="430" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Estados e dependências</text>
+<text x="120" y="472" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Inclua erros e confirmações.</text>
+<text x="120" y="506" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Registre componentes de terceiros.</text>
+<rect x="32" y="562" width="656" height="154" rx="14" fill="#fff" stroke="#dcd9d1" stroke-width="2"/><rect x="48" y="584" width="54" height="54" rx="12" fill="#e2ede8"/>
+<text x="65" y="621" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">3</text>
+<text x="120" y="606" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Referência e alcance</text>
+<text x="120" y="648" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine critérios, método e avaliador.</text>
+<text x="120" y="682" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Declare os limites da avaliação.</text>
+<rect x="32" y="738" width="656" height="154" rx="14" fill="#fff" stroke="#dcd9d1" stroke-width="2"/><rect x="48" y="760" width="54" height="54" rx="12" fill="#e2ede8"/>
+<text x="65" y="797" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">4</text>
+<text x="120" y="782" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Demonstração humana</text>
+<text x="120" y="824" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira como a tarefa é concluída.</text>
+<text x="120" y="858" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Inclua a correção de erros.</text>
+<text x="36" y="958" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">Verificações iniciais não comprovam</text>
+<text x="36" y="990" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">conformidade WCAG.</text>
+<text x="36" y="1030" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao produto.</text>
+</svg>
