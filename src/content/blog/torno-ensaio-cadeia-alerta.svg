@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1260" viewBox="0 0 720 1260" role="img" aria-labelledby="title desc"><title id="title">Ensaie a cadeia do alerta</title><desc id="desc">Sequência editorial do ensaio: condição controlada, detecção, entrega, confirmação e ação ou escalonamento, com limites registrados.</desc><rect width="720" height="1260" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ENSAIO DA CADEIA</text>
+<text x="36" y="118" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="36" font-weight="700">O aviso chega a uma ação?</text>
+<text x="36" y="164" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine um teste controlado e autorizado.</text>
+<rect x="68" y="210" width="620" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="92" y="250" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Condição controlada</text>
+<text x="92" y="294" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Gere a condição combinada no ensaio.</text>
+<text x="92" y="329" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Registre ambiente, versão e limites.</text>
+<text x="28" y="256" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">1</text>
+<path d="M378 360 L378 386" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="68" y="386" width="620" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="92" y="426" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Detecção pela regra</text>
+<text x="92" y="470" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira se o sinal e a condição</text>
+<text x="92" y="505" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">produzem o alerta previsto.</text>
+<text x="28" y="432" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">2</text>
+<path d="M378 536 L378 562" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="68" y="562" width="620" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="92" y="602" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Entrega ao destinatário</text>
+<text x="92" y="646" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o canal e a pessoa que recebe.</text>
+<text x="92" y="681" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Gerar o alerta não prova a entrega.</text>
+<text x="28" y="608" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">3</text>
+<path d="M378 712 L378 738" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="68" y="738" width="620" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="92" y="778" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Confirmação de recebimento</text>
+<text x="92" y="822" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Receber não prova ação nem resolução.</text>
+<text x="92" y="857" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Sem resposta, siga o escalonamento.</text>
+<text x="28" y="784" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">4</text>
+<path d="M378 888 L378 914" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="68" y="914" width="620" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="92" y="954" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Ação e evidência</text>
+<text x="92" y="998" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Registre o que foi executado</text>
+<text x="92" y="1033" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">e o resultado que pôde ser conferido.</text>
+<text x="28" y="960" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700">5</text>
+<text x="36" y="1134" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Mensagem injetada no canal não testa</text>
+<text x="36" y="1174" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">a coleta nem a avaliação da regra.</text>
+<text x="36" y="1230" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao produto.</text>
+</svg>

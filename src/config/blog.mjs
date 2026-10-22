@@ -148,6 +148,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-homologacao-destino-pendente.svg', digest: 'c23c1544eca71aecb3778c3e703e4801b2dd87b837e972c4920e1cc4ebb66718' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261022-monitoramento-alertas', intent_id: 'buyer-software-monitoring-actionable-alerts-pt', locale: 'pt-BR',
+    path: '/blog/monitoramento-software-alertas-fluxo-critico/', canonical_url: `${BLOG_ORIGIN}/blog/monitoramento-software-alertas-fluxo-critico/`,
+    digest: 'ce937c915771947017a402ec3b160244feb60ebc1fd51d66eb51d73c443558d5', digestScope: 'file',
+    assets: [
+      { path: 'torno-acordo-alerta-fluxo.svg', digest: '66a5ae0ed1d908ded471ae3970733ba29285d3476340fec7c1cb00165dc29bb5' },
+      { path: 'torno-ensaio-cadeia-alerta.svg', digest: '4e598773dd63b98f3fb041f8c91488c8be811e0d8536f43b8b013518e4e221a4' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -428,6 +437,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261022-ambiente-homologacao': [
         {asset:'./torno-homologacao-conexoes-ambiente.svg',alt:'Mapa de conferência liga a aplicação em homologação às perguntas sobre banco de dados, arquivos e serviços externos, incluindo possíveis ligações com produção.',caption:'Mapa editorial de perguntas ao responsável; não representa uma arquitetura real nem comprova isolamento. Crédito: Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-homologacao-destino-pendente.svg',alt:'Um destino não confirmado mantém o cenário pendente; o responsável verifica a configuração antes do teste, e o resultado deve declarar seus limites.',caption:'O destino de uma ação deve ser confirmado antes do cenário; uma simulação não prova a troca real. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261022-monitoramento-alertas': [
+        {asset:'./torno-acordo-alerta-fluxo.svg',alt:'Ficha do alerta liga fluxo e impacto a sinal, janela, condição, destinatário, cobertura, ação e teste.',caption:'Proposta editorial de acordo por alerta, com condições próprias do sistema e cobertura combinada. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-ensaio-cadeia-alerta.svg',alt:'Ensaio controlado percorre condição, detecção, entrega, confirmação e ação; injetar mensagem no canal não testa coleta e regra.',caption:'Registre cada etapa demonstrada e seus limites; receber o aviso não comprova ação ou resolução. Crédito: Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

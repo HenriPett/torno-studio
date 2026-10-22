@@ -448,6 +448,7 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 
 **Deduplicação:** este evento promove apenas `content_id + locale` da manutenção pós-lançamento. Não republica planilhas, critérios, ERP ou evidências antes de refazer sistema; não altera suas datas de primeira publicação, não reabre o custo de construção do MVP e não cria versão EN.
 
+
 ### Rodada 12h — reentrega de evento na integração (2026-10-20)
 
 - Evento editorial `release-approved:torno-artigo-pt-20261020-evento-duplicado:2026-10-20T15:20:24Z`, rodada `2026-10-20-1200` em America/Sao_Paulo. `content_id=torno-artigo-pt-20261020-evento-duplicado`, `intent_id=buyer-integration-duplicate-event-acceptance-pt`, locale `pt-BR`; path planejado `/blog/integracao-evento-duplicado-regra-negocio/`.
@@ -481,3 +482,10 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 - Rodada `2026-10-21-1200`, `content_id=torno-artigo-pt-20261021-trilha-auditoria`, `intent_id=buyer-audit-trail-business-requirements-pt`, locale `pt-BR`, path planejado `/blog/trilha-auditoria-sistema-requisitos-negocio/`.
 - Intenção qualitativa do comprador: reconstruir acontecimentos e resultados por evento, distinta da matriz de permissões de acesso e do relato de erro. Sem métricas de volume/ranking/tráfego. Fonte e limites na [ficha](ROTINA-2026-10-21-1200.md).
 - Markdown `status: review`, liberável só pelo SHA-256 `4c2410d08fe0b0be5f023540d35cae00b338bef54065efde7a21a4b8c2ecd359` e SVGs SHA-256 `8274c5147b8ad9d085e6c7fcdc80febea5c3286105963d1010afcce11fa7b64e` e `2667097334d5c848846d03b88e22c49c9e1fd9d8073e7b23449963908a8d2b11`. Revisão independente do conteúdo PASS; diff staged final pendente. `first_published_at=null` até URL pública observada.
+
+### 2026-10-22 18h BRT — alertas para fluxo crítico de software
+
+- Execução `22-1800`, `content_id=torno-artigo-pt-20261022-monitoramento-alertas`, `intent_id=buyer-software-monitoring-actionable-alerts-pt`, locale `pt-BR`; URL planejada `/blog/monitoramento-software-alertas-fluxo-critico/`.
+- Intenção informacional do comprador: definir sinal, condição, cobertura, destinatário, ação e teste para perceber um problema num fluxo crítico. Auditoria reconstrói eventos, erro intermitente documenta ocorrência, rollback trata reversão e custo de manutenção trata orçamento; nenhuma dessas páginas é substituída. Pesquisa quantitativa, GSC e indexação: sem dados.
+- Markdown em `status: review`, aprovado para inclusão nesta rodada somente pelo SHA-256 `ce937c915771947017a402ec3b160244feb60ebc1fd51d66eb51d73c443558d5` e SVGs `66a5ae0ed1d908ded471ae3970733ba29285d3476340fec7c1cb00165dc29bb5`/`4e598773dd63b98f3fb041f8c91488c8be811e0d8536f43b8b013518e4e221a4`. Revisão factual/visual independente do autor GO; gate do diff completo antes do push. Aprovação operacional do integrador sob autorização editorial do usuário, sem autoria ou revisão pessoal de Henrique.
+- `first_published_at=null`, `verified_at=null`, `evidence_of_publication=null` até observação pública. Build ou push não provam publicação.

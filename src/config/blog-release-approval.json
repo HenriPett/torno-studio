@@ -767,6 +767,32 @@
           "sha256": "c23c1544eca71aecb3778c3e703e4801b2dd87b837e972c4920e1cc4ebb66718"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261022-monitoramento-alertas",
+      "intentId": "buyer-software-monitoring-actionable-alerts-pt",
+      "locale": "pt-BR",
+      "path": "/blog/monitoramento-software-alertas-fluxo-critico/",
+      "contentRevision": "ce937c915771947017a402ec3b160244feb60ebc1fd51d66eb51d73c443558d5",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-22T21:12:00Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-22T21:12:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 22/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão por agente diferente do autor.",
+        "review": "Revisão factual e visual independente do autor PASS dos bytes finais de Markdown e dois SVGs em 2026-10-22; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-acordo-alerta-fluxo.svg",
+          "sha256": "66a5ae0ed1d908ded471ae3970733ba29285d3476340fec7c1cb00165dc29bb5"
+        },
+        {
+          "path": "torno-ensaio-cadeia-alerta.svg",
+          "sha256": "4e598773dd63b98f3fb041f8c91488c8be811e0d8536f43b8b013518e4e221a4"
+        }
+      ]
     }
   ]
 }
