@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1320" viewBox="0 0 720 1320" role="img" aria-labelledby="title desc"><title id="title">Uma matriz para aceitar datas e horários</title><desc id="desc">Ficha editorial com campo, significado, fuso de referência, corte, exibição e relatório. Não representa uma configuração real.</desc><rect width="720" height="1320" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · MATRIZ DE ACEITE</text>
+<text x="36" y="118" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="34" font-weight="700">Combine a regra e a evidência</text>
+<text x="36" y="164" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Use uma linha para cada campo ou regra distinta.</text>
+<rect x="32" y="215" width="656" height="139" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Campo</text>
+<text x="54" y="294" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual informação será registrada</text>
+<text x="54" y="330" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">e em qual fluxo ela é usada?</text>
+<rect x="32" y="371" width="656" height="139" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="408" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Significado</text>
+<text x="54" y="450" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">É data civil, instante</text>
+<text x="54" y="486" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">ou agendamento futuro?</text>
+<rect x="32" y="527" width="656" height="139" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="564" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Referência de fuso</text>
+<text x="54" y="606" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual local ou fuso orienta</text>
+<text x="54" y="642" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">a regra quando ele se aplica?</text>
+<rect x="32" y="683" width="656" height="139" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="720" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Corte</text>
+<text x="54" y="762" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual é o limite do período?</text>
+<text x="54" y="798" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como tratar o caso na fronteira?</text>
+<rect x="32" y="839" width="656" height="139" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="876" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Exibição</text>
+<text x="54" y="918" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que cada perfil verá</text>
+<text x="54" y="954" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">e com qual referência?</text>
+<rect x="32" y="995" width="656" height="139" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1032" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Relatório</text>
+<text x="54" y="1074" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Em qual período o evento entra?</text>
+<text x="54" y="1110" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como conferir tela e exportação?</text>
+<text x="36" y="1204" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Teste as fronteiras e registre a regra aplicada.</text>
+<text x="36" y="1274" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao sistema.</text>
+</svg>

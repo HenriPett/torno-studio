@@ -175,6 +175,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-importacao-erros.svg', digest: 'df18dc1db078299321ecd7a5a037941985ef5226deb634bfb94cc816bc519ec4' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261023-datas-fusos', intent_id: 'buyer-date-time-business-rules-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/datas-fusos-sistema-prazos-relatorios/', canonical_url: `${BLOG_ORIGIN}/blog/datas-fusos-sistema-prazos-relatorios/`,
+    digest: 'af589e75b6907bff2685780b8fc453d5cc74b63e8716a7c9f56f1f15f7ab791e', digestScope: 'file',
+    assets: [
+      { path: 'torno-datas-regras.svg', digest: 'cf77ae7cfaa66223fcdad4f9947a3bd8b6dbc4bf02c39344bb53bd83d0fc0542' },
+      { path: 'torno-datas-aceite.svg', digest: '14fb71feacac0245aec89ba8508d783aedc508caea840ebb4ce379feee5148e2' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -467,6 +476,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261023-importacao-planilhas-erros': [
         {asset:'./torno-importacao-fluxo.svg',alt:'Fluxo proposto para receber o arquivo, interpretar o modelo, validar registros, aplicar a política de gravação e apresentar um resultado verificável.',caption:'Roteiro ilustrativo da importação; a política de gravação depende do acordo do produto. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-importacao-erros.svg',alt:'Modelo fictício de devolutiva com linha, campo, motivo e ação de correção, distinguindo arquivo inválido de registro inválido e os totais lidos, previstos e gravados.',caption:'Campos propostos para conferir o resultado e orientar a correção, com dados fictícios. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261023-datas-fusos': [
+        {asset:'./torno-datas-regras.svg',alt:'Três significados para datas e horários: data civil, instante e agendamento futuro, definidos antes da representação técnica.',caption:'Perguntas propostas para definir o significado dos campos e a referência do negócio. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-datas-aceite.svg',alt:'Matriz de aceite com campo, significado, referência de fuso, corte, exibição e relatório, para combinar a regra e a evidência.',caption:'Roteiro ilustrativo para conferir regras temporais nos limites relevantes do processo. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

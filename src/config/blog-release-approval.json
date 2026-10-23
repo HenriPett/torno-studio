@@ -845,6 +845,26 @@
           "sha256": "df18dc1db078299321ecd7a5a037941985ef5226deb634bfb94cc816bc519ec4"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261023-datas-fusos",
+      "intentId": "buyer-date-time-business-rules-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/datas-fusos-sistema-prazos-relatorios/",
+      "contentRevision": "af589e75b6907bff2685780b8fc453d5cc74b63e8716a7c9f56f1f15f7ab791e",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-23T21:11:30Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-23T21:11:30Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 23/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-23; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        { "path": "torno-datas-regras.svg", "sha256": "cf77ae7cfaa66223fcdad4f9947a3bd8b6dbc4bf02c39344bb53bd83d0fc0542" },
+        { "path": "torno-datas-aceite.svg", "sha256": "14fb71feacac0245aec89ba8508d783aedc508caea840ebb4ce379feee5148e2" }
+      ]
     }
   ]
 }
