@@ -31,12 +31,13 @@ const expected = [
   ['torno-artigo-pt-20261022-ambiente-homologacao', '/blog/ambiente-homologacao-conferir-antes-testar-sistema/', '0f0708be733aadb46390d2a0311c33b310ce6a88569b51ac12b379cde64dc7e0', ['torno-homologacao-conexoes-ambiente.svg', 'torno-homologacao-destino-pendente.svg']],
   ['torno-artigo-pt-20261022-monitoramento-alertas', '/blog/monitoramento-software-alertas-fluxo-critico/', 'ce937c915771947017a402ec3b160244feb60ebc1fd51d66eb51d73c443558d5', ['torno-acordo-alerta-fluxo.svg', 'torno-ensaio-cadeia-alerta.svg']],
   ['torno-artigo-pt-20261023-limites-api-cota', '/blog/limites-api-integracao-cota/', '16ce502784889115fc254eae1de18b58f77947dc52e55b1b78906796b333974a', ['torno-api-cota-pendencia.svg', 'torno-api-cota-evidencia.svg']],
+  ['torno-artigo-pt-20261023-importacao-planilhas-erros', '/blog/importacao-planilhas-sistema-tratar-erros/', 'c2deb1fc418d548a2b4f9c003654a86081910ac4e4a6bd222bb61f89e064b95f', ['torno-importacao-fluxo.svg', 'torno-importacao-erros.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os dezenove artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os vinte artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -46,7 +47,7 @@ checks.push(['manifesto inclui exatamente os dezenove artigos autorizados e suas
   }
 }]);
 
-checks.push(['sitemap contém 41 URLs únicas: baseline com páginas institucionais, dois índices e dezenove artigos PT', async () => {
+checks.push(['sitemap contém 42 URLs únicas: baseline com páginas institucionais, dois índices e vinte artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();

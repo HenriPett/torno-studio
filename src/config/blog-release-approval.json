@@ -819,6 +819,32 @@
           "sha256": "eea3cc3b7623173c9efa67a182ad5954a24acf64726b31f598286f2663289952"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261023-importacao-planilhas-erros",
+      "intentId": "buyer-recurring-spreadsheet-import-validation-pt",
+      "locale": "pt-BR",
+      "path": "/blog/importacao-planilhas-sistema-tratar-erros/",
+      "contentRevision": "c2deb1fc418d548a2b4f9c003654a86081910ac4e4a6bd222bb61f89e064b95f",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-23T15:09:06Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-23T15:09:06Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 23/10/2026, meio-dia America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-23; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-importacao-fluxo.svg",
+          "sha256": "6911a8c890de53b55dcc378560551b4ddd19efbe9befc70b462a3fc5894ea231"
+        },
+        {
+          "path": "torno-importacao-erros.svg",
+          "sha256": "df18dc1db078299321ecd7a5a037941985ef5226deb634bfb94cc816bc519ec4"
+        }
+      ]
     }
   ]
 }

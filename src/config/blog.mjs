@@ -166,6 +166,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-api-cota-evidencia.svg', digest: 'eea3cc3b7623173c9efa67a182ad5954a24acf64726b31f598286f2663289952' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261023-importacao-planilhas-erros', intent_id: 'buyer-recurring-spreadsheet-import-validation-pt', locale: 'pt-BR',
+    path: '/blog/importacao-planilhas-sistema-tratar-erros/', canonical_url: `${BLOG_ORIGIN}/blog/importacao-planilhas-sistema-tratar-erros/`,
+    digest: 'c2deb1fc418d548a2b4f9c003654a86081910ac4e4a6bd222bb61f89e064b95f', digestScope: 'file',
+    assets: [
+      { path: 'torno-importacao-fluxo.svg', digest: '6911a8c890de53b55dcc378560551b4ddd19efbe9befc70b462a3fc5894ea231' },
+      { path: 'torno-importacao-erros.svg', digest: 'df18dc1db078299321ecd7a5a037941985ef5226deb634bfb94cc816bc519ec4' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -454,6 +463,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261023-limites-api-cota': [
         {asset:'./torno-api-cota-pendencia.svg',alt:'Ao atingir a cota, a integração reconhece a regra do provedor, mantém a pendência visível, espera conforme a API e retoma de forma controlada.',caption:'Proposta editorial de comportamento ao atingir a cota; fila e espera não garantem conclusão. Crédito: Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-api-cota-evidencia.svg',alt:'Ficha de evidência verifica condição do ensaio, espera visível, retomada, resultados e limites de uma resposta simulada ou de um teste real.',caption:'Peça evidências antes, durante e depois da restrição, declarando o que não foi demonstrado. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261023-importacao-planilhas-erros': [
+        {asset:'./torno-importacao-fluxo.svg',alt:'Fluxo proposto para receber o arquivo, interpretar o modelo, validar registros, aplicar a política de gravação e apresentar um resultado verificável.',caption:'Roteiro ilustrativo da importação; a política de gravação depende do acordo do produto. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-importacao-erros.svg',alt:'Modelo fictício de devolutiva com linha, campo, motivo e ação de correção, distinguindo arquivo inválido de registro inválido e os totais lidos, previstos e gravados.',caption:'Campos propostos para conferir o resultado e orientar a correção, com dados fictícios. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

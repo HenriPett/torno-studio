@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc"><title id="title">Da leitura do arquivo ao recibo</title><desc id="desc">Fluxo editorial de uma importação recorrente: estrutura do arquivo, validação por linha, prévia, decisão explícita e recibo.</desc><rect width="720" height="1280" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · IMPORTAÇÃO RECORRENTE</text>
+<text x="36" y="118" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="36" font-weight="700">Prévia não é gravação</text>
+<text x="36" y="164" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine a regra de cada etapa antes do aceite.</text>
+<rect x="32" y="210" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Estrutura do arquivo</text>
+<text x="54" y="298" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Arquivo inválido pode impedir a leitura.</text>
+<text x="54" y="337" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O retorno precisa explicar o impedimento.</text>
+<path d="M360 372 L360 398" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="398" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="440" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Conteúdo de cada linha</text>
+<text x="54" y="486" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Uma linha inválida pede localização do erro.</text>
+<text x="54" y="525" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Informe campo, motivo e correção esperada.</text>
+<path d="M360 560 L360 586" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="586" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="628" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Prévia, quando prevista</text>
+<text x="54" y="674" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Declare seu alcance e os problemas exibidos.</text>
+<text x="54" y="713" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Defina o que ainda não foi gravado.</text>
+<path d="M360 748 L360 774" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="774" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="816" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Decisão de importação</text>
+<text x="54" y="862" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine a unidade da rejeição ou aceitação.</text>
+<text x="54" y="901" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Deixe explícito o que será aceito.</text>
+<path d="M360 936 L360 962" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="962" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1004" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Recibo do processamento</text>
+<text x="54" y="1050" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o que foi gravado e o que ficou fora.</text>
+<text x="54" y="1089" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Relacione os totais aos resultados.</text>
+<text x="36" y="1228" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao produto.</text>
+</svg>
