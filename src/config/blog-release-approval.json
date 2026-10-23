@@ -793,6 +793,32 @@
           "sha256": "4e598773dd63b98f3fb041f8c91488c8be811e0d8536f43b8b013518e4e221a4"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261023-limites-api-cota",
+      "intentId": "buyer-integration-api-quota-behavior-pt",
+      "locale": "pt-BR",
+      "path": "/blog/limites-api-integracao-cota/",
+      "contentRevision": "16ce502784889115fc254eae1de18b58f77947dc52e55b1b78906796b333974a",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-23T11:25:44Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-23T11:25:44Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 23/10/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual e visual independente do autor PASS dos bytes finais de Markdown e dois SVGs em 2026-10-23; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-api-cota-pendencia.svg",
+          "sha256": "5509b338eedac92a5ac3a015f188b6da8777574527cab6cc93c47dd8ec31e8ae"
+        },
+        {
+          "path": "torno-api-cota-evidencia.svg",
+          "sha256": "eea3cc3b7623173c9efa67a182ad5954a24acf64726b31f598286f2663289952"
+        }
+      ]
     }
   ]
 }

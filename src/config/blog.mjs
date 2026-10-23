@@ -157,6 +157,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-ensaio-cadeia-alerta.svg', digest: '4e598773dd63b98f3fb041f8c91488c8be811e0d8536f43b8b013518e4e221a4' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261023-limites-api-cota', intent_id: 'buyer-integration-api-quota-behavior-pt', locale: 'pt-BR',
+    path: '/blog/limites-api-integracao-cota/', canonical_url: `${BLOG_ORIGIN}/blog/limites-api-integracao-cota/`,
+    digest: '16ce502784889115fc254eae1de18b58f77947dc52e55b1b78906796b333974a', digestScope: 'file',
+    assets: [
+      { path: 'torno-api-cota-pendencia.svg', digest: '5509b338eedac92a5ac3a015f188b6da8777574527cab6cc93c47dd8ec31e8ae' },
+      { path: 'torno-api-cota-evidencia.svg', digest: 'eea3cc3b7623173c9efa67a182ad5954a24acf64726b31f598286f2663289952' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -441,6 +450,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261022-monitoramento-alertas': [
         {asset:'./torno-acordo-alerta-fluxo.svg',alt:'Ficha do alerta liga fluxo e impacto a sinal, janela, condição, destinatário, cobertura, ação e teste.',caption:'Proposta editorial de acordo por alerta, com condições próprias do sistema e cobertura combinada. Crédito: Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-ensaio-cadeia-alerta.svg',alt:'Ensaio controlado percorre condição, detecção, entrega, confirmação e ação; injetar mensagem no canal não testa coleta e regra.',caption:'Registre cada etapa demonstrada e seus limites; receber o aviso não comprova ação ou resolução. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261023-limites-api-cota': [
+        {asset:'./torno-api-cota-pendencia.svg',alt:'Ao atingir a cota, a integração reconhece a regra do provedor, mantém a pendência visível, espera conforme a API e retoma de forma controlada.',caption:'Proposta editorial de comportamento ao atingir a cota; fila e espera não garantem conclusão. Crédito: Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-api-cota-evidencia.svg',alt:'Ficha de evidência verifica condição do ensaio, espera visível, retomada, resultados e limites de uma resposta simulada ou de um teste real.',caption:'Peça evidências antes, durante e depois da restrição, declarando o que não foi demonstrado. Crédito: Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
