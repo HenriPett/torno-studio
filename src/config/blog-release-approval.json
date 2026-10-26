@@ -885,6 +885,26 @@
         { "path": "torno-edicao-simultanea-fluxo.svg", "sha256": "d966766c3ea27b4698e6cea009f4152efeab015610f24b0fa439786fb8445624" },
         { "path": "torno-edicao-simultanea-aceite.svg", "sha256": "8a7117d75b07e8b3a28c7cf9de2fbeec0214b6aa0f0a959ae75427d16ed3b12e" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261026-exportacao-dados",
+      "intentId": "buyer-recurring-data-export-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/exportacao-dados-sistema-aceite/",
+      "contentRevision": "8ce0ca37bf6cf036c9c5cad1ece95442ce2ec329252241c3688b777feeb4e5e9",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-26T15:08:26Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-26T15:08:15Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 26/10/2026, 12h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-26; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        { "path": "torno-exportacao-contrato.svg", "sha256": "ffd74cdcd4578e253a548f058e4171c5d4889aa6bd47b2bbf3f744414d8e08a7" },
+        { "path": "torno-exportacao-aceite.svg", "sha256": "ffb9646f9767c977162202f09c4c068c5c79396bf7cd0755b2a11fd6be89560b" }
+      ]
     }
   ]
 }

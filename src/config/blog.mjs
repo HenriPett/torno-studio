@@ -193,6 +193,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-edicao-simultanea-aceite.svg', digest: '8a7117d75b07e8b3a28c7cf9de2fbeec0214b6aa0f0a959ae75427d16ed3b12e' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261026-exportacao-dados', intent_id: 'buyer-recurring-data-export-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/exportacao-dados-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/exportacao-dados-sistema-aceite/`,
+    digest: '8ce0ca37bf6cf036c9c5cad1ece95442ce2ec329252241c3688b777feeb4e5e9', digestScope: 'file',
+    assets: [
+      { path: 'torno-exportacao-contrato.svg', digest: 'ffd74cdcd4578e253a548f058e4171c5d4889aa6bd47b2bbf3f744414d8e08a7' },
+      { path: 'torno-exportacao-aceite.svg', digest: 'ffb9646f9767c977162202f09c4c068c5c79396bf7cd0755b2a11fd6be89560b' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -493,6 +502,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261026-edicao-simultanea': [
         {asset:'./torno-edicao-simultanea-fluxo.svg',alt:'Duas sessões leem a mesma versão inicial, alteram campos diferentes e tentam salvar; a regra e a ordem determinam o resultado a conferir.',caption:'Cenário editorial para combinar o resultado das gravações e conferir o estado final, sem impor um mecanismo. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-edicao-simultanea-aceite.svg',alt:'Matriz para edição simultânea que organiza cenário, regra, resultado esperado, evidência e pendência.',caption:'Descreva o resultado de cada cenário e preserve evidências do que ficou salvo e do que continua pendente. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261026-exportacao-dados': [
+        {asset:'./torno-exportacao-contrato.svg',alt:'Contrato ilustrativo da exportação com finalidade, conjunto e filtros, campos e significados, formato e destino previsto para a conferência.',caption:'Decisões propostas para definir o arquivo recorrente antes do aceite. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-exportacao-aceite.svg',alt:'Ficha de conferência da exportação com escopo, contagens, campos críticos, limites, resultado e pendências.',caption:'Roteiro ilustrativo para conferir o conteúdo e o uso do arquivo, além do download. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
