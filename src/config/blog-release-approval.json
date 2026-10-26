@@ -905,6 +905,26 @@
         { "path": "torno-exportacao-contrato.svg", "sha256": "ffd74cdcd4578e253a548f058e4171c5d4889aa6bd47b2bbf3f744414d8e08a7" },
         { "path": "torno-exportacao-aceite.svg", "sha256": "ffb9646f9767c977162202f09c4c068c5c79396bf7cd0755b2a11fd6be89560b" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261026-emails-sistema",
+      "intentId": "buyer-transactional-email-delivery-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/emails-sistema-envio-entrega-falha/",
+      "contentRevision": "5de6946d981f0d136755d30530e2686e069867cd503070a6d15fa3e41b4205bb",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-26T21:06:39Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-26T21:06:14Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 26/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-26; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        { "path": "torno-email-etapas.svg", "sha256": "6f4cda23195e67ecf29a37f11c5cad9498afa39dcd3568b95445a402f4290633" },
+        { "path": "torno-email-evidencias.svg", "sha256": "c2598459f3dd63ccfdf718d7a140ad7704604a1e7376b06b8582562d92716aae" }
+      ]
     }
   ]
 }

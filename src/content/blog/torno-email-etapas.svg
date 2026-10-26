@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1300" viewBox="0 0 720 1300" role="img" aria-labelledby="title desc"><title id="title">O que cada etapa do e-mail comprova</title><desc id="desc">Mapa editorial entre evento de negócio, aceitação pelo fornecedor e aceitação pelo servidor destinatário, com possível atraso ou falha. Não comprova leitura ou caixa de entrada.</desc><rect width="720" height="1300" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · FRONTEIRAS DO ENVIO</text>
+<text x="36" y="118" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="36" font-weight="700">Enviado não significa lido</text>
+<text x="36" y="164" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Confira a evidência e a definição de cada estado.</text>
+<rect x="64" y="210" width="624" height="135" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="86" y="253" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="700">Evento de negócio</text>
+<text x="86" y="297" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual ação deveria gerar qual mensagem?</text>
+<path d="M376 345 L376 382" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="64" y="382" width="624" height="143" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="86" y="425" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="700">Aceito pelo fornecedor</text>
+<text x="86" y="469" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A solicitação entrou no serviço de envio.</text>
+<text x="86" y="505" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Isso não comprova a aceitação no destino.</text>
+<path d="M376 525 L376 566" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="64" y="566" width="624" height="143" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="86" y="609" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Aceito pelo servidor destinatário</text>
+<text x="86" y="653" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A evidência alcança essa fronteira.</text>
+<text x="86" y="689" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Não comprova caixa de entrada ou leitura.</text>
+<path d="M64 454 H24 V858 H64" fill="none" stroke="#8a4b0f" stroke-width="3"/>
+<rect x="64" y="788" width="624" height="145" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="86" y="830" fill="#8a4b0f" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Atraso, falha ou outro resultado</text>
+<text x="86" y="874" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Interprete conforme o provedor e combine</text>
+<text x="86" y="910" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">o acompanhamento e a próxima ação.</text>
+<rect x="32" y="1006" width="656" height="160" rx="12" fill="#e2ede8" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1049" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Os nomes e as regras não são universais</text>
+<text x="54" y="1094" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Relacione mensagem, estado e evidência.</text>
+<text x="54" y="1130" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Não transforme uma etapa em prova de outra.</text>
+<text x="36" y="1240" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao sistema.</text>
+</svg>

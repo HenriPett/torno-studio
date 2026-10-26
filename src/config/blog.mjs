@@ -202,6 +202,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-exportacao-aceite.svg', digest: 'ffb9646f9767c977162202f09c4c068c5c79396bf7cd0755b2a11fd6be89560b' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261026-emails-sistema', intent_id: 'buyer-transactional-email-delivery-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/emails-sistema-envio-entrega-falha/', canonical_url: `${BLOG_ORIGIN}/blog/emails-sistema-envio-entrega-falha/`,
+    digest: '5de6946d981f0d136755d30530e2686e069867cd503070a6d15fa3e41b4205bb', digestScope: 'file',
+    assets: [
+      { path: 'torno-email-etapas.svg', digest: '6f4cda23195e67ecf29a37f11c5cad9498afa39dcd3568b95445a402f4290633' },
+      { path: 'torno-email-evidencias.svg', digest: 'c2598459f3dd63ccfdf718d7a140ad7704604a1e7376b06b8582562d92716aae' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -506,6 +515,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261026-exportacao-dados': [
         {asset:'./torno-exportacao-contrato.svg',alt:'Contrato ilustrativo da exportação com finalidade, conjunto e filtros, campos e significados, formato e destino previsto para a conferência.',caption:'Decisões propostas para definir o arquivo recorrente antes do aceite. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-exportacao-aceite.svg',alt:'Ficha de conferência da exportação com escopo, contagens, campos críticos, limites, resultado e pendências.',caption:'Roteiro ilustrativo para conferir o conteúdo e o uso do arquivo, além do download. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261026-emails-sistema': [
+        {asset:'./torno-email-etapas.svg',alt:'Etapas de uma notificação do sistema, distinguindo evento de negócio, mensagem, aceitação pelo provedor e servidor destinatário, com leitura não comprovada.',caption:'Fronteiras propostas para discutir estados e evidências; os eventos disponíveis dependem do provedor. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-email-evidencias.svg',alt:'Ficha de evidências de e-mail com identificação, estado conhecido, fonte da confirmação, próxima ação e limites do ensaio.',caption:'Campos propostos para relacionar a mensagem ao resultado observado e às pendências. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
