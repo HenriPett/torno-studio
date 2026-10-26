@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1200" viewBox="0 0 720 1200" role="img" aria-labelledby="title desc"><title id="title">Uma matriz para o aceite</title><desc id="desc">Ficha editorial de cenário, regra, resultado, evidência e pendência para testar edição simultânea sem impor uma tecnologia.</desc><rect width="720" height="1200" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ACEITE DA REGRA</text>
+<text x="36" y="118" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="35" font-weight="700">Torne o resultado verificável</text>
+<text x="36" y="164" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Preencha a matriz para cada cenário relevante.</text>
+<rect x="32" y="210" width="656" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="250" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Cenário</text>
+<text x="54" y="292" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais sessões, campos e ordem de gravação</text>
+<text x="54" y="330" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">serão exercitados no mesmo registro?</text>
+<rect x="32" y="386" width="656" height="150" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="426" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Regra</text>
+<text x="54" y="468" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual comportamento foi combinado</text>
+<text x="54" y="506" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">quando a versão estiver desatualizada?</text>
+<rect x="32" y="562" width="656" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="602" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Resultado esperado</text>
+<text x="54" y="644" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que cada pessoa vê e o que permanece</text>
+<text x="54" y="682" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">salvo após as tentativas?</text>
+<rect x="32" y="738" width="656" height="150" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="778" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Evidência</text>
+<text x="54" y="820" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Registre versões, sequência e resultado.</text>
+<text x="54" y="858" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o estado final com acesso autorizado.</text>
+<rect x="32" y="914" width="656" height="150" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="954" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Pendência</text>
+<text x="54" y="996" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que não foi demonstrado ou divergiu?</text>
+<text x="54" y="1034" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quem corrige e como será verificado?</text>
+<text x="36" y="1155" fill="#16181a" font-family="IBM Plex Sans Variable,DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao sistema.</text>
+</svg>

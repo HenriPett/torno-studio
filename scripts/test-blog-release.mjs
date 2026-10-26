@@ -33,12 +33,13 @@ const expected = [
   ['torno-artigo-pt-20261023-limites-api-cota', '/blog/limites-api-integracao-cota/', '16ce502784889115fc254eae1de18b58f77947dc52e55b1b78906796b333974a', ['torno-api-cota-pendencia.svg', 'torno-api-cota-evidencia.svg']],
   ['torno-artigo-pt-20261023-importacao-planilhas-erros', '/blog/importacao-planilhas-sistema-tratar-erros/', 'c2deb1fc418d548a2b4f9c003654a86081910ac4e4a6bd222bb61f89e064b95f', ['torno-importacao-fluxo.svg', 'torno-importacao-erros.svg']],
   ['torno-artigo-pt-20261023-datas-fusos', '/blog/datas-fusos-sistema-prazos-relatorios/', 'af589e75b6907bff2685780b8fc453d5cc74b63e8716a7c9f56f1f15f7ab791e', ['torno-datas-regras.svg', 'torno-datas-aceite.svg']],
+  ['torno-artigo-pt-20261026-edicao-simultanea', '/blog/edicao-simultanea-sistema-conflitos/', 'c96209b7141ce8f22ac00a98990af7545c384291f6068560d416492bb2752a01', ['torno-edicao-simultanea-fluxo.svg', 'torno-edicao-simultanea-aceite.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os vinte e um artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os vinte e dois artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -48,7 +49,7 @@ checks.push(['manifesto inclui exatamente os vinte e um artigos autorizados e su
   }
 }]);
 
-checks.push(['sitemap contém 43 URLs únicas: baseline com páginas institucionais, dois índices e vinte e um artigos PT', async () => {
+checks.push(['sitemap contém 44 URLs únicas: baseline com páginas institucionais, dois índices e vinte e dois artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();

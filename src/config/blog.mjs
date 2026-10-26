@@ -184,6 +184,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-datas-aceite.svg', digest: '14fb71feacac0245aec89ba8508d783aedc508caea840ebb4ce379feee5148e2' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261026-edicao-simultanea', intent_id: 'buyer-concurrent-edit-conflict-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/edicao-simultanea-sistema-conflitos/', canonical_url: `${BLOG_ORIGIN}/blog/edicao-simultanea-sistema-conflitos/`,
+    digest: 'c96209b7141ce8f22ac00a98990af7545c384291f6068560d416492bb2752a01', digestScope: 'file',
+    assets: [
+      { path: 'torno-edicao-simultanea-fluxo.svg', digest: 'd966766c3ea27b4698e6cea009f4152efeab015610f24b0fa439786fb8445624' },
+      { path: 'torno-edicao-simultanea-aceite.svg', digest: '8a7117d75b07e8b3a28c7cf9de2fbeec0214b6aa0f0a959ae75427d16ed3b12e' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -480,6 +489,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261023-datas-fusos': [
         {asset:'./torno-datas-regras.svg',alt:'Três significados para datas e horários: data civil, instante e agendamento futuro, definidos antes da representação técnica.',caption:'Perguntas propostas para definir o significado dos campos e a referência do negócio. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-datas-aceite.svg',alt:'Matriz de aceite com campo, significado, referência de fuso, corte, exibição e relatório, para combinar a regra e a evidência.',caption:'Roteiro ilustrativo para conferir regras temporais nos limites relevantes do processo. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261026-edicao-simultanea': [
+        {asset:'./torno-edicao-simultanea-fluxo.svg',alt:'Duas sessões leem a mesma versão inicial, alteram campos diferentes e tentam salvar; a regra e a ordem determinam o resultado a conferir.',caption:'Cenário editorial para combinar o resultado das gravações e conferir o estado final, sem impor um mecanismo. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-edicao-simultanea-aceite.svg',alt:'Matriz para edição simultânea que organiza cenário, regra, resultado esperado, evidência e pendência.',caption:'Descreva o resultado de cada cenário e preserve evidências do que ficou salvo e do que continua pendente. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

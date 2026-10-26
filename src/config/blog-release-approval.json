@@ -865,6 +865,26 @@
         { "path": "torno-datas-regras.svg", "sha256": "cf77ae7cfaa66223fcdad4f9947a3bd8b6dbc4bf02c39344bb53bd83d0fc0542" },
         { "path": "torno-datas-aceite.svg", "sha256": "14fb71feacac0245aec89ba8508d783aedc508caea840ebb4ce379feee5148e2" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261026-edicao-simultanea",
+      "intentId": "buyer-concurrent-edit-conflict-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/edicao-simultanea-sistema-conflitos/",
+      "contentRevision": "c96209b7141ce8f22ac00a98990af7545c384291f6068560d416492bb2752a01",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-26T11:26:30Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-26T11:26:30Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 26/10/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-26; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        { "path": "torno-edicao-simultanea-fluxo.svg", "sha256": "d966766c3ea27b4698e6cea009f4152efeab015610f24b0fa439786fb8445624" },
+        { "path": "torno-edicao-simultanea-aceite.svg", "sha256": "8a7117d75b07e8b3a28c7cf9de2fbeec0214b6aa0f0a959ae75427d16ed3b12e" }
+      ]
     }
   ]
 }
