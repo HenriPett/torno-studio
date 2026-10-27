@@ -220,6 +220,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-anexo-aceite.svg', digest: '3f8303cf394b8c90a1192df1d3d3387805750667afd5291dab58d32ad25c2644' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261027-fluxo-aprovacao', intent_id: 'buyer-approval-workflow-business-rules-pt', locale: 'pt-BR',
+    path: '/blog/fluxo-aprovacao-sistema-regras/', canonical_url: `${BLOG_ORIGIN}/blog/fluxo-aprovacao-sistema-regras/`,
+    digest: '0d530977411b09950c8e3cf263d4f52e683c3ae3d6b9e19be8bd4c1e4d9cdfb2', digestScope: 'file',
+    assets: [
+      { path: 'torno-aprovacao-estados.svg', digest: '98f47765a9590c7dbb99135c57f05bf7d521dae8001320b973c93fe4666ca83c' },
+      { path: 'torno-aprovacao-aceite.svg', digest: '855e8634986a7ad68a33f6de73e0b5fc5964092fc4ed3830ebeb792a7487411c' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -532,6 +541,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261027-anexos': [
         {asset:'./torno-anexo-estados.svg',alt:'Estados ilustrativos do anexo, distinguindo seleção, envio, confirmação do vínculo e disponibilidade para consulta, com pendências e falhas explícitas.',caption:'Etapas propostas para discutir a confirmação e a consulta do documento; os estados concretos dependem da solução. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-anexo-aceite.svg',alt:'Ficha de aceite de anexos com regras de envio, confirmação, acesso, substituição e falha, relacionando resultado esperado, evidência e pendência.',caption:'Conferências propostas para relacionar as regras do anexo ao resultado observado. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261027-fluxo-aprovacao': [
+        {asset:'./torno-aprovacao-estados.svg',alt:'Estados e decisões ilustrativos: solicitação, análise por ator autorizado e opções de devolver, aprovar ou rejeitar, com pergunta sobre mudanças nos dados.',caption:'Caminhos propostos para discutir estados e decisões; não representam um fluxo já implementado. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-aprovacao-aceite.svg',alt:'Quatro cenários de aceite do fluxo de aprovação: aprovação, devolução, ausência do responsável e dados alterados, cada um com perguntas sobre resultado e evidência.',caption:'Conferências propostas para relacionar estados, responsáveis e consequências observadas. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
