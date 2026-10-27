@@ -925,6 +925,26 @@
         { "path": "torno-email-etapas.svg", "sha256": "6f4cda23195e67ecf29a37f11c5cad9498afa39dcd3568b95445a402f4290633" },
         { "path": "torno-email-evidencias.svg", "sha256": "c2598459f3dd63ccfdf718d7a140ad7704604a1e7376b06b8582562d92716aae" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261027-anexos",
+      "intentId": "buyer-attachment-upload-access-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/anexos-sistema-envio-consulta-arquivos/",
+      "contentRevision": "eabce03e8a95fdf5075e3c46195dabcc934be9e96c497f1ce6bc5a1f877e0c10",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-27T11:20:28Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-27T11:20:28Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 27/10/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-27; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        { "path": "torno-anexo-estados.svg", "sha256": "90817b55a2b4168aa0e2dbff5818358807af53573514d53f75f68a83ad4bb476" },
+        { "path": "torno-anexo-aceite.svg", "sha256": "3f8303cf394b8c90a1192df1d3d3387805750667afd5291dab58d32ad25c2644" }
+      ]
     }
   ]
 }

@@ -36,12 +36,13 @@ const expected = [
   ['torno-artigo-pt-20261026-edicao-simultanea', '/blog/edicao-simultanea-sistema-conflitos/', 'c96209b7141ce8f22ac00a98990af7545c384291f6068560d416492bb2752a01', ['torno-edicao-simultanea-fluxo.svg', 'torno-edicao-simultanea-aceite.svg']],
   ['torno-artigo-pt-20261026-exportacao-dados', '/blog/exportacao-dados-sistema-aceite/', '8ce0ca37bf6cf036c9c5cad1ece95442ce2ec329252241c3688b777feeb4e5e9', ['torno-exportacao-contrato.svg', 'torno-exportacao-aceite.svg']],
   ['torno-artigo-pt-20261026-emails-sistema', '/blog/emails-sistema-envio-entrega-falha/', '5de6946d981f0d136755d30530e2686e069867cd503070a6d15fa3e41b4205bb', ['torno-email-etapas.svg', 'torno-email-evidencias.svg']],
+  ['torno-artigo-pt-20261027-anexos', '/blog/anexos-sistema-envio-consulta-arquivos/', 'eabce03e8a95fdf5075e3c46195dabcc934be9e96c497f1ce6bc5a1f877e0c10', ['torno-anexo-estados.svg', 'torno-anexo-aceite.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os vinte e quatro artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os vinte e cinco artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -51,7 +52,7 @@ checks.push(['manifesto inclui exatamente os vinte e quatro artigos autorizados 
   }
 }]);
 
-checks.push(['sitemap contém 46 URLs únicas: baseline com páginas institucionais, dois índices e vinte e quatro artigos PT', async () => {
+checks.push(['sitemap contém 47 URLs únicas: baseline com páginas institucionais, dois índices e vinte e cinco artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();

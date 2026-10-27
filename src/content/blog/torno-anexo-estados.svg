@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1260" viewBox="0 0 720 1260" role="img" aria-labelledby="title desc"><title id="title">Do arquivo escolhido ao anexo consultável</title><desc id="desc">Fluxo editorial de seleção, envio, validação e confirmação, vínculo ao registro e consulta autorizada. Não representa uma tecnologia ou produto específico.</desc><rect width="720" height="1260" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ESTADOS DO ANEXO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" font-weight="700">Escolher não é confirmar</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine o que cada estado permite concluir.</text>
+<rect x="32" y="210" width="656" height="174" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="253" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Arquivo escolhido no aparelho</text>
+<text x="54" y="303" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O seletor ajuda a escolher o arquivo.</text>
+<text x="54" y="343" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O filtro accept não é validação.</text>
+<path d="M360 384 L360 416" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="416" width="656" height="174" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="459" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Envio e confirmação</text>
+<text x="54" y="509" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Defina quando o envio está concluído</text>
+<text x="54" y="549" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">e como uma interrupção aparece.</text>
+<path d="M360 590 L360 622" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="622" width="656" height="174" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="665" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Validação e resultado</text>
+<text x="54" y="715" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais verificações decidem a aceitação?</text>
+<text x="54" y="755" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como o resultado é informado à pessoa?</text>
+<path d="M360 796 L360 828" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="828" width="656" height="174" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="871" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Vínculo e consulta</text>
+<text x="54" y="921" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A qual registro o anexo pertence?</text>
+<text x="54" y="961" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quem pode consultá-lo depois?</text>
+<text x="36" y="1102" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Confira o estado final e o acesso autorizado.</text>
+<text x="36" y="1195" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao sistema.</text>
+</svg>

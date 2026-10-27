@@ -211,6 +211,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-email-evidencias.svg', digest: 'c2598459f3dd63ccfdf718d7a140ad7704604a1e7376b06b8582562d92716aae' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261027-anexos', intent_id: 'buyer-attachment-upload-access-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/anexos-sistema-envio-consulta-arquivos/', canonical_url: `${BLOG_ORIGIN}/blog/anexos-sistema-envio-consulta-arquivos/`,
+    digest: 'eabce03e8a95fdf5075e3c46195dabcc934be9e96c497f1ce6bc5a1f877e0c10', digestScope: 'file',
+    assets: [
+      { path: 'torno-anexo-estados.svg', digest: '90817b55a2b4168aa0e2dbff5818358807af53573514d53f75f68a83ad4bb476' },
+      { path: 'torno-anexo-aceite.svg', digest: '3f8303cf394b8c90a1192df1d3d3387805750667afd5291dab58d32ad25c2644' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -519,6 +528,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261026-emails-sistema': [
         {asset:'./torno-email-etapas.svg',alt:'Etapas de uma notificação do sistema, distinguindo evento de negócio, mensagem, aceitação pelo provedor e servidor destinatário, com leitura não comprovada.',caption:'Fronteiras propostas para discutir estados e evidências; os eventos disponíveis dependem do provedor. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-email-evidencias.svg',alt:'Ficha de evidências de e-mail com identificação, estado conhecido, fonte da confirmação, próxima ação e limites do ensaio.',caption:'Campos propostos para relacionar a mensagem ao resultado observado e às pendências. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261027-anexos': [
+        {asset:'./torno-anexo-estados.svg',alt:'Estados ilustrativos do anexo, distinguindo seleção, envio, confirmação do vínculo e disponibilidade para consulta, com pendências e falhas explícitas.',caption:'Etapas propostas para discutir a confirmação e a consulta do documento; os estados concretos dependem da solução. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-anexo-aceite.svg',alt:'Ficha de aceite de anexos com regras de envio, confirmação, acesso, substituição e falha, relacionando resultado esperado, evidência e pendência.',caption:'Conferências propostas para relacionar as regras do anexo ao resultado observado. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
