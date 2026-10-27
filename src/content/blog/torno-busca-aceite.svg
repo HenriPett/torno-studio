@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1260" viewBox="0 0 720 1260" role="img" aria-labelledby="title desc"><title id="title">Cenários de aceite da consulta</title><desc id="desc">Ficha editorial para conferir combinação de filtros, ausência de resultados e erros, ordem e paginação, e acesso de perfis diferentes. Sem resultados de cliente ou teste real.</desc><rect width="720" height="1260" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ACEITE DOS RESULTADOS</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="34" font-weight="700">Compare esperado e observado</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Defina um conjunto de teste conhecido.</text>
+<rect x="32" y="210" width="656" height="176" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="253" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Termo e filtros combinados</text>
+<text x="54" y="304" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais registros devem aparecer ou ficar fora?</text>
+<text x="54" y="345" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira a combinação e a limpeza dos filtros.</text>
+<rect x="32" y="420" width="656" height="176" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="463" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Nenhum resultado ou erro</text>
+<text x="54" y="514" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A consulta terminou sem correspondências</text>
+<text x="54" y="555" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">ou falhou? Confira mensagens diferentes.</text>
+<rect x="32" y="630" width="656" height="176" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="673" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Ordem e páginas</text>
+<text x="54" y="724" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual sequência e continuidade são esperadas?</text>
+<text x="54" y="765" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira empates, avanço e mudança de filtro.</text>
+<rect x="32" y="840" width="656" height="176" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="883" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Perfis e escopo</text>
+<text x="54" y="934" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual conjunto cada perfil pode consultar?</text>
+<text x="54" y="975" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira registros permitidos e excluídos.</text>
+<text x="36" y="1115" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Guarde consulta, evidência e pendências.</text>
+<text x="36" y="1210" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · sem caso ou teste real.</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1300" viewBox="0 0 720 1300" role="img" aria-labelledby="title desc"><title id="title">Regras da busca e dos filtros</title><desc id="desc">Modelo editorial de escopo autorizado, campos de busca, filtros, ordenação e páginas. Busca na lista é distinta da exportação de dados.</desc><rect width="720" height="1300" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · CONTRATO DA CONSULTA</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="32" font-weight="700">Que resultado a lista deve mostrar?</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine o significado antes de aceitar a tela.</text>
+<rect x="32" y="210" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Escopo autorizado</text>
+<text x="54" y="298" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais registros esse perfil pode consultar?</text>
+<text x="54" y="337" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A busca respeita esse conjunto?</text>
+<path d="M360 372 L360 398" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="398" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="440" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Campos e correspondência</text>
+<text x="54" y="486" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Em quais campos o termo é procurado?</text>
+<text x="54" y="525" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que deve contar como correspondência?</text>
+<path d="M360 560 L360 586" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="586" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="628" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Filtros e combinação</text>
+<text x="54" y="674" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Que condições estão ativas?</text>
+<text x="54" y="713" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como elas se combinam na consulta?</text>
+<path d="M360 748 L360 774" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="774" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="816" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Ordem dos resultados</text>
+<text x="54" y="862" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual critério define a sequência?</text>
+<text x="54" y="901" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como resolver resultados empatados?</text>
+<path d="M360 936 L360 962" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="962" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1004" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Páginas e continuidade</text>
+<text x="54" y="1050" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como avançar, voltar e mudar a consulta?</text>
+<text x="54" y="1089" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual conjunto o total apresentado descreve?</text>
+<text x="36" y="1212" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Buscar na lista não define a regra de exportação.</text>
+<text x="36" y="1270" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao sistema.</text>
+</svg>

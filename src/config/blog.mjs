@@ -229,6 +229,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-aprovacao-aceite.svg', digest: '855e8634986a7ad68a33f6de73e0b5fc5964092fc4ed3830ebeb792a7487411c' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261027-busca-filtros', intent_id: 'buyer-search-filter-results-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/busca-filtros-sistema-resultados/', canonical_url: `${BLOG_ORIGIN}/blog/busca-filtros-sistema-resultados/`,
+    digest: '6b1bc35e827131fa62b543bee0c3a3586f0d5748b77596b438fe6502039bd285', digestScope: 'file',
+    assets: [
+      { path: 'torno-busca-contrato.svg', digest: '916e384944206208b5e61d710306d38f5fde9a16c5ab84425727cf0d7fac44a5' },
+      { path: 'torno-busca-aceite.svg', digest: '8c65e0c4c367965404db98887ac4dc48e5c27429a628836c3b1e95bb9fbf18de' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -545,6 +554,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261027-fluxo-aprovacao': [
         {asset:'./torno-aprovacao-estados.svg',alt:'Estados e decisões ilustrativos: solicitação, análise por ator autorizado e opções de devolver, aprovar ou rejeitar, com pergunta sobre mudanças nos dados.',caption:'Caminhos propostos para discutir estados e decisões; não representam um fluxo já implementado. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-aprovacao-aceite.svg',alt:'Quatro cenários de aceite do fluxo de aprovação: aprovação, devolução, ausência do responsável e dados alterados, cada um com perguntas sobre resultado e evidência.',caption:'Conferências propostas para relacionar estados, responsáveis e consequências observadas. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261027-busca-filtros': [
+        {asset:'./torno-busca-contrato.svg',alt:'Contrato da consulta reúne escopo autorizado, campos e correspondência, filtros, ordenação e continuidade entre páginas.',caption:'Defina o significado da consulta e o conjunto que cada resultado representa; busca e exportação têm regras distintas. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-busca-aceite.svg',alt:'Cenários de aceite verificam termo e filtros, consulta sem resultado ou com erro, ordem e páginas, além do escopo por perfil.',caption:'Compare esperado e observado com um conjunto de teste conhecido e preserve evidências e pendências. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
