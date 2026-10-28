@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc"><title id="title">Perguntas sobre recuperação de senha</title><desc id="desc">Modelo editorial das etapas e limites: pedido, canal, validade da instrução, alteração e sessões. Não prescreve arquitetura ou solução universal.</desc><rect width="720" height="1280" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · REGRAS DA RECUPERAÇÃO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="35" font-weight="700">O que cada etapa comprova?</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine o comportamento antes do aceite.</text>
+<rect x="32" y="210" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Pedido e resposta</text>
+<text x="54" y="298" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como responder sem expor se a conta existe?</text>
+<text x="54" y="337" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual evidência o ensaio pode registrar?</text>
+<path d="M360 372 L360 398" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="398" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="440" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Canal de recuperação</text>
+<text x="54" y="486" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual canal está autorizado para a instrução?</text>
+<text x="54" y="525" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Se ele não está acessível, qual procedimento?</text>
+<path d="M360 560 L360 586" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="586" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="628" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Validade da instrução</text>
+<text x="54" y="674" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como tratar expiração, uso anterior</text>
+<text x="54" y="713" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">e uma nova solicitação, conforme a política?</text>
+<path d="M360 748 L360 774" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="774" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="816" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Alteração da senha</text>
+<text x="54" y="862" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como confirmar que a mudança ocorreu?</text>
+<text x="54" y="901" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Recuperar senha não equivale a recuperar MFA.</text>
+<path d="M360 936 L360 962" stroke="#1c5a49" stroke-width="3" fill="none"/>
+<rect x="32" y="962" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1004" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Sessões e efeitos</text>
+<text x="54" y="1050" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que acontece com acessos já iniciados?</text>
+<text x="54" y="1089" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A troca não define sozinha seu encerramento.</text>
+<text x="36" y="1228" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte à política do produto.</text>
+</svg>

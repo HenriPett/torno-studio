@@ -238,6 +238,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-busca-aceite.svg', digest: '8c65e0c4c367965404db98887ac4dc48e5c27429a628836c3b1e95bb9fbf18de' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261028-recuperacao-senha', intent_id: 'buyer-password-recovery-flow-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/recuperacao-senha-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/recuperacao-senha-sistema-aceite/`,
+    digest: 'bb32f48d4f0c97dc8f1f40f67531a36456af3c982d29db46cf63b21d65c79c22', digestScope: 'file',
+    assets: [
+      { path: 'torno-recuperacao-etapas.svg', digest: '6b4fc8afbd3b329a8083efd4f2839f381a5d9d303bbcee6a32ad90b1263d53c8' },
+      { path: 'torno-recuperacao-aceite.svg', digest: '332b28d0a04de5192fd24760983ca6f4c05f1b36eb9fed976c3ec37e07163b96' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -558,6 +567,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261027-busca-filtros': [
         {asset:'./torno-busca-contrato.svg',alt:'Contrato da consulta reúne escopo autorizado, campos e correspondência, filtros, ordenação e continuidade entre páginas.',caption:'Defina o significado da consulta e o conjunto que cada resultado representa; busca e exportação têm regras distintas. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-busca-aceite.svg',alt:'Cenários de aceite verificam termo e filtros, consulta sem resultado ou com erro, ordem e páginas, além do escopo por perfil.',caption:'Compare esperado e observado com um conjunto de teste conhecido e preserve evidências e pendências. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261028-recuperacao-senha': [
+        {asset:'./torno-recuperacao-etapas.svg',alt:'Perguntas da recuperação de senha cobrem pedido e resposta, canal, validade da instrução, alteração da senha e efeitos sobre sessões.',caption:'Defina o comportamento e os limites de cada etapa; trocar a senha não define sozinho os efeitos sobre sessões. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-recuperacao-aceite.svg',alt:'Cenários de aceite incluem link expirado ou usado, canal indisponível, resposta para conta inexistente e tratamento das sessões existentes.',caption:'Confira resultados com contas e destinos de teste autorizados e registre evidências, limites e pendências. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

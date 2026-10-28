@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc"><title id="title">Cenários para aceitar a recuperação</title><desc id="desc">Ficha editorial de link expirado, link usado, canal indisponível, conta inexistente e sessões. Defina resultado esperado, evidência e limites.</desc><rect width="720" height="1280" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · CENÁRIOS DE ACEITE</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="35" font-weight="700">Confira resultados e limites</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Use contas e destinos de teste autorizados.</text>
+<rect x="32" y="210" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Link expirado</text>
+<text x="54" y="298" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual retorno e próximo passo são esperados?</text>
+<text x="54" y="337" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o bloqueio da instrução vencida.</text>
+<rect x="32" y="398" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="440" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Link já usado</text>
+<text x="54" y="486" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O uso anterior impede nova alteração?</text>
+<text x="54" y="525" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o resultado conforme a política.</text>
+<rect x="32" y="586" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="628" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Canal indisponível</text>
+<text x="54" y="674" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual procedimento separado foi combinado?</text>
+<text x="54" y="713" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Não trate a ausência do canal como atalho.</text>
+<rect x="32" y="774" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="816" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Conta inexistente</text>
+<text x="54" y="862" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como manter resposta consistente</text>
+<text x="54" y="901" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">sem revelar o cadastro da pessoa?</text>
+<rect x="32" y="962" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1004" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Sessões existentes</text>
+<text x="54" y="1050" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais acessos devem permanecer ou encerrar?</text>
+<text x="54" y="1089" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira os efeitos explicitamente acordados.</text>
+<text x="36" y="1210" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Registre evidências, limites e pendências.</text>
+<text x="36" y="1254" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · sem caso ou teste real.</text>
+</svg>

@@ -985,6 +985,26 @@
         { "path": "torno-busca-contrato.svg", "sha256": "916e384944206208b5e61d710306d38f5fde9a16c5ab84425727cf0d7fac44a5" },
         { "path": "torno-busca-aceite.svg", "sha256": "8c65e0c4c367965404db98887ac4dc48e5c27429a628836c3b1e95bb9fbf18de" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261028-recuperacao-senha",
+      "intentId": "buyer-password-recovery-flow-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/recuperacao-senha-sistema-aceite/",
+      "contentRevision": "bb32f48d4f0c97dc8f1f40f67531a36456af3c982d29db46cf63b21d65c79c22",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-28T11:24:49Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-28T11:24:49Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 28/10/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-28; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        { "path": "torno-recuperacao-etapas.svg", "sha256": "6b4fc8afbd3b329a8083efd4f2839f381a5d9d303bbcee6a32ad90b1263d53c8" },
+        { "path": "torno-recuperacao-aceite.svg", "sha256": "332b28d0a04de5192fd24760983ca6f4c05f1b36eb9fed976c3ec37e07163b96" }
+      ]
     }
   ]
 }
