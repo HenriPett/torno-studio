@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1210" viewBox="0 0 720 1210" role="img" aria-labelledby="title desc"><title id="title">O que cada ação faz com o registro</title><desc id="desc">Modelo editorial de perguntas sobre arquivar, inativar e excluir, sem impor significado universal, exclusão de dados pessoais ou possibilidade de desfazer.</desc><rect width="720" height="1210" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · SIGNIFICADO DA AÇÃO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="35" font-weight="700">O nome do botão não basta</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Combine o efeito antes de aceitar o comportamento.</text>
+<rect x="32" y="225" width="656" height="200" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="273" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="31" font-weight="700">Arquivar</text>
+<text x="54" y="329" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual estado e visibilidade mudam?</text>
+<text x="54" y="373" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O registro pode ser consultado por quem?</text>
+<rect x="32" y="467" width="656" height="200" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="515" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="31" font-weight="700">Inativar</text>
+<text x="54" y="571" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais usos deixam de ser permitidos?</text>
+<text x="54" y="615" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como ficam os vínculos que já existem?</text>
+<rect x="32" y="709" width="656" height="200" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="757" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="31" font-weight="700">Excluir</text>
+<text x="54" y="813" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que é removido e o que permanece?</text>
+<text x="54" y="857" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quais dependências impedem ou alteram a ação?</text>
+<text x="36" y="1037" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Consulta, uso e remoção são decisões distintas.</text>
+<text x="36" y="1083" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Não presuma que exista uma forma de desfazer.</text>
+<text x="36" y="1163" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte ao processo.</text>
+</svg>

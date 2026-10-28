@@ -247,6 +247,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-recuperacao-aceite.svg', digest: '332b28d0a04de5192fd24760983ca6f4c05f1b36eb9fed976c3ec37e07163b96' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261028-arquivar-excluir', intent_id: 'buyer-record-archive-delete-dependencies-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/arquivar-excluir-registros-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/arquivar-excluir-registros-sistema/`,
+    digest: '69b039af4c60e47c6d377f62b8a74c8b72d113a7f6b9ffe3fa212721ec3d219d', digestScope: 'file',
+    assets: [
+      { path: 'torno-registros-acoes.svg', digest: '71a67d2f7f49b0f3adee5d7a68326c45d4edd8379ddde26d4b3c98d97514df26' },
+      { path: 'torno-registros-aceite.svg', digest: '769218a1fcc609cd1d1a7c64002827293f1e9b5f24903515e7bfcc57c032a09d' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -571,6 +580,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261028-recuperacao-senha': [
         {asset:'./torno-recuperacao-etapas.svg',alt:'Perguntas da recuperação de senha cobrem pedido e resposta, canal, validade da instrução, alteração da senha e efeitos sobre sessões.',caption:'Defina o comportamento e os limites de cada etapa; trocar a senha não define sozinho os efeitos sobre sessões. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-recuperacao-aceite.svg',alt:'Cenários de aceite incluem link expirado ou usado, canal indisponível, resposta para conta inexistente e tratamento das sessões existentes.',caption:'Confira resultados com contas e destinos de teste autorizados e registre evidências, limites e pendências. Diagrama original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261028-arquivar-excluir': [
+        {asset:"./torno-registros-acoes.svg",alt:"Perguntas distintas para arquivar, inativar ou excluir: estado do registro, consulta, uso em novas operações, remoção e vínculos relacionados.",caption:"Decisões propostas para esclarecer o efeito de cada ação, sem uma política universal. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-registros-aceite.svg",alt:"Ficha de aceite sobre dependentes, perfis, consulta, retomada quando contratada e resultado observado, com evidências e pendências.",caption:"Conferências propostas para verificar os efeitos e os limites das ações sobre registros. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

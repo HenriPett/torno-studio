@@ -1005,6 +1005,32 @@
         { "path": "torno-recuperacao-etapas.svg", "sha256": "6b4fc8afbd3b329a8083efd4f2839f381a5d9d303bbcee6a32ad90b1263d53c8" },
         { "path": "torno-recuperacao-aceite.svg", "sha256": "332b28d0a04de5192fd24760983ca6f4c05f1b36eb9fed976c3ec37e07163b96" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261028-arquivar-excluir",
+      "intentId": "buyer-record-archive-delete-dependencies-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/arquivar-excluir-registros-sistema/",
+      "contentRevision": "69b039af4c60e47c6d377f62b8a74c8b72d113a7f6b9ffe3fa212721ec3d219d",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-28T15:10:51Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-28T15:10:51Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 28/10/2026, 12h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-28; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-registros-acoes.svg",
+          "sha256": "71a67d2f7f49b0f3adee5d7a68326c45d4edd8379ddde26d4b3c98d97514df26"
+        },
+        {
+          "path": "torno-registros-aceite.svg",
+          "sha256": "769218a1fcc609cd1d1a7c64002827293f1e9b5f24903515e7bfcc57c032a09d"
+        }
+      ]
     }
   ]
 }
