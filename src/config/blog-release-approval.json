@@ -1031,6 +1031,32 @@
           "sha256": "769218a1fcc609cd1d1a7c64002827293f1e9b5f24903515e7bfcc57c032a09d"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261028-cancelamento-solicitacao",
+      "intentId": "buyer-operation-cancellation-outcome-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/cancelamento-solicitacao-sistema/",
+      "contentRevision": "7bea1c7c30e961029874213afe6d7bdd8f9d6c371fc755191374e5a9d6a81672",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-28T21:05:37Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-28T21:05:37Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 28/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-28; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-cancelamento-estados.svg",
+          "sha256": "aca488f85f6f2de4d03174324543053537b9cf813a917a876bd7fafbe4dc33ca"
+        },
+        {
+          "path": "torno-cancelamento-aceite.svg",
+          "sha256": "81b6e1088377fdc90c67f8b20592ebf66e253c36c5da1a02aa9f446c753af9e9"
+        }
+      ]
     }
   ]
 }

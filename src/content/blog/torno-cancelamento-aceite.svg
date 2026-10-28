@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc"><title id="title">Cenários para aceitar o cancelamento</title><desc id="desc">Ficha editorial de cancelamento antes do início, em curso, após conclusão, com serviço externo ou demora, com resultado esperado e evidência.</desc><rect width="720" height="1280" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ACEITE POR CENÁRIO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="33" font-weight="700">Demonstre o resultado combinado</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Defina estado inicial, ação e evidência esperada.</text>
+<rect x="32" y="210" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Antes do início</text>
+<text x="54" y="298" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O pedido impede que a operação comece?</text>
+<text x="54" y="337" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o comportamento autorizado.</text>
+<rect x="32" y="398" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="440" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Em curso</text>
+<text x="54" y="486" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que pode parar e o que já foi concluído?</text>
+<text x="54" y="525" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o resultado e os efeitos parciais.</text>
+<rect x="32" y="586" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="628" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Depois de concluída</text>
+<text x="54" y="674" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual retorno ou procedimento se aplica?</text>
+<text x="54" y="713" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Não apresente como interrupção retroativa.</text>
+<rect x="32" y="774" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="816" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Com serviço externo</text>
+<text x="54" y="862" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual efeito foi confirmado no destino?</text>
+<text x="54" y="901" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que exige conferência ou outra ação?</text>
+<rect x="32" y="962" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1004" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Demora ou resultado incerto</text>
+<text x="54" y="1050" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como a pendência permanece visível?</text>
+<text x="54" y="1089" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quem acompanha e como confirma o desfecho?</text>
+<text x="36" y="1210" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Registre diferenças, limites e pendências.</text>
+<text x="36" y="1254" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · sem caso ou teste real.</text>
+</svg>

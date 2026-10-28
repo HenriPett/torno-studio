@@ -256,6 +256,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-registros-aceite.svg', digest: '769218a1fcc609cd1d1a7c64002827293f1e9b5f24903515e7bfcc57c032a09d' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261028-cancelamento-solicitacao', intent_id: 'buyer-operation-cancellation-outcome-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/cancelamento-solicitacao-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/cancelamento-solicitacao-sistema/`,
+    digest: '7bea1c7c30e961029874213afe6d7bdd8f9d6c371fc755191374e5a9d6a81672', digestScope: 'file',
+    assets: [
+      { path: 'torno-cancelamento-estados.svg', digest: 'aca488f85f6f2de4d03174324543053537b9cf813a917a876bd7fafbe4dc33ca' },
+      { path: 'torno-cancelamento-aceite.svg', digest: '81b6e1088377fdc90c67f8b20592ebf66e253c36c5da1a02aa9f446c753af9e9' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -584,6 +593,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261028-arquivar-excluir': [
         {asset:"./torno-registros-acoes.svg",alt:"Perguntas distintas para arquivar, inativar ou excluir: estado do registro, consulta, uso em novas operações, remoção e vínculos relacionados.",caption:"Decisões propostas para esclarecer o efeito de cada ação, sem uma política universal. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registros-aceite.svg",alt:"Ficha de aceite sobre dependentes, perfis, consulta, retomada quando contratada e resultado observado, com evidências e pendências.",caption:"Conferências propostas para verificar os efeitos e os limites das ações sobre registros. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261028-cancelamento-solicitacao': [
+        {asset:"./torno-cancelamento-estados.svg",alt:"Perguntas para distinguir solicitação recebida, estado da operação, efeitos já concluídos, dependências externas e resultado com pendências.",caption:"Fronteiras propostas para conferir o efeito do pedido de cancelamento. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-cancelamento-aceite.svg",alt:"Cinco cenários de aceite do cancelamento: antes do início, em curso, depois de concluída a operação, com serviço externo e com demora ou resultado incerto.",caption:"Perguntas propostas para conferir resultados, efeitos e pendências em cada cenário. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
