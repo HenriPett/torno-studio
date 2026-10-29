@@ -1109,6 +1109,32 @@
           "sha256": "a7287fad774ad1f6987c1bf41f15a65aa7d011a5d38a58008093970a32e0300d"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261029-liberacao-gradual",
+      "intentId": "buyer-production-pilot-rollout-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/liberacao-gradual-funcionalidade-piloto/",
+      "contentRevision": "9e19e3ba58ff1a486df37c39728212ca836d149d329be47c693cdc17e4dee71b",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-29T21:06:42Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-29T21:06:42Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 29/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-29; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-piloto-escopo.svg",
+          "sha256": "6178656bf68a99ccc6334ff30777975a44b2bd9b3cb4bc69cbeca9b7aac96bb8"
+        },
+        {
+          "path": "torno-piloto-decisao.svg",
+          "sha256": "894d66dc90210347ef25c14b4d2421d2ce5dd354f859b750bb2b3efbd7c9f4a8"
+        }
+      ]
     }
   ]
 }

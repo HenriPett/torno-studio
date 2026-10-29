@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc"><title id="title">Escopo do piloto e convivência dos fluxos</title><desc id="desc">Modelo editorial de funcionalidade, unidade elegível, grupo piloto e pessoas fora dele, com regras de acesso e fluxos em curso. Não prescreve arquitetura.</desc><rect width="720" height="1280" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ESCOPO DO GRUPO PILOTO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="36" font-weight="700">Quem usa qual fluxo?</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Defina grupo, unidade e funcionalidade elegível.</text>
+<rect x="32" y="210" width="656" height="150" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="254" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="700">Elegibilidade e controle</text>
+<text x="54" y="300" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Quem entra, por qual critério e em qual versão?</text>
+<text x="54" y="338" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Quem autoriza e acompanha essa escolha?</text>
+<rect x="32" y="420" width="312" height="234" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="52" y="467" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">No grupo piloto</text>
+<text x="52" y="518" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Qual fluxo está</text>
+<text x="52" y="552" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">disponível?</text>
+<text x="52" y="602" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Como conferir</text>
+<text x="52" y="634" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">o acesso previsto?</text>
+<rect x="376" y="420" width="312" height="234" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="396" y="467" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Fora do piloto</text>
+<text x="396" y="518" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Qual fluxo está</text>
+<text x="396" y="552" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">disponível?</text>
+<text x="396" y="602" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Como conferir</text>
+<text x="396" y="634" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">o acesso previsto?</text>
+<rect x="32" y="714" width="656" height="174" rx="12" fill="#e2ede8" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="758" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="700">Coexistência dos caminhos</text>
+<text x="54" y="805" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que acontece com tarefas já iniciadas</text>
+<text x="54" y="844" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">quando a participação no grupo muda?</text>
+<rect x="32" y="938" width="656" height="156" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="982" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Visibilidade não é autorização</text>
+<text x="54" y="1027" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Exibir uma função não substitui conferir</text>
+<text x="54" y="1066" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">as permissões para executá-la.</text>
+<text x="36" y="1200" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · adapte à regra do produto.</text>
+</svg>
