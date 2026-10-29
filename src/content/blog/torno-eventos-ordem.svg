@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1200" viewBox="0 0 720 1200" role="img" aria-labelledby="title desc"><title id="title">Ordem do negócio e ordem de chegada</title><desc id="desc">Exemplo editorial abstrato: a mudança A ocorreu antes de B, mas o evento de B chegou antes do evento de A. Sem cliente ou ensaio real.</desc><rect width="720" height="1200" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ORDEM E SIGNIFICADO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="32" font-weight="700">Chegar depois não é ocorrer depois</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Exemplo editorial abstrato, sem caso ou teste real.</text>
+<text x="44" y="245" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">NO NEGÓCIO</text>
+<text x="388" y="245" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">NA CHEGADA</text>
+<rect x="32" y="280" width="312" height="160" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="52" y="328" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Mudança A</text>
+<text x="52" y="384" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Ocorreu antes.</text>
+<rect x="376" y="280" width="312" height="160" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="396" y="328" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Evento de B</text>
+<text x="396" y="384" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Chegou primeiro.</text>
+<rect x="32" y="490" width="312" height="160" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="52" y="538" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Mudança B</text>
+<text x="52" y="594" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Ocorreu depois.</text>
+<rect x="376" y="490" width="312" height="160" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="396" y="538" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Evento de A</text>
+<text x="396" y="594" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Chegou depois.</text>
+<path d="M188 444 V484 M532 444 V484" fill="none" stroke="#1c5a49" stroke-width="3"/>
+<rect x="32" y="710" width="656" height="184" rx="12" fill="#e2ede8" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="755" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">São mudanças legítimas distintas</text>
+<text x="54" y="801" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">A ordem de chegada não define sozinha</text>
+<text x="54" y="839" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">qual efeito autorizar no registro.</text>
+<rect x="32" y="938" width="656" height="144" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="979" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700">Qual regra decide o tratamento?</text>
+<text x="54" y="1021" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Combine contexto, referência e transições</text>
+<text x="54" y="1057" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">permitidas, com evidência do resultado.</text>
+<text x="36" y="1150" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Não há ranking universal de estados ou horários.</text>
+</svg>

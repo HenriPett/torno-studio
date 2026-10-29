@@ -1083,6 +1083,32 @@
           "sha256": "30890b39967923559de9a0be016d1d151d58a5ad6245daf3a8d1d27a11cc9d0b"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261029-eventos-fora-ordem",
+      "intentId": "buyer-out-of-order-integration-events-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/integracao-eventos-fora-ordem/",
+      "contentRevision": "d3db36d1575aba85a547417e0880ce69e80d02f0dc87ae53d645b2ef747aac07",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-29T15:04:58Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-29T15:04:58Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 29/10/2026, 12h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-29; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-eventos-ordem.svg",
+          "sha256": "d60dcbf6b9ef8e85803825054deb4eae0411ff305c0d9cacc12a603560b8c781"
+        },
+        {
+          "path": "torno-eventos-aceite.svg",
+          "sha256": "a7287fad774ad1f6987c1bf41f15a65aa7d011a5d38a58008093970a32e0300d"
+        }
+      ]
     }
   ]
 }

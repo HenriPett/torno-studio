@@ -274,6 +274,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-monetarios-aceite.svg', digest: '30890b39967923559de9a0be016d1d151d58a5ad6245daf3a8d1d27a11cc9d0b' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261029-eventos-fora-ordem', intent_id: 'buyer-out-of-order-integration-events-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/integracao-eventos-fora-ordem/', canonical_url: `${BLOG_ORIGIN}/blog/integracao-eventos-fora-ordem/`,
+    digest: 'd3db36d1575aba85a547417e0880ce69e80d02f0dc87ae53d645b2ef747aac07', digestScope: 'file',
+    assets: [
+      { path: 'torno-eventos-ordem.svg', digest: 'd60dcbf6b9ef8e85803825054deb4eae0411ff305c0d9cacc12a603560b8c781' },
+      { path: 'torno-eventos-aceite.svg', digest: 'a7287fad774ad1f6987c1bf41f15a65aa7d011a5d38a58008093970a32e0300d' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -610,6 +619,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261029-valores-monetarios': [
         {asset:"./torno-monetarios-regras.svg",alt:"Ficha de regras para valores monetários com moeda e unidade, precisão, etapa, regra de arredondamento e total e consistência.",caption:"Perguntas propostas para definir o significado e o cálculo antes de conferir os valores. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-monetarios-aceite.svg",alt:"Ficha de evidências com entrada, cálculo intermediário, resultado esperado, tela e integração, e evidência e pendência.",caption:"Conferências propostas para comparar entradas, regras e saídas com o resultado esperado. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261029-eventos-fora-ordem': [
+        {asset:"./torno-eventos-ordem.svg",alt:"Exemplo abstrato em que a mudança A ocorre antes de B, mas o evento de B chega primeiro; a regra de tratamento depende de contexto, referência e transições permitidas.",caption:"Ordem de ocorrência e ordem de chegada são perguntas distintas para o contrato da integração. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-eventos-aceite.svg",alt:"Cinco cenários de aceite: chegada invertida, evento anterior recebido depois, mesma ocorrência repetida, mudança legítima posterior e referência ou conferência ausente.",caption:"Perguntas propostas para conferir resultados, efeitos autorizados e pendências em cada cenário. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

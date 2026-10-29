@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc"><title id="title">Cenários para aceitar eventos fora de ordem</title><desc id="desc">Ficha editorial de chegada invertida, evento antigo, repetição, mudança legítima e informação insuficiente, com resultado esperado e evidência.</desc><rect width="720" height="1280" fill="#f7f6f2"/>
+<text x="36" y="55" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700">TORNO · ACEITE DO TRATAMENTO</text>
+<text x="36" y="118" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="34" font-weight="700">Confira o resultado por cenário</text>
+<text x="36" y="164" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Defina o esperado antes de executar o ensaio.</text>
+<rect x="32" y="210" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="252" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Chegada invertida</text>
+<text x="54" y="298" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Qual estado deve resultar da sequência?</text>
+<text x="54" y="337" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o registro após cada entrega.</text>
+<rect x="32" y="398" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="440" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Evento anterior recebido depois</text>
+<text x="54" y="486" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Como a regra trata a informação antiga?</text>
+<text x="54" y="525" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o efeito autorizado e sua evidência.</text>
+<rect x="32" y="586" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="628" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Mesma ocorrência repetida</text>
+<text x="54" y="674" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">É uma repetição ou outra mudança legítima?</text>
+<text x="54" y="713" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Confira o comportamento de cada caso.</text>
+<rect x="32" y="774" width="656" height="162" rx="12" fill="#eeece6" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="816" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Mudança legítima posterior</text>
+<text x="54" y="862" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Essa transição ainda pode ocorrer?</text>
+<text x="54" y="901" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Não descarte uma mudança só pelo rótulo.</text>
+<rect x="32" y="962" width="656" height="162" rx="12" fill="#fff" stroke="#dcd9d1" stroke-width="2"/>
+<text x="54" y="1004" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="700">Referência ou conferência ausente</text>
+<text x="54" y="1050" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">O que permanece pendente até esclarecer?</text>
+<text x="54" y="1089" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400">Registre limite, responsável e próxima ação.</text>
+<text x="36" y="1210" fill="#1c5a49" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700">Guarde esperado, observado e pendências.</text>
+<text x="36" y="1254" fill="#16181a" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400">Proposta editorial · sem caso ou teste real.</text>
+</svg>
