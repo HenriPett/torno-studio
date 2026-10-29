@@ -1057,6 +1057,32 @@
           "sha256": "81b6e1088377fdc90c67f8b20592ebf66e253c36c5da1a02aa9f446c753af9e9"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261029-valores-monetarios",
+      "intentId": "buyer-monetary-rounding-business-rules-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/valores-monetarios-arredondamento-sistema/",
+      "contentRevision": "af8758a4b9a209d3e6c17c3510b2695e8fccee1529c077e53dc9945e8a2334db",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-29T11:22:54Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-29T11:22:54Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução para edição de 29/10/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-29; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-monetarios-regras.svg",
+          "sha256": "d6b004f2b06c899f32efc08cd6d87840bc1312887738c0d67413d8b2104d550f"
+        },
+        {
+          "path": "torno-monetarios-aceite.svg",
+          "sha256": "30890b39967923559de9a0be016d1d151d58a5ad6245daf3a8d1d27a11cc9d0b"
+        }
+      ]
     }
   ]
 }

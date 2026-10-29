@@ -265,6 +265,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-cancelamento-aceite.svg', digest: '81b6e1088377fdc90c67f8b20592ebf66e253c36c5da1a02aa9f446c753af9e9' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261029-valores-monetarios', intent_id: 'buyer-monetary-rounding-business-rules-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/valores-monetarios-arredondamento-sistema/', canonical_url: `${BLOG_ORIGIN}/blog/valores-monetarios-arredondamento-sistema/`,
+    digest: 'af8758a4b9a209d3e6c17c3510b2695e8fccee1529c077e53dc9945e8a2334db', digestScope: 'file',
+    assets: [
+      { path: 'torno-monetarios-regras.svg', digest: 'd6b004f2b06c899f32efc08cd6d87840bc1312887738c0d67413d8b2104d550f' },
+      { path: 'torno-monetarios-aceite.svg', digest: '30890b39967923559de9a0be016d1d151d58a5ad6245daf3a8d1d27a11cc9d0b' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -597,6 +606,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261028-cancelamento-solicitacao': [
         {asset:"./torno-cancelamento-estados.svg",alt:"Perguntas para distinguir solicitação recebida, estado da operação, efeitos já concluídos, dependências externas e resultado com pendências.",caption:"Fronteiras propostas para conferir o efeito do pedido de cancelamento. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-cancelamento-aceite.svg",alt:"Cinco cenários de aceite do cancelamento: antes do início, em curso, depois de concluída a operação, com serviço externo e com demora ou resultado incerto.",caption:"Perguntas propostas para conferir resultados, efeitos e pendências em cada cenário. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261029-valores-monetarios': [
+        {asset:"./torno-monetarios-regras.svg",alt:"Ficha de regras para valores monetários com moeda e unidade, precisão, etapa, regra de arredondamento e total e consistência.",caption:"Perguntas propostas para definir o significado e o cálculo antes de conferir os valores. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-monetarios-aceite.svg",alt:"Ficha de evidências com entrada, cálculo intermediário, resultado esperado, tela e integração, e evidência e pendência.",caption:"Conferências propostas para comparar entradas, regras e saídas com o resultado esperado. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

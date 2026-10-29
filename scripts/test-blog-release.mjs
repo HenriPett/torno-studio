@@ -42,12 +42,13 @@ const expected = [
   ['torno-artigo-pt-20261028-recuperacao-senha', '/blog/recuperacao-senha-sistema-aceite/', 'bb32f48d4f0c97dc8f1f40f67531a36456af3c982d29db46cf63b21d65c79c22', ['torno-recuperacao-etapas.svg', 'torno-recuperacao-aceite.svg']],
   ['torno-artigo-pt-20261028-arquivar-excluir', '/blog/arquivar-excluir-registros-sistema/', '69b039af4c60e47c6d377f62b8a74c8b72d113a7f6b9ffe3fa212721ec3d219d', ['torno-registros-acoes.svg', 'torno-registros-aceite.svg']],
   ['torno-artigo-pt-20261028-cancelamento-solicitacao', '/blog/cancelamento-solicitacao-sistema/', '7bea1c7c30e961029874213afe6d7bdd8f9d6c371fc755191374e5a9d6a81672', ['torno-cancelamento-estados.svg', 'torno-cancelamento-aceite.svg']],
+  ['torno-artigo-pt-20261029-valores-monetarios', '/blog/valores-monetarios-arredondamento-sistema/', 'af8758a4b9a209d3e6c17c3510b2695e8fccee1529c077e53dc9945e8a2334db', ['torno-monetarios-regras.svg', 'torno-monetarios-aceite.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os trinta artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os trinta e um artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -57,7 +58,7 @@ checks.push(['manifesto inclui exatamente os trinta artigos autorizados e suas a
   }
 }]);
 
-checks.push(['sitemap contém 52 URLs únicas: baseline com páginas institucionais, dois índices e trinta artigos PT', async () => {
+checks.push(['sitemap contém 53 URLs únicas: baseline com páginas institucionais, dois índices e trinta e um artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();
