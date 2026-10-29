@@ -2,9 +2,9 @@
 
 ## Escopo e leitura
 
-- [FATO] Leitura integral dos **32 arquivos** `src/content/blog/*.md` antes da síntese. Inventário apurado no checkout `/private/tmp/torno-geo-20261029` em 29/10/2026; são 32 identidades distintas e 96 takeaways. Fonte: arquivos locais listados abaixo.
+- [FATO] Leitura integral dos **32 artigos originais e do novo artigo de liberação gradual**, antes das respectivas sínteses. O novo arquivo chegou com o commit remoto `e87100d`, integrado pelo responsável pelo merge durante esta tarefa. Inventário atualizado no checkout `/private/tmp/torno-geo-20261029` em 29/10/2026: **33 artigos, 33 identidades distintas e 99 takeaways**. Fonte: arquivos locais listados abaixo.
 - [FATO] `.astro/blog-publication-manifest.json` não estava presente na leitura inicial; o diretório `.astro` também não existia. O carregador existente em `src/lib/blog.ts` usa `.astro/blog-manifest.json`. Não foi criado nem modificado inventário de publicação por esta tarefa.
-- [FATO] São **31 frontmatters com `content_id` explícito** e um legado: `torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento.md`. A chave do legado é a identidade já reconhecida por `src/lib/blog.ts`; não houve preenchimento de frontmatter.
+- [FATO] São **32 frontmatters com `content_id` explícito** e um legado: `torno-artigo-pt-20261016-custo-manutencao-software-apos-lancamento.md`. A chave do legado é a identidade já reconhecida por `src/lib/blog.ts`; não houve preenchimento de frontmatter.
 - [FATO] Arquivos de entrega desta tarefa: `src/content/seo/blog-geo.ts` e este relatório. As respostas são dados para a integração na seção “Resposta direta” e na saída Markdown; esta entrega editorial não altera renderizadores.
 
 ## Critério editorial
@@ -34,6 +34,7 @@
 | [importacao-planilhas-sistema-tratar-erros.md](../../../src/content/blog/importacao-planilhas-sistema-tratar-erros.md)<br>`torno-artigo-pt-20261023-importacao-planilhas-erros` | Que regras de validação, retorno e reenvio definir para tratar erros na importação recorrente de planilhas em um sistema? | `buyer-recurring-spreadsheet-import-validation-pt` | [33], [39], [40] |
 | [integracao-evento-duplicado-regra-negocio.md](../../../src/content/blog/integracao-evento-duplicado-regra-negocio.md)<br>`torno-artigo-pt-20261020-evento-duplicado` | O que exigir de uma integração quando o mesmo evento é entregue duas vezes? | `buyer-integration-duplicate-event-acceptance-pt` | [41], [42], [43] |
 | [integracao-eventos-fora-ordem.md](../../../src/content/blog/integracao-eventos-fora-ordem.md)<br>`torno-artigo-pt-20261029-eventos-fora-ordem` | Que regras e evidências definir para tratar eventos fora de ordem sem aplicar indevidamente um estado anterior? | `buyer-out-of-order-integration-events-acceptance-pt` | [42], [44], [45] |
+| [liberacao-gradual-funcionalidade-piloto.md](../../../src/content/blog/liberacao-gradual-funcionalidade-piloto.md)<br>`torno-artigo-pt-20261029-liberacao-gradual` | Que regras e evidências definir para liberar uma funcionalidade a um grupo piloto em produção e decidir sua ampliação? | `buyer-production-pilot-rollout-acceptance-pt` | [97], [98], [99] |
 | [limites-api-integracao-cota.md](../../../src/content/blog/limites-api-integracao-cota.md)<br>`torno-artigo-pt-20261023-limites-api-cota` | Que comportamento e evidências o comprador deve exigir quando a integração atinge um limite ou uma cota da API externa? | `buyer-integration-api-quota-behavior-pt` | [46], [47], [48], [49], [50] |
 | [monitoramento-software-alertas-fluxo-critico.md](../../../src/content/blog/monitoramento-software-alertas-fluxo-critico.md)<br>`torno-artigo-pt-20261022-monitoramento-alertas` | Que sinais, condições, responsáveis e evidências o comprador deve combinar no monitoramento do fluxo crítico de um software? | `buyer-software-monitoring-actionable-alerts-pt` | [51], [52], [53], [54] |
 | [mvp-pos-lancamento-priorizar-mudancas.md](../../../src/content/blog/mvp-pos-lancamento-priorizar-mudancas.md)<br>`torno-artigo-pt-20261019-priorizar-mudancas-mvp` | Que evidências reunir para decidir qual mudança priorizar depois de lançar um MVP? | `post-launch-mvp-change-prioritization-pt` | [55], [56] |
@@ -62,12 +63,15 @@
 - [FATO — conteúdo local] Homologação e simulação só demonstram o percurso exercitado. Teste de carga tem cenário e critérios próprios; restauração exige validação de conteúdo e uso; rollback depende da compatibilidade e dos efeitos externos.
 - [FATO — conteúdo local] Dia civil, instante e agendamento não têm semântica intercambiável. Precisão de cálculo, apresentação e momento de arredondar devem ser definidos separadamente.
 
+- [FATO — conteúdo local] No piloto em produção, elegibilidade não amplia autorização; público reduzido não comprova prontidão ou capacidade futura. Parar a ampliação, retirar a funcionalidade e reverter a versão têm efeitos distintos, com destino explícito para trabalho iniciado e dados produzidos.
+
 ## Verificação da entrega
 
-- [FATO] Validação local por AST/transpilação TypeScript e leitura de YAML: 32 identidades cobertas, nenhuma chave adicional, nenhuma duplicação de identidade e 96 takeaways não vazios.
+- [FATO] Validação local por AST/transpilação TypeScript e leitura de YAML: 33 identidades cobertas, nenhuma chave adicional, nenhuma duplicação de identidade e 99 takeaways não vazios.
 - [FATO] Segmentação de frases em `pt-BR` verificou duas frases em cada resposta; conferência automatizada também confirmou que nenhuma resposta é idêntica ao respectivo `summary`.
 - [FATO] A checagem TypeScript isolada usa `--noEmit`; não requer gerar `.astro`, alterar artigos ou atualizar digests. Integração e QA de renderização pertencem à etapa que consome este módulo.
-- [FATO] A comparação de bytes confirmou os 32 artigos idênticos a `HEAD` nesta verificação. Também passaram as conferências de links locais do relatório e de ausência de alegações numéricas nas respostas e nos takeaways.
+- [FATO] A comparação de bytes da entrega inicial confirmou os 32 artigos originais idênticos ao `HEAD` daquele momento. Na atualização para 33, o artigo novo foi comparado ao arquivo do commit `e87100d`, sem alteração de conteúdo. Também passaram as conferências de links locais do relatório e de ausência de alegações numéricas nas respostas e nos takeaways.
+- [FATO] Na atualização, passaram a cobertura de 33 arquivos/entradas, 32 `content_id` explícitos e a identidade legada, 33 linhas de inventário e 99 URLs distintas. Os 102 registros estruturados de fontes e as três referências do legado permanecem documentados por artigo; as fontes novas [97]–[99] conservam `checked_at` e limites do artigo. A checagem TypeScript isolada passou com `--noEmit --strict`, sem build ou preview.
 
 ## Revisão independente
 
@@ -75,11 +79,13 @@
 
 [FATO] O único achado foi P3 documental: a deduplicação de URLs ocultava diferenças de data e limite entre artigos. Correção incorporada: cada fonte agora identifica o registro representativo e preserva metadados dos registros adicionais por artigo e URL.
 
+[FATO] Atualização para o 33º artigo: entrada `torno-artigo-pt-20261029-liberacao-gradual` acrescentada após leitura integral de `liberacao-gradual-funcionalidade-piloto.md`. Revisão READ-ONLY da entrada e do complemento documental solicitada ao Crivo; resultado será registrado após o retorno.
+
 ## Fontes
 
 [FATO documental] Inventário das referências já presentes nos artigos. Nome, URL, data e limitações abaixo são transcritos do conteúdo local, com leitura em 29/10/2026. Datas de consulta indicam as coletas registradas nos artigos, **não uma nova verificação externa nesta tarefa**; o texto do legado informa menos metadados estruturados. Referências de fornecedor explicam seus próprios mecanismos e não provam recursos implementados pela Torno. MDN é documentação explicativa de HTML, sem autoridade normativa de especificação; a página da Torno é fonte primária apenas de sua própria oferta.
 
-[FATO documental] São 96 URLs distintas, consolidadas pela primeira ocorrência na ordem da tabela. Cada item identifica o artigo do registro representativo; quando a URL reaparece, os registros adicionais preservam publicação, consulta e limite de cada artigo. A tabela de intenções remete reutilizações à mesma URL, sem atribuir a ela comprovação do produto concreto.
+[FATO documental] São **99 URLs distintas**: os 96 registros de URL da entrega original mantiveram sua numeração, e as três fontes do novo artigo foram acrescentadas como [97]–[99]. Cada item identifica o artigo do registro representativo; quando a URL reaparece, os registros adicionais preservam publicação, consulta e limite de cada artigo. A tabela de intenções remete reutilizações à mesma URL, sem atribuir a ela comprovação do produto concreto.
 
 1. **W3C — Accessibility Guidelines Working Group** — https://www.w3.org/TR/WCAG22/. Publicação registrada: 2024-12-12. Consulta registrada: 2026-10-22T11:19:29Z. Limite: Referência normativa; o artigo não enumera todos os critérios nem determina conformidade de um produto. Registro representativo: `torno-artigo-pt-20261022-acessibilidade-aceite`.
 2. **W3C — Web Accessibility Initiative** — https://www.w3.org/WAI/test-evaluate/preliminary/. Publicação registrada: SEM DADO (data exata não registrada). Consulta registrada: 2026-10-22T11:19:29Z. Limite: Página atualizada em 09/08/2023; data original mantida sem valor exato. Revisão inicial, não avaliação abrangente; a ficha do artigo adapta os tópicos à conversa de aceite. Registro representativo: `torno-artigo-pt-20261022-acessibilidade-aceite`.
@@ -189,6 +195,10 @@
 95. **PostgreSQL Global Development Group** — https://www.postgresql.org/docs/current/datatype-numeric.html. Publicação registrada: SEM DADO (data exata não registrada). Consulta registrada: 2026-10-29T11:17:44Z. Limite: Exemplo de implementação PostgreSQL 18, não arquitetura obrigatória nem prova de exatidão de um fluxo completo; data editorial desconhecida. Registro representativo: `torno-artigo-pt-20261029-valores-monetarios`.
 96. **Microsoft Learn — .NET API Reference** — https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-10.0. Publicação registrada: SEM DADO (data exata não registrada). Consulta registrada: 2026-10-29T11:17:44Z. Limite: Exemplo técnico, não método recomendado universalmente; não afirma disponibilidade de versão ou implementação pela Torno. Data editorial desconhecida. Registro representativo: `torno-artigo-pt-20261029-valores-monetarios`.
 
+97. **Microsoft Learn — Azure App Configuration** — https://learn.microsoft.com/en-us/azure/azure-app-configuration/howto-targetingfilter. Publicação registrada: SEM DADO (data exata não registrada). Consulta registrada: 2026-10-29T21:02:53Z. Limite: Página atualizada em 27/08/2026; exemplo de plataforma, não capacidade já implementada na Torno nem arquitetura obrigatória. Registro representativo: `torno-artigo-pt-20261029-liberacao-gradual`.
+98. **Amazon Web Services — AWS AppConfig** — https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-deployment-strategy.html. Publicação registrada: SEM DADO (data exata não registrada). Consulta registrada: 2026-10-29T21:02:53Z. Limite: Configurações e mecanismos do AppConfig não são percentuais, durações ou automações universais; data editorial desconhecida. Registro representativo: `torno-artigo-pt-20261029-liberacao-gradual`.
+99. **LaunchDarkly Documentation** — https://launchdarkly.com/docs/home/releases/progressive-rollouts. Publicação registrada: SEM DADO (data exata não registrada). Consulta registrada: 2026-10-29T21:02:53Z. Limite: Comportamento específico do serviço; não implica que toda implementação tenha a mesma seleção nem recomenda adotar a plataforma. Data editorial desconhecida. Registro representativo: `torno-artigo-pt-20261029-liberacao-gradual`.
+
 ## Lacunas e riscos
 
 1. [FATO] O artigo legado de manutenção não possui `content_id`, `intent_id` nem `claims_and_sources` estruturados. A identidade já usada pelo carregador foi preservada e os links foram inventariados pelo corpo; nenhuma correção de metadados está incluída nesta posse.
@@ -198,3 +208,4 @@
 5. [SEM DADO] Não há evidência nova de implantação em cliente, ensaio executado ou resultado medido nestas sínteses. Para alegar resultados ou segurança/conformidade de um produto, obter evidência específica e revisão competente; exemplos editoriais permanecem hipóteses.
 6. [SEM DADO] Não foi avaliada a eficácia GEO após publicação. Validar por amostragem de HTML e Markdown na integração e, depois, por observação documentada das consultas relevantes; não prometer indexação, citação ou posição.
 7. [FATO] A ausência inicial do manifesto impede usar esse arquivo como inventário desta leitura. A cobertura é de todos os arquivos existentes; o consumo do módulo deve continuar respeitando os gates de publicação já existentes.
+8. [FATO documental] As três fontes do artigo de liberação gradual descrevem mecanismos dos próprios fornecedores. Não há evidência de plataforma de rollout implementada, piloto realizado, resultado observado, percentual ou duração universal; a síntese preserva o caráter de roteiro. As consultas de 29/10/2026 são as registradas no artigo, sem nova consulta externa nesta atualização.

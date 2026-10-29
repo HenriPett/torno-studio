@@ -257,4 +257,12 @@ export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = 
       "Dê tratamento explícito a zero, ausência e negativo quando aplicáveis e justifique qualquer tolerância, sem substituir validação fiscal ou contábil especializada.",
     ],
   },
+  "torno-artigo-pt-20261029-liberacao-gradual": {
+    answer: "Para liberar uma funcionalidade a um grupo piloto em produção, defina público e unidade de seleção, convivência dos fluxos e evidências de uso que sustentem ampliar, manter ou pausar o alcance. Registre quem decide e o efeito de cada ação sobre tarefas e dados já produzidos; pausar a expansão, retirar a função e reverter uma versão não são ações equivalentes nem desfazem automaticamente efeitos anteriores.",
+    takeaways: [
+      "Defina inclusões, exclusões e continuidade entre sessões e pontos de entrada; receber a funcionalidade não amplia as permissões para agir sobre dados.",
+      "Confira como os registros criados no fluxo novo serão lidos e usados pelo anterior, incluindo tarefas em andamento, integrações e processos automáticos relevantes.",
+      "Relacione conclusão da tarefa e falhas à versão e ao grupo observado, com responsável e cobertura de acompanhamento; pouco uso ou ausência de reclamações não comprovam prontidão para ampliar.",
+    ],
+  },
 };

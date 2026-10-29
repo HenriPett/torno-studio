@@ -36,9 +36,10 @@ AGENT_REPORT_PATH=docs/qa/geo-20261029/production-http.json node scripts/verify-
 ## Resultado da validação local
 
 - Build com configuração pública real de produção: Astro check sem erros, warnings ou hints.
-- 119 verificações de GEO/autoria e 37 verificações editoriais: PASS.
+- 118 verificações de GEO/autoria e 37 verificações editoriais: PASS.
 - 40 testes técnicos de negociação, conteúdo público, descoberta e contador: PASS.
-- Linkinator: 211 links internos, PASS.
+- Linkinator: 215 links internos, PASS.
+- 114 combinações de página/largura no navegador: sem overflow e sem violações graves/críticas nas regras axe WCAG A/AA avaliadas.
 - Checagens do navegador e evidência HTTP ficam nos arquivos vinculados acima; foram executadas depois do build final.
 
 ## Critérios e limites

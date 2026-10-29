@@ -47,6 +47,24 @@ Correção solicitada à Vela (localizações na versão original): preservar da
 
 [FATO — revisão de código] `src/pages/og/blog/[id].png.ts:7` gera somente entradas públicas do carregador existente, com chave idioma+slug, título real e autoria do manifesto. `BlogArticle.astro:29` usa o mesmo caminho em `schema.image` e nas props OG do Base. O renderer Satori existente mantém 1200×630 e o rodapé contém a autoria confirmada; não acrescenta data, resultado ou credencial. Nenhum bloqueador estático identificado. O novo build/QA dessas alterações está em execução pelo integrador, conforme sua última mensagem; a aprovação anterior de testes não é atribuída automaticamente a essa revisão final. Não iniciei build concorrente.
 
+## Adendo — 33º artigo: liberação gradual
+
+Revisão limitada à nova entrada e ao complemento documental, em 2026-10-29T21:20:59.941822+00:00, após integração informada do commit `e87100d`. **PASS: nenhum achado ou correção necessária nesta entrada.** As 32 entradas e páginas anteriores não foram reabertas; permanecem cobertas pela revisão anterior.
+
+- [FATO — cotejo local] Li integralmente `src/content/blog/liberacao-gradual-funcionalidade-piloto.md`. `blog-geo.ts:260–267` apresenta duas frases e três takeaways específicos, fiéis à pergunta central e ao escopo do artigo. A contagem textual atual é de 33 arquivos, 33 entradas e 99 takeaways; a exceção legada anterior permanece preservada.
+- [FATO — rastreabilidade] A resposta corresponde à seleção do público e unidade (artigo:91–97), convivência dos fluxos (99–105), evidências e decisor para ampliar/manter/pausar (120–134) e distinção entre interromper expansão, retirar função e reverter versão (136–142). Os três takeaways correspondem, respectivamente, às linhas 93–103, 101–105 e 122–126/169. Elegibilidade não concede autorização; ausência de reclamação e pouco uso não provam prontidão; efeitos anteriores não são automaticamente desfeitos.
+- [FATO — limites] Não identifiquei invenção de número, prazo, percentual, credencial, cliente, piloto realizado, resultado observado, automação universal ou cobertura contínua. O exemplo fictício não foi convertido em realização da Torno. O resumo não transforma orientação de plataforma em implementação existente.
+- [FATO — complemento editorial] `editorial.md:5–7` atualiza o inventário para 33 artigos/99 takeaways e 32 IDs explícitos mais um legado; a linha 37 preserva a pergunta, `intent_id` e referências 97–99. Os itens 97–99 (linhas 197–199 no snapshot lido) preservam nome, URL, `checked_at` de 2026-10-29T21:02:53Z, publicação SEM DADO e os limites originais de Azure App Configuration, AWS AppConfig e LaunchDarkly. Atualização indicada de 27/08/2026 não virou data de publicação. Não houve nova consulta externa nem certificação da atualidade dos provedores.
+- [FATO — execução] Nenhum build, teste ou preview iniciado; nenhuma fonte ou arquivo da Vela editado. Somente este adendo foi registrado no arquivo de revisão autorizado pelo integrador.
+
+Hashes SHA-256 adicionais (sem substituir os snapshots históricos acima):
+
+```text
+9e19e3ba58ff1a486df37c39728212ca836d149d329be47c693cdc17e4dee71b  src/content/blog/liberacao-gradual-funcionalidade-piloto.md
+7ec5f92d6809b44b3bd20c0322206479c4a69e3a83980113e6b8b8e68c774339  src/content/seo/blog-geo.ts
+6c8d0eb26f2786e798f6bf476e97edb342684f8952c5b22889bc3ceb111e55a1  docs/qa/geo-20261029/editorial.md
+```
+
 ## Fontes
 
 1. [Artigos originais](../../../src/content/blog/), [sínteses GEO](../../../src/content/seo/blog-geo.ts) e [QA editorial](editorial.md), lidos no checkout em 29/10/2026. Inventário e metadados comparados localmente; não é nova consulta às URLs externas.

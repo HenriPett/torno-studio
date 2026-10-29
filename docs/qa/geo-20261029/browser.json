@@ -276,22 +276,6 @@
     "overflow": 0,
     "h1": 1,
     "violations": [],
-    "path": "/autores/henrique-pett/",
-    "requestedWidth": 360
-  },
-  {
-    "width": 360,
-    "overflow": 0,
-    "h1": 1,
-    "violations": [],
-    "path": "/en/authors/henrique-pett/",
-    "requestedWidth": 360
-  },
-  {
-    "width": 360,
-    "overflow": 0,
-    "h1": 1,
-    "violations": [],
     "path": "/about/",
     "requestedWidth": 360
   },
@@ -429,22 +413,6 @@
     "h1": 1,
     "violations": [],
     "path": "/en/privacy/",
-    "requestedWidth": 360
-  },
-  {
-    "width": 360,
-    "overflow": 0,
-    "h1": 1,
-    "violations": [],
-    "path": "/blog/",
-    "requestedWidth": 360
-  },
-  {
-    "width": 360,
-    "overflow": 0,
-    "h1": 1,
-    "violations": [],
-    "path": "/en/blog/",
     "requestedWidth": 360
   },
   {
@@ -724,22 +692,6 @@
     "overflow": 0,
     "h1": 1,
     "violations": [],
-    "path": "/autores/henrique-pett/",
-    "requestedWidth": 1280
-  },
-  {
-    "width": 1280,
-    "overflow": 0,
-    "h1": 1,
-    "violations": [],
-    "path": "/en/authors/henrique-pett/",
-    "requestedWidth": 1280
-  },
-  {
-    "width": 1280,
-    "overflow": 0,
-    "h1": 1,
-    "violations": [],
     "path": "/about/",
     "requestedWidth": 1280
   },
@@ -877,6 +829,70 @@
     "h1": 1,
     "violations": [],
     "path": "/en/privacy/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/liberacao-gradual-funcionalidade-piloto/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/autores/henrique-pett/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/authors/henrique-pett/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/blog/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/liberacao-gradual-funcionalidade-piloto/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/autores/henrique-pett/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/authors/henrique-pett/",
     "requestedWidth": 1280
   },
   {
