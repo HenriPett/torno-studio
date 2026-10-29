@@ -283,6 +283,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-eventos-aceite.svg', digest: 'a7287fad774ad1f6987c1bf41f15a65aa7d011a5d38a58008093970a32e0300d' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261029-liberacao-gradual', intent_id: 'buyer-production-pilot-rollout-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/liberacao-gradual-funcionalidade-piloto/', canonical_url: `${BLOG_ORIGIN}/blog/liberacao-gradual-funcionalidade-piloto/`,
+    digest: '9e19e3ba58ff1a486df37c39728212ca836d149d329be47c693cdc17e4dee71b', digestScope: 'file',
+    assets: [
+      { path: 'torno-piloto-escopo.svg', digest: '6178656bf68a99ccc6334ff30777975a44b2bd9b3cb4bc69cbeca9b7aac96bb8' },
+      { path: 'torno-piloto-decisao.svg', digest: '894d66dc90210347ef25c14b4d2421d2ce5dd354f859b750bb2b3efbd7c9f4a8' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -629,6 +638,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261029-eventos-fora-ordem': [
         {asset:"./torno-eventos-ordem.svg",alt:"Exemplo abstrato em que a mudança A ocorre antes de B, mas o evento de B chega primeiro; a regra de tratamento depende de contexto, referência e transições permitidas.",caption:"Ordem de ocorrência e ordem de chegada são perguntas distintas para o contrato da integração. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-eventos-aceite.svg",alt:"Cinco cenários de aceite: chegada invertida, evento anterior recebido depois, mesma ocorrência repetida, mudança legítima posterior e referência ou conferência ausente.",caption:"Perguntas propostas para conferir resultados, efeitos autorizados e pendências em cada cenário. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261029-liberacao-gradual': [
+        {asset:"./torno-piloto-escopo.svg",alt:"Escopo do piloto distingue elegibilidade, pessoas dentro e fora do grupo, convivência dos caminhos e permissões para agir.",caption:"Combine quem recebe a mudança, qual fluxo fica disponível e o destino das tarefas em andamento. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-piloto-decisao.svg",alt:"Decisão do piloto reúne observação, opções de ampliar, manter ou pausar, responsáveis e limites sobre efeitos anteriores.",caption:"Relacione evidências e pendências à decisão, com responsável e alcance da ação definidos. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;
