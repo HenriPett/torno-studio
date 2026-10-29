@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
+import PageAnswer from '../seo/PageAnswer.astro';
 import BookingCta from '../ui/BookingCta.astro';
 import type { Locale } from '../../lib/i18n';
 import { guideCopy } from './content';
@@ -25,6 +26,7 @@ const sources = [
       <p class="meta">{copy.eyebrow}</p>
       <h1>{copy.title}</h1>
       <p class="intro">{copy.intro}</p>
+      <PageAnswer locale={locale} routeId="rlsGuide" />
       <nav aria-label={copy.toc} class="contents">
         <p><strong>{copy.toc}</strong></p>
         <ol>{copy.sections.map(section => <li><a href={`#${section.id}`}>{section.title.replace(/^\d\. /, '')}</a></li>)}</ol>

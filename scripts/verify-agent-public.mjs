@@ -67,6 +67,19 @@ for (const [path, mime] of [['/robots.txt', 'text/plain'], ['/llms.txt', 'text/p
   if (path === '/llms.txt') for (const [, href] of body.matchAll(/\]\((https:\/\/[^)]+)\)/g)) { const linked = await get(new URL(href).pathname, 'text/markdown'); assert(linked.body.length > 20); }
   record(`${path} preserves machine/asset response`, { type: response.headers.get('content-type'), chars: body.length });
 }
+// Per-article social images must resolve as real images, never negotiated Markdown.
+const articleImages = (await readdir(resolve('dist/og/blog'))).filter(file => file.endsWith('.png'));
+for (const file of articleImages) {
+  const path = `/og/blog/${file}`;
+  const response = await fetch(new URL(path, origin), { headers: { Accept: 'text/markdown' } });
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('content-type') || '', /^image\/png/);
+  const png = Buffer.from(await response.arrayBuffer());
+  assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+  assert.equal(png.readUInt32BE(16), 1200); assert.equal(png.readUInt32BE(20), 630);
+  record(`article image ${file}`, { status: response.status, bytes: png.length });
+}
+
 // Existing hashed CSS, JS, font and images retain their bytes/MIME under Accept: Markdown.
 const assets = (await readdir(resolve('dist/_astro'))).filter(f => /\.(?:css|js|woff2|avif)$/.test(f));
 for (const extension of ['css','js','woff2','avif']) {

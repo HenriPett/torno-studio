@@ -11,6 +11,7 @@ export const defaultLocale = 'pt-BR';
 export const routes = {
   blog: { 'pt-BR': '/blog/', en: '/en/blog/' },
   home: { 'pt-BR': '/', en: '/en/' },
+  author: { 'pt-BR': '/autores/henrique-pett/', en: '/en/authors/henrique-pett/' },
   about: { 'pt-BR': '/about/', en: '/en/about/' },
   contact: { 'pt-BR': '/contact/', en: '/en/contact/' },
   recovery: { 'pt-BR': '/recuperacao-de-projeto/', en: '/en/software-project-rescue/' },

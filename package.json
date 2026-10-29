@@ -15,7 +15,8 @@
     "test": "astro build && playwright test",
     "links": "linkinator dist --config linkinator.config.json",
     "lhci": "PUBLIC_ALLOW_INDEXING=true astro build && lhci autorun",
-    "visitas": "node scripts/visitas.mjs"
+    "visitas": "node scripts/visitas.mjs",
+    "test:geo": "node scripts/test-geo.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

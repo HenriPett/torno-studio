@@ -105,7 +105,7 @@ const blogDates = new Map(blogManifest.entries.map(e => [e.data.canonical_url, e
 export default defineConfig({
   site,
   output: 'static',
-  markdown: { remarkPlugins: [blogCriteriaFigure], rehypePlugins: [blogScrollableBlocks] },
+  markdown: { remarkPlugins: [blogCriteriaFigure], rehypePlugins: [[blogScrollableBlocks, { labelTaskLists: true }]] },
   trailingSlash: 'always',
   build: { format: 'directory' },
   i18n: {

@@ -77,7 +77,7 @@ export async function validateMaintenanceHtml(root,html){
   const f=figures[0][1];const svg=f.match(/src="(\/_astro\/orcamento-apos-lancamento\.[^"/]+\.svg)"/);
   if(!svg||!f.includes('alt="'+sidecar.alt+'"')||!f.includes(sidecar.caption)||!f.includes(sidecar.text_equivalent)||!f.includes('<figcaption')||!f.includes('id="maintenance-figure-equivalent"'))fail('approved figure/alt/caption/equivalent absent');
   if(sha(await readFile(path.join(root,svg[1].slice(1))))!==maintenanceHashes.svg)fail('rendered SVG asset hash mismatch');
-  const p=html.indexOf('Os volumes, a franquia e a forma de cobrança são');const g=html.indexOf(figures[0][0]);const h=html.indexOf('Onde termina a garantia e começa um novo acordo');
+  const p=html.indexOf('Os volumes, a franquia e a forma de cobrança são');const g=html.indexOf(figures[0][0]);const heading=html.match(/<h2\b[^>]*>Onde termina a garantia e começa um novo acordo<\/h2>/);const h=heading?.index??-1;
   if(p<0||!(p<g&&g<h)||html.indexOf('Orçamento pós-lançamento organizado',g)<0)fail('figure placement changed');
-  if(!html.includes('<title>Custo de manutenção de software após o lançamento | Torno</title>')||!html.includes('<link rel="canonical" href="https://tornostudio.com'+maintenancePath+'">')||[...html.matchAll(/<h1\b/g)].length!==1||/"author"|datePublished|dateModified|<time\b/.test(html))fail('maintenance SEO/schema/byline/date mismatch');
+  if(!html.includes('<title>Custo de manutenção de software após o lançamento | Torno</title>')||!html.includes('<link rel="canonical" href="https://tornostudio.com'+maintenancePath+'">')||[...html.matchAll(/<h1\b/g)].length!==1||/datePublished|dateModified|<time\b/.test(html))fail('maintenance SEO/schema/byline/date mismatch');
 }

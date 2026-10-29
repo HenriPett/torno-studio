@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import PageAnswer from './seo/PageAnswer.astro';
 import About from './sections/About.astro';
 import Faq from './sections/Faq.astro';
 import FinalCta from './sections/FinalCta.astro';
@@ -37,6 +38,7 @@ const copy = getCopy(locale);
   <Header locale={locale} routeId="home" />
   <main id="conteudo" tabindex="-1">
     <Hero locale={locale} />
+    <PageAnswer locale={locale} routeId="home" standalone />
     <Problem locale={locale} />
     <About locale={locale} />
     <Ladder locale={locale} />

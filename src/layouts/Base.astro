@@ -5,6 +5,7 @@
  * canonical/hreflang e a página é sempre noindex.
  */
 
+import { personSchema } from '../lib/person';
 import { organizationSchema } from '../lib/organization';
 import { BLOG_ORIGIN } from '../config/blog.mjs';
 import '../styles/reset.css';
@@ -62,7 +63,9 @@ const structuredData = (routeId === 'home' || routeId === 'about' || routeId ===
   headline: pageTitle,
   description: pageDescription,
   inLanguage: htmlLang[locale],
-  author: { '@type': 'Person', name: 'Henrique Pett' },
+  author: personSchema(siteUrl, locale),
+  publisher: { '@id': new URL('/#organization', siteUrl).href },
+  image: [ogImage],
   datePublished: routeId === 'rlsGuide' ? '2026-10-13' : '2026-10-14',
 } : canonical && (routeId === 'recovery' || routeId === 'lovableProduction') ? {
   '@context': 'https://schema.org',
@@ -71,9 +74,26 @@ const structuredData = (routeId === 'home' || routeId === 'about' || routeId ===
   url: canonical,
   name: pageTitle,
   description: pageDescription,
-  provider: { '@type': 'Person', name: 'Henrique Pett' },
+  provider: { '@id': new URL('/#organization', siteUrl).href, '@type': 'Organization', name: site.organizationName },
+  availableChannel: { '@type': 'ServiceChannel', serviceUrl: new URL(pathFor('contact', locale), siteUrl).href },
 } : null);
 
+
+// Stable entity IDs connect every indexable page with the studio and author.
+const entityGraph = canonical ? {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ...(structuredData?.['@type'] === 'Organization' ? [] : [organizationSchema(siteUrl, locale === 'en' ? 'Custom web software, integrations, automation and AI engineering led by Henrique Pett.' : 'Estúdio de software web sob medida, integrações, automação e IA conduzido por Henrique Pett.', locale)]),
+    personSchema(siteUrl, locale),
+    { '@type': 'WebSite', '@id': new URL('/#website', siteUrl).href, url: new URL('/', siteUrl).href, name: site.organizationName, inLanguage: ['pt-BR','en'], publisher: { '@id': new URL('/#organization', siteUrl).href } },
+    {
+      '@type': routeId === 'author' ? 'ProfilePage' : routeId === 'about' ? 'AboutPage' : routeId === 'contact' ? 'ContactPage' : 'WebPage',
+      '@id': `${canonical}#webpage`, url: canonical, name: pageTitle, description: pageDescription,
+      inLanguage: htmlLang[locale], isPartOf: { '@id': new URL('/#website', siteUrl).href },
+      ...(routeId === 'author' ? { mainEntity: personSchema(siteUrl, locale) } : editorial?.schema['@id'] ? { mainEntity: { '@id': editorial.schema['@id'] } } : {}),
+    },
+  ],
+} : null;
 
 // unicode-range do subset latin, igual ao do fontsource.
 const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:normal;font-display:swap;font-weight:100 700;src:url(${fontUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
@@ -126,6 +146,7 @@ const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:nor
 
     {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />}
 
+    {entityGraph && <script is:inline type="application/ld+json" set:html={JSON.stringify(entityGraph).replace(/</g, '\\u003c')} />}
     <slot name="head" />
   </head>
   <body>

@@ -4,33 +4,72 @@ import Base from '../../layouts/Base.astro';
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import BookingCta from '../ui/BookingCta.astro';
+import { blogGeo } from '../../content/seo/blog-geo';
+import { personSchema } from '../../lib/person';
+import { pathFor } from '../../lib/i18n';
+import { site } from '../../config/site';
+import { publicBlogEntries } from '../../lib/blog';
 import { blogIndexPath, type BlogEntry } from '../../config/blog.mjs';
 interface Props { meta: BlogEntry; entry: CollectionEntry<'blog'> }
 const {meta,entry}=Astro.props;
-const {Content}=await render(entry);
+const {Content,headings}=await render(entry);
 const d=meta.data;
 const en=meta.locale==='en';
 const languageHref=meta.alternates.find(a=>a.hreflang!=='x-default' && a.hreflang!==meta.locale)?.href ?? null;
 const date=(value:string)=>new Intl.DateTimeFormat(meta.locale,{dateStyle:'long',timeZone:'UTC'}).format(new Date(value));
 const hasAuthor=typeof d.author_name==='string' && d.author_name.trim() && typeof d.author_basis==='string' && d.author_basis.trim();
+const authorIsHenrique=hasAuthor && d.author_name==='Henrique Pett';
+const geo=blogGeo[meta.id];
+const toc=headings.filter(heading=>heading.depth===2);
+const otherArticles=(await publicBlogEntries(meta.locale)).filter(({meta:other})=>other.id!==meta.id);
+const relatedArticles=otherArticles.map(article=>({...article,score:toc.reduce((score,heading)=>score + heading.text.toLowerCase().split(/\s+/).filter(word=>word.length>5 && article.meta.data.h1.toLowerCase().includes(word)).length,0)})).sort((a,b)=>b.score-a.score).slice(0,3);
 const seoTitle=d.seo_title??`${d.h1} | {brand}`;
 const seoDescription=d.seo_description??d.summary;
-const schema={ '@context':'https://schema.org','@type':'BlogPosting',url:d.canonical_url,mainEntityOfPage:d.canonical_url,headline:d.h1,description:seoDescription,inLanguage:meta.locale,...(hasAuthor?{author:{'@type':'Person',name:d.author_name}}:{}),...(d.first_published_at?{datePublished:d.first_published_at}:{}),...(d.last_substantive_update_at?{dateModified:d.last_substantive_update_at}:{}) };
+const origin=new URL(d.canonical_url);
+const articleOgPath=`/og/blog/${meta.locale}-${meta.slug}.png`;
+const schema={
+  '@context':'https://schema.org', '@type':'BlogPosting', '@id':`${d.canonical_url}#article`,
+  url:d.canonical_url, mainEntityOfPage:{'@id':`${d.canonical_url}#webpage`}, headline:d.h1,
+  description:seoDescription, inLanguage:meta.locale,
+  image:[new URL(articleOgPath, origin).href],
+  publisher:{'@type':'Organization','@id':new URL('/#organization',origin).href,name:site.organizationName,url:new URL('/',origin).href},
+  isPartOf:{'@type':'Blog',url:new URL(blogIndexPath(meta.locale),origin).href,name:en?'Torno Studio blog':'Blog Torno Studio'},
+  ...(hasAuthor?{author:authorIsHenrique?personSchema(origin,meta.locale):{'@type':'Person',name:d.author_name}}:{}),
+  ...(d.first_published_at?{datePublished:d.first_published_at}:{}),
+  ...(d.last_substantive_update_at?{dateModified:d.last_substantive_update_at}:{}),
+};
+const breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[
+  {'@type':'ListItem',position:1,name:en?'Home':'Início',item:new URL(en?'/en/':'/',origin).href},
+  {'@type':'ListItem',position:2,name:'Blog',item:new URL(blogIndexPath(meta.locale),origin).href},
+  {'@type':'ListItem',position:3,name:d.h1,item:d.canonical_url},
+]};
 ---
-<Base locale={meta.locale} title={seoTitle} description={seoDescription} editorial={{canonical:d.canonical_url,alternates:meta.alternates,schema,article:true}}>
+<Base locale={meta.locale} title={seoTitle} description={seoDescription} ogImagePath={articleOgPath} ogImageAlt={d.h1} editorial={{canonical:d.canonical_url,alternates:meta.alternates,schema,article:true}}>
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbs).replace(/</g, '\\u003c')} />
+  {hasAuthor && <meta slot="head" name="author" content={d.author_name} />}
+  {authorIsHenrique && <meta slot="head" property="article:author" content={new URL(pathFor('author',meta.locale),origin).href} />}
   <Header locale={meta.locale} routeId="blog" languageHref={languageHref} />
   <main id="conteudo" tabindex="-1" class="container blog-article">
     <nav class="breadcrumb" aria-label={en?'Breadcrumb':'Navegação estrutural'}><ol>
       <li><a class="link link--target" href={en?'/en/':'/'}>{en?'Home':'Início'}</a></li>
       <li><span aria-hidden="true">/</span> <a class="link link--target" href={blogIndexPath(meta.locale)}>Blog</a></li>
+      <li><span aria-hidden="true">/</span> <span aria-current="page">{d.h1}</span></li>
     </ol></nav>
     <article>
       <header class="article-heading"><h1>{d.h1}</h1><p class="lead">{d.summary}</p>
-        {d.author_name && d.author_basis && <p class="meta">{d.author_name}</p>}
+        {hasAuthor && <p class="meta byline">{en?'Written by':'Escrito por'} {authorIsHenrique ? <a class="link" rel="author" href={pathFor('author',meta.locale)}>Henrique Pett</a> : d.author_name}{authorIsHenrique && <span> · Product Engineer · {site.organizationName}</span>}</p>}
         {d.first_published_at && <p class="meta">{en?'Published on':'Publicado em'} <time datetime={d.first_published_at}>{date(d.first_published_at)}</time></p>}
         {d.last_substantive_update_at && <p class="meta">{en?'Updated on':'Atualizado em'} <time datetime={d.last_substantive_update_at}>{date(d.last_substantive_update_at)}</time></p>}
       </header>
+      {geo && <section class="article-answer prose" aria-labelledby="article-answer-title">
+        <h2 id="article-answer-title">{en?'Direct answer':'Resposta direta'}</h2>
+        <p>{geo.answer}</p>
+        <ul>{geo.takeaways.map(item=><li>{item}</li>)}</ul>
+      </section>}
+      {toc.length>1 && <nav class="article-toc" aria-label={en?'In this article':'Neste artigo'}><p><strong>{en?'In this article':'Neste artigo'}</strong></p><ul>{toc.map(heading=><li><a class="link" href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>}
       <div class="prose"><Content /></div>
+      {authorIsHenrique && <section class="author-note prose" aria-labelledby="article-author-title"><h2 id="article-author-title">{en?'About the author':'Sobre o autor'}</h2><p><a class="link" rel="author" href={pathFor('author',meta.locale)}>Henrique Pett</a> {en?'is the Product Engineer leading Torno Studio. He builds custom web software, integrations and AI applications, from discovery to production.':'é o Product Engineer à frente da Torno Studio. Atua em software web sob medida, integrações e aplicações com IA, da descoberta à produção.'}</p><a class="link link--target" href={pathFor('author',meta.locale)}>{en?'Experience and more articles by Henrique':'Trajetória e mais artigos de Henrique'} →</a></section>}
+      {relatedArticles.length>0 && <aside class="related prose" aria-labelledby="article-related-title"><h2 id="article-related-title">{en?'Related reading':'Continue a leitura'}</h2><ul>{relatedArticles.map(({meta:other})=><li><a class="link link--target" href={other.path}>{other.data.h1}</a></li>)}</ul></aside>}
       {meta.id==='torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias' && <style is:inline>
         #conteudo .prose .blog-figure--rebuild { max-inline-size:30rem; inline-size:100%; margin-inline:auto; padding:0; }
         #conteudo .prose .blog-figure--rebuild img { display:block; inline-size:100%; max-inline-size:100%; block-size:auto; margin-inline:0; }
@@ -69,6 +108,12 @@ const schema={ '@context':'https://schema.org','@type':'BlogPosting',url:d.canon
 .blog-article { max-inline-size:54rem; padding-block:var(--space-6) var(--space-8); }
 .breadcrumb ol { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-3); list-style:none; padding:0; }
 .breadcrumb li { display:flex; align-items:center; gap:var(--space-3); }
+.article-answer,.article-toc,.author-note,.related { margin-block:var(--space-6); }
+.article-answer { padding:var(--space-5); border-inline-start:3px solid var(--color-accent-text); background:var(--color-accent-subtle); border-radius:var(--radius-md); }
+.article-answer h2 { margin-block-start:0; }
+.article-toc ul { padding-inline-start:var(--space-5); margin-block-start:var(--space-3); }
+.article-toc li + li { margin-block-start:var(--space-2); }
+.byline a { color:var(--color-accent-text); text-decoration:underline; }
 .article-heading { margin-block:var(--space-5) var(--space-7); }
 h1 { font-size:var(--text-3xl); line-height:var(--leading-tight); max-inline-size:24ch; }
 .article-heading p { margin-block-start:var(--space-4); max-inline-size:var(--measure); }

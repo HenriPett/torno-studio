@@ -59,7 +59,7 @@ checks.push(['manifesto inclui exatamente os trinta e dois artigos autorizados e
   }
 }]);
 
-checks.push(['sitemap contém 54 URLs únicas: baseline com páginas institucionais, dois índices e trinta e dois artigos PT', async () => {
+checks.push(['sitemap contém 56 URLs únicas: baseline com páginas institucionais, dois índices e trinta e dois artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();
@@ -90,7 +90,7 @@ for (const [id, path, contentHash, assetNames] of expected) {
     assert(!html.includes('[Marca]') && !html.includes('href="#agendar"'), 'preview local sem marca/CTA configurados');
     assert(schemaTypes(schemas(doc)).includes('BlogPosting'), 'BlogPosting ausente');
     const posting = schemas(doc).find((item) => item['@type'] === 'BlogPosting');
-    assert(posting && !Object.hasOwn(posting, 'author') && !Object.hasOwn(posting, 'datePublished') && !Object.hasOwn(posting, 'dateModified'), 'autor ou data não comprovados no schema');
+    assert(posting && posting.author?.name === 'Henrique Pett' && posting.author?.url === origin + '/autores/henrique-pett/' && !Object.hasOwn(posting, 'datePublished') && !Object.hasOwn(posting, 'dateModified'), 'autoria confirmada ausente ou data não comprovada no schema');
     assert(!/Publicado em|Atualizado em/.test(text(doc)), 'byline/data não comprovada visível');
     assert(tags(doc, 'figure').length === assetNames.length, `esperadas ${assetNames.length} figuras`);
     const imagePaths = tags(doc, 'img').map((node) => attr(node, 'src'));

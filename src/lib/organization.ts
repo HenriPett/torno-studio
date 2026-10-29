@@ -11,7 +11,7 @@ export function organizationSchema(origin: URL, description: string, locale: Loc
     url,
     description,
     sameAs: [site.organizationLinkedinUrl],
-    founder: { '@type': 'Person', name: 'Henrique Pett', sameAs: [site.linkedinUrl, site.githubUrl] },
+    founder: { '@id': new URL('/autores/henrique-pett/#person', origin).href, '@type': 'Person', name: 'Henrique Pett', sameAs: [site.linkedinUrl, site.githubUrl] },
     ...(site.contactEmail ? { email: site.contactEmail, contactPoint: {
       '@type': 'ContactPoint', email: site.contactEmail, contactType: 'sales',
       url: new URL(locale === 'en' ? '/en/contact/' : '/contact/', origin).href,

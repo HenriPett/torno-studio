@@ -1,0 +1,44 @@
+---
+import { pageAnswers, type PageAnswerRoute } from '../../content/seo/page-answers';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  routeId: PageAnswerRoute;
+  /** Use the page container when placed between full-width sections. */
+  standalone?: boolean;
+}
+
+const { locale, routeId, standalone = false } = Astro.props;
+const { question, answer } = pageAnswers[locale][routeId];
+const headingId = `page-answer-${routeId}`;
+---
+
+<section class:list={['page-answer', standalone && 'container page-answer--standalone']} aria-labelledby={headingId}>
+  <h2 id={headingId} class="h3">{question}</h2>
+  <p class="body">{answer}</p>
+</section>
+
+<style>
+  .page-answer {
+    margin-block-start: var(--space-5);
+  }
+
+  .page-answer--standalone {
+    margin-block-start: 0;
+    padding-block: var(--space-5);
+  }
+
+  .page-answer h2 {
+    max-inline-size: var(--measure);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    text-wrap: pretty;
+  }
+
+  .page-answer p {
+    margin-block-start: var(--space-3);
+    color: var(--color-text-muted);
+  }
+</style>

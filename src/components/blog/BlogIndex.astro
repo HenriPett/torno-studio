@@ -4,6 +4,8 @@ import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import BookingCta from '../ui/BookingCta.astro';
 import { publicBlogEntries } from '../../lib/blog';
+import { site } from '../../config/site';
+import { pathFor } from '../../lib/i18n';
 import type { Locale } from '../../lib/i18n';
 interface Props { locale: Locale }
 const {locale}=Astro.props;
@@ -11,11 +13,13 @@ const en=locale==='en';
 const articles=await publicBlogEntries(locale);
 const description=en?'Notes on custom software, product decisions, and getting systems into production.':'Textos sobre software sob medida, decisões de produto e o trabalho de colocar sistemas em produção.';
 ---
-<Base locale={locale} routeId="blog" title="Blog | {brand}" description={description}>
+<Base locale={locale} routeId="blog" title={en?'Custom software and integrations blog | {brand}':'Blog de software sob medida e integrações | {brand}'} description={description}>
+  {articles.length>0 && <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'ItemList',url:new URL(pathFor('blog',locale),'https://tornostudio.com').href,numberOfItems:articles.length,itemListElement:articles.map(({meta},index)=>({'@type':'ListItem',position:index+1,url:meta.data.canonical_url,name:meta.data.h1}))}).replace(/</g, '\\u003c')} />}
   <Header locale={locale} routeId="blog" />
   <main id="conteudo" tabindex="-1" class="container blog-index">
-    <h1>Blog</h1>
+    <h1>{en?'Blog: custom software and integrations':'Blog: software sob medida e integrações'}</h1>
     <p class="lead introduction">{description}</p>
+    <p class="introduction">{en?'Articles by':'Artigos escritos por'} <a class="link link--target" rel="author" href={pathFor('author',locale)}>Henrique Pett</a>, Product Engineer · {site.organizationName}. {en?'Practical guidance for defining scope, assessing integrations and checking a software delivery.':'Orientações práticas para definir escopo, avaliar integrações e conferir uma entrega de software.'}</p>
     {articles.length ? <ul class="articles">{articles.map(({meta})=><li><h2><a class="link link--target" href={meta.path}>{meta.data.h1}</a></h2><p>{meta.data.summary}</p></li>)}</ul> : <p class="empty">{en?'No articles are available in English yet.':'Ainda não há artigos publicados em português.'}</p>}
     <section class="blog-cta" aria-labelledby="blog-cta-title">
       <h2 id="blog-cta-title">{en?'Have a project in mind?':'Tem um projeto em mente?'}</h2>

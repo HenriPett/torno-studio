@@ -346,6 +346,9 @@ async function markdownFiles(dir) {
 }
 export async function prepareBlogManifest(root, buildAt) {
   const source=path.join(root,'src/content/blog');
+  // Current author attestation is separate from immutable historical release receipts.
+  const authorship=JSON.parse(await readFile(path.join(root,'src/config/blog-authorship.json'),'utf8'));
+  const authoredIds=new Set(authorship.contentIds);
   let approvals={entries:[]};
   try { approvals=JSON.parse(await readFile(path.join(root,'src/config/blog-release-approval.json'),'utf8')); }
   catch(e) {
@@ -416,6 +419,9 @@ export async function prepareBlogManifest(root, buildAt) {
     if(ids.has(d.content_id))fail(`duplicate content_id: ${d.content_id}`);ids.add(d.content_id);
     const relative=path.relative(root,file);sourceHashes[relative]=sha256(raw);
     if(!eligible)continue;
+    if(!privateFixture && authoredIds.has(effective.content_id)) {
+      effective={...effective,author_name:authorship.confirmedBy,author_basis:authorship.basis};
+    }
     const key=`${d.intent_id}:${d.locale}`;
     if(paths.has(d.proposed_path)||intents.has(key))fail('duplicate path or intention');
     paths.add(d.proposed_path);intents.add(key);
@@ -464,7 +470,7 @@ export async function validateBlogOutput(root, manifest) {
         const [name,alt,caption]=expected[i];const f=figures[i];
         if(!f.includes('alt="'+alt+'"')||!new RegExp('src="/_astro/'+name+'\\.[^"/]+\\.svg"').test(f)||!f.includes('<figcaption')||!f.includes(caption))fail('ERP figure/alt/caption/SVG mismatch: '+name);
       }
-      if(!html.includes('<title>Integração com ERP: briefing para orçamento | Torno</title>')||!html.includes('content="Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências."')||!html.includes('<link rel="canonical" href="https://tornostudio.com/blog/integracao-erp-briefing-orcamento/">')||[...html.matchAll(/<h1\b/g)].length!==1||/"author"|datePublished|dateModified|<time\b/.test(html))fail('ERP SEO/schema/byline/known-date mismatch');
+      if(!html.includes('<title>Integração com ERP: briefing para orçamento | Torno</title>')||!html.includes('content="Veja quais dados, documentos, acessos e responsáveis reunir antes de pedir orçamento de integração com ERP. Um roteiro para explicitar dependências."')||!html.includes('<link rel="canonical" href="https://tornostudio.com/blog/integracao-erp-briefing-orcamento/">')||[...html.matchAll(/<h1\b/g)].length!==1||/datePublished|dateModified|<time\b/.test(html))fail('ERP SEO/schema/byline/known-date mismatch');
     }
     if(e.id==='torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias') {
       const expected=[
@@ -477,7 +483,7 @@ export async function validateBlogOutput(root, manifest) {
         const [name,alt,caption]=expected[i];const f=figures[i];
         if(!f.includes('alt="'+alt+'"')||!new RegExp('src="/_astro/'+name+'\\.[^"/]+\\.svg"').test(f)||!f.includes('<figcaption')||!f.includes(caption))fail('rebuild-evidence figure/alt/caption/SVG mismatch: '+name);
       }
-      if(!html.includes('<title>Refazer um sistema? 7 evidências para decidir | Torno</title>')||!html.includes('content="Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências."')||!html.includes('<link rel="canonical" href="https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/">')||[...html.matchAll(/<h1\b/g)].length!==1||/"author"|datePublished|dateModified|<time\b/.test(html))fail('rebuild-evidence SEO/schema/byline/date mismatch');
+      if(!html.includes('<title>Refazer um sistema? 7 evidências para decidir | Torno</title>')||!html.includes('content="Antes de refazer um sistema, confira acessos, fluxo crítico, dependências e recuperação. Um checklist para comparar propostas com evidências."')||!html.includes('<link rel="canonical" href="https://tornostudio.com/blog/antes-de-refazer-sistema-evidencias/">')||[...html.matchAll(/<h1\b/g)].length!==1||/datePublished|dateModified|<time\b/.test(html))fail('rebuild-evidence SEO/schema/byline/date mismatch');
     }
     if(e.id===maintenanceId)await validateMaintenanceHtml(root,html);
     const urls=[...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)].map(m=>m[1]);
@@ -652,13 +658,20 @@ export function blogCriteriaFigure() {
 }
 
 /** Rehype: preserve tables inside keyboard-accessible scroll regions. */
-export function blogScrollableBlocks() {
+export function blogScrollableBlocks({labelTaskLists=true}={}) {
   return (tree, file) => {
     const filepath=[file.path,...(file.history??[])].filter(Boolean).map(String).join(' ').replaceAll('\\','/');
     const frontmatter=file.data?.astro?.frontmatter??{};
     const blogFile=filepath.includes('/content/blog/')||String(frontmatter.content_id??'').startsWith('torno-artigo-pt-');
     const en=frontmatter.locale==='en';
+    const nodeText=node=>node.type==='text'?node.value:(node.children??[]).map(nodeText).join('');
+    const labelCheckboxes=(node,label)=>{
+      if(node.type==='element' && node.tagName==='input' && node.properties?.type==='checkbox') node.properties.ariaLabel=label;
+      for(const child of node.children??[])labelCheckboxes(child,label);
+    };
     const visit=node=>{
+      // Markdown task lists keep disabled state and gain the visible item as their accessible name.
+      if(labelTaskLists && blogFile && node.type==='element' && node.tagName==='li') labelCheckboxes(node,nodeText(node).trim());
       if(blogFile && node.type==='element' && node.tagName==='pre'){node.properties??={};node.properties.tabIndex=0;}
       for(let i=0;i<(node.children??[]).length;i++){
         const child=node.children[i];

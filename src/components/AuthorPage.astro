@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { site } from '../config/site';
+import { publicBlogEntries } from '../lib/blog';
+import { pathFor, type Locale } from '../lib/i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const en = locale === 'en';
+const articles = await publicBlogEntries(locale);
+---
+<Base locale={locale} routeId="author" title={en ? 'Henrique Pett | Product Engineer and author at {brand}' : 'Henrique Pett | Product Engineer e autor na {brand}'} description={en ? 'Meet Henrique Pett, the Product Engineer leading Torno Studio and writing about custom software, integrations and delivery acceptance.' : 'Conheça Henrique Pett, Product Engineer à frente da Torno Studio e autor de artigos sobre software sob medida, integrações e critérios de aceite.'}>
+  <Header locale={locale} routeId="author" />
+  <main id="conteudo" class="section" tabindex="-1">
+    <article class="container author">
+      <h1>Henrique Pett</h1>
+      <p class="lead">{en ? 'Product Engineer · Torno Studio · Blog author' : 'Product Engineer · Torno Studio · Autor do blog'}</p>
+      <section><h2>{en ? 'Who writes these articles?' : 'Quem escreve os artigos?'}</h2>
+        <p>{en ? 'I’m Henrique Pett, the engineer leading Torno Studio. I work on custom web products, internal tools, system integrations and AI applications, from understanding the problem to production. I write the blog to help buyers turn business needs into a defined scope and verifiable acceptance criteria.' : 'Sou Henrique Pett, engenheiro à frente da Torno Studio. Trabalho com produtos web sob medida, ferramentas internas, integrações entre sistemas e aplicações com IA, do entendimento do problema à produção. Escrevo o blog para ajudar quem contrata software a transformar necessidades do negócio em escopo e critérios de aceite verificáveis.'}</p>
+      </section>
+      <section><h2>{en ? 'Experience behind the writing' : 'Experiência que informa os textos'}</h2>
+        <p>{en ? 'My background includes software and AI for container terminal operations, credit analysis and Ascende, my own web product. The case studies document my role and each project’s context. Examples in the blog are illustrative when identified as such.' : 'Minha trajetória inclui software e IA para operação de terminais de contêineres, análise de crédito e o Ascende, produto web próprio. Os cases documentam meu papel e o contexto de cada trabalho. Os exemplos do blog são didáticos quando identificados como tal.'}</p>
+        <ul>{(['caseLoopt','caseBomCapital','caseAscende'] as const).map((route, i) => <li><a class="link link--target" href={pathFor(route, locale)}>{['Loopt','Bom Capital','Ascende'][i]}</a></li>)}</ul>
+      </section>
+      <section><h2>{en ? 'How I write' : 'Como escrevo'}</h2>
+        <p>{en ? 'The articles distinguish proposed checks from demonstrated results. Where technical behavior depends on a provider, they link to primary documentation and state the limits of the reference. A checklist helps prepare a decision; applying it still requires evaluating the actual system, dependencies and agreed scope.' : 'Os artigos distinguem verificações propostas de resultados demonstrados. Quando o comportamento técnico depende de um provedor, trazem referências à documentação primária e os limites da consulta. Um roteiro ajuda a preparar a decisão; aplicá-lo exige avaliar o sistema real, suas dependências e o escopo combinado.'}</p>
+      </section>
+      <section><h2>{en ? 'Articles by Henrique Pett' : 'Artigos de Henrique Pett'}</h2>
+        {articles.length ? <ul>{articles.map(({meta}) => <li><a class="link link--target" href={meta.path}>{meta.data.h1}</a></li>)}</ul> : <p>{en ? 'Articles are currently available in Portuguese.' : 'Os artigos estão disponíveis no blog.'} <a class="link link--target" href="/blog/">Blog em português</a></p>}
+      </section>
+      <section><h2>{en ? 'Contact and professional profiles' : 'Contato e perfis profissionais'}</h2>
+        <p>{en ? 'I work remotely from Jaraguá do Sul, Santa Catarina, Brazil. For questions about an article or to discuss a project, use the official contact page.' : 'Trabalho remotamente a partir de Jaraguá do Sul, Santa Catarina, Brasil. Para conversar sobre um artigo ou avaliar um projeto, use a página oficial de contato.'}</p>
+        <ul><li><a class="link link--target" href={pathFor('contact',locale)}>{en ? 'Contact Henrique' : 'Falar com Henrique'}</a></li><li><a class="link link--target" rel="me" href={site.linkedinUrl}>LinkedIn</a></li><li><a class="link link--target" rel="me" href={site.githubUrl}>GitHub</a></li></ul>
+      </section>
+    </article>
+  </main>
+  <Footer locale={locale} routeId="author" />
+</Base>
+<style>
+  .author { max-inline-size:calc(var(--measure) + 2 * var(--container-pad)); }
+  h1 { font-size:var(--text-3xl); line-height:var(--leading-tight); }
+  h2 { font-size:var(--text-xl); }
+  section { margin-block-start:var(--space-6); }
+  p, ul { margin-block-start:var(--space-4); }
+  ul { padding-inline-start:var(--space-5); }
+  li + li { margin-block-start:var(--space-3); }
+</style>

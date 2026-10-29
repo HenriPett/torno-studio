@@ -1,0 +1,898 @@
+[
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/acessibilidade-software-sob-medida-aceite/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/ambiente-homologacao-conferir-antes-testar-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/anexos-sistema-envio-consulta-arquivos/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/arquivar-excluir-registros-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/busca-filtros-sistema-resultados/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/cancelamento-solicitacao-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/datas-fusos-sistema-prazos-relatorios/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/edicao-simultanea-sistema-conflitos/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/emails-sistema-envio-entrega-falha/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/erro-intermitente-software-evidencias/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/exportacao-dados-sistema-aceite/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/fluxo-aprovacao-sistema-regras/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/importacao-planilhas-sistema-tratar-erros/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/integracao-evento-duplicado-regra-negocio/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/integracao-eventos-fora-ordem/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/limites-api-integracao-cota/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/monitoramento-software-alertas-fluxo-critico/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/mvp-pos-lancamento-priorizar-mudancas/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/permissoes-acesso-software-regras-negocio/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/plano-rollback-atualizacao-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/prova-restauracao-backup-software/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/recuperacao-senha-sistema-aceite/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/teste-carga-evidencias-liberar-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/quando-automatizar-processos-planilhas/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/antes-de-refazer-sistema-evidencias/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/criterios-aceite-mvp/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/integracao-erp-briefing-orcamento/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/custo-manutencao-software-apos-lancamento/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/migracao-dados-validacao-troca-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/trilha-auditoria-sistema-requisitos-negocio/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/troca-fornecedor-software-passagem-tecnica/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/valores-monetarios-arredondamento-sistema/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/autores/henrique-pett/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/authors/henrique-pett/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/about/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/contact/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/about/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/contact/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/cases/loopt/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/cases/bom-capital/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/cases/ascende/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/cases/loopt/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/cases/bom-capital/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/cases/ascende/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/recuperacao-de-projeto/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/software-project-rescue/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/lovable-em-producao/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/lovable-to-production/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/guias/rls-multiempresa/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/guides/multi-tenant-rls/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/privacidade/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/privacy/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 360,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/blog/",
+    "requestedWidth": 360
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/acessibilidade-software-sob-medida-aceite/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/ambiente-homologacao-conferir-antes-testar-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/anexos-sistema-envio-consulta-arquivos/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/arquivar-excluir-registros-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/busca-filtros-sistema-resultados/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/cancelamento-solicitacao-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/datas-fusos-sistema-prazos-relatorios/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/edicao-simultanea-sistema-conflitos/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/emails-sistema-envio-entrega-falha/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/erro-intermitente-software-evidencias/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/exportacao-dados-sistema-aceite/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/fluxo-aprovacao-sistema-regras/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/importacao-planilhas-sistema-tratar-erros/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/integracao-evento-duplicado-regra-negocio/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/integracao-eventos-fora-ordem/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/limites-api-integracao-cota/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/monitoramento-software-alertas-fluxo-critico/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/mvp-pos-lancamento-priorizar-mudancas/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/permissoes-acesso-software-regras-negocio/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/plano-rollback-atualizacao-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/prova-restauracao-backup-software/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/recuperacao-senha-sistema-aceite/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/teste-carga-evidencias-liberar-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/quando-automatizar-processos-planilhas/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/antes-de-refazer-sistema-evidencias/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/criterios-aceite-mvp/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/integracao-erp-briefing-orcamento/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/custo-manutencao-software-apos-lancamento/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/migracao-dados-validacao-troca-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/trilha-auditoria-sistema-requisitos-negocio/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/troca-fornecedor-software-passagem-tecnica/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/valores-monetarios-arredondamento-sistema/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/autores/henrique-pett/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/authors/henrique-pett/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/about/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/contact/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/about/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/contact/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/cases/loopt/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/cases/bom-capital/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/cases/ascende/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/cases/loopt/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/cases/bom-capital/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/cases/ascende/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/recuperacao-de-projeto/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/software-project-rescue/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/lovable-em-producao/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/lovable-to-production/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/guias/rls-multiempresa/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/guides/multi-tenant-rls/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/privacidade/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/privacy/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/blog/",
+    "requestedWidth": 1280
+  },
+  {
+    "width": 1280,
+    "overflow": 0,
+    "h1": 1,
+    "violations": [],
+    "path": "/en/blog/",
+    "requestedWidth": 1280
+  }
+]

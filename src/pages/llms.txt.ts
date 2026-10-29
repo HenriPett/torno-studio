@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
+import { publicBlogEntries } from '../lib/blog';
 import { site } from '../config/site';
 
-export const GET: APIRoute = ({ site: origin }) => {
+export const GET: APIRoute = async ({ site: origin }) => {
+  const articles=await publicBlogEntries('pt-BR');
   const url = (path: string) => new URL(path, origin).href;
   // llmstxt.org: H1, blockquote, introductory guidance, then H2 file lists.
   const body = `# ${site.organizationName}
@@ -22,6 +24,12 @@ A operação é remota. A cidade do fundador é Jaraguá do Sul, SC, Brasil; ist
 - [Contato](${url('/contact/index.md')}): canais oficiais e informações para uma primeira conversa.
 - [Recuperação de projeto](${url('/recuperacao-de-projeto/index.md')}): avaliação de software existente e retomada por escopo.
 - [Lovable em produção](${url('/lovable-em-producao/index.md')}): revisão de um protótipo antes de receber usuários reais.
+
+## Autor e artigos
+
+- [Henrique Pett — autor e Product Engineer](${url('/autores/henrique-pett/index.md')}): trajetória, atuação, perfis profissionais e artigos assinados.
+- [Henrique Pett — author profile in English](${url('/en/authors/henrique-pett/index.md')}): author identity and professional background.
+${articles.map(({meta})=>`- [${String(meta.data.h1).replace(/[\[\]]/g,'')}](${url(meta.path+'index.md')}): ${meta.data.summary}`).join('\n')}
 
 ## Optional
 

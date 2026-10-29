@@ -12,4 +12,4 @@ export declare function prepareBlogManifest(root: string, buildAt: string): Prom
 export declare function validateBlogOutput(root: string, manifest: BlogManifest): Promise<void>;
 
 export declare function blogCriteriaFigure(): (tree: any, file: any) => void;
-export declare function blogScrollableBlocks(): (tree: any, file: any) => void;
+export declare function blogScrollableBlocks(options?: { labelTaskLists?: boolean }): (tree: any, file: any) => void;
