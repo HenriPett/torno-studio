@@ -1,0 +1,1226 @@
+{
+  "origin": "https://tornostudio.com",
+  "checkedAt": "2026-10-29T21:22:28.626Z",
+  "checks": [
+    {
+      "name": "home negotiation text/markdown",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/html",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation */*",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation null",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation TEXT/MARKDOWN",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;q=0,text/*;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;Q=0,*/*;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;q=0.1,text/html;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;q=1,text/html;q=0.1",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown;profile=\"x,y\";q=0,text/html;q=1",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/html",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/markdown",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "home negotiation text/html",
+      "status": 200,
+      "type": "text/html; charset=UTF-8",
+      "vary": "Accept-Encoding, Accept"
+    },
+    {
+      "name": "/404.html text/html",
+      "status": 200,
+      "chars": 13892
+    },
+    {
+      "name": "/404.html text/markdown",
+      "status": 200,
+      "chars": 302
+    },
+    {
+      "name": "/404.html direct Markdown",
+      "status": 200,
+      "chars": 302
+    },
+    {
+      "name": "/ text/html",
+      "status": 200,
+      "chars": 72750
+    },
+    {
+      "name": "/ text/markdown",
+      "status": 200,
+      "chars": 14906
+    },
+    {
+      "name": "/ direct Markdown",
+      "status": 200,
+      "chars": 14906
+    },
+    {
+      "name": "/about/ text/html",
+      "status": 200,
+      "chars": 22659
+    },
+    {
+      "name": "/about/ text/markdown",
+      "status": 200,
+      "chars": 2196
+    },
+    {
+      "name": "/about/ direct Markdown",
+      "status": 200,
+      "chars": 2196
+    },
+    {
+      "name": "/blog/ text/html",
+      "status": 200,
+      "chars": 39955
+    },
+    {
+      "name": "/blog/ text/markdown",
+      "status": 200,
+      "chars": 9575
+    },
+    {
+      "name": "/blog/ direct Markdown",
+      "status": 200,
+      "chars": 9575
+    },
+    {
+      "name": "/contact/ text/html",
+      "status": 200,
+      "chars": 22965
+    },
+    {
+      "name": "/contact/ text/markdown",
+      "status": 200,
+      "chars": 2296
+    },
+    {
+      "name": "/contact/ direct Markdown",
+      "status": 200,
+      "chars": 2296
+    },
+    {
+      "name": "/diagnostico/ text/html",
+      "status": 200,
+      "chars": 48785
+    },
+    {
+      "name": "/diagnostico/ text/markdown",
+      "status": 200,
+      "chars": 7444
+    },
+    {
+      "name": "/diagnostico/ direct Markdown",
+      "status": 200,
+      "chars": 7444
+    },
+    {
+      "name": "/en/ text/html",
+      "status": 200,
+      "chars": 72408
+    },
+    {
+      "name": "/en/ text/markdown",
+      "status": 200,
+      "chars": 14466
+    },
+    {
+      "name": "/en/ direct Markdown",
+      "status": 200,
+      "chars": 14466
+    },
+    {
+      "name": "/lovable-em-producao/ text/html",
+      "status": 200,
+      "chars": 32830
+    },
+    {
+      "name": "/lovable-em-producao/ text/markdown",
+      "status": 200,
+      "chars": 6276
+    },
+    {
+      "name": "/lovable-em-producao/ direct Markdown",
+      "status": 200,
+      "chars": 6276
+    },
+    {
+      "name": "/privacidade/ text/html",
+      "status": 200,
+      "chars": 35440
+    },
+    {
+      "name": "/privacidade/ text/markdown",
+      "status": 200,
+      "chars": 9569
+    },
+    {
+      "name": "/privacidade/ direct Markdown",
+      "status": 200,
+      "chars": 9569
+    },
+    {
+      "name": "/recuperacao-de-projeto/ text/html",
+      "status": 200,
+      "chars": 31757
+    },
+    {
+      "name": "/recuperacao-de-projeto/ text/markdown",
+      "status": 200,
+      "chars": 5608
+    },
+    {
+      "name": "/recuperacao-de-projeto/ direct Markdown",
+      "status": 200,
+      "chars": 5608
+    },
+    {
+      "name": "/autores/henrique-pett/ text/html",
+      "status": 200,
+      "chars": 29068
+    },
+    {
+      "name": "/autores/henrique-pett/ text/markdown",
+      "status": 200,
+      "chars": 6225
+    },
+    {
+      "name": "/autores/henrique-pett/ direct Markdown",
+      "status": 200,
+      "chars": 6225
+    },
+    {
+      "name": "/blog/acessibilidade-software-sob-medida-aceite/ text/html",
+      "status": 200,
+      "chars": 38387
+    },
+    {
+      "name": "/blog/acessibilidade-software-sob-medida-aceite/ text/markdown",
+      "status": 200,
+      "chars": 14977
+    },
+    {
+      "name": "/blog/acessibilidade-software-sob-medida-aceite/ direct Markdown",
+      "status": 200,
+      "chars": 14977
+    },
+    {
+      "name": "/blog/ambiente-homologacao-conferir-antes-testar-sistema/ text/html",
+      "status": 200,
+      "chars": 38241
+    },
+    {
+      "name": "/blog/ambiente-homologacao-conferir-antes-testar-sistema/ text/markdown",
+      "status": 200,
+      "chars": 15205
+    },
+    {
+      "name": "/blog/ambiente-homologacao-conferir-antes-testar-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 15205
+    },
+    {
+      "name": "/blog/anexos-sistema-envio-consulta-arquivos/ text/html",
+      "status": 200,
+      "chars": 37430
+    },
+    {
+      "name": "/blog/anexos-sistema-envio-consulta-arquivos/ text/markdown",
+      "status": 200,
+      "chars": 13998
+    },
+    {
+      "name": "/blog/anexos-sistema-envio-consulta-arquivos/ direct Markdown",
+      "status": 200,
+      "chars": 13998
+    },
+    {
+      "name": "/blog/antes-de-refazer-sistema-evidencias/ text/html",
+      "status": 200,
+      "chars": 37206
+    },
+    {
+      "name": "/blog/antes-de-refazer-sistema-evidencias/ text/markdown",
+      "status": 200,
+      "chars": 11929
+    },
+    {
+      "name": "/blog/antes-de-refazer-sistema-evidencias/ direct Markdown",
+      "status": 200,
+      "chars": 11929
+    },
+    {
+      "name": "/blog/arquivar-excluir-registros-sistema/ text/html",
+      "status": 200,
+      "chars": 37741
+    },
+    {
+      "name": "/blog/arquivar-excluir-registros-sistema/ text/markdown",
+      "status": 200,
+      "chars": 14272
+    },
+    {
+      "name": "/blog/arquivar-excluir-registros-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 14272
+    },
+    {
+      "name": "/blog/busca-filtros-sistema-resultados/ text/html",
+      "status": 200,
+      "chars": 38012
+    },
+    {
+      "name": "/blog/busca-filtros-sistema-resultados/ text/markdown",
+      "status": 200,
+      "chars": 14423
+    },
+    {
+      "name": "/blog/busca-filtros-sistema-resultados/ direct Markdown",
+      "status": 200,
+      "chars": 14423
+    },
+    {
+      "name": "/blog/cancelamento-solicitacao-sistema/ text/html",
+      "status": 200,
+      "chars": 38522
+    },
+    {
+      "name": "/blog/cancelamento-solicitacao-sistema/ text/markdown",
+      "status": 200,
+      "chars": 15022
+    },
+    {
+      "name": "/blog/cancelamento-solicitacao-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 15022
+    },
+    {
+      "name": "/blog/criterios-aceite-mvp/ text/html",
+      "status": 200,
+      "chars": 33795
+    },
+    {
+      "name": "/blog/criterios-aceite-mvp/ text/markdown",
+      "status": 200,
+      "chars": 10768
+    },
+    {
+      "name": "/blog/criterios-aceite-mvp/ direct Markdown",
+      "status": 200,
+      "chars": 10768
+    },
+    {
+      "name": "/blog/custo-manutencao-software-apos-lancamento/ text/html",
+      "status": 200,
+      "chars": 36192
+    },
+    {
+      "name": "/blog/custo-manutencao-software-apos-lancamento/ text/markdown",
+      "status": 200,
+      "chars": 12545
+    },
+    {
+      "name": "/blog/custo-manutencao-software-apos-lancamento/ direct Markdown",
+      "status": 200,
+      "chars": 12545
+    },
+    {
+      "name": "/blog/datas-fusos-sistema-prazos-relatorios/ text/html",
+      "status": 200,
+      "chars": 38088
+    },
+    {
+      "name": "/blog/datas-fusos-sistema-prazos-relatorios/ text/markdown",
+      "status": 200,
+      "chars": 14562
+    },
+    {
+      "name": "/blog/datas-fusos-sistema-prazos-relatorios/ direct Markdown",
+      "status": 200,
+      "chars": 14562
+    },
+    {
+      "name": "/blog/edicao-simultanea-sistema-conflitos/ text/html",
+      "status": 200,
+      "chars": 38083
+    },
+    {
+      "name": "/blog/edicao-simultanea-sistema-conflitos/ text/markdown",
+      "status": 200,
+      "chars": 14608
+    },
+    {
+      "name": "/blog/edicao-simultanea-sistema-conflitos/ direct Markdown",
+      "status": 200,
+      "chars": 14608
+    },
+    {
+      "name": "/blog/emails-sistema-envio-entrega-falha/ text/html",
+      "status": 200,
+      "chars": 38205
+    },
+    {
+      "name": "/blog/emails-sistema-envio-entrega-falha/ text/markdown",
+      "status": 200,
+      "chars": 14766
+    },
+    {
+      "name": "/blog/emails-sistema-envio-entrega-falha/ direct Markdown",
+      "status": 200,
+      "chars": 14766
+    },
+    {
+      "name": "/blog/erro-intermitente-software-evidencias/ text/html",
+      "status": 200,
+      "chars": 34412
+    },
+    {
+      "name": "/blog/erro-intermitente-software-evidencias/ text/markdown",
+      "status": 200,
+      "chars": 11303
+    },
+    {
+      "name": "/blog/erro-intermitente-software-evidencias/ direct Markdown",
+      "status": 200,
+      "chars": 11303
+    },
+    {
+      "name": "/blog/exportacao-dados-sistema-aceite/ text/html",
+      "status": 200,
+      "chars": 37881
+    },
+    {
+      "name": "/blog/exportacao-dados-sistema-aceite/ text/markdown",
+      "status": 200,
+      "chars": 14363
+    },
+    {
+      "name": "/blog/exportacao-dados-sistema-aceite/ direct Markdown",
+      "status": 200,
+      "chars": 14363
+    },
+    {
+      "name": "/blog/fluxo-aprovacao-sistema-regras/ text/html",
+      "status": 200,
+      "chars": 37638
+    },
+    {
+      "name": "/blog/fluxo-aprovacao-sistema-regras/ text/markdown",
+      "status": 200,
+      "chars": 14211
+    },
+    {
+      "name": "/blog/fluxo-aprovacao-sistema-regras/ direct Markdown",
+      "status": 200,
+      "chars": 14211
+    },
+    {
+      "name": "/blog/importacao-planilhas-sistema-tratar-erros/ text/html",
+      "status": 200,
+      "chars": 37169
+    },
+    {
+      "name": "/blog/importacao-planilhas-sistema-tratar-erros/ text/markdown",
+      "status": 200,
+      "chars": 13785
+    },
+    {
+      "name": "/blog/importacao-planilhas-sistema-tratar-erros/ direct Markdown",
+      "status": 200,
+      "chars": 13785
+    },
+    {
+      "name": "/blog/integracao-erp-briefing-orcamento/ text/html",
+      "status": 200,
+      "chars": 34876
+    },
+    {
+      "name": "/blog/integracao-erp-briefing-orcamento/ text/markdown",
+      "status": 200,
+      "chars": 10786
+    },
+    {
+      "name": "/blog/integracao-erp-briefing-orcamento/ direct Markdown",
+      "status": 200,
+      "chars": 10786
+    },
+    {
+      "name": "/blog/integracao-evento-duplicado-regra-negocio/ text/html",
+      "status": 200,
+      "chars": 34654
+    },
+    {
+      "name": "/blog/integracao-evento-duplicado-regra-negocio/ text/markdown",
+      "status": 200,
+      "chars": 11831
+    },
+    {
+      "name": "/blog/integracao-evento-duplicado-regra-negocio/ direct Markdown",
+      "status": 200,
+      "chars": 11831
+    },
+    {
+      "name": "/blog/integracao-eventos-fora-ordem/ text/html",
+      "status": 200,
+      "chars": 37822
+    },
+    {
+      "name": "/blog/integracao-eventos-fora-ordem/ text/markdown",
+      "status": 200,
+      "chars": 14368
+    },
+    {
+      "name": "/blog/integracao-eventos-fora-ordem/ direct Markdown",
+      "status": 200,
+      "chars": 14368
+    },
+    {
+      "name": "/blog/liberacao-gradual-funcionalidade-piloto/ text/html",
+      "status": 200,
+      "chars": 38337
+    },
+    {
+      "name": "/blog/liberacao-gradual-funcionalidade-piloto/ text/markdown",
+      "status": 200,
+      "chars": 14722
+    },
+    {
+      "name": "/blog/liberacao-gradual-funcionalidade-piloto/ direct Markdown",
+      "status": 200,
+      "chars": 14722
+    },
+    {
+      "name": "/blog/limites-api-integracao-cota/ text/html",
+      "status": 200,
+      "chars": 38391
+    },
+    {
+      "name": "/blog/limites-api-integracao-cota/ text/markdown",
+      "status": 200,
+      "chars": 14880
+    },
+    {
+      "name": "/blog/limites-api-integracao-cota/ direct Markdown",
+      "status": 200,
+      "chars": 14880
+    },
+    {
+      "name": "/blog/migracao-dados-validacao-troca-sistema/ text/html",
+      "status": 200,
+      "chars": 37051
+    },
+    {
+      "name": "/blog/migracao-dados-validacao-troca-sistema/ text/markdown",
+      "status": 200,
+      "chars": 13784
+    },
+    {
+      "name": "/blog/migracao-dados-validacao-troca-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 13784
+    },
+    {
+      "name": "/blog/monitoramento-software-alertas-fluxo-critico/ text/html",
+      "status": 200,
+      "chars": 38027
+    },
+    {
+      "name": "/blog/monitoramento-software-alertas-fluxo-critico/ text/markdown",
+      "status": 200,
+      "chars": 14660
+    },
+    {
+      "name": "/blog/monitoramento-software-alertas-fluxo-critico/ direct Markdown",
+      "status": 200,
+      "chars": 14660
+    },
+    {
+      "name": "/blog/mvp-pos-lancamento-priorizar-mudancas/ text/html",
+      "status": 200,
+      "chars": 34041
+    },
+    {
+      "name": "/blog/mvp-pos-lancamento-priorizar-mudancas/ text/markdown",
+      "status": 200,
+      "chars": 11003
+    },
+    {
+      "name": "/blog/mvp-pos-lancamento-priorizar-mudancas/ direct Markdown",
+      "status": 200,
+      "chars": 11003
+    },
+    {
+      "name": "/blog/permissoes-acesso-software-regras-negocio/ text/html",
+      "status": 200,
+      "chars": 35812
+    },
+    {
+      "name": "/blog/permissoes-acesso-software-regras-negocio/ text/markdown",
+      "status": 200,
+      "chars": 12637
+    },
+    {
+      "name": "/blog/permissoes-acesso-software-regras-negocio/ direct Markdown",
+      "status": 200,
+      "chars": 12637
+    },
+    {
+      "name": "/blog/plano-rollback-atualizacao-sistema/ text/html",
+      "status": 200,
+      "chars": 38116
+    },
+    {
+      "name": "/blog/plano-rollback-atualizacao-sistema/ text/markdown",
+      "status": 200,
+      "chars": 14798
+    },
+    {
+      "name": "/blog/plano-rollback-atualizacao-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 14798
+    },
+    {
+      "name": "/blog/prova-restauracao-backup-software/ text/html",
+      "status": 200,
+      "chars": 34325
+    },
+    {
+      "name": "/blog/prova-restauracao-backup-software/ text/markdown",
+      "status": 200,
+      "chars": 11348
+    },
+    {
+      "name": "/blog/prova-restauracao-backup-software/ direct Markdown",
+      "status": 200,
+      "chars": 11348
+    },
+    {
+      "name": "/blog/quando-automatizar-processos-planilhas/ text/html",
+      "status": 200,
+      "chars": 33637
+    },
+    {
+      "name": "/blog/quando-automatizar-processos-planilhas/ text/markdown",
+      "status": 200,
+      "chars": 10671
+    },
+    {
+      "name": "/blog/quando-automatizar-processos-planilhas/ direct Markdown",
+      "status": 200,
+      "chars": 10671
+    },
+    {
+      "name": "/blog/recuperacao-senha-sistema-aceite/ text/html",
+      "status": 200,
+      "chars": 37721
+    },
+    {
+      "name": "/blog/recuperacao-senha-sistema-aceite/ text/markdown",
+      "status": 200,
+      "chars": 14435
+    },
+    {
+      "name": "/blog/recuperacao-senha-sistema-aceite/ direct Markdown",
+      "status": 200,
+      "chars": 14435
+    },
+    {
+      "name": "/blog/teste-carga-evidencias-liberar-sistema/ text/html",
+      "status": 200,
+      "chars": 35615
+    },
+    {
+      "name": "/blog/teste-carga-evidencias-liberar-sistema/ text/markdown",
+      "status": 200,
+      "chars": 12419
+    },
+    {
+      "name": "/blog/teste-carga-evidencias-liberar-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 12419
+    },
+    {
+      "name": "/blog/trilha-auditoria-sistema-requisitos-negocio/ text/html",
+      "status": 200,
+      "chars": 35260
+    },
+    {
+      "name": "/blog/trilha-auditoria-sistema-requisitos-negocio/ text/markdown",
+      "status": 200,
+      "chars": 11999
+    },
+    {
+      "name": "/blog/trilha-auditoria-sistema-requisitos-negocio/ direct Markdown",
+      "status": 200,
+      "chars": 11999
+    },
+    {
+      "name": "/blog/troca-fornecedor-software-passagem-tecnica/ text/html",
+      "status": 200,
+      "chars": 36457
+    },
+    {
+      "name": "/blog/troca-fornecedor-software-passagem-tecnica/ text/markdown",
+      "status": 200,
+      "chars": 13451
+    },
+    {
+      "name": "/blog/troca-fornecedor-software-passagem-tecnica/ direct Markdown",
+      "status": 200,
+      "chars": 13451
+    },
+    {
+      "name": "/blog/valores-monetarios-arredondamento-sistema/ text/html",
+      "status": 200,
+      "chars": 37175
+    },
+    {
+      "name": "/blog/valores-monetarios-arredondamento-sistema/ text/markdown",
+      "status": 200,
+      "chars": 13754
+    },
+    {
+      "name": "/blog/valores-monetarios-arredondamento-sistema/ direct Markdown",
+      "status": 200,
+      "chars": 13754
+    },
+    {
+      "name": "/cases/ascende/ text/html",
+      "status": 200,
+      "chars": 30500
+    },
+    {
+      "name": "/cases/ascende/ text/markdown",
+      "status": 200,
+      "chars": 4713
+    },
+    {
+      "name": "/cases/ascende/ direct Markdown",
+      "status": 200,
+      "chars": 4713
+    },
+    {
+      "name": "/cases/bom-capital/ text/html",
+      "status": 200,
+      "chars": 30290
+    },
+    {
+      "name": "/cases/bom-capital/ text/markdown",
+      "status": 200,
+      "chars": 4340
+    },
+    {
+      "name": "/cases/bom-capital/ direct Markdown",
+      "status": 200,
+      "chars": 4340
+    },
+    {
+      "name": "/cases/loopt/ text/html",
+      "status": 200,
+      "chars": 32615
+    },
+    {
+      "name": "/cases/loopt/ text/markdown",
+      "status": 200,
+      "chars": 4801
+    },
+    {
+      "name": "/cases/loopt/ direct Markdown",
+      "status": 200,
+      "chars": 4801
+    },
+    {
+      "name": "/en/about/ text/html",
+      "status": 200,
+      "chars": 22567
+    },
+    {
+      "name": "/en/about/ text/markdown",
+      "status": 200,
+      "chars": 2059
+    },
+    {
+      "name": "/en/about/ direct Markdown",
+      "status": 200,
+      "chars": 2059
+    },
+    {
+      "name": "/en/blog/ text/html",
+      "status": 200,
+      "chars": 20510
+    },
+    {
+      "name": "/en/blog/ text/markdown",
+      "status": 200,
+      "chars": 616
+    },
+    {
+      "name": "/en/blog/ direct Markdown",
+      "status": 200,
+      "chars": 616
+    },
+    {
+      "name": "/en/contact/ text/html",
+      "status": 200,
+      "chars": 22820
+    },
+    {
+      "name": "/en/contact/ text/markdown",
+      "status": 200,
+      "chars": 2210
+    },
+    {
+      "name": "/en/contact/ direct Markdown",
+      "status": 200,
+      "chars": 2210
+    },
+    {
+      "name": "/en/lovable-to-production/ text/html",
+      "status": 200,
+      "chars": 32674
+    },
+    {
+      "name": "/en/lovable-to-production/ text/markdown",
+      "status": 200,
+      "chars": 6116
+    },
+    {
+      "name": "/en/lovable-to-production/ direct Markdown",
+      "status": 200,
+      "chars": 6116
+    },
+    {
+      "name": "/en/privacy/ text/html",
+      "status": 200,
+      "chars": 35267
+    },
+    {
+      "name": "/en/privacy/ text/markdown",
+      "status": 200,
+      "chars": 9173
+    },
+    {
+      "name": "/en/privacy/ direct Markdown",
+      "status": 200,
+      "chars": 9173
+    },
+    {
+      "name": "/en/software-project-rescue/ text/html",
+      "status": 200,
+      "chars": 31649
+    },
+    {
+      "name": "/en/software-project-rescue/ text/markdown",
+      "status": 200,
+      "chars": 5534
+    },
+    {
+      "name": "/en/software-project-rescue/ direct Markdown",
+      "status": 200,
+      "chars": 5534
+    },
+    {
+      "name": "/guias/rls-multiempresa/ text/html",
+      "status": 200,
+      "chars": 40243
+    },
+    {
+      "name": "/guias/rls-multiempresa/ text/markdown",
+      "status": 200,
+      "chars": 13370
+    },
+    {
+      "name": "/guias/rls-multiempresa/ direct Markdown",
+      "status": 200,
+      "chars": 13370
+    },
+    {
+      "name": "/en/authors/henrique-pett/ text/html",
+      "status": 200,
+      "chars": 22283
+    },
+    {
+      "name": "/en/authors/henrique-pett/ text/markdown",
+      "status": 200,
+      "chars": 1714
+    },
+    {
+      "name": "/en/authors/henrique-pett/ direct Markdown",
+      "status": 200,
+      "chars": 1714
+    },
+    {
+      "name": "/en/cases/ascende/ text/html",
+      "status": 200,
+      "chars": 30302
+    },
+    {
+      "name": "/en/cases/ascende/ text/markdown",
+      "status": 200,
+      "chars": 4648
+    },
+    {
+      "name": "/en/cases/ascende/ direct Markdown",
+      "status": 200,
+      "chars": 4648
+    },
+    {
+      "name": "/en/cases/bom-capital/ text/html",
+      "status": 200,
+      "chars": 30011
+    },
+    {
+      "name": "/en/cases/bom-capital/ text/markdown",
+      "status": 200,
+      "chars": 4168
+    },
+    {
+      "name": "/en/cases/bom-capital/ direct Markdown",
+      "status": 200,
+      "chars": 4168
+    },
+    {
+      "name": "/en/cases/loopt/ text/html",
+      "status": 200,
+      "chars": 32336
+    },
+    {
+      "name": "/en/cases/loopt/ text/markdown",
+      "status": 200,
+      "chars": 4591
+    },
+    {
+      "name": "/en/cases/loopt/ direct Markdown",
+      "status": 200,
+      "chars": 4591
+    },
+    {
+      "name": "/en/guides/multi-tenant-rls/ text/html",
+      "status": 200,
+      "chars": 40060
+    },
+    {
+      "name": "/en/guides/multi-tenant-rls/ text/markdown",
+      "status": 200,
+      "chars": 13201
+    },
+    {
+      "name": "/en/guides/multi-tenant-rls/ direct Markdown",
+      "status": 200,
+      "chars": 13201
+    },
+    {
+      "name": "404 text/markdown",
+      "status": 404,
+      "chars": 212
+    },
+    {
+      "name": "404 text/html",
+      "status": 404,
+      "chars": 13892
+    },
+    {
+      "name": "/privacy policy redirect",
+      "status": 301,
+      "final": "https://tornostudio.com/privacidade/"
+    },
+    {
+      "name": "/privacy/ policy redirect",
+      "status": 301,
+      "final": "https://tornostudio.com/privacidade/"
+    },
+    {
+      "name": "/robots.txt preserves machine/asset response",
+      "type": "text/plain; charset=UTF-8",
+      "chars": 75
+    },
+    {
+      "name": "/llms.txt preserves machine/asset response",
+      "type": "text/plain; charset=UTF-8",
+      "chars": 12016
+    },
+    {
+      "name": "/sitemap-index.xml preserves machine/asset response",
+      "type": "application/xml",
+      "chars": 186
+    },
+    {
+      "name": "/sitemap-0.xml preserves machine/asset response",
+      "type": "application/xml",
+      "chars": 11476
+    },
+    {
+      "name": "/favicon.svg preserves machine/asset response",
+      "type": "image/svg+xml",
+      "chars": 184
+    },
+    {
+      "name": "/og/pt-BR.png preserves machine/asset response",
+      "type": "image/png",
+      "chars": 33548
+    },
+    {
+      "name": "article image pt-BR-acessibilidade-software-sob-medida-aceite.png",
+      "status": 200,
+      "bytes": 31289
+    },
+    {
+      "name": "article image pt-BR-ambiente-homologacao-conferir-antes-testar-sistema.png",
+      "status": 200,
+      "bytes": 35616
+    },
+    {
+      "name": "article image pt-BR-anexos-sistema-envio-consulta-arquivos.png",
+      "status": 200,
+      "bytes": 32846
+    },
+    {
+      "name": "article image pt-BR-antes-de-refazer-sistema-evidencias.png",
+      "status": 200,
+      "bytes": 30315
+    },
+    {
+      "name": "article image pt-BR-arquivar-excluir-registros-sistema.png",
+      "status": 200,
+      "bytes": 35115
+    },
+    {
+      "name": "article image pt-BR-busca-filtros-sistema-resultados.png",
+      "status": 200,
+      "bytes": 35863
+    },
+    {
+      "name": "article image pt-BR-cancelamento-solicitacao-sistema.png",
+      "status": 200,
+      "bytes": 36037
+    },
+    {
+      "name": "article image pt-BR-criterios-aceite-mvp.png",
+      "status": 200,
+      "bytes": 31821
+    },
+    {
+      "name": "article image pt-BR-custo-manutencao-software-apos-lancamento.png",
+      "status": 200,
+      "bytes": 34817
+    },
+    {
+      "name": "article image pt-BR-datas-fusos-sistema-prazos-relatorios.png",
+      "status": 200,
+      "bytes": 32293
+    },
+    {
+      "name": "article image pt-BR-edicao-simultanea-sistema-conflitos.png",
+      "status": 200,
+      "bytes": 36773
+    },
+    {
+      "name": "article image pt-BR-emails-sistema-envio-entrega-falha.png",
+      "status": 200,
+      "bytes": 30353
+    },
+    {
+      "name": "article image pt-BR-erro-intermitente-software-evidencias.png",
+      "status": 200,
+      "bytes": 34905
+    },
+    {
+      "name": "article image pt-BR-exportacao-dados-sistema-aceite.png",
+      "status": 200,
+      "bytes": 32186
+    },
+    {
+      "name": "article image pt-BR-fluxo-aprovacao-sistema-regras.png",
+      "status": 200,
+      "bytes": 33854
+    },
+    {
+      "name": "article image pt-BR-importacao-planilhas-sistema-tratar-erros.png",
+      "status": 200,
+      "bytes": 34061
+    },
+    {
+      "name": "article image pt-BR-integracao-erp-briefing-orcamento.png",
+      "status": 200,
+      "bytes": 31281
+    },
+    {
+      "name": "article image pt-BR-integracao-evento-duplicado-regra-negocio.png",
+      "status": 200,
+      "bytes": 39034
+    },
+    {
+      "name": "article image pt-BR-integracao-eventos-fora-ordem.png",
+      "status": 200,
+      "bytes": 33228
+    },
+    {
+      "name": "article image pt-BR-liberacao-gradual-funcionalidade-piloto.png",
+      "status": 200,
+      "bytes": 37916
+    },
+    {
+      "name": "article image pt-BR-limites-api-integracao-cota.png",
+      "status": 200,
+      "bytes": 32507
+    },
+    {
+      "name": "article image pt-BR-migracao-dados-validacao-troca-sistema.png",
+      "status": 200,
+      "bytes": 31783
+    },
+    {
+      "name": "article image pt-BR-monitoramento-software-alertas-fluxo-critico.png",
+      "status": 200,
+      "bytes": 34701
+    },
+    {
+      "name": "article image pt-BR-mvp-pos-lancamento-priorizar-mudancas.png",
+      "status": 200,
+      "bytes": 33307
+    },
+    {
+      "name": "article image pt-BR-permissoes-acesso-software-regras-negocio.png",
+      "status": 200,
+      "bytes": 34893
+    },
+    {
+      "name": "article image pt-BR-plano-rollback-atualizacao-sistema.png",
+      "status": 200,
+      "bytes": 32350
+    },
+    {
+      "name": "article image pt-BR-prova-restauracao-backup-software.png",
+      "status": 200,
+      "bytes": 34842
+    },
+    {
+      "name": "article image pt-BR-quando-automatizar-processos-planilhas.png",
+      "status": 200,
+      "bytes": 28335
+    },
+    {
+      "name": "article image pt-BR-recuperacao-senha-sistema-aceite.png",
+      "status": 200,
+      "bytes": 35926
+    },
+    {
+      "name": "article image pt-BR-teste-carga-evidencias-liberar-sistema.png",
+      "status": 200,
+      "bytes": 34441
+    },
+    {
+      "name": "article image pt-BR-trilha-auditoria-sistema-requisitos-negocio.png",
+      "status": 200,
+      "bytes": 31402
+    },
+    {
+      "name": "article image pt-BR-troca-fornecedor-software-passagem-tecnica.png",
+      "status": 200,
+      "bytes": 34373
+    },
+    {
+      "name": "article image pt-BR-valores-monetarios-arredondamento-sistema.png",
+      "status": 200,
+      "bytes": 34090
+    },
+    {
+      "name": "asset .css",
+      "type": "text/css; charset=UTF-8",
+      "bytes": 6799
+    },
+    {
+      "name": "asset .js",
+      "type": "application/javascript; charset=UTF-8",
+      "bytes": 5774
+    },
+    {
+      "name": "asset .woff2",
+      "type": "font/woff2",
+      "bytes": 45712
+    },
+    {
+      "name": "asset .avif",
+      "type": "image/avif",
+      "bytes": 6076
+    },
+    {
+      "name": "wire HEAD / text/html",
+      "bodyBytes": 0
+    },
+    {
+      "name": "wire HEAD / text/markdown",
+      "bodyBytes": 0
+    },
+    {
+      "name": "wire HEAD /__ora-404-probe-torno-agent-readiness-20261020 text/html",
+      "bodyBytes": 0
+    },
+    {
+      "name": "wire HEAD /__ora-404-probe-torno-agent-readiness-20261020 text/markdown",
+      "bodyBytes": 0
+    }
+  ]
+}

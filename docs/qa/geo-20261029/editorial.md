@@ -79,7 +79,7 @@
 
 [FATO] O único achado foi P3 documental: a deduplicação de URLs ocultava diferenças de data e limite entre artigos. Correção incorporada: cada fonte agora identifica o registro representativo e preserva metadados dos registros adicionais por artigo e URL.
 
-[FATO] Atualização para o 33º artigo: entrada `torno-artigo-pt-20261029-liberacao-gradual` acrescentada após leitura integral de `liberacao-gradual-funcionalidade-piloto.md`. Revisão READ-ONLY da entrada e do complemento documental solicitada ao Crivo; resultado será registrado após o retorno.
+[FATO] Atualização para o 33º artigo: entrada `torno-artigo-pt-20261029-liberacao-gradual` acrescentada após leitura integral de `liberacao-gradual-funcionalidade-piloto.md`. Crivo concluiu revisão READ-ONLY e deu **PASS**, sem achados ou correções: duas frases e três takeaways fiéis, limites preservados, contagem de 33 arquivos/33 entradas/99 takeaways e fontes [97]–[99] com nomes, URLs, `checked_at` de `2026-10-29T21:02:53Z`, publicação SEM DADO e limites originais. A revisão não alterou fontes nem executou build, teste ou preview.
 
 ## Fontes
 

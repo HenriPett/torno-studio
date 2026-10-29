@@ -20,6 +20,7 @@ Implementação sobre a main remota `a7959097f962babf2697018f9fcba25adc9190ff`, 
 - [Revisão independente de Crivo](review.md): sem achado aberto; P3 documental corrigido.
 - [Verificação integrada local](local-verification.json).
 - [Navegador: overflow, H1 e axe WCAG A/AA](browser.json). A automação cobre as 57 páginas indexáveis em 360 e 1280 pixels; verificações automatizadas não certificam conformidade integral.
+- Capturas: [perfil do autor em desktop](author-desktop.png) e [resposta direta no celular](article-mobile.png).
 - [HTTP em produção](production-http.json), gerado após publicação para conferir HTML/Markdown negociado, arquivos diretos, paridade com o build, status, Vary, HEAD, redirects, assets e arquivos de descoberta.
 
 Reprodução usando configuração pública de produção em `.env` (não versionada):
@@ -41,6 +42,14 @@ AGENT_REPORT_PATH=docs/qa/geo-20261029/production-http.json node scripts/verify-
 - Linkinator: 215 links internos, PASS.
 - 114 combinações de página/largura no navegador: sem overflow e sem violações graves/críticas nas regras axe WCAG A/AA avaliadas.
 - Checagens do navegador e evidência HTTP ficam nos arquivos vinculados acima; foram executadas depois do build final.
+
+242 verificações HTTP em produção: PASS, cobrindo 59 documentos HTML nas variantes HTML, Markdown negociado e arquivo direto, além de 33 imagens de artigos, descoberta, aliases, assets e HEAD.
+
+## Publicação
+
+Fonte publicada na main: `729509b0e28a546a1b2df20e246aa648167eab38`. Deploy Netlify `6ae3b8d2d2b2c3ab9e80afd7`, pronto em 29/10/2026 às 21:21:50 UTC. Metadados em [deployment.json](deployment.json).
+
+No portal, o link de autoria do artigo novo abriu o perfil PT em produção, e o seletor de idioma abriu o perfil EN correto, com `html lang=en`, H1 único e sem overflow em 1280px. O perfil PT publicado inclui o artigo recém-integrado.
 
 ## Critérios e limites
 
