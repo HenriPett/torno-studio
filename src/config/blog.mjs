@@ -292,6 +292,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-piloto-decisao.svg', digest: '894d66dc90210347ef25c14b4d2421d2ce5dd354f859b750bb2b3efbd7c9f4a8' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261030-sistema-sem-internet', intent_id: 'buyer-offline-data-sync-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/sistema-sem-internet-dados-sincronizacao/', canonical_url: `${BLOG_ORIGIN}/blog/sistema-sem-internet-dados-sincronizacao/`,
+    digest: '8bcfd94a4508c9d77058d0508d2d3638d0883a7d1cefaac30ee2ec93f0d1c84e', digestScope: 'file',
+    assets: [
+      { path: 'torno-offline-mapa.svg', digest: 'df9de257ca807247ad3821ab71d4d707f4a9c09c9d6f8ffca750eb9e44f4f13a' },
+      { path: 'torno-registro-passaporte.svg', digest: '3aa343c04588a6e33e888ed8c3ea491eab6da1f3135611b7185b58796afc921e' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -642,6 +651,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261029-liberacao-gradual': [
         {asset:"./torno-piloto-escopo.svg",alt:"Escopo do piloto distingue elegibilidade, pessoas dentro e fora do grupo, convivência dos caminhos e permissões para agir.",caption:"Combine quem recebe a mudança, qual fluxo fica disponível e o destino das tarefas em andamento. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-piloto-decisao.svg",alt:"Decisão do piloto reúne observação, opções de ampliar, manter ou pausar, responsáveis e limites sobre efeitos anteriores.",caption:"Relacione evidências e pendências à decisão, com responsável e alcance da ação definidos. Diagrama original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261030-sistema-sem-internet': [
+        {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

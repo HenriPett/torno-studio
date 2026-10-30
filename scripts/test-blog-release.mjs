@@ -45,12 +45,13 @@ const expected = [
   ['torno-artigo-pt-20261029-valores-monetarios', '/blog/valores-monetarios-arredondamento-sistema/', 'af8758a4b9a209d3e6c17c3510b2695e8fccee1529c077e53dc9945e8a2334db', ['torno-monetarios-regras.svg', 'torno-monetarios-aceite.svg']],
   ['torno-artigo-pt-20261029-eventos-fora-ordem', '/blog/integracao-eventos-fora-ordem/', 'd3db36d1575aba85a547417e0880ce69e80d02f0dc87ae53d645b2ef747aac07', ['torno-eventos-ordem.svg', 'torno-eventos-aceite.svg']],
   ['torno-artigo-pt-20261029-liberacao-gradual', '/blog/liberacao-gradual-funcionalidade-piloto/', '9e19e3ba58ff1a486df37c39728212ca836d149d329be47c693cdc17e4dee71b', ['torno-piloto-escopo.svg', 'torno-piloto-decisao.svg']],
+  ['torno-artigo-pt-20261030-sistema-sem-internet', '/blog/sistema-sem-internet-dados-sincronizacao/', '8bcfd94a4508c9d77058d0508d2d3638d0883a7d1cefaac30ee2ec93f0d1c84e', ['torno-offline-mapa.svg', 'torno-registro-passaporte.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
 const checks = [];
 
-checks.push(['manifesto inclui exatamente os trinta e três artigos autorizados e suas aprovações', async () => {
+checks.push(['manifesto inclui exatamente os trinta e quatro artigos autorizados e suas aprovações', async () => {
   assert(manifest.entries.length === expected.length, `esperados ${expected.length} artigos; encontrados ${manifest.entries.length}`);
   for (const entry of manifest.entries) {
     const wanted = expectedById.get(entry.id);
@@ -60,7 +61,7 @@ checks.push(['manifesto inclui exatamente os trinta e três artigos autorizados 
   }
 }]);
 
-checks.push(['sitemap contém 57 URLs únicas: baseline com páginas institucionais, dois índices e trinta e três artigos PT', async () => {
+checks.push(['sitemap contém 58 URLs únicas: baseline com páginas institucionais, dois índices e trinta e quatro artigos PT', async () => {
   const index = await readFile(join(dist, 'sitemap-index.xml'), 'utf8');
   const maps = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const entries = (await Promise.all(maps.map(async (path) => sitemapUrls(await readFile(join(dist, path.slice(1)), 'utf8'))))).flat();

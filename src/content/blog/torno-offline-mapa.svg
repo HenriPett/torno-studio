@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120" role="img" aria-labelledby="t d"><title id="t">Mapa do dado entre aparelho e servidor</title><desc id="d">Mapa editorial espacial da tarefa, disponibilidade e gravação local, fronteira sem rede e confirmação no servidor. Não descreve arquitetura real.</desc><rect width="720" height="1120" fill="#f7f6f2"/>
+<text x="36" y="55" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700" fill="#1c5a49" text-anchor="start">TORNO · MAPA DA TAREFA</text>
+<text x="36" y="118" font-family="DejaVu Sans,Arial,sans-serif" font-size="35" font-weight="700" fill="#16181a" text-anchor="start">Onde está a informação?</text>
+<text x="36" y="165" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="start">Defina a tarefa e a evidência de cada lugar.</text>
+<path d="M44 234H676" stroke="#1c5a49" stroke-width="3"/>
+<text x="44" y="218" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700" fill="#16181a" text-anchor="start">Tarefa delimitada: o que precisa funcionar?</text>
+<text x="48" y="310" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700" fill="#1c5a49" text-anchor="start">NO APARELHO</text>
+<text x="448" y="310" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700" fill="#1c5a49" text-anchor="start">NO SERVIDOR</text>
+<rect x="48" y="346" width="264" height="336" rx="24" fill="#e2ede8" stroke="#1c5a49" stroke-width="4"/><path d="M65 628H295 M159 654H202" stroke="#1c5a49" stroke-width="4"/><path d="M460 404C428 360 488 331 521 355C547 310 620 338 618 379C676 372 698 449 649 470H465C419 469 424 412 460 404Z" fill="#eeece6" stroke="#52575c" stroke-width="4"/><path d="M366 336V715" stroke="#8a4b0f" stroke-width="2" stroke-dasharray="7 9"/>
+<text x="180" y="410" font-family="DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="700" fill="#16181a" text-anchor="middle">Disponibilidade</text>
+<text x="180" y="454" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="middle">e última</text>
+<text x="180" y="492" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="middle">atualização</text>
+<text x="180" y="558" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700" fill="#16181a" text-anchor="middle">Gravação local?</text>
+<text x="563" y="525" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700" fill="#16181a" text-anchor="middle">Recebimento?</text>
+<text x="563" y="571" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="700" fill="#16181a" text-anchor="middle">Confirmação?</text>
+<text x="366" y="773" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="700" fill="#8a4b0f" text-anchor="middle">FRONTEIRA DA CONEXÃO</text>
+<text x="48" y="842" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="start">O que pode ser lido</text>
+<text x="48" y="878" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="start">ou alterado aqui?</text>
+<text x="428" y="842" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="start">Foi confirmado</text>
+<text x="428" y="878" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="400" fill="#16181a" text-anchor="start">no destino?</text>
+<path d="M48 930H672" stroke="#dcd9d1" stroke-width="2"/>
+<text x="48" y="982" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700" fill="#1c5a49" text-anchor="start">Voltar a conexão não comprova</text>
+<text x="48" y="1022" font-family="DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="700" fill="#1c5a49" text-anchor="start">sincronização concluída.</text>
+<text x="48" y="1080" font-family="DejaVu Sans,Arial,sans-serif" font-size="24" font-weight="400" fill="#16181a" text-anchor="start">Mapa conceitual · sem arquitetura ou produto real.</text>
+</svg>

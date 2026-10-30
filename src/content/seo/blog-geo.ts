@@ -265,4 +265,12 @@ export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = 
       "Relacione conclusão da tarefa e falhas à versão e ao grupo observado, com responsável e cobertura de acompanhamento; pouco uso ou ausência de reclamações não comprovam prontidão para ampliar.",
     ],
   },
+  "torno-artigo-pt-20261030-sistema-sem-internet": {
+    answer: "Um sistema sem internet precisa delimitar a tarefa, os dados preparados no aparelho e o resultado que depende do servidor. Salvar localmente ou recuperar a conexão não comprova sincronização; o aceite deve distinguir pendência, falha e confirmação no destino, com limites conhecidos para cada dispositivo e condição exercitada.",
+    takeaways: [
+      "Defina quais registros e campos estarão disponíveis antes da falta de rede e como identificar uma informação local desatualizada ou ausente naquele aparelho.",
+      "Separe rascunho ou gravação local de envio pendente e resultado confirmado no servidor, sem tratar o ícone de conexão como evidência de entrega.",
+      "Teste primeira abertura, fechamento e reabertura, retorno instável e falha no destino com dados fictícios; registre o que ficou fora do escopo e quem resolve pendências.",
+    ],
+  },
 };
