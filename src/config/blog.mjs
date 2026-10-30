@@ -301,6 +301,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-registro-passaporte.svg', digest: '3aa343c04588a6e33e888ed8c3ea491eab6da1f3135611b7185b58796afc921e' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261030-agente-erp-permissoes', intent_id: 'buyer-ai-agent-erp-action-permissions-pt', locale: 'pt-BR',
+    path: '/blog/agente-ia-erp-permissoes-acoes/', canonical_url: `${BLOG_ORIGIN}/blog/agente-ia-erp-permissoes-acoes/`,
+    digest: 'bd62a4a62797602e5f4da6abb615b1856789ef16087f3f738c1954d78bc5af0d', digestScope: 'file',
+    assets: [
+      { path: 'torno-agente-erp-tres-niveis.svg', digest: '18ee3daf4e48c11ddd2d8e3e083279e1b191474eb7b992d0cb683e50d77c893f' },
+      { path: 'torno-agente-erp-matriz.svg', digest: '9182dfd7b60a43d64882ab50b43b8b0691ef278dc63f7cebfe212605d5cfdff1' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -655,6 +664,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261030-agente-erp-permissoes': [
+        {asset:"./torno-agente-erp-tres-niveis.svg",alt:"Três cartões distintos mostram consulta, preparação e execução com limites de autorização diferentes.",caption:"Comparação editorial de níveis de ação; não representa uma interface ou implantação real. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+        {asset:"./torno-agente-erp-matriz.svg",alt:"Matriz visual compara impacto de erro e reversibilidade para orientar quando uma ação de agente exige aprovação.",caption:"A classificação deve ser feita com o cliente e validada no seu processo. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
       ],
     };
     const figures=configs[id];if(!figures)return;

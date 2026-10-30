@@ -1161,6 +1161,32 @@
           "sha256": "3aa343c04588a6e33e888ed8c3ea491eab6da1f3135611b7185b58796afc921e"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261030-agente-erp-permissoes",
+      "intentId": "buyer-ai-agent-erp-action-permissions-pt",
+      "locale": "pt-BR",
+      "path": "/blog/agente-ia-erp-permissoes-acoes/",
+      "contentRevision": "bd62a4a62797602e5f4da6abb615b1856789ef16087f3f738c1954d78bc5af0d",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-30T15:07:46Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-30T15:07:46Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução vigente da automação para edição de 30/10/2026, 12h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO dos bytes finais de Markdown e dois SVGs em 2026-10-30; diff integrado e testes sujeitos ao gate final antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-agente-erp-tres-niveis.svg",
+          "sha256": "18ee3daf4e48c11ddd2d8e3e083279e1b191474eb7b992d0cb683e50d77c893f"
+        },
+        {
+          "path": "torno-agente-erp-matriz.svg",
+          "sha256": "9182dfd7b60a43d64882ab50b43b8b0691ef278dc63f7cebfe212605d5cfdff1"
+        }
+      ]
     }
   ]
 }

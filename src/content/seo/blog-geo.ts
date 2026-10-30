@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261030-agente-erp-permissoes": {
+    answer: "Antes de integrar um agente de IA ao ERP, delimite separadamente o que ele pode consultar, preparar e executar. Para cada ação, defina usuário, dados, recurso, aprovação e evidência no sistema de destino; uma resposta no chat não comprova que a mudança foi autorizada ou concluída.",
+    takeaways: [
+      "Comece por uma lista curta de operações e reduza permissões e ferramentas ao necessário para cada tarefa.",
+      "Exija aprovação e autorização verificável para ações sensíveis, vinculadas ao pedido e ao recurso exatos.",
+      "Teste o resultado no ERP com perfis distintos, falhas e repetições, além de conferir a resposta do agente.",
+    ],
+  },
   "torno-artigo-pt-20261022-acessibilidade-aceite": {
     answer: "O aceite de acessibilidade deve identificar uma tarefa completa, os perfis e estados envolvidos, a referência de avaliação e quem fará as verificações humanas e automatizadas. Peça evidências nas condições combinadas e encaminhamento das barreiras; uma nota de ferramenta ou um checklist inicial não comprova conformidade WCAG do produto.",
     takeaways: [
