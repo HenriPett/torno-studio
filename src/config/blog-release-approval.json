@@ -1187,6 +1187,32 @@
           "sha256": "9182dfd7b60a43d64882ab50b43b8b0691ef278dc63f7cebfe212605d5cfdff1"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261030-mfa-aceite",
+      "intentId": "buyer-mfa-system-scope-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/autenticacao-dois-fatores-sistema-requisitos-aceite/",
+      "contentRevision": "4a9bf76b592884b84f2620a52d6cc4f38686a8ea0f6b69cc92fc806370615aeb",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-10-30T21:25:18Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-10-30T21:25:18Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 30/10/2026, 18h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e dos SVGs em código por revisor independente GO. Integrador verificou renderização local desktop/mobile e imagens carregadas; push depende da validação da relação main/release.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-mfa-duas-portas.svg",
+          "sha256": "30bb75daa795c14f154ae69bc29ee9ff48f2b3be3063e090cbdf2e1bbfdcb321"
+        },
+        {
+          "path": "torno-mfa-caderno-ensaios.svg",
+          "sha256": "0a38592c18e0c1ee4e783224c18946249c9ffe1e7b8e789ebfae993edeaa5d28"
+        }
+      ]
     }
   ]
 }

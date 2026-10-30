@@ -310,6 +310,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-agente-erp-matriz.svg', digest: '9182dfd7b60a43d64882ab50b43b8b0691ef278dc63f7cebfe212605d5cfdff1' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261030-mfa-aceite', intent_id: 'buyer-mfa-system-scope-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/autenticacao-dois-fatores-sistema-requisitos-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/autenticacao-dois-fatores-sistema-requisitos-aceite/`,
+    digest: '4a9bf76b592884b84f2620a52d6cc4f38686a8ea0f6b69cc92fc806370615aeb', digestScope: 'file',
+    assets: [
+      { path: 'torno-mfa-duas-portas.svg', digest: '30bb75daa795c14f154ae69bc29ee9ff48f2b3be3063e090cbdf2e1bbfdcb321' },
+      { path: 'torno-mfa-caderno-ensaios.svg', digest: '0a38592c18e0c1ee4e783224c18946249c9ffe1e7b8e789ebfae993edeaa5d28' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -664,6 +673,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261030-mfa-aceite': [
+        {asset:'./torno-mfa-duas-portas.svg',alt:'Ilustração conceitual de duas portas: entrada da conta e ação sensível, com requisitos de verificação distintos.',caption:'As portas representam decisões de escopo, não telas ou um produto existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-mfa-caderno-ensaios.svg',alt:'Página ilustrativa de caderno de ensaios para ativação, perda de dispositivo, recuperação e revogação de fator.',caption:'Ficha de teste fictícia para discussão de critérios de aceite; não é prova de um sistema implementado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261030-agente-erp-permissoes': [
         {asset:"./torno-agente-erp-tres-niveis.svg",alt:"Três cartões distintos mostram consulta, preparação e execução com limites de autorização diferentes.",caption:"Comparação editorial de níveis de ação; não representa uma interface ou implantação real. Ilustração original Torno Studio, 2026.",className:['blog-figure']},

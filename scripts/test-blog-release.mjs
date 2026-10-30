@@ -47,6 +47,7 @@ const expected = [
   ['torno-artigo-pt-20261029-liberacao-gradual', '/blog/liberacao-gradual-funcionalidade-piloto/', '9e19e3ba58ff1a486df37c39728212ca836d149d329be47c693cdc17e4dee71b', ['torno-piloto-escopo.svg', 'torno-piloto-decisao.svg']],
   ['torno-artigo-pt-20261030-sistema-sem-internet', '/blog/sistema-sem-internet-dados-sincronizacao/', '8bcfd94a4508c9d77058d0508d2d3638d0883a7d1cefaac30ee2ec93f0d1c84e', ['torno-offline-mapa.svg', 'torno-registro-passaporte.svg']],
   ['torno-artigo-pt-20261030-agente-erp-permissoes', '/blog/agente-ia-erp-permissoes-acoes/', 'bd62a4a62797602e5f4da6abb615b1856789ef16087f3f738c1954d78bc5af0d', ['torno-agente-erp-tres-niveis.svg', 'torno-agente-erp-matriz.svg']],
+  ['torno-artigo-pt-20261030-mfa-aceite', '/blog/autenticacao-dois-fatores-sistema-requisitos-aceite/', '4a9bf76b592884b84f2620a52d6cc4f38686a8ea0f6b69cc92fc806370615aeb', ['torno-mfa-duas-portas.svg', 'torno-mfa-caderno-ensaios.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261030-mfa-aceite": {
+    answer: "Antes de contratar autenticação de dois fatores para um sistema, defina quais perfis e ações exigem MFA, quais métodos serão aceitos e como uma pessoa legítima recuperará o acesso após perder o dispositivo. O aceite deve provar o fluxo normal, a troca e revogação do fator e a recusa de tentativas de contornar a proteção.",
+    takeaways: [
+      "Relacione perfis e ações sensíveis aos momentos em que a verificação adicional será exigida.",
+      "Especifique ativação, troca, perda do dispositivo e recuperação com responsáveis e registros.",
+      "Demonstre casos legítimos e tentativas de contorno com contas fictícias em ambiente autorizado.",
+    ],
+  },
   "torno-artigo-pt-20261030-agente-erp-permissoes": {
     answer: "Antes de integrar um agente de IA ao ERP, delimite separadamente o que ele pode consultar, preparar e executar. Para cada ação, defina usuário, dados, recurso, aprovação e evidência no sistema de destino; uma resposta no chat não comprova que a mudança foi autorizada ou concluída.",
     takeaways: [
