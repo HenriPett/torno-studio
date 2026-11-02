@@ -337,6 +337,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-etiquetas-ensaio.svg', digest: 'f12345b795cf4e4ea7e387dfe761de8ed41b536b2e3cccfdd3a50f3878e14b05' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261102-assinatura-status', intent_id: 'buyer-esign-system-status-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/assinatura-eletronica-sistema-status-documento-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/assinatura-eletronica-sistema-status-documento-aceite/`,
+    digest: 'e2a17685901aa2f20895a0f5474246bc5b5caa34985dcbc5867d251710dd791f', digestScope: 'file',
+    assets: [
+      { path: 'torno-documento-estados.svg', digest: '94673132873bec579afaf5e795fa4f7641cdf9294fad5da559eefff3bf8aaf50' },
+      { path: 'torno-assinatura-recibo.svg', digest: '3295bfbf4dc1a7be47042bbc4c9bb96af7bac4924777b1997758d3578d6e6fd6' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -691,6 +700,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261102-assinatura-status': [
+        {asset:'./torno-documento-estados.svg',alt:'Documento ilustrativo versão 01 com carimbo Aguardando outra pessoa; rodapé distingue envio, assinatura parcial e conclusão.',caption:'Estados ilustrativos para discutir escopo; não reproduzem a interface de uma plataforma de assinatura. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-assinatura-recibo.svg',alt:'Recibo editorial de conferência reúne versão, signatários, estado confirmado no provedor e retorno ao ERP.',caption:'A ficha mostra o que pedir na demonstração; não é comprovante de assinatura nem resultado de cliente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261102-leitor-codigo-barras': [
         {asset:'./torno-bancada-leitura.svg',alt:'Bancada conceitual mostra uma etiqueta lida, um item identificado e a decisão operacional que ainda depende do sistema e de uma pessoa.',caption:'A leitura identifica dados; o movimento depende da regra e da confirmação acordadas. Exemplo ilustrativo, sem equipamento ou cliente real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

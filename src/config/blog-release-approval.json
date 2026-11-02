@@ -1265,6 +1265,32 @@
           "sha256": "f12345b795cf4e4ea7e387dfe761de8ed41b536b2e3cccfdd3a50f3878e14b05"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261102-assinatura-status",
+      "intentId": "buyer-esign-system-status-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/assinatura-eletronica-sistema-status-documento-aceite/",
+      "contentRevision": "e2a17685901aa2f20895a0f5474246bc5b5caa34985dcbc5867d251710dd791f",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-02T21:12:00Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-02T21:12:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 02/11/2026, 18h America/Sao_Paulo: commits editoriais e push na main autorizados após revisão independente.",
+        "review": "Revisão factual e editorial independente GO; imagens e diff final sujeitos à revisão antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-documento-estados.svg",
+          "sha256": "94673132873bec579afaf5e795fa4f7641cdf9294fad5da559eefff3bf8aaf50"
+        },
+        {
+          "path": "torno-assinatura-recibo.svg",
+          "sha256": "3295bfbf4dc1a7be47042bbc4c9bb96af7bac4924777b1997758d3578d6e6fd6"
+        }
+      ]
     }
   ]
 }

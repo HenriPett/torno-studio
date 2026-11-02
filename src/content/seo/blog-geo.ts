@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261102-assinatura-status": {
+    answer: "Uma integração de assinatura eletrônica deve liberar o próximo passo interno apenas quando o estado acordado for confirmado pelo provedor e registrado no sistema de origem. Convite enviado, link aberto ou assinatura parcial não bastam. Defina documento, versão, participantes, estados, evidências e tratamento de falhas antes do aceite.",
+    takeaways: [
+      "Relacione documento e versão no sistema interno ao processo no provedor de assinatura.",
+      "Confirme a conclusão pela fonte oficial do provedor e diferencie assinatura individual de processo concluído.",
+      "Teste recusa, expiração, falha de retorno e eventos repetidos, com evidência no sistema de origem.",
+    ],
+  },
   "torno-artigo-pt-20261102-leitor-codigo-barras": {
     answer: "Antes de comprar um leitor de código de barras para o sistema, defina a tarefa que vem após a leitura, quais dados precisam constar da etiqueta, que equipamento será usado e como a aplicação confirma ou recusa a operação. Identificar um item não atualiza o estoque por si só; o aceite deve provar resultados normais, códigos desconhecidos, leituras difíceis e repetidas.",
     takeaways: [
