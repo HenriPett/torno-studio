@@ -1213,6 +1213,32 @@
           "sha256": "0a38592c18e0c1ee4e783224c18946249c9ffe1e7b8e789ebfae993edeaa5d28"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261102-isolamento-multiempresa",
+      "intentId": "buyer-multitenant-isolation-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/sistema-multiempresa-isolamento-dados-aceite/",
+      "contentRevision": "63ce1cc1a12e21ecb8557fb67b979e7c40f868e442ed66e99fa43f2018128187",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-02T11:19:42Z",
+      "reviewedBy": "Revisor factual e visual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-02T11:19:42Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 02/11/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO para artigo e SVGs; integrador valida diff final, build, mobile/desktop e release antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-multiempresa-vitrines.svg",
+          "sha256": "42f92e8758d72c518bfef6f66d662156ce96fa176295d5a6f3c763255138301b"
+        },
+        {
+          "path": "torno-multiempresa-ensaio.svg",
+          "sha256": "c4fc22a99b6e896bd053513ea3ca34d50821ff6a8ebe81d56afdd5041571b227"
+        }
+      ]
     }
   ]
 }

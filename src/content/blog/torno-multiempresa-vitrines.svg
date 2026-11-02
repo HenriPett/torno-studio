@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">Dois arquivos de empresas com uma fronteira de acesso</title>
+<desc id="desc">Ilustração conceitual: registros da Empresa A e da Empresa B ficam em lados separados; uma tentativa cruzada é barrada.</desc>
+<rect width="1200" height="650" fill="#edf2ed"/>
+<path d="M0 0H1200V160H0Z" fill="#153f39"/>
+<text x="60" y="92" font-family="Arial,sans-serif" font-size="49" font-weight="700" fill="#f6f5e9">Uma fronteira entre organizações</text>
+<path d="M0 552 455 410 588 466 1200 292V650H0Z" fill="#d7e3db"/>
+<path d="M58 235 440 183 440 492 58 548Z" fill="#6fae9a" stroke="#194d43" stroke-width="6"/>
+<path d="M440 183 503 227 503 525 440 492Z" fill="#2f756a" stroke="#194d43" stroke-width="6"/>
+<path d="M67 244 438 194 493 231 125 287Z" fill="#9ecbb8" stroke="#194d43" stroke-width="5"/>
+<path d="M696 213 1107 179 1107 499 696 535Z" fill="#e2b85d" stroke="#765b26" stroke-width="6"/>
+<path d="M1107 179 1159 224 1159 532 1107 499Z" fill="#b98a3e" stroke="#765b26" stroke-width="6"/>
+<path d="M703 220 1105 190 1151 228 750 261Z" fill="#f2d88c" stroke="#765b26" stroke-width="5"/>
+<text x="110" y="333" font-family="Arial,sans-serif" font-size="52" font-weight="700" fill="#123e38">EMPRESA A</text>
+<text x="760" y="315" font-family="Arial,sans-serif" font-size="52" font-weight="700" fill="#59431f">EMPRESA B</text>
+<path d="M111 366h258m-258 34h258m-258 34h200" stroke="#2f756a" stroke-width="11" stroke-linecap="round"/>
+<path d="M762 347h264m-264 34h264m-264 34h205" stroke="#b98a3e" stroke-width="11" stroke-linecap="round"/>
+<path d="M581 170v412" stroke="#173f3b" stroke-width="14" stroke-linecap="round"/>
+<path d="M616 170v412" stroke="#173f3b" stroke-width="14" stroke-linecap="round"/>
+<path d="M500 375h57" stroke="#d16648" stroke-width="13" stroke-linecap="round"/>
+<path d="m533 353 28 22-28 22" fill="none" stroke="#d16648" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="599" cy="375" r="49" fill="#d16648"/>
+<path d="m577 352 44 46m0-46-44 46" stroke="#fff9ef" stroke-width="12" stroke-linecap="round"/>
+<text x="65" y="615" font-family="Arial,sans-serif" font-size="26" fill="#2b4d48">Exemplo editorial fictício · a regra real depende de perfis, dados e exceções combinadas.</text>
+</svg>

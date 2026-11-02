@@ -319,6 +319,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-mfa-caderno-ensaios.svg', digest: '0a38592c18e0c1ee4e783224c18946249c9ffe1e7b8e789ebfae993edeaa5d28' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261102-isolamento-multiempresa', intent_id: 'buyer-multitenant-isolation-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/sistema-multiempresa-isolamento-dados-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/sistema-multiempresa-isolamento-dados-aceite/`,
+    digest: '63ce1cc1a12e21ecb8557fb67b979e7c40f868e442ed66e99fa43f2018128187', digestScope: 'file',
+    assets: [
+      { path: 'torno-multiempresa-vitrines.svg', digest: '42f92e8758d72c518bfef6f66d662156ce96fa176295d5a6f3c763255138301b' },
+      { path: 'torno-multiempresa-ensaio.svg', digest: 'c4fc22a99b6e896bd053513ea3ca34d50821ff6a8ebe81d56afdd5041571b227' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -673,6 +682,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261102-isolamento-multiempresa': [
+        {asset:'./torno-multiempresa-vitrines.svg',alt:'Ilustração editorial de dois arquivos de empresas, com registros próprios e um acesso cruzado barrado.',caption:'Cada empresa deve encontrar seus dados dentro do alcance contratado; a figura não representa um produto existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-multiempresa-ensaio.svg',alt:'Folha ilustrada de ensaio com ações permitidas e recusadas entre duas empresas fictícias.',caption:'A folha organiza perguntas para o aceite; não é prova de teste executado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261030-mfa-aceite': [
         {asset:'./torno-mfa-duas-portas.svg',alt:'Ilustração conceitual de duas portas: entrada da conta e ação sensível, com requisitos de verificação distintos.',caption:'As portas representam decisões de escopo, não telas ou um produto existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

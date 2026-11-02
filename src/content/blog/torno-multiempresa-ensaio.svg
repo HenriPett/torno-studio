@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">Tira de ensaio para conferir acesso permitido e negado</title>
+<desc id="desc">Exemplo fictício de prova de aceite: acesso da Empresa A ao seu próprio registro permitido; tentativa da Empresa A de abrir registro da Empresa B negada.</desc>
+<rect width="1200" height="650" fill="#142e31"/>
+<path d="M78 0h1044v650H78z" fill="#f4f0e5"/>
+<path d="M78 0h1044v58H78z" fill="#d4e3da"/>
+<path d="M78 593h1044v57H78z" fill="#d4e3da"/>
+<path d="M79 0h17v650H79zm1026 0h17v650h-17z" fill="#d3cfc1"/>
+<circle cx="118" cy="32" r="10" fill="#f4f0e5"/><circle cx="1081" cy="32" r="10" fill="#f4f0e5"/>
+<circle cx="118" cy="619" r="10" fill="#f4f0e5"/><circle cx="1081" cy="619" r="10" fill="#f4f0e5"/>
+<text x="148" y="129" font-family="Arial,sans-serif" font-size="50" font-weight="700" fill="#163f3b">ENSAIO DE FRONTEIRA</text>
+<text x="150" y="172" font-family="Arial,sans-serif" font-size="28" fill="#526966">Duas organizações fictícias · mesmo caminho de consulta</text>
+<path d="M148 209h905" stroke="#9fb3aa" stroke-width="3"/>
+<text x="150" y="266" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#183e3b">A abre registro de A</text>
+<path d="M832 234h222v72H832z" rx="7" fill="#d6e9db" stroke="#28694d" stroke-width="4"/>
+<text x="849" y="280" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#28694d">PERMITIDO</text>
+<path d="M148 325h905" stroke="#9fb3aa" stroke-width="3"/>
+<text x="150" y="385" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#183e3b">A tenta registro de B</text>
+<path d="M832 351h222v72H832z" rx="7" fill="#f2d8c8" stroke="#af553d" stroke-width="4"/>
+<text x="860" y="398" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#af553d">NEGADO</text>
+<path d="M148 444h905" stroke="#9fb3aa" stroke-width="3"/>
+<text x="149" y="495" font-family="Arial,sans-serif" font-size="30" fill="#34524b">O resultado deve ser observado no serviço e registrado.</text>
+<text x="149" y="550" font-family="Arial,sans-serif" font-size="24" fill="#5a746c">Ilustração original Torno Studio, 2026 · não é relatório de teste real.</text>
+</svg>

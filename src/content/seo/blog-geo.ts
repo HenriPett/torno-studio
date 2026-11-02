@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261102-isolamento-multiempresa": {
+    answer: "Antes de aceitar um sistema multiempresa, combine quais dados pertencem a cada organização e teste com usuários e registros fictícios de duas empresas. Confira tanto o acesso permitido aos próprios dados quanto a recusa de consultas, links, arquivos, exportações e alterações dirigidas aos dados da outra empresa; esconder botões não prova isolamento no serviço.",
+    takeaways: [
+      "Defina perfis, registros e exceções legítimas antes de demonstrar a fronteira entre organizações.",
+      "Teste a mesma informação por tela, link direto, arquivo, exportação e API quando esses caminhos fizerem parte do escopo.",
+      "Registre o resultado observado e repita os ensaios depois de mudanças no produto.",
+    ],
+  },
   "torno-artigo-pt-20261030-mfa-aceite": {
     answer: "Antes de contratar autenticação de dois fatores para um sistema, defina quais perfis e ações exigem MFA, quais métodos serão aceitos e como uma pessoa legítima recuperará o acesso após perder o dispositivo. O aceite deve provar o fluxo normal, a troca e revogação do fator e a recusa de tentativas de contornar a proteção.",
     takeaways: [
