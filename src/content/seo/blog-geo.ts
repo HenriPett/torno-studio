@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261102-leitor-codigo-barras": {
+    answer: "Antes de comprar um leitor de código de barras para o sistema, defina a tarefa que vem após a leitura, quais dados precisam constar da etiqueta, que equipamento será usado e como a aplicação confirma ou recusa a operação. Identificar um item não atualiza o estoque por si só; o aceite deve provar resultados normais, códigos desconhecidos, leituras difíceis e repetidas.",
+    takeaways: [
+      "Leve etiquetas representativas e diferencie GTIN, lote, série e códigos internos conforme a tarefa.",
+      "Teste o dispositivo e a forma de entrada no aplicativo escolhido, sem presumir compatibilidade universal.",
+      "Separe custo de hardware da integração e registre erros, confirmações e resultado no sistema de destino.",
+    ],
+  },
   "torno-artigo-pt-20261102-isolamento-multiempresa": {
     answer: "Antes de aceitar um sistema multiempresa, combine quais dados pertencem a cada organização e teste com usuários e registros fictícios de duas empresas. Confira tanto o acesso permitido aos próprios dados quanto a recusa de consultas, links, arquivos, exportações e alterações dirigidas aos dados da outra empresa; esconder botões não prova isolamento no serviço.",
     takeaways: [

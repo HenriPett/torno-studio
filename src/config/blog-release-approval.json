@@ -1239,6 +1239,32 @@
           "sha256": "c4fc22a99b6e896bd053513ea3ca34d50821ff6a8ebe81d56afdd5041571b227"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261102-leitor-codigo-barras",
+      "intentId": "buyer-barcode-scanner-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/leitor-codigo-barras-sistema-requisitos-aceite/",
+      "contentRevision": "a8f3632b4d36bcbbfb0cd6510de1b2a294ef41bac738b259bcb00b3975811d6f",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-02T15:10:02Z",
+      "reviewedBy": "Revisor factual e visual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-02T15:10:02Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 02/11/2026, 12h America/Sao_Paulo: commits editoriais e push na main dos dois projetos autorizados após revisão independente.",
+        "review": "Revisão factual, editorial e visual independente do autor GO para artigo e SVGs; integrador valida diff final, build, mobile/desktop e release antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais necessários; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-bancada-leitura.svg",
+          "sha256": "98bc3692d04c69aa09eae0e2d9501f796bca3db37eecf849d686778bb238a351"
+        },
+        {
+          "path": "torno-etiquetas-ensaio.svg",
+          "sha256": "f12345b795cf4e4ea7e387dfe761de8ed41b536b2e3cccfdd3a50f3878e14b05"
+        }
+      ]
     }
   ]
 }

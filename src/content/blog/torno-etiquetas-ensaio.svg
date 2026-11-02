@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">Amostras conceituais para ensaiar leitura de etiquetas</title>
+<desc id="desc">Quatro adesivos ilustrativos espalhados sobre uma superfície: leitura normal, código desconhecido, etiqueta amassada e repetição. Os traços são decorativos e não codificam dados válidos.</desc>
+<rect width="1200" height="650" fill="#e3e7df"/>
+<path d="M0 0h1200v115H0z" fill="#253f43"/>
+<text x="58" y="69" font-family="Arial,sans-serif" font-size="44" font-weight="700" fill="#f7f4e9">Quatro amostras antes de comprar o leitor</text>
+<path d="M0 115h1200M0 650h1200" stroke="#94aaa0" stroke-width="4"/>
+<path d="M20 160h1160M20 272h1160M20 384h1160M20 496h1160" stroke="#d1dbd1" stroke-width="2"/>
+<!-- scattered paper labels rather than a matrix -->
+<g transform="rotate(-7 241 299)">
+<path d="M70 199h342v181H70z" fill="#fffdf2" stroke="#8ba397" stroke-width="5"/>
+<path d="M70 199h342v35H70z" fill="#bdd9c5"/>
+<text x="93" y="284" font-family="Arial,sans-serif" font-size="31" font-weight="700" fill="#1d4a40">LEITURA NORMAL</text>
+<path d="M93 328h28m18 0h15m18 0h34m17 0h12m16 0h25" stroke="#758d81" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g transform="rotate(5 635 257)">
+<path d="M480 159h322v193H480z" fill="#fffdf2" stroke="#8ba397" stroke-width="5"/>
+<path d="M480 159h322v35H480z" fill="#ead5af"/>
+<text x="503" y="254" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#745332">DESCONHECIDO</text>
+<text x="504" y="300" font-family="Arial,sans-serif" font-size="25" fill="#745332">Pedir conferência</text>
+</g>
+<g transform="rotate(-4 971 324)">
+<path d="M843 213h302v210H843z" fill="#fffdf2" stroke="#8ba397" stroke-width="5"/>
+<path d="M843 213h302v35H843z" fill="#e9c7b5"/>
+<path d="m864 275 28 25-20 29 37 18-18 36" fill="none" stroke="#b87052" stroke-width="8" stroke-linecap="round"/>
+<text x="922" y="313" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#754d3c">AMASSADA</text>
+<text x="922" y="352" font-family="Arial,sans-serif" font-size="24" fill="#754d3c">Não presumir dado</text>
+</g>
+<g transform="rotate(7 448 483)">
+<path d="M267 399h395v170H267z" fill="#fffdf2" stroke="#8ba397" stroke-width="5"/>
+<path d="M267 399h395v35H267z" fill="#bcd2df"/>
+<text x="292" y="490" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#31576b">LEITURA REPETIDA</text>
+<text x="293" y="535" font-family="Arial,sans-serif" font-size="24" fill="#31576b">A ação duplicou?</text>
+</g>
+<text x="701" y="529" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#234a40">Registre o resultado observado</text>
+<text x="59" y="613" font-family="Arial,sans-serif" font-size="22" fill="#3a5650">Amostras inventadas · traços decorativos, sem código de barras válido.</text>
+</svg>

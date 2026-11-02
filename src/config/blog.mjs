@@ -328,6 +328,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-multiempresa-ensaio.svg', digest: 'c4fc22a99b6e896bd053513ea3ca34d50821ff6a8ebe81d56afdd5041571b227' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261102-leitor-codigo-barras', intent_id: 'buyer-barcode-scanner-system-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/leitor-codigo-barras-sistema-requisitos-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/leitor-codigo-barras-sistema-requisitos-aceite/`,
+    digest: 'a8f3632b4d36bcbbfb0cd6510de1b2a294ef41bac738b259bcb00b3975811d6f', digestScope: 'file',
+    assets: [
+      { path: 'torno-bancada-leitura.svg', digest: '98bc3692d04c69aa09eae0e2d9501f796bca3db37eecf849d686778bb238a351' },
+      { path: 'torno-etiquetas-ensaio.svg', digest: 'f12345b795cf4e4ea7e387dfe761de8ed41b536b2e3cccfdd3a50f3878e14b05' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -682,6 +691,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261102-leitor-codigo-barras': [
+        {asset:'./torno-bancada-leitura.svg',alt:'Bancada conceitual mostra uma etiqueta lida, um item identificado e a decisão operacional que ainda depende do sistema e de uma pessoa.',caption:'A leitura identifica dados; o movimento depende da regra e da confirmação acordadas. Exemplo ilustrativo, sem equipamento ou cliente real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-etiquetas-ensaio.svg',alt:'Folha editorial de ensaio apresenta etiquetas fictícias para testar leitura normal, código desconhecido, repetição e etiqueta difícil de ler.',caption:'O ensaio compara dados capturados e resultado operacional esperado; símbolos ilustrativos não são códigos válidos. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261102-isolamento-multiempresa': [
         {asset:'./torno-multiempresa-vitrines.svg',alt:'Ilustração editorial de dois arquivos de empresas, com registros próprios e um acesso cruzado barrado.',caption:'Cada empresa deve encontrar seus dados dentro do alcance contratado; a figura não representa um produto existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
