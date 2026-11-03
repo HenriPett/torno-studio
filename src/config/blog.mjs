@@ -355,6 +355,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-pdf-conferencia.svg', digest: '703e2c4047801753dd7f534a0f9c21fb54d725821f37e57a1e2c8fa8a6805912' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261103-login-unico-sso', intent_id: 'buyer-internal-system-sso-access-lifecycle-pt', locale: 'pt-BR',
+    path: '/blog/login-unico-sso-sistema-interno-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/login-unico-sso-sistema-interno-aceite/`,
+    digest: '16be8a7cfdd64e473367d641914368e234d26bcf09f5b3f43a5024d28202c6f9', digestScope: 'file',
+    assets: [
+      { path: 'torno-sso-portas.svg', digest: 'c842c7ef7e46c917465ebabc8988c10144431f300f80e2571ee7b64b15b82fdc' },
+      { path: 'torno-sso-saida.svg', digest: '52af59426e13cdde4627e38085a9954786be26e7f9a1cf94e20c230cc0a65174' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -709,6 +718,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261103-login-unico-sso': [
+        {asset:'./torno-sso-portas.svg',alt:'Ilustração de um acesso corporativo a uma porta de aplicação: identidade reconhecida, mas a decisão de permissão ainda depende da porta correta.',caption:'A porta representa uma decisão de acesso, não uma tela ou controle de segurança real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-sso-saida.svg',alt:'Ilustração de um crachá com acesso retirado ao lado de um relógio que pergunta se a sessão ainda está aberta.',caption:'Crachá e relógio são símbolos de um ensaio de desligamento, sem representar uma configuração técnica real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261103-ocr-pdf-revisao': [
         {asset:'./torno-pdf-campos.svg',alt:'Folha fictícia de pedido de compra com campos destacados como lido com clareza, pedir revisão e campo ausente.',caption:'O documento ilustrativo mostra que campos de uma mesma página podem pedir tratamentos diferentes. Não representa um pedido real nem resultado de ferramenta. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

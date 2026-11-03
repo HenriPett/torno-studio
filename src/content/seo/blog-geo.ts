@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261103-login-unico-sso": {
+    answer: "Antes de integrar login único a um sistema interno, defina quem pode entrar, como a identidade corporativa se vincula ao cadastro local, quais ações são autorizadas e como o acesso termina quando a pessoa muda de função ou sai. SSO autentica a entrada, mas não garante provisionamento, permissões corretas ou encerramento imediato de sessões próprias da aplicação.",
+    takeaways: [
+      "Distinga autenticação, vínculo de conta, autorização e provisionamento antes de fechar o escopo.",
+      "Especifique responsável e evidência para criar, mudar e remover acesso, inclusive quando o processo for manual.",
+      "Teste desligamento com sessão aberta e o comportamento quando o provedor de identidade falha.",
+    ],
+  },
   "torno-artigo-pt-20261103-ocr-pdf-revisao": {
     answer: "Antes de usar dados extraídos de um PDF no sistema, defina que documentos entram, quais campos são necessários, como validar o resultado e quando uma pessoa deve revisar uma dúvida. O aceite precisa provar tanto a leitura normal quanto campos ausentes, ambíguos, documentos repetidos e falhas de gravação; texto reconhecido não é cadastro confirmado.",
     takeaways: [
