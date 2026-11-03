@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261103-whatsapp-avisos": {
+    answer: "Antes de integrar avisos automáticos por WhatsApp ao sistema, defina o evento de negócio que autoriza cada mensagem, quem consentiu em recebê-la, o modelo e a categoria aplicáveis, o custo esperado e o destino da resposta. O aceite deve provar estados normais, gatilhos repetidos, ausência de permissão, falhas e opt-out sem confundir tentativa de envio com entrega ou leitura.",
+    takeaways: [
+      "Parta de um estado confirmado do pedido e defina como evitar avisos duplicados.",
+      "Registre permissão de contato, opt-out, modelo e regras atuais da plataforma antes de enviar.",
+      "Teste resposta, encaminhamento humano e falha com dados fictícios e responsáveis definidos.",
+    ],
+  },
   "torno-artigo-pt-20261103-login-unico-sso": {
     answer: "Antes de integrar login único a um sistema interno, defina quem pode entrar, como a identidade corporativa se vincula ao cadastro local, quais ações são autorizadas e como o acesso termina quando a pessoa muda de função ou sai. SSO autentica a entrada, mas não garante provisionamento, permissões corretas ou encerramento imediato de sessões próprias da aplicação.",
     takeaways: [

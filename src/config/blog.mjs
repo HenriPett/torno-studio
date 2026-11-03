@@ -364,6 +364,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-sso-saida.svg', digest: '52af59426e13cdde4627e38085a9954786be26e7f9a1cf94e20c230cc0a65174' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261103-whatsapp-avisos', intent_id: 'buyer-whatsapp-system-notifications-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/whatsapp-sistema-avisos-automaticos-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/whatsapp-sistema-avisos-automaticos-aceite/`,
+    digest: '8170ec26a8b6cc6d507528d7bbf6ef606b006d1c68b74eef80cc073b956a5238', digestScope: 'file',
+    assets: [
+      { path: 'torno-whatsapp-pedido.svg', digest: '4da6716af030af0a3730862511d2874b596c2b67ebe1c58053232344c66c9c08' },
+      { path: 'torno-whatsapp-resposta.svg', digest: 'a54f82b14d7902092a9e9e649924b0db4ac61b84410e2a5a2b1985aff2ef3d89' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -718,6 +727,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261103-whatsapp-avisos': [
+        {asset:'./torno-whatsapp-pedido.svg',alt:'Ilustração editorial de um pedido fictício com carimbo de estado confirmado e rascunho de mensagem separado, mostrando que o aviso depende da decisão anterior.',caption:'O carimbo e o texto são fictícios e não representam interface, cliente ou mensagem enviada. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-whatsapp-resposta.svg',alt:'Cena editorial de uma conversa fictícia: a dúvida do cliente aparece ao lado de um posto de atendimento humano, sem prometer resposta automática.',caption:'A figura destaca o destino da resposta; balões e pessoas são conceituais. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261103-login-unico-sso': [
         {asset:'./torno-sso-portas.svg',alt:'Ilustração de um acesso corporativo a uma porta de aplicação: identidade reconhecida, mas a decisão de permissão ainda depende da porta correta.',caption:'A porta representa uma decisão de acesso, não uma tela ou controle de segurança real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

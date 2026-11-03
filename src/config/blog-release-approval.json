@@ -1343,6 +1343,32 @@
           "sha256": "52af59426e13cdde4627e38085a9954786be26e7f9a1cf94e20c230cc0a65174"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261103-whatsapp-avisos",
+      "intentId": "buyer-whatsapp-system-notifications-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/whatsapp-sistema-avisos-automaticos-aceite/",
+      "contentRevision": "8170ec26a8b6cc6d507528d7bbf6ef606b006d1c68b74eef80cc073b956a5238",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-03T21:10:00Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-03T21:10:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 03/11/2026, 18h America/Sao_Paulo: commits editoriais e push na main autorizados após revisão independente.",
+        "review": "Revisão factual e editorial independente GO; imagens e diff final sujeitos à revisão antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-whatsapp-pedido.svg",
+          "sha256": "4da6716af030af0a3730862511d2874b596c2b67ebe1c58053232344c66c9c08"
+        },
+        {
+          "path": "torno-whatsapp-resposta.svg",
+          "sha256": "a54f82b14d7902092a9e9e649924b0db4ac61b84410e2a5a2b1985aff2ef3d89"
+        }
+      ]
     }
   ]
 }
