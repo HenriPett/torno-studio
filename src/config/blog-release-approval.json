@@ -1291,6 +1291,32 @@
           "sha256": "3295bfbf4dc1a7be47042bbc4c9bb96af7bac4924777b1997758d3578d6e6fd6"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261103-ocr-pdf-revisao",
+      "intentId": "buyer-ocr-pdf-data-review-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/ocr-pdf-sistema-revisao-dados-aceite/",
+      "contentRevision": "921f4ca3343ebfbc6facc11869be8fed7d8ca026e2233e8fa8c7a47c2c12d171",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-03T11:30:00Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-03T11:30:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 03/11/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main autorizados após revisão independente.",
+        "review": "Revisão factual e editorial independente GO após ajuste de alt; imagens e diff final sujeitos à revisão antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem autoria, revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-pdf-campos.svg",
+          "sha256": "2f5dabb668ee6ee5b6f18e5a599eba21c2655b66f36540e9ad7ef4a108328805"
+        },
+        {
+          "path": "torno-pdf-conferencia.svg",
+          "sha256": "703e2c4047801753dd7f534a0f9c21fb54d725821f37e57a1e2c8fa8a6805912"
+        }
+      ]
     }
   ]
 }

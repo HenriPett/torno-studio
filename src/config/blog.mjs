@@ -346,6 +346,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-assinatura-recibo.svg', digest: '3295bfbf4dc1a7be47042bbc4c9bb96af7bac4924777b1997758d3578d6e6fd6' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261103-ocr-pdf-revisao', intent_id: 'buyer-ocr-pdf-data-review-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/ocr-pdf-sistema-revisao-dados-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/ocr-pdf-sistema-revisao-dados-aceite/`,
+    digest: '921f4ca3343ebfbc6facc11869be8fed7d8ca026e2233e8fa8c7a47c2c12d171', digestScope: 'file',
+    assets: [
+      { path: 'torno-pdf-campos.svg', digest: '2f5dabb668ee6ee5b6f18e5a599eba21c2655b66f36540e9ad7ef4a108328805' },
+      { path: 'torno-pdf-conferencia.svg', digest: '703e2c4047801753dd7f534a0f9c21fb54d725821f37e57a1e2c8fa8a6805912' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -700,6 +709,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261103-ocr-pdf-revisao': [
+        {asset:'./torno-pdf-campos.svg',alt:'Folha fictícia de pedido de compra com campos destacados como lido com clareza, pedir revisão e campo ausente.',caption:'O documento ilustrativo mostra que campos de uma mesma página podem pedir tratamentos diferentes. Não representa um pedido real nem resultado de ferramenta. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-pdf-conferencia.svg',alt:'Mesa de conferência ilustrada: documento de origem à esquerda e lupa sobre o único campo duvidoso antes do registro definitivo.',caption:'A cena ilustra a decisão de revisar uma exceção antes de gravar dados. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261102-assinatura-status': [
         {asset:'./torno-documento-estados.svg',alt:'Documento ilustrativo versão 01 com carimbo Aguardando outra pessoa; rodapé distingue envio, assinatura parcial e conclusão.',caption:'Estados ilustrativos para discutir escopo; não reproduzem a interface de uma plataforma de assinatura. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

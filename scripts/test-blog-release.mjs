@@ -49,6 +49,7 @@ const expected = [
   ['torno-artigo-pt-20261030-agente-erp-permissoes', '/blog/agente-ia-erp-permissoes-acoes/', 'bd62a4a62797602e5f4da6abb615b1856789ef16087f3f738c1954d78bc5af0d', ['torno-agente-erp-tres-niveis.svg', 'torno-agente-erp-matriz.svg']],
   ['torno-artigo-pt-20261030-mfa-aceite', '/blog/autenticacao-dois-fatores-sistema-requisitos-aceite/', '4a9bf76b592884b84f2620a52d6cc4f38686a8ea0f6b69cc92fc806370615aeb', ['torno-mfa-duas-portas.svg', 'torno-mfa-caderno-ensaios.svg']],
   ['torno-artigo-pt-20261102-isolamento-multiempresa', '/blog/sistema-multiempresa-isolamento-dados-aceite/', '63ce1cc1a12e21ecb8557fb67b979e7c40f868e442ed66e99fa43f2018128187', ['torno-multiempresa-vitrines.svg', 'torno-multiempresa-ensaio.svg']],
+  ['torno-artigo-pt-20261103-ocr-pdf-revisao', '/blog/ocr-pdf-sistema-revisao-dados-aceite/', '921f4ca3343ebfbc6facc11869be8fed7d8ca026e2233e8fa8c7a47c2c12d171', ['torno-pdf-campos.svg', 'torno-pdf-conferencia.svg']],
   ['torno-artigo-pt-20261102-assinatura-status', '/blog/assinatura-eletronica-sistema-status-documento-aceite/', 'e2a17685901aa2f20895a0f5474246bc5b5caa34985dcbc5867d251710dd791f', ['torno-documento-estados.svg', 'torno-assinatura-recibo.svg']],
   ['torno-artigo-pt-20261102-leitor-codigo-barras', '/blog/leitor-codigo-barras-sistema-requisitos-aceite/', 'a8f3632b4d36bcbbfb0cd6510de1b2a294ef41bac738b259bcb00b3975811d6f', ['torno-bancada-leitura.svg', 'torno-etiquetas-ensaio.svg']],
 ];

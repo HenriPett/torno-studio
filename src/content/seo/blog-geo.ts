@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261103-ocr-pdf-revisao": {
+    answer: "Antes de usar dados extraídos de um PDF no sistema, defina que documentos entram, quais campos são necessários, como validar o resultado e quando uma pessoa deve revisar uma dúvida. O aceite precisa provar tanto a leitura normal quanto campos ausentes, ambíguos, documentos repetidos e falhas de gravação; texto reconhecido não é cadastro confirmado.",
+    takeaways: [
+      "Comece por um tipo de documento e uma tarefa operacional concreta.",
+      "Separe leitura de texto, identificação de campos, validação, revisão e gravação no destino.",
+      "Ensaie exceções com arquivos autorizados e confira o registro final, sem prometer acurácia universal.",
+    ],
+  },
   "torno-artigo-pt-20261102-assinatura-status": {
     answer: "Uma integração de assinatura eletrônica deve liberar o próximo passo interno apenas quando o estado acordado for confirmado pelo provedor e registrado no sistema de origem. Convite enviado, link aberto ou assinatura parcial não bastam. Defina documento, versão, participantes, estados, evidências e tratamento de falhas antes do aceite.",
     takeaways: [
