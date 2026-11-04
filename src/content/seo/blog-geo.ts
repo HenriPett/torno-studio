@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261104-agendamento-reserva-dupla": {
+    answer: "Para evitar reserva dupla, defina o recurso, os intervalos que se sobrepõem e o momento da confirmação. No aceite, duas pessoas devem tentar confirmar a mesma vaga ao mesmo tempo; só uma pode receber confirmação, com orientação clara para a outra.",
+    takeaways: [
+      "Defina recurso, duração, preparo e estados que bloqueiam a vaga.",
+      "Trate a consulta de calendário externo como informação, não confirmação de reserva.",
+      "Teste tentativas concorrentes, falha e reenvio com resultados observáveis."
+    ]
+  },
   "torno-artigo-pt-20261104-dashboard-erp-divergencias": {
     answer: "Se dashboard e ERP mostram números diferentes, confira definição do indicador, população, filtros, período e última atualização antes do aceite. Compare um conjunto conhecido de registros e exija explicação reproduzível para diferenças remanescentes.",
     takeaways: [

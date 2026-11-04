@@ -1395,6 +1395,32 @@
           "sha256": "25608a0f6886944b6ae1de7fdf8609c3c6c42f3dba39c4f732f9ad0e500a9335"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261104-agendamento-reserva-dupla",
+      "intentId": "buyer-scheduling-double-booking-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/sistema-agendamento-reserva-dupla-aceite/",
+      "contentRevision": "09570877691f5d03639bb9c4332329b802de492895fd677dd152b185a0822838",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-04T15:03:57Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-04T15:03:57Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 04/11/2026, 12h America/Sao_Paulo: commits editoriais e push na main autorizados após revisão independente.",
+        "review": "Revisão factual e editorial independente GO; imagens e diff final sujeitos à revisão antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-agenda-sobreposicao.svg",
+          "sha256": "0b43f6ff13b7b26832706fb139adc05e21b4882c953cb983c999d63f074d8863"
+        },
+        {
+          "path": "torno-agenda-duas-tentativas.svg",
+          "sha256": "93e897ce6dce1d1215eaca8ba38f17999d2185e43a79df6c8e253a8102b04d75"
+        }
+      ]
     }
   ]
 }

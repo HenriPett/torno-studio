@@ -382,6 +382,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-painel-relogio.svg', digest: '25608a0f6886944b6ae1de7fdf8609c3c6c42f3dba39c4f732f9ad0e500a9335' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261104-agendamento-reserva-dupla', intent_id: 'buyer-scheduling-double-booking-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/sistema-agendamento-reserva-dupla-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/sistema-agendamento-reserva-dupla-aceite/`,
+    digest: '09570877691f5d03639bb9c4332329b802de492895fd677dd152b185a0822838', digestScope: 'file',
+    assets: [
+      { path: 'torno-agenda-sobreposicao.svg', digest: '0b43f6ff13b7b26832706fb139adc05e21b4882c953cb983c999d63f074d8863' },
+      { path: 'torno-agenda-duas-tentativas.svg', digest: '93e897ce6dce1d1215eaca8ba38f17999d2185e43a79df6c8e253a8102b04d75' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -736,6 +745,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261104-agendamento-reserva-dupla': [
+        {asset:'./torno-agenda-sobreposicao.svg',alt:'Régua de horários de uma sala fictícia, com duas faixas de reserva parcialmente sobrepostas e a área de conflito destacada.',caption:'Defina o intervalo que bloqueia o recurso, inclusive preparo quando aplicável. Horários e sala são fictícios; ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-agenda-duas-tentativas.svg',alt:'Dois comprovantes fictícios de tentativa para a mesma Sala Azul: um confirmado e outro recusado, com próxima ação visível para o solicitante.',caption:'Duas pessoas podem ver a vaga; só o resultado de confirmação decide a reserva. Cena fictícia; ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261104-dashboard-erp-divergencias': [
         {asset:'./torno-painel-lentes.svg',alt:'Ilustração editorial de uma mesma pilha de pedidos vista por duas lentes, cada uma destacando um conjunto diferente de estados.',caption:'As lentes mostram a importância de declarar o filtro; não representam relatório ou cliente real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
