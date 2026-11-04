@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Folha de ensaio para estados de pagamento</title>
+  <desc id="desc">Página ilustrada de teste com quatro situações fictícias: retorno antes da confirmação, sucesso posterior, aviso repetido e pagamento recusado.</desc>
+  <rect width="1200" height="720" fill="#e5e8e3"/>
+  <g transform="translate(92 37) rotate(1 500 310)">
+    <rect x="15" y="18" width="1000" height="630" rx="12" fill="#9dada1" opacity=".4"/>
+    <rect width="1000" height="630" rx="12" fill="#fffefa" stroke="#1d403b" stroke-width="4"/>
+    <path d="M60 139H941M60 220H941M60 307H941M60 394H941M60 481H941M60 568H941" stroke="#abc3b5" stroke-width="2"/>
+    <text x="60" y="75" fill="#153d37" font-family="Arial,sans-serif" font-size="37" font-weight="700">ENSAIO DO PEDIDO</text>
+    <text x="61" y="118" fill="#547169" font-family="Arial,sans-serif" font-size="19">MODELO FICTÍCIO · RESULTADO ESPERADO ANTES DO TESTE</text>
+    <g fill="#28514a" font-family="Arial,sans-serif" font-size="21" font-weight="700"><text x="70" y="188">CENÁRIO</text><text x="493" y="188">O QUE CONFERIR</text></g>
+    <g fill="#173c39" font-family="Arial,sans-serif" font-size="24">
+      <text x="70" y="275">01  Retorno antecipado</text><text x="493" y="275">Pedido ainda pendente</text>
+      <text x="70" y="362">02  Sucesso posterior</text><text x="493" y="362">Uma liberação registrada</text>
+      <text x="70" y="449">03  Aviso repetido</text><text x="493" y="449">Sem segunda liberação</text>
+      <text x="70" y="536">04  Pagamento recusado</text><text x="493" y="536">Próxima ação visível</text>
+    </g>
+    <g fill="none" stroke="#33806a" stroke-width="4"><rect x="879" y="241" width="27" height="27" rx="4"/><rect x="879" y="328" width="27" height="27" rx="4"/><rect x="879" y="415" width="27" height="27" rx="4"/><rect x="879" y="502" width="27" height="27" rx="4"/></g>
+    <text x="60" y="607" fill="#547169" font-family="Arial,sans-serif" font-size="18">Preencha evidência, versão e pendências no sistema real.</text>
+  </g>
+  <text x="94" y="692" fill="#36534c" font-family="Arial,sans-serif" font-size="17">ILUSTRAÇÃO EDITORIAL ORIGINAL · TORNO STUDIO · 2026</text>
+</svg>

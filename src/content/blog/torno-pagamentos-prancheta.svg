@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Pedido e estados de pagamento</title>
+  <desc id="desc">Prancheta ilustrada: pedido fictício 042 ao lado de três carimbos, pendente, aprovado e recusado. Apenas o estado acordado confirma o pedido.</desc>
+  <rect width="1200" height="680" fill="#ebf0ea"/>
+  <path d="M0 570Q300 520 600 575T1200 560V680H0Z" fill="#d7e5d9"/>
+  <g transform="translate(89 65) rotate(-3 300 275)">
+    <rect x="14" y="14" width="570" height="535" rx="23" fill="#b4c1b7" opacity=".46"/>
+    <rect width="570" height="535" rx="23" fill="#fffdfa" stroke="#173c39" stroke-width="5"/>
+    <rect x="212" y="-13" width="146" height="47" rx="16" fill="#173c39"/>
+    <circle cx="285" cy="11" r="8" fill="#b9d2a0"/>
+    <text x="47" y="93" fill="#173c39" font-family="Arial,sans-serif" font-size="22" font-weight="700">PEDIDO FICTÍCIO</text>
+    <text x="47" y="173" fill="#173c39" font-family="Arial,sans-serif" font-size="72" font-weight="700">#042</text>
+    <path d="M47 218H518" stroke="#abc3b4" stroke-width="3"/>
+    <text x="47" y="272" fill="#315650" font-family="Arial,sans-serif" font-size="26">Cliente chegou ao checkout</text>
+    <text x="47" y="323" fill="#315650" font-family="Arial,sans-serif" font-size="26">Confirmação a verificar</text>
+    <rect x="47" y="373" width="470" height="103" rx="14" fill="#e3eee4"/>
+    <text x="71" y="415" fill="#173c39" font-family="Arial,sans-serif" font-size="21" font-weight="700">REGRA DE NEGÓCIO</text>
+    <text x="71" y="451" fill="#315650" font-family="Arial,sans-serif" font-size="19">Qual estado libera a próxima ação?</text>
+  </g>
+  <g font-family="Arial,sans-serif" font-weight="700" text-anchor="middle">
+    <g transform="translate(775 102) rotate(8)"><rect width="345" height="130" rx="18" fill="#fff9e6" stroke="#af7928" stroke-width="5"/><text x="173" y="78" fill="#845b19" font-size="39">PENDENTE</text></g>
+    <g transform="translate(713 280) rotate(-5)"><rect width="380" height="140" rx="20" fill="#dcf1e0" stroke="#1c7453" stroke-width="5"/><circle cx="54" cy="69" r="27" fill="#1c7453"/><path d="m41 68 9 10 18-22" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/><text x="223" y="83" fill="#175c45" font-size="40">APROVADO</text></g>
+    <g transform="translate(790 474) rotate(5)"><rect width="338" height="130" rx="18" fill="#f9e8e5" stroke="#b45d54" stroke-width="5"/><text x="169" y="77" fill="#924840" font-size="38">RECUSADO</text></g>
+  </g>
+  <text x="91" y="630" fill="#36534c" font-family="Arial,sans-serif" font-size="17">ILUSTRAÇÃO EDITORIAL ORIGINAL · TORNO STUDIO · 2026</text>
+</svg>

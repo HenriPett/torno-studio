@@ -1421,6 +1421,32 @@
           "sha256": "93e897ce6dce1d1215eaca8ba38f17999d2185e43a79df6c8e253a8102b04d75"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261104-pagamentos-status",
+      "intentId": "buyer-payment-integration-order-status-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/integracao-pagamentos-status-pedido-aceite/",
+      "contentRevision": "7fec1f79d3421976cdce7eb4c769864bf43cc51c81f387ab47cba5d9d208a8cc",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-04T21:05:30Z",
+      "reviewedBy": "Revisor factual e visual independente (agente Codex)",
+      "reviewedAt": "2026-11-04T21:04:48Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 04/11/2026, 18h America/Sao_Paulo: commits editoriais e push na main autorizados após revisão independente.",
+        "review": "Revisão independente GO do Markdown e dos dois SVGs com fontes primárias; diff final sujeito a conferência antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-pagamentos-prancheta.svg",
+          "sha256": "204aebe2878ff8e6b140cdce5832596cba7ea3465fa35ffafb1d12038a2eeb54"
+        },
+        {
+          "path": "torno-pagamentos-ensaio.svg",
+          "sha256": "0094535b1115ddea970fe1c0842c93bd9544ee6806c0bea2beb5ec4b57a5bc34"
+        }
+      ]
     }
   ]
 }

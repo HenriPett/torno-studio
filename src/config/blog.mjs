@@ -391,6 +391,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-agenda-duas-tentativas.svg', digest: '93e897ce6dce1d1215eaca8ba38f17999d2185e43a79df6c8e253a8102b04d75' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261104-pagamentos-status', intent_id: 'buyer-payment-integration-order-status-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/integracao-pagamentos-status-pedido-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/integracao-pagamentos-status-pedido-aceite/`,
+    digest: '7fec1f79d3421976cdce7eb4c769864bf43cc51c81f387ab47cba5d9d208a8cc', digestScope: 'file',
+    assets: [
+      { path: 'torno-pagamentos-prancheta.svg', digest: '204aebe2878ff8e6b140cdce5832596cba7ea3465fa35ffafb1d12038a2eeb54' },
+      { path: 'torno-pagamentos-ensaio.svg', digest: '0094535b1115ddea970fe1c0842c93bd9544ee6806c0bea2beb5ec4b57a5bc34' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -749,6 +758,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261104-agendamento-reserva-dupla': [
         {asset:'./torno-agenda-sobreposicao.svg',alt:'Régua de horários de uma sala fictícia, com duas faixas de reserva parcialmente sobrepostas e a área de conflito destacada.',caption:'Defina o intervalo que bloqueia o recurso, inclusive preparo quando aplicável. Horários e sala são fictícios; ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-agenda-duas-tentativas.svg',alt:'Dois comprovantes fictícios de tentativa para a mesma Sala Azul: um confirmado e outro recusado, com próxima ação visível para o solicitante.',caption:'Duas pessoas podem ver a vaga; só o resultado de confirmação decide a reserva. Cena fictícia; ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261104-pagamentos-status': [
+        {asset:'./torno-pagamentos-prancheta.svg',alt:'Prancheta editorial com um pedido fictício à esquerda e três carimbos distintos de pagamento: pendente, aprovado e recusado.',caption:'Ilustração original Torno Studio, 2026. Pedido e carimbos são fictícios; não representam a interface de um provedor.',className:['blog-figure']},
+        {asset:'./torno-pagamentos-ensaio.svg',alt:'Página ilustrada de ensaio com quatro linhas de pedidos fictícios: retorno antecipado, confirmação posterior, aviso repetido e recusa.',caption:'Folha de ensaio original Torno Studio, 2026. Os pedidos são fictícios e não comprovam teste executado.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261104-dashboard-erp-divergencias': [
         {asset:'./torno-painel-lentes.svg',alt:'Ilustração editorial de uma mesma pilha de pedidos vista por duas lentes, cada uma destacando um conjunto diferente de estados.',caption:'As lentes mostram a importância de declarar o filtro; não representam relatório ou cliente real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
