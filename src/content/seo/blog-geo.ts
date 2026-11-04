@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261104-dashboard-erp-divergencias": {
+    answer: "Se dashboard e ERP mostram números diferentes, confira definição do indicador, população, filtros, período e última atualização antes do aceite. Compare um conjunto conhecido de registros e exija explicação reproduzível para diferenças remanescentes.",
+    takeaways: [
+      "Defina fonte, inclusão, exclusão, unidade e período de cada indicador.",
+      "Mostre quando o dado foi atualizado e trate falhas de carga sem exibir sucesso fictício.",
+      "Teste a conciliação com registros e filtros conhecidos antes de aceitar o painel."
+    ]
+  },
   "torno-artigo-pt-20261103-whatsapp-avisos": {
     answer: "Antes de integrar avisos automáticos por WhatsApp ao sistema, defina o evento de negócio que autoriza cada mensagem, quem consentiu em recebê-la, o modelo e a categoria aplicáveis, o custo esperado e o destino da resposta. O aceite deve provar estados normais, gatilhos repetidos, ausência de permissão, falhas e opt-out sem confundir tentativa de envio com entrega ou leitura.",
     takeaways: [

@@ -373,6 +373,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-whatsapp-resposta.svg', digest: 'a54f82b14d7902092a9e9e649924b0db4ac61b84410e2a5a2b1985aff2ef3d89' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261104-dashboard-erp-divergencias', intent_id: 'buyer-dashboard-erp-metric-reconciliation-pt', locale: 'pt-BR',
+    path: '/blog/dashboard-erp-numeros-divergentes-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/dashboard-erp-numeros-divergentes-aceite/`,
+    digest: '17af47218f9fc87946fc677504429d92b7ec51658b50bfa4b9955660d322b588', digestScope: 'file',
+    assets: [
+      { path: 'torno-painel-lentes.svg', digest: 'bac06803722a928e1fdccc71518f0520ff9f9c3eab123ee0a1bfc85aed50d7f3' },
+      { path: 'torno-painel-relogio.svg', digest: '25608a0f6886944b6ae1de7fdf8609c3c6c42f3dba39c4f732f9ad0e500a9335' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -727,6 +736,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261030-sistema-sem-internet': [
         {asset:"./torno-offline-mapa.svg",alt:"Mapa conceitual distingue dados no aparelho, confirmação no servidor e a fronteira da conexão, com perguntas sobre disponibilidade e gravação.",caption:"Delimite a tarefa e confira a evidência em cada lugar; voltar a conexão não comprova sincronização concluída. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
         {asset:"./torno-registro-passaporte.svg",alt:"Caderno editorial aberto reúne perguntas sobre identidade e atualização do registro, confirmação no destino, persistência local e divergências.",caption:"Registre o que pode ser comprovado, as condições de preservação e as pendências; a ficha não representa uma interface de produto. Ilustração original Torno Studio, 2026.",className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261104-dashboard-erp-divergencias': [
+        {asset:'./torno-painel-lentes.svg',alt:'Ilustração editorial de uma mesma pilha de pedidos vista por duas lentes, cada uma destacando um conjunto diferente de estados.',caption:'As lentes mostram a importância de declarar o filtro; não representam relatório ou cliente real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-painel-relogio.svg',alt:'Cena editorial de um relógio próximo a uma fotografia datada do painel e a um registro mais recente na origem, mostrando a diferença entre hora de consulta e hora do dado.',caption:'A fotografia e o relógio ilustram a idade da informação, sem prometer atualização em tempo real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261103-whatsapp-avisos': [
         {asset:'./torno-whatsapp-pedido.svg',alt:'Ilustração editorial de um pedido fictício com carimbo de estado confirmado e rascunho de mensagem separado, mostrando que o aviso depende da decisão anterior.',caption:'O carimbo e o texto são fictícios e não representam interface, cliente ou mensagem enviada. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">A mesma pilha de pedidos vista por duas lentes</title>
+  <desc id="desc">À esquerda, uma lente inclui todos os pedidos criados; à direita, outra destaca apenas os concluídos. É um exemplo fictício de filtros diferentes sobre a mesma fonte.</desc>
+  <rect width="1200" height="675" fill="#e8e5dd"/>
+  <path d="M0 528Q289 500 611 529T1200 522V675H0Z" fill="#d9d6ce"/>
+  <text x="62" y="77" font-family="DejaVu Sans, sans-serif" font-size="29" font-weight="700" fill="#263e50">A MESMA FONTE, DOIS RECORTES</text>
+  <text x="62" y="115" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#4f6971">Pedidos fictícios vistos por regras de seleção diferentes</text>
+
+  <g transform="rotate(-5 593 348)">
+    <rect x="414" y="190" width="370" height="286" rx="12" fill="#c7c2b7" opacity=".42"/>
+    <rect x="396" y="174" width="370" height="286" rx="12" fill="#fbf8ef" stroke="#bab6ad" stroke-width="4"/>
+    <text x="429" y="218" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#314d5a">FONTE · PEDIDOS</text>
+    <path d="M428 235H732" stroke="#c7cdc9" stroke-width="4"/>
+    <rect x="429" y="254" width="303" height="38" rx="6" fill="#d9e9e3"/>
+    <text x="444" y="279" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#2d6258">#A · concluído</text>
+    <rect x="429" y="301" width="303" height="38" rx="6" fill="#eee1cf"/>
+    <text x="444" y="326" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#735a3e">#B · pendente</text>
+    <rect x="429" y="348" width="303" height="38" rx="6" fill="#d9e9e3"/>
+    <text x="444" y="373" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#2d6258">#C · concluído</text>
+    <rect x="429" y="395" width="303" height="38" rx="6" fill="#eee1cf"/>
+    <text x="444" y="420" font-family="DejaVu Sans, sans-serif" font-size="17" fill="#735a3e">#D · pendente</text>
+  </g>
+
+  <path d="M340 322L429 287M775 287L855 322" fill="none" stroke="#718991" stroke-width="7" stroke-dasharray="11 9"/>
+  <g>
+    <circle cx="247" cy="359" r="131" fill="#f5f4eb" fill-opacity=".95" stroke="#557485" stroke-width="14"/>
+    <path d="M155 331H339M155 377H339" stroke="#d5dad4" stroke-width="5"/>
+    <circle cx="185" cy="331" r="11" fill="#478579"/>
+    <circle cx="222" cy="331" r="11" fill="#b88d5d"/>
+    <circle cx="259" cy="331" r="11" fill="#478579"/>
+    <circle cx="296" cy="331" r="11" fill="#b88d5d"/>
+    <text x="164" y="413" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#294b5b">CRIADOS</text>
+    <path d="M155 471L101 527" stroke="#557485" stroke-width="23" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="957" cy="359" r="131" fill="#f5f4eb" fill-opacity=".95" stroke="#668a7d" stroke-width="14"/>
+    <path d="M864 331H1050M864 377H1050" stroke="#d5dad4" stroke-width="5"/>
+    <circle cx="920" cy="331" r="12" fill="#478579"/>
+    <circle cx="994" cy="331" r="12" fill="#478579"/>
+    <text x="875" y="413" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="700" fill="#315f56">CONCLUÍDOS</text>
+    <path d="M1050 471L1104 527" stroke="#668a7d" stroke-width="23" stroke-linecap="round"/>
+  </g>
+  <text x="62" y="622" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#405b64">Ilustração editorial: filtros distintos podem produzir totais distintos.</text>
+</svg>

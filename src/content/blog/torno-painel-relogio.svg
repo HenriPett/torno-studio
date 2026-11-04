@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Relógio e fotografia datada do painel</title>
+  <desc id="desc">Uma fotografia editorial mostra dados atualizados às oito horas, enquanto o relógio e a origem avançaram para nove horas. Os horários são fictícios e servem para explicar a idade da informação.</desc>
+  <rect width="1200" height="675" fill="#dce5e3"/>
+  <path d="M0 514Q375 489 688 520T1200 500V675H0Z" fill="#cbd8d3"/>
+  <text x="63" y="77" font-family="DejaVu Sans, sans-serif" font-size="29" font-weight="700" fill="#263e50">QUAL É A HORA DOS DADOS?</text>
+  <text x="63" y="116" font-family="DejaVu Sans, sans-serif" font-size="20" fill="#4f6971">Abrir a tela agora não garante uma atualização agora</text>
+
+  <g transform="rotate(-5 401 352)">
+    <rect x="118" y="169" width="577" height="383" rx="8" fill="#c0c7c2" opacity=".5"/>
+    <rect x="104" y="155" width="577" height="383" rx="8" fill="#fffdf7" stroke="#b8c6c1" stroke-width="4"/>
+    <rect x="132" y="183" width="521" height="274" rx="4" fill="#e4eeeb"/>
+    <text x="163" y="224" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#2d535c">FOTOGRAFIA DO PAINEL</text>
+    <path d="M170 386V325H230V386M258 386V290H318V386M346 386V332H406V386M434 386V270H494V386M522 386V309H582V386" fill="none" stroke="#688e86" stroke-width="17"/>
+    <path d="M163 403H608" stroke="#809b94" stroke-width="5"/>
+    <text x="157" y="497" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#315f5b">ÚLTIMO DADO · 08:00*</text>
+  </g>
+
+  <circle cx="914" cy="308" r="147" fill="#fffdf7" stroke="#5c7a82" stroke-width="15"/>
+  <circle cx="914" cy="308" r="9" fill="#345966"/>
+  <path d="M914 308V218M914 308L1001 308" stroke="#345966" stroke-width="11" stroke-linecap="round"/>
+  <path d="M914 180V200M1042 308H1022M914 436V416M786 308H806" stroke="#7e9b9d" stroke-width="7" stroke-linecap="round"/>
+  <text x="830" y="499" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#294e5b">CONSULTA · 09:00*</text>
+
+  <rect x="754" y="537" width="348" height="52" rx="10" fill="#f4e7d3" stroke="#c4ab88" stroke-width="3"/>
+  <text x="786" y="571" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" fill="#765d3d">ORIGEM MAIS RECENTE</text>
+  <text x="63" y="622" font-family="DejaVu Sans, sans-serif" font-size="19" fill="#405b64">*Horários fictícios · a data do dado precisa ficar visível.</text>
+</svg>

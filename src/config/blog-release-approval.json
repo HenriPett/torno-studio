@@ -1369,6 +1369,32 @@
           "sha256": "a54f82b14d7902092a9e9e649924b0db4ac61b84410e2a5a2b1985aff2ef3d89"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261104-dashboard-erp-divergencias",
+      "intentId": "buyer-dashboard-erp-metric-reconciliation-pt",
+      "locale": "pt-BR",
+      "path": "/blog/dashboard-erp-numeros-divergentes-aceite/",
+      "contentRevision": "17af47218f9fc87946fc677504429d92b7ec51658b50bfa4b9955660d322b588",
+      "approvedBy": "Integrador editorial (autorização do usuário para publicar)",
+      "approvedAt": "2026-11-04T11:26:59Z",
+      "reviewedBy": "Revisor factual independente do autor (agente Codex)",
+      "reviewedAt": "2026-11-04T11:26:59Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 04/11/2026, 08h15 America/Sao_Paulo: commits editoriais e push na main autorizados após revisão independente.",
+        "review": "Revisão factual e editorial independente GO; imagens e diff final sujeitos à revisão antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-painel-lentes.svg",
+          "sha256": "bac06803722a928e1fdccc71518f0520ff9f9c3eab123ee0a1bfc85aed50d7f3"
+        },
+        {
+          "path": "torno-painel-relogio.svg",
+          "sha256": "25608a0f6886944b6ae1de7fdf8609c3c6c42f3dba39c4f732f9ad0e500a9335"
+        }
+      ]
     }
   ]
 }
