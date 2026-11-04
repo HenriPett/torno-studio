@@ -19,7 +19,7 @@ scope: Permissão, estados (default, granted, denied), plataforma (iPhone/iPad c
 not_scope: Escolha de fornecedor de push, app nativo e lojas de aplicativos, marketing em massa, LGPD ou análise jurídica, garantia de entrega.
 author_name: Henrique Pett
 author_basis: Henrique Pett
-created_at: '2026-11-04T21:40:00Z'
+created_at: '2026-11-04T21:15:00Z'
 reviewer: null
 reviewed_at: null
 verified_at: null
@@ -49,42 +49,42 @@ claims_and_sources:
     reference: https://webkit.org/blog/13878/web-push-for-web-apps-on-ios-and-ipados/
     entity: WebKit Blog
     source_date: '2023-02-16'
-    checked_at: '2026-11-04T21:40:00Z'
+    checked_at: '2026-11-04T21:15:00Z'
     limit: Post de 2023, escrito para o beta do iOS e iPadOS 16.4; não sustenta afirmações sobre versões posteriores nem sobre o comportamento fora da Tela de Início.
   - classification: FATO
     claim: Notification.requestPermission() resulta em granted, denied ou default; em default a decisão do usuário é desconhecida e o aplicativo age como se a permissão tivesse sido negada; o recurso está disponível apenas em contexto seguro (HTTPS) e a página orienta fazer o pedido em resposta a uma interação do usuário.
     reference: https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static
     entity: MDN Web Docs
     source_date: null
-    checked_at: '2026-11-04T21:40:00Z'
+    checked_at: '2026-11-04T21:15:00Z'
     limit: Descreve a API do navegador; detalhes de interface variam por navegador e não foram verificados aqui.
   - classification: FATO
     claim: A Push API exige um service worker ativo e uma assinatura criada com PushManager.subscribe(); ativar um service worker para push pode aumentar o uso de recursos e de bateria.
     reference: https://developer.mozilla.org/en-US/docs/Web/API/Push_API
     entity: MDN Web Docs
     source_date: null
-    checked_at: '2026-11-04T21:40:00Z'
+    checked_at: '2026-11-04T21:15:00Z'
     limit: Documentação de referência da API; não mede consumo em nenhum aparelho específico.
   - classification: FATO
     claim: Mostrar o diálogo de permissão assim que o usuário chega ao site é apontado como a pior prática; recomenda-se pedir quando o benefício é óbvio; se o usuário bloqueia, o app não pode pedir de novo e reverter depende da configuração do navegador.
     reference: https://web.dev/articles/push-notifications-permissions-ux
     entity: web.dev (Matt Gaunt)
     source_date: null
-    checked_at: '2026-11-04T21:40:00Z'
+    checked_at: '2026-11-04T21:15:00Z'
     limit: Artigo de orientação de UX; não é norma.
   - classification: FATO
     claim: O TTL sugere por quanto tempo o serviço de push retém a mensagem (o serviço pode retê-la por menos tempo); depois dele o serviço não pode tentar entregá-la (MUST NOT); com TTL zero e agente indisponível, a mensagem expira e nunca é entregue; o cabeçalho Urgency admite os valores very-low, low, normal e high.
     reference: https://www.rfc-editor.org/rfc/rfc8030
     entity: IETF, RFC 8030 (Generic Event Delivery Using HTTP Push)
     source_date: null
-    checked_at: '2026-11-04T21:40:00Z'
+    checked_at: '2026-11-04T21:15:00Z'
     limit: Especificação do protocolo; não define tempos de entrega de nenhum serviço específico.
   - classification: FATO
     claim: A especificação do W3C define userVisibleOnly para assinaturas de mensagens com efeito visível ao usuário e registra que mensagens push costumam ter latência maior do que comunicações diretas.
     reference: https://www.w3.org/TR/push-api/
     entity: W3C, Push API
     source_date: '2026-10-05'
-    checked_at: '2026-11-04T21:40:00Z'
+    checked_at: '2026-11-04T21:15:00Z'
     limit: Working Draft; o texto pode mudar.
   - classification: HIPÓTESE
     claim: A ferramenta, a ordem de serviço, os aparelhos, a matriz de aceite e os cenários deste artigo são modelos editoriais fictícios.

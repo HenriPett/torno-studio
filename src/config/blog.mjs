@@ -400,6 +400,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-pagamentos-ensaio.svg', digest: '0094535b1115ddea970fe1c0842c93bd9544ee6806c0bea2beb5ec4b57a5bc34' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261104-web-push-pwa', intent_id: 'buyer-web-push-pwa-notifications-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/notificacoes-push-pwa-app-web-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/notificacoes-push-pwa-app-web-aceite/`,
+    digest: 'f1655a5aa66156edef3f0a0ef9d0f772225458d649bebe3e6bf208e45c4a4752', digestScope: 'file',
+    assets: [
+      { path: 'torno-push-quatro-telas.svg', digest: 'fca955c395709db2ae14ce1000fe5ee6857e5eae1f7b63d1f92e40c83c292c00' },
+      { path: 'torno-push-validade.svg', digest: '0ee942fcec6712d80cba8cacda315fcf849d5470d363a6509ab7ee9b119c76a7' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -758,6 +767,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261104-agendamento-reserva-dupla': [
         {asset:'./torno-agenda-sobreposicao.svg',alt:'Régua de horários de uma sala fictícia, com duas faixas de reserva parcialmente sobrepostas e a área de conflito destacada.',caption:'Defina o intervalo que bloqueia o recurso, inclusive preparo quando aplicável. Horários e sala são fictícios; ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-agenda-duas-tentativas.svg',alt:'Dois comprovantes fictícios de tentativa para a mesma Sala Azul: um confirmado e outro recusado, com próxima ação visível para o solicitante.',caption:'Duas pessoas podem ver a vaga; só o resultado de confirmação decide a reserva. Cena fictícia; ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261104-web-push-pwa': [
+        {asset:'./torno-push-quatro-telas.svg',alt:'Quadro editorial com quatro aparelhos fictícios lado a lado — iPhone com o app na Tela de Início, iPhone com o site aberto no Safari, Android e computador — cada um com uma etiqueta do que verificar no aceite.',caption:'Ilustração original Torno Studio, 2026. Aparelhos e etiquetas são fictícios; não representam a interface de um sistema real.',className:['blog-figure']},
+        {asset:'./torno-push-validade.svg',alt:'Ilustração de um envelope de aviso com um carimbo de validade ao lado de uma ampulheta, indicando que uma mensagem push pode expirar antes de chegar ao aparelho.',caption:'Ilustração original Torno Studio, 2026. O envelope e o carimbo representam o tempo de vida (TTL) de uma mensagem; não mostram dados reais.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261104-pagamentos-status': [
         {asset:'./torno-pagamentos-prancheta.svg',alt:'Prancheta editorial com um pedido fictício à esquerda e três carimbos distintos de pagamento: pendente, aprovado e recusado.',caption:'Ilustração original Torno Studio, 2026. Pedido e carimbos são fictícios; não representam a interface de um provedor.',className:['blog-figure']},

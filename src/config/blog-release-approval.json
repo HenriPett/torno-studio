@@ -1447,6 +1447,32 @@
           "sha256": "0094535b1115ddea970fe1c0842c93bd9544ee6806c0bea2beb5ec4b57a5bc34"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261104-web-push-pwa",
+      "intentId": "buyer-web-push-pwa-notifications-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/notificacoes-push-pwa-app-web-aceite/",
+      "contentRevision": "f1655a5aa66156edef3f0a0ef9d0f772225458d649bebe3e6bf208e45c4a4752",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-04T21:33:00Z",
+      "reviewedBy": "Revisor factual e visual independente (agente Claude)",
+      "reviewedAt": "2026-11-04T21:21:42Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Instrução explícita de Henrique Pett na sessão da rotina \"Blogs SEO — tarde\" de 04/11/2026: \"SEMPRE pode publicar sem a minha aprovação para ambos (Ascende e Torno)\".",
+        "review": "Revisão independente GO do Markdown e dos dois SVGs com fontes primárias (WebKit, MDN, web.dev, RFC 8030, W3C); diff final conferido antes do push.",
+        "scope": "Somente artigo, dois SVGs e metadados editoriais; sem revisão ou aprovação pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-push-quatro-telas.svg",
+          "sha256": "fca955c395709db2ae14ce1000fe5ee6857e5eae1f7b63d1f92e40c83c292c00"
+        },
+        {
+          "path": "torno-push-validade.svg",
+          "sha256": "0ee942fcec6712d80cba8cacda315fcf849d5470d363a6509ab7ee9b119c76a7"
+        }
+      ]
     }
   ]
 }
