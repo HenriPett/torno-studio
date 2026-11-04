@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="780" viewBox="0 0 800 780" role="img" aria-labelledby="title desc">
+  <title id="title">Quatro aparelhos fictícios e o que conferir em cada um</title>
+  <desc id="desc">Quatro cartões ilustrados: iPhone com o app na Tela de Início (pedir permissão após um toque), iPhone só no Safari (não contar com push), Android (permissão após toque; testar o aviso) e computador (mesmo fluxo, no navegador testado).</desc>
+  <rect width="800" height="780" fill="#e5e8e3"/>
+  <g fill="#fffefa" stroke="#1d403b" stroke-width="4"><rect x="30" y="30" width="360" height="350" rx="14"/><rect x="410" y="30" width="360" height="350" rx="14"/><rect x="30" y="400" width="360" height="350" rx="14"/><rect x="410" y="400" width="360" height="350" rx="14"/></g>
+  <g stroke="#abc3b5" stroke-width="2"><path d="M54 262H366M434 262H746M54 632H366M434 632H746"/></g>
+  <!-- 1 iPhone app -->
+  <g transform="translate(175 48)"><rect width="70" height="124" rx="14" fill="#d6e4da" stroke="#1d403b" stroke-width="4"/><rect x="26" y="8" width="18" height="5" rx="2.5" fill="#1d403b"/><g fill="#33806a"><rect x="12" y="28" width="18" height="18" rx="4"/><rect x="40" y="28" width="18" height="18" rx="4"/><rect x="12" y="56" width="18" height="18" rx="4"/></g><rect x="40" y="56" width="18" height="18" rx="4" fill="#fffefa" stroke="#c8782f" stroke-width="3"/><circle cx="57" cy="56" r="6" fill="#c8782f"/></g>
+  <!-- 2 iPhone Safari -->
+  <g transform="translate(555 48)"><rect width="70" height="124" rx="14" fill="#d6e4da" stroke="#1d403b" stroke-width="4"/><rect x="26" y="8" width="18" height="5" rx="2.5" fill="#1d403b"/><rect x="10" y="94" width="50" height="16" rx="8" fill="#fffefa" stroke="#547169" stroke-width="2"/><path d="M14 36H56M14 50H48M14 64H52" stroke="#abc3b5" stroke-width="4" stroke-linecap="round"/></g>
+  <!-- 3 Android -->
+  <g transform="translate(175 418)"><rect width="70" height="124" rx="10" fill="#d6e4da" stroke="#1d403b" stroke-width="4"/><circle cx="35" cy="11" r="3.5" fill="#1d403b"/><rect x="12" y="30" width="46" height="30" rx="6" fill="#fffefa" stroke="#33806a" stroke-width="3"/><path d="M19 40H51M19 50H42" stroke="#33806a" stroke-width="3" stroke-linecap="round"/><path d="M22 108H48" stroke="#1d403b" stroke-width="3" stroke-linecap="round"/></g>
+  <!-- 4 Computador -->
+  <g transform="translate(527 428)"><rect width="126" height="84" rx="8" fill="#d6e4da" stroke="#1d403b" stroke-width="4"/><rect x="74" y="12" width="40" height="26" rx="4" fill="#fffefa" stroke="#33806a" stroke-width="3"/><path d="M12 22H58M12 36H50M12 50H62" stroke="#abc3b5" stroke-width="4" stroke-linecap="round"/><path d="M63 86V104M36 108H90" stroke="#1d403b" stroke-width="5" stroke-linecap="round"/></g>
+  <g font-family="Arial,sans-serif" font-size="32" text-anchor="middle">
+    <g fill="#153d37" font-weight="700"><text x="210" y="208">iPhone · app na</text><text x="210" y="246">Tela de Início</text><text x="590" y="208">iPhone · só</text><text x="590" y="246">no Safari</text><text x="210" y="600">Android</text><text x="590" y="600">Computador</text></g>
+    <g fill="#2a6b58"><text x="210" y="302">pedir permissão</text><text x="210" y="340">após um toque</text><text x="590" y="302">não contar com</text><text x="590" y="340">push; outro canal</text><text x="210" y="672">permissão após</text><text x="210" y="710">toque; testar aviso</text><text x="590" y="672">mesmo fluxo, no</text><text x="590" y="710">navegador testado</text></g>
+  </g>
+</svg>

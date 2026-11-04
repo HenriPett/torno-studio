@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" role="img" aria-labelledby="title desc">
+  <title id="title">Envelope de aviso com carimbo de validade e ampulheta</title>
+  <desc id="desc">Um envelope com o carimbo TTL ao lado de uma ampulheta quase vazia: depois da validade, o serviço de push não deve entregar o aviso.</desc>
+  <rect width="800" height="560" fill="#e5e8e3"/>
+  <ellipse cx="400" cy="400" rx="340" ry="22" fill="#9dada1" opacity=".35"/>
+  <g transform="rotate(-4 250 250)">
+    <rect x="70" y="150" width="360" height="236" rx="12" fill="#fffefa" stroke="#1d403b" stroke-width="4"/>
+    <path d="M74 156L250 288L426 156" fill="none" stroke="#1d403b" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M74 380L206 262M426 380L294 262" stroke="#abc3b5" stroke-width="3"/>
+    <g transform="rotate(-12 340 300)"><circle cx="340" cy="300" r="62" fill="none" stroke="#c8782f" stroke-width="6"/><circle cx="340" cy="300" r="50" fill="none" stroke="#c8782f" stroke-width="2"/><text x="340" y="316" text-anchor="middle" fill="#c8782f" font-family="Arial,sans-serif" font-size="46" font-weight="700">TTL</text></g>
+  </g>
+  <g stroke="#1d403b" stroke-width="4" stroke-linejoin="round">
+    <path d="M520 100H700M520 400H700" stroke-width="8" stroke-linecap="round"/>
+    <path d="M534 108C534 190 610 220 610 250C610 280 534 310 534 392H686C686 310 610 280 610 250C610 220 686 190 686 108Z" fill="#d6e4da"/>
+    <path d="M552 380C556 340 585 318 610 306C635 318 664 340 668 380Z" fill="#c8782f" stroke="none"/>
+    <path d="M610 250V306" stroke="#c8782f" stroke-width="3"/>
+    <path d="M580 126C590 150 600 160 610 170C620 160 630 150 640 126Z" fill="#c8782f" stroke="none" opacity=".35"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="32" text-anchor="middle" fill="#153d37">
+    <text x="400" y="470" font-weight="700">Depois da validade,</text>
+    <text x="400" y="510" fill="#2a6b58">o serviço não deve entregar</text>
+  </g>
+</svg>
