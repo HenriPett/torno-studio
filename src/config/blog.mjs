@@ -436,6 +436,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-sessao-ensaios.svg', digest: '1c76f2ab8e0d9173c8c650c8909c3967ecdd9c821743bde51e58868072dc74ce' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261105-nfe-ibs-cbs', intent_id: 'buyer-nfe-reforma-tributaria-ibs-cbs-system-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/nfe-reforma-tributaria-ibs-cbs-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/nfe-reforma-tributaria-ibs-cbs-sistema-aceite/`,
+    digest: '2dc47a41f50ffe6bb18735d50b9b5e35006f5a695629d033609854ed23496814', digestScope: 'file',
+    assets: [
+      { path: 'torno-nfe-regua-datas.svg', digest: '08670380a49d1ef9f07509604ca7a55f52f5b44bb07bd9dfd77d3ce41eb26b2a' },
+      { path: 'torno-nfe-dois-carimbos.svg', digest: 'b9b3c40114094fdf9ff443218f2be3cfd58e1194bec29bac54adc8b532e1e14a' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -802,6 +811,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261105-sessao-formulario': [
         {asset:'./torno-sessao-formulario.svg',alt:'Ilustração de um formulário fictício com campos preenchidos, um relógio de sessão e três pontos de decisão: aviso, rascunho e retomada.',caption:'Cena conceitual fictícia para discutir requisitos; não representa tela de um produto. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-sessao-ensaios.svg',alt:'Ilustração original em formato de bilhete de ensaio com três situações: sessão ativa, vencida e novo login por outra pessoa.',caption:'Bilhete de ensaio fictício; os resultados esperados devem ser definidos para o sistema real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261105-nfe-ibs-cbs': [
+        {asset:'./torno-nfe-regua-datas.svg',alt:'Escada de três degraus com as datas de obrigatoriedade: 03/08/2026, campos de IBS e CBS obrigatórios na NF-e e NFC-e; 01/12/2026, NF-e de quem não é contribuinte do ICMS; 01/01/2027, Simples Nacional, tributação monofásica e Duimp. Abaixo, um quadro tracejado com o texto "validação que rejeita a nota: adiada, sem data".',caption:'Datas segundo o Ato Conjunto RFB/CGIBS nº 4/2026; adiamento da validação segundo o CGIBS em 06/08/2026. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-nfe-dois-carimbos.svg',alt:'Ilustração de uma nota fiscal fictícia com um carimbo "Autorizada" e, ao lado, uma ficha de conferência com quatro itens: classificação definida pelo contador, código vigente na data, itens somam o total e XML guardado.',caption:'Exemplo fictício: a nota não contém dados reais. O carimbo de autorização não substitui a ficha de conferência. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261105-campos-condicionais': [
         {asset:'./torno-campos-condicionais-matriz.svg',alt:'Matriz editorial fictícia que compara as respostas sim e não para fornecedor escolhido, mostrando campo visível, exigência e perguntas sobre o destino do valor anterior.',caption:'Matriz de requisitos inventada para discussão, sem representar um formulário existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

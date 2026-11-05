@@ -1552,6 +1552,32 @@
           "sha256": "1c76f2ab8e0d9173c8c650c8909c3967ecdd9c821743bde51e58868072dc74ce"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261105-nfe-ibs-cbs",
+      "intentId": "buyer-nfe-reforma-tributaria-ibs-cbs-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/nfe-reforma-tributaria-ibs-cbs-sistema-aceite/",
+      "contentRevision": "2dc47a41f50ffe6bb18735d50b9b5e35006f5a695629d033609854ed23496814",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-05T21:22:48Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-05T21:22:47Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Autorização permanente de Henrique (04/11/2026, rotina 18h): \"SEMPRE pode publicar sem a minha aprovação para ambos (Ascende e Torno)\"; execução 2026-11-05-1800-claude.",
+        "review": "GO factual, editorial e visual independente após 5 correções aplicadas (lead, dispensa de recolhimento, citação PNCT, alt, timestamps); fontes oficiais CGIBS/RFB abertas em 05/11/2026; diff final sujeito a nova conferência.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não é consultoria tributária."
+      },
+      "assets": [
+        {
+          "path": "torno-nfe-regua-datas.svg",
+          "sha256": "08670380a49d1ef9f07509604ca7a55f52f5b44bb07bd9dfd77d3ce41eb26b2a"
+        },
+        {
+          "path": "torno-nfe-dois-carimbos.svg",
+          "sha256": "b9b3c40114094fdf9ff443218f2be3cfd58e1194bec29bac54adc8b532e1e14a"
+        }
+      ]
     }
   ]
 }
