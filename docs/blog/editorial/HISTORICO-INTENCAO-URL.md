@@ -540,3 +540,11 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 - A aprovação permite inclusão no artefato local. `verified_at`, `first_published_at`, `evidence_of_publication` e indexação permanecem **sem dado** até observação de produção. Não inferir publicação do build ou do push.
 - Revisão independente concluída em `2026-11-05T15:15:53Z`; decisão de inclusão editorial em `15:15:54Z`, com hash de Markdown `0a70dd14c6ce8c2f3308b1100275c7dd430e067b013a9102e3271ec15d0060e7`. Diff final ainda sujeito a GO independente antes do push.
 - Envio à main: `2a71695c488acca681c108a48af37b28ce334e55` após revisão independente e 52/52 checks locais. Verificação pública da URL e SVGs bloqueada pelo proxy (CONNECT 403); CI do SHA não confirmada por API. Estado **approved/enviado à main**, não `published`. Campos de publicação permanecem nulos.
+
+### 2026-11-05 18h BRT — sessão vencida durante formulário
+
+- Execução `2026-11-05-1800`; `content_id=torno-artigo-pt-20261105-sessao-formulario`; `intent_id=buyer-session-expiry-unsaved-form-acceptance-pt`; locale `pt-BR`; estado editorial **approved**, sujeito a verificação pública.
+- Pergunta dona: como especificar e testar a continuidade e proteção dos dados de um formulário interno quando a sessão vence. Diferente de login único, MFA, recuperação de senha e regras dos campos condicionais. Pesquisa qualitativa; volume, dificuldade e ranking **SEM DADO**.
+- URL planejada `/blog/sessao-expirada-formulario-dados-aceite/`; conteúdo, fontes NIST/W3C, figuras, revisão, testes e estado de deploy na [ficha da rodada](ROTINA-2026-11-05-1800.md).
+- Autoria atribuída a Henrique Pett conforme decisão de 29/10; revisão independente por agente Codex, sem atribuir revisão pessoal a Henrique. Aprovação de inclusão editorial pelo integrador sob autorização do usuário, hash do Markdown `f0f5090555b5a1de6f819b423046cecf99b7efd3e3c6e8f0ec13f43eb6e5fc52`.
+- `first_published_at=null`, `verified_at=null`, `evidence_of_publication=null` e indexação sem dado até observação pública. Build ou push não comprovam publicação.

@@ -427,6 +427,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-formulario-duas-respostas.svg', digest: '0ec9c16e075e74b0cbcbd64b0a3c19cd7df88a04fba86abd648d480c04d51cc5' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261105-sessao-formulario', intent_id: 'buyer-session-expiry-unsaved-form-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/sessao-expirada-formulario-dados-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/sessao-expirada-formulario-dados-aceite/`,
+    digest: 'f0f5090555b5a1de6f819b423046cecf99b7efd3e3c6e8f0ec13f43eb6e5fc52', digestScope: 'file',
+    assets: [
+      { path: 'torno-sessao-formulario.svg', digest: 'c560824ab695f0ff7225dd078982ec61679a2237f7c7a17bb3f45659babd3e6e' },
+      { path: 'torno-sessao-ensaios.svg', digest: '1c76f2ab8e0d9173c8c650c8909c3967ecdd9c821743bde51e58868072dc74ce' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -789,6 +798,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261104-web-push-pwa': [
         {asset:'./torno-push-quatro-telas.svg',alt:'Quadro editorial com quatro aparelhos fictícios lado a lado — iPhone com o app na Tela de Início, iPhone com o site aberto no Safari, Android e computador — cada um com uma etiqueta do que verificar no aceite.',caption:'Ilustração original Torno Studio, 2026. Aparelhos e etiquetas são fictícios; não representam a interface de um sistema real.',className:['blog-figure']},
         {asset:'./torno-push-validade.svg',alt:'Ilustração de um envelope de aviso com um carimbo de validade ao lado de uma ampulheta, indicando que uma mensagem push pode expirar antes de chegar ao aparelho.',caption:'Ilustração original Torno Studio, 2026. O envelope e o carimbo representam o tempo de vida (TTL) de uma mensagem; não mostram dados reais.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261105-sessao-formulario': [
+        {asset:'./torno-sessao-formulario.svg',alt:'Ilustração de um formulário fictício com campos preenchidos, um relógio de sessão e três pontos de decisão: aviso, rascunho e retomada.',caption:'Cena conceitual fictícia para discutir requisitos; não representa tela de um produto. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-sessao-ensaios.svg',alt:'Ilustração original em formato de bilhete de ensaio com três situações: sessão ativa, vencida e novo login por outra pessoa.',caption:'Bilhete de ensaio fictício; os resultados esperados devem ser definidos para o sistema real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261105-campos-condicionais': [
         {asset:'./torno-campos-condicionais-matriz.svg',alt:'Matriz editorial fictícia que compara as respostas sim e não para fornecedor escolhido, mostrando campo visível, exigência e perguntas sobre o destino do valor anterior.',caption:'Matriz de requisitos inventada para discussão, sem representar um formulário existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
