@@ -418,6 +418,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-substituto-ficha.svg', digest: '69376f9ac02764d27600bfa4618da15ae89bc6d77d76179fb997fbd2ce35a531' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261105-campos-condicionais', intent_id: 'buyer-conditional-form-fields-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/campos-condicionais-formulario-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/campos-condicionais-formulario-sistema-aceite/`,
+    digest: '0a70dd14c6ce8c2f3308b1100275c7dd430e067b013a9102e3271ec15d0060e7', digestScope: 'file',
+    assets: [
+      { path: 'torno-campos-condicionais-matriz.svg', digest: '3e42e9b6f99f881fbc551781f03ee45bb366254d88a1428af85da598c9a571e4' },
+      { path: 'torno-formulario-duas-respostas.svg', digest: '0ec9c16e075e74b0cbcbd64b0a3c19cd7df88a04fba86abd648d480c04d51cc5' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -780,6 +789,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261104-web-push-pwa': [
         {asset:'./torno-push-quatro-telas.svg',alt:'Quadro editorial com quatro aparelhos fictícios lado a lado — iPhone com o app na Tela de Início, iPhone com o site aberto no Safari, Android e computador — cada um com uma etiqueta do que verificar no aceite.',caption:'Ilustração original Torno Studio, 2026. Aparelhos e etiquetas são fictícios; não representam a interface de um sistema real.',className:['blog-figure']},
         {asset:'./torno-push-validade.svg',alt:'Ilustração de um envelope de aviso com um carimbo de validade ao lado de uma ampulheta, indicando que uma mensagem push pode expirar antes de chegar ao aparelho.',caption:'Ilustração original Torno Studio, 2026. O envelope e o carimbo representam o tempo de vida (TTL) de uma mensagem; não mostram dados reais.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261105-campos-condicionais': [
+        {asset:'./torno-campos-condicionais-matriz.svg',alt:'Matriz editorial fictícia que compara as respostas sim e não para fornecedor escolhido, mostrando campo visível, exigência e perguntas sobre o destino do valor anterior.',caption:'Matriz de requisitos inventada para discussão, sem representar um formulário existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-formulario-duas-respostas.svg',alt:'Cena editorial de um formulário fictício em duas versões: primeiro com fornecedor preenchido, depois com a resposta alterada e o destino do valor anterior em aberto.',caption:'Duas etapas fictícias da mesma solicitação; não reproduzem tela real nem comprovam comportamento implementado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261105-substituto-aprovador': [
         {asset:'./torno-ausencia-agenda.svg',alt:'Agenda fictícia com período de ausência e uma faixa de substituição limitada àquele intervalo.',caption:'Agenda editorial fictícia. A faixa ilustra início e fim de uma delegação, sem representar um produto existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
