@@ -409,6 +409,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-push-validade.svg', digest: '0ee942fcec6712d80cba8cacda315fcf849d5470d363a6509ab7ee9b119c76a7' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261105-substituto-aprovador', intent_id: 'buyer-approval-delegation-absence-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/substituto-aprovador-ausencia-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/substituto-aprovador-ausencia-sistema-aceite/`,
+    digest: '87130fe0820c72c15715865a2ba570f2a5e8bbc3b3fe8e63cd3268c7343d7108', digestScope: 'file',
+    assets: [
+      { path: 'torno-ausencia-agenda.svg', digest: 'be57862bffaab84b7ca18730abc887ad20f69deff2dfffbd1869dc722a553085' },
+      { path: 'torno-substituto-ficha.svg', digest: '69376f9ac02764d27600bfa4618da15ae89bc6d77d76179fb997fbd2ce35a531' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -771,6 +780,10 @@ export function blogCriteriaFigure() {
       'torno-artigo-pt-20261104-web-push-pwa': [
         {asset:'./torno-push-quatro-telas.svg',alt:'Quadro editorial com quatro aparelhos fictícios lado a lado — iPhone com o app na Tela de Início, iPhone com o site aberto no Safari, Android e computador — cada um com uma etiqueta do que verificar no aceite.',caption:'Ilustração original Torno Studio, 2026. Aparelhos e etiquetas são fictícios; não representam a interface de um sistema real.',className:['blog-figure']},
         {asset:'./torno-push-validade.svg',alt:'Ilustração de um envelope de aviso com um carimbo de validade ao lado de uma ampulheta, indicando que uma mensagem push pode expirar antes de chegar ao aparelho.',caption:'Ilustração original Torno Studio, 2026. O envelope e o carimbo representam o tempo de vida (TTL) de uma mensagem; não mostram dados reais.',className:['blog-figure']},
+      ],
+      'torno-artigo-pt-20261105-substituto-aprovador': [
+        {asset:'./torno-ausencia-agenda.svg',alt:'Agenda fictícia com período de ausência e uma faixa de substituição limitada àquele intervalo.',caption:'Agenda editorial fictícia. A faixa ilustra início e fim de uma delegação, sem representar um produto existente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-substituto-ficha.svg',alt:'Ficha editorial fictícia com escopo da substituição, limites e três cenários de teste.',caption:'Ficha para discutir critérios de aceite, não registro de delegação real. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
       ],
       'torno-artigo-pt-20261104-pagamentos-status': [
         {asset:'./torno-pagamentos-prancheta.svg',alt:'Prancheta editorial com um pedido fictício à esquerda e três carimbos distintos de pagamento: pendente, aprovado e recusado.',caption:'Ilustração original Torno Studio, 2026. Pedido e carimbos são fictícios; não representam a interface de um provedor.',className:['blog-figure']},

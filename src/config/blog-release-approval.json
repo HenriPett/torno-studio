@@ -1474,5 +1474,32 @@
         }
       ]
     }
+,
+    {
+      "contentId": "torno-artigo-pt-20261105-substituto-aprovador",
+      "intentId": "buyer-approval-delegation-absence-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/substituto-aprovador-ausencia-sistema-aceite/",
+      "contentRevision": "87130fe0820c72c15715865a2ba570f2a5e8bbc3b3fe8e63cd3268c7343d7108",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-05T11:28:15Z",
+      "reviewedBy": "Revisor editorial independente (agente Codex)",
+      "reviewedAt": "2026-11-05T11:27:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina editorial de 05/11/2026, 08h15 America/Sao_Paulo: commits editoriais e push main autorizados após revisão independente.",
+        "review": "Revisão independente GO de Markdown, fontes primárias, imagens e diff inicial; diff final sujeito a conferência antes do push.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-ausencia-agenda.svg",
+          "sha256": "be57862bffaab84b7ca18730abc887ad20f69deff2dfffbd1869dc722a553085"
+        },
+        {
+          "path": "torno-substituto-ficha.svg",
+          "sha256": "69376f9ac02764d27600bfa4618da15ae89bc6d77d76179fb997fbd2ce35a531"
+        }
+      ]
+    }
   ]
 }

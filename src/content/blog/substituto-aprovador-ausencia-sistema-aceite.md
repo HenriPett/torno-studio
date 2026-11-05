@@ -3,7 +3,7 @@ content_id: torno-artigo-pt-20261105-substituto-aprovador
 intent_id: buyer-approval-delegation-absence-acceptance-pt
 locale: pt-BR
 type: artigo
-status: review
+status: approved
 working_title: 'Aprovador ausente: como definir substituto e testar o fluxo no sistema'
 h1: 'Aprovador ausente: como definir substituto e testar o fluxo no sistema'
 seo_title: 'Aprovador ausente: substituição e critérios de aceite | Torno'
@@ -20,12 +20,12 @@ not_scope: Produto existente da Torno, regra jurídica universal de representaç
 author_name: Henrique Pett
 author_basis: Henrique Pett
 created_at: '2026-11-05T11:22:00Z'
-reviewer: null
-reviewed_at: null
+reviewer: Revisor editorial independente (agente Codex)
+reviewed_at: '2026-11-05T11:27:00Z'
 verified_at: null
-release_approved_by: null
-release_approved_at: null
-release_approval_evidence: null
+release_approved_by: Integrador editorial (autorização do usuário)
+release_approved_at: '2026-11-05T11:28:15Z'
+release_approval_evidence: Revisão factual e visual independente GO; autorização editorial do usuário; sem revisão pessoal atribuída a Henrique.
 first_published_at: null
 last_substantive_update_at: null
 evidence_of_publication: null

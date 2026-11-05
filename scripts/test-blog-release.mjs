@@ -58,6 +58,7 @@ const expected = [
   ['torno-artigo-pt-20261103-ocr-pdf-revisao', '/blog/ocr-pdf-sistema-revisao-dados-aceite/', '921f4ca3343ebfbc6facc11869be8fed7d8ca026e2233e8fa8c7a47c2c12d171', ['torno-pdf-campos.svg', 'torno-pdf-conferencia.svg']],
   ['torno-artigo-pt-20261102-assinatura-status', '/blog/assinatura-eletronica-sistema-status-documento-aceite/', 'e2a17685901aa2f20895a0f5474246bc5b5caa34985dcbc5867d251710dd791f', ['torno-documento-estados.svg', 'torno-assinatura-recibo.svg']],
   ['torno-artigo-pt-20261102-leitor-codigo-barras', '/blog/leitor-codigo-barras-sistema-requisitos-aceite/', 'a8f3632b4d36bcbbfb0cd6510de1b2a294ef41bac738b259bcb00b3975811d6f', ['torno-bancada-leitura.svg', 'torno-etiquetas-ensaio.svg']],
+  ['torno-artigo-pt-20261105-substituto-aprovador', '/blog/substituto-aprovador-ausencia-sistema-aceite/', '87130fe0820c72c15715865a2ba570f2a5e8bbc3b3fe8e63cd3268c7343d7108', ['torno-ausencia-agenda.svg', 'torno-substituto-ficha.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
