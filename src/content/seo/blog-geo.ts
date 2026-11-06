@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261106-versionamento-api": {
+    answer: "Para aceitar uma nova versão de API, registre a versão usada, identifique as mudanças que afetam o fluxo de negócio, confirme a convivência com a versão anterior e teste o resultado com dados fictícios. Uma conexão bem-sucedida não demonstra que campos, estados e ações continuam corretos.",
+    takeaways: [
+      "Relacione o contrato atual aos campos e resultados que a integração realmente usa.",
+      "Confira a política e o prazo do provedor antes de planejar a transição entre versões.",
+      "Exija evidências do fluxo completo, de falhas pertinentes e dos limites de retorno."
+    ]
+  },
   "torno-artigo-pt-20261104-agendamento-reserva-dupla": {
     answer: "Para evitar reserva dupla, defina o recurso, os intervalos que se sobrepõem e o momento da confirmação. No aceite, duas pessoas devem tentar confirmar a mesma vaga ao mesmo tempo; só uma pode receber confirmação, com orientação clara para a outra.",
     takeaways: [

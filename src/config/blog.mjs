@@ -445,6 +445,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-nfe-dois-carimbos.svg', digest: 'b9b3c40114094fdf9ff443218f2be3cfd58e1194bec29bac54adc8b532e1e14a' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261106-versionamento-api', intent_id: 'buyer-api-version-migration-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/versionamento-api-integracao-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/versionamento-api-integracao-aceite/`,
+    digest: '219f36885fb9abafa1bc54456930e1ac928aeac9f1e75ca4fb397ce64b380f2e', digestScope: 'file',
+    assets: [
+      { path: 'torno-versoes-ponte.svg', digest: '188fd1709835690f58127487ea77e719d0a277d4044c888d20842b672cebd512' },
+      { path: 'torno-versoes-lupa.svg', digest: '802e70360fea31aba36d9f3a90dd0921f9a023c30777385f76cba5c0007ff59c' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -673,6 +682,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261106-versionamento-api': [
+        {asset:'./torno-versoes-ponte.svg',alt:'Ilustração de uma ponte entre dois cais, versão atual e versão nova, com uma carga fictícia que precisa chegar ao mesmo destino de negócio.',caption:'A ponte representa uma migração a conferir; não é arquitetura nem resultado de cliente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-versoes-lupa.svg',alt:'Cena editorial de duas folhas de resposta de API fictícias sob uma lupa; a lupa destaca que o nome e o valor de um campo mudaram, enquanto o significado de negócio ainda precisa de conferência.',caption:'Respostas e lupa são fictícias. A figura ilustra uma pergunta de aceite, não uma tela ou teste realizado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261015-criterios-aceite-mvp': [
         {asset:'./torno.svg',alt:'Diagrama de critérios de aceite para portal de pedidos hipotético: contexto, ação, resultado e evidência; três cenários: pedido válido, informação incompleta e nova tentativa após perda da resposta.',caption:'Diagrama original preparado para este artigo. Os cenários são hipotéticos.',className:['blog-figure']},
       ],

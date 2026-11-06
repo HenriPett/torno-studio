@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 780" role="img" aria-labelledby="title desc">
+  <title id="title">Duas respostas fictícias de uma API sob análise</title>
+  <desc id="desc">Duas folhas verticais mostram um pedido fictício antes e depois da mudança de versão. Uma lupa destaca que o nome e o valor do campo mudaram, sem afirmar que têm o mesmo significado.</desc>
+  <rect width="720" height="780" rx="24" fill="#edf3ef"/>
+  <path d="M0 124 Q350 94 720 126 V0 H0Z" fill="#dbe9df"/>
+  <text x="34" y="64" fill="#173f40" font-family="Arial,sans-serif" font-size="36" font-weight="700">Compare as respostas</text>
+  <text x="35" y="106" fill="#3e625e" font-family="Arial,sans-serif" font-size="28">e confira o efeito no negócio</text>
+  <g transform="translate(34 157)">
+    <rect width="652" height="207" rx="18" fill="#fffdf7" stroke="#b5d0c7" stroke-width="3"/>
+    <path d="M0 18 Q0 0 18 0 H138 V48 H0Z" fill="#245c58"/>
+    <text x="24" y="34" fill="#fffdf7" font-family="Arial,sans-serif" font-size="28" font-weight="700">Antes</text>
+    <text x="28" y="93" fill="#315a55" font-family="Arial,monospace" font-size="28">pedido: 008</text>
+    <rect x="18" y="116" width="477" height="60" rx="11" fill="#f8e2cc"/>
+    <text x="30" y="155" fill="#833f2f" font-family="Arial,monospace" font-size="28">estado: confirmado</text>
+  </g>
+  <path d="M360 375 V407" stroke="#245c58" stroke-width="8" stroke-linecap="round"/>
+  <path d="M344 400 L360 416 L376 400" fill="none" stroke="#245c58" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(34 426)">
+    <rect width="652" height="207" rx="18" fill="#fffdf7" stroke="#b5d0c7" stroke-width="3"/>
+    <path d="M0 18 Q0 0 18 0 H151 V48 H0Z" fill="#245c58"/>
+    <text x="24" y="34" fill="#fffdf7" font-family="Arial,sans-serif" font-size="28" font-weight="700">Depois</text>
+    <text x="28" y="93" fill="#315a55" font-family="Arial,monospace" font-size="28">pedido: 008</text>
+    <rect x="18" y="116" width="520" height="60" rx="11" fill="#f8e2cc"/>
+    <text x="30" y="155" fill="#833f2f" font-family="Arial,monospace" font-size="28">situacao: concluido</text>
+  </g>
+  <g transform="translate(540 568)">
+    <circle cx="49" cy="49" r="42" fill="#fffdf7" fill-opacity=".8" stroke="#245c58" stroke-width="9"/>
+    <path d="M82 81 L122 121" stroke="#245c58" stroke-width="12" stroke-linecap="round"/>
+    <text x="49" y="65" text-anchor="middle" fill="#a85037" font-family="Arial,sans-serif" font-size="49" font-weight="700">?</text>
+  </g>
+  <text x="36" y="707" fill="#173f40" font-family="Arial,sans-serif" font-size="28" font-weight="700">Nome diferente não prova</text>
+  <text x="36" y="743" fill="#173f40" font-family="Arial,sans-serif" font-size="28" font-weight="700">o mesmo resultado.</text>
+</svg>

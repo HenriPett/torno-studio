@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
+  <title id="title">A travessia entre duas versões de uma integração</title>
+  <desc id="desc">Dois cais marcados Atual e Nova são ligados por uma ponte. Um pedido fictício atravessa, e uma lupa no destino indica que o resultado ainda precisa ser conferido.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#f9e8d3"/><stop offset="1" stop-color="#fff9ee"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#aad4cc"/><stop offset="1" stop-color="#6faea6"/></linearGradient>
+  </defs>
+  <rect width="720" height="620" rx="24" fill="url(#sky)"/>
+  <circle cx="590" cy="105" r="55" fill="#f6c989" opacity=".75"/>
+  <path d="M0 402 Q130 387 250 408 T490 405 T720 408 V620 H0Z" fill="url(#water)"/>
+  <path d="M0 455 Q100 439 210 456 T430 455 T720 453 M0 528 Q140 510 260 527 T520 525 T720 523" fill="none" stroke="#d7ede3" stroke-width="7" opacity=".6"/>
+  <path d="M0 343 H180 Q201 343 201 365 V431 H0Z M519 365 Q519 343 540 343 H720 V431 H519Z" fill="#245c58"/>
+  <path d="M0 431 H201 V451 H0Z M519 431 H720 V451 H519Z" fill="#173f40"/>
+  <path d="M182 366 Q360 229 538 366" fill="none" stroke="#a85037" stroke-width="45" stroke-linecap="round"/>
+  <path d="M182 366 Q360 229 538 366" fill="none" stroke="#e9895d" stroke-width="31" stroke-linecap="round"/>
+  <path d="M182 366 Q360 229 538 366" fill="none" stroke="#ffd4ac" stroke-width="8" stroke-dasharray="30 22" stroke-linecap="round"/>
+  <path d="M206 366 V440 M275 314 V425 M360 288 V421 M445 314 V425 M514 366 V440" stroke="#356a66" stroke-width="9" stroke-linecap="round"/>
+  <g transform="translate(300 245) rotate(-8)">
+    <rect width="116" height="87" rx="10" fill="#fff9e9" stroke="#9e6747" stroke-width="4"/>
+    <path d="M58 2 V85 M4 20 L58 48 L112 20" fill="none" stroke="#d18559" stroke-width="4"/>
+    <circle cx="58" cy="48" r="11" fill="#245c58"/>
+  </g>
+  <rect x="22" y="376" width="145" height="56" rx="28" fill="#fffaf0"/>
+  <text x="94" y="414" text-anchor="middle" fill="#173f40" font-family="Arial,sans-serif" font-size="31" font-weight="700">Atual</text>
+  <rect x="553" y="376" width="145" height="56" rx="28" fill="#fffaf0"/>
+  <text x="625" y="414" text-anchor="middle" fill="#173f40" font-family="Arial,sans-serif" font-size="31" font-weight="700">Nova</text>
+  <g transform="translate(560 232)">
+    <circle cx="33" cy="33" r="30" fill="#fffaf0" stroke="#245c58" stroke-width="8"/>
+    <path d="M57 57 L83 83" stroke="#245c58" stroke-width="11" stroke-linecap="round"/>
+    <text x="33" y="45" text-anchor="middle" fill="#a85037" font-family="Arial,sans-serif" font-size="35" font-weight="700">?</text>
+  </g>
+  <text x="34" y="74" fill="#173f40" font-family="Arial,sans-serif" font-size="37" font-weight="700">Mudou a versão.</text>
+  <text x="34" y="116" fill="#245c58" font-family="Arial,sans-serif" font-size="30">E o resultado?</text>
+  <text x="34" y="574" fill="#173f40" font-family="Arial,sans-serif" font-size="27">Travessia conceitual · pedido fictício</text>
+</svg>

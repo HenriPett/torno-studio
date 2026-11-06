@@ -1578,6 +1578,26 @@
           "sha256": "b9b3c40114094fdf9ff443218f2be3cfd58e1194bec29bac54adc8b532e1e14a"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261106-versionamento-api",
+      "intentId": "buyer-api-version-migration-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/versionamento-api-integracao-aceite/",
+      "contentRevision": "219f36885fb9abafa1bc54456930e1ac928aeac9f1e75ca4fb397ce64b380f2e",
+      "approvedBy": "Integrador editorial (autorização da rotina do usuário)",
+      "approvedAt": "2026-11-06T11:20:01Z",
+      "reviewedBy": "Revisor editorial independente (agente Codex)",
+      "reviewedAt": "2026-11-06T11:19:21Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Delegação da edição editorial de 06/11/2026 às 08h15 America/Sao_Paulo autoriza commits e push editorial na main após revisão e testes.",
+        "review": "GO independente para fontes, conteúdo, imagens e leitura estimada no Markdown SHA-256 219f36885fb9abafa1bc54456930e1ac928aeac9f1e75ca4fb397ce64b380f2e; revisão do diff final ainda exigida antes do push.",
+        "scope": "Somente artigo, dois SVGs, histórico e metadados editoriais; sem revisão pessoal atribuída a Henrique e sem alterações funcionais."
+      },
+      "assets": [
+        { "path": "torno-versoes-ponte.svg", "sha256": "188fd1709835690f58127487ea77e719d0a277d4044c888d20842b672cebd512" },
+        { "path": "torno-versoes-lupa.svg", "sha256": "802e70360fea31aba36d9f3a90dd0921f9a023c30777385f76cba5c0007ff59c" }
+      ]
     }
   ]
 }

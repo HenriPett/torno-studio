@@ -556,3 +556,10 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 - Fontes oficiais lidas em 05/11/2026: Ato Conjunto RFB/CGIBS nº 4/2026 e nº 5/2026 (PDFs oficiais), CGIBS 15/06/2026, 06/08/2026 e 12/12/2025, Comunicado Conjunto RFB (atualizado 28/10/2026); IT 2025.002 v1.60 via espelho não oficial (sinalizado). Portal NF-e e Planalto bloquearam leitura automatizada.
 - Markdown SHA-256 `2dc47a41f50ffe6bb18735d50b9b5e35006f5a695629d033609854ed23496814`; SVGs `torno-nfe-regua-datas.svg` `08670380a49d1ef9f07509604ca7a55f52f5b44bb07bd9dfd77d3ce41eb26b2a` e `torno-nfe-dois-carimbos.svg` `b9b3c40114094fdf9ff443218f2be3cfd58e1194bec29bac54adc8b532e1e14a`. Revisão independente (agente Claude opus) GO após correções; aprovação operacional do integrador sob autorização permanente do usuário, sem revisão pessoal atribuída a Henrique.
 - `first_published_at=null`, `verified_at=null`, `evidence_of_publication=null` até GET público. Detalhes em [ficha da rodada](ROTINA-2026-11-05-1800-claude.md).
+
+### 2026-11-06 08h15 BRT — versionamento de API em integração
+
+- Execução `2026-11-06-0815`; `content_id=torno-artigo-pt-20261106-versionamento-api`; `intent_id=buyer-api-version-migration-acceptance-pt`; locale `pt-BR`; URL planejada `/blog/versionamento-api-integracao-aceite/`.
+- Pergunta dona: o que compradores devem pedir e testar antes de aceitar a migração de uma integração para outra versão de API. Distinta de limites de cota, eventos duplicados/fora de ordem e briefing ERP: aqui, a unidade de decisão é a mudança de contrato entre versões e a continuidade do fluxo. Pesquisa qualitativa; volume, ranking e tráfego **SEM DADO**.
+- Fontes primárias: Google AIP-180 e AIP-185, Microsoft Learn Azure API Management e changelog da Stripe, lidos em 06/11/2026; políticas específicas, não regra universal. Autoria editorial atribuída a Henrique Pett conforme instrução do usuário; revisão pessoal não presumida.
+- Estado inicial `review` em checkout isolado sobre `cc96dc0`, aguardando revisão independente e gate de inclusão; `first_published_at`, `verified_at`, `evidence_of_publication` e indexação nulos. Push e publicação ainda não ocorreram.
