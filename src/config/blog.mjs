@@ -454,6 +454,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-versoes-lupa.svg', digest: '802e70360fea31aba36d9f3a90dd0921f9a023c30777385f76cba5c0007ff59c' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261106-dados-maquina-erp', intent_id: 'buyer-machine-data-erp-integration-pt', locale: 'pt-BR',
+    path: '/blog/dados-maquina-erp-integracao-opc-ua/', canonical_url: `${BLOG_ORIGIN}/blog/dados-maquina-erp-integracao-opc-ua/`,
+    digest: '48c1d76d3d7a2fe1b82f0d06928ee813ef63dbd50525022832ed5b443a919bc2', digestScope: 'file',
+    assets: [
+      { path: 'torno-dados-maquina-lentes.svg', digest: '2010096ceac7b177f38ad4469f58d07b4e86bb63967e2cb35a3970813c054114' },
+      { path: 'torno-dados-maquina-ficha.svg', digest: '4ce5000aec7758190aa1506f4b92b31e5602423e3d2f1d0ab7ae320279548a8a' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -682,6 +691,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261106-dados-maquina-erp': [
+        {asset:'./torno-dados-maquina-lentes.svg',alt:'Três lentes de aumento sobre um mesmo dado fictício: sinal da máquina, significado no processo e registro no ERP. As lentes mostram que cada etapa precisa de uma resposta distinta.',caption:'As lentes representam perguntas para o projeto, não uma interface pronta nem uma arquitetura industrial. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-dados-maquina-ficha.svg',alt:'Ficha visual fictícia de uma leitura industrial, com campos de origem, tempo, significado e decisão de conferência; um selo destaca que o valor lido ainda não é produção aprovada.',caption:'Ficha ilustrativa com dados inventados. Não representa tela, equipamento ou projeto de cliente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261106-versionamento-api': [
         {asset:'./torno-versoes-ponte.svg',alt:'Ilustração de uma ponte entre dois cais, versão atual e versão nova, com uma carga fictícia que precisa chegar ao mesmo destino de negócio.',caption:'A ponte representa uma migração a conferir; não é arquitetura nem resultado de cliente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-versoes-lupa.svg',alt:'Cena editorial de duas folhas de resposta de API fictícias sob uma lupa; a lupa destaca que o nome e o valor de um campo mudaram, enquanto o significado de negócio ainda precisa de conferência.',caption:'Respostas e lupa são fictícias. A figura ilustra uma pergunta de aceite, não uma tela ou teste realizado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

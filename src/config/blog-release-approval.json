@@ -1598,6 +1598,26 @@
         { "path": "torno-versoes-ponte.svg", "sha256": "188fd1709835690f58127487ea77e719d0a277d4044c888d20842b672cebd512" },
         { "path": "torno-versoes-lupa.svg", "sha256": "802e70360fea31aba36d9f3a90dd0921f9a023c30777385f76cba5c0007ff59c" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261106-dados-maquina-erp",
+      "intentId": "buyer-machine-data-erp-integration-pt",
+      "locale": "pt-BR",
+      "path": "/blog/dados-maquina-erp-integracao-opc-ua/",
+      "contentRevision": "48c1d76d3d7a2fe1b82f0d06928ee813ef63dbd50525022832ed5b443a919bc2",
+      "approvedBy": "Integrador editorial (autorização da rotina do usuário)",
+      "approvedAt": "2026-11-06T15:11:34Z",
+      "reviewedBy": "/root/reviewer (agente independente)",
+      "reviewedAt": "2026-11-06T15:11:30Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Delegação editorial de Henrique para a edição de 06/11/2026 às 12h America/Sao_Paulo autoriza artigo Ascende e Torno, autoria Por Henrique Pett, revisão independente, commits e push editorial na main.",
+        "review": "GO factual, editorial e visual independente de /root/reviewer para Markdown SHA-256 48c1d76d3d7a2fe1b82f0d06928ee813ef63dbd50525022832ed5b443a919bc2; fontes OPC Foundation e NIST verificadas; diff final ainda sujeito a conferência antes do push.",
+        "scope": "Somente artigo, dois SVGs originais, ficha e metadados editoriais; sem cliente ou resultado inventado; publicação pública ainda não verificada."
+      },
+      "assets": [
+        { "path": "torno-dados-maquina-lentes.svg", "sha256": "2010096ceac7b177f38ad4469f58d07b4e86bb63967e2cb35a3970813c054114" },
+        { "path": "torno-dados-maquina-ficha.svg", "sha256": "4ce5000aec7758190aa1506f4b92b31e5602423e3d2f1d0ab7ae320279548a8a" }
+      ]
     }
   ]
 }

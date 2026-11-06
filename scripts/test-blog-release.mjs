@@ -63,6 +63,7 @@ const expected = [
   ['torno-artigo-pt-20261105-campos-condicionais', '/blog/campos-condicionais-formulario-sistema-aceite/', '0a70dd14c6ce8c2f3308b1100275c7dd430e067b013a9102e3271ec15d0060e7', ['torno-campos-condicionais-matriz.svg', 'torno-formulario-duas-respostas.svg']],
   ['torno-artigo-pt-20261105-nfe-ibs-cbs', '/blog/nfe-reforma-tributaria-ibs-cbs-sistema-aceite/', '2dc47a41f50ffe6bb18735d50b9b5e35006f5a695629d033609854ed23496814', ['torno-nfe-regua-datas.svg', 'torno-nfe-dois-carimbos.svg']],
   ['torno-artigo-pt-20261106-versionamento-api', '/blog/versionamento-api-integracao-aceite/', '219f36885fb9abafa1bc54456930e1ac928aeac9f1e75ca4fb397ce64b380f2e', ['torno-versoes-ponte.svg', 'torno-versoes-lupa.svg']],
+  ['torno-artigo-pt-20261106-dados-maquina-erp', '/blog/dados-maquina-erp-integracao-opc-ua/', '48c1d76d3d7a2fe1b82f0d06928ee813ef63dbd50525022832ed5b443a919bc2', ['torno-dados-maquina-lentes.svg', 'torno-dados-maquina-ficha.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

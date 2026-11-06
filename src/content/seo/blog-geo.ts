@@ -1,5 +1,13 @@
 /** Sínteses editoriais dos artigos; regras propostas não comprovam implementação. */
 export const blogGeo: Record<string, { answer: string; takeaways: string[] }> = {
+  "torno-artigo-pt-20261106-dados-maquina-erp": {
+    answer: "Antes de integrar dados de máquinas ao ERP, defina o registro de negócio desejado, a origem e o significado de cada dado, o caminho de acesso autorizado e o que acontece em falhas. OPC UA pode oferecer troca padronizada de informações, mas não garante que a máquina exponha os dados necessários nem que o ERP os aceite sem adaptação. Separe leitura de comandos ao equipamento.",
+    takeaways: [
+      "Comece pelo evento que a operação precisa registrar, não pela escolha de um protocolo.",
+      "Confirme no equipamento e nos sistemas existentes os valores, unidades, identidade, tempo e limites do dado.",
+      "Teste leitura, reconexão, associação à ordem, correção e acesso com envolvidos da automação e da operação."
+    ]
+  },
   "torno-artigo-pt-20261106-versionamento-api": {
     answer: "Para aceitar uma nova versão de API, registre a versão usada, identifique as mudanças que afetam o fluxo de negócio, confirme a convivência com a versão anterior e teste o resultado com dados fictícios. Uma conexão bem-sucedida não demonstra que campos, estados e ações continuam corretos.",
     takeaways: [

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Ficha ilustrativa de uma leitura de máquina</title>
+  <desc id="desc">Ficha fictícia em estilo editorial com origem, instante, valor lido, vínculo com a ordem e decisão pendente de conferência.</desc>
+  <rect width="1200" height="675" fill="#e8eee9"/>
+  <path d="M0 38h1200M0 637h1200" stroke="#c9d4cb" stroke-width="2"/>
+  <rect x="76" y="84" width="1048" height="496" rx="21" fill="#ffffff" stroke="#b5c8bd" stroke-width="2"/>
+  <rect x="76" y="84" width="1048" height="90" rx="21" fill="#18382f"/>
+  <rect x="76" y="147" width="1048" height="27" fill="#18382f"/>
+  <text x="124" y="143" fill="#f2f7ef" font-family="Arial,sans-serif" font-size="34" font-weight="700">Ficha de uma leitura industrial</text>
+  <text x="916" y="142" fill="#d4eadb" font-family="Arial,sans-serif" font-size="18">EXEMPLO FICTÍCIO</text>
+  <text x="130" y="235" fill="#476357" font-family="Arial,sans-serif" font-size="17" font-weight="700">ORIGEM</text>
+  <text x="130" y="275" fill="#18382f" font-family="Arial,sans-serif" font-size="26">Máquina M-04</text>
+  <text x="575" y="235" fill="#476357" font-family="Arial,sans-serif" font-size="17" font-weight="700">VALOR LIDO</text>
+  <text x="575" y="275" fill="#18382f" font-family="Arial,sans-serif" font-size="26">120 ciclos</text>
+  <path d="M130 305h940" stroke="#d8e1d8" stroke-width="2"/>
+  <text x="130" y="356" fill="#476357" font-family="Arial,sans-serif" font-size="17" font-weight="700">REFERÊNCIA TEMPORAL</text>
+  <text x="130" y="396" fill="#18382f" font-family="Arial,sans-serif" font-size="25">06/11/2026 · 10h40 · horário local</text>
+  <text x="575" y="356" fill="#476357" font-family="Arial,sans-serif" font-size="17" font-weight="700">VÍNCULO COM A ORDEM</text>
+  <text x="575" y="396" fill="#18382f" font-family="Arial,sans-serif" font-size="25">OP-047 · confirmar turno</text>
+  <rect x="120" y="445" width="960" height="82" rx="12" fill="#fbefd9" stroke="#d4ad6c" stroke-width="2"/>
+  <circle cx="167" cy="486" r="19" fill="#955e25"/>
+  <text x="167" y="493" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="22" font-weight="700">!</text>
+  <text x="205" y="480" fill="#75481f" font-family="Arial,sans-serif" font-size="20" font-weight="700">DECISÃO PENDENTE</text>
+  <text x="205" y="507" fill="#75481f" font-family="Arial,sans-serif" font-size="18">Valor lido não equivale a peças aprovadas.</text>
+  <text x="77" y="625" fill="#426054" font-family="Arial,sans-serif" font-size="17">Ilustração original Torno Studio · 2026</text>
+</svg>

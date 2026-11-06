@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Três perguntas para integrar dados da máquina ao ERP</title>
+  <desc id="desc">Três círculos como lentes mostram leitura, interpretação e registro. Um mesmo número fictício precisa mudar de significado antes de entrar no ERP.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#121c23"/><stop offset="1" stop-color="#243b40"/></linearGradient>
+    <radialGradient id="a"><stop stop-color="#d5f3e8"/><stop offset="1" stop-color="#8bc8aa"/></radialGradient>
+    <radialGradient id="b"><stop stop-color="#ffe8b5"/><stop offset="1" stop-color="#eabf79"/></radialGradient>
+    <radialGradient id="c"><stop stop-color="#cce7f5"/><stop offset="1" stop-color="#86b5cb"/></radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <path d="M0 120h1200M0 565h1200" stroke="#ffffff" opacity=".07"/>
+  <text x="70" y="77" fill="#e8f1eb" font-family="Arial,sans-serif" font-size="36" font-weight="700">O dado muda de sentido ao atravessar o negócio</text>
+  <text x="70" y="116" fill="#a8c5bb" font-family="Arial,sans-serif" font-size="21">Exemplo fictício para definir o escopo antes da integração</text>
+  <circle cx="235" cy="330" r="147" fill="url(#a)"/>
+  <circle cx="600" cy="330" r="147" fill="url(#b)"/>
+  <circle cx="965" cy="330" r="147" fill="url(#c)"/>
+  <circle cx="235" cy="330" r="156" fill="none" stroke="#c0e8d6" stroke-width="3" opacity=".6"/>
+  <circle cx="600" cy="330" r="156" fill="none" stroke="#f7d99e" stroke-width="3" opacity=".6"/>
+  <circle cx="965" cy="330" r="156" fill="none" stroke="#b7dbea" stroke-width="3" opacity=".6"/>
+  <path d="M392 330h45m326 0h45" stroke="#dbe8e2" stroke-width="4" stroke-dasharray="8 9"/>
+  <text x="235" y="268" text-anchor="middle" fill="#25483b" font-family="Arial,sans-serif" font-size="20" font-weight="700">LEITURA</text>
+  <text x="235" y="341" text-anchor="middle" fill="#102821" font-family="Arial,sans-serif" font-size="65" font-weight="700">120</text>
+  <text x="235" y="377" text-anchor="middle" fill="#25483b" font-family="Arial,sans-serif" font-size="20">ciclos observados</text>
+  <text x="600" y="268" text-anchor="middle" fill="#725020" font-family="Arial,sans-serif" font-size="20" font-weight="700">INTERPRETAÇÃO</text>
+  <text x="600" y="325" text-anchor="middle" fill="#483318" font-family="Arial,sans-serif" font-size="25" font-weight="700">Qual ordem?</text>
+  <text x="600" y="362" text-anchor="middle" fill="#725020" font-family="Arial,sans-serif" font-size="19">Houve descarte?</text>
+  <text x="965" y="268" text-anchor="middle" fill="#214659" font-family="Arial,sans-serif" font-size="20" font-weight="700">REGISTRO</text>
+  <text x="965" y="321" text-anchor="middle" fill="#173648" font-family="Arial,sans-serif" font-size="27" font-weight="700">Apontamento</text>
+  <text x="965" y="357" text-anchor="middle" fill="#214659" font-family="Arial,sans-serif" font-size="20">a conferir no ERP</text>
+  <text x="70" y="567" fill="#f1f1ec" font-family="Arial,sans-serif" font-size="25" font-weight="700">Leitura automática ≠ produção aprovada</text>
+  <text x="70" y="613" fill="#abc0b9" font-family="Arial,sans-serif" font-size="17">Ilustração original Torno Studio · 2026</text>
+</svg>
