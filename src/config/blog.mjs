@@ -463,6 +463,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-dados-maquina-ficha.svg', digest: '4ce5000aec7758190aa1506f4b92b31e5602423e3d2f1d0ab7ae320279548a8a' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261106-lgpd-pedido-titular', intent_id: 'buyer-lgpd-data-subject-request-system-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/lgpd-pedido-titular-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/lgpd-pedido-titular-sistema-aceite/`,
+    digest: '918aa3c87a92dc51a09e031783e2d48a3d2a08ee46d560d46fe378158e4d343e', digestScope: 'file',
+    assets: [
+      { path: 'torno-lgpd-camadas.svg', digest: 'c1cc89e2a31b3547151cb6b2f66f36b5621d2cfb4c854bba274c7021f1e2684e' },
+      { path: 'torno-lgpd-envelope-resposta.svg', digest: '7ab0ed187031094d6c2dd9beeb63374428b5f201997c69c909da2678c17bfcdc' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -691,6 +700,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261106-lgpd-pedido-titular': [
+        {asset:'./torno-lgpd-camadas.svg',alt:'Corte de solo fictício intitulado “Um pedido, cinco camadas e uma raiz”: na superfície, o pedido do Titular T-01; abaixo, cadastro, anexos, histórico e log, mensagens enviadas e backup, cada camada com a decisão a tomar (no histórico e log, decidir o que manter do atendimento); uma raiz lateral chega a um sistema integrado, com a nota de comunicar quem recebeu os dados.',caption:'Exemplo fictício: o Titular T-01 e as decisões por camada não representam sistema ou cliente real. Eliminar, anonimizar ou manter é decisão da empresa, com o jurídico. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-lgpd-envelope-resposta.svg',alt:'Envelope aberto com cinco folhas da declaração completa a um pedido fictício: confirmação de tratamento, origem dos dados, inexistência de registro (se for o caso), critérios utilizados e finalidade do tratamento. Um carimbo traz a data do pedido, 03/11, e o prazo de até 15 dias para a declaração completa (art. 19, II, da LGPD), com o rótulo Exemplo fictício.',caption:'Exemplo fictício: datas e conteúdo não vêm de um pedido real. O conteúdo de cada resposta é definido pela empresa, com o encarregado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261106-dados-maquina-erp': [
         {asset:'./torno-dados-maquina-lentes.svg',alt:'Três lentes de aumento sobre um mesmo dado fictício: sinal da máquina, significado no processo e registro no ERP. As lentes mostram que cada etapa precisa de uma resposta distinta.',caption:'As lentes representam perguntas para o projeto, não uma interface pronta nem uma arquitetura industrial. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-dados-maquina-ficha.svg',alt:'Ficha visual fictícia de uma leitura industrial, com campos de origem, tempo, significado e decisão de conferência; um selo destaca que o valor lido ainda não é produção aprovada.',caption:'Ficha ilustrativa com dados inventados. Não representa tela, equipamento ou projeto de cliente. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

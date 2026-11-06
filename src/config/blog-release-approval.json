@@ -1618,6 +1618,32 @@
         { "path": "torno-dados-maquina-lentes.svg", "sha256": "2010096ceac7b177f38ad4469f58d07b4e86bb63967e2cb35a3970813c054114" },
         { "path": "torno-dados-maquina-ficha.svg", "sha256": "4ce5000aec7758190aa1506f4b92b31e5602423e3d2f1d0ab7ae320279548a8a" }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261106-lgpd-pedido-titular",
+      "intentId": "buyer-lgpd-data-subject-request-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/lgpd-pedido-titular-sistema-aceite/",
+      "contentRevision": "918aa3c87a92dc51a09e031783e2d48a3d2a08ee46d560d46fe378158e4d343e",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-06T21:39:30Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-06T21:39:22Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026; execução 2026-11-06-1800-claude.",
+        "review": "GO factual, editorial e visual independente após correções (condição da cópia integral, condições da eliminação, figura restrita ao art. 19, II, prazo em dias, legibilidade mobile); LGPD (Câmara) e páginas da ANPD abertas em 06/11/2026; diff final sujeito a nova conferência.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não é parecer jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-lgpd-camadas.svg",
+          "sha256": "c1cc89e2a31b3547151cb6b2f66f36b5621d2cfb4c854bba274c7021f1e2684e"
+        },
+        {
+          "path": "torno-lgpd-envelope-resposta.svg",
+          "sha256": "7ab0ed187031094d6c2dd9beeb63374428b5f201997c69c909da2678c17bfcdc"
+        }
+      ]
     }
   ]
 }
