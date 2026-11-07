@@ -472,6 +472,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-lgpd-envelope-resposta.svg', digest: '7ab0ed187031094d6c2dd9beeb63374428b5f201997c69c909da2678c17bfcdc' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261107-conciliacao-bancaria', intent_id: 'buyer-bank-reconciliation-automation-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/conciliacao-bancaria-sistema-extrato-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/conciliacao-bancaria-sistema-extrato-aceite/`,
+    digest: 'f383bc496ce03fca459dcb1b0bef8061154f6532c5ad3960ae8fb8dc08bd8670', digestScope: 'file',
+    assets: [
+      { path: 'torno-conciliacao-encaixe.svg', digest: '3b68cb34802d55881533e240847f86d8ceabd5b152dfe44b310f308c5ebc9235' },
+      { path: 'torno-conciliacao-bandejas.svg', digest: '1945a9109a361db3764c633a459cd12c533b56a73a4cf6d4802cf08a54e652ad' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -700,6 +709,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261107-conciliacao-bancaria': [
+        {asset:'./torno-conciliacao-encaixe.svg',alt:'Peças de encaixe ligam lançamentos fictícios do banco (extrato e retorno), à esquerda, a pedidos e títulos do sistema, à direita: Pix de R$ 1.250,00 com txid T-0042 no Pedido P-0042 (Cliente C-01); crédito de R$ 978,50 do nosso número NN-0007, informado no retorno CNAB, no título de R$ 1.000,00 (Cliente C-02), com tarifa de R$ 21,50; Pix de R$ 430,00 sem txid no Pedido P-0051 (Cliente C-03) só por valor, data e pagador, com a ressalva “sugestão, confirmar”; crédito de R$ 215,90 sem identificação, sem par.',caption:'Exemplo fictício: clientes, pedidos, chaves e valores não vêm de banco ou sistema real; identificadores encurtados para leitura; no teste, use o formato exigido pelo banco. A chave forte encaixa sozinha; valor e data só sugerem. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-conciliacao-bandejas.svg',alt:'Mesa de triagem com três bandejas fictícias. Conciliado: Pedido P-0042 com Pix de R$ 1.250,00; título NN-0007 pago R$ 1.000,00, tarifa R$ 21,50, crédito R$ 978,50. Exceção para decisão humana: crédito de R$ 215,90 sem identificação; P-0051 sugerido por valor e data; devolução Pix de R$ 100,00 do P-0042. Rejeitado: arquivo com trailer que não confere, recusado inteiro; registro 14 com data inválida, recusado sozinho.',caption:'Exemplo fictício: itens e arquivos não vêm de banco ou sistema real. A decisão sobre cada exceção é da empresa. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261106-lgpd-pedido-titular': [
         {asset:'./torno-lgpd-camadas.svg',alt:'Corte de solo fictício intitulado “Um pedido, cinco camadas e uma raiz”: na superfície, o pedido do Titular T-01; abaixo, cadastro, anexos, histórico e log, mensagens enviadas e backup, cada camada com a decisão a tomar (no histórico e log, decidir o que manter do atendimento); uma raiz lateral chega a um sistema integrado, com a nota de comunicar quem recebeu os dados.',caption:'Exemplo fictício: o Titular T-01 e as decisões por camada não representam sistema ou cliente real. Eliminar, anonimizar ou manter é decisão da empresa, com o jurídico. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-lgpd-envelope-resposta.svg',alt:'Envelope aberto com cinco folhas da declaração completa a um pedido fictício: confirmação de tratamento, origem dos dados, inexistência de registro (se for o caso), critérios utilizados e finalidade do tratamento. Um carimbo traz a data do pedido, 03/11, e o prazo de até 15 dias para a declaração completa (art. 19, II, da LGPD), com o rótulo Exemplo fictício.',caption:'Exemplo fictício: datas e conteúdo não vêm de um pedido real. O conteúdo de cada resposta é definido pela empresa, com o encarregado. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

@@ -1644,6 +1644,32 @@
           "sha256": "7ab0ed187031094d6c2dd9beeb63374428b5f201997c69c909da2678c17bfcdc"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261107-conciliacao-bancaria",
+      "intentId": "buyer-bank-reconciliation-automation-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/conciliacao-bancaria-sistema-extrato-aceite/",
+      "contentRevision": "f383bc496ce03fca459dcb1b0bef8061154f6532c5ad3960ae8fb8dc08bd8670",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-07T13:57:30Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-07T13:56:28Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main), atualização de permissões de 07/11/2026 e autorização permanente registrada em 04/11/2026; execução 2026-11-07-0815-claude.",
+        "review": "GO factual, editorial e visual independente após correções (nosso número no retorno e não no extrato, identificadores encurtados, versão vigente do Guia MED, created_at real, critério da devolução Pix, txid na cobrança com QR dinâmico); fontes do BCB, FEBRABAN, Santander, Sicoob e Resolução Conjunta nº 1/2020 abertas em 07/11/2026; diff final sujeito a nova conferência.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não é parecer contábil ou fiscal."
+      },
+      "assets": [
+        {
+          "path": "torno-conciliacao-encaixe.svg",
+          "sha256": "3b68cb34802d55881533e240847f86d8ceabd5b152dfe44b310f308c5ebc9235"
+        },
+        {
+          "path": "torno-conciliacao-bandejas.svg",
+          "sha256": "1945a9109a361db3764c633a459cd12c533b56a73a4cf6d4802cf08a54e652ad"
+        }
+      ]
     }
   ]
 }
