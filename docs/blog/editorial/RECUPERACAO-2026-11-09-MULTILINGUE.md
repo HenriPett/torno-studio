@@ -14,3 +14,12 @@
 - Astro: 135 arquivos, zero erros/avisos. Blog: 62/62. Links: 314/314. GEO: 158/168; as dez falhas de resposta direta já existem em artigos anteriores, sem regressão neste artigo.
 - Desktop e viewport responsivo de 390 px (375 úteis): sem overflow de página, figura SVG carregada com largura natural 1200, tabela com rolagem própria e legendas legíveis.
 - Metadados, canonical, ausência de noindex, autoria, sitemap e escopo exato de imagens conferidos pelo teste do release. Nenhum template alterado.
+
+## Publicação observada em 2026-11-09T16:29:47Z
+
+- Commit editorial `db91baec73f98fa39bc7e1d73f368031eba3888c` confirmado em origin/main, árvore `56739c49afb20e965e32c012a1d79ffa29a2fcf7` idêntica à revisada. Atualização fast-forward com SHA esperado, sem force.
+- Navegador de produção abriu o artigo completo em https://tornostudio.com/blog/sistema-multilingue-requisitos-aceite/, com H1/title/description/canonical corretos, sem meta noindex, autoria Henrique Pett e BlogPosting/BreadcrumbList. SVG carregado, largura natural 1200. Sitemap público inclui a URL.
+- Primeira observação pública confirmada nesta sessão; instante exato do deploy e indexação em buscadores permanecem SEM DADO. O Markdown aprovado e hashes ficam imutáveis; esta seção registra o estado publicado observado.
+- Não há workflow GitHub Actions neste repositório; status agregado retornou lista vazia, não prova de CI verde. Build/QA locais concluídos conforme seção anterior.
+
+- GET HTTP independente confirmou status 200 nas duas páginas em 09/11/2026, sem cabeçalho X-Robots-Tag.
