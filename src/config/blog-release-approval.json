@@ -1670,6 +1670,32 @@
           "sha256": "1945a9109a361db3764c633a459cd12c533b56a73a4cf6d4802cf08a54e652ad"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261109-comissao-vendedores",
+      "intentId": "buyer-sales-commission-rules-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/comissao-vendedores-sistema-regras-aceite/",
+      "contentRevision": "c73df8600220ec4b030e2de9dc3a5c1908b5e0bfe9ed790a3dea2c1eb31d7dc9",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-09T11:43:56Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-09T11:43:03Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026; execução 2026-11-09-0815-claude.",
+        "review": "Revisão factual independente NO-GO às 2026-11-09T11:31:58Z, correções obrigatórias aplicadas pelo redator e GO da revisão factual independente às 2026-11-09T11:43:03Z; fontes da Câmara dos Deputados (Lei nº 3.207/1957, publicação original, e Lei nº 4.886/1965, norma atualizada) abertas em 09/11/2026; diff final sujeito a nova conferência.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não é parecer trabalhista, contábil ou fiscal."
+      },
+      "assets": [
+        {
+          "path": "torno-comissao-faixas.svg",
+          "sha256": "a7716182c4f0112bc84d016583d4496e225de98e9ec5a914408945031788c565"
+        },
+        {
+          "path": "torno-comissao-extrato.svg",
+          "sha256": "92cf392a6db4cc00d541cee2e76721ec289aa80c10f0324232453e4bd8aa54b6"
+        }
+      ]
     }
   ]
 }

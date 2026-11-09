@@ -481,6 +481,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-conciliacao-bandejas.svg', digest: '1945a9109a361db3764c633a459cd12c533b56a73a4cf6d4802cf08a54e652ad' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261109-comissao-vendedores', intent_id: 'buyer-sales-commission-rules-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/comissao-vendedores-sistema-regras-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/comissao-vendedores-sistema-regras-aceite/`,
+    digest: 'c73df8600220ec4b030e2de9dc3a5c1908b5e0bfe9ed790a3dea2c1eb31d7dc9', digestScope: 'file',
+    assets: [
+      { path: 'torno-comissao-faixas.svg', digest: 'a7716182c4f0112bc84d016583d4496e225de98e9ec5a914408945031788c565' },
+      { path: 'torno-comissao-extrato.svg', digest: '92cf392a6db4cc00d541cee2e76721ec289aa80c10f0324232453e4bd8aa54b6' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -709,6 +718,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261109-comissao-vendedores': [
+        {asset:'./torno-comissao-faixas.svg',alt:'Gráfico de degraus fictício: comissão no eixo vertical e vendas do mês no eixo horizontal, de R$ 0 a R$ 120.000,00, com faixas de 2% até R$ 50.000,00, 3% até R$ 100.000,00 e 4% acima. A linha da faixa sobre o total salta de R$ 1.000,00 para R$ 1.500,03 em R$ 50.001,00 e de R$ 3.000,00 para R$ 4.000,04 em R$ 100.001,00, terminando em R$ 4.800,00. A linha da faixa marginal sobe sem saltos: R$ 1.000,00 em R$ 50.000,00, R$ 2.500,00 em R$ 100.000,00, R$ 2.500,04 em R$ 100.001,00 e R$ 3.300,00 em R$ 120.000,00. Destaque: R$ 1,00 a mais de venda, R$ 1.000,04 a mais de comissão.',caption:'Exemplo fictício: faixas e valores não são recomendação de política de comissão. A escolha entre faixa marginal e faixa sobre o total é da empresa. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-comissao-extrato.svg',alt:'Extrato fictício do vendedor V-07, outubro de 2026, com quatro linhas: parcela 1/2 do Pedido P-1201 recebida, base R$ 5.000,00, 3%, R$ 150,00, regra v2; parcela 2/2 do Pedido P-1188 recebida, base R$ 4.000,00, 2%, R$ 80,00, regra v1, com balão de contestação “pedido aceito em 02/10; não seria a v2?”, em análise pelo financeiro; devolução do Pedido P-1150, base R$ 1.000,00, estorno de R$ 20,00 pela regra v1; ajuste de faixa, base do mês R$ 8.000,00 acima da meta de R$ 6.000,00, mais 0,5%, R$ 40,00, regra Faixas v1. Total: R$ 250,00, uma linha em contestação.',caption:'Exemplo fictício: vendedor, pedidos, regras e valores não vêm de empresa ou sistema real. Cada linha mostra a regra e a versão que a gerou. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261107-conciliacao-bancaria': [
         {asset:'./torno-conciliacao-encaixe.svg',alt:'Peças de encaixe ligam lançamentos fictícios do banco (extrato e retorno), à esquerda, a pedidos e títulos do sistema, à direita: Pix de R$ 1.250,00 com txid T-0042 no Pedido P-0042 (Cliente C-01); crédito de R$ 978,50 do nosso número NN-0007, informado no retorno CNAB, no título de R$ 1.000,00 (Cliente C-02), com tarifa de R$ 21,50; Pix de R$ 430,00 sem txid no Pedido P-0051 (Cliente C-03) só por valor, data e pagador, com a ressalva “sugestão, confirmar”; crédito de R$ 215,90 sem identificação, sem par.',caption:'Exemplo fictício: clientes, pedidos, chaves e valores não vêm de banco ou sistema real; identificadores encurtados para leitura; no teste, use o formato exigido pelo banco. A chave forte encaixa sozinha; valor e data só sugerem. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-conciliacao-bandejas.svg',alt:'Mesa de triagem com três bandejas fictícias. Conciliado: Pedido P-0042 com Pix de R$ 1.250,00; título NN-0007 pago R$ 1.000,00, tarifa R$ 21,50, crédito R$ 978,50. Exceção para decisão humana: crédito de R$ 215,90 sem identificação; P-0051 sugerido por valor e data; devolução Pix de R$ 100,00 do P-0042. Rejeitado: arquivo com trailer que não confere, recusado inteiro; registro 14 com data inválida, recusado sozinho.',caption:'Exemplo fictício: itens e arquivos não vêm de banco ou sistema real. A decisão sobre cada exceção é da empresa. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
