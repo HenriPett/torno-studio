@@ -572,3 +572,9 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 - Autoria editorial `Por Henrique Pett` baseada na autorização explícita do usuário para os agendamentos, reiterada na delegação de 06/11/2026 às 12h America/Sao_Paulo. A autoria editorial não indica que Henrique tenha feito revisão pessoal nem que ele opere as máquinas do exemplo. O parser exige `author_name === author_basis`; por isso a evidência está neste registro.
 - Estado do arquivo `review` em checkout sobre `96fb828b4fe833ea71d9c505f94e551b07d72fb0`; a aprovação no manifesto libera sua inclusão no build sem fingir observação pública. Revisão factual/editorial/visual independente de `/root/reviewer` GO final registrado em `2026-11-06T15:11:30Z`; decisão operacional de inclusão `2026-11-06T15:11:34Z`, para Markdown SHA-256 `48c1d76d3d7a2fe1b82f0d06928ee813ef63dbd50525022832ed5b443a919bc2`. SVGs SHA-256 `2010096ceac7b177f38ad4469f58d07b4e86bb63967e2cb35a3970813c054114` e `4ce5000aec7758190aa1506f4b92b31e5602423e3d2f1d0ab7ae320279548a8a`.
 - `first_published_at`, `verified_at`, `evidence_of_publication` e indexação nulos. Build ou push não comprovam publicação.
+
+
+### 2026-11-09 — recuperação do rascunho multilíngue de 06/11
+
+- `torno-artigo-pt-20261106-sistema-multilingue`; `buyer-multilingual-system-localization-acceptance-pt`; PT-BR; `/blog/sistema-multilingue-requisitos-aceite/`. Aprovado para inclusão sob pedido explícito de Henrique. Não duplica aceite geral ou datas/fusos.
+- Fontes, revisão, hashes e futura observação pública em [registro de recuperação](RECUPERACAO-2026-11-09-MULTILINGUE.md).

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Uma tarefa em dois idiomas, mostrada como um caderno aberto</title>
+<desc id="desc">Um caderno editorial aberto apresenta o mesmo percurso fictício nas páginas PT e EN. Cada página contém formulário, confirmação e mensagem, indicando que todo o percurso precisa ser definido.</desc>
+<rect width="1200" height="675" fill="#17272c"/>
+<circle cx="1050" cy="72" r="264" fill="#315353" opacity=".38"/>
+<circle cx="138" cy="627" r="234" fill="#30524a" opacity=".38"/>
+<text x="80" y="89" fill="#f2f3eb" font-family="Arial,sans-serif" font-size="39" font-weight="700">Uma tarefa, dois idiomas</text>
+<text x="80" y="131" fill="#b9cec8" font-family="Arial,sans-serif" font-size="22">Caderno editorial fictício para conferir o percurso completo</text>
+<path d="M92 217 Q285 171 575 215 L575 560 Q274 518 92 566 Z" fill="#eaf1e9"/>
+<path d="M575 215 Q861 171 1108 217 L1108 566 Q853 518 575 560 Z" fill="#fff1d7"/>
+<path d="M575 215v345" stroke="#a7b5a8" stroke-width="6"/>
+<path d="M107 230 Q295 192 563 228M588 228 Q837 192 1091 230" stroke="#ced8cf" fill="none" stroke-width="2"/>
+<text x="145" y="282" fill="#245548" font-family="Arial,sans-serif" font-size="32" font-weight="700">PT</text>
+<text x="643" y="282" fill="#755326" font-family="Arial,sans-serif" font-size="32" font-weight="700">EN</text>
+<g font-family="Arial,sans-serif" font-size="25" fill="#25443d"><text x="150" y="342">Formulário</text><text x="150" y="423">Confirmação</text><text x="150" y="504">Mensagem</text></g>
+<g font-family="Arial,sans-serif" font-size="25" fill="#664b2c"><text x="645" y="342">Form</text><text x="645" y="423">Confirmation</text><text x="645" y="504">Message</text></g>
+<g stroke="#83a99b" stroke-width="7" stroke-linecap="round"><path d="M360 334h132M360 415h132M360 496h132"/></g>
+<g stroke="#cfad79" stroke-width="7" stroke-linecap="round"><path d="M895 334h126M895 415h126M895 496h126"/></g>
+<path d="M79 578 Q299 550 575 585 Q864 550 1120 578" fill="none" stroke="#718c81" stroke-width="3"/>
+<text x="80" y="621" fill="#d0ded6" font-family="Arial,sans-serif" font-size="20">A troca do menu, sozinha, não cobre a tarefa inteira.</text>
+<text x="80" y="650" fill="#91aea4" font-family="Arial,sans-serif" font-size="16">Ilustração original Torno Studio · 2026</text>
+</svg>

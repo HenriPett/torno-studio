@@ -1748,6 +1748,28 @@
           "sha256": "4474a8456c7e7610e0351369a589219d5dd745fe901b97b0345618f66902b009"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261106-sistema-multilingue",
+      "intentId": "buyer-multilingual-system-localization-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/sistema-multilingue-requisitos-aceite/",
+      "contentRevision": "025c0d2fa9f1f56f7f6de60e1ac9dbe5009bc33d788b708bc2db210216351002",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-09T16:22:35Z",
+      "reviewedBy": "revisar_sistema_multilingue (agente independente)",
+      "reviewedAt": "2026-11-09T16:22:35Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Henrique pediu publicar todos os rascunhos na main, dando pull antes. Recuperação dos dois rascunhos no Space autorizada explicitamente em 09/11/2026.",
+        "review": "Revisão independente factual, editorial e visual em 09/11/2026; fontes W3C reabertas e qualificadas. Ajustes de voz aplicados. Inclusão operacional autorizada pelo pedido explícito de Henrique para publicar todos os rascunhos na main; sem revisão pessoal atribuída a Henrique. Publicação depende da observação posterior do deploy.",
+        "scope": "Artigo multilíngue, SVG e registros/metadados editoriais; sem mudanças de aplicação ou template."
+      },
+      "assets": [
+        {
+          "path": "torno-sistema-multilingue-percurso.svg",
+          "sha256": "8e9a4f6d8bbfd571082e81519fcb8d21ac2e44aaffdd9f4d9409174702fdb10e"
+        }
+      ]
     }
   ]
 }

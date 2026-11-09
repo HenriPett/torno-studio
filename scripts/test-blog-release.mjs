@@ -12,6 +12,7 @@ const root = resolve(process.argv[2] ?? '.');
 const dist = join(root, 'dist');
 const manifest = JSON.parse(await readFile(join(root, '.astro/blog-manifest.json'), 'utf8'));
 const expected = [
+  ["torno-artigo-pt-20261106-sistema-multilingue", "/blog/sistema-multilingue-requisitos-aceite/", "025c0d2fa9f1f56f7f6de60e1ac9dbe5009bc33d788b708bc2db210216351002", ["torno-sistema-multilingue-percurso.svg"]],
   ["torno-artigo-pt-20261109-acoes-lote", "/blog/acoes-lote-sistema-falhas-parciais/", "f33463418171dc486e0cc02c641bfbe8ba7af49a716af34964ab01fbc59316e9", ["torno-lote-resultados.svg", "torno-lote-retomada.svg"]],
   ['torno-artigo-pt-20261014-planilhas', '/blog/quando-automatizar-processos-planilhas/', 'a84d4826d4b1d68efc03767aea2c09dd2ba8386a7b1ddaee87f235cc15974d66', []],
   ['torno-artigo-pt-20261015-criterios-aceite-mvp', '/blog/criterios-aceite-mvp/', 'bfee8c6b195d2ee2b3946327aa0e010348921bde6edc64c29169ab00e5d151e2', ['torno.svg']],
