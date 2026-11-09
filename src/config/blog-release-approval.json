@@ -1770,6 +1770,32 @@
           "sha256": "8e9a4f6d8bbfd571082e81519fcb8d21ac2e44aaffdd9f4d9409174702fdb10e"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261109-marketplace-estoque",
+      "intentId": "buyer-marketplace-integration-stock-orders-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/integracao-marketplace-estoque-pedidos-aceite/",
+      "contentRevision": "df94467a044b012a5532fdab89680b9ffa1fa62bdd911b563a17388099cce143",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-09T21:21:00Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-09T21:20:24Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-09-1800-claude.",
+        "review": "Revisão factual independente NO-GO com cinco correções obrigatórias (horário do exemplo, margem da cena, devoluções unsaleable/discard, alt e seo_description) e condição de primeira pessoa, aplicadas pelo integrador; GO da revisão factual independente às 2026-11-09T21:20:24Z; documentação do Mercado Livre Developers aberta em 09/11/2026; diff final sujeito a nova conferência.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda hub, ERP nem integrador."
+      },
+      "assets": [
+        {
+          "path": "torno-marketplace-camadas-estoque.svg",
+          "sha256": "a4f1148396a3008122bda03df374efde228c214031294fb1b6f6c4ed60e63960"
+        },
+        {
+          "path": "torno-marketplace-ultima-unidade.svg",
+          "sha256": "4ffecee86e69cbe57129446c2f5976774c57027a3601a91e103ba80dbfd133b0"
+        }
+      ]
     }
   ]
 }

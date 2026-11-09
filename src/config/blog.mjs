@@ -501,6 +501,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-pix-tres-chaves.svg', digest: '8eb342477b74b2eae8137505065a533fd0c0154ad0cf1ac78dfdca751c52dc62' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261109-marketplace-estoque', intent_id: 'buyer-marketplace-integration-stock-orders-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/integracao-marketplace-estoque-pedidos-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/integracao-marketplace-estoque-pedidos-aceite/`,
+    digest: 'df94467a044b012a5532fdab89680b9ffa1fa62bdd911b563a17388099cce143', digestScope: 'file',
+    assets: [
+      { path: 'torno-marketplace-camadas-estoque.svg', digest: 'a4f1148396a3008122bda03df374efde228c214031294fb1b6f6c4ed60e63960' },
+      { path: 'torno-marketplace-ultima-unidade.svg', digest: '4ffecee86e69cbe57129446c2f5976774c57027a3601a91e103ba80dbfd133b0' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -731,6 +740,10 @@ export function blogCriteriaFigure() {
     const configs={
       "torno-artigo-pt-20261106-sistema-multilingue": [{"asset": "./torno-sistema-multilingue-percurso.svg", "alt": "Caderno editorial aberto com a mesma solicitação fictícia em português e inglês, com formulário, confirmação e mensagem como partes do mesmo percurso.", "caption": "O percurso representa uma pergunta de escopo, não uma tela de sistema existente. Ilustração original Torno Studio, 2026.", "className": ["blog-figure"]}],
       "torno-artigo-pt-20261109-acoes-lote": [{"asset": "./torno-lote-resultados.svg", "alt": "Diagrama de uma seleção de 12 solicitações fictícias dividida em 8 concluídas, 2 recusadas, 1 ignorada e 1 com resultado a confirmar.", "caption": "Distribuição hipotética para explicar a conferência por item. Ilustração original Torno Studio, 2026.", "className": ["blog-figure"]}, {"asset": "./torno-lote-retomada.svg", "alt": "Fluxo de retomada com três caminhos: preservar itens concluídos, corrigir recusas antes de repetir e consultar resultados incertos antes de decidir.", "caption": "Fluxo conceitual de decisão, sem representar uma interface ou implementação existente. Ilustração original Torno Studio, 2026.", "className": ["blog-figure"]}],
+      'torno-artigo-pt-20261109-marketplace-estoque': [
+        {asset:'./torno-marketplace-camadas-estoque.svg',alt:'Barra empilhada fictícia do saldo do SKU CAN-042: físico 20 dividido em reservado 3, bloqueado 2, margem de segurança 2 e disponível para publicar 13, com a fórmula 20 − 3 − 2 − 2 = 13 e a marcação Exemplo fictício.',caption:'Exemplo fictício: SKU e saldos imaginários; as camadas são uma proposta de modelagem, não termos do marketplace. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-marketplace-ultima-unidade.svg',alt:'Ilustração editorial fictícia: prateleira com a última unidade do SKU CAN-042; abaixo, a loja própria com pedido no balcão às 14:02:10 e uma tela genérica de marketplace, sem logotipo, com pedido confirmado às 14:02:11, ambos apontando para a mesma caixa; no pé, o quadro Qual regra o sistema aplica? com três opções: reservar para o primeiro pedido confirmado, publicar com margem de segurança, cancelar um dos pedidos e avisar o comprador. Marcado Exemplo fictício.',caption:'Exemplo fictício: SKU, horário e canais imaginários. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261109-pix-automatico': [
         {asset:'./torno-pix-regua-parcela.svg',alt:'Régua de dias fictícia da mensalidade de dezembro de uma escola, com vencimento em 10/12/2026: faixa de envio da cobrança de 30/11 a 08/12 (10 a 2 dias antes); véspera 09/12 com dois marcadores, recebedor cancela cobrança até 22h e pagador cancela agendamento até 23h59; dia 10/12 com duas janelas de tentativa, 0h às 8h e 18h às 21h; após o vencimento, até 3 datas de nova tentativa até 17/12, marcadas “só se a recorrência permitir”.',caption:'Exemplo fictício: escola, datas e janelas aplicadas a uma parcela imaginária, conforme o Guia de implementação do Pix Automático do BCB consultado em 09/11/2026. Os prazos combinados entre recebedor e PSP podem ser mais curtos. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-pix-tres-chaves.svg',alt:'Chaveiro fictício com três etiquetas presas no mesmo aro: etiqueta grande “idRec — contrato C-0312, mensalidade, valor variável, novas tentativas: sim”; etiqueta média “txid — parcela dez/2026, R$ 980,00, vencimento 10/12”; duas etiquetas pequenas penduradas no txid, “endToEndId 1 — tentativa 10/12, sem saldo” e “endToEndId 2 — tentativa 14/12, liquidado”.',caption:'Exemplo fictício: contrato, parcela, valores e identificadores encurtados para leitura; os reais têm formato definido pelo BCB. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
