@@ -490,6 +490,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-comissao-extrato.svg', digest: '92cf392a6db4cc00d541cee2e76721ec289aa80c10f0324232453e4bd8aa54b6' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261109-pix-automatico', intent_id: 'buyer-pix-automatico-recurring-billing-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/pix-automatico-cobranca-recorrente-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/pix-automatico-cobranca-recorrente-sistema-aceite/`,
+    digest: '87061af943d3bfb3eba0391b203872d129a79e705e30813b7234138bc39ca1eb', digestScope: 'file',
+    assets: [
+      { path: 'torno-pix-regua-parcela.svg', digest: '9edf83140db7bc4c63bfdb0b01563f56ddef263bc4f66d627402edbe5e4096d3' },
+      { path: 'torno-pix-tres-chaves.svg', digest: '8eb342477b74b2eae8137505065a533fd0c0154ad0cf1ac78dfdca751c52dc62' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -718,6 +727,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261109-pix-automatico': [
+        {asset:'./torno-pix-regua-parcela.svg',alt:'Régua de dias fictícia da mensalidade de dezembro de uma escola, com vencimento em 10/12/2026: faixa de envio da cobrança de 30/11 a 08/12 (10 a 2 dias antes); véspera 09/12 com dois marcadores, recebedor cancela cobrança até 22h e pagador cancela agendamento até 23h59; dia 10/12 com duas janelas de tentativa, 0h às 8h e 18h às 21h; após o vencimento, até 3 datas de nova tentativa até 17/12, marcadas “só se a recorrência permitir”.',caption:'Exemplo fictício: escola, datas e janelas aplicadas a uma parcela imaginária, conforme o Guia de implementação do Pix Automático do BCB consultado em 09/11/2026. Os prazos combinados entre recebedor e PSP podem ser mais curtos. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-pix-tres-chaves.svg',alt:'Chaveiro fictício com três etiquetas presas no mesmo aro: etiqueta grande “idRec — contrato C-0312, mensalidade, valor variável, novas tentativas: sim”; etiqueta média “txid — parcela dez/2026, R$ 980,00, vencimento 10/12”; duas etiquetas pequenas penduradas no txid, “endToEndId 1 — tentativa 10/12, sem saldo” e “endToEndId 2 — tentativa 14/12, liquidado”.',caption:'Exemplo fictício: contrato, parcela, valores e identificadores encurtados para leitura; os reais têm formato definido pelo BCB. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261109-comissao-vendedores': [
         {asset:'./torno-comissao-faixas.svg',alt:'Gráfico de degraus fictício: comissão no eixo vertical e vendas do mês no eixo horizontal, de R$ 0 a R$ 120.000,00, com faixas de 2% até R$ 50.000,00, 3% até R$ 100.000,00 e 4% acima. A linha da faixa sobre o total salta de R$ 1.000,00 para R$ 1.500,03 em R$ 50.001,00 e de R$ 3.000,00 para R$ 4.000,04 em R$ 100.001,00, terminando em R$ 4.800,00. A linha da faixa marginal sobe sem saltos: R$ 1.000,00 em R$ 50.000,00, R$ 2.500,00 em R$ 100.000,00, R$ 2.500,04 em R$ 100.001,00 e R$ 3.300,00 em R$ 120.000,00. Destaque: R$ 1,00 a mais de venda, R$ 1.000,04 a mais de comissão.',caption:'Exemplo fictício: faixas e valores não são recomendação de política de comissão. A escolha entre faixa marginal e faixa sobre o total é da empresa. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-comissao-extrato.svg',alt:'Extrato fictício do vendedor V-07, outubro de 2026, com quatro linhas: parcela 1/2 do Pedido P-1201 recebida, base R$ 5.000,00, 3%, R$ 150,00, regra v2; parcela 2/2 do Pedido P-1188 recebida, base R$ 4.000,00, 2%, R$ 80,00, regra v1, com balão de contestação “pedido aceito em 02/10; não seria a v2?”, em análise pelo financeiro; devolução do Pedido P-1150, base R$ 1.000,00, estorno de R$ 20,00 pela regra v1; ajuste de faixa, base do mês R$ 8.000,00 acima da meta de R$ 6.000,00, mais 0,5%, R$ 40,00, regra Faixas v1. Total: R$ 250,00, uma linha em contestação.',caption:'Exemplo fictício: vendedor, pedidos, regras e valores não vêm de empresa ou sistema real. Cada linha mostra a regra e a versão que a gerou. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

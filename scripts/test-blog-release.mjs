@@ -67,6 +67,7 @@ const expected = [
   ['torno-artigo-pt-20261106-lgpd-pedido-titular', '/blog/lgpd-pedido-titular-sistema-aceite/', '918aa3c87a92dc51a09e031783e2d48a3d2a08ee46d560d46fe378158e4d343e', ['torno-lgpd-camadas.svg', 'torno-lgpd-envelope-resposta.svg']],
   ['torno-artigo-pt-20261107-conciliacao-bancaria', '/blog/conciliacao-bancaria-sistema-extrato-aceite/', 'f383bc496ce03fca459dcb1b0bef8061154f6532c5ad3960ae8fb8dc08bd8670', ['torno-conciliacao-encaixe.svg', 'torno-conciliacao-bandejas.svg']],
   ['torno-artigo-pt-20261109-comissao-vendedores', '/blog/comissao-vendedores-sistema-regras-aceite/', 'c73df8600220ec4b030e2de9dc3a5c1908b5e0bfe9ed790a3dea2c1eb31d7dc9', ['torno-comissao-faixas.svg', 'torno-comissao-extrato.svg']],
+  ['torno-artigo-pt-20261109-pix-automatico', '/blog/pix-automatico-cobranca-recorrente-sistema-aceite/', '87061af943d3bfb3eba0391b203872d129a79e705e30813b7234138bc39ca1eb', ['torno-pix-regua-parcela.svg', 'torno-pix-tres-chaves.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

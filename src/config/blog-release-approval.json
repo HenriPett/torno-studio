@@ -1696,6 +1696,32 @@
           "sha256": "92cf392a6db4cc00d541cee2e76721ec289aa80c10f0324232453e4bd8aa54b6"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261109-pix-automatico",
+      "intentId": "buyer-pix-automatico-recurring-billing-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/pix-automatico-cobranca-recorrente-sistema-aceite/",
+      "contentRevision": "87061af943d3bfb3eba0391b203872d129a79e705e30813b7234138bc39ca1eb",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-09T15:28:30Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-09T15:27:43Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-09-1200-claude.",
+        "review": "Revisão factual independente NO-GO às 2026-11-09T15:21:40Z, correção obrigatória (valor da parcela fictícia acima do teto) e recomendadas aplicadas pelo redator e pelo agente de imagens, GO da revisão factual independente às 2026-11-09T15:27:43Z; fontes do Banco Central do Brasil abertas em 09/11/2026; diff final sujeito a nova conferência.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não é consultoria regulatória nem recomendação de PSP."
+      },
+      "assets": [
+        {
+          "path": "torno-pix-regua-parcela.svg",
+          "sha256": "9edf83140db7bc4c63bfdb0b01563f56ddef263bc4f66d627402edbe5e4096d3"
+        },
+        {
+          "path": "torno-pix-tres-chaves.svg",
+          "sha256": "8eb342477b74b2eae8137505065a533fd0c0154ad0cf1ac78dfdca751c52dc62"
+        }
+      ]
     }
   ]
 }
