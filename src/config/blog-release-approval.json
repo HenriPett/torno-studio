@@ -1722,6 +1722,32 @@
           "sha256": "8eb342477b74b2eae8137505065a533fd0c0154ad0cf1ac78dfdca751c52dc62"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261109-acoes-lote",
+      "intentId": "buyer-bulk-action-partial-failure-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/acoes-lote-sistema-falhas-parciais/",
+      "contentRevision": "f33463418171dc486e0cc02c641bfbe8ba7af49a716af34964ab01fbc59316e9",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-09T15:18:04Z",
+      "reviewedBy": "revisar_artigos_retoma (agente independente)",
+      "reviewedAt": "2026-11-09T15:16:58Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Henrique autorizou publicação e commit/push editorial em main, exclusivamente na nuvem, com revisão independente e QA. Autoria editorial Henrique Pett preservada.",
+        "review": "GO independente de corpo, fontes reabertas e imagens na retomada de 09/11/2026, comunicado pelo coordenador às 15:16:58 UTC. Autoria editorial Henrique Pett autorizada pelo usuário; sem revisão pessoal atribuída a Henrique. Inclusão para QA local; publicação condicionada à revisão do diff final e QA desktop/mobile.",
+        "scope": "Artigo, dois SVGs e registros/metadados editoriais. Não é autorização para alterações de aplicação."
+      },
+      "assets": [
+        {
+          "path": "torno-lote-resultados.svg",
+          "sha256": "82fe94f1d60da6ef3de3eab4111e93af43c64e288cd263093f8be242436ad390"
+        },
+        {
+          "path": "torno-lote-retomada.svg",
+          "sha256": "4474a8456c7e7610e0351369a589219d5dd745fe901b97b0345618f66902b009"
+        }
+      ]
     }
   ]
 }
