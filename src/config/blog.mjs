@@ -510,6 +510,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-marketplace-ultima-unidade.svg', digest: '4ffecee86e69cbe57129446c2f5976774c57027a3601a91e103ba80dbfd133b0' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261110-estoque-lote-validade', intent_id: 'buyer-inventory-lot-expiry-fefo-traceability-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/estoque-lote-validade-fefo-sistema-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/estoque-lote-validade-fefo-sistema-aceite/`,
+    digest: '700a6bf180041a29fcbb8c39a3c233855d10ea7234afb856de994a5ad3803fb3', digestScope: 'file',
+    assets: [
+      { path: 'torno-lote-etiqueta-gs1.svg', digest: '7202f5105003c5248675bf817b132bea72ab4376a7465d329bfb6e4fa017ae9b' },
+      { path: 'torno-lote-arvore-rastreio.svg', digest: '16fe4fa35e1340c544c67001638a7fd5d574e073aeefad3497b9955bbec7d677' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -738,6 +747,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261110-estoque-lote-validade': [
+        {asset:'./torno-lote-etiqueta-gs1.svg',alt:'Etiqueta de caixa fictícia ampliada com o cabeçalho MOLHO DE TOMATE 340 g · CX 24 · MT-340, barras ilustrativas e a linha legível (01) 12000000012343 (11) 260615 (17) 270614 (10) L26241; cada campo é sublinhado e decodificado ao lado: GTIN do item comercial da caixa, fabricação 15/06/2026, validade 14/06/2027 e lote L26241 de 1 a 20 caracteres que não deve repetir para o mesmo GTIN. Um detalhe mostra a validade (17) 270600 lida como 30/06/2027, porque o dia 00 indica o último dia do mês, com a nota de que desde 01/01/2025 produtos de saúde regulados não usam 00; um carimbo tracejado pergunta o que fazer com etiqueta sem (10) e responde que o contrato decide entre recusar ou criar lote interno marcado. Marcado Exemplo fictício.',caption:'Exemplo fictício: produto, GTIN, datas e lote inventados; as barras são ilustrativas e não codificam dados. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-lote-arvore-rastreio.svg',alt:'Árvore horizontal de rastreabilidade do lote fictício L26290: no centro, o tronco Lote L26290 · MT-340 · fabricação 18/08/2026 · validade 17/08/2027 · 480 caixas recebidas; à esquerda, para trás, a raiz com a nota de entrada 4410 de 01/09/2026 e o fornecedor Conservas Exemplo Ltda; à direita, para frente, galhos com espessura proporcional à quantidade para Mercado Alfa 120 caixas, Padaria Central 96 e Restaurante Exemplo 60, expedidas, 276 no total; um galho tracejado com 24 caixas separadas para pedido ainda não expedido, a retirar; e um galho hachurado com 180 caixas na prateleira, em quarentena. No pé, a conta 276 + 24 + 180 = 480 caixas e o selo A soma fecha com o recebido. Marcado Exemplo fictício.',caption:'Exemplo fictício: fornecedor, clientes, nota e quantidades inventados; espessura dos galhos proporcional às caixas. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       "torno-artigo-pt-20261106-sistema-multilingue": [{"asset": "./torno-sistema-multilingue-percurso.svg", "alt": "Caderno editorial aberto com a mesma solicitação fictícia em português e inglês, com formulário, confirmação e mensagem como partes do mesmo percurso.", "caption": "O percurso representa uma pergunta de escopo, não uma tela de sistema existente. Ilustração original Torno Studio, 2026.", "className": ["blog-figure"]}],
       "torno-artigo-pt-20261109-acoes-lote": [{"asset": "./torno-lote-resultados.svg", "alt": "Diagrama de uma seleção de 12 solicitações fictícias dividida em 8 concluídas, 2 recusadas, 1 ignorada e 1 com resultado a confirmar.", "caption": "Distribuição hipotética para explicar a conferência por item. Ilustração original Torno Studio, 2026.", "className": ["blog-figure"]}, {"asset": "./torno-lote-retomada.svg", "alt": "Fluxo de retomada com três caminhos: preservar itens concluídos, corrigir recusas antes de repetir e consultar resultados incertos antes de decidir.", "caption": "Fluxo conceitual de decisão, sem representar uma interface ou implementação existente. Ilustração original Torno Studio, 2026.", "className": ["blog-figure"]}],
       'torno-artigo-pt-20261109-marketplace-estoque': [

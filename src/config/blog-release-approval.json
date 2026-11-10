@@ -1796,6 +1796,32 @@
           "sha256": "4ffecee86e69cbe57129446c2f5976774c57027a3601a91e103ba80dbfd133b0"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261110-estoque-lote-validade",
+      "intentId": "buyer-inventory-lot-expiry-fefo-traceability-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/estoque-lote-validade-fefo-sistema-aceite/",
+      "contentRevision": "700a6bf180041a29fcbb8c39a3c233855d10ea7234afb856de994a5ad3803fb3",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-10T11:41:59Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-10T11:40:37Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-10-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus) GO condicionado a quatro correções obrigatórias (FEFO no cenário de quarentena, regra do estado vencido, nota do dia 00 e metadados de aprovação), aplicadas pelo integrador; parecer às 2026-11-10T11:40:37Z; fontes GS1, RDC Anvisa 655/2022, CDC e Portaria MJSP 618/2019 abertas em 10/11/2026; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda ERP, WMS nem fornecedor; não é parecer jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-lote-etiqueta-gs1.svg",
+          "sha256": "7202f5105003c5248675bf817b132bea72ab4376a7465d329bfb6e4fa017ae9b"
+        },
+        {
+          "path": "torno-lote-arvore-rastreio.svg",
+          "sha256": "16fe4fa35e1340c544c67001638a7fd5d574e073aeefad3497b9955bbec7d677"
+        }
+      ]
     }
   ]
 }
