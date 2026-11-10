@@ -519,6 +519,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-lote-arvore-rastreio.svg', digest: '16fe4fa35e1340c544c67001638a7fd5d574e073aeefad3497b9955bbec7d677' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261110-sla-horas-uteis', intent_id: 'buyer-helpdesk-sla-business-hours-pause-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/sla-horas-uteis-sistema-chamados-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/sla-horas-uteis-sistema-chamados-aceite/`,
+    digest: 'ec712d21f7067e66a267dfd6cbe956cc9fadc8c6b4927352a1de963da8d2e44e', digestScope: 'file',
+    assets: [
+      { path: 'torno-sla-regua-semana.svg', digest: '58c0f28ba4d4eaafdd24fb6a77ee4c36934382382b0ed5a534b052f66670b858' },
+      { path: 'torno-sla-cronometro-estados.svg', digest: '962b0753377ba54d813ee44aa60f7de3f287455c61039c3638b7a7aa555c4463' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -747,6 +756,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261110-sla-horas-uteis': [
+        {asset:'./torno-sla-regua-semana.svg',alt:'Régua de tempo de quinta 19/11 a segunda 23/11/2026, horário de São Paulo, para chamado fictício com meta de 8 horas úteis e expediente das 08h às 18h. Contadas: quinta 16h30–18h (1h30), segunda 08h–09h (1h) e 10h30–16h (5h30). Não contadas: noites, sexta 20/11 feriado nacional, sábado e domingo. Pausa aguardando cliente na segunda 09h–10h30. Marcos: abertura quinta 16h30 e vencimento segunda 16h00. Exemplo fictício.',caption:'Exemplo fictício: chamado, calendário e meta inventados; uma faixa por dia, das 08h às 18h. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-sla-cronometro-estados.svg',alt:'Ilustração de três cronômetros: Contando, com o ponteiro em movimento durante o expediente e o chamado aberto; Pausado, com ícone de pausa, aguardando o cliente; e Parado, com ícone de conferido, chamado resolvido. Abaixo, a pergunta: reaberto, continua de onde parou ou começa de novo? Decisão de negócio, por escrito.',caption:'Três estados do cronômetro do prazo; a regra de retomada na reabertura é decisão de negócio, a definir no contrato. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261110-estoque-lote-validade': [
         {asset:'./torno-lote-etiqueta-gs1.svg',alt:'Etiqueta de caixa fictícia ampliada com o cabeçalho MOLHO DE TOMATE 340 g · CX 24 · MT-340, barras ilustrativas e a linha legível (01) 12000000012343 (11) 260615 (17) 270614 (10) L26241; cada campo é sublinhado e decodificado ao lado: GTIN do item comercial da caixa, fabricação 15/06/2026, validade 14/06/2027 e lote L26241 de 1 a 20 caracteres que não deve repetir para o mesmo GTIN. Um detalhe mostra a validade (17) 270600 lida como 30/06/2027, porque o dia 00 indica o último dia do mês, com a nota de que desde 01/01/2025 produtos de saúde regulados não usam 00; um carimbo tracejado pergunta o que fazer com etiqueta sem (10) e responde que o contrato decide entre recusar ou criar lote interno marcado. Marcado Exemplo fictício.',caption:'Exemplo fictício: produto, GTIN, datas e lote inventados; as barras são ilustrativas e não codificam dados. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-lote-arvore-rastreio.svg',alt:'Árvore horizontal de rastreabilidade do lote fictício L26290: no centro, o tronco Lote L26290 · MT-340 · fabricação 18/08/2026 · validade 17/08/2027 · 480 caixas recebidas; à esquerda, para trás, a raiz com a nota de entrada 4410 de 01/09/2026 e o fornecedor Conservas Exemplo Ltda; à direita, para frente, galhos com espessura proporcional à quantidade para Mercado Alfa 120 caixas, Padaria Central 96 e Restaurante Exemplo 60, expedidas, 276 no total; um galho tracejado com 24 caixas separadas para pedido ainda não expedido, a retirar; e um galho hachurado com 180 caixas na prateleira, em quarentena. No pé, a conta 276 + 24 + 180 = 480 caixas e o selo A soma fecha com o recebido. Marcado Exemplo fictício.',caption:'Exemplo fictício: fornecedor, clientes, nota e quantidades inventados; espessura dos galhos proporcional às caixas. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

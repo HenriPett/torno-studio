@@ -72,6 +72,7 @@ const expected = [
   ['torno-artigo-pt-20261109-pix-automatico', '/blog/pix-automatico-cobranca-recorrente-sistema-aceite/', '87061af943d3bfb3eba0391b203872d129a79e705e30813b7234138bc39ca1eb', ['torno-pix-regua-parcela.svg', 'torno-pix-tres-chaves.svg']],
   ['torno-artigo-pt-20261109-marketplace-estoque', '/blog/integracao-marketplace-estoque-pedidos-aceite/', 'df94467a044b012a5532fdab89680b9ffa1fa62bdd911b563a17388099cce143', ['torno-marketplace-camadas-estoque.svg', 'torno-marketplace-ultima-unidade.svg']],
   ['torno-artigo-pt-20261110-estoque-lote-validade', '/blog/estoque-lote-validade-fefo-sistema-aceite/', '700a6bf180041a29fcbb8c39a3c233855d10ea7234afb856de994a5ad3803fb3', ['torno-lote-etiqueta-gs1.svg', 'torno-lote-arvore-rastreio.svg']],
+  ['torno-artigo-pt-20261110-sla-horas-uteis', '/blog/sla-horas-uteis-sistema-chamados-aceite/', 'ec712d21f7067e66a267dfd6cbe956cc9fadc8c6b4927352a1de963da8d2e44e', ['torno-sla-regua-semana.svg', 'torno-sla-cronometro-estados.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

@@ -578,3 +578,7 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 
 - `torno-artigo-pt-20261106-sistema-multilingue`; `buyer-multilingual-system-localization-acceptance-pt`; PT-BR; `/blog/sistema-multilingue-requisitos-aceite/`. Aprovado para inclusão sob pedido explícito de Henrique. Não duplica aceite geral ou datas/fusos.
 - Fontes, revisão, hashes e futura observação pública em [registro de recuperação](RECUPERACAO-2026-11-09-MULTILINGUE.md).
+
+### 2026-11-10 — SLA em horas úteis no sistema de chamados (execução 2026-11-10-1200-claude)
+
+- `torno-artigo-pt-20261110-sla-horas-uteis`; `buyer-helpdesk-sla-business-hours-pause-acceptance-pt`; PT-BR; `/blog/sla-horas-uteis-sistema-chamados-aceite/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `datas-fusos-sistema-prazos-relatorios` (datas/fusos em geral) nem `monitoramento-software-alertas-fluxo-critico` (exclui SLA). Fontes, revisão e hashes em [ROTINA-2026-11-10-1200-claude.md](ROTINA-2026-11-10-1200-claude.md).
