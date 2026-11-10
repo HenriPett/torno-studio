@@ -528,6 +528,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-sla-cronometro-estados.svg', digest: '962b0753377ba54d813ee44aa60f7de3f287455c61039c3638b7a7aa555c4463' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261110-cnpj-alfanumerico', intent_id: 'buyer-alphanumeric-cnpj-system-adaptation-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/cnpj-alfanumerico-sistema-adaptar-testar/', canonical_url: `${BLOG_ORIGIN}/blog/cnpj-alfanumerico-sistema-adaptar-testar/`,
+    digest: '40a19ff4c2637380e9493ddae0182c0bcbea663c91d47dc450ecf783fb12fa2a', digestScope: 'file',
+    assets: [
+      { path: 'torno-cnpj-mapa-sistema.svg', digest: '323b91393c3ff448e72e6750b6c4d7d289ecb9250138912fab10184078f885da' },
+      { path: 'torno-cnpj-calculo-dv.svg', digest: 'aaa0b5a7d6af6fb21b51f70e98b25a62299ce374b1d899994e84b1caec03bced' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -756,6 +765,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261110-cnpj-alfanumerico': [
+        {asset:'./torno-cnpj-mapa-sistema.svg',alt:'Mapa ilustrativo no estilo de linha de metrô, com o título Por onde o CNPJ passa no sistema e o subtítulo Cada estação é um ponto de falha possível. A Linha CNPJ desce em zigue-zague por oito estações numeradas: 1 Formulário, aceita letras maiúsculas e cola com pontuação; 2 Validação, DV calculado com letras; 3 Banco, texto de 14, zeros à esquerda, índice único; 4 Busca, encontra por trecho; 5 Integrações/APIs, o outro lado aceita letras?; 6 NF-e/XML, CNPJ e chave de 44 posições; 7 Planilhas, sem notação científica; 8 Relatórios e exportação, coluna como texto, sem corte. Rodapé: Oito pontos para conferir antes de aceitar o campo.',caption:'As estações são exemplos de onde o CNPJ costuma passar; o inventário do seu sistema pode ter outras. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-cnpj-calculo-dv.svg',alt:'Folha de cálculo do dígito verificador do exemplo oficial da Receita Federal, 12.ABC.345/01DE. Primeiro dígito: os caracteres 1, 2, A, B, C, 3, 4, 5, 0, 1, D, E viram os valores 1, 2, 17, 18, 19, 3, 4, 5, 0, 1, 20, 21 (código ASCII menos 48); multiplicados pelos pesos 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, dão 5, 8, 51, 36, 171, 24, 28, 30, 0, 4, 60, 42; soma 459, resto da divisão por 11 igual a 8, primeiro dígito 11 − 8 = 3. Segundo dígito: os mesmos valores seguidos do 3, com pesos 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2; soma 424, resto 6, segundo dígito 11 − 6 = 5. Resultado: 12.ABC.345/01DE-35.',caption:'Cálculo do exemplo publicado pela Receita Federal no Perguntas e Respostas do CNPJ alfanumérico, conferido para este artigo. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261110-sla-horas-uteis': [
         {asset:'./torno-sla-regua-semana.svg',alt:'Régua de tempo de quinta 19/11 a segunda 23/11/2026, horário de São Paulo, para chamado fictício com meta de 8 horas úteis e expediente das 08h às 18h. Contadas: quinta 16h30–18h (1h30), segunda 08h–09h (1h) e 10h30–16h (5h30). Não contadas: noites, sexta 20/11 feriado nacional, sábado e domingo. Pausa aguardando cliente na segunda 09h–10h30. Marcos: abertura quinta 16h30 e vencimento segunda 16h00. Exemplo fictício.',caption:'Exemplo fictício: chamado, calendário e meta inventados; uma faixa por dia, das 08h às 18h. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-sla-cronometro-estados.svg',alt:'Ilustração de três cronômetros: Contando, com o ponteiro em movimento durante o expediente e o chamado aberto; Pausado, com ícone de pausa, aguardando o cliente; e Parado, com ícone de conferido, chamado resolvido. Abaixo, a pergunta: reaberto, continua de onde parou ou começa de novo? Decisão de negócio, por escrito.',caption:'Três estados do cronômetro do prazo; a regra de retomada na reabertura é decisão de negócio, a definir no contrato. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

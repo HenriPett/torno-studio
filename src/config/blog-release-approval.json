@@ -1848,6 +1848,32 @@
           "sha256": "962b0753377ba54d813ee44aa60f7de3f287455c61039c3638b7a7aa555c4463"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261110-cnpj-alfanumerico",
+      "intentId": "buyer-alphanumeric-cnpj-system-adaptation-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/cnpj-alfanumerico-sistema-adaptar-testar/",
+      "contentRevision": "40a19ff4c2637380e9493ddae0182c0bcbea663c91d47dc450ecf783fb12fa2a",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-10T21:19:29Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-10T21:18:07Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-10-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus) NO-GO às 2026-11-10T21:18:07Z com cinco correções obrigatórias (data de implantação no passado com a notícia oficial do primeiro CNPJ alfanumérico, regra de resto 0/1 sem fonte, resultado com minúsculas, descrição do teste headless do LibreOffice, alt do mapa), aplicadas pelo integrador; DV recalculado e teste do LibreOffice reproduzido pelo revisor; fontes Receita Federal (Perguntas e Respostas), Agência Gov (2024 e 2026), Serpro e resumos secundários da NT 2026.004 abertos em 10/11/2026; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda ERP, emissor, biblioteca nem fornecedor; não é parecer contábil, fiscal ou jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-cnpj-mapa-sistema.svg",
+          "sha256": "323b91393c3ff448e72e6750b6c4d7d289ecb9250138912fab10184078f885da"
+        },
+        {
+          "path": "torno-cnpj-calculo-dv.svg",
+          "sha256": "aaa0b5a7d6af6fb21b51f70e98b25a62299ce374b1d899994e84b1caec03bced"
+        }
+      ]
     }
   ]
 }

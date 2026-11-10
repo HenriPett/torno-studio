@@ -582,3 +582,7 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 ### 2026-11-10 — SLA em horas úteis no sistema de chamados (execução 2026-11-10-1200-claude)
 
 - `torno-artigo-pt-20261110-sla-horas-uteis`; `buyer-helpdesk-sla-business-hours-pause-acceptance-pt`; PT-BR; `/blog/sla-horas-uteis-sistema-chamados-aceite/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `datas-fusos-sistema-prazos-relatorios` (datas/fusos em geral) nem `monitoramento-software-alertas-fluxo-critico` (exclui SLA). Fontes, revisão e hashes em [ROTINA-2026-11-10-1200-claude.md](ROTINA-2026-11-10-1200-claude.md).
+
+### 2026-11-10 — CNPJ alfanumérico no sistema (execução 2026-11-10-1800-claude)
+
+- `torno-artigo-pt-20261110-cnpj-alfanumerico`; `buyer-alphanumeric-cnpj-system-adaptation-acceptance-pt`; PT-BR; `/blog/cnpj-alfanumerico-sistema-adaptar-testar/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `nfe-reforma-tributaria-ibs-cbs-sistema-aceite` (IBS/CBS na NF-e) nem `importacao-planilhas-sistema-tratar-erros` (importação em geral). Fontes, revisão e hashes em [ROTINA-2026-11-10-1800-claude.md](ROTINA-2026-11-10-1800-claude.md).
