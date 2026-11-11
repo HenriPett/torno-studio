@@ -537,6 +537,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-cnpj-calculo-dv.svg', digest: 'aaa0b5a7d6af6fb21b51f70e98b25a62299ce374b1d899994e84b1caec03bced' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261111-nfse-nacional', intent_id: 'buyer-nfse-national-standard-system-integration-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/nfse-padrao-nacional-sistema-integracao-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/nfse-padrao-nacional-sistema-integracao-aceite/`,
+    digest: '58c551667daf63ee3d0ad51a0e72fe44ef78ae227d5fdcca9fc8f76be4424a49', digestScope: 'file',
+    assets: [
+      { path: 'torno-nfse-dois-caminhos.svg', digest: 'd3ed1dd3a1e5ec4fe09f1a5152d7d0392012486fc54c0f9e358558515ce4e5a9' },
+      { path: 'torno-nfse-vida-da-nota.svg', digest: '69a6c7ea660b4723dc2f81ee48ecbe09dc4ba0419e1cc89d1ecb786c22f2016a' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -765,6 +774,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261111-nfse-nacional': [
+        {asset:'./torno-nfse-dois-caminhos.svg',alt:'Vista aérea de uma estrada que sai de um prédio rotulado “Sistema da empresa” e chega a um entroncamento com uma placa: “Qual caminho o município escolheu?”. A estrada da esquerda, rotulada “Município A: usa o Emissor Nacional”, passa por “DPS enviada à Sefin Nacional (portal ou API)” e chega a “NFS-e de padrão nacional: documento único”. A estrada da direita, rotulada “Município B: emissor próprio”, passa por “Nota emitida no sistema da prefeitura (regras do município)” e por “Município compartilha a nota com o ADN no padrão nacional”, com a marcação “dois documentos para a mesma operação”. As duas estradas terminam numa praça rotulada “ADN – Ambiente de Dados Nacional”. Rodapé: “Desde 01/01/2026 (LC 214/2025, art. 62): o município autoriza o emissor nacional ou compartilha com o ADN.”',caption:'Municípios A e B são fictícios; cenários segundo material da Receita Federal de junho de 2026. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-nfse-vida-da-nota.svg',alt:'Ficha de uma nota de serviço marcada “Exemplo fictício”, da empresa Serviços Fictícios Ltda., Município A, com quatro carimbos em sequência. Carimbo 1: “DPS enviada – 06/10/2026 09:14 – série 1, nº 1042”. Carimbo 2: “NFS-e autorizada – chave de acesso guardada”. Carimbo 3, em diagonal: “Substituída – evento de cancelamento por substituição – 07/10/2026”. Uma seta leva a uma segunda ficha, “NFS-e substituta – DPS série 1, nº 1043”, com o carimbo 4: “Manifestação do tomador: confirmação – 09/10/2026”. Anotação na margem: “Cada carimbo: XML guardado, data e hora, quem pediu”.',caption:'Exemplo fictício: empresa, município, números e datas inventados. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261110-cnpj-alfanumerico': [
         {asset:'./torno-cnpj-mapa-sistema.svg',alt:'Mapa ilustrativo no estilo de linha de metrô, com o título Por onde o CNPJ passa no sistema e o subtítulo Cada estação é um ponto de falha possível. A Linha CNPJ desce em zigue-zague por oito estações numeradas: 1 Formulário, aceita letras maiúsculas e cola com pontuação; 2 Validação, DV calculado com letras; 3 Banco, texto de 14, zeros à esquerda, índice único; 4 Busca, encontra por trecho; 5 Integrações/APIs, o outro lado aceita letras?; 6 NF-e/XML, CNPJ e chave de 44 posições; 7 Planilhas, sem notação científica; 8 Relatórios e exportação, coluna como texto, sem corte. Rodapé: Oito pontos para conferir antes de aceitar o campo.',caption:'As estações são exemplos de onde o CNPJ costuma passar; o inventário do seu sistema pode ter outras. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-cnpj-calculo-dv.svg',alt:'Folha de cálculo do dígito verificador do exemplo oficial da Receita Federal, 12.ABC.345/01DE. Primeiro dígito: os caracteres 1, 2, A, B, C, 3, 4, 5, 0, 1, D, E viram os valores 1, 2, 17, 18, 19, 3, 4, 5, 0, 1, 20, 21 (código ASCII menos 48); multiplicados pelos pesos 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, dão 5, 8, 51, 36, 171, 24, 28, 30, 0, 4, 60, 42; soma 459, resto da divisão por 11 igual a 8, primeiro dígito 11 − 8 = 3. Segundo dígito: os mesmos valores seguidos do 3, com pesos 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2; soma 424, resto 6, segundo dígito 11 − 6 = 5. Resultado: 12.ABC.345/01DE-35.',caption:'Cálculo do exemplo publicado pela Receita Federal no Perguntas e Respostas do CNPJ alfanumérico, conferido para este artigo. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

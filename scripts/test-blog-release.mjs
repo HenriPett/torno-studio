@@ -74,6 +74,7 @@ const expected = [
   ['torno-artigo-pt-20261110-estoque-lote-validade', '/blog/estoque-lote-validade-fefo-sistema-aceite/', '700a6bf180041a29fcbb8c39a3c233855d10ea7234afb856de994a5ad3803fb3', ['torno-lote-etiqueta-gs1.svg', 'torno-lote-arvore-rastreio.svg']],
   ['torno-artigo-pt-20261110-sla-horas-uteis', '/blog/sla-horas-uteis-sistema-chamados-aceite/', 'ec712d21f7067e66a267dfd6cbe956cc9fadc8c6b4927352a1de963da8d2e44e', ['torno-sla-regua-semana.svg', 'torno-sla-cronometro-estados.svg']],
   ['torno-artigo-pt-20261110-cnpj-alfanumerico', '/blog/cnpj-alfanumerico-sistema-adaptar-testar/', '40a19ff4c2637380e9493ddae0182c0bcbea663c91d47dc450ecf783fb12fa2a', ['torno-cnpj-mapa-sistema.svg', 'torno-cnpj-calculo-dv.svg']],
+  ['torno-artigo-pt-20261111-nfse-nacional', '/blog/nfse-padrao-nacional-sistema-integracao-aceite/', '58c551667daf63ee3d0ad51a0e72fe44ef78ae227d5fdcca9fc8f76be4424a49', ['torno-nfse-dois-caminhos.svg', 'torno-nfse-vida-da-nota.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

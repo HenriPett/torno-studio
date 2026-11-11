@@ -1874,6 +1874,32 @@
           "sha256": "aaa0b5a7d6af6fb21b51f70e98b25a62299ce374b1d899994e84b1caec03bced"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261111-nfse-nacional",
+      "intentId": "buyer-nfse-national-standard-system-integration-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/nfse-padrao-nacional-sistema-integracao-aceite/",
+      "contentRevision": "58c551667daf63ee3d0ad51a0e72fe44ef78ae227d5fdcca9fc8f76be4424a49",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-11T11:42:46Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-11T11:38:43Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-11-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus) NO-GO às 2026-11-11T11:38:43Z com seis correções obrigatórias (Resolução CGSN 189/2026 revogada pela 191/2026 e Simples obrigado ao Emissor Nacional desde 01/11/2026; regime da empresa além do município; MEI só para serviços sem ICMS; redação do art. 62 da LC 214/2025; lista não exaustiva de notas técnicas; legibilidade dos carimbos de uma figura), aplicadas na integração; fontes gov.br/nfse (NT 004, NT 010, manuais e página de APIs), Receita Federal, Fazenda do DF, Fenacon e CRCs abertas em 11/11/2026; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda emissor, fornecedor nem código de tributação; não é parecer contábil, fiscal ou jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-nfse-dois-caminhos.svg",
+          "sha256": "d3ed1dd3a1e5ec4fe09f1a5152d7d0392012486fc54c0f9e358558515ce4e5a9"
+        },
+        {
+          "path": "torno-nfse-vida-da-nota.svg",
+          "sha256": "69a6c7ea660b4723dc2f81ee48ecbe09dc4ba0419e1cc89d1ecb786c22f2016a"
+        }
+      ]
     }
   ]
 }

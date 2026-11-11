@@ -586,3 +586,7 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 ### 2026-11-10 — CNPJ alfanumérico no sistema (execução 2026-11-10-1800-claude)
 
 - `torno-artigo-pt-20261110-cnpj-alfanumerico`; `buyer-alphanumeric-cnpj-system-adaptation-acceptance-pt`; PT-BR; `/blog/cnpj-alfanumerico-sistema-adaptar-testar/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `nfe-reforma-tributaria-ibs-cbs-sistema-aceite` (IBS/CBS na NF-e) nem `importacao-planilhas-sistema-tratar-erros` (importação em geral). Fontes, revisão e hashes em [ROTINA-2026-11-10-1800-claude.md](ROTINA-2026-11-10-1800-claude.md).
+
+### 2026-11-11 — NFS-e de padrão nacional no sistema (execução 2026-11-11-0815-claude)
+
+- `torno-artigo-pt-20261111-nfse-nacional`; `buyer-nfse-national-standard-system-integration-acceptance-pt`; PT-BR; `/blog/nfse-padrao-nacional-sistema-integracao-aceite/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `nfe-reforma-tributaria-ibs-cbs-sistema-aceite` (NF-e/NFC-e; NFS-e fora do escopo dele) nem `cnpj-alfanumerico-sistema-adaptar-testar` (CNPJ em geral). Fontes, revisão e hashes em [ROTINA-2026-11-11-0815-claude.md](ROTINA-2026-11-11-0815-claude.md).
