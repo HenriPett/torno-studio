@@ -546,6 +546,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-nfse-vida-da-nota.svg', digest: '69a6c7ea660b4723dc2f81ee48ecbe09dc4ba0419e1cc89d1ecb786c22f2016a' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261111-cadastro-duplicado', intent_id: 'buyer-duplicate-customer-records-dedup-merge-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/cadastro-duplicado-clientes-sistema-mesclar-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/cadastro-duplicado-clientes-sistema-mesclar-aceite/`,
+    digest: 'ca54175484cadd4d7f71c1331167c15b7f99bc98109fa64111ef947f2189457d', digestScope: 'file',
+    assets: [
+      { path: 'torno-duplicado-diferencas.svg', digest: 'b64d3ba62545a6c7301f34848999b2c42e30c7d96c164ef793deff51a46ea5a7' },
+      { path: 'torno-duplicado-rios-mesclagem.svg', digest: '803fc7458304761eeb4701e2b03df828b9b3a1abfe7f2358881881faa9b096c4' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -774,6 +783,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261111-cadastro-duplicado': [
+        {asset:'./torno-duplicado-diferencas.svg',alt:'Ilustração no estilo ache as diferenças com duas fichas de cadastro fictícias. Ficha C-1042, já cadastrada: Maria Ap. Souza, CPF 123.456.789-09, celular (11) 98765-4321, e-mail maria.souza@example.com. Novo cadastro digitado: MARIA APARECIDA SOUZA, CPF 12345678909, celular +55 11 98765 4321, e-mail Maria.Souza@Example.com, com as quatro diferenças circuladas. Abaixo, na forma canônica: CPF 12345678909 igual, celular +5511987654321 igual, e-mail maria.souza@example.com igual e nome só parecido, porque Ap. não é Aparecida. Conclusão: mesmo CPF, o sistema recusa e mostra C-1042; nome parecido, sozinho, gera só aviso. Exemplo fictício.',caption:'Exemplo fictício: nomes, CPF, celular e e-mail inventados; as diferenças somem na forma canônica, menos a do nome. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-duplicado-rios-mesclagem.svg',alt:'Ilustração de dois rios que se juntam. O rio da esquerda, C-2210, cadastro do site, leva 1 pedido, 1 nota e 1 contrato. O rio da direita, C-1042, cadastro do balcão, leva 3 pedidos, 2 notas e 1 anexo. Depois da confluência, C-1042 sobrevivente leva 4 pedidos, 3 notas e 2 anexos. Na margem esquerda, uma placa indica C-2210 para C-1042: o identificador antigo, como apelido, ainda acha o cliente. Na margem direita, um marco de pedra registra a trilha: quem, quando e o quê. Rio abaixo, uma comporta pergunta: desfazer? Regra escrita antes de mesclar. Nada do histórico fica para trás. Exemplo fictício.',caption:'Exemplo fictício: fichas, pedidos, notas e anexos inventados; a mesclagem leva todo o histórico para a ficha que fica. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261111-nfse-nacional': [
         {asset:'./torno-nfse-dois-caminhos.svg',alt:'Vista aérea de uma estrada que sai de um prédio rotulado “Sistema da empresa” e chega a um entroncamento com uma placa: “Qual caminho o município escolheu?”. A estrada da esquerda, rotulada “Município A: usa o Emissor Nacional”, passa por “DPS enviada à Sefin Nacional (portal ou API)” e chega a “NFS-e de padrão nacional: documento único”. A estrada da direita, rotulada “Município B: emissor próprio”, passa por “Nota emitida no sistema da prefeitura (regras do município)” e por “Município compartilha a nota com o ADN no padrão nacional”, com a marcação “dois documentos para a mesma operação”. As duas estradas terminam numa praça rotulada “ADN – Ambiente de Dados Nacional”. Rodapé: “Desde 01/01/2026 (LC 214/2025, art. 62): o município autoriza o emissor nacional ou compartilha com o ADN.”',caption:'Municípios A e B são fictícios; cenários segundo material da Receita Federal de junho de 2026. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-nfse-vida-da-nota.svg',alt:'Ficha de uma nota de serviço marcada “Exemplo fictício”, da empresa Serviços Fictícios Ltda., Município A, com quatro carimbos em sequência. Carimbo 1: “DPS enviada – 06/10/2026 09:14 – série 1, nº 1042”. Carimbo 2: “NFS-e autorizada – chave de acesso guardada”. Carimbo 3, em diagonal: “Substituída – evento de cancelamento por substituição – 07/10/2026”. Uma seta leva a uma segunda ficha, “NFS-e substituta – DPS série 1, nº 1043”, com o carimbo 4: “Manifestação do tomador: confirmação – 09/10/2026”. Anotação na margem: “Cada carimbo: XML guardado, data e hora, quem pediu”.',caption:'Exemplo fictício: empresa, município, números e datas inventados. Ilustração original Torno Studio, 2026.',className:['blog-figure']},

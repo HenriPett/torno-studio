@@ -1900,6 +1900,32 @@
           "sha256": "69a6c7ea660b4723dc2f81ee48ecbe09dc4ba0419e1cc89d1ecb786c22f2016a"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261111-cadastro-duplicado",
+      "intentId": "buyer-duplicate-customer-records-dedup-merge-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/cadastro-duplicado-clientes-sistema-mesclar-aceite/",
+      "contentRevision": "ca54175484cadd4d7f71c1331167c15b7f99bc98109fa64111ef947f2189457d",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-11T15:21:36Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-11T15:20:40Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-11-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus) NO-GO às 2026-11-11T15:20:40Z por uma frase além da fonte (Salesforce 000331044: o artigo não diz se o histórico movido volta), corrigida pelo integrador, que também aplicou sugestões (HubSpot \"por padrão\", regras do exemplo explícitas para CPFs diferentes, contrato como anexo e desfazer, nome em NFC); fontes Lei 13.709/2018 (Câmara), Unicode UAX #15 rev. 56, Anatel, ITU-T E.164 ed. 7, PostgreSQL 18, Salesforce Trailhead e Ajuda, HubSpot abertas em 11/11/2026; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda ferramenta nem fornecedor; não é parecer jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-duplicado-diferencas.svg",
+          "sha256": "b64d3ba62545a6c7301f34848999b2c42e30c7d96c164ef793deff51a46ea5a7"
+        },
+        {
+          "path": "torno-duplicado-rios-mesclagem.svg",
+          "sha256": "803fc7458304761eeb4701e2b03df828b9b3a1abfe7f2358881881faa9b096c4"
+        }
+      ]
     }
   ]
 }

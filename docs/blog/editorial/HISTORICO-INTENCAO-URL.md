@@ -590,3 +590,7 @@ Adendo recebido e registrado em `2026-10-15T11:48:27Z` UTC. Vincula-se ao mesmo 
 ### 2026-11-11 — NFS-e de padrão nacional no sistema (execução 2026-11-11-0815-claude)
 
 - `torno-artigo-pt-20261111-nfse-nacional`; `buyer-nfse-national-standard-system-integration-acceptance-pt`; PT-BR; `/blog/nfse-padrao-nacional-sistema-integracao-aceite/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `nfe-reforma-tributaria-ibs-cbs-sistema-aceite` (NF-e/NFC-e; NFS-e fora do escopo dele) nem `cnpj-alfanumerico-sistema-adaptar-testar` (CNPJ em geral). Fontes, revisão e hashes em [ROTINA-2026-11-11-0815-claude.md](ROTINA-2026-11-11-0815-claude.md).
+
+### 2026-11-11 — cadastro duplicado de clientes no sistema (execução 2026-11-11-1200-claude)
+
+- `torno-artigo-pt-20261111-cadastro-duplicado`; `buyer-duplicate-customer-records-dedup-merge-acceptance-pt`; PT-BR; `/blog/cadastro-duplicado-clientes-sistema-mesclar-aceite/`. Estado `approved` (enviado ao Git; `published` só após GET público). Não duplica `integracao-evento-duplicado-regra-negocio` (evento repetido), `importacao-planilhas-sistema-tratar-erros` (importação em geral), `cnpj-alfanumerico-sistema-adaptar-testar` (formato do CNPJ), `trilha-auditoria-sistema-requisitos-negocio` (conteúdo da trilha) nem `lgpd-pedido-titular-sistema-aceite` (pedido do titular); todos recebem link interno. Fontes, revisão e hashes em [ROTINA-2026-11-11-1200-claude.md](ROTINA-2026-11-11-1200-claude.md).
