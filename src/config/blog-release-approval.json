@@ -1926,6 +1926,32 @@
           "sha256": "803fc7458304761eeb4701e2b03df828b9b3a1abfe7f2358881881faa9b096c4"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261111-documentos-pdf",
+      "intentId": "buyer-pdf-document-generation-templates-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/gerar-documentos-pdf-sistema-modelos-aceite/",
+      "contentRevision": "9ad79625b01fd517f024488b6f1708f519ec50915d56f325df6cfe20a2c98fcf",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-11T21:24:30Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-11T21:20:46Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-11-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus) NO-GO às 2026-11-11T21:20:46Z por quatro pontos (conector no resumo, figura da quebra de página sem o número da proposta na página 2, \"dia 8\" ambíguo, superlativo sem fonte), corrigidos pelo autor a pedido do integrador, com sugestões aplicadas (\"podem fazer\", cancelamento da última proposta, \"Ltda.\", numeração na falha); fontes ISO 32000-2:2020 (página da ISO), PDF Association (acesso sem custo à ISO 32000-2 e PDF/UA-2), Library of Congress (PDF/A e PDF/A-2), Conarq Orientação Técnica nº 4, Decreto 10.278/2020 (Senado e anexo na Câmara), W3C técnicas PDF6 e PDF9 e veraPDF abertas em 11/11/2026; sem revisão pessoal atribuída a Henrique; não recomenda ferramenta nem fornecedor; não é parecer jurídico; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda ferramenta nem fornecedor; não é parecer jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-pdf-fotografia-emissao.svg",
+          "sha256": "11c03ce5641d748d03c6aa5b629a7433311c137fd90ff04d5e40ee48cc647dfa"
+        },
+        {
+          "path": "torno-pdf-folha-quebra.svg",
+          "sha256": "5acb012f829a9f18322f1ba50b140442644b3a120f92d059df5337bcdc739e8a"
+        }
+      ]
     }
   ]
 }

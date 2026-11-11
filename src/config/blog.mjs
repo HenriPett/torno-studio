@@ -555,6 +555,15 @@ const RELEASE_ALLOWLIST = [
       { path: 'torno-duplicado-rios-mesclagem.svg', digest: '803fc7458304761eeb4701e2b03df828b9b3a1abfe7f2358881881faa9b096c4' },
     ],
   },
+  {
+    content_id: 'torno-artigo-pt-20261111-documentos-pdf', intent_id: 'buyer-pdf-document-generation-templates-acceptance-pt', locale: 'pt-BR',
+    path: '/blog/gerar-documentos-pdf-sistema-modelos-aceite/', canonical_url: `${BLOG_ORIGIN}/blog/gerar-documentos-pdf-sistema-modelos-aceite/`,
+    digest: '9ad79625b01fd517f024488b6f1708f519ec50915d56f325df6cfe20a2c98fcf', digestScope: 'file',
+    assets: [
+      { path: 'torno-pdf-fotografia-emissao.svg', digest: '11c03ce5641d748d03c6aa5b629a7433311c137fd90ff04d5e40ee48cc647dfa' },
+      { path: 'torno-pdf-folha-quebra.svg', digest: '5acb012f829a9f18322f1ba50b140442644b3a120f92d059df5337bcdc739e8a' },
+    ],
+  },
 ];
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const fail = message => { throw new Error(`[blog] ${message}`); };
@@ -783,6 +792,10 @@ export function blogCriteriaFigure() {
     if(insertMaintenanceFigure(tree,file))return;
     const id=file.data?.astro?.frontmatter?.content_id;
     const configs={
+      'torno-artigo-pt-20261111-documentos-pdf': [
+        {asset:'./torno-pdf-fotografia-emissao.svg',alt:'Ilustração de uma fotografia instantânea do recibo fictício R-0412, Padaria Ribeiro ME, Rua das Acácias, 120, valor R$ 1.980,00, serviço de instalação, modelo versão 2, emitido em 03/11/2026 às 14:05, arquivo guardado. Ao lado, o cadastro em 10/11/2026 mostra Padaria Ribeiro Ltda. e Av. Brasil, 455, endereço que mudou em 07/11. Abaixo, a pergunta: alguém pede o recibo de 03/11 de novo. Reabrir ou tirar segunda via entrega o mesmo arquivo de 03/11, com Rua das Acácias, modelo 2 e hash igual. Regerar com o cadastro de hoje está errado: daria um recibo de 03/11 com o endereço de 10/11, documento diferente com o mesmo número. Corrigir de verdade gera o novo documento R-0412-A, com motivo, e o original fica marcado como substituído. Exemplo fictício.',caption:'Exemplo fictício: empresa, endereços, valores e datas inventados; o documento emitido guarda os dados do momento da emissão. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+        {asset:'./torno-pdf-folha-quebra.svg',alt:'Ilustração de uma tabela de proposta que quebra entre duas páginas, com a proposta fictícia P-2026-0147 de 20 itens. Em cima, sem regra de quebra: a linha 19, Instalação elétrica, 1, 3.480,00, é cortada ao meio pela quebra de página, e a página 2 começa sem cabeçalho e sem número de página, só com a linha 20, Treinamento da equipe, e o total de R$ 34.430,00; a legenda em vermelho diz que a página 2 não informa quais são as colunas nem de qual proposta é. Embaixo, com regra de quebra: a página 1 termina na linha 18 com P-2026-0147, página 1 de 2, e continua na página 2; a página 2 repete o cabeçalho Descrição, Qtd e Valor (R$), traz a linha 19 inteira, a linha 20 e o total, com P-2026-0147, página 2 de 2, no rodapé. Exemplo fictício.',caption:'Exemplo fictício: proposta, itens e valores inventados; a regra de quebra decide onde a tabela continua e o que se repete em cada página. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
+      ],
       'torno-artigo-pt-20261111-cadastro-duplicado': [
         {asset:'./torno-duplicado-diferencas.svg',alt:'Ilustração no estilo ache as diferenças com duas fichas de cadastro fictícias. Ficha C-1042, já cadastrada: Maria Ap. Souza, CPF 123.456.789-09, celular (11) 98765-4321, e-mail maria.souza@example.com. Novo cadastro digitado: MARIA APARECIDA SOUZA, CPF 12345678909, celular +55 11 98765 4321, e-mail Maria.Souza@Example.com, com as quatro diferenças circuladas. Abaixo, na forma canônica: CPF 12345678909 igual, celular +5511987654321 igual, e-mail maria.souza@example.com igual e nome só parecido, porque Ap. não é Aparecida. Conclusão: mesmo CPF, o sistema recusa e mostra C-1042; nome parecido, sozinho, gera só aviso. Exemplo fictício.',caption:'Exemplo fictício: nomes, CPF, celular e e-mail inventados; as diferenças somem na forma canônica, menos a do nome. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
         {asset:'./torno-duplicado-rios-mesclagem.svg',alt:'Ilustração de dois rios que se juntam. O rio da esquerda, C-2210, cadastro do site, leva 1 pedido, 1 nota e 1 contrato. O rio da direita, C-1042, cadastro do balcão, leva 3 pedidos, 2 notas e 1 anexo. Depois da confluência, C-1042 sobrevivente leva 4 pedidos, 3 notas e 2 anexos. Na margem esquerda, uma placa indica C-2210 para C-1042: o identificador antigo, como apelido, ainda acha o cliente. Na margem direita, um marco de pedra registra a trilha: quem, quando e o quê. Rio abaixo, uma comporta pergunta: desfazer? Regra escrita antes de mesclar. Nada do histórico fica para trás. Exemplo fictício.',caption:'Exemplo fictício: fichas, pedidos, notas e anexos inventados; a mesclagem leva todo o histórico para a ficha que fica. Ilustração original Torno Studio, 2026.',className:['blog-figure']},
