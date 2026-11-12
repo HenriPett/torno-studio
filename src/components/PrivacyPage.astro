@@ -24,11 +24,14 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
 
 <Base locale={locale} routeId="privacy" title={copy.meta.privacy.title} description={copy.meta.privacy.description}>
   <Header locale={locale} routeId="privacy" />
-  <main id="conteudo" class="section" tabindex="-1">
+  <main id="conteudo" class="legal-main" tabindex="-1">
     <article class="container legal">
-      <h1 class="legal__title">{privacy.title}</h1>
-      <p class="meta">{privacy.updatedLabel} <time datetime={privacy.updated}>{updated}</time></p>
-      <PageAnswer locale={locale} routeId="privacy" />
+      <header class="legal__head">
+        <p class="eyebrow">Legal</p>
+        <h1 class="legal__title">{privacy.title}</h1>
+        <p class="meta">{privacy.updatedLabel} <time datetime={privacy.updated}>{updated}</time></p>
+        <PageAnswer locale={locale} routeId="privacy" />
+      </header>
       {
         privacy.sections.map((section) => (
           <section>
@@ -43,6 +46,7 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
         <p class="body">{cookies.intro}</p>
         {
           cookies.rows.length > 0 && (
+            <div class="cookies-wrap">
             <table class="cookies">
               <caption class="visually-hidden">{cookies.caption}</caption>
               <thead>
@@ -68,6 +72,7 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
                 ))}
               </tbody>
             </table>
+            </div>
           )
         }
       </section>
@@ -99,29 +104,43 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
 </Base>
 
 <style>
+  .legal-main {
+    padding-block: var(--space-7) var(--space-section);
+  }
+
   .legal {
-    max-inline-size: calc(var(--measure) + 2 * var(--container-pad));
+    max-inline-size: calc(68ch + 2 * var(--container-pad));
+    line-height: 1.65;
+  }
+
+  .legal__head {
+    padding-block-end: var(--space-6);
+    border-block-end: var(--border-width) solid var(--color-border);
   }
 
   .legal__title {
-    font-size: var(--text-2xl);
-    font-weight: var(--weight-bold);
-    line-height: var(--leading-snug);
+    margin-block-start: var(--space-3);
+    font-size: var(--text-display-md);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
   }
 
-  .legal > .meta {
-    margin-block-start: var(--space-3);
+  .legal__head > .meta {
+    margin-block-start: var(--space-4);
   }
 
   .legal section {
-    margin-block-start: var(--space-6);
+    margin-block-start: var(--space-7);
+    scroll-margin-block-start: calc(var(--header-height) + var(--space-4));
   }
 
   .legal__h2 {
-    font-size: var(--text-xl);
+    font-size: var(--text-title);
     font-weight: var(--weight-semibold);
     line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-title);
   }
 
   .legal__h2 + .body,
@@ -129,25 +148,37 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
     margin-block-start: var(--space-3);
   }
 
+  .legal .body {
+    max-inline-size: none;
+  }
+
+  .cookies-wrap {
+    margin-block-start: var(--space-5);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
   .cookies {
     inline-size: 100%;
-    margin-block-start: var(--space-4);
     border-collapse: collapse;
     font-size: var(--text-sm);
+    line-height: 1.5;
   }
 
   .cookies th,
   .cookies td {
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-3) var(--space-4);
     text-align: start;
     vertical-align: top;
-    border-block-end: var(--border-width) solid var(--color-border);
+    border-block-start: var(--border-width) solid var(--color-border-subtle);
   }
 
   .cookies thead th {
-    background-color: var(--color-surface-sunken);
+    border-block-start: 0;
+    background-color: var(--color-surface-muted);
     font-weight: var(--weight-semibold);
-    color: var(--color-text-muted);
+    color: var(--color-text);
   }
 
   .cookies tbody th {
@@ -155,7 +186,8 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
   }
 
   .cookies code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-family: var(--font-mono);
+    font-size: 0.92em;
     overflow-wrap: anywhere;
   }
 
@@ -176,14 +208,17 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
     }
 
     .cookies tr {
-      padding-block: var(--space-2);
-      border-block-end: var(--border-width) solid var(--color-border);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .cookies tbody tr + tr {
+      border-block-start: var(--border-width) solid var(--color-border-subtle);
     }
 
     .cookies tbody th,
     .cookies td {
       display: grid;
-      grid-template-columns: 7rem minmax(0, 1fr);
+      grid-template-columns: 6.5rem minmax(0, 1fr);
       gap: var(--space-2);
       padding: var(--space-1) 0;
       border: 0;
@@ -198,7 +233,9 @@ const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: '
   }
 
   .legal__back {
-    margin-block-start: var(--space-7);
+    margin-block-start: var(--space-8);
+    padding-block-start: var(--space-5);
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .legal__back a {

@@ -1,6 +1,7 @@
 import { expect, test, type APIRequestContext } from './fixtures';
 
-import { NOT_FOUND, PAGES } from './helpers';
+import { campaignRoutes, routes } from '../../src/config/routes.mjs';
+import { DIAGNOSTICO, NOT_FOUND, PAGES } from './helpers';
 
 /**
  * hreflang, canonical, sitemap, robots, lang, noindex e OG (CHECKLIST.md §S).
@@ -98,26 +99,33 @@ test('S6 404: status 404, noindex, sem canonical/hreflang, links para / e /en/',
   await expect(page.locator('main a[href="/en/"]')).toHaveCount(1);
 });
 
-test('S7 sitemap = 10 URLs canônicas, sem a campanha, cada uma com alternates', async ({ request }) => {
+/** Páginas institucionais no sitemap: todas as rotas de routes.mjs nos dois idiomas, menos as de campanha (28 URLs). */
+const SITEMAP_PAGES = Object.entries(routes)
+  .filter(([id, route]) => !(campaignRoutes as readonly string[]).includes(id) && route['pt-BR'] && route.en)
+  .flatMap(([, route]) => [route['pt-BR'] as string, route.en as string]);
+
+test(`S7 sitemap = ${SITEMAP_PAGES.length} URLs de routes.mjs com alternates + artigos do blog; sem campanha e sem /para/`, async ({ request }) => {
   const index = await (await request.get('/sitemap-index.xml')).text();
   const maps = attr(index, /<loc>([^<]+)<\/loc>/g);
   expect(maps.length).toBeGreaterThan(0);
-  const locs: string[] = [];
+  const pages: string[] = [];
+  const articles: string[] = [];
   for (const map of maps) {
     const xml = await (await request.get(new URL(map).pathname)).text();
+    expect(xml, 'landings de setor nunca entram no sitemap').not.toMatch(/\/para\//);
     for (const block of xml.split('<url>').slice(1)) {
       const loc = attr(block, /<loc>([^<]+)<\/loc>/g)[0];
-      locs.push(new URL(loc ?? '').pathname);
+      const path = new URL(loc ?? '').pathname;
+      // Artigos do blog existem só em PT: sem hreflang de par (o manifesto editorial decide).
+      if (/^\/(?:en\/)?blog\/[^/]+\/$/.test(path)) { articles.push(path); continue; }
+      pages.push(path);
       const langs = attr(block, /hreflang="([^"]+)"/g).sort();
       expect(langs, loc).toEqual(['en', 'pt-BR', 'x-default']);
     }
   }
-  expect(locs.sort()).toEqual([
-    ...PAGES.map((p) => p.path),
-    '/recuperacao-de-projeto/', '/en/software-project-rescue/',
-    '/lovable-em-producao/', '/en/lovable-to-production/',
-    '/guias/rls-multiempresa/', '/en/guides/multi-tenant-rls/',
-  ].sort());
+  expect(pages.sort()).toEqual([...SITEMAP_PAGES].sort());
+  expect(pages).not.toContain(DIAGNOSTICO.path);
+  expect(new Set([...pages, ...articles]).size, 'sem URL repetida').toBe(pages.length + articles.length);
 });
 
 test('S8 robots.txt permite rastreio e aponta o sitemap absoluto', async ({ request }) => {

@@ -4,6 +4,10 @@ import { expect, test, type Page } from '@playwright/test';
 /** Pares de páginas equivalentes (espelha src/config/routes.mjs). */
 const pairs = [
   { pt: '/', en: '/en/' },
+  { pt: '/como-trabalhamos/', en: '/en/how-we-work/' },
+  { pt: '/cases/', en: '/en/cases/' },
+  { pt: '/about/', en: '/en/about/' },
+  { pt: '/contact/', en: '/en/contact/' },
   { pt: '/privacidade/', en: '/en/privacy/' },
 ];
 
@@ -48,6 +52,22 @@ for (const { path, lang, pair } of pages) {
     });
   });
 }
+
+// Estratégia 2026-11 §2: a marca é "Torno"; "Studio" sai do texto, dos metadados e do JSON-LD.
+test('marca Torno no head e no JSON-LD, sem "Studio"', async ({ request }) => {
+  for (const { pt, en } of pairs) for (const path of [pt, en]) {
+    const html = await (await request.get(path)).text();
+    const head = html.split('</head>')[0] ?? '';
+    const brand = head.match(/<meta property="og:site_name" content="([^"]+)"/)?.[1] ?? '';
+    expect(brand, path).not.toBe('');
+    expect(head, path).not.toMatch(/Studio/);
+    const graph = [...head.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .flatMap((m) => { const json = JSON.parse(m[1]!); return json['@graph'] ?? [json]; });
+    const org = graph.find((node) => node['@type'] === 'Organization');
+    expect(org?.name, path).toBe(brand);
+    expect(org?.description, path).toMatch(/indústria|industrial/);
+  }
+});
 
 test('seletor de idioma leva à página equivalente', async ({ page }) => {
   await page.goto('/privacidade/');

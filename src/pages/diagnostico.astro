@@ -1,20 +1,22 @@
 ---
 /**
- * Landing da campanha do Google Ads (docs/landing/DIAGNOSTICO-SPEC.md, DESIGN §14). Só PT; noindex,follow; fora
- * do sitemap. Objetivo único: agendar o diagnóstico. O CTA aparece só no header, no hero e no final; sem nav,
- * seletor de idioma, LinkedIn ou GitHub; links de saída só ascende.site e a política.
- * Texto: SiteCopy.diagnostico (Mote). Preços: os mesmos da home (pricing.ts, componente da escada).
+ * Landing da campanha do Google Ads: diagnóstico de IA para a operação industrial. Só PT; noindex, follow;
+ * fora do sitemap (routes.mjs campaignRoutes). Objetivo único: agendar o diagnóstico.
+ * O CTA (BookingCta, data-booking-cta) aparece só no header, no hero e no final. Header lean com a marca
+ * como texto, sem nav nem idioma; único link de saída no corpo: a fonte pública (MundoLogística).
+ * O contador sem cookie (netlify/edge-functions/count-diagnostico.ts) conta a rota, não depende do markup.
+ * Texto: SiteCopy.diagnostico (src/content/pt-BR.ts). Sem preço (estratégia §4.3).
  */
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import AboutLean from '../components/campaign/AboutLean.astro';
-import Proofs from '../components/campaign/Proofs.astro';
-import SprintDeliverables from '../components/campaign/SprintDeliverables.astro';
-import Faq from '../components/sections/Faq.astro';
-import FinalCta from '../components/sections/FinalCta.astro';
-import Hero from '../components/sections/Hero.astro';
-import Ladder from '../components/sections/Ladder.astro';
+import Section from '../components/ds/Section.astro';
+import SectionHeader from '../components/ds/SectionHeader.astro';
+import FeatureGrid from '../components/ds/FeatureGrid.astro';
+import Steps from '../components/ds/Steps.astro';
+import StatGrid from '../components/ds/StatGrid.astro';
+import Faq from '../components/ds/Faq.astro';
+import BookingCta from '../components/ui/BookingCta.astro';
 import { getCopy } from '../lib/i18n';
 
 const locale = 'pt-BR';
@@ -25,13 +27,129 @@ if (!copy) throw new Error('SiteCopy pt-BR sem diagnostico');
 <Base locale={locale} routeId="diagnostico" title={copy.meta.title} description={copy.meta.description}>
   <Header locale={locale} routeId="diagnostico" lean />
   <main id="conteudo" tabindex="-1">
-    <Hero locale={locale} campaign={copy.hero} />
-    <Ladder locale={locale} title={copy.ladder.title} intro={copy.ladder.intro} ctas={false} />
-    <SprintDeliverables locale={locale} content={copy.sprint} />
-    <Proofs content={copy.proofs} />
-    <AboutLean locale={locale} content={copy.about} />
-    <Faq locale={locale} content={copy.faq} />
-    <FinalCta locale={locale} campaign={copy.finalCta} />
+    <Section id="inicio" labelledby="inicio-title" class="diag-hero" reveal={false}>
+      <SectionHeader as="h1" id="inicio-title" eyebrow={copy.hero.eyebrow} title={copy.hero.title} lead={copy.hero.lead} accent>
+        <BookingCta locale={locale} size="lg">{copy.hero.cta}</BookingCta>
+      </SectionHeader>
+      <ul class="diag-facts" role="list">
+        {copy.hero.facts.map((fact) => <li>{fact}</li>)}
+      </ul>
+    </Section>
+
+    <Section id="entregas" variant="muted" labelledby="entregas-title">
+      <SectionHeader id="entregas-title" eyebrow={copy.deliverables.eyebrow} title={copy.deliverables.title} lead={copy.deliverables.lead} accent />
+      <FeatureGrid columns={4} card="surface" items={copy.deliverables.items} />
+    </Section>
+
+    <Section id="etapas" labelledby="etapas-title">
+      <SectionHeader id="etapas-title" eyebrow={copy.steps.eyebrow} title={copy.steps.title} lead={copy.steps.lead} accent />
+      <Steps items={copy.steps.items} />
+    </Section>
+
+    <Section id="provas" variant="inverse" labelledby="provas-title">
+      <SectionHeader id="provas-title" eyebrow={copy.proofs.eyebrow} title={copy.proofs.title} lead={copy.proofs.lead} />
+      <StatGrid locale={locale} items={copy.proofs.stats} columns={2} />
+      <ul class="grid grid--2 diag-proofs" role="list">
+        {
+          copy.proofs.items.map((item) => (
+            <li class="diag-proof" data-proof={item.title}>
+              <p class="eyebrow">{item.eyebrow}</p>
+              <h3 class="title">{item.title}</h3>
+              <p class="muted">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="caption diag-note">{copy.proofs.note}</p>
+    </Section>
+
+    <Section id="faq" width="narrow" labelledby="faq-title">
+      <SectionHeader id="faq-title" title={copy.faq.title} size="md" />
+      <Faq items={copy.faq.items} name="diag-faq" />
+    </Section>
+
+    <Section id="contato" variant="muted" labelledby="contato-title" class="diag-final">
+      <SectionHeader id="contato-title" title={copy.finalCta.title} lead={copy.finalCta.text} align="center">
+        <BookingCta locale={locale} size="lg">{copy.hero.cta}</BookingCta>
+      </SectionHeader>
+    </Section>
   </main>
   <Footer locale={locale} routeId="diagnostico" lean />
 </Base>
+
+<style>
+  /* 1ª dobra no celular (360×640 com o banner de cookies): título menor e respiro curto. */
+  .diag-hero {
+    padding-block: var(--space-6) var(--space-section-tight);
+  }
+
+  .diag-hero :global(.ds-sh__title) {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 4rem);
+    max-inline-size: 20ch;
+  }
+
+  .diag-hero :global(.ds-sh__lead) {
+    font-size: var(--text-base);
+    margin-block-start: var(--space-3);
+  }
+
+  .diag-hero :global(.ds-sh__actions) {
+    margin-block-start: var(--space-5);
+  }
+
+  @media (min-width: 48em) {
+    .diag-hero {
+      padding-block: var(--space-section);
+    }
+
+    .diag-hero :global(.ds-sh__lead) {
+      font-size: var(--text-lead);
+    }
+  }
+
+  .diag-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-block-start: var(--space-6);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .diag-facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .diag-facts li::before {
+    content: '';
+    inline-size: 6px;
+    block-size: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+  }
+
+  .diag-proofs {
+    margin-block-start: var(--space-8);
+    padding: 0;
+    list-style: none;
+  }
+
+  .diag-proof {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+  }
+
+  .diag-note {
+    margin-block-start: var(--space-6);
+    max-inline-size: 72ch;
+    color: var(--color-text-muted);
+  }
+</style>

@@ -1,13 +1,22 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from './fixtures';
 
-import { HOMES, NOT_FOUND, PAGES, gotoWithTheme, openAllDetails, type Theme } from './helpers';
+import { HOMES, NOT_FOUND, PAGES, gotoWithTheme, openAllDetails, type QaPage, type Theme } from './helpers';
 
 /** Acessibilidade, teclado e foco (CHECKLIST.md §A e §K; DESIGN §6 e §9). */
 
 const THEMES: Theme[] = ['light', 'dark'];
 
-for (const p of [...PAGES, NOT_FOUND]) {
+/** Páginas da refatoração 2026-11 (estratégia §6) além das de PAGES; kind não é usado aqui. */
+const NEW_PAGES: QaPage[] = [
+  { path: '/como-trabalhamos/', lang: 'pt-BR', kind: 'home' },
+  { path: '/en/how-we-work/', lang: 'en', kind: 'home' },
+  { path: '/cases/', lang: 'pt-BR', kind: 'home' },
+  { path: '/en/cases/', lang: 'en', kind: 'home' },
+];
+const A11Y_PAGES = [...PAGES, ...NEW_PAGES];
+
+for (const p of [...A11Y_PAGES, NOT_FOUND]) {
   for (const theme of THEMES) {
     for (const width of [360, 1280]) {
       test(`A1 axe sem violação séria/crítica: ${p.path} ${theme} ${width}px`, async ({ page }) => {
@@ -24,7 +33,7 @@ for (const p of [...PAGES, NOT_FOUND]) {
   }
 }
 
-for (const p of PAGES) {
+for (const p of A11Y_PAGES) {
   test.describe(`${p.path} estrutura`, () => {
     test('A2 um H1, sem salto de nível de heading', async ({ page }) => {
       await page.goto(p.path);
@@ -64,7 +73,7 @@ async function focusIsVisible(page: Page): Promise<{ ok: boolean; desc: string }
   });
 }
 
-for (const p of PAGES) {
+for (const p of A11Y_PAGES) {
   for (const width of [360, 1280]) {
     test(`K1 Tab percorre tudo com foco visível: ${p.path} ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });

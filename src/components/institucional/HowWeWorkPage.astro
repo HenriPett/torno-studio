@@ -1,0 +1,231 @@
+---
+/**
+ * /como-trabalhamos/ e /en/how-we-work/ (estratégia 2026-11 §4.2 e §4.4): etapas e entregas, estrutura de
+ * entrega, governança, segurança e LGPD, continuidade, o que precisamos do cliente e FAQ.
+ * Ritmo: default → muted → default → muted → inverse → default → muted → default → CTA inverse.
+ */
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Section from '../ds/Section.astro';
+import SectionHeader from '../ds/SectionHeader.astro';
+import FeatureGrid from '../ds/FeatureGrid.astro';
+import Card from '../ds/Card.astro';
+import Faq from '../ds/Faq.astro';
+import CtaBand from '../ds/CtaBand.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import { howWeWork } from '../../content/institucional';
+import { getChrome } from '../../content/chrome';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = howWeWork[locale];
+const en = locale === 'en';
+const id = en
+  ? { stages: 'stages', delivery: 'delivery', governance: 'governance', security: 'security', continuity: 'continuity', client: 'your-side', faq: 'faq' }
+  : { stages: 'etapas', delivery: 'estrutura', governance: 'governanca', security: 'seguranca', continuity: 'continuidade', client: 'da-sua-parte', faq: 'faq' };
+---
+
+<Base locale={locale} routeId="howWeWork" title={c.meta.title} description={c.meta.description}>
+  <Header locale={locale} routeId="howWeWork" />
+  <main id="conteudo" tabindex="-1">
+    <Section labelledby="hww-title" reveal={false} class="page-hero">
+      <SectionHeader as="h1" id="hww-title" eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} accent>
+        <BookingCta locale={locale} size="lg">{getChrome(locale).common.bookingCta}</BookingCta>
+        <a class="link link--arrow link--target" href={`#${id.stages}`}>{c.hero.secondary}</a>
+      </SectionHeader>
+    </Section>
+
+    <Section id={id.stages} variant="muted" labelledby={`${id.stages}-title`}>
+      <SectionHeader id={`${id.stages}-title`} eyebrow={c.stages.eyebrow} title={c.stages.title} lead={c.stages.lead} accent />
+      <ol class="stages" role="list">
+        {
+          c.stages.items.map((stage, index) => (
+            <li class="stage">
+              <span class="stage__num tnum" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div class="stage__head">
+                <p class="stage__meta">{stage.meta}</p>
+                <h3 class="title-lg">{stage.title}</h3>
+                <p class="muted stage__body">{stage.body}</p>
+              </div>
+              <div class="stage__detail">
+                <h4 class="stage__label">{c.stages.workLabel}</h4>
+                <ul class="stage__work" role="list">
+                  {stage.work.map((item) => <li>{item}</li>)}
+                </ul>
+                <h4 class="stage__label">{c.stages.deliverableLabel}</h4>
+                <p class="stage__deliverable">{stage.deliverable}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </Section>
+
+    <Section id={id.delivery} labelledby={`${id.delivery}-title`}>
+      <SectionHeader id={`${id.delivery}-title`} eyebrow={c.delivery.eyebrow} title={c.delivery.title} lead={c.delivery.lead} accent />
+      <div class="grid grid--2">
+        {
+          c.delivery.items.map((item) => (
+            <Card variant="muted" padding="lg" radius="xl">
+              <p class="eyebrow eyebrow--accent">{item.eyebrow}</p>
+              <h3 class="title-lg">{item.title}</h3>
+              <p class="muted">{item.body}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </Section>
+
+    <Section id={id.governance} variant="muted" labelledby={`${id.governance}-title`}>
+      <SectionHeader id={`${id.governance}-title`} eyebrow={c.governance.eyebrow} title={c.governance.title} lead={c.governance.lead} accent />
+      <FeatureGrid columns={3} card="surface" items={c.governance.items} />
+    </Section>
+
+    <Section id={id.security} variant="inverse" labelledby={`${id.security}-title`}>
+      <SectionHeader id={`${id.security}-title`} eyebrow={c.security.eyebrow} title={c.security.title} lead={c.security.lead} />
+      <ul class="grid grid--3 plain-list" role="list">
+        {
+          c.security.items.map((item) => (
+            <li>
+              <h3 class="title">{item.title}</h3>
+              <p class="muted">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id={id.continuity} labelledby={`${id.continuity}-title`}>
+      <SectionHeader id={`${id.continuity}-title`} eyebrow={c.continuity.eyebrow} title={c.continuity.title} lead={c.continuity.lead} accent />
+      <FeatureGrid columns={3} items={c.continuity.items} />
+    </Section>
+
+    <Section id={id.client} variant="muted" labelledby={`${id.client}-title`}>
+      <SectionHeader id={`${id.client}-title`} eyebrow={c.client.eyebrow} title={c.client.title} lead={c.client.lead} accent />
+      <FeatureGrid columns={4} card="surface" items={c.client.items} />
+    </Section>
+
+    <Section id={id.faq} width="narrow" labelledby={`${id.faq}-title`}>
+      <SectionHeader id={`${id.faq}-title`} title={c.faq.title} size="md" />
+      <Faq items={c.faq.items} name="hww-faq" />
+    </Section>
+
+    <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} />
+  </main>
+  <Footer locale={locale} routeId="howWeWork" />
+</Base>
+
+<style>
+  .stages {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stage {
+    display: grid;
+    gap: var(--space-4) var(--space-6);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+  }
+
+  .stage__num {
+    font-size: var(--text-title);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-text);
+    line-height: 1;
+  }
+
+  .stage__meta {
+    margin-block-end: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+  }
+
+  .stage__body {
+    margin-block-start: var(--space-2);
+    max-inline-size: 40ch;
+  }
+
+  .stage__detail {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+  }
+
+  .stage__label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+
+  .stage__label:not(:first-child) {
+    margin-block-start: var(--space-3);
+  }
+
+  .stage__work {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stage__work li {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .stage__work li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0.7em;
+    inline-size: 0.5rem;
+    block-size: 2px;
+    background: var(--color-accent);
+  }
+
+  .stage__deliverable {
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 64em) {
+    .stage {
+      grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
+      padding: var(--space-7);
+    }
+
+    .stage__num {
+      font-size: var(--text-display-md);
+      font-weight: var(--weight-display);
+      letter-spacing: var(--tracking-tight);
+    }
+  }
+
+  .plain-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    --grid-gap: var(--space-7) var(--space-6);
+  }
+
+  .plain-list li {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    padding-block-start: var(--space-5);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+</style>

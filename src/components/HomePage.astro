@@ -1,23 +1,29 @@
 ---
 /**
- * Corpo da landing, compartilhado por / e /en/ (PLANO-DEV §2.2, DESIGN §7).
- * Ordem das seções e âncoras iguais nos dois idiomas.
+ * Home (/ e /en/) para indústrias com 200+ funcionários (estratégia 2026-11 §2, §4 e §6; DESIGN-2026-11 §8).
+ * Mesma estrutura nos dois idiomas; conteúdo em src/content/home.ts e institucional.ts.
+ * Ritmo de fundos: default → muted → default → muted → default → muted → inverse → default → muted → CTA inverse.
+ * Regras: nenhum setor citado por nome, nenhum link para /para/, sem preço, mocks e exemplos rotulados.
  */
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
-import PageAnswer from './seo/PageAnswer.astro';
-import About from './sections/About.astro';
-import Faq from './sections/Faq.astro';
-import FinalCta from './sections/FinalCta.astro';
-import Guarantees from './sections/Guarantees.astro';
-import Hero from './sections/Hero.astro';
-import Ladder from './sections/Ladder.astro';
-import Method from './sections/Method.astro';
-import NotFor from './sections/NotFor.astro';
-import Problem from './sections/Problem.astro';
-import Testimonials from './sections/Testimonials.astro';
-import { getCopy, type Locale } from '../lib/i18n';
+import Section from './ds/Section.astro';
+import SectionHeader from './ds/SectionHeader.astro';
+import FeatureGrid from './ds/FeatureGrid.astro';
+import Steps from './ds/Steps.astro';
+import StatGrid from './ds/StatGrid.astro';
+import Faq from './ds/Faq.astro';
+import CtaBand from './ds/CtaBand.astro';
+import Pill from './ds/Pill.astro';
+import AskMock from './ds/mocks/AskMock.astro';
+import PanelMock from './ds/mocks/PanelMock.astro';
+import BookingCta from './ui/BookingCta.astro';
+import CaseCards from './institucional/CaseCards.astro';
+import { home, MUNDOLOGISTICA_URL } from '../content/home';
+import { etapas, estrutura } from '../content/institucional';
+import { getChrome } from '../content/chrome';
+import { getCopy, pathFor, type Locale } from '../lib/i18n';
 
 interface Props {
   locale: Locale;
@@ -25,6 +31,11 @@ interface Props {
 
 const { locale } = Astro.props;
 const copy = getCopy(locale);
+const c = home[locale];
+const ids = c.ids;
+const cta = getChrome(locale).common.bookingCta;
+const howWeWork = pathFor('howWeWork', locale);
+const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSource, href: MUNDOLOGISTICA_URL } }));
 ---
 
 <Base
@@ -37,18 +48,284 @@ const copy = getCopy(locale);
 >
   <Header locale={locale} routeId="home" />
   <main id="conteudo" tabindex="-1">
-    <Hero locale={locale} />
-    <PageAnswer locale={locale} routeId="home" standalone />
-    <Problem locale={locale} />
-    <About locale={locale} />
-    <Ladder locale={locale} />
-    <Guarantees locale={locale} />
-    {/* Slot oculto (regra 5): sem filhos e com PUBLIC_SHOW_TESTIMONIALS=false, não renderiza nada. */}
-    <Testimonials locale={locale} />
-    <Method locale={locale} />
-    <NotFor locale={locale} />
-    <Faq locale={locale} />
-    <FinalCta locale={locale} />
+    <!-- 1. Hero -->
+    <Section id={ids.hero} labelledby={`${ids.hero}-title`} class="home-hero" reveal={false}>
+      <SectionHeader as="h1" id={`${ids.hero}-title`} eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} align="center" accent>
+        <BookingCta locale={locale} size="lg">{cta}</BookingCta>
+        <a class="link link--arrow link--target" href={howWeWork}>{c.hero.secondary}</a>
+      </SectionHeader>
+      <ul class="home-hero__facts" role="list">
+        {c.hero.facts.map((fact) => <li>{fact}</li>)}
+      </ul>
+    </Section>
+
+    <!-- 2. Cérebro da operação -->
+    <Section id={ids.brain} variant="muted" width="wide" labelledby={`${ids.brain}-title`}>
+      <div class="media-split home-brain">
+        <div class="home-brain__text">
+          <SectionHeader id={`${ids.brain}-title`} eyebrow={c.brain.eyebrow} title={c.brain.title} lead={c.brain.lead} accent />
+          <p class="home-brain__sources-title">{c.brain.sourcesTitle}</p>
+          <ul class="home-pills" role="list">
+            {c.brain.sources.map((source) => <li><Pill tone="outline">{source}</Pill></li>)}
+          </ul>
+        </div>
+        <AskMock locale={locale} stage="surface" {...c.brain.mock} />
+      </div>
+      <ul class="grid grid--3 home-points" role="list">
+        {
+          c.brain.points.map((point) => (
+            <li>
+              <h3 class="title">{point.title}</h3>
+              <p class="muted">{point.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <!-- 3. Soluções por área (âncora do header) -->
+    <Section id={ids.solutions} labelledby={`${ids.solutions}-title`}>
+      <SectionHeader id={`${ids.solutions}-title`} eyebrow={c.solutions.eyebrow} title={c.solutions.title} lead={c.solutions.lead} accent />
+      <p class="home-solutions__label"><Pill tone="accent" size="sm">{c.solutions.exampleLabel}</Pill></p>
+      <FeatureGrid columns={4} items={c.solutions.areas} class="home-areas" />
+    </Section>
+
+    <!-- 4. Software sob medida -->
+    <Section id={ids.custom} variant="muted" width="wide" labelledby={`${ids.custom}-title`}>
+      <div class="media-split media-split--reverse">
+        <div>
+          <SectionHeader id={`${ids.custom}-title`} eyebrow={c.custom.eyebrow} title={c.custom.title} lead={c.custom.lead} accent />
+          <ul class="home-checks home-custom__points" role="list">
+            {c.custom.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+        <PanelMock locale={locale} stage="surface" {...c.custom.mock} />
+      </div>
+    </Section>
+
+    <!-- 5. Como trabalhamos -->
+    <Section id={ids.process} labelledby={`${ids.process}-title`}>
+      <SectionHeader id={`${ids.process}-title`} eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} accent>
+        <a class="link link--arrow link--target" href={howWeWork}>{c.process.link}</a>
+      </SectionHeader>
+      <Steps items={etapas[locale]} />
+    </Section>
+
+    <!-- 6. Estrutura de entrega -->
+    <Section id={ids.structure} variant="muted" labelledby={`${ids.structure}-title`}>
+      <SectionHeader id={`${ids.structure}-title`} eyebrow={c.structure.eyebrow} title={c.structure.title} lead={c.structure.lead} accent>
+        <a class="link link--arrow link--target" href={howWeWork}>{c.structure.link}</a>
+      </SectionHeader>
+      <FeatureGrid columns={3} card="surface" items={estrutura[locale]} class="home-structure" />
+    </Section>
+
+    <!-- 7. Prova -->
+    <Section id={ids.proof} variant="inverse" labelledby={`${ids.proof}-title`}>
+      <SectionHeader id={`${ids.proof}-title`} eyebrow={c.proof.eyebrow} title={c.proof.title} lead={c.proof.lead} />
+      <StatGrid locale={locale} items={stats} columns={2} class="home-stats" />
+      <div class="home-cases">
+        <CaseCards locale={locale} linkLabel={c.proof.caseLink} card="surface" />
+      </div>
+      <p class="caption home-proof__note">{c.proof.note}</p>
+      <p class="home-proof__all">
+        <a class="link link--arrow link--target" href={pathFor('cases', locale)}>{c.proof.allCases}</a>
+      </p>
+    </Section>
+
+    <!-- 8. Para quem é -->
+    <Section id={ids.fit} labelledby={`${ids.fit}-title`}>
+      <SectionHeader id={`${ids.fit}-title`} eyebrow={c.fit.eyebrow} title={c.fit.title} size="md" accent />
+      <div class="grid grid--2 home-fit">
+        <div class="home-fit__col">
+          <h3 class="title">{c.fit.yesTitle}</h3>
+          <ul class="home-checks" role="list">
+            {c.fit.yes.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="home-fit__col home-fit__col--no">
+          <h3 class="title">{c.fit.noTitle}</h3>
+          <ul class="home-dashes" role="list">
+            {c.fit.no.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Section>
+
+    <!-- 9. FAQ -->
+    <Section id={ids.faq} variant="muted" width="narrow" labelledby={`${ids.faq}-title`}>
+      <SectionHeader id={`${ids.faq}-title`} eyebrow={c.faq.eyebrow} title={c.faq.title} size="md" accent />
+      <Faq items={c.faq.items} name="home-faq" />
+    </Section>
+
+    <!-- 10. CTA final -->
+    <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} secondary={{ label: c.cta.secondary, href: pathFor('contact', locale) }} />
   </main>
   <Footer locale={locale} routeId="home" />
 </Base>
+
+<style>
+  .home-hero :global(.ds-sh__title) {
+    max-inline-size: 18ch;
+  }
+
+  .home-hero :global(.ds-sh__lead) {
+    max-inline-size: 44ch;
+  }
+
+  .home-hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-5);
+    margin-block-start: var(--space-7);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .home-hero__facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .home-hero__facts li::before {
+    content: '';
+    inline-size: 6px;
+    block-size: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+  }
+
+  .home-brain {
+    align-items: center;
+  }
+
+  .home-brain__sources-title {
+    margin-block-start: var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+
+  .home-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block-start: var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-points {
+    margin-block-start: var(--space-8);
+    padding: 0;
+    list-style: none;
+    --grid-gap: var(--space-6);
+  }
+
+  .home-points li {
+    display: grid;
+    gap: var(--space-2);
+    padding-block-start: var(--space-5);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .home-solutions__label {
+    margin-block-start: var(--space-stack);
+  }
+
+  .home-solutions__label + :global(.home-areas) {
+    margin-block-start: var(--space-4);
+  }
+
+  :global(.home-areas) > :global(li) :global(.ds-card__body),
+  :global(.home-structure) > :global(li) :global(.ds-card__body) {
+    gap: var(--space-2);
+  }
+
+  .home-checks,
+  .home-dashes {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: start;
+  }
+
+  .home-checks li,
+  .home-dashes li {
+    position: relative;
+    padding-inline-start: 1.75rem;
+    text-wrap: pretty;
+  }
+
+  .home-checks li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0.15rem;
+    inset-block-start: 0.35em;
+    inline-size: 0.7rem;
+    block-size: 0.4rem;
+    border-inline-start: 2px solid var(--color-accent-text);
+    border-block-end: 2px solid var(--color-accent-text);
+    transform: rotate(-45deg);
+  }
+
+  .home-dashes li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0.1rem;
+    inset-block-start: 0.75em;
+    inline-size: 0.8rem;
+    block-size: 2px;
+    background: var(--color-text-muted);
+  }
+
+  .home-custom__points {
+    margin-block-start: var(--space-6);
+  }
+
+  .home-stats {
+    margin-block-start: var(--space-stack);
+  }
+
+  .home-cases {
+    margin-block-start: var(--space-8);
+  }
+
+  .home-proof__note {
+    margin-block-start: var(--space-6);
+    max-inline-size: 72ch;
+    color: var(--color-text-muted);
+  }
+
+  .home-proof__all {
+    margin-block-start: var(--space-4);
+  }
+
+  .home-fit {
+    --grid-gap: var(--space-7);
+  }
+
+  .home-fit__col {
+    display: grid;
+    align-content: start;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface-muted);
+  }
+
+  .home-fit__col--no {
+    background: transparent;
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  @media (min-width: 64em) {
+    .home-fit__col {
+      padding: var(--space-7);
+    }
+  }
+</style>

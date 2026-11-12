@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
-import handler, { prefersMarkdown, varyAccept } from '../netlify/edge-functions/agent-content';
-import { mainMarkdown } from '../scripts/agent-markdown.mjs';
+import handler, { htmlOnly, prefersMarkdown, varyAccept } from '../netlify/edge-functions/agent-content';
+import { mainMarkdown, skipMarkdown } from '../scripts/agent-markdown.mjs';
 
 for (const [accept, expected] of [
   [null, false], ['*/*', false], ['text/*', false], ['text/html', false],
@@ -24,8 +24,8 @@ test('Vary preserves existing values and is idempotent', () => {
 });
 
 test('conversion keeps rendered headings, links, tables and excludes unrelated markup', () => {
-  const md = mainMarkdown('<title>Torno Studio | Service</title><header>navigation</header><main><h1>Service</h1><p>Useful <a href="/contact/">contact</a></p><table><tr><th>Plan</th><th>Price</th></tr><tr><td>Sprint</td><td>6000</td></tr></table><script>secret()</script><p hidden>hidden</p></main><footer>footer</footer>', 'https://tornostudio.com/');
-  expect(md).toContain('> Torno Studio | Service'); expect(md).toContain('# Service'); expect(md).toContain('[contact](https://tornostudio.com/contact/)');
+  const md = mainMarkdown('<title>Torno | Service</title><header>navigation</header><main><h1>Service</h1><p>Useful <a href="/contact/">contact</a></p><table><tr><th>Plan</th><th>Price</th></tr><tr><td>Sprint</td><td>6000</td></tr></table><script>secret()</script><p hidden>hidden</p></main><footer>footer</footer>', 'https://tornostudio.com/');
+  expect(md).toContain('> Torno | Service'); expect(md).toContain('# Service'); expect(md).toContain('[contact](https://tornostudio.com/contact/)');
   expect(md).toMatch(/\| Plan\s+\| Price/); expect(md).toContain('6000');
   expect(md).not.toMatch(/navigation|secret|hidden|footer/);
 });
@@ -112,5 +112,28 @@ test('negotiated representation preserves HTML noindex for campaign/preview page
   try {
     const r = await handler(req('/diagnostico/'), { next: async () => new Response('<meta name="robots" content="noindex, follow"><main>Campaign</main>', { headers: { 'Content-Type': 'text/html' } }) });
     expect(r.headers.get('x-robots-tag')).toBe('noindex, follow');
+  } finally { globalThis.fetch = saved; }
+});
+
+// Landings de setor (estratégia §7.2) e /design-system/ não têm Markdown: o build não gera e a borda serve o HTML.
+test('build skips Markdown for sector landings and the internal design system only', () => {
+  for (const file of ['para/textil/index.html', 'para/index.html', 'design-system/index.html', 'design-system.html']) expect(skipMarkdown(file), file).toBe(true);
+  for (const file of ['index.html', 'parada/index.html', 'blog/para-que-serve/index.html', 'cases/index.html', 'como-trabalhamos/index.html']) expect(skipMarkdown(file), file).toBe(false);
+});
+
+test('Accept: text/markdown on a sector landing or /design-system/ returns the HTML untouched, never a 503 or other content', async () => {
+  expect(htmlOnly('/para/textil/')).toBe(true); expect(htmlOnly('/design-system/')).toBe(true);
+  expect(htmlOnly('/')).toBe(false); expect(htmlOnly('/parada/')).toBe(false); expect(htmlOnly('/blog/para-que-serve/')).toBe(false);
+  const saved = globalThis.fetch; let fetched = false;
+  globalThis.fetch = async () => { fetched = true; return new Response('# Markdown that must not be served here', { headers: { 'Content-Type': 'text/markdown' } }); };
+  try {
+    for (const path of ['/para/textil/', '/design-system/']) {
+      const r = await handler(req(path), { next: async () => new Response('<meta name="robots" content="noindex, nofollow"><main>Landing</main>', { headers: { 'Content-Type': 'text/html' } }) });
+      expect(r.status).toBe(200); expect(r.headers.get('content-type')).toContain('text/html');
+      expect(r.headers.get('vary')).toContain('Accept'); expect(await r.text()).toContain('<main>Landing</main>');
+    }
+    const missing = await handler(req('/para/'), { next: async () => original(404) });
+    expect(missing.status).toBe(404); expect(await missing.text()).toContain('<h1>HTML</h1>');
+    expect(fetched).toBe(false);
   } finally { globalThis.fetch = saved; }
 });

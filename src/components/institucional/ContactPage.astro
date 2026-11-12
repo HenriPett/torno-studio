@@ -1,0 +1,133 @@
+---
+/**
+ * /contact/ e /en/contact/: agenda, e-mail (só com PUBLIC_CONTACT_EMAIL), LinkedIn da empresa, o que levar
+ * para a conversa e o que acontece depois. Ritmo: default → muted → default → muted → CTA inverse.
+ */
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Section from '../ds/Section.astro';
+import SectionHeader from '../ds/SectionHeader.astro';
+import Card from '../ds/Card.astro';
+import FeatureGrid from '../ds/FeatureGrid.astro';
+import Steps from '../ds/Steps.astro';
+import CtaBand from '../ds/CtaBand.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import { contact } from '../../content/institucional';
+import { getChrome } from '../../content/chrome';
+import { site } from '../../config/site';
+import { pathFor, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = contact[locale];
+const en = locale === 'en';
+const cta = getChrome(locale).common.bookingCta;
+const id = en ? { channels: 'channels', prepare: 'prepare', next: 'next-steps' } : { channels: 'canais', prepare: 'o-que-levar', next: 'proximos-passos' };
+---
+
+<Base locale={locale} routeId="contact" title={c.meta.title} description={c.meta.description}>
+  <Header locale={locale} routeId="contact" />
+  <main id="conteudo" tabindex="-1">
+    <Section labelledby="contact-title" reveal={false}>
+      <SectionHeader as="h1" id="contact-title" eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} accent>
+        <BookingCta locale={locale} size="lg">{cta}</BookingCta>
+      </SectionHeader>
+    </Section>
+
+    <Section id={id.channels} variant="muted" labelledby={`${id.channels}-title`}>
+      <SectionHeader id={`${id.channels}-title`} eyebrow={c.channels.eyebrow} title={c.channels.title} size="md" accent />
+      <ul class:list={['grid', site.contactEmail ? 'grid--3' : 'grid--2', 'channels']} role="list">
+        <Card as="li" variant="surface" padding="lg" radius="xl">
+          <h3 class="title">{c.channels.booking.title}</h3>
+          <p class="muted">{c.channels.booking.body}</p>
+          <div class="channels__action">
+            <BookingCta locale={locale} size="md">{cta}</BookingCta>
+          </div>
+        </Card>
+        {
+          site.contactEmail && (
+            <Card as="li" variant="surface" padding="lg" radius="xl">
+              <h3 class="title">{c.channels.email.title}</h3>
+              <p class="muted">{c.channels.email.body}</p>
+              <p class="channels__action">
+                <a class="link link--target channels__email" href={`mailto:${site.contactEmail}`}>
+                  {site.contactEmail}
+                </a>
+              </p>
+            </Card>
+          )
+        }
+        <Card as="li" variant="surface" padding="lg" radius="xl">
+          <h3 class="title">{c.channels.linkedin.title}</h3>
+          <p class="muted">{c.channels.linkedin.body}</p>
+          <p class="channels__action">
+            <a class="link link--arrow link--target" href={site.organizationLinkedinUrl}>{c.channels.linkedin.label}</a>
+          </p>
+        </Card>
+      </ul>
+    </Section>
+
+    <Section id={id.prepare} labelledby={`${id.prepare}-title`}>
+      <SectionHeader id={`${id.prepare}-title`} eyebrow={c.prepare.eyebrow} title={c.prepare.title} lead={c.prepare.lead} accent />
+      <FeatureGrid columns={4} items={c.prepare.items} />
+      <p class="contact-note">{c.prepare.note}</p>
+    </Section>
+
+    <Section id={id.next} variant="muted" labelledby={`${id.next}-title`}>
+      <SectionHeader id={`${id.next}-title`} eyebrow={c.next.eyebrow} title={c.next.title} size="md" accent />
+      <Steps items={c.next.items} />
+      <div class="contact-location">
+        <h3 class="title">{c.location.title}</h3>
+        <p class="muted">{c.location.body}</p>
+        <p><a class="link link--target" href={pathFor('privacy', locale)}>{c.location.privacy}</a></p>
+      </div>
+    </Section>
+
+    <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} />
+  </main>
+  <Footer locale={locale} routeId="contact" />
+</Base>
+
+<style>
+  .channels {
+    padding: 0;
+    list-style: none;
+  }
+
+  .channels :global(.ds-card__body) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    block-size: 100%;
+  }
+
+  .channels__action {
+    margin-block-start: auto;
+    padding-block-start: var(--space-3);
+  }
+
+  .channels__email {
+    overflow-wrap: anywhere;
+  }
+
+  .contact-note {
+    margin-block-start: var(--space-6);
+    max-inline-size: var(--measure);
+    padding: var(--space-4) var(--space-5);
+    border-inline-start: 3px solid var(--color-accent);
+    background: var(--color-surface-muted);
+    border-radius: var(--radius-sm);
+  }
+
+  .contact-location {
+    display: grid;
+    gap: var(--space-2);
+    margin-block-start: var(--space-8);
+    padding-block-start: var(--space-6);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+</style>

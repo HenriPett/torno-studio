@@ -16,7 +16,8 @@
     "links": "linkinator dist --config linkinator.config.json",
     "lhci": "PUBLIC_ALLOW_INDEXING=true astro build && lhci autorun",
     "visitas": "node scripts/visitas.mjs",
-    "test:geo": "node scripts/test-geo.mjs"
+    "test:geo": "node scripts/test-geo.mjs",
+    "test:isolamento": "node scripts/check-sector-isolation.mjs dist"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
