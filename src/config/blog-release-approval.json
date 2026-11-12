@@ -1978,6 +1978,32 @@
           "sha256": "c3b8f024ee8f207de9bff9678eec0642b33d96477db8de6b82ba58872e32bcec"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261112-devolucao-troca",
+      "intentId": "buyer-sales-returns-exchanges-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/devolucao-troca-mercadoria-sistema-aceite/",
+      "contentRevision": "50b04c228eb83706480e9543e1d714e8e89d5ba0cf935480d66b43c39a9949a0",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-12T15:26:01Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-12T15:22:38Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-12-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus) NO-GO às 2026-11-12T15:22:38Z por um ponto (fronteira com cancelamento-solicitacao-sistema descrita como cancelamento de venda, quando o artigo trata cancelamento de operação em andamento), corrigido pelo autor a pedido do integrador, com sugestões aplicadas (\"pelo CDC\" na troca por cortesia, estorno pelo mesmo meio como regra escrita, regra do avariado no exemplo e na figura, nota de conferência secundária do CDC compilado); fontes abertas em 12/11/2026: Senado — CDC (Lei 8.078/1990) arts. 18, 26 e 49; Câmara — Decreto 7.962/2013 art. 5º; Procon-SP — guia Presentes (dez/2019); Microsoft Learn — Business Central (duas páginas de devolução, exemplo, não recomendação); aritmética do exemplo fictício recalculada pelo revisor; sem revisão pessoal atribuída a Henrique; não é parecer jurídico nem contábil; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda sistema nem fornecedor; não define política de trocas; não é parecer jurídico nem contábil."
+      },
+      "assets": [
+        {
+          "path": "torno-devolucao-bancada-conferencia.svg",
+          "sha256": "6df0dd704a9fbd4ed88e15e92dcaa29722fc63b2e816aa3f83b408832a721d8d"
+        },
+        {
+          "path": "torno-devolucao-recibo-canhotos.svg",
+          "sha256": "f53ea6ee60acde9b269998a54e69e63ba85573989c2d6916f0d8cc81e8219b26"
+        }
+      ]
     }
   ]
 }
