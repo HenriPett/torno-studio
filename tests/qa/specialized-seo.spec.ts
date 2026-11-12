@@ -161,11 +161,11 @@ for (const p of pages) {
     if (p.group < 2) test('Comercial: sem preço exibido, escopo e qualificação do cliente', async ({ page }) => {
       await open(page, p.path);
       const text = normalize(await page.locator('main').innerText());
-      if (p.lang === 'pt-BR' && p.group === 0) expect(text).toMatch(/50\s*[–—-]\s*249/);
+      if (p.lang === 'pt-BR' && p.group === 0) expect(text).toMatch(/m[ée]dio e grande porte/i);
       expect(text).not.toMatch(priceShown);
       const patterns = p.lang === 'pt-BR'
         ? [/opera[çc][aã]o/i, /escopo/i, /or[çc]amento/i, /decisor|decis[aã]o/i, /acesso/i, /autoriz/i, /impacto/i]
-        : [/funded|funding|revenue/i, /founder/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i];
+        : [/mid-size|large/i, /manufactur|industr/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i];
       for (const pattern of patterns) expect(text).toMatch(pattern);
     });
 
@@ -320,9 +320,9 @@ for (const p of pages) test(`@http ${p.path} HTML, SEO, schema, conteúdo e link
   }
   for (const hash of internal.filter(u => u.pathname === p.path && u.hash).map(u => decodeURIComponent(u.hash.slice(1)))) expect(all.some(n => attr(n, 'id') === hash), `âncora ${hash}`).toBe(true);
   if (p.group < 2) {
-    if (p.lang === 'pt-BR' && p.group === 0) expect(main).toMatch(/50\s*[–—-]\s*249/);
+    if (p.lang === 'pt-BR' && p.group === 0) expect(main).toMatch(/m[ée]dio e grande porte/i);
     expect(main).not.toMatch(priceShown);
-    for (const pattern of p.lang === 'pt-BR' ? [/opera[çc][aã]o/i, /escopo/i, /or[çc]amento/i, /decisor|decis[aã]o/i, /acesso/i, /autoriz/i, /impacto/i] : [/funded|funding|revenue/i, /founder/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i]) expect(main).toMatch(pattern);
+    for (const pattern of p.lang === 'pt-BR' ? [/opera[çc][aã]o/i, /escopo/i, /or[çc]amento/i, /decisor|decis[aã]o/i, /acesso/i, /autoriz/i, /impacto/i] : [/mid-size|large/i, /manufactur|industr/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i]) expect(main).toMatch(pattern);
   } else {
     const sql = nodes('pre').map(text).join('\n');
     for (const pattern of [/enable row level security/i, /create policy/i, /auth\.uid\(\)/i, /with check/i]) expect(sql).toMatch(pattern);
