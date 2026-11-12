@@ -1,5 +1,5 @@
 /**
- * Conteúdo da home (/ e /en/), indústria com 200+ funcionários.
+ * Conteúdo da home (/ e /en/), indústria de médio e grande porte.
  * Fonte: docs/estrategia-2026-11-torno-industria.md (§2 posicionamento, §4 oferta, §5 honestidade, §9 voz).
  * A home fala de "indústria" em geral: nenhum setor citado por nome e nenhum link para /para/.
  * Exemplos de áreas e mocks são ilustrativos e rotulados. Sem preço.
@@ -94,7 +94,7 @@ export const home: Record<Locale, HomeContent> = {
       title: 'IA aplicada à operação industrial, desenhada para a sua fábrica.',
       lead: 'Juntamos os dados e o conhecimento da operação num cérebro da empresa e colocamos agentes de IA nas áreas que mais perdem tempo. Por etapas e dentro das regras da sua TI.',
       secondary: 'Ver como trabalhamos',
-      facts: ['Para indústrias com 200 ou mais funcionários', 'Proposta fechada por etapa', 'Código e dados em nome da empresa'],
+      facts: ['Para indústrias de médio e grande porte', 'Proposta fechada por etapa', 'Código e dados em nome da empresa'],
     },
     brain: {
       eyebrow: 'O cérebro da operação',
@@ -220,7 +220,7 @@ export const home: Record<Locale, HomeContent> = {
       title: 'A Torno trabalha só com indústria.',
       yesTitle: 'Faz sentido quando',
       yes: [
-        'A empresa tem 200 ou mais funcionários e um ERP implantado.',
+        'A operação já roda sobre um ERP e várias áreas dependem dele.',
         'A informação está espalhada em planilhas, PDFs, e-mails e na cabeça de pessoas experientes.',
         'Gente com décadas de casa está perto de se aposentar.',
         'As áreas fazem as mesmas perguntas umas às outras todos os dias.',
@@ -291,7 +291,7 @@ export const home: Record<Locale, HomeContent> = {
       title: 'Applied AI for industrial operations, designed for your plant.',
       lead: 'We bring your operations data and know-how into one company brain and put AI agents to work where time is lost. In stages, within your IT rules.',
       secondary: 'See how we work',
-      facts: ['For manufacturers with 200+ employees', 'Fixed proposal per stage', 'Code and data in your name'],
+      facts: ['For mid-size and large manufacturers', 'Fixed proposal per stage', 'Code and data in your name'],
     },
     brain: {
       eyebrow: 'The operations brain',
@@ -376,7 +376,7 @@ export const home: Record<Locale, HomeContent> = {
       title: 'Torno works with manufacturers only.',
       yesTitle: 'A good fit when',
       yes: [
-        'You have 200 or more employees and an ERP in place.',
+        'Your operation runs on an ERP that several areas depend on.',
         'Information is spread across spreadsheets, PDFs, emails and experienced people.',
         'People with decades on the floor are close to retiring.',
         'Areas ask each other the same questions every day.',
