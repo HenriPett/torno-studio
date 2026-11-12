@@ -1,0 +1,294 @@
+---
+/**
+ * AskMock (DESIGN-2026-11 §6.12): ilustração do "cérebro da operação" respondendo uma pergunta de
+ * fábrica com citações de fonte. HTML/CSS puro, sem imagem. Selo "Ilustração" obrigatório (MockFrame).
+ *
+ * <AskMock locale="pt-BR" />                         → exemplo padrão do idioma
+ * <AskMock locale="en" question="…" answer="…" sources={[…]} asker="…" />
+ */
+import { getChrome } from '../../../content/chrome';
+import type { Locale } from '../../../lib/i18n';
+import MockFrame from './MockFrame.astro';
+
+export interface AskSource {
+  title: string;
+  detail: string;
+}
+
+interface Props {
+  locale: Locale;
+  question?: string;
+  /** Resposta; marcadores [1], [2] viram selos de citação. */
+  answer?: string;
+  sources?: AskSource[];
+  asker?: string;
+  label?: string;
+  caption?: string;
+  stage?: 'muted' | 'surface' | 'none';
+}
+
+const defaults = {
+  'pt-BR': {
+    app: 'Assistente da operação',
+    asker: 'Supervisora de produção · Linha 2',
+    question: 'Qual a faixa de temperatura da zona 3 para o PP copolímero depois da última revisão?',
+    answer:
+      'Entre 210 °C e 230 °C, com rosca a 45 rpm [1]. A revisão C baixou o limite superior de 240 °C para 230 °C por causa de manchas no lote 0912 [2].',
+    sources: [
+      { title: 'Ficha técnica 4471, rev. C', detail: 'Parâmetros de processo · p. 2' },
+      { title: 'Relatório de não conformidade RNC-0912', detail: 'Causa e ação corretiva' },
+    ],
+    sourcesTitle: 'Fontes',
+    input: 'Pergunte sobre máquinas, fichas, pedidos…',
+    description:
+      'tela de um assistente interno. Uma supervisora pergunta a faixa de temperatura de uma extrusora; a resposta cita a ficha técnica 4471, revisão C, e um relatório de não conformidade.',
+  },
+  en: {
+    app: 'Operations assistant',
+    asker: 'Production supervisor · Line 2',
+    question: 'What is the zone 3 temperature range for PP copolymer after the latest revision?',
+    answer:
+      'Between 210 °C and 230 °C, with the screw at 45 rpm [1]. Revision C lowered the upper limit from 240 °C to 230 °C after streaks on batch 0912 [2].',
+    sources: [
+      { title: 'Technical sheet 4471, rev. C', detail: 'Process parameters · p. 2' },
+      { title: 'Non-conformance report NCR-0912', detail: 'Root cause and corrective action' },
+    ],
+    sourcesTitle: 'Sources',
+    input: 'Ask about machines, sheets, orders…',
+    description:
+      'an internal assistant screen. A supervisor asks for an extruder temperature range; the answer cites technical sheet 4471, revision C, and a non-conformance report.',
+  },
+} as const;
+
+const { locale, caption, stage } = Astro.props;
+const d = defaults[locale];
+const question = Astro.props.question ?? d.question;
+const answer = Astro.props.answer ?? d.answer;
+const sources = Astro.props.sources ?? d.sources;
+const asker = Astro.props.asker ?? d.asker;
+const label = Astro.props.label ?? getChrome(locale).common.illustration;
+const parts = answer.split(/(\[\d+\])/g).filter(Boolean);
+const description = Astro.props.question ? `${question} — ${answer}` : d.description;
+---
+
+<MockFrame label={label} description={description} caption={caption} stage={stage}>
+  <div class="ask">
+    <div class="ask__bar">
+      <span class="ask__logo" aria-hidden="true"></span>
+      <span class="ask__app">{d.app}</span>
+    </div>
+    <div class="ask__thread">
+      <div class="ask__q">
+        <p class="ask__who">{asker}</p>
+        <p class="ask__bubble">{question}</p>
+      </div>
+      <div class="ask__a">
+        <span class="ask__spark" aria-hidden="true"></span>
+        <div class="ask__a-body">
+          <p>
+            {
+              parts.map((part) =>
+                /^\[\d+\]$/.test(part) ? <span class="ask__cite tnum">{part.slice(1, -1)}</span> : part,
+              )
+            }
+          </p>
+          <p class="ask__sources-title">{d.sourcesTitle}</p>
+          <ol class="ask__sources">
+            {
+              sources.map((source, index) => (
+                <li class="ask__source">
+                  <span class="ask__cite tnum">{index + 1}</span>
+                  <span class="ask__doc" aria-hidden="true" />
+                  <span class="ask__source-text">
+                    <strong>{source.title}</strong>
+                    <span>{source.detail}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="ask__input">
+      <span>{d.input}</span>
+      <span class="ask__send" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" /></svg>
+      </span>
+    </div>
+  </div>
+</MockFrame>
+
+<style>
+  .ask {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ask__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-block-end: var(--border-width) solid var(--color-border-subtle);
+    font-weight: var(--weight-semibold);
+  }
+
+  .ask__logo {
+    inline-size: 14px;
+    block-size: 14px;
+    border-radius: 50%;
+    border: 3px solid var(--color-accent);
+  }
+
+  .ask__thread {
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .ask__q {
+    display: grid;
+    justify-items: end;
+    gap: var(--space-1);
+    padding-inline-start: 12%;
+  }
+
+  .ask__who {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .ask__bubble {
+    padding: var(--space-3) var(--space-4);
+    border-radius: 18px 18px 4px 18px;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .ask__a {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .ask__spark {
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    border-radius: 50%;
+    border: 4px solid var(--color-accent);
+    background: radial-gradient(circle at center, var(--color-accent) 0 3px, transparent 3.5px);
+  }
+
+  .ask__a-body > p:first-child {
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+
+  .ask__cite {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 1.15rem;
+    block-size: 1.15rem;
+    margin-inline: 0.15em;
+    padding-inline: 0.25rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent-text);
+    font-size: 0.6875rem;
+    font-weight: var(--weight-semibold);
+    vertical-align: 0.15em;
+  }
+
+  .ask__sources-title {
+    margin-block: var(--space-4) var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  .ask__sources {
+    display: grid;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+
+  .ask__source {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-width) solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-muted);
+  }
+
+  .ask__source .ask__cite {
+    margin: 0;
+    vertical-align: 0;
+  }
+
+  .ask__doc {
+    inline-size: 14px;
+    block-size: 17px;
+    border-radius: 2px;
+    border: 1.5px solid var(--color-text-muted);
+    background: linear-gradient(var(--color-text-muted), var(--color-text-muted)) 3px 5px / 6px 1.5px no-repeat,
+      linear-gradient(var(--color-text-muted), var(--color-text-muted)) 3px 9px / 6px 1.5px no-repeat;
+  }
+
+  .ask__source-text {
+    display: grid;
+    min-inline-size: 0;
+  }
+
+  .ask__source-text strong {
+    font-weight: var(--weight-semibold);
+  }
+
+  .ask__source-text span {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .ask__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin: 0 var(--space-4) var(--space-4);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+  }
+
+  .ask__input > span:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .ask__send {
+    display: grid;
+    place-items: center;
+    flex: none;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .ask__send svg {
+    inline-size: 1rem;
+    block-size: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+/**
+ * StatGrid (DESIGN-2026-11 §6.7): números grandes com legenda e FONTE OBRIGATÓRIA por item.
+ * Regra de honestidade: só use com números verificáveis (estudo público, dado de case publicado
+ * com autorização). O tipo exige `source`; sem fonte, não há número.
+ *
+ * <StatGrid locale="pt-BR" items={[{ value: '38%', label: '…', source: { label: 'IBGE, PIA 2023', href: 'https://…' } }]} />
+ */
+import { getChrome } from '../../content/chrome';
+import type { Locale } from '../../lib/i18n';
+
+export interface StatItem {
+  value: string;
+  label: string;
+  source: { label: string; href?: string };
+}
+
+interface Props {
+  locale: Locale;
+  items: StatItem[];
+  columns?: 2 | 3 | 4;
+  class?: string;
+}
+
+const { locale, items, columns = 3, class: className } = Astro.props;
+const sourceLabel = getChrome(locale).common.source;
+---
+
+<ul class:list={['grid', `grid--${columns}`, 'ds-stats', className]} role="list">
+  {
+    items.map((item) => (
+      <li class="ds-stats__item">
+        <p class="ds-stats__value tnum">{item.value}</p>
+        <p class="ds-stats__label">{item.label}</p>
+        <p class="ds-stats__source caption">
+          {sourceLabel}:{' '}
+          {item.source.href ? (
+            <a class="link" href={item.source.href}>
+              {item.source.label}
+            </a>
+          ) : (
+            item.source.label
+          )}
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .ds-stats {
+    list-style: none;
+    padding: 0;
+    --grid-gap: var(--space-7) var(--space-6);
+  }
+
+  .ds-stats__item {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    padding-block-start: var(--space-4);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .ds-stats__value {
+    font-size: var(--text-display-lg);
+    font-weight: var(--weight-display);
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .ds-stats__label {
+    max-inline-size: 32ch;
+    text-wrap: pretty;
+  }
+</style>

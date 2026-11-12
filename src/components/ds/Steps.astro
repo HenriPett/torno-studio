@@ -1,0 +1,108 @@
+---
+/**
+ * Steps (DESIGN-2026-11 §6.6): sequência numerada REAL de processo (a ordem importa).
+ * Não use para listas sem ordem (use FeatureGrid). <ol> semântico; o número visível é decorativo.
+ *
+ * <Steps items={[{ title: 'Diagnóstico', body: '…' }, …]} />
+ *
+ * - layout: columns (lado a lado a partir de 1024, com linha de conexão) | rows (sempre empilhado)
+ * - headingLevel: h3 (padrão) | h4
+ */
+export interface StepItem {
+  title: string;
+  body: string;
+  /** Rótulo curto opcional (ex.: "Semana 1–2"). */
+  meta?: string;
+}
+
+interface Props {
+  items: StepItem[];
+  layout?: 'columns' | 'rows';
+  headingLevel?: 'h3' | 'h4';
+  class?: string;
+}
+
+const { items, layout = 'columns', headingLevel: H = 'h3', class: className } = Astro.props;
+const cols = Math.min(Math.max(items.length, 2), 4);
+---
+
+<ol class:list={['ds-steps', `ds-steps--${layout}`, className]} style={`--ds-steps-cols: ${cols}`}>
+  {
+    items.map((item, index) => (
+      <li class="ds-steps__item">
+        <span class="ds-steps__num tnum" aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div class="ds-steps__text">
+          {item.meta && <p class="ds-steps__meta">{item.meta}</p>}
+          <H class="title ds-steps__title">{item.title}</H>
+          <p class="ds-steps__body">{item.body}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .ds-steps {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .ds-steps__item {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: var(--space-4);
+    padding-block-start: var(--space-5);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .ds-steps__num {
+    font-size: var(--text-title);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-title);
+    color: var(--color-accent-text);
+  }
+
+  .ds-steps__meta {
+    margin-block-end: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+  }
+
+  .ds-steps__body {
+    margin-block-start: var(--space-2);
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 64em) {
+    .ds-steps--columns {
+      grid-template-columns: repeat(var(--ds-steps-cols), minmax(0, 1fr));
+      gap: var(--space-6) var(--space-5);
+    }
+
+    .ds-steps--columns .ds-steps__item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+      padding-block-start: var(--space-5);
+      border-block-start-width: 2px;
+    }
+
+    .ds-steps--columns .ds-steps__item:first-child {
+      border-block-start-color: var(--color-accent);
+    }
+
+    .ds-steps--columns .ds-steps__num {
+      font-size: var(--text-display-md);
+      font-weight: var(--weight-display);
+      line-height: 1;
+      letter-spacing: var(--tracking-tight);
+    }
+  }
+</style>

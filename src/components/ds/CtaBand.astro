@@ -1,0 +1,77 @@
+---
+/**
+ * CtaBand (DESIGN-2026-11 §6.11): seção final de conversão, centrada, com o CTA de agenda.
+ * Usa ui/BookingCta (destino via bookingHref + interceptação de consentimento/Calendly).
+ *
+ * <CtaBand locale="pt-BR" title="Vamos olhar a sua operação." text="Uma conversa de 45 minutos…" />
+ *
+ * - id: padrão "agendar" (é o fallback de bookingHref sem PUBLIC_BOOKING_URL). Uma por página.
+ * - variant: inverse (preto, padrão) | muted | default
+ * - cta: rótulo do botão (padrão do chrome: "Agendar diagnóstico" / "Book a call")
+ * - secondary: link opcional ao lado ({ label, href }).
+ * - Slot padrão: linha extra abaixo dos botões (ex.: e-mail).
+ */
+import { getChrome } from '../../content/chrome';
+import type { Locale } from '../../lib/i18n';
+import BookingCta from '../ui/BookingCta.astro';
+import Section from './Section.astro';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  text?: string;
+  cta?: string;
+  id?: string;
+  variant?: 'inverse' | 'muted' | 'default';
+  secondary?: { label: string; href: string };
+}
+
+const { locale, title, text, cta, id = 'agendar', variant = 'inverse', secondary } = Astro.props;
+const label = cta ?? getChrome(locale).common.bookingCta;
+const titleId = `${id}-title`;
+---
+
+<Section id={id} variant={variant} labelledby={titleId} class="ds-cta">
+  <div class="ds-cta__inner">
+    <h2 id={titleId} class="display-lg ds-cta__title">{title}</h2>
+    {text && <p class="lead ds-cta__text">{text}</p>}
+    <div class="actions ds-cta__actions">
+      <BookingCta locale={locale} size="lg" variant={variant === 'inverse' ? 'on-inverse' : 'primary'}>{label}</BookingCta>
+      {
+        secondary && (
+          <a class="link link--arrow link--target" href={secondary.href}>
+            {secondary.label}
+          </a>
+        )
+      }
+    </div>
+    {Astro.slots.has('default') && <div class="ds-cta__extra caption"><slot /></div>}
+  </div>
+</Section>
+
+<style>
+  .ds-cta__inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ds-cta__title {
+    max-inline-size: 20ch;
+  }
+
+  .ds-cta__text {
+    margin-block-start: var(--space-4);
+    margin-inline: auto;
+  }
+
+  .ds-cta__actions {
+    margin-block-start: var(--space-6);
+    justify-content: center;
+    align-self: stretch;
+  }
+
+  .ds-cta__extra {
+    margin-block-start: var(--space-4);
+  }
+</style>

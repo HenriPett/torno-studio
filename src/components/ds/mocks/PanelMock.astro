@@ -1,0 +1,283 @@
+---
+/**
+ * PanelMock (DESIGN-2026-11 §6.12): ilustração de painel da operação com 3–4 indicadores, gráfico
+ * de barras decorativo e lista de alertas. HTML/CSS puro. Selo "Ilustração" obrigatório (MockFrame).
+ * Os números do exemplo são FICTÍCIOS e só existem dentro do mock (nunca em texto corrido).
+ *
+ * <PanelMock locale="pt-BR" />  ou  <PanelMock locale="en" title="…" kpis={[…]} alerts={[…]} />
+ */
+import { getChrome } from '../../../content/chrome';
+import type { Locale } from '../../../lib/i18n';
+import MockFrame from './MockFrame.astro';
+
+export interface PanelKpi {
+  label: string;
+  value: string;
+  delta?: string;
+  tone?: 'ok' | 'warn' | 'neutral';
+}
+
+export interface PanelAlert {
+  tone: 'warn' | 'ok' | 'info';
+  text: string;
+  meta: string;
+}
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  kpis?: PanelKpi[];
+  alerts?: PanelAlert[];
+  label?: string;
+  caption?: string;
+  stage?: 'muted' | 'surface' | 'none';
+}
+
+const defaults = {
+  'pt-BR': {
+    title: 'Planta 1 · Turno B',
+    time: 'Hoje, 14:20',
+    chart: 'Peças por hora',
+    alertsTitle: 'Alertas',
+    kpis: [
+      { label: 'OEE linha 2', value: '78%', delta: '+3 p.p.', tone: 'ok' },
+      { label: 'Refugo', value: '1,8%', delta: '−0,4 p.p.', tone: 'ok' },
+      { label: 'Paradas não planejadas', value: '2', delta: '41 min', tone: 'warn' },
+      { label: 'OPs em atraso', value: '4', delta: 'de 37', tone: 'neutral' },
+    ],
+    alerts: [
+      { tone: 'warn', text: 'Zona 3 acima do limite há 12 min', meta: 'Extrusora E-02 · ficha 4471 rev. C' },
+      { tone: 'info', text: 'Setup da OP 18.233 começa às 15:00', meta: 'Injetora I-07 · molde M-114' },
+      { tone: 'ok', text: 'Lote 0915 liberado pela qualidade', meta: 'Inspeção final · 14:05' },
+    ],
+    description:
+      'painel de uma planta com quatro indicadores (OEE, refugo, paradas, ordens em atraso), um gráfico de peças por hora e três alertas, um deles de temperatura acima do limite.',
+  },
+  en: {
+    title: 'Plant 1 · Shift B',
+    time: 'Today, 2:20 pm',
+    chart: 'Parts per hour',
+    alertsTitle: 'Alerts',
+    kpis: [
+      { label: 'OEE line 2', value: '78%', delta: '+3 pts', tone: 'ok' },
+      { label: 'Scrap', value: '1.8%', delta: '−0.4 pts', tone: 'ok' },
+      { label: 'Unplanned stops', value: '2', delta: '41 min', tone: 'warn' },
+      { label: 'Late work orders', value: '4', delta: 'of 37', tone: 'neutral' },
+    ],
+    alerts: [
+      { tone: 'warn', text: 'Zone 3 above limit for 12 min', meta: 'Extruder E-02 · sheet 4471 rev. C' },
+      { tone: 'info', text: 'Setup for WO 18233 starts at 3:00 pm', meta: 'Injection I-07 · mold M-114' },
+      { tone: 'ok', text: 'Batch 0915 released by quality', meta: 'Final inspection · 2:05 pm' },
+    ],
+    description:
+      'a plant dashboard with four indicators (OEE, scrap, stops, late orders), a parts-per-hour chart and three alerts, one of them a temperature above limit.',
+  },
+} as const;
+
+const { locale, caption, stage } = Astro.props;
+const d = defaults[locale];
+const title = Astro.props.title ?? d.title;
+const kpis: readonly PanelKpi[] = Astro.props.kpis ?? d.kpis;
+const alerts: readonly PanelAlert[] = Astro.props.alerts ?? d.alerts;
+const label = Astro.props.label ?? getChrome(locale).common.illustration;
+const bars = [62, 70, 68, 74, 30, 22, 58, 76, 80, 78, 84, 81];
+---
+
+<MockFrame label={label} description={d.description} caption={caption} stage={stage}>
+  <div class="panel">
+    <div class="panel__bar">
+      <strong>{title}</strong>
+      <span class="panel__time">{d.time}</span>
+    </div>
+    <ul class="panel__kpis">
+      {
+        kpis.map((kpi) => (
+          <li class="panel__kpi">
+            <span class="panel__kpi-label">{kpi.label}</span>
+            <span class="panel__kpi-value tnum">{kpi.value}</span>
+            {kpi.delta && <span class:list={['panel__kpi-delta', 'tnum', `is-${kpi.tone ?? 'neutral'}`]}>{kpi.delta}</span>}
+          </li>
+        ))
+      }
+    </ul>
+    <div class="panel__chart">
+      <span class="panel__chart-title">{d.chart}</span>
+      <div class="panel__bars" aria-hidden="true">
+        {bars.map((h, i) => <span class:list={[i === 4 || i === 5 ? 'is-low' : '']} style={`--h:${h}%`} />)}
+      </div>
+    </div>
+    <div class="panel__alerts">
+      <span class="panel__chart-title">{d.alertsTitle}</span>
+      <ul>
+        {
+          alerts.map((alert) => (
+            <li class:list={['panel__alert', `is-${alert.tone}`]}>
+              <span class="panel__dot" aria-hidden="true" />
+              <span class="panel__alert-text">
+                <strong>{alert.text}</strong>
+                <span>{alert.meta}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</MockFrame>
+
+<style>
+  .panel__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-block-end: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  .panel__time {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .panel__kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    list-style: none;
+    padding: 0;
+    background-color: var(--color-border-subtle);
+    border-block-end: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  @media (min-width: 40em) {
+    .panel__kpis {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .panel__kpi {
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-surface-raised);
+  }
+
+  .panel__kpi-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .panel__kpi-value {
+    font-size: var(--text-title-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+  }
+
+  .panel__kpi-delta {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+  }
+
+  .panel__kpi-delta.is-ok {
+    color: var(--color-ok-text);
+  }
+
+  .panel__kpi-delta.is-warn {
+    color: var(--color-warn-text);
+  }
+
+  .panel__chart,
+  .panel__alerts {
+    padding: var(--space-4);
+  }
+
+  .panel__chart {
+    border-block-end: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  .panel__chart-title {
+    display: block;
+    margin-block-end: var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  .panel__bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    block-size: 72px;
+  }
+
+  .panel__bars span {
+    flex: 1 1 0;
+    block-size: var(--h);
+    border-radius: 4px 4px 1px 1px;
+    background-color: var(--color-accent);
+    opacity: 0.85;
+  }
+
+  .panel__bars span.is-low {
+    background-color: var(--color-warn-text);
+  }
+
+  .panel__alerts ul {
+    display: grid;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+
+  .panel__alert {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-muted);
+  }
+
+  .panel__alert.is-warn {
+    background-color: var(--color-warn-subtle);
+  }
+
+  .panel__dot {
+    inline-size: 8px;
+    block-size: 8px;
+    margin-block-start: 0.45em;
+    border-radius: 50%;
+    background-color: var(--color-accent-text);
+  }
+
+  .is-warn .panel__dot {
+    background-color: var(--color-warn-text);
+  }
+
+  .is-ok .panel__dot {
+    background-color: var(--color-ok-text);
+  }
+
+  .panel__alert-text {
+    display: grid;
+    min-inline-size: 0;
+  }
+
+  .panel__alert-text strong {
+    font-weight: var(--weight-semibold);
+  }
+
+  .is-warn .panel__alert-text strong {
+    color: var(--color-warn-text);
+  }
+
+  .panel__alert-text span {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+</style>

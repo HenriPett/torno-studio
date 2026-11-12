@@ -1,0 +1,104 @@
+---
+/**
+ * MediaFrame (DESIGN-2026-11 §6.10): moldura para screenshot real ou mock, com legenda.
+ *
+ * <MediaFrame caption="Painel do piloto, dados anonimizados." chrome="window" label="Ilustração">
+ *   <img src={…} alt="…" />
+ * </MediaFrame>
+ *
+ * - chrome: window (barra de janela genérica) | none
+ * - tone: muted (fundo cinza em volta, padrão) | plain
+ * - label: selo visível no canto (ex.: "Ilustração"). Obrigatório quando o conteúdo NÃO é tela real
+ *   de cliente; os mocks em ds/mocks já trazem o próprio selo.
+ */
+interface Props {
+  caption?: string;
+  chrome?: 'window' | 'none';
+  tone?: 'muted' | 'plain';
+  label?: string;
+  class?: string;
+}
+
+const { caption, chrome = 'none', tone = 'muted', label, class: className } = Astro.props;
+---
+
+<figure class:list={['ds-frame', `ds-frame--${tone}`, className]}>
+  <div class="ds-frame__stage">
+    <div class="ds-frame__window">
+      {
+        chrome === 'window' && (
+          <div class="ds-frame__bar" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+        )
+      }
+      <div class="ds-frame__content"><slot /></div>
+    </div>
+    {label && <span class="ds-frame__label">{label}</span>}
+  </div>
+  {caption && <figcaption class="caption ds-frame__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .ds-frame {
+    min-inline-size: 0;
+  }
+
+  .ds-frame__stage {
+    position: relative;
+    border-radius: var(--radius-xl);
+  }
+
+  .ds-frame--muted .ds-frame__stage {
+    padding: clamp(var(--space-4), 0.5rem + 3vw, var(--space-8));
+    background-color: var(--color-surface-muted);
+  }
+
+  .ds-frame__window {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-raised);
+    border: var(--border-width) solid var(--color-border-subtle);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .ds-frame__bar {
+    display: flex;
+    gap: 6px;
+    padding: 12px 14px;
+    border-block-end: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  .ds-frame__bar span {
+    inline-size: 10px;
+    block-size: 10px;
+    border-radius: 50%;
+    background-color: var(--color-border);
+  }
+
+  .ds-frame__content :global(img) {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .ds-frame__label {
+    position: absolute;
+    inset-block-start: var(--space-3);
+    inset-inline-end: var(--space-3);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+  }
+
+  .ds-frame__caption {
+    margin-block-start: var(--space-3);
+    text-align: center;
+  }
+</style>

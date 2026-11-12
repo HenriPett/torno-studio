@@ -1,0 +1,55 @@
+---
+/**
+ * Button (DESIGN-2026-11 §6.3): pílula. Com `href` vira <a>, sem `href` vira <button>.
+ * Para o CTA de AGENDA use ui/BookingCta.astro (destino e consentimento), não este.
+ *
+ * <Button href="/cases/" variant="secondary" arrow>Ver cases</Button>
+ *
+ * - variant: primary | secondary | ghost | on-inverse (claro, em seção preta)
+ * - size: sm (36) | md (44, padrão) | lg (52)
+ * - arrow: "›" no fim (estilo link de produto). Demais atributos (data-*, aria-*, target…) passam direto.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = Omit<HTMLAttributes<'a'>, 'class'> & {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'on-inverse';
+  size?: 'sm' | 'md' | 'lg';
+  arrow?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+};
+
+const { href, variant = 'primary', size = 'md', arrow = false, type = 'button', class: className, ...rest } = Astro.props;
+const classes = ['btn', `btn--${variant}`, size !== 'md' && `btn--${size}`, arrow && 'ds-btn--arrow', className];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes} {...(rest as HTMLAttributes<'button'>)}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .ds-btn--arrow::after {
+    content: "\203A";
+    content: "\203A" / "";
+    font-size: 1.25em;
+    line-height: 1;
+    margin-inline-start: -0.1em;
+    transform: translateY(-0.05em);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .ds-btn--arrow:hover::after {
+      transform: translate(0.15em, -0.05em);
+    }
+  }
+</style>

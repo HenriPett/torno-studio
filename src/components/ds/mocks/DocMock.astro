@@ -1,0 +1,250 @@
+---
+/**
+ * DocMock (DESIGN-2026-11 §6.12): ilustração de documento/procedimento com trecho destacado e nota
+ * de revisão na margem. HTML/CSS puro. Selo "Ilustração" obrigatório (MockFrame).
+ *
+ * <DocMock locale="pt-BR" />  ou  <DocMock locale="en" code="…" title="…" rows={[…]} note="…" />
+ */
+import { getChrome } from '../../../content/chrome';
+import type { Locale } from '../../../lib/i18n';
+import MockFrame from './MockFrame.astro';
+
+export interface DocRow {
+  label: string;
+  value: string;
+  /** Linha alterada/destacada. */
+  highlight?: boolean;
+}
+
+interface Props {
+  locale: Locale;
+  code?: string;
+  title?: string;
+  section?: string;
+  rows?: DocRow[];
+  note?: string;
+  label?: string;
+  caption?: string;
+  stage?: 'muted' | 'surface' | 'none';
+}
+
+const defaults = {
+  'pt-BR': {
+    code: 'PO-EXT-012',
+    title: 'Setup de extrusora · PP copolímero',
+    rev: 'Rev. C',
+    status: 'Vigente',
+    section: '4.3 Temperaturas por zona',
+    rows: [
+      { label: 'Zona 1 (alimentação)', value: '180–190 °C' },
+      { label: 'Zona 2 (compressão)', value: '195–210 °C' },
+      { label: 'Zona 3 (dosagem)', value: '210–230 °C', highlight: true },
+      { label: 'Cabeçote', value: '220–235 °C' },
+    ],
+    note: 'Alterado na rev. C: limite superior de 240 °C para 230 °C (RNC-0912).',
+    noteWho: 'Engenharia de processo',
+    description:
+      'procedimento PO-EXT-012, revisão C, com a tabela de temperaturas por zona; a linha da zona 3 está destacada e uma nota explica a alteração do limite.',
+  },
+  en: {
+    code: 'SOP-EXT-012',
+    title: 'Extruder setup · PP copolymer',
+    rev: 'Rev. C',
+    status: 'Current',
+    section: '4.3 Zone temperatures',
+    rows: [
+      { label: 'Zone 1 (feed)', value: '180–190 °C' },
+      { label: 'Zone 2 (compression)', value: '195–210 °C' },
+      { label: 'Zone 3 (metering)', value: '210–230 °C', highlight: true },
+      { label: 'Die head', value: '220–235 °C' },
+    ],
+    note: 'Changed in rev. C: upper limit from 240 °C to 230 °C (NCR-0912).',
+    noteWho: 'Process engineering',
+    description:
+      'procedure SOP-EXT-012, revision C, with the zone temperature table; the zone 3 row is highlighted and a note explains the limit change.',
+  },
+} as const;
+
+const { locale, caption, stage } = Astro.props;
+const d = defaults[locale];
+const code = Astro.props.code ?? d.code;
+const title = Astro.props.title ?? d.title;
+const section = Astro.props.section ?? d.section;
+const rows: readonly DocRow[] = Astro.props.rows ?? d.rows;
+const note = Astro.props.note ?? d.note;
+const label = Astro.props.label ?? getChrome(locale).common.illustration;
+---
+
+<MockFrame label={label} description={d.description} caption={caption} stage={stage}>
+  <div class="doc">
+    <div class="doc__head">
+      <span class="doc__code tnum">{code}</span>
+      <span class="doc__tags">
+        <span class="doc__tag doc__tag--accent">{d.rev}</span>
+        <span class="doc__tag">{d.status}</span>
+      </span>
+    </div>
+    <div class="doc__page">
+      <p class="doc__title">{title}</p>
+      <div class="doc__lines" aria-hidden="true"><span style="--w:92%"></span><span style="--w:78%"></span></div>
+      <p class="doc__section">{section}</p>
+      <div class="doc__grid">
+        <dl class="doc__table">
+          {
+            rows.map((row) => (
+              <div class:list={['doc__row', row.highlight && 'is-hl']}>
+                <dt>{row.label}</dt>
+                <dd class="tnum">{row.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="doc__note">
+          <span class="doc__note-who">{d.noteWho}</span>
+          <span>{note}</span>
+        </div>
+      </div>
+      <div class="doc__lines" aria-hidden="true">
+        <span style="--w:96%"></span><span style="--w:88%"></span><span style="--w:64%"></span>
+      </div>
+    </div>
+  </div>
+</MockFrame>
+
+<style>
+  .doc__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-block-end: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  .doc__code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  .doc__tags {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .doc__tag {
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+  }
+
+  .doc__tag--accent {
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent-text);
+  }
+
+  .doc__page {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4) var(--space-6);
+  }
+
+  @media (min-width: 40em) {
+    .doc__page {
+      padding-inline: var(--space-6);
+    }
+  }
+
+  .doc__title {
+    font-size: var(--text-title);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-title);
+    line-height: 1.25;
+  }
+
+  .doc__section {
+    margin-block-start: var(--space-2);
+    font-weight: var(--weight-semibold);
+  }
+
+  .doc__lines {
+    display: grid;
+    gap: 8px;
+  }
+
+  .doc__lines span {
+    display: block;
+    inline-size: var(--w);
+    block-size: 8px;
+    border-radius: 4px;
+    background-color: var(--color-border-subtle);
+  }
+
+  .doc__grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 48em) {
+    .doc__grid {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      align-items: start;
+    }
+  }
+
+  .doc__table {
+    border: var(--border-width) solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .doc__row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .doc__row + .doc__row {
+    border-block-start: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  .doc__row dt {
+    color: var(--color-text-muted);
+  }
+
+  .doc__row dd {
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+  }
+
+  .doc__row.is-hl {
+    background-color: var(--color-accent-subtle);
+    box-shadow: inset 3px 0 0 var(--color-accent);
+  }
+
+  .doc__row.is-hl dt,
+  .doc__row.is-hl dd {
+    color: var(--color-text);
+    font-weight: var(--weight-semibold);
+  }
+
+  .doc__note {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    background-color: var(--color-warn-subtle);
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    line-height: 1.45;
+  }
+
+  .doc__note-who {
+    font-weight: var(--weight-semibold);
+    color: var(--color-warn-text);
+  }
+</style>

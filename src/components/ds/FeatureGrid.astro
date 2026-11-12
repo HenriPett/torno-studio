@@ -1,0 +1,53 @@
+---
+/**
+ * FeatureGrid (DESIGN-2026-11 §6.5): grade responsiva de 2/3/4 colunas (1 no celular, 2 a partir de 640).
+ *
+ * Modo dados:  <FeatureGrid columns={3} items={[{ title, body, eyebrow? }]} />  → <ul> de Cards
+ * Modo slot:   <FeatureGrid columns={2}><Card>…</Card><Card>…</Card></FeatureGrid>
+ *
+ * - card: variante dos cards no modo dados (padrão muted; use surface dentro de Section muted).
+ * - headingLevel: nível do título de cada item (padrão h3).
+ */
+import Card from './Card.astro';
+
+export interface FeatureItem {
+  title: string;
+  body: string;
+  eyebrow?: string;
+}
+
+interface Props {
+  columns?: 2 | 3 | 4;
+  items?: FeatureItem[];
+  card?: 'muted' | 'surface' | 'outline' | 'inverse' | 'accent';
+  headingLevel?: 'h3' | 'h4';
+  class?: string;
+}
+
+const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', class: className } = Astro.props;
+---
+
+{
+  items ? (
+    <ul class:list={['grid', `grid--${columns}`, 'ds-fg', className]} role="list">
+      {items.map((item) => (
+        <Card as="li" variant={card}>
+          {item.eyebrow && <p class="eyebrow eyebrow--accent">{item.eyebrow}</p>}
+          <H class="title">{item.title}</H>
+          <p class="muted">{item.body}</p>
+        </Card>
+      ))}
+    </ul>
+  ) : (
+    <div class:list={['grid', `grid--${columns}`, 'ds-fg', className]}>
+      <slot />
+    </div>
+  )
+}
+
+<style>
+  .ds-fg {
+    list-style: none;
+    padding: 0;
+  }
+</style>

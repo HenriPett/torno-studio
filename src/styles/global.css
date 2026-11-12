@@ -1,10 +1,16 @@
 /*
- * Estilos globais da landing: tipografia base, container, botões, links e padrões de seção
- * (DESIGN.md §2–§6). Só tokens de tokens.css; breakpoints literais em em (40em, 64em, 75em).
+ * Estilos globais da Torno (2026-11): base tipográfica, layout, seções, tipografia display, botões,
+ * links, grids e utilitários. Só tokens de tokens.css. Spec: docs/design/DESIGN-2026-11.md.
+ * Breakpoints literais em em: 40em (640), 48em (768), 64em (1024), 75em (1200).
+ *
+ * Mantém as classes antigas ainda usadas por páginas não migradas (privacidade, guias, cases,
+ * consentimento, blog): .h2, .h3, .section-head, .section--sunken, .split, .body, .meta,
+ * .icon-item, .dash-list, .actions, .link--target, .btn--lg etc.
  */
 
 html {
   font-size: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -16,13 +22,17 @@ html {
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
+  font-optical-sizing: auto; /* Inter: corte "display" automático nos tamanhos grandes */
   line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-body);
+  text-rendering: optimizeLegibility;
   overflow-wrap: break-word;
 }
 
 :focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
+  border-radius: var(--radius-xs);
 }
 
 /* Alvos de foco só programático (main#conteudo, título do diálogo): sem anel, não são controles. */
@@ -30,7 +40,12 @@ body {
   outline: none;
 }
 
-/* ---------- Layout ---------- */
+::selection {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-text);
+}
+
+/* ===================== Layout ===================== */
 
 .container {
   inline-size: 100%;
@@ -39,19 +54,59 @@ body {
   padding-inline: var(--container-pad);
 }
 
-.section {
-  padding-block: var(--space-section);
+.container--wide {
+  max-inline-size: calc(var(--container-wide) + 2 * var(--container-pad));
 }
 
-section[id] {
+.container--narrow {
+  max-inline-size: calc(var(--container-narrow) + 2 * var(--container-pad));
+}
+
+/* Seção: o ritmo da página. Alterne default → muted → default… e use inverse com parcimônia (1–2 por página). */
+.section {
+  padding-block: var(--space-section);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.section--muted,
+.section--sunken {
+  background-color: var(--color-bg-muted);
+}
+
+/* .section--inverse: cores locais em tokens.css (bloco .theme-inverse). */
+
+.section--tight {
+  padding-block: var(--space-section-tight);
+}
+
+/* Duas seções do mesmo fundo em sequência: cole a 2ª na 1ª sem dobrar o respiro. */
+.section--flush-top {
+  padding-block-start: 0;
+}
+
+/* No tema escuro o preto da seção inversa fica perto do fundo: uma hairline separa. */
+:root[data-theme="dark"] .section--inverse {
+  box-shadow: inset 0 1px 0 var(--color-border), inset 0 -1px 0 var(--color-border);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .section--inverse {
+    box-shadow: inset 0 1px 0 var(--color-border), inset 0 -1px 0 var(--color-border);
+  }
+}
+
+section[id],
+[id].section {
   scroll-margin-top: calc(var(--header-height) + var(--space-4));
 }
 
-.section--sunken {
-  background-color: var(--color-surface-sunken);
+/* Pilha vertical com espaço uniforme entre filhos. */
+.stack > * + * {
+  margin-block-start: var(--stack-gap, var(--space-4));
 }
 
-/* Padrão desktop "rótulo à esquerda, conteúdo à direita" (§2). */
+/* Padrão desktop "rótulo à esquerda, conteúdo à direita" (páginas antigas e de texto). */
 .split {
   display: grid;
   gap: var(--space-6);
@@ -76,12 +131,94 @@ section[id] {
   }
 }
 
-/* ---------- Tipografia ---------- */
+/* Grids responsivos: 1 coluna no celular, 2 a partir de 640, 3/4 a partir de 1024. */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-gutter));
+  grid-template-columns: minmax(0, 1fr);
+}
 
+@media (min-width: 40em) {
+  .grid--2,
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Produto: texto + visual lado a lado a partir de 1024 (visual embaixo no celular). */
+.media-split {
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+@media (min-width: 64em) {
+  .media-split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-8);
+  }
+
+  .media-split--reverse > :first-child {
+    order: 2;
+  }
+}
+
+/* ===================== Tipografia ===================== */
+
+.display-xl,
+.display-lg,
+.display-md {
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.display-xl {
+  font-size: var(--text-display-xl);
+}
+
+.display-lg {
+  font-size: var(--text-display-lg);
+}
+
+.display-md {
+  font-size: var(--text-display-md);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.title-lg {
+  font-size: var(--text-title-lg);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-title);
+  text-wrap: balance;
+}
+
+.title {
+  font-size: var(--text-title);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-title);
+}
+
+/* Títulos antigos: mesma intenção, nova escala. */
 .h2 {
   font-size: var(--text-2xl);
-  font-weight: 650;
-  line-height: var(--leading-snug);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
   max-inline-size: 24ch;
   text-wrap: balance;
@@ -91,13 +228,35 @@ section[id] {
   font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-title);
 }
 
 .lead {
-  font-size: var(--text-lg);
-  line-height: 1.5;
+  font-size: var(--text-lead);
+  line-height: var(--leading-lead);
+  letter-spacing: -0.012em;
   color: var(--color-text-muted);
   max-inline-size: var(--measure-narrow);
+  text-wrap: pretty;
+}
+
+/* Eyebrow: rótulo curto acima do título, em caixa normal (estilo produto). */
+.eyebrow {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: 0;
+  color: var(--color-text-muted);
+}
+
+.eyebrow--accent {
+  color: var(--color-accent-text);
+}
+
+.eyebrow--caps {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
 }
 
 .section-head > * + * {
@@ -134,20 +293,65 @@ section[id] {
   color: var(--color-text-muted);
 }
 
-.eyebrow {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
+.caption {
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-center .lead,
+.text-center.lead {
+  margin-inline: auto;
 }
 
 .tnum {
   font-feature-settings: var(--font-features-numeric);
 }
 
-/* ---------- Links e botões (§6.3) ---------- */
+/* Texto corrido genérico (páginas de texto). Baixa especificidade: componentes sobrescrevem fácil. */
+:where(.prose) {
+  max-inline-size: var(--measure);
+}
+
+:where(.prose) > :where(* + *) {
+  margin-block-start: var(--space-4);
+}
+
+:where(.prose) :where(h2) {
+  margin-block-start: var(--space-7);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+:where(.prose) :where(h3) {
+  margin-block-start: var(--space-6);
+  font-size: var(--text-title);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-title);
+}
+
+:where(.prose) :where(ul, ol) {
+  padding-inline-start: 1.25em;
+}
+
+:where(.prose) :where(li + li) {
+  margin-block-start: var(--space-2);
+}
+
+:where(.prose) :where(a:not([class])) {
+  color: var(--color-accent-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* ===================== Links ===================== */
 
 .link {
   color: var(--color-accent-text);
@@ -163,6 +367,48 @@ section[id] {
   }
 }
 
+/* Link de ação estilo produto: sem sublinhado, com "›" que anda 2px no hover. */
+.link--arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  font-weight: var(--weight-medium);
+  text-decoration-line: none;
+}
+
+.link--arrow::after {
+  content: "\203A";
+  content: "\203A" / "";
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 1;
+  transform: translateY(-0.04em);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link--arrow:hover {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  .link--arrow:hover::after {
+    transform: translate(0.15em, -0.04em);
+  }
+}
+
+/* Link discreto (rodapé, nav): cor do texto, sublinha no hover. */
+.link--quiet {
+  color: inherit;
+  text-decoration-line: none;
+}
+
+@media (hover: hover) {
+  .link--quiet:hover {
+    text-decoration-line: underline;
+  }
+}
+
 .link__icon {
   display: inline-block;
   inline-size: 0.75rem;
@@ -171,29 +417,62 @@ section[id] {
   vertical-align: baseline;
 }
 
+/* Link solto (fora de frase): alvo de toque ≥ 44 px de altura. */
+.link--target {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--tap-min);
+}
+
+/* <button> com cara de link (preferências de cookies no rodapé). */
+.link--button {
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+/* ===================== Botões ===================== */
+/* Pílula. Tamanhos: sm (36px visual, alvo 44 via padding externo do header), md (44), lg (52). */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
   min-block-size: var(--tap-min);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-5);
   border: var(--border-width) solid transparent;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   line-height: var(--leading-snug);
+  letter-spacing: -0.005em;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
   transition:
     background-color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--sm {
+  min-block-size: 2.25rem;
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--text-sm);
 }
 
 .btn--lg {
-  min-block-size: 3rem;
-  padding: var(--space-3) var(--space-5);
+  min-block-size: 3.25rem;
+  padding: var(--space-3) var(--space-6);
   font-size: var(--text-base);
 }
 
@@ -208,14 +487,26 @@ section[id] {
   border-color: var(--color-accent-active);
 }
 
+/* Secundário: contorno no acento (ação alternativa ao lado do primário). */
 .btn--secondary {
   background-color: transparent;
-  border-color: var(--color-border-strong);
-  color: var(--color-text);
+  border-color: var(--color-accent-text);
+  color: var(--color-accent-text);
 }
 
-.btn--secondary:active {
-  border-color: var(--color-text);
+/* Ghost: só texto, para terceira ação ou dentro de cards. */
+.btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-accent-text);
+  padding-inline: var(--space-3);
+}
+
+/* Em seção inversa (preta): botão claro, maior contraste que o azul sobre o preto. */
+.btn--on-inverse {
+  background-color: #f5f5f7;
+  border-color: #f5f5f7;
+  color: #1d1d1f; /* 15.5:1 */
 }
 
 @media (hover: hover) {
@@ -225,7 +516,16 @@ section[id] {
   }
 
   .btn--secondary:hover {
-    background-color: var(--color-surface-sunken);
+    background-color: var(--color-accent-subtle);
+  }
+
+  .btn--ghost:hover {
+    background-color: var(--color-accent-subtle);
+  }
+
+  .btn--on-inverse:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
   }
 }
 
@@ -235,10 +535,10 @@ section[id] {
   flex: none;
 }
 
-/* < 640: botão lg a 100% sem a seta e com respiro menor, para o rótulo longo caber em 1 linha. */
+/* < 640: botão lg sem a seta e com respiro menor, para o rótulo longo caber em 1 linha. */
 @media (max-width: 39.99em) {
   .btn--lg {
-    padding-inline: var(--space-4);
+    padding-inline: var(--space-5);
     text-wrap: balance;
   }
 
@@ -247,14 +547,7 @@ section[id] {
   }
 }
 
-/* Link solto (fora de frase): alvo de toque ≥ 44 px de altura (DESIGN §5). */
-.link--target {
-  display: inline-flex;
-  align-items: center;
-  min-block-size: var(--tap-min);
-}
-
-/* Botões lg: 100% e empilhados no mobile, lado a lado a partir de 640 px. */
+/* Grupo de ações: empilhado e 100% no celular, lado a lado a partir de 640 px. */
 .actions {
   display: flex;
   flex-direction: column;
@@ -269,7 +562,12 @@ section[id] {
   }
 }
 
-/* Placeholder visível em dev: [Marca] e CTA sem URL (§6.1, §6.13). */
+.text-center .actions,
+.actions--center {
+  justify-content: center;
+}
+
+/* Placeholder visível em dev: [Marca] e CTA sem URL. */
 [data-placeholder] {
   background-color: var(--color-placeholder-bg);
   outline: 1px dashed var(--color-border-strong);
@@ -280,22 +578,25 @@ section[id] {
   border-color: var(--color-border-strong);
 }
 
-/* ---------- Skip link (§6.14) ---------- */
+/* ===================== Skip link ===================== */
 
 .skip-link:focus,
 .skip-link:active {
   position: fixed;
   inset-block-start: var(--space-2);
   inset-inline-start: var(--space-2);
-  z-index: 20;
+  z-index: 50;
   padding: var(--space-2) var(--space-4);
   background-color: var(--color-surface);
   border: var(--border-width) solid var(--color-border-strong);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  box-shadow: var(--shadow-md);
 }
 
-/* ---------- Ícones de lista (§6.9) ---------- */
+/* ===================== Ícones de lista (páginas antigas) ===================== */
 
 .icon {
   inline-size: 1.5rem;
@@ -324,7 +625,7 @@ section[id] {
   text-wrap: pretty;
 }
 
-/* Marcador "—" de "fica fora" e "não é para" (§7.4, §7.7). */
+/* Marcador "—" de "fica fora" e "não é para". */
 .dash-list {
   list-style: none;
   padding: 0;
@@ -341,4 +642,37 @@ section[id] {
   inset-inline-start: 0;
   color: var(--color-warn-text);
   font-weight: var(--weight-semibold);
+}
+
+/* ===================== Movimento: entrada de seção ===================== */
+/*
+ * Scroll-driven (sem JS): o elemento sobe 24px enquanto entra na viewport. Só transform, nunca
+ * opacidade, para o conteúdo estar sempre legível (inclusive para axe/Lighthouse, impressão e
+ * navegadores sem suporte, que simplesmente mostram o estado final).
+ * Uso: class="reveal" (Section.astro aplica no conteúdo por padrão).
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: ds-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+@keyframes ds-rise {
+  from {
+    transform: translateY(1.5rem) scale(0.985);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@media print {
+  .reveal {
+    animation: none !important;
+  }
 }

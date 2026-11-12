@@ -1,0 +1,325 @@
+---
+/**
+ * Referência visual do design system (QA e cópia de uso pelos outros fluxos). Sem routeId no Base:
+ * noindex, sem canonical e fora do sitemap de rotas. Não é linkada de lugar nenhum.
+ * Spec: docs/design/DESIGN-2026-11.md.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ds/Section.astro';
+import SectionHeader from '../components/ds/SectionHeader.astro';
+import Button from '../components/ds/Button.astro';
+import Card from '../components/ds/Card.astro';
+import FeatureGrid from '../components/ds/FeatureGrid.astro';
+import Steps from '../components/ds/Steps.astro';
+import StatGrid from '../components/ds/StatGrid.astro';
+import Faq from '../components/ds/Faq.astro';
+import CtaBand from '../components/ds/CtaBand.astro';
+import Pill from '../components/ds/Pill.astro';
+import MediaFrame from '../components/ds/MediaFrame.astro';
+import AskMock from '../components/ds/mocks/AskMock.astro';
+import PanelMock from '../components/ds/mocks/PanelMock.astro';
+import DocMock from '../components/ds/mocks/DocMock.astro';
+import BookingCta from '../components/ui/BookingCta.astro';
+
+const locale = 'pt-BR' as const;
+
+const colors = [
+  ['--color-bg', 'Fundo'],
+  ['--color-bg-muted', 'Fundo alternado'],
+  ['--color-bg-inverse', 'Fundo inverso'],
+  ['--color-surface', 'Superfície'],
+  ['--color-text', 'Texto'],
+  ['--color-text-muted', 'Texto secundário'],
+  ['--color-border', 'Borda decorativa'],
+  ['--color-border-strong', 'Borda de controle'],
+  ['--color-accent', 'Acento'],
+  ['--color-accent-subtle', 'Acento suave'],
+  ['--color-warn-text', 'Alerta'],
+  ['--color-ok-text', 'OK'],
+];
+
+const type = [
+  ['display-xl', 'Display XL · 44 → 88'],
+  ['display-lg', 'Display LG · 36 → 64'],
+  ['display-md', 'Display MD · 30 → 48'],
+  ['title-lg', 'Título LG · 22 → 32'],
+  ['title', 'Título · 19 → 24'],
+];
+
+const features = [
+  { eyebrow: 'Produção', title: 'Pergunte à fábrica', body: 'Respostas com a fonte citada: ficha técnica, procedimento, ordem de produção.' },
+  { eyebrow: 'Qualidade', title: 'Rastreie desvios', body: 'Do alerta ao lote, com o histórico de revisões de cada documento.' },
+  { eyebrow: 'Comercial', title: 'Prazos que fecham', body: 'Capacidade e carteira no mesmo lugar, antes de prometer data ao cliente.' },
+];
+
+const steps = [
+  { title: 'Diagnóstico', body: 'Mapeamos sistemas, documentos e onde o tempo da equipe se perde.', meta: 'Semana 1' },
+  { title: 'Piloto', body: 'Um caso de uso, uma área, dados reais e critério de sucesso combinado.', meta: 'Semanas 2–6' },
+  { title: 'Implantação', body: 'Integração com ERP/MES, permissões por área e treinamento.', meta: 'Mês 2–3' },
+  { title: 'Evolução', body: 'Novas áreas entram com a mesma base, sem refazer o que funciona.', meta: 'Contínuo' },
+];
+
+const faq = [
+  { q: 'Os dados saem da empresa?', a: 'Exemplo de resposta. O componente usa <details> nativo: funciona sem JavaScript.\n\nParágrafos são separados por linha em branco.' },
+  { q: 'Precisa trocar o ERP?', a: 'Exemplo de resposta curta.' },
+  { q: 'Quanto tempo leva um piloto?', a: 'Exemplo de resposta curta.' },
+];
+---
+
+<Base locale={locale} title="Design system · {brand}" description="Referência interna de tokens e componentes.">
+  <Header locale={locale} routeId="home" />
+  <main id="conteudo" tabindex="-1">
+    <!-- Hero -->
+    <Section labelledby="ds-hero" tight>
+      <SectionHeader as="h1" id="ds-hero" eyebrow="Design system · 2026-11" title="IA e software sob medida para a indústria." lead="Referência viva dos tokens e primitivos. Cada bloco abaixo é o componente real, com os dados de exemplo.">
+        <BookingCta locale={locale} size="lg">Agendar diagnóstico</BookingCta>
+        <a class="link link--arrow link--target" href="#ds-componentes">Ver componentes</a>
+      </SectionHeader>
+    </Section>
+
+    <!-- Cores -->
+    <Section variant="muted" labelledby="ds-cores">
+      <SectionHeader id="ds-cores" eyebrow="Tokens" title="Cor" size="md" lead="Paleta contida: branco, cinza claro, preto e um acento azul cobalto. Troque o tema no header para ver o escuro." />
+      <ul class="swatches" role="list">
+        {
+          colors.map(([token, name]) => (
+            <li class="swatch">
+              <span class="swatch__chip" style={`background: var(${token})`} />
+              <span class="swatch__name">{name}</span>
+              <code class="swatch__token">{token}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <!-- Tipografia -->
+    <Section labelledby="ds-tipo">
+      <SectionHeader id="ds-tipo" eyebrow="Tokens" title="Tipografia" size="md" lead="Inter Variable com tamanho óptico. Títulos com tracking negativo; corpo a 16–17 px." />
+      <div class="type-specimens">
+        {
+          type.map(([cls, name]) => (
+            <div class="type-row">
+              <p class="caption">{name}</p>
+              <p class={cls}>O cérebro da operação.</p>
+            </div>
+          ))
+        }
+        <div class="type-row">
+          <p class="caption">Eyebrow · Lead · Corpo · Legenda</p>
+          <div class="stack">
+            <p class="eyebrow">Eyebrow neutro</p>
+            <p class="eyebrow eyebrow--accent">Eyebrow de acento</p>
+            <p class="lead">Lead: uma ou duas frases que explicam o título sem repetir. Cinza, 18 → 22 px.</p>
+            <p class="body">Corpo: texto corrido a 16–17 px, entrelinha 1,55, medida máxima de 65 caracteres para leitura confortável.</p>
+            <p class="caption">Legenda: 13 px, para fontes e notas de mídia.</p>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Botões e links -->
+    <Section variant="muted" labelledby="ds-componentes-title" id="ds-componentes">
+      <SectionHeader id="ds-componentes-title" eyebrow="Primitivos" title="Botões, links e pills" size="md" />
+      <div class="demo-stack">
+        <div class="demo-row">
+          <Button size="lg">Primário lg</Button>
+          <Button>Primário</Button>
+          <Button size="sm">Primário sm</Button>
+        </div>
+        <div class="demo-row">
+          <Button variant="secondary" href="#ds-componentes">Secundário</Button>
+          <Button variant="ghost" href="#ds-componentes" arrow>Ghost com seta</Button>
+          <a class="link link--arrow link--target" href="#ds-componentes">Link de ação</a>
+          <a class="link" href="#ds-componentes">Link em frase</a>
+        </div>
+        <div class="demo-row">
+          <Pill>Neutro</Pill>
+          <Pill tone="accent">Acento</Pill>
+          <Pill tone="ok">Liberado</Pill>
+          <Pill tone="warn">Acima do limite</Pill>
+          <Pill tone="outline">Contorno</Pill>
+          <Pill size="sm" tone="accent">sm</Pill>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Cards e grids -->
+    <Section labelledby="ds-cards">
+      <SectionHeader id="ds-cards" eyebrow="Primitivos" title="Cards e grades" size="md" lead="Tiles com cantos de 20–28 px, sem sombra: o contraste vem do fundo." />
+      <FeatureGrid columns={3} items={features} />
+      <div class="grid grid--2 demo-gap">
+        <Card variant="muted" padding="lg" radius="xl">
+          <p class="eyebrow eyebrow--accent">Card muted · xl</p>
+          <h3 class="title-lg">Um tile grande para uma ideia só.</h3>
+          <p class="muted">Use em pares ou trios. O conteúdo manda; nada de ícone decorativo sobrando.</p>
+          <a class="link link--arrow ds-card__link" href="#ds-cards">Saiba mais</a>
+        </Card>
+        <Card variant="inverse" padding="lg" radius="xl">
+          <p class="eyebrow">Card inverse</p>
+          <h3 class="title-lg">Preto para dar peso.</h3>
+          <p class="muted">As cores internas se ajustam sozinhas (escopo .theme-inverse).</p>
+          <a class="link link--arrow" href="#ds-cards">Saiba mais</a>
+        </Card>
+        <Card variant="outline">
+          <h3 class="title">Card outline</h3>
+          <p class="muted">Só borda; bom sobre fundos com imagem ou em listas densas.</p>
+        </Card>
+        <Card variant="accent">
+          <h3 class="title">Card accent</h3>
+          <p>Fundo de acento suave para um destaque por página, no máximo.</p>
+        </Card>
+      </div>
+    </Section>
+
+    <!-- Steps -->
+    <Section variant="muted" labelledby="ds-steps">
+      <SectionHeader id="ds-steps" eyebrow="Primitivos" title="Steps: só para processo com ordem real" size="md" />
+      <Steps items={steps} />
+    </Section>
+
+    <!-- Produto com mock -->
+    <Section labelledby="ds-produto" width="wide">
+      <div class="media-split">
+        <SectionHeader id="ds-produto" eyebrow="Padrão de seção de produto" title="Pergunte. A resposta vem com a fonte." lead="Texto à esquerda, mock à direita (embaixo no celular). Todo mock leva o selo “Ilustração”.">
+          <a class="link link--arrow link--target" href="#ds-produto">Como funciona</a>
+        </SectionHeader>
+        <AskMock locale={locale} />
+      </div>
+    </Section>
+
+    <Section variant="muted" labelledby="ds-mocks" width="wide">
+      <SectionHeader id="ds-mocks" eyebrow="Mocks" title="Painel e documento" size="md" align="center" />
+      <div class="grid grid--2 demo-mocks">
+        <PanelMock locale={locale} stage="surface" />
+        <DocMock locale={locale} stage="surface" />
+      </div>
+    </Section>
+
+    <Section variant="inverse" labelledby="ds-inverse" width="wide">
+      <SectionHeader id="ds-inverse" eyebrow="Seção inversa" title="Os mesmos mocks no preto." size="md" align="center" lead="Paleta escura local; útil para conferir o tema escuro sem trocar o tema da página." />
+      <div class="grid grid--2 demo-mocks">
+        <AskMock locale="en" stage="none" />
+        <PanelMock locale="en" stage="none" />
+      </div>
+      <div class="demo-row demo-center">
+        <Button variant="on-inverse" size="lg">Botão on-inverse</Button>
+        <Button variant="secondary" size="lg">Secundário</Button>
+      </div>
+    </Section>
+
+    <!-- Stats, moldura e FAQ -->
+    <Section labelledby="ds-stats">
+      <SectionHeader id="ds-stats" eyebrow="Primitivos" title="Números só com fonte" size="md" lead="StatGrid exige a fonte de cada número. Os valores abaixo são marcadores, não dados." />
+      <StatGrid
+        locale={locale}
+        items={[
+          { value: '00%', label: 'Legenda do número, curta e literal.', source: { label: 'Nome da fonte, ano' } },
+          { value: '0,0×', label: 'Outro número de exemplo.', source: { label: 'Fonte com link', href: '#ds-stats' } },
+          { value: '000', label: 'Sem fonte não entra.', source: { label: 'Fonte obrigatória' } },
+        ]}
+      />
+    </Section>
+
+    <Section variant="muted" labelledby="ds-frame" width="narrow">
+      <SectionHeader id="ds-frame" eyebrow="Primitivos" title="MediaFrame" size="md" />
+      <MediaFrame chrome="window" tone="plain" label="Ilustração" caption="Legenda da mídia. Para screenshot real, diga de onde é; para mock, mantenha o selo.">
+        <div class="frame-placeholder" aria-hidden="true"></div>
+      </MediaFrame>
+    </Section>
+
+    <Section labelledby="ds-faq" width="narrow">
+      <SectionHeader id="ds-faq" eyebrow="Primitivos" title="Perguntas frequentes" size="md" />
+      <Faq items={faq} />
+    </Section>
+
+    <CtaBand locale={locale} title="Vamos olhar a sua operação." text="CtaBand: título, uma frase e o CTA de agenda. Uma por página, no fim." secondary={{ label: 'Ver como trabalhamos', href: '#ds-steps' }} />
+  </main>
+  <Footer locale={locale} routeId="home" />
+</Base>
+
+<style>
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+
+  .swatch {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface);
+  }
+
+  .swatch__chip {
+    display: block;
+    block-size: 3.5rem;
+    margin-block-end: var(--space-2);
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  .swatch__name {
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+  }
+
+  .swatch__token {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .type-specimens {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .type-row {
+    display: grid;
+    gap: var(--space-2);
+    padding-block-start: var(--space-4);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .demo-stack {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .demo-center {
+    justify-content: center;
+    margin-block-start: var(--space-7);
+  }
+
+  .demo-gap {
+    margin-block-start: var(--space-gutter);
+  }
+
+  .demo-mocks {
+    --grid-gap: var(--space-6);
+    align-items: start;
+  }
+
+  .frame-placeholder {
+    aspect-ratio: 16 / 9;
+    background:
+      linear-gradient(var(--color-border-subtle), var(--color-border-subtle)) 8% 18% / 40% 10px no-repeat,
+      linear-gradient(var(--color-border-subtle), var(--color-border-subtle)) 8% 30% / 60% 10px no-repeat,
+      linear-gradient(var(--color-accent-subtle), var(--color-accent-subtle)) 8% 80% / 84% 40% no-repeat;
+  }
+</style>

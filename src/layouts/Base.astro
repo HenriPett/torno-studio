@@ -11,10 +11,11 @@ import { BLOG_ORIGIN } from '../config/blog.mjs';
 import '../styles/reset.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
-// Fonte única (DESIGN §4): IBM Plex Sans Variable, eixo wght, SÓ o subset latin (PT e EN cabem nele).
-// O @font-face é escrito aqui, e não via wght.css do fontsource, que traz 6 subsets.
+// Fonte única (DESIGN-2026-11 §4): Inter Variable, eixos wght + opsz (tamanho óptico: corte "display"
+// automático nos títulos grandes), SÓ o subset latin (PT e EN cabem nele).
+// O @font-face é escrito aqui, e não via opsz.css do fontsource, que traz 7 subsets.
 import ConsentBanner from '../components/ConsentBanner.astro';
-import fontUrl from '@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url';
+import fontUrl from '@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url';
 
 import { site, SITE_BRAND } from '../config/site';
 import { alternatesFor, fill, getCopy, htmlLang, isCampaignRoute, locales, ogLocale, pathFor, type Locale, type RouteId } from '../lib/i18n';
@@ -96,7 +97,7 @@ const entityGraph = canonical ? {
 } : null;
 
 // unicode-range do subset latin, igual ao do fontsource.
-const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:normal;font-display:swap;font-weight:100 700;src:url(${fontUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
+const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font-display:swap;font-weight:100 900;src:url(${fontUrl}) format('woff2-variations');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}`;
 ---
 
 <!doctype html>

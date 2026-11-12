@@ -1,9 +1,14 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { expect, test } from '@playwright/test';
 
 import { formatMoney, pricing } from '../src/config/pricing';
 import { SECTION_IDS } from '../src/content/types';
 import { en } from '../src/content/en';
 import { ptBR } from '../src/content/pt-BR';
+import { chrome } from '../src/content/chrome';
+import { routes } from '../src/config/routes.mjs';
 
 // Testes de componente das seções da landing (DESIGN §6–§7), contra o HTML real do build.
 
@@ -180,33 +185,69 @@ for (const { path, copy } of homes) {
   });
 }
 
+// Header/tema/skip link do design system 2026-11 (docs/design/DESIGN-2026-11.md §7.1).
+const hrefInDist = (href: string): boolean => {
+  const [path = '/', hash] = href.split('#');
+  const file = join('dist', path, 'index.html');
+  if (!existsSync(file)) return false;
+  return !hash || readFileSync(file, 'utf8').includes(`id="${hash}"`);
+};
+/** Itens da nav cujo destino já existe no build (o header esconde os demais na transição). */
+const expectedNav = (locale: 'pt-BR' | 'en') =>
+  chrome[locale].header.nav.filter((item) => {
+    const path = routes[item.routeId][locale] ?? '/';
+    return hrefInDist(item.hash ? `${path}#${item.hash}` : path);
+  });
+
 test.describe('header', () => {
-  test('360 px: CTA curto, sem nav e sem toggle; marca em até 2 linhas', async ({ page }) => {
+  test('360 px: marca + Menu + CTA curto; nav e toggle no painel do menu', async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 640 });
     await page.goto('/');
     const header = page.locator('header.site-header');
-    await expect(header.locator('nav')).toBeHidden();
-    await expect(header.locator('[data-theme-toggle]')).toBeHidden();
-    await expect(header.getByRole('link', { name: ptBR.common.bookingCtaHeaderMobile, exact: true })).toBeVisible();
+    const t = chrome['pt-BR'].header;
+    await expect(header.getByRole('link', { name: t.ctaShort, exact: true })).toBeVisible();
     await expect(header.locator('.site-header__cta-long')).toBeHidden();
+    const menu = header.getByRole('button', { name: t.menuOpen, exact: true });
+    await expect(menu).toBeVisible();
+    await expect(header.locator('.site-header__links a').first()).toBeHidden();
+    await expect(header.locator('[data-theme-toggle]')).toBeHidden();
     const lines = await header.locator('[data-brand] .wordmark__text').evaluate((el) => {
       const style = getComputedStyle(el);
       return Math.round(el.getBoundingClientRect().height / parseFloat(style.lineHeight));
     });
     expect(lines).toBeLessThanOrEqual(2);
-    // CTA principal do hero acima da dobra (DESIGN §7.1).
-    const box = await page.locator('#inicio [data-booking-cta]').boundingBox();
-    expect((box?.y ?? 0) + (box?.height ?? 0)).toBeLessThanOrEqual(640);
+    // Alvos ≥ 44 px.
+    for (const target of [menu, header.locator('[data-brand]')]) {
+      expect((await target.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+    }
+    // Abre o painel (popover nativo, sem JS próprio), mostra links e toggle; Esc fecha.
+    await menu.click();
+    await expect(header.locator('.site-header__links a').first()).toBeVisible();
+    await expect(header.locator('[data-theme-toggle]')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(header.locator('.site-header__links a').first()).toBeHidden();
   });
 
-  test('1280 px: nav com 4 âncoras, toggle e CTA longo', async ({ page }) => {
+  test('1280 px: nav com os links do chrome, toggle e CTA longo; sem /para/', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/en/');
     const header = page.locator('header.site-header');
-    await expect(header.locator('nav a')).toHaveText(Object.values(en.header.nav));
+    const t = chrome.en.header;
+    const expected = expectedNav('en');
+    // Contrato final: 5 links (Solutions, How we work, Cases, Blog, About). Enquanto uma página/âncora de
+    // destino não existe no build, o item fica oculto (src/lib/nav-availability.ts).
+    expect(t.nav).toHaveLength(5);
+    await expect(header.locator('.site-header__links a')).toHaveText(expected.map((item) => item.label));
+    await expect(header.getByRole('navigation', { name: t.navLabel })).toBeVisible();
+    await expect(header.getByRole('button', { name: t.menuOpen, exact: true })).toBeHidden();
     await expect(header.locator('[data-theme-toggle]')).toBeVisible();
-    await expect(header.getByRole('link', { name: en.common.bookingCtaHeader, exact: true })).toBeVisible();
+    await expect(header.locator('[data-lang-switch]')).toBeVisible();
+    await expect(header.getByRole('link', { name: t.cta, exact: true })).toBeVisible();
     await expect(header.locator('.site-header__cta-short')).toBeHidden();
+    const box = await header.boundingBox();
+    expect(box?.height ?? 0).toBeLessThanOrEqual(56);
+    const hrefs = await page.locator('header a[href], footer a[href]').evaluateAll((els) => els.map((el) => el.getAttribute('href') ?? ''));
+    expect(hrefs.filter((href) => href.includes('/para/'))).toEqual([]);
   });
 });
 
@@ -216,7 +257,7 @@ test.describe('tema', () => {
     await page.goto('/');
     const toggle = page.locator('footer [data-theme-toggle]');
     await expect(toggle).toBeVisible();
-    await expect(toggle).toHaveAttribute('aria-label', ptBR.common.themeToggleLabel);
+    await expect(toggle).toHaveAttribute('aria-label', chrome['pt-BR'].common.themeToggleLabel);
     await expect(toggle).toHaveAttribute('aria-pressed', 'false');
     await toggle.click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
@@ -233,12 +274,15 @@ test.describe('tema', () => {
   test.describe('sem JS', () => {
     test.use({ javaScriptEnabled: false });
 
-    test('toggle não aparece; conteúdo e <details> continuam acessíveis', async ({ page }) => {
-      await page.goto('/');
+    test('toggle não aparece; <details> e menu móvel continuam funcionando', async ({ page }) => {
+      await page.goto('/design-system/');
       await expect(page.locator('[data-theme-toggle]').first()).toBeHidden();
       await expect(page.locator('h1')).toBeVisible();
-      await page.locator('#faq details summary').first().click();
-      await expect(page.locator('#faq details').first()).toHaveAttribute('open', '');
+      await page.locator('.ds-faq details summary').first().click();
+      await expect(page.locator('.ds-faq details').first()).toHaveAttribute('open', '');
+      await page.setViewportSize({ width: 360, height: 640 });
+      await page.getByRole('button', { name: chrome['pt-BR'].header.menuOpen, exact: true }).click();
+      await expect(page.locator('.site-header__links a').first()).toBeVisible();
     });
   });
 });
@@ -251,6 +295,9 @@ test('skip link aparece ao focar e leva ao conteúdo', async ({ page }) => {
   await expect(skip).toHaveText(ptBR.common.skipToContent);
   const box = await skip.boundingBox();
   expect(box?.width ?? 0).toBeGreaterThan(10);
+  expect(box?.y ?? -1).toBeGreaterThanOrEqual(0);
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#conteudo$/);
 });
 
 test('privacidade: seções do copy e link de volta', async ({ page }) => {

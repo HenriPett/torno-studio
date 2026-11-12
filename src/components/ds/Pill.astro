@@ -1,0 +1,68 @@
+---
+/**
+ * Pill (DESIGN-2026-11 §6.9): rótulo curto (status, categoria, setor). Não é botão nem link.
+ *
+ * <Pill tone="accent">Novo</Pill>
+ *
+ * - tone: neutral | accent | warn | ok | outline. Cor nunca é o único sinal: o texto diz o estado.
+ * - size: sm | md
+ */
+interface Props {
+  tone?: 'neutral' | 'accent' | 'warn' | 'ok' | 'outline';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { tone = 'neutral', size = 'md', class: className } = Astro.props;
+---
+
+<span class:list={['ds-pill', `ds-pill--${tone}`, `ds-pill--${size}`, className]}><slot /></span>
+
+<style>
+  .ds-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    border-radius: var(--radius-full);
+    font-weight: var(--weight-medium);
+    line-height: 1.2;
+    white-space: nowrap;
+    border: var(--border-width) solid transparent;
+  }
+
+  .ds-pill--md {
+    padding: 0.3rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  .ds-pill--sm {
+    padding: 0.15rem 0.55rem;
+    font-size: var(--text-xs);
+  }
+
+  .ds-pill--neutral {
+    background-color: var(--color-surface-muted);
+    color: var(--color-text);
+    border-color: var(--color-border-subtle);
+  }
+
+  .ds-pill--accent {
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent-text);
+  }
+
+  .ds-pill--warn {
+    background-color: var(--color-warn-subtle);
+    color: var(--color-warn-text);
+  }
+
+  .ds-pill--ok {
+    background-color: var(--color-ok-subtle);
+    color: var(--color-ok-text);
+  }
+
+  .ds-pill--outline {
+    color: var(--color-text-muted);
+    border-color: var(--color-border);
+  }
+</style>

@@ -1,10 +1,17 @@
 ---
 /**
- * Footer (DESIGN §7.10). Sempre tem o ThemeToggle (no mobile ele só existe aqui).
- * Links vazios (LinkedIn/GitHub) não renderizam.
+ * Footer (DESIGN-2026-11 §7.2): fundo cinza claro, marca + linha de posicionamento, colunas de
+ * links (Empresa / Conteúdo / Legal), contato (LinkedIn da empresa, e-mail se configurado) e barra
+ * inferior com ©, local, idioma e tema. O ThemeToggle fica sempre aqui (no celular o do header
+ * está dentro do menu).
+ *
+ * `lean` (landing de campanha): marca como texto; só Privacidade, Preferências de cookies e local.
+ * Regra: nada de links para /para/... aqui.
  */
 import { site } from '../config/site';
-import { fill, getCopy, type Locale, pathFor, type RouteId } from '../lib/i18n';
+import { getChrome } from '../content/chrome';
+import { fill, getCopy, pathFor, type Locale, type RouteId } from '../lib/i18n';
+import { pageExists } from '../lib/nav-availability';
 import LangSwitch from './ui/LangSwitch.astro';
 import ThemeToggle from './ui/ThemeToggle.astro';
 import Wordmark from './ui/Wordmark.astro';
@@ -12,144 +19,203 @@ import Wordmark from './ui/Wordmark.astro';
 interface Props {
   locale: Locale;
   routeId: RouteId;
-  /** null hides unavailable article translation; undefined preserves route behavior. */
+  /** null oculta o seletor de idioma (artigo sem tradução); undefined usa a rota equivalente. */
   languageHref?: string | null;
-  /** Landing de campanha (DESIGN §14.9): marca como texto; só Privacidade e Preferências; sem LinkedIn/GitHub nem idioma. */
+  /** Landing de campanha: marca como texto; só Privacidade e Preferências; sem LinkedIn nem idioma. */
   lean?: boolean;
 }
 
 const { locale, routeId, languageHref, lean = false } = Astro.props;
-const copy = getCopy(locale);
-const year = new Date().getFullYear();
+const t = getChrome(locale);
 /** Mesma condição do ConsentBanner: sem categoria opcional ativa não há o que reabrir. */
 const consentEnabled = Boolean(site.gadsId);
-const links = [
-  { href: pathFor('privacy', locale), label: copy.footer.privacyLink },
-  !lean && { href: pathFor('about', locale), label: locale === 'en' ? 'About' : 'Sobre' },
-  !lean && { href: pathFor('contact', locale), label: locale === 'en' ? 'Contact' : 'Contato' },
-  !lean && { href: pathFor('blog', locale), label: 'Blog' },
-  !lean && { href: pathFor('author', locale), label: locale === 'en' ? 'Author: Henrique Pett' : 'Autor: Henrique Pett' },
-  !lean && { href: pathFor('recovery', locale), label: locale === 'en' ? 'Software project rescue' : 'Recuperação de projeto' },
-  !lean && { href: pathFor('lovableProduction', locale), label: locale === 'en' ? 'Lovable to production' : 'Lovable em produção' },
-  !lean && { href: pathFor('rlsGuide', locale), label: locale === 'en' ? 'Multi-tenant permissions guide' : 'Guia de permissões multiempresa' },
-  !lean && site.linkedinUrl && { href: site.linkedinUrl, label: copy.footer.linkedinLabel },
-  !lean && site.githubUrl && { href: site.githubUrl, label: copy.footer.githubLabel },
-].filter((link): link is { href: string; label: string } => Boolean(link));
+const consentLabel = getCopy(locale).consent.footerLink;
+const year = new Date().getFullYear();
+const columns = (
+  lean
+    ? [{ title: t.footer.columns.at(-1)?.title ?? 'Legal', links: [{ label: locale === 'en' ? 'Privacy' : 'Privacidade', routeId: 'privacy' as RouteId }] }]
+    : t.footer.columns
+)
+  // TRANSITÓRIO: links para páginas ainda não criadas ficam de fora (lib/nav-availability.ts).
+  .map((column) => ({ ...column, links: column.links.filter((link) => pageExists(pathFor(link.routeId, locale))) }))
+  .filter((column) => column.links.length > 0);
+const privacyPath = pathFor('privacy', locale);
 ---
 
-<footer class="site-footer">
-  <div class="container site-footer__grid">
-    <div class="site-footer__brand">
-      <Wordmark href={lean ? undefined : pathFor('home', locale)} />
+<footer class:list={['site-footer', lean && 'site-footer--lean']}>
+  <div class="container site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <Wordmark href={lean ? undefined : pathFor('home', locale)} homeLabel={t.header.homeLabel} />
+        <p class="site-footer__tagline">{t.footer.tagline}</p>
+      </div>
+      <div class="site-footer__cols">
+        {
+          columns.map((column) => (
+            <div class="site-footer__col">
+              <h2 class="site-footer__title">{column.title}</h2>
+              <ul class="site-footer__list">
+                {column.links.map((link) => {
+                  const href = pathFor(link.routeId, locale);
+                  return (
+                    <>
+                      <li>
+                        <a class="site-footer__link" href={href}>
+                          {link.label}
+                        </a>
+                      </li>
+                      {/* Reabre o 2º nível do consentimento; logo depois de Privacidade, oculto sem JS. */}
+                      {href === privacyPath && consentEnabled && (
+                        <li>
+                          <button type="button" class="site-footer__link link--button" data-consent-open hidden>
+                            {consentLabel}
+                          </button>
+                        </li>
+                      )}
+                    </>
+                  );
+                })}
+              </ul>
+            </div>
+          ))
+        }
+        {
+          !lean && (
+            <div class="site-footer__col">
+              <h2 class="site-footer__title">{t.footer.contactTitle}</h2>
+              <ul class="site-footer__list">
+                <li>
+                  <a class="site-footer__link" href={site.organizationLinkedinUrl}>
+                    {t.footer.linkedinLabel}
+                  </a>
+                </li>
+                {site.contactEmail && (
+                  <li>
+                    <a class="site-footer__link" href={`mailto:${site.contactEmail}`}>
+                      {site.contactEmail}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )
+        }
+      </div>
     </div>
-    <ul class="site-footer__links">
-      {
-        links.map((link, index) => (
-          <>
-            <li>
-              <a class="link link--target" href={link.href}>
-                {link.label}
-              </a>
-            </li>
-            {/* Reabre o 2º nível do consentimento; logo depois de Privacidade, oculto sem JS (DESIGN §13.3). */}
-            {index === 0 && consentEnabled && (
-              <li>
-                <button type="button" class="link link--target link--button" data-consent-open hidden>
-                  {copy.consent.footerLink}
-                </button>
-              </li>
-            )}
-          </>
-        ))
-      }
-    </ul>
-    <div class="site-footer__about">
-      <p class="site-footer__tagline">{fill(copy.footer.tagline)}</p>
-      <p class="site-footer__copy">{fill(copy.footer.copyright, { year })}</p>
-    </div>
-    <div class="site-footer__controls">
-      {!lean && <LangSwitch locale={locale} routeId={routeId} href={languageHref} />}
-      <ThemeToggle label={copy.common.themeToggleLabel} />
+    <div class="site-footer__bottom">
+      <p class="site-footer__legal">
+        <span>{fill(t.footer.copyright, { year })}</span>
+        <span aria-hidden="true" class="site-footer__sep">·</span>
+        <span>{t.footer.location}</span>
+      </p>
+      <div class="site-footer__controls">
+        {!lean && <LangSwitch locale={locale} routeId={routeId} href={languageHref} />}
+        <ThemeToggle label={t.common.themeToggleLabel} />
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background-color: var(--color-bg);
-    border-block-start: var(--border-width) solid var(--color-border);
-    padding-block: var(--space-7);
+    background-color: var(--color-bg-muted);
+    color: var(--color-text);
+    padding-block: var(--space-8) var(--space-5);
+    font-size: var(--text-sm);
   }
 
-  .site-footer__grid {
+  .site-footer__top {
     display: grid;
-    gap: var(--space-5);
-    grid-template-areas: 'brand' 'about' 'links' 'controls';
+    gap: var(--space-7);
   }
 
   .site-footer__brand {
-    grid-area: brand;
-    display: flex;
-    min-inline-size: 0;
-  }
-
-  .site-footer__about {
-    grid-area: about;
-  }
-
-  .site-footer__links {
-    grid-area: links;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-5);
-    list-style: none;
-    padding: 0;
-    font-size: var(--text-sm);
-  }
-
-  .link--button {
-    padding: 0;
-    background: none;
-    border: 0;
-    font: inherit;
-    cursor: pointer;
-  }
-
-  .site-footer__controls {
-    grid-area: controls;
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
+    display: grid;
+    justify-items: start;
+    gap: var(--space-1);
+    align-content: start;
   }
 
   .site-footer__tagline {
-    font-size: var(--text-sm);
     color: var(--color-text-muted);
-    max-inline-size: var(--measure);
+    max-inline-size: 28ch;
   }
 
-  .site-footer__copy {
-    margin-block-start: var(--space-2);
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-5);
+  }
+
+  .site-footer__title {
+    margin-block-end: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0;
+    color: var(--color-text);
+  }
+
+  .site-footer__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* Alvo ≥ 32 px (WCAG 2.5.8 pede 24). */
+  .site-footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    text-align: start;
+  }
+
+  @media (hover: hover) {
+    .site-footer__link:hover {
+      color: var(--color-text);
+      text-decoration-line: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-block-start: var(--space-7);
+    padding-block-start: var(--space-4);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
     font-size: var(--text-xs);
     color: var(--color-text-muted);
   }
 
+  .site-footer__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  @media (min-width: 48em) {
+    .site-footer__cols {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
   @media (min-width: 64em) {
-    .site-footer__grid {
-      grid-template-columns: minmax(12rem, 1fr) minmax(0, 2fr);
-      grid-template-areas: 'brand links' 'about controls';
-      align-items: center;
-      column-gap: var(--space-7);
+    .site-footer__top {
+      grid-template-columns: minmax(14rem, 1fr) minmax(0, 2.4fr);
     }
+  }
 
-    .site-footer__links {
-      justify-self: stretch;
-      justify-content: flex-end;
-      min-inline-size: 0;
-    }
-
-    .site-footer__controls {
-      justify-self: end;
-    }
+  .site-footer--lean .site-footer__cols {
+    grid-template-columns: minmax(0, 1fr);
   }
 </style>
