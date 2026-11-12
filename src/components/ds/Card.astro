@@ -127,7 +127,7 @@ const { variant = 'muted', padding = 'md', radius = 'lg', as: Tag = 'div', inter
     outline: none;
   }
 
-  .ds-card:has(:global(.ds-card__link:focus-visible)) {
+  :global(.ds-card:has(.ds-card__link:focus-visible)) {
     outline: var(--focus-ring);
     outline-offset: var(--focus-offset);
   }

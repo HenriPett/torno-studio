@@ -163,11 +163,13 @@ const hrefInDist = (href: string): boolean => {
   if (!existsSync(file)) return false;
   return !hash || readFileSync(file, 'utf8').includes(`id="${hash}"`);
 };
-/** Itens da nav cujo destino já existe no build (o header esconde os demais na transição). */
+/** Itens da nav; todo destino precisa existir no build (página e, se houver, âncora). */
 const expectedNav = (locale: 'pt-BR' | 'en') =>
-  chrome[locale].header.nav.filter((item) => {
+  chrome[locale].header.nav.map((item) => {
     const path = routes[item.routeId][locale] ?? '/';
-    return hrefInDist(item.hash ? `${path}#${item.hash}` : path);
+    const href = item.hash ? `${path}#${item.hash}` : path;
+    expect(hrefInDist(href), `destino da nav existe no build: ${href}`).toBe(true);
+    return item;
   });
 
 test.describe('header', () => {
@@ -205,8 +207,7 @@ test.describe('header', () => {
     const header = page.locator('header.site-header');
     const t = chrome.en.header;
     const expected = expectedNav('en');
-    // Contrato final: 5 links (Solutions, How we work, Cases, Blog, About). Enquanto uma página/âncora de
-    // destino não existe no build, o item fica oculto (src/lib/nav-availability.ts).
+    // Contrato: 5 links (Solutions, How we work, Cases, Blog, About).
     expect(t.nav).toHaveLength(5);
     await expect(header.locator('.site-header__links a')).toHaveText(expected.map((item) => item.label));
     await expect(header.getByRole('navigation', { name: t.navLabel })).toBeVisible();

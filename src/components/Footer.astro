@@ -11,7 +11,6 @@
 import { site } from '../config/site';
 import { getChrome } from '../content/chrome';
 import { fill, getCopy, pathFor, type Locale, type RouteId } from '../lib/i18n';
-import { pageExists } from '../lib/nav-availability';
 import LangSwitch from './ui/LangSwitch.astro';
 import ThemeToggle from './ui/ThemeToggle.astro';
 import Wordmark from './ui/Wordmark.astro';
@@ -36,9 +35,7 @@ const columns = (
     ? [{ title: t.footer.columns.at(-1)?.title ?? 'Legal', links: [{ label: locale === 'en' ? 'Privacy' : 'Privacidade', routeId: 'privacy' as RouteId }] }]
     : t.footer.columns
 )
-  // TRANSITÓRIO: links para páginas ainda não criadas ficam de fora (lib/nav-availability.ts).
-  .map((column) => ({ ...column, links: column.links.filter((link) => pageExists(pathFor(link.routeId, locale))) }))
-  .filter((column) => column.links.length > 0);
+;
 const privacyPath = pathFor('privacy', locale);
 ---
 

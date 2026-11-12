@@ -26,7 +26,7 @@ for (const slug of SLUGS) {
       await expect(page.locator('h1')).toHaveCount(1);
       const levels = await page.locator('h1, h2, h3, h4, h5, h6').evaluateAll((nodes) => nodes.map((node) => Number(node.tagName[1])));
       expect(levels[0]).toBe(1);
-      for (let i = 1; i < levels.length; i++) expect(levels[i] - levels[i - 1], `heading ${i}: h${levels[i - 1]} → h${levels[i]}`).toBeLessThanOrEqual(1);
+      for (let i = 1; i < levels.length; i++) expect(levels[i]! - levels[i - 1]!, `heading ${i}: h${levels[i - 1]} → h${levels[i]}`).toBeLessThanOrEqual(1);
     });
 
     for (const colorScheme of ['light', 'dark'] as const) {

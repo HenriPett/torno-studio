@@ -7,6 +7,7 @@ export const baselinePaths = [
   '/', '/en/',
   '/autores/henrique-pett/', '/en/authors/henrique-pett/',
   '/about/', '/contact/', '/en/about/', '/en/contact/',
+  '/cases/', '/en/cases/', '/como-trabalhamos/', '/en/how-we-work/',
   '/cases/loopt/', '/cases/bom-capital/', '/cases/ascende/',
   '/en/cases/loopt/', '/en/cases/bom-capital/', '/en/cases/ascende/',
   '/recuperacao-de-projeto/', '/en/software-project-rescue/',

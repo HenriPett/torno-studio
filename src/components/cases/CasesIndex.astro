@@ -13,7 +13,6 @@ import BookingCta from '../ui/BookingCta.astro';
 import CaseCard from './CaseCard.astro';
 import { caseSlugs, casesIndex } from '../../content/cases';
 import { pathFor, type Locale } from '../../lib/i18n';
-import { hrefAvailable } from '../../lib/nav-availability';
 import { getChrome } from '../../content/chrome';
 
 interface Props {
@@ -23,8 +22,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = casesIndex[locale];
 const howWeWork = pathFor('howWeWork', locale);
-// Transitório: /como-trabalhamos/ é criada por outro fluxo; o link aparece quando a página existir.
-const showHowWeWork = hrefAvailable(howWeWork);
+const showHowWeWork = true;
 ---
 
 <Base locale={locale} routeId="cases" title={t.title} description={t.description} ogImagePath={`/og/cases/index-${locale}.png`} ogImageAlt={t.heading}>

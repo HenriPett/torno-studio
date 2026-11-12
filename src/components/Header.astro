@@ -17,7 +17,6 @@
  */
 import { getChrome } from '../content/chrome';
 import { pathFor, type Locale, type RouteId } from '../lib/i18n';
-import { hrefAvailable } from '../lib/nav-availability';
 import BookingCta from './ui/BookingCta.astro';
 import LangSwitch from './ui/LangSwitch.astro';
 import ThemeToggle from './ui/ThemeToggle.astro';
@@ -49,9 +48,7 @@ const navItems = t.nav
     const href = item.hash ? `${path}#${item.hash}` : path;
     const current = !item.hash && path !== home && currentPath.startsWith(path);
     return { ...item, href, current };
-  })
-  // TRANSITÓRIO: some com o item enquanto a página/âncora de destino não existir (lib/nav-availability.ts).
-  .filter((item) => hrefAvailable(item.href));
+  });
 ---
 
 <header class:list={['site-header', `site-header--${variant}`]}>

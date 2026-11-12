@@ -15,16 +15,16 @@ interface PageAnswerCopy {
 export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>> = {
   'pt-BR': {
     home: {
-      question: `Que tipo de software a ${site.organizationName} desenvolve?`,
-      answer: 'Desenvolvo software sob medida para empresas que precisam automatizar processos, integrar sistemas, retomar um projeto travado ou lançar um produto web. Sou Henrique Pett: defino o escopo com você e implemento a entrega até a produção, com critérios de aceite e código na sua conta.',
+      question: `O que a ${site.organizationName} faz pela indústria?`,
+      answer: 'A Torno desenha e implanta IA e software sob medida para indústrias com 200 ou mais funcionários. Juntamos os dados e o conhecimento da operação num cérebro da empresa, com permissões por área e respostas que citam a fonte, e colocamos agentes para trabalhar em produção, qualidade, manutenção, comercial e gestão. Começamos por um diagnóstico e implantamos por etapas.',
     },
     about: {
       question: `Quem conduz os projetos da ${site.organizationName}?`,
-      answer: 'Sou Henrique Pett, o engenheiro responsável pelo estúdio. Você trabalha diretamente comigo na avaliação do problema, definição do escopo e implementação de produtos web, ferramentas internas, integrações e automações. Os cases apresentam minha experiência profissional e um produto próprio.',
+      answer: 'Cada projeto tem uma liderança técnica única, responsável do diagnóstico à operação: hoje, Henrique Pett, fundador da Torno. Especialistas em dados, segurança, UX e infraestrutura entram por escopo e são nomeados na proposta. Os cases mostram a experiência profissional de quem conduz a Torno e um projeto próprio.',
     },
     contact: {
-      question: 'Como começar uma conversa sobre seu projeto de software?',
-      answer: 'Use o e-mail ou o link de agendamento nos canais oficiais abaixo. Descreva o fluxo atual, quem usa, o que precisa mudar e quais sistemas estão envolvidos. Se já existe código ou protótipo, conte a principal falha observada, sem enviar senhas ou dados de clientes.',
+      question: 'Como começar uma conversa com a Torno?',
+      answer: 'Agende a conversa inicial de 45 minutos ou escreva pelos canais oficiais desta página. Conte qual área perde mais tempo, quais sistemas a empresa usa e quem decide. Não envie senhas nem dados de clientes antes de um acordo de confidencialidade.',
     },
     privacy: {
       question: 'Como controlar o uso de cookies neste site?',
@@ -32,11 +32,11 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
     },
     recovery: {
       question: 'Como retomar um projeto de software travado?',
-      answer: 'Começo pelo fluxo bloqueado e seu impacto na operação. Com acesso autorizado ao código e ao ambiente, avalio o que pode ser preservado e delimito correções com critérios de aceite. Quando o legado ou o escopo ainda são incertos, o Product Sprint define as prioridades antes da implementação.',
+      answer: 'Começamos pelo fluxo bloqueado e pelo impacto dele na operação. Com acesso autorizado ao código e ao ambiente, avaliamos o que pode ser preservado e delimitamos correções com critérios de aceite. Quando o legado ou o escopo ainda são incertos, um diagnóstico define as prioridades antes da implementação.',
     },
     lovableProduction: {
       question: 'O que entra na preparação de um app Lovable para produção?',
-      answer: 'Para um protótipo aproveitável e escopo compatível, combino critérios de aceite, implemento as correções acordadas e verifico acessos, fluxo principal, integrações e procedimentos de operação. O trabalho parte do backend e das contas existentes; uma migração ou reconstrução exige justificativa e escopo próprios.',
+      answer: 'Para um protótipo aproveitável e escopo compatível, combinamos critérios de aceite, implementamos as correções acordadas e verificamos acessos, fluxo principal, integrações e procedimentos de operação. O trabalho parte do backend e das contas existentes; uma migração ou reconstrução exige justificativa e escopo próprios.',
     },
     rlsGuide: {
       question: 'Como testar permissões entre empresas com RLS?',
@@ -57,16 +57,16 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
   },
   en: {
     home: {
-      question: `What does ${site.organizationName} build for founders?`,
-      answer: 'I build custom web products, integrations and automation for early-stage founders without a CTO, including stalled projects and usable prototypes that need production work. I’m Henrique Pett: you work directly with me from scoping through implementation, with agreed acceptance criteria and code in your own repository.',
+      question: `What does ${site.organizationName} do for industrial companies?`,
+      answer: 'Torno designs and deploys custom AI and software for industrial companies with 200 or more employees. We bring the operation’s data and know-how into one company brain, with permissions by area and answers that cite their source, and put agents to work in production, quality, maintenance, sales and management. We start with an assessment and deploy in stages.',
     },
     about: {
       question: `Who handles projects at ${site.organizationName}?`,
-      answer: 'I’m Henrique Pett, the engineer responsible for the studio. You work directly with me to assess the problem, define scope and implement web products, internal tools, integrations and automation. The case studies describe my professional experience and a product I built myself.',
+      answer: 'Every project has a single technical lead, accountable from assessment to operation: today, Henrique Pett, Torno’s founder. Specialists in data, security, UX and infrastructure join by scope and are named in the proposal. The case studies describe the professional experience of the person who leads Torno and an own project.',
     },
     contact: {
-      question: 'How do you start a conversation about your software project?',
-      answer: 'Use the email or booking link in the official channels below. Describe the current workflow, who uses it, what needs to change and which systems are involved. If you have code or a prototype, explain the main failure you see without sending passwords or customer data.',
+      question: 'How do you start a conversation with Torno?',
+      answer: 'Book the 45-minute intro call or write through the official channels on this page. Tell us which area loses the most time, which systems you use and who decides. Do not send passwords or customer data before a confidentiality agreement.',
     },
     privacy: {
       question: 'How can you control cookies on this site?',
@@ -74,11 +74,11 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
     },
     recovery: {
       question: 'How do you restart a stalled software project?',
-      answer: 'I start with the blocked workflow and its impact on your pilot or business. With authorized access to the code and environment, I assess what can be retained and scope changes against acceptance criteria. When the inherited system or scope is unclear, a Product Sprint defines priorities before implementation.',
+      answer: 'We start with the blocked workflow and its impact on the operation. With authorized access to the code and environment, we assess what can be retained and scope changes against acceptance criteria. When the inherited system or scope is unclear, an assessment defines priorities before implementation.',
     },
     lovableProduction: {
       question: 'What does preparing a Lovable app for production involve?',
-      answer: 'For a usable prototype and compatible scope, I agree acceptance criteria, implement bounded changes and check access, the core workflow, integrations and operating procedures. The work starts with your existing backend and accounts; migration or reconstruction needs its own justification and scope.',
+      answer: 'For a usable prototype and compatible scope, we agree acceptance criteria, implement bounded changes and check access, the core workflow, integrations and operating procedures. The work starts with your existing backend and accounts; migration or reconstruction needs its own justification and scope.',
     },
     rlsGuide: {
       question: 'How do you test access across companies with RLS?',
