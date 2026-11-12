@@ -9,18 +9,16 @@ import { SITE_BRAND } from '../../config/site';
 interface Props {
   /** Sem href, a marca é texto (landing de campanha: um link para a home seria uma saída). */
   href?: string | undefined;
-  /** Nome acessível extra do link (ex.: "página inicial"), lido depois da marca. */
-  homeLabel?: string | undefined;
   size?: 'md' | 'lg';
 }
 
-const { href, homeLabel, size = 'md' } = Astro.props;
+const { href, size = 'md' } = Astro.props;
 const Tag = href ? 'a' : 'span';
 const placeholder = import.meta.env.DEV && SITE_BRAND.includes('[');
 ---
 
 <Tag class:list={['wordmark', `wordmark--${size}`]} href={href} data-brand data-placeholder={placeholder || undefined}
-  ><span class="wordmark__text">{SITE_BRAND}</span>{href && homeLabel && <span class="visually-hidden">, {homeLabel}</span>}</Tag
+  ><span class="wordmark__text">{SITE_BRAND}</span></Tag
 >
 
 <style>

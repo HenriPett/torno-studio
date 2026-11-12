@@ -57,7 +57,7 @@ const navItems = t.nav
 <header class:list={['site-header', `site-header--${variant}`]}>
   <div class="container container--wide site-header__inner">
     <div class="site-header__brand">
-      <Wordmark href={brandAsText ? undefined : home} homeLabel={t.homeLabel} />
+      <Wordmark href={brandAsText ? undefined : home} />
     </div>
     {
       variant === 'full' && (
@@ -89,7 +89,7 @@ const navItems = t.nav
         </nav>
       )
     }
-    <BookingCta locale={locale} size="sm" class="site-header__cta">
+    <BookingCta locale={locale} size="md" class="site-header__cta">
       <span class="site-header__cta-long">{t.cta}</span>
       <span class="site-header__cta-short">{t.ctaShort}</span>
     </BookingCta>
@@ -127,9 +127,11 @@ const navItems = t.nav
     min-inline-size: 0;
   }
 
+  /* CTA md (alvo de 44 px, WCAG/tests K4) com respiro lateral de botão pequeno. */
   :global(.site-header__cta) {
     flex: none;
     white-space: nowrap;
+    padding-inline: var(--space-4);
   }
 
   .site-header__cta-long {

@@ -59,6 +59,13 @@ const overage = `${formatMoney(evolution.overagePerHour, locale)}${ladder.units.
     border: var(--border-width) solid var(--color-border);
   }
 
+  /* DS 2026-11: Inter é mais larga que o Plex; em 320 px a tabela passava 2 px da tela. */
+  @media (max-width: 22.5em) {
+    .evolution__table {
+      font-size: var(--text-sm);
+    }
+  }
+
   caption {
     padding-block-end: var(--space-3);
     font-size: var(--text-lg);

@@ -22,7 +22,6 @@ export interface ChromeLink {
 export interface ChromeCopy {
   header: {
     navLabel: string;
-    homeLabel: string;
     nav: ChromeNavItem[];
     menuOpen: string;
     menuClose: string;
@@ -51,7 +50,6 @@ export const chrome: Record<Locale, ChromeCopy> = {
   'pt-BR': {
     header: {
       navLabel: 'Navegação principal',
-      homeLabel: 'página inicial',
       nav: [
         { label: 'Soluções', routeId: 'home', hash: 'solucoes' },
         { label: 'Como trabalhamos', routeId: 'howWeWork' },
@@ -95,7 +93,6 @@ export const chrome: Record<Locale, ChromeCopy> = {
   en: {
     header: {
       navLabel: 'Main navigation',
-      homeLabel: 'home page',
       nav: [
         { label: 'Solutions', routeId: 'home', hash: 'solutions' },
         { label: 'How we work', routeId: 'howWeWork' },

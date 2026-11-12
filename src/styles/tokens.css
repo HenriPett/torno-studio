@@ -16,8 +16,8 @@
  * Contraste (WCAG 2.2, calculado; tabela completa em DESIGN-2026-11.md §3):
  *   claro  — text #1d1d1f: 16.8:1 no bg, 15.5:1 no muted · text-muted #6e6e73: 5.07 / 4.66
  *            accent #1d4fd7: 6.66 / 6.12 · branco no accent 6.66 · border-strong #86868b: 3.62 / 3.33
- *   escuro — text #f5f5f7: 18.1:1 · muted #a1a1a6: 7.65 no bg, 6.61 no surface
- *            accent-text #6b9bff: 7.27 · branco no accent #2f62e8: 5.2 · border-strong #76767c: 4.36
+ *   escuro — text #f5f5f7: 18.2:1 · muted #a1a1a6: 7.69 no bg, 6.61 no surface
+ *            accent-text #6b9bff: 7.31 · branco no accent #2f62e8: 5.21 · border-strong #76767c: 4.38
  *   inverso— text #f5f5f7 no #000: 19.3 · muted #a1a1a6: 8.16 · accent-text #6b9bff: 7.76
  *
  * Os nomes antigos (--color-surface-sunken, --text-2xl, --radius-md...) continuam existindo como
@@ -54,7 +54,7 @@
   --color-accent-hover: #1843b8;
   --color-accent-active: #13389c;
   --color-on-accent: #ffffff; /* 6.66:1 no accent */
-  --color-accent-subtle: #eaf0fd; /* fundo de pílula/realce; texto accent sobre ele 5.9:1 */
+  --color-accent-subtle: #eaf0fd; /* fundo de pílula/realce; texto accent sobre ele 5.83:1 */
   --color-accent-text: #1d4fd7; /* links e texto de acento em qualquer superfície clara */
 
   /* Sinais (só em mocks/alertas; sempre com texto, nunca só a cor) */
@@ -176,17 +176,17 @@
     --color-surface: #1c1c1e;
     --color-surface-muted: #161617;
     --color-surface-raised: #1c1c1e;
-    --color-text: #f5f5f7; /* 18.1:1 */
-    --color-text-muted: #a1a1a6; /* 7.65:1 no bg, 6.61:1 no surface */
+    --color-text: #f5f5f7; /* 18.2:1 */
+    --color-text-muted: #a1a1a6; /* 7.69:1 no bg, 6.61:1 no surface */
     --color-border: #2c2c2e;
     --color-border-subtle: #232325;
-    --color-border-strong: #76767c; /* 4.36:1 no bg */
+    --color-border-strong: #76767c; /* 4.38:1 no bg */
     --color-accent: #2f62e8; /* branco sobre ele: 5.2:1 */
     --color-accent-hover: #4572f0;
     --color-accent-active: #5a82f3;
     --color-on-accent: #ffffff;
     --color-accent-subtle: #14213f;
-    --color-accent-text: #6b9bff; /* 7.27:1 no bg, 6.29:1 no surface */
+    --color-accent-text: #6b9bff; /* 7.31:1 no bg, 6.29:1 no surface */
     --color-warn-text: #ffb37a;
     --color-warn-subtle: #33200f;
     --color-ok-text: #6fd59a;
