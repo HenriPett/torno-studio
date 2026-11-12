@@ -1952,6 +1952,32 @@
           "sha256": "5acb012f829a9f18322f1ba50b140442644b3a120f92d059df5337bcdc739e8a"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261112-tabela-precos-descontos",
+      "intentId": "buyer-price-lists-discount-rules-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/tabela-precos-cliente-descontos-sistema-aceite/",
+      "contentRevision": "326057629f799c012a8610893049e3e06655928befa076986fb3a0184034e4a1",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-12T11:35:54Z",
+      "reviewedBy": "Revisor editorial independente (agente Claude opus)",
+      "reviewedAt": "2026-11-12T11:32:03Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-12-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus) NO-GO às 2026-11-12T11:32:03Z por três pontos (alcance da Lei 13.455/2017 sobre cláusulas em arranjos de pagamento e dois superlativos sem fonte), corrigidos pelo autor a pedido do integrador, com sugestões aplicadas (título da página Microsoft, \"parcelamento ou financiamento\" no Decreto 5.903/2006, CDC art. 30 \"contrato que vier a ser celebrado\", duas afirmações atenuadas, promoção renomeada e botões de preço da figura afastados da borda); fontes abertas em 12/11/2026: Câmara dos Deputados — Lei 13.455/2017, Lei 10.962/2004, Decreto 5.903/2006 e CDC (Lei 8.078/1990); Microsoft Learn — Business Central (Extending Price Calculations e Set up prices and discounts); sem revisão pessoal atribuída a Henrique; não recomenda sistema nem fornecedor; não é parecer jurídico; diff final sujeito a revisão final independente.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda sistema nem fornecedor; não define política comercial; não é parecer jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-precos-pilha-peneiras.svg",
+          "sha256": "8ff8da6bd3328ab3c8e43f68d91e81dde2cc880564a8af3991feb3b8af1592dc"
+        },
+        {
+          "path": "torno-precos-etiqueta-pedido.svg",
+          "sha256": "c3b8f024ee8f207de9bff9678eec0642b33d96477db8de6b82ba58872e32bcec"
+        }
+      ]
     }
   ]
 }
