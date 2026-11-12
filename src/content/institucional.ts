@@ -471,7 +471,7 @@ export const about: Record<Locale, AboutContent> = {
     meta: {
       title: 'Sobre a {brand} | IA e software para a indústria',
       description:
-        'A Torno implanta IA e software sob medida na operação de indústrias com 200 ou mais funcionários. Jaraguá do Sul, SC. Liderança técnica de Henrique Pett.',
+        'A Torno implanta IA e software sob medida na operação de indústrias de médio e grande porte. Jaraguá do Sul, SC. Liderança técnica de Henrique Pett.',
     },
     hero: {
       eyebrow: 'Sobre a Torno',
@@ -490,11 +490,11 @@ export const about: Record<Locale, AboutContent> = {
       eyebrow: 'Foco',
       title: 'Só indústria, a partir de Jaraguá do Sul.',
       paragraphs: [
-        'A Torno fica em Jaraguá do Sul, no norte de Santa Catarina, cidade de forte presença industrial. Atendemos indústrias com 200 ou mais funcionários no Brasil, com prioridade para o Sul.',
+        'A Torno fica em Jaraguá do Sul, no norte de Santa Catarina, cidade de forte presença industrial. Atendemos indústrias de médio e grande porte no Brasil, com prioridade para o Sul.',
         'O trabalho é remoto, com idas à planta quando a etapa pede, combinadas na proposta.',
       ],
       facts: [
-        { title: 'Indústrias com 200+ funcionários', body: 'Com ERP implantado e informação espalhada em planilhas, documentos e pessoas.' },
+        { title: 'Indústrias de médio e grande porte', body: 'Com ERP implantado e informação espalhada em planilhas, documentos e pessoas.' },
         { title: 'Jaraguá do Sul, SC', body: 'Atendimento a todo o Brasil, com prioridade para Santa Catarina e o Sul.' },
         { title: 'Proposta fechada por etapa', body: 'Diagnóstico, piloto e implantação orçados separadamente, depois de cada decisão.' },
       ],
@@ -535,7 +535,7 @@ export const about: Record<Locale, AboutContent> = {
     meta: {
       title: 'About {brand} | AI and software for manufacturers',
       description:
-        'Torno builds and rolls out custom AI and software in the operations of manufacturers with 200+ employees. Based in Jaraguá do Sul, Brazil. Led by Henrique Pett.',
+        'Torno builds and rolls out custom AI and software in the operations of mid-size and large manufacturers. Based in Jaraguá do Sul, Brazil. Led by Henrique Pett.',
     },
     hero: {
       eyebrow: 'About Torno',
@@ -554,11 +554,11 @@ export const about: Record<Locale, AboutContent> = {
       eyebrow: 'Focus',
       title: 'Manufacturing only, from Jaraguá do Sul, Brazil.',
       paragraphs: [
-        'Torno is based in Jaraguá do Sul, an industrial city in the north of Santa Catarina, Brazil. We work with manufacturers that have 200 or more employees, with priority for southern Brazil.',
+        'Torno is based in Jaraguá do Sul, an industrial city in the north of Santa Catarina, Brazil. We work with mid-size and large manufacturers, with priority for southern Brazil.',
         'Work is remote, with plant visits when a stage calls for them, agreed in the proposal.',
       ],
       facts: [
-        { title: 'Manufacturers with 200+ employees', body: 'With an ERP in place and information spread across spreadsheets, documents and people.' },
+        { title: 'Mid-size and large manufacturers', body: 'With an ERP in place and information spread across spreadsheets, documents and people.' },
         { title: 'Jaraguá do Sul, Brazil', body: 'Serving all of Brazil, with priority for Santa Catarina and the South.' },
         { title: 'Fixed proposal per stage', body: 'Assessment, pilot and rollout quoted separately, after each decision.' },
       ],
