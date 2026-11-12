@@ -15,7 +15,8 @@ for (const locale of ['pt-BR', 'en'] as const) {
     expect(html).toContain(locale === 'en' ? 'does not yet have a published case study' : 'ainda não tem case publicado');
     expect(html).toContain('data-booking-cta');
     expect(html).not.toContain('href="/para/');
-    expect(html).not.toMatch(/\bstudio\b/i);
+    // Marca "Torno" sem "Studio" no conteúdo (o domínio tornostudio.com e a URL do LinkedIn ficam).
+    expect(html.match(/<main[\s\S]*<\/main>/)?.[0]).not.toMatch(/\bstudio\b/i);
     expect(html).not.toMatch(/−41%|−31%|Deicmar|Ecoporto|TBSA|Santos Brasil|Bandeirantes/);
 
     const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];

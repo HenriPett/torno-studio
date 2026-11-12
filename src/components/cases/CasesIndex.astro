@@ -34,7 +34,7 @@ const showHowWeWork = hrefAvailable(howWeWork);
       <SectionHeader as="h1" size="lg" id="cases-title" eyebrow={t.eyebrow} accent title={t.heading} lead={t.lead} />
     </Section>
 
-    <Section flushTop width="wide" labelledby="cases-list">
+    <Section flushTop labelledby="cases-list">
       <h2 id="cases-list" class="visually-hidden">{t.listTitle}</h2>
       <ul class="grid grid--3 cases-list" role="list">
         {
@@ -48,7 +48,7 @@ const showHowWeWork = hrefAvailable(howWeWork);
     </Section>
 
     <Section id="agendar" variant="inverse" labelledby="cases-industry">
-      <SectionHeader id="cases-industry" eyebrow={t.industry.eyebrow} title={t.industry.title} lead={t.industry.text}>
+      <SectionHeader id="cases-industry" size="md" eyebrow={t.industry.eyebrow} title={t.industry.title} lead={t.industry.text}>
         <BookingCta locale={locale} variant="on-inverse">{getChrome(locale).common.bookingCta}</BookingCta>
         {showHowWeWork && <a class="link link--arrow link--target" href={howWeWork}>{t.industry.secondary}</a>}
       </SectionHeader>

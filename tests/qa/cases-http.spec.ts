@@ -31,7 +31,8 @@ for (const slug of ['loopt', 'bom-capital', 'ascende']) {
       if (process.env.PUBLIC_BOOKING_URL) expect(html).toContain(process.env.PUBLIC_BOOKING_URL);
       expect(html).toContain(`href="${locale === 'en' ? '/en' : ''}/cases/"`);
       expect(html).not.toContain('href="/para/');
-      expect(html).not.toMatch(/\bstudio\b/i);
+      // Marca "Torno" sem "Studio" no conteúdo (o domínio tornostudio.com e a URL do LinkedIn ficam).
+      expect(html.match(/<main[\s\S]*<\/main>/)?.[0]).not.toMatch(/\bstudio\b/i);
       expect(html).not.toMatch(/−41%|−31%|-41%|-31%/);
       expect(html).not.toMatch(LOOPT_CLIENTS);
 
