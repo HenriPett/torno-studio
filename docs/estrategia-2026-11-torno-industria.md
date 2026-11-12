@@ -78,6 +78,7 @@ Não inventamos equipe. Mostramos estrutura, que é verdadeira e é o que a ind�
 6. **Cenários são rotulados.** Exemplos de implantação por setor e mocks de interface levam o selo "Cenário ilustrativo" ou "Ilustração" e não usam nomes de empresas reais.
 7. **Fatos de setor citam a fonte** (IBGE, ABIT, FIESC, Comissão Europeia, matéria datada) e não citam empresas do setor por nome como se fossem clientes ou alvos.
 8. **Sem foto de banco** e sem imagem que pareça fábrica do cliente. Visual é tipográfico, com mocks de interface rotulados.
+9. **Porte não aparece como número no site** (decisão do Henrique, 2026-11-12). O corte de 200+ funcionários é critério interno de ICP e de prospecção; no texto público usamos "indústrias de médio e grande porte". O teste C45 em `tests/qa/content-audit.spec.ts` barra "200+", "200 ou mais" e variações.
 
 ## 6. Arquitetura do site
 

@@ -159,11 +159,30 @@
   --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.04), 0 24px 64px rgb(0 0 0 / 0.1);
 
   /* ===================== Movimento ===================== */
+  /* Spec: DESIGN-2026-11 §9. Linguagem "produto": entra devagar e assenta suave; nada quica. */
   --duration-fast: 150ms; /* hover, cor */
   --duration-base: 250ms; /* abrir details, tema */
-  --duration-slow: 600ms; /* entrada de seção */
+  --duration-slow: 600ms; /* entrada de seção (legado) */
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
   --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Curvas */
+  --motion-ease: cubic-bezier(0.28, 0.11, 0.32, 1); /* entrada de conteúdo (rápida no início, assenta longa) */
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* ease-out expo: indicadores, barras, contadores */
+  --motion-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1); /* trocas de estado (aba, header) */
+  /* Durações */
+  --motion-micro: 150ms; /* hover, cor, foco */
+  --motion-short: 300ms; /* aba, menu, FAQ, header */
+  --motion-reveal: 900ms; /* entrada por rolagem */
+  --motion-hero: 1100ms; /* sequência de entrada do hero */
+  --motion-long: 1400ms; /* contador, barras de gráfico (o JS usa o mesmo valor) */
+  /* Distâncias */
+  --motion-distance-sm: 0.75rem; /* 12: botões, chips */
+  --motion-distance: 1.75rem; /* 28: textos e cards */
+  --motion-distance-lg: 3rem; /* 48: mocks */
+  /* Escalonamento (delay entre itens que entram juntos) */
+  --motion-stagger: 80ms;
+  --motion-stagger-line: 110ms; /* linhas de um título display */
 }
 
 /* ---------- Paleta escura (dupla: preferência do sistema e toggle) ---------- */
@@ -272,5 +291,15 @@
     --duration-fast: 0ms;
     --duration-base: 0ms;
     --duration-slow: 0ms;
+    /* Sem movimento: só cortes (ou fades curtos, ≤ 150 ms). */
+    --motion-short: 120ms;
+    --motion-reveal: 0ms;
+    --motion-hero: 0ms;
+    --motion-long: 0ms;
+    --motion-distance-sm: 0;
+    --motion-distance: 0;
+    --motion-distance-lg: 0;
+    --motion-stagger: 0ms;
+    --motion-stagger-line: 0ms;
   }
 }

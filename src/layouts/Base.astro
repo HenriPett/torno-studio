@@ -83,7 +83,7 @@ const structuredData = (routeId === 'home' || routeId === 'about' || routeId ===
   description: pageDescription,
   provider: orgRef,
   areaServed: { '@type': 'Country', name: locale === 'en' ? 'Brazil' : 'Brasil' },
-  audience: { '@type': 'BusinessAudience', name: locale === 'en' ? 'Industrial companies with 200 or more employees' : 'Indústrias com 200 ou mais funcionários' },
+  audience: { '@type': 'BusinessAudience', name: locale === 'en' ? 'Mid-size and large industrial companies' : 'Indústrias de médio e grande porte' },
   availableChannel: { '@type': 'ServiceChannel', serviceUrl: new URL(pathFor('contact', locale), siteUrl).href },
 } : canonical && (routeId === 'recovery' || routeId === 'lovableProduction') ? {
   '@context': 'https://schema.org',
@@ -131,9 +131,10 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
     <script is:inline>
       window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
     </script>
-    <!-- Tema salvo pelo toggle antes da 1ª pintura (DESIGN §3); sem JS vale prefers-color-scheme. -->
+    <!-- Tema salvo pelo toggle antes da 1ª pintura (DESIGN §3); sem JS vale prefers-color-scheme.
+         html.js-motion: há JS, então a entrada do hero e os carrosséis do celular podem ser usados (DESIGN §9). -->
     <script is:inline>
-      try{var t=localStorage.getItem('theme');if(t=='light'||t=='dark')document.documentElement.dataset.theme=t}catch(e){}
+      document.documentElement.classList.add('js-motion');try{var t=localStorage.getItem('theme');if(t=='light'||t=='dark')document.documentElement.dataset.theme=t}catch(e){}
     </script>
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
     <style is:inline set:html={fontFace} />
@@ -182,6 +183,10 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
          (true = tema efetivo escuro; WCAG 4.1.2) na carga, no clique e no change do sistema. -->
     <script is:inline>
       (function(){var r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)'),b=document.querySelectorAll('[data-theme-toggle]'),c=function(){return r.dataset.theme||(m.matches?'dark':'light')},s=function(){b.forEach(function(x){x.setAttribute('aria-pressed',c()=='dark')})};b.forEach(function(x){x.hidden=!1;x.onclick=function(){var n=c()=='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}s()}});m.addEventListener('change',s);s()})();
+    </script>
+    <!-- Motion (DESIGN-2026-11 §9): revelação por rolagem, contadores, demo de abas, etapas, header, carrosséis. -->
+    <script>
+      import '../scripts/motion';
     </script>
   </body>
 </html>

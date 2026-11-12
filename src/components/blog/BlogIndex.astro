@@ -26,7 +26,7 @@ const description=en?'Notes on custom software, product decisions, and getting s
     <Section variant="muted" tight label={en?'Articles':'Artigos'} reveal={false} class="blog-list">
       {articles.length ? <>
         <p class="caption blog-count">{articles.length} {en?(articles.length===1?'article':'articles'):(articles.length===1?'artigo':'artigos')}</p>
-        <ul class="articles" role="list">{articles.map(({meta},index)=><li class:list={['article-card', index===0 && 'article-card--featured']}>
+        <ul class="articles" role="list" data-reveal-stagger>{articles.map(({meta},index)=><li class:list={['article-card', index===0 && 'article-card--featured']}>
           <h2 class:list={[index===0?'title-lg':'title','article-card__title']}><a class="article-card__link" href={meta.path}>{meta.data.h1}</a></h2>
           <p class="article-card__summary">{meta.data.summary}</p>
           <span class="article-card__more" aria-hidden="true">{en?'Read':'Ler artigo'}</span>

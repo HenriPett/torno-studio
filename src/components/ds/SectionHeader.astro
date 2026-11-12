@@ -25,17 +25,20 @@ interface Props {
 const { title, eyebrow, lead, as: Heading = 'h2', align = 'start', id, accent = false, class: className } = Astro.props;
 const size = Astro.props.size ?? (Heading === 'h1' ? 'xl' : Heading === 'h2' ? 'lg' : 'md');
 const hasActions = Astro.slots.has('default');
+// Motion (DESIGN §9): o h1 entra na sequência do hero (CSS); os demais revelam ao rolar, o título por linha.
+const hero = Heading === 'h1';
+const reveal = hero ? undefined : '';
 ---
 
-<header class:list={['ds-sh', `ds-sh--${align}`, `ds-sh--${size}`, className]}>
-  {eyebrow && <p class:list={['eyebrow', 'ds-sh__eyebrow', accent && 'eyebrow--accent']}>{eyebrow}</p>}
-  <Heading id={id} class:list={[`display-${size}`, 'ds-sh__title']}>
+<header class:list={['ds-sh', `ds-sh--${align}`, `ds-sh--${size}`, hero && 'ds-sh--hero', className]}>
+  {eyebrow && <p class:list={['eyebrow', 'ds-sh__eyebrow', accent && 'eyebrow--accent']} data-reveal={reveal}>{eyebrow}</p>}
+  <Heading id={id} class:list={[`display-${size}`, 'ds-sh__title']} data-reveal={hero ? undefined : 'lines'}>
     {Astro.slots.has('title') ? <slot name="title" /> : title}
   </Heading>
-  {lead && <p class="lead ds-sh__lead">{lead}</p>}
+  {lead && <p class="lead ds-sh__lead" data-reveal={reveal}>{lead}</p>}
   {
     hasActions && (
-      <div class="ds-sh__actions actions">
+      <div class="ds-sh__actions actions" data-reveal={reveal}>
         <slot />
       </div>
     )

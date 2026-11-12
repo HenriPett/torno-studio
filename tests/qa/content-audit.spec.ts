@@ -31,6 +31,8 @@ const COMMON: Rule[] = [
   { id: 'C7 token não substituído', re: /\{(brand|organization|price|year|n|BOOKING_URL|CONTACT_EMAIL|SITE_BRAND)[^}]*\}/ },
   { id: 'C7 undefined/null/NaN no texto', re: word('(undefined|NaN|null)', 'u') },
   { id: 'C40 "Studio" no texto (marca é Torno; o domínio tornostudio.com segue)', re: /studio(?!\.com)/i },
+  // Decisão do Henrique (2026-11-12): o porte do ICP não aparece como número no site.
+  { id: 'C45 porte em número de funcionários (200+)', re: /\b200\s?(\+|ou mais|or more)|\b200\s(funcion|employees|pessoas|people)/i },
 ];
 
 /** Páginas institucionais novas (escopo da home): regras de voz, preço e vocabulário. */

@@ -42,7 +42,7 @@ const id = en
 
     <Section id={id.stages} variant="muted" labelledby={`${id.stages}-title`}>
       <SectionHeader id={`${id.stages}-title`} eyebrow={c.stages.eyebrow} title={c.stages.title} lead={c.stages.lead} accent />
-      <ol class="stages" role="list">
+      <ol class="stages" role="list" data-reveal-stagger>
         {
           c.stages.items.map((stage, index) => (
             <li class="stage">
@@ -70,7 +70,7 @@ const id = en
 
     <Section id={id.delivery} labelledby={`${id.delivery}-title`}>
       <SectionHeader id={`${id.delivery}-title`} eyebrow={c.delivery.eyebrow} title={c.delivery.title} lead={c.delivery.lead} accent />
-      <div class="grid grid--2">
+      <div class="grid grid--2" data-reveal-stagger>
         {
           c.delivery.items.map((item) => (
             <Card variant="muted" padding="lg" radius="xl">
@@ -90,7 +90,7 @@ const id = en
 
     <Section id={id.security} variant="inverse" labelledby={`${id.security}-title`}>
       <SectionHeader id={`${id.security}-title`} eyebrow={c.security.eyebrow} title={c.security.title} lead={c.security.lead} />
-      <ul class="grid grid--3 plain-list" role="list">
+      <ul class="grid grid--3 plain-list" role="list" data-reveal-stagger>
         {
           c.security.items.map((item) => (
             <li>
