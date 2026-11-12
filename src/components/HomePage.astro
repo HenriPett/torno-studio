@@ -175,6 +175,21 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     max-inline-size: 44ch;
   }
 
+  /* Celular: o CTA do hero precisa ficar acima da faixa de consentimento na 1ª visita (CS-f, 360×640). */
+  @media (max-width: 30em) {
+    :global(.home-hero.section) {
+      padding-block-start: var(--space-5);
+    }
+
+    :global(.home-hero) :global(.ds-sh__title) {
+      font-size: 2rem;
+    }
+
+    :global(.home-hero) :global(.ds-sh__lead) {
+      font-size: var(--text-base);
+    }
+  }
+
   .home-hero__facts {
     display: flex;
     flex-wrap: wrap;
