@@ -72,7 +72,7 @@ export const setor: SectorLanding = {
       },
       {
         area: 'Qualidade',
-        title: 'Documentação por pedido em minutos',
+        title: 'Documentação do pedido reunida num lugar',
         body: 'Reúne certificados, relatórios dimensionais e registros de inspeção do pedido e prepara o rascunho do 8D quando há não conformidade.',
         example: '“Monte o pacote de documentação do pedido 7731 com certificados de material e relatório dimensional.”',
       },

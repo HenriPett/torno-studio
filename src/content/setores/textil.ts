@@ -80,7 +80,7 @@ export const setor: SectorLanding = {
       },
       {
         area: 'Comercial e representantes',
-        title: 'Resposta ao representante em minutos',
+        title: 'Preço, prazo e estoque para o representante, com a fonte',
         body: 'Um assistente para representantes com grade disponível, prazo, tabela de preço e status de pedido, dentro das regras comerciais e das permissões de cada um.',
         example: '“Tenho grade completa da 5120 na cor marinho para entrega em março?”',
       },

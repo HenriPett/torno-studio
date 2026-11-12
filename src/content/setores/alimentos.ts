@@ -10,7 +10,7 @@ export const setor: SectorLanding = {
   },
   hero: {
     eyebrow: 'Para indústrias de alimentos e bebidas',
-    title: 'Do lote à reclamação do SAC, a resposta em minutos',
+    title: 'Do lote à reclamação do SAC, a resposta com a fonte',
     lead: 'A Torno reúne ERP, registros de BPF e APPCC, laudos, fichas de formulação e o histórico do SAC num cérebro da operação, com a fonte citada em cada resposta. Em cima dele, agentes de IA ajudam qualidade, PCP, manutenção e comercial. Implantamos por etapas, com a sua TI.',
     cta: 'Agendar diagnóstico',
   },

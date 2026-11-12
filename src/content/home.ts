@@ -230,7 +230,7 @@ export const home: Record<Locale, HomeContent> = {
       no: [
         'Empresas pequenas ou em fase de validação.',
         'Apps para consumidor final e MVP de startup.',
-        'Levar um protótipo de ferramenta no-code para produção.',
+        'Projetos sem um responsável dentro da empresa.',
         'Clínicas, consultórios e escritórios.',
       ],
     },
@@ -382,7 +382,7 @@ export const home: Record<Locale, HomeContent> = {
         'Areas ask each other the same questions every day.',
       ],
       noTitle: 'Not the right choice for',
-      no: ['Small companies or early-stage ventures.', 'Consumer apps and startup MVPs.', 'Taking a no-code prototype to production.', 'Clinics and professional offices.'],
+      no: ['Small companies or early-stage ventures.', 'Consumer apps and startup MVPs.', 'Projects with no owner inside the company.', 'Clinics and professional offices.'],
     },
     faq: {
       eyebrow: 'Questions',

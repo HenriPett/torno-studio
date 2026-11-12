@@ -156,7 +156,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
     <meta property="og:locale" content={ogLocale[locale]} />
     {
       locales
-        .filter((other) => other !== locale && (!editorial || alternates.some(a => a.hreflang === other)))
+        .filter((other) => other !== locale && alternates.some((a) => a.hreflang === other))
         .map((other) => <meta property="og:locale:alternate" content={ogLocale[other]} />)
     }
     <meta property="og:image" content={ogImage} />

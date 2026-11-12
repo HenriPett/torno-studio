@@ -90,7 +90,7 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
     },
     caseAscende: {
       question: 'What does the Ascende project demonstrate?',
-      answer: 'Ascende is an own project of the person who leads Torno: an app that turns text or voice into records the user reviews before saving, built from concept to launch. The evidence is the live product; logged-in workflows were not audited for this case study.',
+      answer: 'Ascende is a personal project of the person who leads Torno: an app that turns text or voice into records the user reviews before saving, built from concept to launch. The evidence is the live product; logged-in workflows were not audited for this case study.',
     },
     caseBomCapital: {
       question: 'How do software and credit analysis connect in the Bom.Capital case?',

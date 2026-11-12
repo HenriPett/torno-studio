@@ -38,8 +38,9 @@ const { refs, sources } = Astro.props;
   .note-refs__link {
     display: inline-grid;
     place-items: center;
-    min-inline-size: 1.6em;
-    min-block-size: 1.6em;
+    /* ≥ 24 px (WCAG 2.5.8): com 1.6em o número ficava com ~19 px em 390 px e o axe acusava target-size. */
+    min-inline-size: 1.5rem;
+    min-block-size: 1.5rem;
     padding-inline: 0.3em;
     border-radius: var(--radius-full);
     background-color: var(--color-accent-subtle);

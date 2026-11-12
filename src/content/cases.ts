@@ -520,9 +520,9 @@ export const caseStudies: Record<Locale, Record<CaseSlug, CaseStudy>> = {
       category: 'Own project · End-to-end AI product',
       title: 'Ascende: text and voice entries that become organized data',
       description:
-        'An own project of the person who leads Torno: an AI app that turns text or voice into reviewable records, built from concept to launch.',
+        'A personal project of the person who leads Torno: an AI app that turns text or voice into reviewable records, built from concept to launch.',
       summary:
-        'An AI app that turns a spoken or written sentence into records the user reviews before saving. An own project, published and live.',
+        'An AI app that turns a spoken or written sentence into records the user reviews before saving. A personal project, published and live.',
       lead:
         'Ascende is an app Henrique Pett, who leads Torno, created as his own project. The user describes the day by text or voice, and the AI splits it into finance, workout and sleep records that the user reviews before saving.',
       facts: {
@@ -530,7 +530,7 @@ export const caseStudies: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         scope: 'Web app with AI and text and voice capture',
         evidence: 'Published product, available online',
       },
-      footnote: 'Own project of the person who leads Torno; not a client or a Torno engagement.',
+      footnote: 'Personal project of the person who leads Torno; not a client or a Torno engagement.',
       screenshot: {
         image: 'ascende',
         host: 'ascende.site',
@@ -632,7 +632,7 @@ export const casesIndex: Record<
   en: {
     title: 'Case studies | {brand}',
     description:
-      'Experience of the person who leads Torno in taking AI into operations: Loopt, Bom.Capital and the own project Ascende, with what was done, the evidence for each and what it means for a manufacturer.',
+      'Experience of the person who leads Torno in taking AI into operations: Loopt, Bom.Capital and Ascende, a personal project, with what was done, the evidence for each and what it means for a manufacturer.',
     eyebrow: 'Case studies',
     heading: 'AI that left testing and went into operations.',
     lead: 'Three pieces of work by Henrique Pett, who leads Torno, all predating the company. Two were done at companies where he worked and one is his own project. Each case shows what was done, what evidence exists and what it means for a manufacturer.',
