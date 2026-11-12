@@ -34,7 +34,7 @@ const schema={
   description:seoDescription, inLanguage:meta.locale,
   image:[new URL(articleOgPath, origin).href],
   publisher:{'@type':'Organization','@id':new URL('/#organization',origin).href,name:site.organizationName,url:new URL('/',origin).href},
-  isPartOf:{'@type':'Blog',url:new URL(blogIndexPath(meta.locale),origin).href,name:en?'Torno Studio blog':'Blog Torno Studio'},
+  isPartOf:{'@type':'Blog',url:new URL(blogIndexPath(meta.locale),origin).href,name:en?`${site.organizationName} blog`:`Blog ${site.organizationName}`},
   ...(hasAuthor?{author:authorIsHenrique?personSchema(origin,meta.locale):{'@type':'Person',name:d.author_name}}:{}),
   ...(d.first_published_at?{datePublished:d.first_published_at}:{}),
   ...(d.last_substantive_update_at?{dateModified:d.last_substantive_update_at}:{}),
