@@ -16,7 +16,7 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
   'pt-BR': {
     home: {
       question: `O que a ${site.organizationName} faz pela indústria?`,
-      answer: 'A Torno desenha e implanta IA e software sob medida para indústrias com 200 ou mais funcionários. Juntamos os dados e o conhecimento da operação num cérebro da empresa, com permissões por área e respostas que citam a fonte, e colocamos agentes para trabalhar em produção, qualidade, manutenção, comercial e gestão. Começamos por um diagnóstico e implantamos por etapas.',
+      answer: 'A Torno desenha e implanta IA e software sob medida para indústrias de médio e grande porte. Juntamos os dados e o conhecimento da operação num cérebro da empresa, com permissões por área e respostas que citam a fonte, e colocamos agentes para trabalhar em produção, qualidade, manutenção, comercial e gestão. Começamos por um diagnóstico e implantamos por etapas.',
     },
     about: {
       question: `Quem conduz os projetos da ${site.organizationName}?`,
@@ -58,7 +58,7 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
   en: {
     home: {
       question: `What does ${site.organizationName} do for industrial companies?`,
-      answer: 'Torno designs and deploys custom AI and software for industrial companies with 200 or more employees. We bring the operation’s data and know-how into one company brain, with permissions by area and answers that cite their source, and put agents to work in production, quality, maintenance, sales and management. We start with an assessment and deploy in stages.',
+      answer: 'Torno designs and deploys custom AI and software for mid-size and large industrial companies. We bring the operation’s data and know-how into one company brain, with permissions by area and answers that cite their source, and put agents to work in production, quality, maintenance, sales and management. We start with an assessment and deploy in stages.',
     },
     about: {
       question: `Who handles projects at ${site.organizationName}?`,

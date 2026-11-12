@@ -83,7 +83,7 @@ const structuredData = (routeId === 'home' || routeId === 'about' || routeId ===
   description: pageDescription,
   provider: orgRef,
   areaServed: { '@type': 'Country', name: locale === 'en' ? 'Brazil' : 'Brasil' },
-  audience: { '@type': 'BusinessAudience', name: locale === 'en' ? 'Industrial companies with 200 or more employees' : 'Indústrias com 200 ou mais funcionários' },
+  audience: { '@type': 'BusinessAudience', name: locale === 'en' ? 'Mid-size and large industrial companies' : 'Indústrias de médio e grande porte' },
   availableChannel: { '@type': 'ServiceChannel', serviceUrl: new URL(pathFor('contact', locale), siteUrl).href },
 } : canonical && (routeId === 'recovery' || routeId === 'lovableProduction') ? {
   '@context': 'https://schema.org',
