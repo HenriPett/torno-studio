@@ -56,7 +56,7 @@ test.describe('/diagnostico/', () => {
       ['FinPlan', /fin\s?plan/i, text],
       ['clientes da Loopt', /deicmar|eco\s?-?porto|tbsa|santos brasil|transbrasa|marimex|maersk|bandeirantes|alian[çc]a|bissani|gutierres/i, text],
       ['−41/−31%', /[−\-–]\s?(41|31)\s?%/u, text],
-      ['Studio', /studio/i, text],
+      ['Studio (fora do domínio tornostudio.com)', /studio(?!\.com)/i, text],
       ['eu/meu (voz da marca é "nós")', word('(eu|meu|minha|meus|minhas|comigo)'), main],
       ['preço', /R\$|US\$|mais barat[oa]|\d+\s?[x×](?![\p{L}\p{N}])/iu, main],
       ['oferta antiga', /product sprint|production-ready|mvp plus|garantia de 60 dias|founding engineer/i, text],

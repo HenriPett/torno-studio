@@ -79,30 +79,37 @@ if (!copy) throw new Error('SiteCopy pt-BR sem diagnostico');
 
 <style>
   /* 1ª dobra no celular (360×640 com o banner de cookies): título menor e respiro curto. */
-  .diag-hero {
+  :global(.section.diag-hero) {
     padding-block: var(--space-5) var(--space-section-tight);
   }
 
-  .diag-hero :global(.ds-sh__title) {
+  :global(.diag-hero) :global(.ds-sh__title) {
     font-size: clamp(1.875rem, 1.3rem + 2.6vw, 4rem);
     max-inline-size: 20ch;
   }
 
-  .diag-hero :global(.ds-sh__lead) {
+  :global(.diag-hero) :global(.ds-sh__lead) {
     font-size: var(--text-base);
     margin-block-start: var(--space-3);
   }
 
-  .diag-hero :global(.ds-sh__actions) {
+  :global(.diag-hero) :global(.ds-sh__actions) {
     margin-block-start: var(--space-5);
   }
 
+  /* Celular estreito: o eyebrow repete o título e empurra o CTA para fora da 1ª dobra (360×640 com banner). */
+  @media (max-width: 29.99em) {
+    :global(.diag-hero) :global(.ds-sh__eyebrow) {
+      display: none;
+    }
+  }
+
   @media (min-width: 48em) {
-    .diag-hero {
+    :global(.section.diag-hero) {
       padding-block: var(--space-section);
     }
 
-    .diag-hero :global(.ds-sh__lead) {
+    :global(.diag-hero) :global(.ds-sh__lead) {
       font-size: var(--text-lead);
     }
   }

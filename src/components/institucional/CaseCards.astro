@@ -42,11 +42,18 @@ const cases = slugs.map((slug) => ({ slug, ...caseStudies[locale][slug] }));
     padding: 0;
   }
 
-  .case-cards__card :global(.ds-card__body) {
+  :global(.case-cards__card) :global(.ds-card__body) {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
     block-size: 100%;
+  }
+
+  /* O anel de foco do card inteiro clicável vem do ds/Card, mas lá o seletor `:has(:global(...))` sai literal no
+     CSS compilado (inválido) e o anel some. Regra local até o Card ser corrigido. */
+  :global(.case-cards__card:has(.ds-card__link:focus-visible)) {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
   }
 
   .case-cards__title {

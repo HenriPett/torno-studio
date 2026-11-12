@@ -29,16 +29,17 @@ for (const p of PAGES.filter((x) => x.kind === 'home')) {
     await page.setViewportSize({ width: 360, height: 640 });
     await page.goto(p.path);
     await expect(page.locator('h1')).toBeInViewport();
-    const cta = page.locator('#inicio a').first();
+    const cta = page.locator('main > section:first-of-type a[data-booking-cta]').first();
     await expect(cta).toBeInViewport();
   });
 
   test(`R3 header fixo não cobre o título ao navegar por âncora: ${p.path}`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto(`${p.path}#precos`);
+    const anchor = p.lang === 'en' ? 'solutions' : 'solucoes';
+    await page.goto(`${p.path}#${anchor}`);
     await page.waitForTimeout(300);
-    const header = await page.locator('header').first().boundingBox();
-    const h2 = await page.locator('#precos h2').boundingBox();
+    const header = await page.locator('header.site-header').boundingBox();
+    const h2 = await page.locator(`#${anchor} h2`).boundingBox();
     expect(header && h2 && h2.y >= header.y + header.height - 1, `h2 em y=${h2?.y}, header até ${header && header.y + header.height}`).toBe(true);
   });
 

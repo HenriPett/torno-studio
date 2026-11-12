@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 import { en } from '../src/content/en';
@@ -134,6 +135,16 @@ for (const locale of ['pt-BR', 'en'] as const) {
       for (let i = 1; i < levels.length; i++) expect(levels[i]! - levels[i - 1]!, `heading ${i}`).toBeLessThanOrEqual(1);
       expect((await page.locator('main').textContent()) ?? '').not.toMatch(/R\$|US\$/);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+    });
+
+    test('axe sem violação séria/crítica, claro e escuro', async ({ page }) => {
+      for (const scheme of ['light', 'dark'] as const) {
+        await page.emulateMedia({ colorScheme: scheme });
+        await page.goto(path);
+        await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
+        const { violations } = await new AxeBuilder({ page }).analyze();
+        expect(violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => `${scheme}: ${v.id}`)).toEqual([]);
+      }
     });
 
     test('seletor de idioma leva ao par', async ({ page }) => {
@@ -314,7 +325,7 @@ test.describe('landing /diagnostico/', () => {
     await expect(page.locator('h1')).toHaveText(diag.hero.title);
     const ctas = page.locator('[data-booking-cta]');
     await expect(ctas).toHaveCount(3);
-    expect(await ctas.evaluateAll((els) => els.map((el) => el.closest('header, section')?.id || el.closest('header')?.tagName))).toEqual([
+    expect(await ctas.evaluateAll((els) => els.map((el) => el.closest('main section[id]')?.id ?? el.closest('header')?.tagName))).toEqual([
       'HEADER',
       'inicio',
       'contato',

@@ -30,7 +30,7 @@ const COMMON: Rule[] = [
   { id: 'C27 Vercel citada', re: /vercel/i },
   { id: 'C7 token não substituído', re: /\{(brand|organization|price|year|n|BOOKING_URL|CONTACT_EMAIL|SITE_BRAND)[^}]*\}/ },
   { id: 'C7 undefined/null/NaN no texto', re: word('(undefined|NaN|null)', 'u') },
-  { id: 'C40 "Studio" no texto visível (marca é Torno)', re: /studio/i },
+  { id: 'C40 "Studio" no texto (marca é Torno; o domínio tornostudio.com segue)', re: /studio(?!\.com)/i },
 ];
 
 /** Páginas institucionais novas (escopo da home): regras de voz, preço e vocabulário. */

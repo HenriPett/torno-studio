@@ -42,7 +42,9 @@ for (const p of pages) {
       const links = await alternates();
       expect(links).toHaveLength(3);
       expect(Object.fromEntries(links.map(l => [l.lang, l.href]))).toEqual(expected);
-      const directives = `${await page.locator('meta[name="robots"]').getAttribute('content').catch(() => '')} ${response.headers()['x-robots-tag'] ?? ''}`;
+      // Sem meta robots (build indexável), getAttribute esperaria o elemento até estourar o timeout do teste.
+      const robots = await page.evaluate(() => document.querySelector('meta[name="robots"]')?.getAttribute('content') ?? '');
+      const directives = `${robots} ${response.headers()['x-robots-tag'] ?? ''}`;
       if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
       else expect(directives).toMatch(/noindex/i);
       await expect(page.locator('main h1')).toHaveCount(1);
@@ -180,7 +182,7 @@ for (const p of pages) {
   });
 }
 
-test('@http Sitemap: 10 URLs, pares exatos, sem diagnóstico; robots permite crawler', async ({ request }) => {
+test('@http Sitemap: páginas mantidas com pares exatos, sem diagnóstico nem /para/; robots permite crawler', async ({ request }) => {
   test.skip(!publicOrigin, 'precisa de build com PUBLIC_SITE_URL público');
   const expectedPaths = ['/', '/en/', '/privacidade/', '/en/privacy/', ...pages.map(p => p.path)];
   const index = await request.get('/sitemap-index.xml');
@@ -207,7 +209,10 @@ test('@http Sitemap: 10 URLs, pares exatos, sem diagnóstico; robots permite cra
       }
     }
   }
-  expect(found.sort()).toEqual(expectedPaths.sort());
+  // O sitemap cresceu (blog, autor, cases...): aqui conferimos só o contrato destas páginas.
+  for (const path of expectedPaths) expect(found, path).toContain(path);
+  expect(found).not.toContain('/diagnostico/');
+  expect(found.filter(path => path.startsWith('/para/'))).toEqual([]);
   const robots = await request.get('/robots.txt');
   expect(robots.status()).toBe(200);
   const text = await robots.text();
@@ -237,7 +242,7 @@ test('Descoberta: blog liga as páginas mantidas, comerciais ligam o guia e a ou
     for (const [i, pair] of pairs.slice(0, 2).entries()) {
       await open(page, pair[index]!);
       await expect(page.locator(`main a[href="${pairs[2][index]}"]`).first()).toBeVisible();
-      await expect(page.locator(`main a[href="${pairs[1 - i][index]}"]`).first()).toBeVisible();
+      await expect(page.locator(`main a[href="${pairs[1 - i]![index]}"]`).first()).toBeVisible();
     }
   }
 });
