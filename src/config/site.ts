@@ -25,7 +25,8 @@ const legalId = str(env.PUBLIC_LEGAL_ID);
 
 export const site = {
   brand: SITE_BRAND,
-  organizationName: SITE_BRAND === 'Torno' ? 'Torno Studio' : SITE_BRAND,
+  /** Nome da organização no JSON-LD e no llms.txt (estratégia 2026-11 §2: "Studio" sai de todo o texto). */
+  organizationName: SITE_BRAND,
   organizationLinkedinUrl: 'https://www.linkedin.com/company/torno-studio-software/',
   // Cidade da operação remota declarada pelo fundador; não é sede ou endereço postal.
   operatingLocation: { city: 'Jaraguá do Sul', region: 'SC', country: 'BR' },

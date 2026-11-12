@@ -6,7 +6,8 @@
  */
 
 import { personSchema } from '../lib/person';
-import { organizationSchema } from '../lib/organization';
+import { organizationSchema, websiteDescription } from '../lib/organization';
+import { defaultOgImage } from '../lib/og-image-text';
 import { BLOG_ORIGIN } from '../config/blog.mjs';
 import '../styles/reset.css';
 import '../styles/tokens.css';
@@ -54,8 +55,10 @@ const robots = campaign ? 'noindex, follow' : !site.allowIndexing || noindex || 
 const ogImage = new URL(ogImagePath ?? `/og/${locale}.png`, siteUrl).href;
 
 // Only describe entities actually present in these pages. No ratings, client
-// results or unconditional offers: commercial eligibility depends on scope.
-const structuredData = (routeId === 'home' || routeId === 'about' || routeId === 'contact') ? organizationSchema(siteUrl, pageDescription, locale) : editorial?.schema ?? (routeId === 'blog' && canonical ? { '@context': 'https://schema.org', '@type': 'CollectionPage', url: canonical, name: pageTitle, description: pageDescription, inLanguage: htmlLang[locale] } : null) ?? (canonical && (routeId === 'rlsGuide' || routeId?.startsWith('case')) ? {
+// results, prices or unconditional offers: commercial eligibility depends on scope.
+const orgRef = { '@id': new URL('/#organization', siteUrl).href, '@type': 'Organization', name: site.organizationName };
+const isCase = routeId === 'caseLoopt' || routeId === 'caseAscende' || routeId === 'caseBomCapital';
+const structuredData = (routeId === 'home' || routeId === 'about' || routeId === 'contact') ? organizationSchema(siteUrl, locale) : editorial?.schema ?? (routeId === 'blog' && canonical ? { '@context': 'https://schema.org', '@type': 'CollectionPage', url: canonical, name: pageTitle, description: pageDescription, inLanguage: htmlLang[locale] } : null) ?? (canonical && (routeId === 'rlsGuide' || isCase) ? {
   '@context': 'https://schema.org',
   '@type': 'Article',
   '@id': `${canonical}#article`,
@@ -68,6 +71,20 @@ const structuredData = (routeId === 'home' || routeId === 'about' || routeId ===
   publisher: { '@id': new URL('/#organization', siteUrl).href },
   image: [ogImage],
   datePublished: routeId === 'rlsGuide' ? '2026-10-13' : '2026-10-14',
+  ...(isCase ? { dateModified: '2026-11-12' } : {}),
+} : canonical && routeId === 'howWeWork' ? {
+  // Serviço descrito pelas etapas da página, sem preço nem oferta (estratégia §4.3).
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${canonical}#service`,
+  url: canonical,
+  name: locale === 'en' ? 'Custom AI and software for industrial companies' : 'IA e software sob medida para a indústria',
+  serviceType: locale === 'en' ? 'AI engineering and custom software' : 'Engenharia de IA e software sob medida',
+  description: pageDescription,
+  provider: orgRef,
+  areaServed: { '@type': 'Country', name: locale === 'en' ? 'Brazil' : 'Brasil' },
+  audience: { '@type': 'BusinessAudience', name: locale === 'en' ? 'Industrial companies with 200 or more employees' : 'Indústrias com 200 ou mais funcionários' },
+  availableChannel: { '@type': 'ServiceChannel', serviceUrl: new URL(pathFor('contact', locale), siteUrl).href },
 } : canonical && (routeId === 'recovery' || routeId === 'lovableProduction') ? {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -75,23 +92,27 @@ const structuredData = (routeId === 'home' || routeId === 'about' || routeId ===
   url: canonical,
   name: pageTitle,
   description: pageDescription,
-  provider: { '@id': new URL('/#organization', siteUrl).href, '@type': 'Organization', name: site.organizationName },
+  provider: orgRef,
   availableChannel: { '@type': 'ServiceChannel', serviceUrl: new URL(pathFor('contact', locale), siteUrl).href },
 } : null);
 
+const webPageType = routeId === 'author' ? 'ProfilePage' : routeId === 'about' ? 'AboutPage' : routeId === 'contact' ? 'ContactPage' : routeId === 'cases' ? 'CollectionPage' : 'WebPage';
+// Índice dos cases: as três páginas de case como partes da coleção.
+const casesParts = routeId === 'cases' ? (['caseLoopt', 'caseBomCapital', 'caseAscende'] as const).map((id) => ({ '@id': `${new URL(pathFor(id, locale), siteUrl).href}#webpage`, url: new URL(pathFor(id, locale), siteUrl).href })) : null;
 
-// Stable entity IDs connect every indexable page with the studio and author.
+// Stable entity IDs connect every indexable page with the organization and author.
 const entityGraph = canonical ? {
   '@context': 'https://schema.org',
   '@graph': [
-    ...(structuredData?.['@type'] === 'Organization' ? [] : [organizationSchema(siteUrl, locale === 'en' ? 'Custom web software, integrations, automation and AI engineering led by Henrique Pett.' : 'Estúdio de software web sob medida, integrações, automação e IA conduzido por Henrique Pett.', locale)]),
+    ...(structuredData?.['@type'] === 'Organization' ? [] : [organizationSchema(siteUrl, locale)]),
     personSchema(siteUrl, locale),
-    { '@type': 'WebSite', '@id': new URL('/#website', siteUrl).href, url: new URL('/', siteUrl).href, name: site.organizationName, inLanguage: ['pt-BR','en'], publisher: { '@id': new URL('/#organization', siteUrl).href } },
+    { '@type': 'WebSite', '@id': new URL('/#website', siteUrl).href, url: new URL('/', siteUrl).href, name: site.organizationName, description: websiteDescription[locale].replace(/Torno/g, site.organizationName), inLanguage: ['pt-BR','en'], publisher: { '@id': new URL('/#organization', siteUrl).href } },
     {
-      '@type': routeId === 'author' ? 'ProfilePage' : routeId === 'about' ? 'AboutPage' : routeId === 'contact' ? 'ContactPage' : 'WebPage',
+      '@type': webPageType,
       '@id': `${canonical}#webpage`, url: canonical, name: pageTitle, description: pageDescription,
       inLanguage: htmlLang[locale], isPartOf: { '@id': new URL('/#website', siteUrl).href },
-      ...(routeId === 'author' ? { mainEntity: personSchema(siteUrl, locale) } : editorial?.schema['@id'] ? { mainEntity: { '@id': editorial.schema['@id'] } } : {}),
+      ...(casesParts ? { hasPart: casesParts } : {}),
+      ...(routeId === 'author' ? { mainEntity: personSchema(siteUrl, locale) } : editorial?.schema['@id'] ? { mainEntity: { '@id': editorial.schema['@id'] } } : structuredData?.['@id'] && structuredData['@type'] === 'Service' && routeId === 'howWeWork' ? { mainEntity: { '@id': structuredData['@id'] } } : {}),
     },
   ],
 } : null;
@@ -142,7 +163,7 @@ const fontFace = `@font-face{font-family:'Inter Variable';font-style:normal;font
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={ogImageAlt ?? fill(copy.og.imageAlt)} />
+    <meta property="og:image:alt" content={ogImageAlt ?? (ogImagePath ? fill(copy.og.imageAlt) : fill(defaultOgImage[locale].alt))} />
     <meta name="twitter:card" content="summary_large_image" />
 
     {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />}

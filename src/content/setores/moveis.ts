@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Santa Catarina tem 33 unidades locais de fabricação de produtos de madeira e de móveis com 250 ou mais pessoas ocupadas, e as duas divisões ocupam 85.591 pessoas no estado (IBGE, CEMPRE 2024).',
       'As exportações brasileiras de móveis e colchões para os Estados Unidos caíram 41,7% de janeiro a maio de 2026, na comparação com o mesmo período de 2025, segundo o Times Brasil, em reportagem com o posicionamento da Abimóvel sobre a nova tarifa americana. Voltar parte da produção ao mercado interno exige atender lojistas e representantes com rapidez e entregar sem erro.',
     ],
+    refs: [[1], [2]],
   },
+  stats: [
+    { value: '33', label: 'unidades de madeira e móveis com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
+    { value: '85.591', label: 'pessoas ocupadas nas duas divisões em Santa Catarina', source: 1 },
+    { value: '−41,7%', label: 'nas exportações brasileiras de móveis e colchões para os Estados Unidos, de janeiro a maio de 2026', source: 2 },
+  ],
   pains: {
     title: 'O que custa caro numa fábrica de móveis',
     items: [
@@ -88,7 +94,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'O roupeiro do pedido 7120 voltou com porta empenada. Qual peça mandamos e de qual lote era a chapa?',
     answer:
-      'O pedido 7120 saiu com o roupeiro de 6 portas, acabamento carvalho natural. A porta de correr esquerda é a peça RP-6P-07, ainda em linha. A chapa daquele lote veio do recebimento 3315, MDF 18 mm. Há outras duas reclamações de empeno ligadas ao mesmo recebimento.',
+      'O pedido 7120 saiu com o roupeiro de 6 portas, acabamento carvalho natural [1]. A porta de correr esquerda é a peça RP-6P-07, ainda em linha [2]. A chapa daquele lote veio do recebimento 3315, MDF 18 mm. Há outras duas reclamações de empeno ligadas ao mesmo recebimento [3].',
     citations: ['Pedido 7120, ERP', 'Lista de peças do roupeiro 6P, rev. E', 'Recebimento 3315 e reclamações vinculadas'],
   },
   brain: {

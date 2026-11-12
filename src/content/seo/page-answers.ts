@@ -43,16 +43,16 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
       answer: 'Defina as associações de cada usuário às empresas e as ações permitidas por perfil, depois teste acessos permitidos e negados. Este guia demonstra leitura e edição com dados sintéticos e SQL executável. A validação pela API real e pelas demais partes da aplicação ainda é necessária antes de concluir sobre a segurança em produção.',
     },
     caseLoopt: {
-      question: 'O que a experiência na Loopt ensina sobre levar um modelo à operação?',
-      answer: 'Um modelo precisa apoiar decisões de quem executa o trabalho. Na Loopt, construí o modelo central e depois assumi a gestão do produto de alocação de contêineres, conectando modelagem, prioridades e uso no pátio. O case descreve minha experiência profissional anterior ao estúdio.',
+      question: 'O que a experiência na Loopt mostra sobre IA na operação industrial?',
+      answer: 'Mostra o caminho de um modelo de IA até o uso diário numa operação pesada. Na Loopt, Henrique Pett, que lidera a Torno, construiu o núcleo de Machine Learning e depois geriu o produto de IA para pátios de contêineres. Segundo a Loopt, a solução da equipe reduziu em 27% os movimentos improdutivos (MundoLogística, 13/01/2026). É experiência anterior à Torno.',
     },
     caseAscende: {
-      question: 'O que o Ascende demonstra como produto próprio?',
-      answer: 'O Ascende conecta uma entrada em linguagem natural a registros de finanças, treino e sono que a pessoa pode revisar. Construí a aplicação da concepção à publicação, reunindo interface, autenticação, dados e contexto para o conselheiro. A evidência apresentada é o produto publicado; os fluxos autenticados não foram auditados neste case.',
+      question: 'O que o projeto Ascende demonstra?',
+      answer: 'O Ascende é um projeto próprio de quem conduz a Torno: um aplicativo que transforma texto ou áudio em registros que a pessoa revisa antes de salvar, construído da concepção à publicação. A evidência é o produto no ar; os fluxos com login não foram auditados neste case.',
     },
     caseBomCapital: {
       question: 'Como software e análise de crédito se conectam no case Bom.Capital?',
-      answer: 'Na Bom.Capital, trabalhei no gerenciador de carteira e depois construí a solução de análise de crédito. O aprendizado é integrar interface, regras e dados ao processo que a equipe executa. Esta experiência anterior ao estúdio e seus resultados são apresentados como meu relato profissional, sem publicação externa.',
+      answer: 'Henrique Pett, que lidera a Torno, desenvolveu o sistema de carteira de crédito da Bom.Capital e depois a solução de Machine Learning para analisar propostas. Segundo relato dele, sem publicação externa, a resposta ao cliente passou de 48 horas em média para menos de 2 horas. É experiência anterior à Torno.',
     },
   },
   en: {
@@ -85,16 +85,16 @@ export const pageAnswers: Record<Locale, Record<PageAnswerRoute, PageAnswerCopy>
       answer: 'Define each user’s company memberships and the actions each role can perform, then test allowed and denied access. This guide demonstrates read and edit permissions with synthetic data and executable SQL. Validation through the real API and the rest of the application is still needed before drawing conclusions about production security.',
     },
     caseLoopt: {
-      question: 'What does the Loopt experience teach about putting a model into operation?',
-      answer: 'A model needs to support the decisions people make while doing their work. At Loopt, I built the core model and later managed the container allocation product, connecting modeling, priorities and yard operations. This case describes professional experience predating the studio.',
+      question: 'What does the Loopt experience show about AI in industrial operations?',
+      answer: 'It shows the path from an AI model to daily use in a heavy operation. At Loopt, Henrique Pett, who leads Torno, built the core Machine Learning solution and later managed the AI product for container yards. According to Loopt, the team’s solution cut unproductive moves by 27% (MundoLogística, January 13, 2026). This experience predates Torno.',
     },
     caseAscende: {
-      question: 'What does Ascende demonstrate as a product I built myself?',
-      answer: 'Ascende connects a natural-language entry to finance, workout and sleep records that a person can review. I built the application from concept to publication, bringing together interface, authentication, data and context for the advisor. The evidence presented is the published product; authenticated workflows were not audited for this case study.',
+      question: 'What does the Ascende project demonstrate?',
+      answer: 'Ascende is an own project of the person who leads Torno: an app that turns text or voice into records the user reviews before saving, built from concept to launch. The evidence is the live product; logged-in workflows were not audited for this case study.',
     },
     caseBomCapital: {
       question: 'How do software and credit analysis connect in the Bom.Capital case?',
-      answer: 'At Bom.Capital, I worked on the credit portfolio manager and then built the credit analysis solution. The lesson is to connect interface, rules and data to the process the team actually runs. This experience predates the studio, and its results are my professional account, with no external publication.',
+      answer: 'Henrique Pett, who leads Torno, built Bom.Capital’s credit portfolio system and later the Machine Learning solution for analyzing applications. According to his own account, with no external publication, customer response time fell from an average of 48 hours to under 2 hours. This experience predates Torno.',
     },
   },
 };

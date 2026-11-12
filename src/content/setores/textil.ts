@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Em Santa Catarina, as divisões de produtos têxteis e de confecção somam 177.518 pessoas ocupadas, o maior contingente da indústria de transformação do estado, e 84 unidades locais com 250 ou mais pessoas ocupadas (IBGE, CEMPRE 2024). No Brasil, a cadeia faturou R$ 221 bilhões em 2024 e tem 1,34 milhão de empregados formais, segundo a Abit.',
       'A pressão de fora aumentou. As importações têxteis e de confecção chegaram a US$ 6,8 bilhões em 2025, com déficit comercial de US$ 5,9 bilhões (Abit). Para quem vende à Europa, a Comissão Europeia planeja adotar no quarto trimestre de 2027 as regras do passaporte digital de produto para têxteis, com composição de fibras, origem e informações de reparo acessíveis por QR code. Atender a isso pede a informação de cada artigo organizada e fácil de achar.',
     ],
+    refs: [[1, 2], [2, 3]],
   },
+  stats: [
+    { value: '84', label: 'unidades têxteis e de confecção com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
+    { value: '177.518', label: 'pessoas ocupadas no setor em Santa Catarina, o maior contingente da indústria de transformação do estado', source: 1 },
+    { value: 'R$ 221 bi', label: 'faturamento da cadeia têxtil e de confecção no Brasil em 2024', source: 2 },
+  ],
   pains: {
     title: 'O que trava uma têxtil grande no dia a dia',
     items: [
@@ -89,7 +95,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'Qual o consumo de tecido da referência 4471 no tamanho G e o que mudou desde a coleção passada?',
     answer:
-      'Pela ficha técnica vigente, a referência 4471 consome 1,38 m de malha por peça no tamanho G. Na coleção passada eram 1,42 m. A redução veio de um novo encaixe aprovado pela modelagem depois da segunda peça piloto. O enfesto da OP 88213 já usa o consumo novo.',
+      'Pela ficha técnica vigente, a referência 4471 consome 1,38 m de malha por peça no tamanho G [1]. Na coleção passada eram 1,42 m. A redução veio de um novo encaixe aprovado pela modelagem depois da segunda peça piloto [2]. O enfesto da OP 88213 já usa o consumo novo [3].',
     citations: ['Ficha técnica 4471, rev. C', 'Ata de aprovação da peça piloto 2', 'OP 88213, ERP'],
   },
   brain: {

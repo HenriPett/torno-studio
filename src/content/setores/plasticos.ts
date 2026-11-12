@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Santa Catarina tem 40 unidades locais de fabricação de produtos de borracha e de material plástico com 250 ou mais pessoas ocupadas, e o setor ocupa 51.762 pessoas no estado (IBGE, CEMPRE 2024).',
       'Na indústria grande, a IA já está em uso. Pela Pintec Semestral do IBGE, 57,5% das indústrias com mais de 500 empregados usavam alguma ferramenta de IA em 2024, e as áreas mais citadas por quem usa são administração (87,9%) e comercialização (75,2%). Na injetora, na sopradora e na extrusora, o conhecimento de processo continua nas fichas e na experiência de quem faz o setup.',
     ],
+    refs: [[1], [2]],
   },
+  stats: [
+    { value: '40', label: 'unidades de borracha e material plástico com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
+    { value: '51.762', label: 'pessoas ocupadas no setor em Santa Catarina', source: 1 },
+    { value: '57,5%', label: 'das indústrias brasileiras com mais de 500 empregados usavam alguma ferramenta de IA em 2024', source: 2 },
+  ],
   pains: {
     title: 'Onde a perda aparece numa transformadora',
     items: [
@@ -88,8 +94,8 @@ export const setor: SectorLanding = {
   mock: {
     question: 'Qual setup funcionou para o molde 214 na injetora 9 com PP reciclado?',
     answer:
-      'O último setup aprovado foi no turno B, com temperatura de 225 °C na zona 3, recalque de 4,2 s e resfriamento de 11 s. O preparador registrou que, com PP reciclado, a pressão de recalque precisa subir cerca de 5% para evitar chupagem. O refugo daquela OP ficou em 1,8%.',
-    citations: ['Ficha de processo 214-INJ09, rev. F', 'Apontamento de setup, OP 51877', 'Observação do preparador, turno B'],
+      'O último setup aprovado foi no turno B, com temperatura de 225 °C na zona 3, recalque de 4,2 s e resfriamento de 11 s [1]. O preparador registrou que, com PP reciclado, a pressão de recalque precisa subir cerca de 5% para evitar chupagem [2]. O refugo daquela OP ficou em 1,8% [3].',
+    citations: ['Ficha de processo 214-INJ09, rev. F', 'Observação do preparador, turno B', 'Apontamento de setup, OP 51877'],
   },
   brain: {
     title: 'Como o cérebro da operação se monta numa transformadora',

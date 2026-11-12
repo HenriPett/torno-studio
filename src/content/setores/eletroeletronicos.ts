@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Santa Catarina tem 26 unidades locais de fabricação de máquinas, aparelhos e materiais elétricos com 250 ou mais pessoas ocupadas. Quinze delas têm 500 ou mais e reúnem 26.023 pessoas (IBGE, CEMPRE 2024).',
       'No Brasil, a indústria elétrica e eletrônica faturou R$ 270,8 bilhões em 2025, alta real de 4% sobre 2024, segundo o balanço de fim de ano da Abinee. Num setor em que cada produto responde a normas técnicas, ensaios e certificação, a informação que libera um lote ou responde a um cliente está espalhada por muitos documentos.',
     ],
+    refs: [[1], [2]],
   },
+  stats: [
+    { value: '26', label: 'unidades de máquinas, aparelhos e materiais elétricos com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
+    { value: '26.023', label: 'pessoas ocupadas nas 15 unidades do setor com 500 ou mais pessoas no estado', source: 1 },
+    { value: 'R$ 270,8 bi', label: 'faturamento da indústria elétrica e eletrônica no Brasil em 2025', source: 2 },
+  ],
   pains: {
     title: 'O que sobrecarrega uma fabricante de equipamentos elétricos',
     items: [
@@ -88,7 +94,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'O lote de placas 25-0412 passou no teste final com qual firmware e algum número de série falhou?',
     answer:
-      'O lote 25-0412 tem 1.200 placas gravadas com o firmware 3.8.2. No teste final, 1.188 passaram de primeira. As 12 reprovações foram de tensão de saída fora da faixa, e todas usam regulador do lote de componentes R-2291. Nove já foram retrabalhadas e aprovadas no reteste.',
+      'O lote 25-0412 tem 1.200 placas gravadas com o firmware 3.8.2 [1]. No teste final, 1.188 passaram de primeira. As 12 reprovações foram de tensão de saída fora da faixa, e todas usam regulador do lote de componentes R-2291 [2]. Nove já foram retrabalhadas e aprovadas no reteste [3].',
     citations: ['Registros de teste final, lote 25-0412', 'Rastreabilidade de componentes, ERP', 'Relatório de retrabalho RT-0933'],
   },
   brain: {

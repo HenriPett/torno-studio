@@ -56,6 +56,13 @@ export function varyAccept(headers: Headers) {
   headers.set('Vary', vary.join(', '));
 }
 
+/**
+ * Páginas sem representação Markdown: landings de setor (isoladas e noindex, estratégia §7.2) e a referência
+ * interna do design system. O build não gera .md para elas (scripts/agent-markdown.mjs); aqui elas
+ * respondem sempre o HTML, para Accept: text/markdown não virar 503 nem expor outra coisa.
+ */
+export const htmlOnly = (pathname: string): boolean => /^\/(?:para|design-system)(?:\/|\.html$|$)/.test(pathname);
+
 export default async function agentContent(request: Request, context: Context): Promise<Response> {
   if (!['GET', 'HEAD'].includes(request.method)) return context.next();
   const response = await context.next();
@@ -63,7 +70,7 @@ export default async function agentContent(request: Request, context: Context): 
   if (!response.headers.get('content-type')?.toLowerCase().includes('text/html')) return response;
   const headers = new Headers(response.headers);
   varyAccept(headers);
-  if (!prefersMarkdown(request.headers.get('accept')) || ![200, 404].includes(response.status)) {
+  if (!prefersMarkdown(request.headers.get('accept')) || ![200, 404].includes(response.status) || htmlOnly(new URL(request.url).pathname)) {
     return new Response(request.method === 'HEAD' ? null : response.body, { status: response.status, headers });
   }
   const url = new URL(request.url);

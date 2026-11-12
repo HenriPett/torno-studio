@@ -1,0 +1,51 @@
+---
+/**
+ * Card de case (índice /cases/ e "outros cases" no fim de cada case). Card inteiro clicável
+ * com um único link (.ds-card__link). A evidência aparece como texto, sem selo de "resultado".
+ */
+import Card from '../ds/Card.astro';
+import { caseLabels, caseStudies, type CaseSlug } from '../../content/cases';
+import { pathFor, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  slug: CaseSlug;
+  headingLevel?: 'h2' | 'h3';
+  variant?: 'muted' | 'surface';
+}
+
+const { locale, slug, headingLevel: H = 'h3', variant = 'muted' } = Astro.props;
+const c = caseStudies[locale][slug];
+const labels = caseLabels[locale];
+---
+
+<Card as="article" variant={variant} padding="lg" radius="xl" interactive class="case-card">
+  <p class="eyebrow eyebrow--accent">{c.category}</p>
+  <H class="title-lg case-card__title">{c.name}</H>
+  <p class="case-card__summary">{c.summary}</p>
+  <p class="caption case-card__evidence"><span>{labels.evidence}:</span> {c.facts.evidence}</p>
+  <a class="link link--arrow ds-card__link case-card__link" href={pathFor(c.routeId, locale)} aria-label={`${labels.read}: ${c.name}`}>{labels.read}</a>
+</Card>
+
+<style>
+  :global(.case-card) {
+    block-size: 100%;
+  }
+  :global(.case-card > .ds-card__body) {
+    flex: 1;
+    gap: var(--space-3);
+  }
+  .case-card__title {
+    margin: 0;
+  }
+  .case-card__summary {
+    color: var(--color-text-muted);
+  }
+  .case-card__evidence span {
+    font-weight: var(--weight-semibold);
+  }
+  .case-card__link {
+    margin-block-start: auto;
+    padding-block-start: var(--space-3);
+  }
+</style>

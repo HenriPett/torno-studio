@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Santa Catarina tem 34 unidades locais de fabricação de máquinas e equipamentos com 250 ou mais pessoas ocupadas, e o setor ocupa 52.345 pessoas no estado (IBGE, CEMPRE 2024).',
       'A concorrência de fora cresceu. Segundo a Abimaq, citada pela Agência Brasil em agosto de 2025, os bens importados chegaram a 46% do consumo nacional de máquinas e equipamentos, e a China passou de 16,6% para 32% das máquinas importadas pelo Brasil em dez anos. Para o fabricante nacional, prazo de orçamento, reaproveitamento de projeto e pós-venda bem atendido pesam na hora de fechar um pedido.',
     ],
+    refs: [[1], [2]],
   },
+  stats: [
+    { value: '34', label: 'unidades de máquinas e equipamentos com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
+    { value: '52.345', label: 'pessoas ocupadas no setor em Santa Catarina', source: 1 },
+    { value: '46%', label: 'do consumo nacional de máquinas e equipamentos atendido por bens importados', source: 2 },
+  ],
   pains: {
     title: 'O que segura um fabricante de máquinas',
     items: [
@@ -88,7 +94,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'Qual foi o custo realizado da última peneira vibratória de dois decks e quanto de engenharia ela consumiu?',
     answer:
-      'A última foi o pedido 3982. O custo realizado ficou 8% acima do orçado, puxado por chapa e por 46 horas extras de engenharia na adaptação do chassi. A BOM tem 412 itens, 37 deles feitos sob medida. O desenho base é o PV-2D, revisão D.',
+      'A última foi o pedido 3982. O custo realizado ficou 8% acima do orçado [1], puxado por chapa e por 46 horas extras de engenharia na adaptação do chassi [2]. A BOM tem 412 itens, 37 deles feitos sob medida. O desenho base é o PV-2D, revisão D [3].',
     citations: ['Pedido 3982, custo realizado, ERP', 'Apontamento de horas da engenharia, pedido 3982', 'BOM PV-2D, rev. D'],
   },
   brain: {

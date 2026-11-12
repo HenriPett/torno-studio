@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Santa Catarina tem 23 unidades locais com 250 ou mais pessoas ocupadas na divisão do IBGE de veículos automotores, reboques e carrocerias, que inclui as autopeças. Treze delas têm 500 ou mais (IBGE, CEMPRE 2024).',
       'No Brasil, segundo relatório do Sindipeças noticiado pela AutoData em fevereiro de 2026, o faturamento das autopeças cresceu 5,6% em 2025, as montadoras responderam por 64,5% das vendas e a ociosidade chegou a 26,6%. Fornecer para montadora significa viver da programação dela e das exigências do sistema de qualidade automotivo, com documentação em dia para cada peça.',
     ],
+    refs: [[1], [2]],
   },
+  stats: [
+    { value: '23', label: 'unidades de veículos, reboques e carrocerias, autopeças incluídas, com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
+    { value: '64,5%', label: 'das vendas de autopeças no Brasil em 2025 foram para montadoras', source: 2 },
+    { value: '26,6%', label: 'de ociosidade na indústria brasileira de autopeças em 2025', source: 2 },
+  ],
   pains: {
     title: 'O que consome a qualidade e o PCP de uma fornecedora',
     items: [
@@ -88,7 +94,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'Já tivemos rebarba no furo do suporte 4471-B? O que foi feito?',
     answer:
-      'Sim, duas vezes. Na primeira, a causa raiz no 8D foi desgaste do punção da ferramenta 88-14, e a ação foi reduzir o intervalo de afiação para 40 mil golpes. Na segunda, a ocorrência voltou após a troca do fornecedor de chapa, e o plano de controle ganhou verificação de rebarba a cada 2 horas. O FMEA foi revisado nas duas vezes.',
+      'Sim, duas vezes. Na primeira, a causa raiz no 8D foi desgaste do punção da ferramenta 88-14, e a ação foi reduzir o intervalo de afiação para 40 mil golpes [1]. Na segunda, a ocorrência voltou após a troca do fornecedor de chapa [2], e o plano de controle ganhou verificação de rebarba a cada 2 horas [3]. O FMEA foi revisado nas duas vezes.',
     citations: ['8D 017', '8D 052', 'Plano de controle 4471-B, rev. G'],
   },
   brain: {

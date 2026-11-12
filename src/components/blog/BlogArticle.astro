@@ -3,7 +3,8 @@ import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
-import BookingCta from '../ui/BookingCta.astro';
+import CtaBand from '../ds/CtaBand.astro';
+import Card from '../ds/Card.astro';
 import { blogGeo } from '../../content/seo/blog-geo';
 import { personSchema } from '../../lib/person';
 import { pathFor } from '../../lib/i18n';
@@ -49,27 +50,31 @@ const breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList',item
   {hasAuthor && <meta slot="head" name="author" content={d.author_name} />}
   {authorIsHenrique && <meta slot="head" property="article:author" content={new URL(pathFor('author',meta.locale),origin).href} />}
   <Header locale={meta.locale} routeId="blog" languageHref={languageHref} />
-  <main id="conteudo" tabindex="-1" class="container blog-article">
-    <nav class="breadcrumb" aria-label={en?'Breadcrumb':'Navegação estrutural'}><ol>
-      <li><a class="link link--target" href={en?'/en/':'/'}>{en?'Home':'Início'}</a></li>
-      <li><span aria-hidden="true">/</span> <a class="link link--target" href={blogIndexPath(meta.locale)}>Blog</a></li>
-      <li><span aria-hidden="true">/</span> <span aria-current="page">{d.h1}</span></li>
-    </ol></nav>
-    <article>
-      <header class="article-heading"><h1>{d.h1}</h1><p class="lead">{d.summary}</p>
-        {hasAuthor && <p class="meta byline">{en?'Written by':'Escrito por'} {authorIsHenrique ? <a class="link" rel="author" href={pathFor('author',meta.locale)}>Henrique Pett</a> : d.author_name}{authorIsHenrique && <span> · Product Engineer · {site.organizationName}</span>}</p>}
-        {d.first_published_at && <p class="meta">{en?'Published on':'Publicado em'} <time datetime={d.first_published_at}>{date(d.first_published_at)}</time></p>}
-        {d.last_substantive_update_at && <p class="meta">{en?'Updated on':'Atualizado em'} <time datetime={d.last_substantive_update_at}>{date(d.last_substantive_update_at)}</time></p>}
-      </header>
-      {geo && <section class="article-answer prose" aria-labelledby="article-answer-title">
-        <h2 id="article-answer-title">{en?'Direct answer':'Resposta direta'}</h2>
-        <p>{geo.answer}</p>
-        <ul>{geo.takeaways.map(item=><li>{item}</li>)}</ul>
-      </section>}
-      {toc.length>1 && <nav class="article-toc" aria-label={en?'In this article':'Neste artigo'}><p><strong>{en?'In this article':'Neste artigo'}</strong></p><ul>{toc.map(heading=><li><a class="link" href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>}
-      <div class="prose"><Content /></div>
-      {authorIsHenrique && <section class="author-note prose" aria-labelledby="article-author-title"><h2 id="article-author-title">{en?'About the author':'Sobre o autor'}</h2><p><a class="link" rel="author" href={pathFor('author',meta.locale)}>Henrique Pett</a> {en?'is the Product Engineer leading Torno Studio. He builds custom web software, integrations and AI applications, from discovery to production.':'é o Product Engineer à frente da Torno Studio. Atua em software web sob medida, integrações e aplicações com IA, da descoberta à produção.'}</p><a class="link link--target" href={pathFor('author',meta.locale)}>{en?'Experience and more articles by Henrique':'Trajetória e mais artigos de Henrique'} →</a></section>}
-      {relatedArticles.length>0 && <aside class="related prose" aria-labelledby="article-related-title"><h2 id="article-related-title">{en?'Related reading':'Continue a leitura'}</h2><ul>{relatedArticles.map(({meta:other})=><li><a class="link link--target" href={other.path}>{other.data.h1}</a></li>)}</ul></aside>}
+  <main id="conteudo" tabindex="-1" class="blog-article">
+    <div class="container article-shell">
+      <nav class="breadcrumb" aria-label={en?'Breadcrumb':'Navegação estrutural'}><ol>
+        <li><a class="link link--quiet link--target" href={en?'/en/':'/'}>{en?'Home':'Início'}</a></li>
+        <li><span class="breadcrumb__sep" aria-hidden="true">/</span> <a class="link link--quiet link--target" href={blogIndexPath(meta.locale)}>Blog</a></li>
+        <li class="breadcrumb__current"><span class="breadcrumb__sep" aria-hidden="true">/</span> <span aria-current="page">{d.h1}</span></li>
+      </ol></nav>
+      <article>
+        <header class="article-heading">
+          <h1 class="article-title">{d.h1}</h1>
+          <p class="lead article-lead">{d.summary}</p>
+          {(hasAuthor || d.first_published_at || d.last_substantive_update_at) && <div class="article-meta">
+            {hasAuthor && <p class="meta byline">{en?'Written by':'Escrito por'} {authorIsHenrique ? <a class="link" rel="author" href={pathFor('author',meta.locale)}>Henrique Pett</a> : d.author_name}{authorIsHenrique && <span> · {en?`founder and technical lead, ${site.organizationName}`:`fundador e líder técnico da ${site.organizationName}`}</span>}</p>}
+            {d.first_published_at && <p class="meta">{en?'Published on':'Publicado em'} <time datetime={d.first_published_at}>{date(d.first_published_at)}</time></p>}
+            {d.last_substantive_update_at && <p class="meta">{en?'Updated on':'Atualizado em'} <time datetime={d.last_substantive_update_at}>{date(d.last_substantive_update_at)}</time></p>}
+          </div>}
+        </header>
+        {geo && <section class="article-answer prose" aria-labelledby="article-answer-title">
+          <h2 id="article-answer-title">{en?'Direct answer':'Resposta direta'}</h2>
+          <p>{geo.answer}</p>
+          <ul>{geo.takeaways.map(item=><li>{item}</li>)}</ul>
+        </section>}
+        {toc.length>1 && <nav class="article-toc" aria-label={en?'In this article':'Neste artigo'}><p class="eyebrow">{en?'In this article':'Neste artigo'}</p><ul>{toc.map(heading=><li><a class="link link--quiet" href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>}
+        <div class="prose article-body"><Content /></div>
+        {authorIsHenrique && <section class="author-note" aria-labelledby="article-author-title"><p class="eyebrow">{en?'Author':'Autor'}</p><h2 id="article-author-title" class="title">{en?'About the author':'Sobre o autor'}</h2><p><a class="link" rel="author" href={pathFor('author',meta.locale)}>Henrique Pett</a> {en?`is the founder and technical lead of ${site.organizationName}. He works on custom software, system integrations and AI applications, from the first assessment to operation.`:`é fundador e líder técnico da ${site.organizationName}. Atua em software sob medida, integrações entre sistemas e aplicações com IA, do primeiro diagnóstico à operação.`}</p><a class="link link--arrow link--target" href={pathFor('author',meta.locale)}>{en?'Experience and more articles by Henrique':'Trajetória e mais artigos de Henrique'}</a></section>}
       {meta.id==='torno-artigo-pt-20261015-antes-de-refazer-sistema-evidencias' && <style is:inline>
         #conteudo .prose .blog-figure--rebuild { max-inline-size:30rem; inline-size:100%; margin-inline:auto; padding:0; }
         #conteudo .prose .blog-figure--rebuild img { display:block; inline-size:100%; max-inline-size:100%; block-size:auto; margin-inline:0; }
@@ -94,55 +99,86 @@ const breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList',item
           #conteudo .prose .blog-figure--erp { inline-size:min(30rem, calc(100vw - var(--container-pad) - var(--container-pad))); max-inline-size:30rem; position:relative; left:50%; transform:translateX(-50%); margin-inline:0; }
         }
       </style>}
-    </article>
-    <section class="article-cta" aria-labelledby="article-cta-title">
-      <h2 id="article-cta-title">{en?'Want to discuss your project?':'Quer discutir o seu projeto?'}</h2>
-      <p>{en?"Share the context; I'll help define the scope and next step.":'Traga o contexto; eu ajudo a definir o escopo e o próximo passo.'}</p>
-      <BookingCta locale={meta.locale}>{en?'Book a 45-min scoping call (free)':'Agendar diagnóstico (45 min, grátis)'}</BookingCta>
-    </section>
-    <a class="link link--target return" href={blogIndexPath(meta.locale)}>{en?'Back to the blog':'Voltar ao blog'} →</a>
+      </article>
+    </div>
+    {relatedArticles.length>0 && <aside class="related" aria-labelledby="article-related-title">
+      <div class="container related__inner">
+        <h2 id="article-related-title" class="display-md related__title">{en?'Related reading':'Continue a leitura'}</h2>
+        <ul class="related__list" role="list">{relatedArticles.map(({meta:other})=><Card as="li" variant="surface" padding="md" interactive><p class="eyebrow">Blog</p><h3 class="title related__card-title"><a class="ds-card__link link--quiet" href={other.path}>{other.data.h1}</a></h3><p class="related__summary">{other.data.summary}</p></Card>)}</ul>
+        <a class="link link--arrow link--target return" href={blogIndexPath(meta.locale)}>{en?'Back to the blog':'Voltar ao blog'}</a>
+      </div>
+    </aside>}
+    {relatedArticles.length===0 && <div class="container article-shell"><a class="link link--arrow link--target return" href={blogIndexPath(meta.locale)}>{en?'Back to the blog':'Voltar ao blog'}</a></div>}
+    <CtaBand locale={meta.locale} id="article-cta" title={en?'Want to talk about a system in your operation?':'Quer conversar sobre um sistema da sua operação?'} text={en?'In a free 45-minute first call we look at the problem, the systems involved and who decides.':'Na conversa inicial, de 45 minutos e sem custo, olhamos o problema, os sistemas envolvidos e quem decide.'} />
   </main>
   <Footer locale={meta.locale} routeId="blog" languageHref={languageHref} />
 </Base>
 <style>
-.blog-article { max-inline-size:54rem; padding-block:var(--space-6) var(--space-8); }
-.breadcrumb ol { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-3); list-style:none; padding:0; }
-.breadcrumb li { display:flex; align-items:center; gap:var(--space-3); }
-.article-answer,.article-toc,.author-note,.related { margin-block:var(--space-6); }
-.article-answer { padding:var(--space-5); border-inline-start:3px solid var(--color-accent-text); background:var(--color-accent-subtle); border-radius:var(--radius-md); }
-.article-answer h2 { margin-block-start:0; }
-.article-toc ul { padding-inline-start:var(--space-5); margin-block-start:var(--space-3); }
-.article-toc li + li { margin-block-start:var(--space-2); }
-.byline a { color:var(--color-accent-text); text-decoration:underline; }
-.article-heading { margin-block:var(--space-5) var(--space-7); }
-h1 { font-size:var(--text-3xl); line-height:var(--leading-tight); max-inline-size:24ch; }
-.article-heading p { margin-block-start:var(--space-4); max-inline-size:var(--measure); }
-.prose { max-inline-size:var(--measure); overflow-wrap:anywhere; }
-.prose :global(* + *) { margin-block-start:var(--space-4); }
-.prose :global(h2) { font-size:var(--text-2xl); margin-block-start:var(--space-7); }
-.prose :global(h3) { font-size:var(--text-xl); margin-block-start:var(--space-6); }
+/* Leitura estilo newsroom: coluna de ~68ch, título grande, metadados discretos. */
+.blog-article { padding-block-start:var(--space-5); }
+.article-shell { max-inline-size:calc(68ch + 2 * var(--container-pad)); font-size:var(--text-base); }
+.breadcrumb ol { display:flex; flex-wrap:wrap; align-items:center; column-gap:var(--space-2); list-style:none; padding:0; font-size:var(--text-sm); color:var(--color-text-muted); }
+.breadcrumb li { display:flex; align-items:center; gap:var(--space-2); min-inline-size:0; }
+.breadcrumb a { color:var(--color-text-muted); }
+.breadcrumb__current { flex:1 1 12rem; }
+.breadcrumb__current [aria-current] { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--color-text); }
+.article-heading { margin-block:var(--space-6) var(--space-7); }
+.article-title { font-size:var(--text-display-md); font-weight:var(--weight-display); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); text-wrap:balance; }
+.article-lead { margin-block-start:var(--space-5); max-inline-size:none; }
+.article-meta { margin-block-start:var(--space-6); padding-block-start:var(--space-4); border-block-start:var(--border-width) solid var(--color-border); display:grid; gap:var(--space-1); }
+.byline a { color:var(--color-text); }
+.article-answer { margin-block:var(--space-7); padding:var(--space-5) var(--space-5) var(--space-5); background:var(--color-accent-subtle); border-radius:var(--radius-lg); }
+.article-answer h2 { margin-block-start:0; font-size:var(--text-sm); font-weight:var(--weight-semibold); letter-spacing:0; color:var(--color-accent-text); }
+.article-answer > * + * { margin-block-start:var(--space-3); }
+.article-toc { margin-block:var(--space-7); padding:var(--space-5); background:var(--color-surface-muted); border-radius:var(--radius-lg); }
+.article-toc ul { list-style:none; padding:0; margin-block-start:var(--space-3); counter-reset:toc; }
+.article-toc li { counter-increment:toc; display:grid; grid-template-columns:2ch minmax(0,1fr); gap:var(--space-3); padding-block:var(--space-2); border-block-start:var(--border-width) solid var(--color-border); }
+.article-toc li::before { content:counter(toc); color:var(--color-text-muted); font-feature-settings:var(--font-features-numeric); }
+.article-toc a { color:var(--color-text); }
+.prose { max-inline-size:none; overflow-wrap:anywhere; line-height:1.65; }
+.prose :global(* + *) { margin-block-start:var(--space-5); }
+.prose :global(li + li) { margin-block-start:var(--space-2); }
+.prose :global(li > * + *) { margin-block-start:var(--space-2); }
+.prose :global(h2) { margin-block-start:var(--space-8); font-size:var(--text-title-lg); font-weight:var(--weight-display); line-height:var(--leading-tight); letter-spacing:var(--tracking-title); text-wrap:balance; }
+.prose :global(h3) { margin-block-start:var(--space-6); font-size:var(--text-title); font-weight:var(--weight-semibold); line-height:var(--leading-snug); letter-spacing:var(--tracking-title); }
+.prose :global(h2 + *),.prose :global(h3 + *) { margin-block-start:var(--space-4); }
 .prose :global(h2),.prose :global(h3) { scroll-margin-top:calc(var(--header-height) + var(--space-4)); }
-.prose :global(a) { color:var(--color-accent-text); text-decoration:underline; }
-.prose :global(pre) { overflow-x:auto; padding:var(--space-4); background:var(--color-surface-sunken); }
+.prose :global(a) { color:var(--color-accent-text); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.2em; }
+.prose :global(strong) { font-weight:var(--weight-semibold); }
+.prose :global(code) { font-family:var(--font-mono); font-size:.9em; padding:.1em .35em; background:var(--color-surface-muted); border-radius:var(--radius-xs); overflow-wrap:anywhere; }
+.prose :global(pre) { overflow-x:auto; padding:var(--space-4) var(--space-5); background:var(--color-surface-muted); border:var(--border-width) solid var(--color-border-subtle); border-radius:var(--radius-md); font-size:var(--text-sm); line-height:1.6; }
+.prose :global(pre code) { padding:0; background:none; font-size:inherit; overflow-wrap:normal; }
 .prose :global(pre:focus-visible),.prose :global(.blog-table-scroll:focus-visible) { outline:var(--focus-ring); outline-offset:var(--focus-offset); }
-.prose :global(.blog-table-scroll) { max-inline-size:100%; overflow-x:auto; border:1px solid var(--color-border); border-radius:var(--radius-md); }
-.prose :global(.blog-table-hint) { font-size:var(--text-sm); color:var(--color-text-muted); }
-.prose :global(table) { display:table; inline-size:100%; min-inline-size:36rem; border-collapse:collapse; overflow-wrap:normal; }
-.prose :global(th),.prose :global(td) { min-inline-size:10rem; max-inline-size:28rem; padding:var(--space-3); text-align:start; vertical-align:top; white-space:normal; word-break:normal; overflow-wrap:break-word; border-block-end:1px solid var(--color-border); }
+.prose :global(.blog-table-scroll) { max-inline-size:100%; overflow-x:auto; border:var(--border-width) solid var(--color-border); border-radius:var(--radius-lg); }
+.prose :global(.blog-table-hint) { margin-block-start:var(--space-2); font-size:var(--text-caption); color:var(--color-text-muted); }
+.prose :global(table) { display:table; inline-size:100%; min-inline-size:36rem; border-collapse:collapse; overflow-wrap:normal; font-size:var(--text-sm); line-height:1.5; }
+.prose :global(thead th) { background:var(--color-surface-muted); font-weight:var(--weight-semibold); color:var(--color-text); }
+.prose :global(th),.prose :global(td) { min-inline-size:10rem; max-inline-size:28rem; padding:var(--space-3) var(--space-4); text-align:start; vertical-align:top; white-space:normal; word-break:normal; overflow-wrap:break-word; border-block-end:var(--border-width) solid var(--color-border-subtle); }
+.prose :global(tbody tr:last-child > *) { border-block-end:0; }
 .prose :global(img) { max-inline-size:100%; height:auto; }
-.prose :global(.blog-figure) { max-inline-size:40rem; margin-inline:auto; text-align:center; }
-.prose :global(.blog-figure img) { display:block; inline-size:100%; block-size:auto; }
-.prose :global(.blog-figure-caption) { margin-block-start:var(--space-3); font-size:14px; line-height:var(--leading-normal); color:var(--color-text-muted); }
+.prose :global(.blog-figure) { max-inline-size:40rem; margin-block:var(--space-7); margin-inline:auto; text-align:center; }
+.prose :global(.blog-figure img) { display:block; inline-size:100%; block-size:auto; border:var(--border-width) solid var(--color-border-subtle); border-radius:var(--radius-lg); }
+.prose :global(.blog-figure-caption),.prose :global(figcaption) { margin-block-start:var(--space-3); font-size:var(--text-caption); line-height:1.45; color:var(--color-text-muted); text-align:start; }
 @media(max-width:360px){
   .prose :global(.blog-figure){inline-size:auto;max-inline-size:40rem;margin-inline:auto;}
-  .prose :global(.blog-figure img){inline-size:100vw;max-inline-size:100vw;margin-inline:calc(50% - 50vw);}
+  .prose :global(.blog-figure img){inline-size:100vw;max-inline-size:100vw;margin-inline:calc(50% - 50vw);border-radius:0;border-inline:0;}
   .prose :global(.blog-figure-caption){inline-size:100%;max-inline-size:100%;margin-inline:0;padding-inline:0;box-sizing:border-box;text-align:center;overflow-wrap:break-word;word-break:normal;}
 }
-.prose :global(ul),.prose :global(ol) { padding-inline-start:var(--space-5); }
-.prose :global(blockquote) { border-inline-start:3px solid var(--color-accent-text); padding:var(--space-4); }
-.article-cta { margin-block-start:var(--space-8); padding:var(--space-5); background:var(--color-accent-subtle); border-radius:var(--radius-md); }
-.article-cta h2 { font-size:var(--text-xl); }
-.article-cta p { margin-block:var(--space-4); }
+.prose :global(ul),.prose :global(ol) { padding-inline-start:1.25em; }
+.prose :global(li::marker) { color:var(--color-text-muted); }
+.prose :global(blockquote) { padding-inline-start:var(--space-5); border-inline-start:2px solid var(--color-accent); color:var(--color-text-muted); }
+.prose :global(hr) { border:0; border-block-start:var(--border-width) solid var(--color-border); margin-block:var(--space-7); }
+.author-note { margin-block:var(--space-8) var(--space-7); padding-block-start:var(--space-6); border-block-start:var(--border-width) solid var(--color-border); }
+.author-note > * + * { margin-block-start:var(--space-3); }
+.author-note .link--arrow { margin-block-start:var(--space-2); }
+.related { margin-block-start:var(--space-7); padding-block:var(--space-section-tight); background:var(--color-bg-muted); }
+.related__list { display:grid; gap:var(--space-gutter); margin-block-start:var(--space-6); padding:0; list-style:none; }
+.related__list > :global(li) { display:grid; }
+.related__card-title { margin-block-start:var(--space-2); }
+.related__card-title a { color:inherit; text-decoration:none; }
+.related__summary { margin-block-start:var(--space-3); color:var(--color-text-muted); font-size:var(--text-sm); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .return { margin-block-start:var(--space-6); }
-@media(min-width:40em){.blog-article{padding-block-start:var(--space-7);}}
+.article-shell > .return { margin-block:var(--space-6); }
+@media(min-width:48em){ .related__list { grid-template-columns:repeat(3,minmax(0,1fr)); } .article-answer,.article-toc { padding:var(--space-6); } }
+@media(min-width:64em){ .blog-article { padding-block-start:var(--space-6); } .article-heading { margin-block:var(--space-7) var(--space-8); } }
 </style>

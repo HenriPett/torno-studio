@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import agentMarkdown from './scripts/agent-markdown.mjs';
+import sectorIsolation from './scripts/check-sector-isolation.mjs';
+import { readdirSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -90,6 +92,22 @@ function sitemapLinks(site) {
   return byUrl;
 }
 
+/**
+ * Isolamento das landings de setor (estratégia §7.2): o Rollup batiza CSS compartilhado com o nome da
+ * primeira página que o importa (ex.: _astro/alimentos.<hash>.css linkado por todas as landings), o que
+ * revelaria um setor na página de outro. CSS sai só com hash; outro asset com nome de setor também.
+ */
+const sectorSlugs = new Set((() => {
+  try { return readdirSync('src/pages/para').filter((f) => f.endsWith('.astro')).map((f) => f.slice(0, -6)); } catch { return []; }
+})());
+/** @param {{ names?: string[]; name?: string }} asset */
+function assetFileNames(asset) {
+  const name = (asset.names?.[0] ?? asset.name ?? '').split('/').pop() ?? '';
+  const base = name.replace(/\.[^.]*$/, '');
+  if (name.endsWith('.css') || sectorSlugs.has(base)) return '_astro/[hash][extname]';
+  return '_astro/[name].[hash][extname]';
+}
+
 const site = resolveSiteUrl(); // Preserve existing pages' environment policy.
 const links = sitemapLinks(site);
 /** @param {string} url */
@@ -107,6 +125,7 @@ export default defineConfig({
   output: 'static',
   markdown: { remarkPlugins: [blogCriteriaFigure], rehypePlugins: [[blogScrollableBlocks, { labelTaskLists: true }]] },
   trailingSlash: 'always',
+  vite: { build: { rollupOptions: { output: { assetFileNames } } } },
   build: { format: 'directory' },
   i18n: {
     locales: [...locales],
@@ -117,9 +136,12 @@ export default defineConfig({
     envGuard(),
     agentMarkdown(),
     sitemap({
-      filter: (page) => links.has(blogUrl(page)),
+      // Landings de setor (/para/<slug>/) nunca entram no sitemap (estratégia §7.2), mesmo que ganhem routeId.
+      filter: (page) => !/^\/para(?:\/|$)/.test(new URL(page).pathname) && links.has(blogUrl(page)),
       serialize: (item) => ({ ...item, url: blogUrl(item.url), links: links.get(blogUrl(item.url)) ?? [], ...(blogDates.get(blogUrl(item.url)) ? { lastmod: blogDates.get(blogUrl(item.url)) } : {}) }),
     }),
     { name: 'blog-link-guard', hooks: { 'astro:build:done': async ({ dir }) => { await validateBlogOutput(fileURLToPath(dir), blogManifest); } } },
+    // Por último: confere o dist/ já com sitemap e Markdown gerados. Falha o build se algo citar /para/.
+    sectorIsolation(),
   ],
 });

@@ -20,7 +20,13 @@ export const setor: SectorLanding = {
       'Santa Catarina tem 70 unidades locais de fabricação de alimentos com 250 ou mais pessoas ocupadas, 49 delas com 500 ou mais, e 161.349 pessoas ocupadas no setor (IBGE, CEMPRE 2024). Nenhuma outra divisão da indústria de transformação do estado tem tantas unidades desse porte.',
       'No Brasil, a indústria de alimentos e bebidas faturou R$ 1,39 trilhão em 2025 e empregava 2,12 milhões de pessoas de forma direta, segundo a Abia. Numa planta desse tamanho, um recall ou uma auditoria de cliente pede o caminho completo de um lote, da matéria-prima à expedição, montado em horas com registros que estão em sistemas e pastas diferentes.',
     ],
+    refs: [[1], [2]],
   },
+  stats: [
+    { value: '70', label: 'unidades de fabricação de alimentos com 250 ou mais pessoas ocupadas em Santa Catarina, 49 delas com 500 ou mais', source: 1 },
+    { value: '161.349', label: 'pessoas ocupadas na fabricação de alimentos em Santa Catarina', source: 1 },
+    { value: 'R$ 1,39 tri', label: 'faturamento da indústria de alimentos e bebidas no Brasil em 2025', source: 2 },
+  ],
   pains: {
     title: 'O que toma o tempo da qualidade e do PCP',
     items: [
@@ -88,7 +94,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'De onde veio o leite em pó usado no lote 2411-B e o lote passou pela verificação do PCC 2?',
     answer:
-      'O lote 2411-B usou leite em pó do recebimento 7782, com laudo do fornecedor aprovado na inspeção de entrada. O registro do PCC 2, tratamento térmico, mostra temperatura dentro do limite nas cinco verificações do turno A. O lote foi expedido para quatro clientes, listados no relatório de expedição.',
+      'O lote 2411-B usou leite em pó do recebimento 7782, com laudo do fornecedor aprovado na inspeção de entrada [1]. O registro do PCC 2, tratamento térmico, mostra temperatura dentro do limite nas cinco verificações do turno A [2]. O lote foi expedido para quatro clientes, listados no relatório de expedição [3].',
     citations: [
       'Registro de recebimento 7782',
       'Planilha de monitoramento do PCC 2, turno A',

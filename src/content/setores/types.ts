@@ -24,7 +24,14 @@ export interface SectorLanding {
     cta: string;
   };
   /** Por que agora, neste setor. Fatos verificáveis citam a fonte em `sources`. */
-  context: { title: string; body: string[] };
+  context: {
+    title: string;
+    body: string[];
+    /** Notas por parágrafo: índices (a partir de 1) em `sources`. Viram números de nota no texto. */
+    refs?: number[][];
+  };
+  /** Números do contexto em destaque (StatGrid). `source` é o índice (a partir de 1) em `sources`. */
+  stats?: { value: string; label: string; source: number }[];
   /** Dores reconhecíveis do setor (3 a 5). */
   pains: { title: string; items: { title: string; body: string }[] };
   /** Áreas da empresa atendidas, na linguagem do setor (4 a 6). */

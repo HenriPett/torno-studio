@@ -33,11 +33,17 @@ export function mainMarkdown(html, pageUrl) {
   return identity + toMarkdown(toMdast(main), { extensions: [gfmTableToMarkdown()] });
 }
 
+/**
+ * Sem Markdown para agentes: landings de setor (/para/<slug>/, isoladas e noindex, estratégia §7.2) e a
+ * referência interna do design system (noindex, sem link).
+ */
+export const skipMarkdown = (file) => /^para(?:\/|$)/.test(file) || /^design-system(?:\.html|\/)/.test(file);
+
 export default function agentMarkdown() {
   return { name: 'agent-markdown', hooks: {
     'astro:build:done': async ({ dir, logger }) => {
       const root = fileURLToPath(dir);
-      const pages = (await readdir(root, { recursive: true })).filter(f => f.endsWith('.html'));
+      const pages = (await readdir(root, { recursive: true })).map(f => f.split('\\').join('/')).filter(f => f.endsWith('.html') && !skipMarkdown(f));
       for (const file of pages) {
         const html = await readFile(join(root, file), 'utf8');
         const tree = parser.parse(html);

@@ -1,0 +1,55 @@
+---
+/**
+ * Números de nota de um parágrafo da landing de setor, apontando para a lista de fontes
+ * (#fonte-N, no fim da página). `refs` são índices a partir de 1 em `sources`.
+ */
+import type { SectorSource } from '../../content/setores/types';
+
+interface Props {
+  refs: number[];
+  sources: SectorSource[];
+}
+
+const { refs, sources } = Astro.props;
+---
+
+{
+  refs.length > 0 && (
+    <sup class="note-refs">
+      {refs.map((n) => (
+        <a class="note-refs__link" href={`#fonte-${n}`} aria-label={`Fonte ${n}: ${sources[n - 1]?.label ?? ''}`}>
+          {n}
+        </a>
+      ))}
+    </sup>
+  )
+}
+
+<style>
+  .note-refs {
+    display: inline-flex;
+    gap: 0.2em;
+    margin-inline-start: 0.25em;
+    font-size: 0.65em;
+    line-height: 1;
+    vertical-align: super;
+  }
+
+  .note-refs__link {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 1.6em;
+    min-block-size: 1.6em;
+    padding-inline: 0.3em;
+    border-radius: var(--radius-full);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent-text);
+    font-weight: var(--weight-semibold);
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+  }
+
+  .note-refs__link:hover {
+    text-decoration: underline;
+  }
+</style>

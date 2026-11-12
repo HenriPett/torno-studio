@@ -20,7 +20,12 @@ export const setor: SectorLanding = {
       'Em Santa Catarina, metalurgia e fabricação de produtos de metal somam 66.221 pessoas ocupadas em mais de 7 mil unidades locais. Só 26 delas têm 250 ou mais pessoas ocupadas (IBGE, CEMPRE 2024).',
       'Numa metalmecânica desse porte, cada pedido começa com um desenho do cliente e termina com um certificado. No meio estão o orçamento, o roteiro, a programação de máquina, o apontamento e a inspeção. Boa parte da informação que decide prazo e margem está em orçamentos antigos e na experiência de poucas pessoas.',
     ],
+    refs: [[1], []],
   },
+  stats: [
+    { value: '26', label: 'unidades de metalurgia e produtos de metal com 250 ou mais pessoas ocupadas em Santa Catarina, entre mais de 7 mil', source: 1 },
+    { value: '66.221', label: 'pessoas ocupadas em metalurgia e fabricação de produtos de metal no estado', source: 1 },
+  ],
   pains: {
     title: 'O que pesa numa metalmecânica sob encomenda',
     items: [
@@ -88,7 +93,7 @@ export const setor: SectorLanding = {
   mock: {
     question: 'Já usinamos algo parecido com o desenho 55-118 do cliente? Quanto tempo levou?',
     answer:
-      'Sim. A peça mais próxima é o eixo E-3307, no mesmo aço SAE 4140 e com diâmetro 8% menor. O roteiro teve torneamento CNC, fresamento de rasgo de chaveta, têmpera em terceiro e retífica. O tempo apontado de usinagem foi de 3 h 40 min por peça, 25 min acima do padrão por causa da retífica.',
+      'Sim. A peça mais próxima é o eixo E-3307, no mesmo aço SAE 4140 e com diâmetro 8% menor. O roteiro teve torneamento CNC, fresamento de rasgo de chaveta, têmpera em terceiro e retífica [1]. O tempo apontado de usinagem foi de 3 h 40 min por peça, 25 min acima do padrão por causa da retífica [2].',
     citations: ['Roteiro E-3307, rev. B', 'Apontamentos da OP 60412', 'Orçamento 0981'],
   },
   brain: {

@@ -1,6 +1,7 @@
 /**
  * OG image 1200×630 por idioma, gerada no build (DESIGN §6.15). A marca é variável (SITE_BRAND),
- * então a imagem não pode ser estática: o texto vem de SiteCopy.og.imageLines e da config.
+ * então a imagem não pode ser estática. A OG padrão (/og/<locale>.png) usa defaultOgImage (og-image-text.ts);
+ * as de case e de artigo passam as próprias linhas.
  * Satori não lê fonte variável nem woff2: usa os pesos estáticos .woff do @fontsource/inter (mesma família do site).
  */
 import { readFile } from 'node:fs/promises';
@@ -9,7 +10,8 @@ import { join } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
 import satori from 'satori';
 
-import { fill, getCopy, type Locale } from './i18n';
+import { fill, type Locale } from './i18n';
+import { defaultOgImage } from './og-image-text';
 
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
@@ -32,7 +34,7 @@ const div = (style: Record<string, unknown>, children: string | Node | Node[]): 
 const keepRangesTogether = (text: string) => text.replace(/(\d)\s*([–-])\s*(\d)/g, '$1\u2060$2\u2060$3');
 
 export async function renderOgImage(locale: Locale, lines?: [string, string, string]): Promise<Uint8Array> {
-  const [brandLine, headline, footer] = (lines ?? getCopy(locale).og.imageLines).map((line) => keepRangesTogether(fill(line)));
+  const [brandLine, headline, footer] = (lines ?? defaultOgImage[locale].lines).map((line) => keepRangesTogether(fill(line)));
   const [medium, bold] = await Promise.all([loadFont(500), loadFont(700)]);
 
   const tree = div(

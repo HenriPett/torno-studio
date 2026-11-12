@@ -1,10 +1,13 @@
 /**
- * Contador de visitas sem cookie da /diagnostico/ (docs/infra/CONTADOR-DIAGNOSTICO.md, B3).
+ * Contador de visitas sem cookie da /diagnostico/ e das landings de setor /para/<slug>/
+ * (docs/infra/CONTADOR-DIAGNOSTICO.md, B3; estratégia 2026-11 §7.3).
  *
- * Responde com a página normal (context.next()) e, em segundo plano (context.waitUntil, sem bloquear a
- * resposta), soma +1 ao total do dia (America/Sao_Paulo, chave AAAA-MM-DD) no Netlify Blobs:
- * store "visitas-diagnostico", valor { n }. Nada além do total é gravado: IP, UA, referer e query string
- * ficam só em memória durante a requisição. Sem cookie e sem header novo na resposta.
+ * Responde com a página normal (context.next()) e, se ela respondeu 200, soma +1 em segundo plano
+ * (context.waitUntil, sem bloquear a resposta) no Netlify Blobs, com o dia em America/Sao_Paulo:
+ *  - /diagnostico/  -> store "visitas-diagnostico", chave AAAA-MM-DD;
+ *  - /para/<slug>/  -> store "visitas-setores", chave AAAA-MM-DD/<slug> (só os slugs de SECTOR_SLUGS).
+ * Valor { n }. Nada além do total é gravado: IP, UA, referer e query string ficam só em memória durante a
+ * requisição. Sem cookie e sem header novo na resposta.
  *
  * APIs: https://docs.netlify.com/build/edge-functions/api/ (context.next, context.waitUntil, context.deploy)
  * e https://docs.netlify.com/build/data-and-storage/netlify-blobs/ (getWithMetadata/etag, onlyIfMatch/onlyIfNew).
@@ -20,7 +23,22 @@ interface Context {
 }
 
 export const STORE = 'visitas-diagnostico';
+export const SECTOR_STORE = 'visitas-setores';
 const MAX_ATTEMPTS = 5;
+
+/**
+ * Landings de setor existentes (src/pages/para/*.astro). Lista fixa aqui porque esta função não é pública
+ * nem renderizada; um slug fora dela (ou uma resposta que não seja 200) não grava nada.
+ */
+export const SECTOR_SLUGS = ['textil', 'alimentos', 'plasticos', 'maquinas', 'metalmecanica', 'moveis', 'eletroeletronicos', 'autopecas'] as const;
+
+/** Onde contar a visita a este caminho, ou null se o caminho não é contado. */
+export function counterTarget(pathname: string): { store: string; suffix: string } | null {
+  if (pathname === '/diagnostico/') return { store: STORE, suffix: '' };
+  const slug = /^\/para\/([a-z-]+)\/$/.exec(pathname)?.[1];
+  if (slug && (SECTOR_SLUGS as readonly string[]).includes(slug)) return { store: SECTOR_STORE, suffix: `/${slug}` };
+  return null;
+}
 
 /** Robôs, pré-visualizações e ferramentas de medição não contam. */
 const BOT_UA =
@@ -51,8 +69,8 @@ export function dayKey(now: Date = new Date()): string {
 }
 
 /** +1 com escrita condicional (ETag): incremento concorrente nunca se perde; tenta de novo se perder a corrida. */
-async function increment(key: string): Promise<void> {
-  const store = getStore({ name: STORE, consistency: 'strong' });
+async function increment(storeName: string, key: string): Promise<void> {
+  const store = getStore({ name: storeName, consistency: 'strong' });
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const current = await store.getWithMetadata(key, { type: 'json', consistency: 'strong' });
     if (current && !current.etag) throw new Error('entrada sem ETag');
@@ -67,16 +85,19 @@ async function increment(key: string): Promise<void> {
 }
 
 export default async (request: Request, context: Context): Promise<Response> => {
-  if (shouldCount(request, context.deploy.context)) {
-    const key = dayKey();
+  const response = await context.next();
+  const target = counterTarget(new URL(request.url).pathname);
+  // Só página que existe (200): 404, redirect e erro não contam.
+  if (target && response.status === 200 && shouldCount(request, context.deploy.context)) {
+    const key = `${dayKey()}${target.suffix}`;
     context.waitUntil(
-      increment(key).catch((error: unknown) => {
+      increment(target.store, key).catch((error: unknown) => {
         // Falha não derruba a página: só o log da função.
-        console.error('[count-diagnostico]', key, error instanceof Error ? error.message : error);
+        console.error('[count-diagnostico]', target.store, key, error instanceof Error ? error.message : error);
       }),
     );
   }
-  return context.next();
+  return response;
 };
 
-export const config = { path: '/diagnostico/' };
+export const config = { path: ['/diagnostico/', '/para/*'] };
