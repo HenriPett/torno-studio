@@ -20,7 +20,7 @@ for (const path of ['/', '/en/', '/como-trabalhamos/', '/en/how-we-work/', '/cas
     for (let i = 1; i < headings.length; i++) expect(headings[i]! - headings[i-1]!).toBeLessThanOrEqual(1);
     if (!path.includes('privac')) {
       const json = tree.filter(n => n.tagName === 'script' && n.properties?.type === 'application/ld+json').map(nodeText);
-      const org = json.map(j => JSON.parse(j)).find(j => j['@type'] === 'Organization');
+      const org = json.map(j => JSON.parse(j)).flatMap(j => j['@graph'] ?? [j]).find(j => j['@type'] === 'Organization');
       expect(org.name.length).toBeGreaterThan(0); expect(org.name).not.toMatch(/Studio/); expect(new URL(org.url).pathname).toBe('/');
       expect(org.description).toMatch(/indústria|industrial/); expect(org.aggregateRating).toBeUndefined(); expect(org.numberOfEmployees).toBeUndefined();
       const mail = tree.find(n => n.tagName === 'a' && String(n.properties?.href).startsWith('mailto:'));
@@ -30,7 +30,8 @@ for (const path of ['/', '/en/', '/como-trabalhamos/', '/en/how-we-work/', '/cas
       expect(org.location.address['@type']).toBe('PostalAddress'); expect(org.address).toBeUndefined();
     }
     expect(tree.some(n => n.tagName === 'link' && (n.properties?.rel as string[] | undefined)?.includes('describedby') && n.properties?.href === '/llms.txt')).toBe(true);
-    expect(tree.filter(n => n.tagName === 'dialog')).toHaveLength(1);
+    // O diálogo de consentimento só existe com PUBLIC_GADS_ID (ConsentBanner.astro); o build e o teste leem a mesma env.
+    expect(tree.filter(n => n.tagName === 'dialog')).toHaveLength(process.env.PUBLIC_GADS_ID ? 1 : 0);
   });
 }
 

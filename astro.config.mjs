@@ -100,7 +100,7 @@ function sitemapLinks(site) {
 const sectorSlugs = new Set((() => {
   try { return readdirSync('src/pages/para').filter((f) => f.endsWith('.astro')).map((f) => f.slice(0, -6)); } catch { return []; }
 })());
-/** @param {{ names?: string[]; name?: string }} asset */
+/** @param {{ names?: string[] | undefined; name?: string | undefined }} asset @returns {string} */
 function assetFileNames(asset) {
   const name = (asset.names?.[0] ?? asset.name ?? '').split('/').pop() ?? '';
   const base = name.replace(/\.[^.]*$/, '');
