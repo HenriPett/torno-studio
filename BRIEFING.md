@@ -1,68 +1,44 @@
-# Briefing: site do "Founding Engineer sob demanda"
+# Briefing: site da Torno (IA e software sob medida para a indústria)
 
-> Origem: `/Users/henriquepett/Downloads/pessoal/projeto-50k/plano/plano-de-negocios.md`. É a **fonte da verdade**: leia inteiro antes de começar. Os detalhes de oferta, mensagem e prova social estão em `projeto-50k/research/03-oferta-e-precificacao.md` (§4) e `05-go-to-market.md` (§8, §9 e §10).
-> Fundador: Henrique Pett. Currículo em `projeto-50k/base/01-curriculo-en.txt` e `01-curriculo-pt.md`. Portfólio em `projeto-50k/base/02-portfolio-pessoal.md`.
-> Deploy: **Vercel**.
+> Atualizado em 2026-11-12. Substitui o briefing do "Founding Engineer sob demanda" para PMEs.
+> Fonte de verdade: `docs/estrategia-2026-11-torno-industria.md`. Leia inteiro antes de mexer no site.
+> Fundador e líder técnico: Henrique Pett. Deploy: Netlify (`main` publica em tornostudio.com; pull requests ganham deploy preview).
 
 ## 1. Objetivo do site
 
-É a "landing pública" das semanas 1–2 do plano de 90 dias (`05` §7). Ela serve de prova e de destino dos links do LinkedIn, das DMs e do one-pager. **O site não é canal de aquisição.** A métrica é: **o visitante entende a oferta em 10 segundos e agenda o diagnóstico de 45 min.**
+Ser a prova de seriedade da Torno para indústrias com 200+ funcionários e o destino dos links de outbound e de campanha. A métrica é: o diretor industrial, de TI ou o CEO entende em 10 segundos o que a Torno faz pela operação dele e agenda o diagnóstico.
 
-Públicos (plano §4):
-- **PT-BR:** dono, diretor de operações ou CFO de empresa tradicional média (50–249 pessoas) com operação manual ou em planilha.
-- **EN:** founder pre-seed/seed sem CTO, nos EUA ou na Europa.
-- **Ambos:** quem já tem protótipo em Lovable/Bolt e precisa levar à produção.
+Públicos:
+- **PT-BR (principal):** decisores de indústrias com 200+ funcionários no Brasil, com prioridade para Santa Catarina e o Sul.
+- **EN (enxuto):** a mesma oferta para quem chega em inglês; landings de setor só em PT.
 
-Portanto o site é **bilíngue (PT e EN)**, com rotas separadas, e não com tradução automática.
+## 2. Posicionamento
 
-## 2. Posicionamento (plano §3), não alterar sem falar com o Maestro do projeto
+- Marca: **Torno** (sem "Studio" no site). Domínio `tornostudio.com` mantido por ora.
+- Categoria: engenharia de IA e software sob medida para a indústria.
+- Promessa: juntar dados e conhecimento da operação num cérebro da empresa e colocar agentes de IA para trabalhar nas áreas (produção e PCP, qualidade, manutenção, comercial e representantes, marketing, suprimentos, gestão), implantando por etapas, dentro das regras da TI do cliente, com responsabilidade clara.
+- Entrada: conversa de 45 min e diagnóstico com proposta fechada. Sem preços públicos.
 
-- Categoria: **"Founding Engineer sob demanda" / "Fractional Founding Engineer"**.
-- Manchete PT: *"Seu produto em produção em 6–10 semanas, construído e mantido por um único responsável sênior."*
-- Manchete EN: *"Ship your product without hiring a team. One senior product engineer, accountable end to end."*
-- Ênfase: **redução de complexidade + responsabilidade única + contato direto com quem constrói.** Velocidade aparece como atributo. **Nunca** vender por custo ou "mais barato".
-- **"AI-native" só como prova de método** (seção "como eu trabalho"), nunca como manchete.
+## 3. Regras invioláveis
 
-## 3. Regras invioláveis (plano §3 e proposta §7 e §15)
+1. **Marca institucional, sem afirmações falsas.** Voz em "nós" e "a Torno". Proibido inventar membros de equipe, número de funcionários, escritórios, logos, depoimentos, certificações, prêmios, parcerias ou métricas. A estrutura que mostramos é real: liderança técnica única, rede de especialistas sob demanda, governança, segurança e continuidade (estratégia §4.4).
+2. **Sem promessa de resultado** ("reduza X%", "ROI em N meses", "substitui pessoas", "10x").
+3. **Só métricas com fonte pública.** Loopt: −27% de movimentos improdutivos e +21% de produtividade, segundo a Loopt (MundoLogística, 13/01/2026), resultado da solução da equipe. Nunca "−41%" nem "−31%". Bom.Capital: números autodeclarados, sempre como relato.
+4. **Não citar clientes da Loopt** nem descrevê-los de forma identificável. O nome "Loopt" só aparece onde já aparecia (case e prova, com fonte).
+5. **Projetos próprios** (Ascende) aparecem como projetos próprios, nunca como clientes. Cases são experiência de quem conduz a Torno, não clientes contratados.
+6. **Cenários e mocks de interface levam rótulo** ("Cenário ilustrativo", "Ilustração") e não usam nomes de empresas reais.
+7. **Landings de setor isoladas** (`/para/<setor>/`): nenhuma página, menu, rodapé, blog, sitemap, `llms.txt` ou landing de outro setor aponta para elas; `noindex`. O build falha se isso for quebrado.
+8. **Blog intocado no conteúdo:** `src/content/blog`, `src/content.config.ts`, `src/config/blog*` e `scripts/test-blog-*` pertencem ao job editorial. Mudanças no blog são só de layout e estilo.
+9. **Sem foto de banco.** Visual tipográfico e mocks rotulados.
 
-1. **Não fingir equipe.** O texto é em primeira pessoa ("eu"): um Product Engineer sênior, mais IA, mais rede de especialistas quando necessário. Nada de "nosso time de engenheiros".
-2. **Não prometer:** "5x/10x mais rápido", "substitui 5 engenheiros", "sempre mais barato", "qualquer produto em 2 semanas", "fazemos tudo".
-3. **Só métricas com fonte pública.** Loopt: **−27% de movimentos improdutivos e +21% de produtividade** (MundoLogística, 13/01/2026). **NÃO** usar "−41%" nem "−31%". **Não citar o nome "Loopt" nem do cliente-terminal sem autorização da Loopt:** até lá, escrever "produto de IA para operação de terminais de contêiner". Métricas da Bom.Capital e o "2 semanas → 30 min" são **autodeclarados**. Se usados, aparecem como relato ("reduzi..."), nunca como resultado publicado com selo.
-4. **Projetos pessoais** (Ascende, FinPlan) aparecem como **projetos próprios**, nunca como clientes.
-5. **Nada de depoimentos, logos de clientes ou reviews inventados.** Ainda não existe cliente do studio. Deixar o espaço preparado, mas vazio ou oculto.
-6. Experiência internacional: "trabalhei remotamente em inglês numa consultoria que atendia empresas europeias". **Não** dizer "atendi clientes internacionais".
+## 4. Requisitos técnicos
 
-## 4. Estrutura sugerida (a equipe pode melhorar)
+- Astro 5 estático na Netlify; i18n PT/EN com `hreflang` nas páginas que existem nos dois idiomas.
+- Lighthouse ≥ 95 em desempenho, acessibilidade, boas práticas e SEO; axe sem violações sérias; sem rolagem horizontal em 360 px; claro e escuro.
+- Consentimento e Google Ads conforme `docs/consent/` (não mexer sem necessidade). Contador de visitas sem cookie na `/diagnostico/` e nas landings de setor.
+- Design: `docs/design/DESIGN-2026-11.md` e a página interna `/design-system/`.
+- Agenda: `PUBLIC_BOOKING_URL`; e-mail: `PUBLIC_CONTACT_EMAIL`; controlador: `PUBLIC_LEGAL_NAME`/`PUBLIC_LEGAL_ID` (obrigatórios em produção).
 
-1. **Hero:** manchete + subtítulo + CTA "Agendar diagnóstico (45 min, grátis)".
-2. **O problema:** "Tenho um problema/ideia e não quero montar um time" (exemplos da proposta §8: planilha, operação manual, SaaS, adicionar IA, protótipo que não aguenta produção).
-3. **Como funciona: a escada** (plano §5.1), **com preços públicos**. Nenhuma software house brasileira publica preço; isso é diferencial (`02` §0.5):
-   - Diagnóstico 45 min: grátis
-   - Product Sprint: R$ 6.000 / US$ 3,000 (100% abatido do MVP se assinado em 30 dias; os entregáveis são do cliente)
-   - Production-Ready (protótipo → produção): R$ 18.000 / US$ 7,000
-   - MVP Core: R$ 42.000 / "from US$ 15,000" (preço de lançamento US$ 12–15k)
-   - MVP Plus: R$ 65.000 / US$ 30,000
-   - Product Evolution: a partir de R$ 4.000/mês / from US$ 1,500/mo, com horas-teto
-   - Usar "a partir de" quando fizer sentido. Confirmar com o Maestro do projeto se o EN mostra o preço de lançamento.
-4. **Garantias e regras:** garantia de 60 dias para bugs; escopo fechado com lista do que fica fora; código e nuvem na conta do cliente desde o dia 1; pagamento por marco; no máximo 1 MVP por vez ("quando eu pego seu projeto, ele tem minha atenção").
-5. **Quem constrói:** Henrique, trajetória (PM + ML + full stack), cases conforme a regra 3, link para LinkedIn e GitHub.
-6. **Como eu trabalho:** IA, agentes de código, testes e infra automatizados; especialistas sob demanda (pentest, design de marca, mobile nativo).
-7. **O que eu não faço / para quem não é** (filtro honesto).
-8. **FAQ:** prazo, propriedade do código, o que acontece se eu ficar indisponível (plano §7), NDA, LGPD/GDPR, cobrança internacional.
-9. **CTA final + contato.**
+## 5. Decisões pendentes do fundador
 
-## 5. Requisitos técnicos
-
-- Framework à escolha da equipe, adequado à Vercel (ex.: Next.js App Router com SSG, ou Astro). Site estático, rápido, Lighthouse ≥ 95 em performance, acessibilidade e SEO.
-- i18n PT/EN com `hreflang`, metadados, OG images, sitemap, robots.
-- Analytics leve, sem banner de cookies desnecessário (ex.: Vercel Analytics). Respeitar LGPD/GDPR.
-- Agendamento: link para ferramenta de agenda (Cal.com ou Calendly). **SEM DADO:** URL a definir pelo fundador, usar placeholder configurável.
-- Formulário de contato opcional; se houver, sem armazenar dados pessoais desnecessários.
-- Responsivo, dark/light, sem stock photos genéricas.
-
-## 6. Decisões pendentes do fundador (perguntar, não inventar)
-
-- **Nome da marca e domínio.** Até lá, usar "Henrique Pett — Founding Engineer" como marca provisória e a URL `*.vercel.app`.
-- Link de agendamento e e-mail público.
-- Autorização da Loopt para citar o nome (até lá, regra 3).
-- Conta/time da Vercel (login: `npx vercel login`, que exige ação do fundador).
+Ver `docs/estrategia-2026-11-torno-industria.md` §11 (domínio, preço do diagnóstico, páginas antigas, autorização da Loopt, plano de outbound, nome da página no LinkedIn).
