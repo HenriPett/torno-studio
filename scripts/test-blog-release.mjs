@@ -79,6 +79,7 @@ const expected = [
   ['torno-artigo-pt-20261111-documentos-pdf', '/blog/gerar-documentos-pdf-sistema-modelos-aceite/', '9ad79625b01fd517f024488b6f1708f519ec50915d56f325df6cfe20a2c98fcf', ['torno-pdf-fotografia-emissao.svg', 'torno-pdf-folha-quebra.svg']],
   ['torno-artigo-pt-20261112-tabela-precos-descontos', '/blog/tabela-precos-cliente-descontos-sistema-aceite/', '326057629f799c012a8610893049e3e06655928befa076986fb3a0184034e4a1', ['torno-precos-pilha-peneiras.svg', 'torno-precos-etiqueta-pedido.svg']],
   ['torno-artigo-pt-20261112-devolucao-troca', '/blog/devolucao-troca-mercadoria-sistema-aceite/', '50b04c228eb83706480e9543e1d714e8e89d5ba0cf935480d66b43c39a9949a0', ['torno-devolucao-bancada-conferencia.svg', 'torno-devolucao-recibo-canhotos.svg']],
+  ['torno-artigo-pt-20261112-inventario-contagem', '/blog/inventario-contagem-estoque-sistema-aceite/', '8a1b2a16c399d4a9306e516b34a974c100f45b4dafe39150fab88bbbff70908f', ['torno-inventario-estante-relogio.svg', 'torno-inventario-ficha-cega.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

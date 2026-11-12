@@ -2004,6 +2004,32 @@
           "sha256": "f53ea6ee60acde9b269998a54e69e63ba85573989c2d6916f0d8cc81e8219b26"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261112-inventario-contagem",
+      "intentId": "buyer-inventory-count-adjustment-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/inventario-contagem-estoque-sistema-aceite/",
+      "contentRevision": "8a1b2a16c399d4a9306e516b34a974c100f45b4dafe39150fab88bbbff70908f",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-12T21:28:40Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-12T21:23:29Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-12-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator) NO-GO às 2026-11-12T21:23:29Z por dois pontos — CPC 16 citado pela Deliberação CVM 575/2009, revogada pela Resolução CVM 99/2022, e atribuição indevida ao post sistema-sem-internet — corrigidos pelo autor, com sugestões aplicadas (Guia Prático 3.2.4 não lido registrado, nome do H030, fronteira com marketplace, cenário B-02-3 à parte, ficha da recontagem em folha separada na figura, formatação do blog.mjs); correções conferidas pelo integrador; diff final sujeito a revisão final independente. Fontes abertas em 12/11/2026: Microsoft Learn — Business Central \"Count, adjust, and reclassify inventory\" (17/06/2026) e \"Count inventory using documents\" (07/04/2026); Odoo 18.0 \"Adjust inventory with barcodes\"; SEFAZ-SP — RICMS/SP art. 221; Guia Prático EFD ICMS/IPI 3.2.3 (cópia de terceiro; gov.br/sped recusou acesso automatizado); Resolução CVM 99/2022 (CPC 16 (R1)) no texto da LegisWeb e Deliberação CVM 575/2009 (revogada). Não abriram: Planalto e Câmara (RIR/2018), gov.br/sped (Guia Prático oficial), PDF da Resolução CVM 99 no site da CVM. Sem revisão pessoal atribuída a Henrique; não é parecer fiscal nem contábil.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda sistema nem fornecedor; não é parecer fiscal nem contábil."
+      },
+      "assets": [
+        {
+          "path": "torno-inventario-estante-relogio.svg",
+          "sha256": "e7b4d3bd7bde65f81103188394e06b5ba6d951d4405596a1e2c4eb2f90e96111"
+        },
+        {
+          "path": "torno-inventario-ficha-cega.svg",
+          "sha256": "71055e01ae2404e6b0304601c8938004da5192f50716c7b47157c8dae4e10450"
+        }
+      ]
     }
   ]
 }
