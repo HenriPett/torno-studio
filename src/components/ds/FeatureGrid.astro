@@ -21,15 +21,17 @@ interface Props {
   items?: FeatureItem[];
   card?: 'muted' | 'surface' | 'outline' | 'inverse' | 'accent';
   headingLevel?: 'h3' | 'h4';
+  /** < 640: faixa horizontal com scroll-snap em vez da pilha (DESIGN §9). */
+  carousel?: boolean;
   class?: string;
 }
 
-const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', class: className } = Astro.props;
+const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', carousel = false, class: className } = Astro.props;
 ---
 
 {
   items ? (
-    <ul class:list={['grid', `grid--${columns}`, 'ds-fg', className]} role="list">
+    <ul class:list={['grid', `grid--${columns}`, 'ds-fg', carousel && 'carousel-sm', className]} role="list" data-reveal-stagger>
       {items.map((item) => (
         <Card as="li" variant={card}>
           {item.eyebrow && <p class="eyebrow eyebrow--accent">{item.eyebrow}</p>}
@@ -39,7 +41,7 @@ const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', class: class
       ))}
     </ul>
   ) : (
-    <div class:list={['grid', `grid--${columns}`, 'ds-fg', className]}>
+    <div class:list={['grid', `grid--${columns}`, 'ds-fg', carousel && 'carousel-sm', className]} data-reveal-stagger>
       <slot />
     </div>
   )

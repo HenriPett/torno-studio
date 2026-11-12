@@ -34,7 +34,7 @@ const showHowWeWork = true;
 
     <Section flushTop labelledby="cases-list">
       <h2 id="cases-list" class="visually-hidden">{t.listTitle}</h2>
-      <ul class="grid grid--3 cases-list" role="list">
+      <ul class="grid grid--3 cases-list carousel-sm" role="list" data-reveal-stagger>
         {
           caseSlugs.map((slug) => (
             <li>

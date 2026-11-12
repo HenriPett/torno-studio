@@ -5,6 +5,13 @@
  *
  * <AskMock locale="pt-BR" />                         → exemplo padrão do idioma
  * <AskMock locale="en" question="…" answer="…" sources={[…]} asker="…" />
+ * <AskMock locale="pt-BR" id="demo" tabsLabel="…" items={[{ label, asker, question, answer, sources }, …]} />
+ *   → demo interativa (DESIGN §9): abas ARIA por área; cada aba troca a pergunta e a resposta do mock.
+ *
+ * Motion (src/scripts/motion.ts, [data-ask]): a pergunta é digitada na caixa, sobe como balão, a resposta
+ * aparece e as fontes entram depois. Toca sozinha uma vez ao entrar na tela. Sem JS ou com movimento
+ * reduzido: o primeiro exemplo completo, sem abas (sem JS) ou com troca seca (movimento reduzido).
+ * O mock continua UMA imagem (role="img"); o nome acessível acompanha a aba ativa.
  */
 import { getChrome } from '../../../content/chrome';
 import type { Locale } from '../../../lib/i18n';
@@ -13,6 +20,15 @@ import MockFrame from './MockFrame.astro';
 export interface AskSource {
   title: string;
   detail: string;
+}
+
+export interface AskItem {
+  /** Rótulo da aba. */
+  label: string;
+  asker?: string;
+  question: string;
+  answer: string;
+  sources: AskSource[];
 }
 
 interface Props {
@@ -25,6 +41,12 @@ interface Props {
   label?: string;
   caption?: string;
   stage?: 'muted' | 'surface' | 'none';
+  /** Vários exemplos com abas (≥ 2). Substitui question/answer/sources/asker. */
+  items?: AskItem[];
+  /** Nome acessível da lista de abas. */
+  tabsLabel?: string;
+  /** Prefixo dos ids das abas (único na página). */
+  id?: string;
 }
 
 const defaults = {
@@ -60,64 +82,113 @@ const defaults = {
   },
 } as const;
 
-const { locale, caption, stage } = Astro.props;
+const { locale, caption, stage, tabsLabel, id = 'ask' } = Astro.props;
 const d = defaults[locale];
-const question = Astro.props.question ?? d.question;
-const answer = Astro.props.answer ?? d.answer;
-const sources = Astro.props.sources ?? d.sources;
-const asker = Astro.props.asker ?? d.asker;
 const label = Astro.props.label ?? getChrome(locale).common.illustration;
-const parts = answer.split(/(\[\d+\])/g).filter(Boolean);
-const description = Astro.props.question ? `${question} — ${answer}` : d.description;
+const custom = Boolean(Astro.props.question || Astro.props.items);
+const items: AskItem[] = Astro.props.items?.length
+  ? Astro.props.items
+  : [
+      {
+        label: '',
+        asker: Astro.props.asker ?? d.asker,
+        question: Astro.props.question ?? d.question,
+        answer: Astro.props.answer ?? d.answer,
+        sources: Astro.props.sources ?? [...d.sources],
+      },
+    ];
+const tabs = items.length > 1;
+const threads = items.map((item) => ({
+  ...item,
+  asker: item.asker ?? d.asker,
+  parts: item.answer.split(/(\[\d+\])/g).filter(Boolean),
+  description: custom ? `${item.question} — ${item.answer}` : d.description,
+}));
+const description = threads[0]!.description;
 ---
 
-<MockFrame label={label} description={description} caption={caption} stage={stage}>
-  <div class="ask">
-    <div class="ask__bar">
-      <span class="ask__logo" aria-hidden="true"></span>
-      <span class="ask__app">{d.app}</span>
-    </div>
-    <div class="ask__thread">
-      <div class="ask__q">
-        <p class="ask__who">{asker}</p>
-        <p class="ask__bubble">{question}</p>
+<div class:list={['ask-demo', tabs && 'ask-demo--tabs']} data-ask>
+  {
+    tabs && (
+      <div class="ask-demo__tabs" role="tablist" aria-label={tabsLabel}>
+        <span class="ask-demo__ind" aria-hidden="true" />
+        {items.map((item, k) => (
+          <button
+            type="button"
+            role="tab"
+            class="ask-demo__tab"
+            id={`${id}-tab-${k}`}
+            aria-selected={k === 0 ? 'true' : 'false'}
+            aria-controls={`${id}-panel`}
+            tabindex={k === 0 ? 0 : -1}
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
-      <div class="ask__a">
-        <span class="ask__spark" aria-hidden="true"></span>
-        <div class="ask__a-body">
-          <p>
-            {
-              parts.map((part) =>
-                /^\[\d+\]$/.test(part) ? <span class="ask__cite tnum">{part.slice(1, -1)}</span> : part,
-              )
-            }
-          </p>
-          <p class="ask__sources-title">{d.sourcesTitle}</p>
-          <ol class="ask__sources">
-            {
-              sources.map((source, index) => (
-                <li class="ask__source">
-                  <span class="ask__cite tnum">{index + 1}</span>
-                  <span class="ask__doc" aria-hidden="true" />
-                  <span class="ask__source-text">
-                    <strong>{source.title}</strong>
-                    <span>{source.detail}</span>
-                  </span>
-                </li>
-              ))
-            }
-          </ol>
+    )
+  }
+  <div
+    class="ask-demo__panel"
+    id={tabs ? `${id}-panel` : undefined}
+    role={tabs ? 'tabpanel' : undefined}
+    aria-labelledby={tabs ? `${id}-tab-0` : undefined}
+    tabindex={tabs ? 0 : undefined}
+  >
+    <MockFrame label={label} description={description} caption={caption} stage={stage}>
+      <div class="ask">
+        <div class="ask__bar">
+          <span class="ask__logo" aria-hidden="true"></span>
+          <span class="ask__app">{d.app}</span>
+        </div>
+        <div class="ask__threads">
+          {
+            threads.map((t, k) => (
+              <div class="ask__thread" data-thread data-label={`${label}: ${t.description}`} hidden={k > 0}>
+                <div class="ask__q">
+                  <p class="ask__who">{t.asker}</p>
+                  <p class="ask__bubble">{t.question}</p>
+                </div>
+                <div class="ask__a">
+                  <span class="ask__spark" aria-hidden="true" />
+                  <div class="ask__a-body">
+                    <p class="ask__text">
+                      {t.parts.map((part) =>
+                        /^\[\d+\]$/.test(part) ? <span class="ask__cite tnum">{part.slice(1, -1)}</span> : part,
+                      )}
+                    </p>
+                    <p class="ask__sources-title">{d.sourcesTitle}</p>
+                    <ol class="ask__sources">
+                      {t.sources.map((source, index) => (
+                        <li class="ask__source" style={`--k:${index}`}>
+                          <span class="ask__cite tnum">{index + 1}</span>
+                          <span class="ask__doc" aria-hidden="true" />
+                          <span class="ask__source-text">
+                            <strong>{source.title}</strong>
+                            <span>{source.detail}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="ask__input">
+          <span class="ask__field">
+            <span class="ask__placeholder">{d.input}</span>
+            <span class="ask__typing" aria-hidden="true"></span>
+          </span>
+          <span class="ask__send" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" /></svg>
+          </span>
         </div>
       </div>
-    </div>
-    <div class="ask__input">
-      <span>{d.input}</span>
-      <span class="ask__send" aria-hidden="true">
-        <svg viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" /></svg>
-      </span>
-    </div>
+    </MockFrame>
   </div>
-</MockFrame>
+</div>
 
 <style>
   .ask {
@@ -180,7 +251,7 @@ const description = Astro.props.question ? `${question} — ${answer}` : d.descr
     background: radial-gradient(circle at center, var(--color-accent) 0 3px, transparent 3.5px);
   }
 
-  .ask__a-body > p:first-child {
+  .ask__text {
     font-size: var(--text-base);
     line-height: 1.5;
   }
@@ -265,10 +336,228 @@ const description = Astro.props.question ? `${question} — ${answer}` : d.descr
     color: var(--color-text-muted);
   }
 
-  .ask__input > span:first-child {
+  .ask__field {
+    position: relative;
+    display: grid;
+    min-inline-size: 0;
+    flex: 1 1 auto;
+  }
+
+  .ask__placeholder,
+  .ask__typing {
+    grid-area: 1 / 1;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .ask__typing {
+    text-overflow: clip;
+    color: var(--color-text);
+  }
+
+  .ask__typing:empty {
+    display: none;
+  }
+
+  .ask__typing.is-typing::after {
+    content: "";
+    display: inline-block;
+    inline-size: 2px;
+    block-size: 1.1em;
+    margin-inline-start: 1px;
+    vertical-align: -0.2em;
+    background: var(--color-accent);
+    animation: ask-caret 1s steps(1) infinite;
+  }
+
+  .ask__field:has(.ask__typing:not(:empty)) .ask__placeholder {
+    visibility: hidden;
+  }
+
+  @keyframes ask-caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* ---------- Demo com abas (DESIGN §9) ---------- */
+
+  .ask-demo {
+    display: grid;
+    gap: var(--space-4);
+    min-inline-size: 0;
+  }
+
+  /* Abas só com JS (sem JS fica o 1º exemplo, completo). */
+  .ask-demo__tabs {
+    display: none;
+  }
+
+  :global(html.js-motion) .ask-demo__tabs {
+    position: relative;
+    display: flex;
+    justify-self: center;
+    gap: 2px;
+    max-inline-size: 100%;
+    padding: 4px;
+    overflow-x: auto;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border-subtle);
+    scrollbar-width: none;
+    scroll-padding-inline: var(--space-4);
+  }
+
+  .ask-demo__tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ask-demo__tab {
+    position: relative;
+    z-index: 1;
+    flex: none;
+    min-block-size: var(--tap-min);
+    padding-inline: var(--space-4);
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--motion-short) var(--motion-ease-in-out), background-color var(--motion-short) var(--motion-ease-in-out);
+  }
+
+  .ask-demo__tab[aria-selected="true"] {
+    color: var(--color-on-accent);
+    background-color: var(--color-accent);
+  }
+
+  .ask-demo__tab:focus-visible {
+    outline-offset: -2px;
+    border-radius: var(--radius-full);
+  }
+
+  @media (hover: hover) {
+    .ask-demo__tab[aria-selected="false"]:hover {
+      color: var(--color-text);
+    }
+  }
+
+  /* Indicador que desliza entre as abas (posição vem do JS). */
+  .ask-demo__ind {
+    position: absolute;
+    z-index: 0;
+    inset-block: 4px;
+    inset-inline-start: 0;
+    inline-size: 0;
+    border-radius: var(--radius-full);
+    background-color: var(--color-accent);
+    opacity: 0;
+    transition:
+      transform 0.5s var(--motion-ease),
+      width 0.5s var(--motion-ease);
+  }
+
+  .has-ind .ask-demo__ind {
+    opacity: 1;
+  }
+
+  .has-ind .ask-demo__tab[aria-selected="true"] {
+    background-color: transparent;
+  }
+
+  .ask-demo__panel {
+    min-inline-size: 0;
+    border-radius: var(--radius-xl);
+  }
+
+  /* Todas as conversas na mesma célula: a altura é a da maior, trocar de aba não mexe no layout. */
+  :global(html.js-motion) .ask__threads {
+    display: grid;
+  }
+
+  :global(html.js-motion) .ask__thread {
+    grid-area: 1 / 1;
+  }
+
+  :global(html.js-motion) .ask__thread[hidden] {
+    display: grid;
+    visibility: hidden;
+  }
+
+  /* ---------- Sequência: digitando → enviada → pensando → resposta → fontes ---------- */
+
+  .ask__q,
+  .ask__spark,
+  .ask__text,
+  .ask__sources-title,
+  .ask__source {
+    transition:
+      opacity 0.45s var(--motion-ease),
+      transform 0.6s var(--motion-ease);
+  }
+
+  /* Ao começar (troca de aba), esconde na hora: nada de a resposta anterior "sumir" devagar. */
+  .ask__thread[data-state="typing"] * {
+    transition: none;
+  }
+
+  .ask__thread[data-state] .ask__a-body > *,
+  .ask__thread[data-state] .ask__source {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  .ask__thread[data-state="typing"] .ask__q {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.97);
+    transform-origin: 100% 100%;
+  }
+
+  .ask__thread[data-state="typing"] .ask__spark,
+  .ask__thread[data-state="sent"] .ask__spark {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  .ask__thread[data-state="thinking"] .ask__spark {
+    animation: ask-think 0.75s var(--motion-ease-in-out) infinite alternate;
+  }
+
+  .ask__thread:is([data-state="answer"], [data-state="sources"]) .ask__a-body > .ask__text {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ask__thread:is([data-state="answer"], [data-state="sources"]) .ask__text .ask__cite {
+    animation: ask-cite 0.5s var(--motion-ease-out) 0.35s backwards;
+  }
+
+  .ask__thread[data-state="sources"] .ask__a-body > :is(.ask__sources-title, .ask__sources),
+  .ask__thread[data-state="sources"] .ask__sources > .ask__source {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ask__thread[data-state="sources"] .ask__sources > .ask__source {
+    transition-delay: calc(120ms + var(--k, 0) * 120ms);
+  }
+
+  @keyframes ask-think {
+    to {
+      transform: scale(0.82);
+    }
+  }
+
+  @keyframes ask-cite {
+    from {
+      transform: scale(0.4);
+      opacity: 0;
+    }
   }
 
   .ask__send {

@@ -50,13 +50,17 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
   <main id="conteudo" tabindex="-1">
     <!-- 1. Hero -->
     <Section id={ids.hero} labelledby={`${ids.hero}-title`} class="home-hero" reveal={false}>
-      <SectionHeader as="h1" id={`${ids.hero}-title`} eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} align="center" accent>
-        <BookingCta locale={locale} size="lg">{cta}</BookingCta>
-        <a class="link link--arrow link--target" href={howWeWork}>{c.hero.secondary}</a>
-      </SectionHeader>
-      <ul class="home-hero__facts" role="list">
-        {c.hero.facts.map((fact) => <li>{fact}</li>)}
-      </ul>
+      <div class="home-hero__stage" data-pointer=".home-hero__field">
+        {/* Campo decorativo: grade de pontos e brilho que seguem o ponteiro no desktop (DESIGN §9). */}
+        <div class="home-hero__field" aria-hidden="true" data-hero-in="fade"></div>
+        <SectionHeader as="h1" id={`${ids.hero}-title`} eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} align="center" accent>
+          <BookingCta locale={locale} size="lg">{cta}</BookingCta>
+          <a class="link link--arrow link--target" href={howWeWork}>{c.hero.secondary}</a>
+        </SectionHeader>
+        <ul class="home-hero__facts" role="list" data-hero-in>
+          {c.hero.facts.map((fact) => <li>{fact}</li>)}
+        </ul>
+      </div>
     </Section>
 
     <!-- 2. Cérebro da operação -->
@@ -69,9 +73,15 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
             {c.brain.sources.map((source) => <li><Pill tone="outline">{source}</Pill></li>)}
           </ul>
         </div>
-        <AskMock locale={locale} stage="surface" {...c.brain.mock} />
+        <AskMock
+          locale={locale}
+          stage="surface"
+          id="cerebro-demo"
+          tabsLabel={c.brain.demo.tabsLabel}
+          items={[{ label: c.brain.demo.mockLabel, ...c.brain.mock }, ...c.brain.demo.items]}
+        />
       </div>
-      <ul class="grid grid--3 home-points" role="list">
+      <ul class="grid grid--3 home-points" role="list" data-reveal-stagger>
         {
           c.brain.points.map((point) => (
             <li>
@@ -87,7 +97,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     <Section id={ids.solutions} labelledby={`${ids.solutions}-title`}>
       <SectionHeader id={`${ids.solutions}-title`} eyebrow={c.solutions.eyebrow} title={c.solutions.title} lead={c.solutions.lead} accent />
       <p class="home-solutions__label"><Pill tone="accent" size="sm">{c.solutions.exampleLabel}</Pill></p>
-      <FeatureGrid columns={4} items={c.solutions.areas} class="home-areas" />
+      <FeatureGrid columns={4} items={c.solutions.areas} class="home-areas" carousel />
     </Section>
 
     <!-- 4. Software sob medida -->
@@ -105,12 +115,27 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
 
     <!-- 5. Como trabalhamos -->
     <Section id={ids.process} labelledby={`${ids.process}-title`}>
-      <SectionHeader id={`${ids.process}-title`} eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} accent>
-        <a class="link link--arrow link--target" href={howWeWork}>{c.process.link}</a>
-      </SectionHeader>
-      {/* id legado "precos": artigos do blog (conteúdo intocável) linkam /#precos; as etapas com proposta por etapa substituem a antiga escada de preços. */}
-      <div id={locale === 'pt-BR' ? 'precos' : undefined} class="home-steps">
-        <Steps items={etapas[locale]} />
+      {/* Desktop: cabeçalho fixo + etapa ativa conforme a rolagem (src/scripts/motion.ts, [data-scrolly]). Celular: lista. */}
+      <div class="scrolly" data-scrolly>
+        <div class="scrolly__aside">
+          <SectionHeader id={`${ids.process}-title`} eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} accent>
+            <a class="link link--arrow link--target" href={howWeWork}>{c.process.link}</a>
+          </SectionHeader>
+          <div class="scrolly__nav" aria-hidden="true">
+            <span class="scrolly__rail"><span class="scrolly__bar" data-scrolly-bar></span></span>
+            <span class="scrolly__marks">
+              {etapas[locale].map((step, index) => (
+                <span class="scrolly__mark" data-step-mark>
+                  <span class="tnum">{String(index + 1).padStart(2, '0')}</span> {step.title}
+                </span>
+              ))}
+            </span>
+          </div>
+        </div>
+        {/* id legado "precos": artigos do blog (conteúdo intocável) linkam /#precos; as etapas com proposta por etapa substituem a antiga escada de preços. */}
+        <div id={locale === 'pt-BR' ? 'precos' : undefined} class="home-steps">
+          <Steps items={etapas[locale]} layout="rows" />
+        </div>
       </div>
     </Section>
 
@@ -188,6 +213,31 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     :global(.home-hero) :global(.ds-sh__lead) {
       font-size: var(--text-base);
     }
+  }
+
+  /* ---------- Hero vivo ---------- */
+  :global(.home-hero.section) {
+    overflow: clip;
+  }
+
+  .home-hero__stage {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .home-hero__field {
+    position: absolute;
+    z-index: -1;
+    inset-block: calc(-1 * var(--space-section)) calc(-1 * var(--space-7));
+    inset-inline: calc(50% - 50vw);
+    pointer-events: none;
+    --hero-delay: 0ms;
+    --at: var(--mx, 50%) var(--my, 38%);
+    background:
+      radial-gradient(34rem circle at var(--at), color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%),
+      radial-gradient(circle, var(--color-border) 1px, transparent 1.5px) 0 0 / 22px 22px;
+    -webkit-mask-image: radial-gradient(42rem 28rem at var(--at), #000 0%, rgb(0 0 0 / 0.3) 50%, transparent 78%);
+    mask-image: radial-gradient(42rem 28rem at var(--at), #000 0%, rgb(0 0 0 / 0.3) 50%, transparent 78%);
   }
 
   .home-hero__facts {
@@ -323,10 +373,109 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     margin-block-start: var(--space-4);
   }
 
-  /* 5 etapas lado a lado no desktop (o Steps limita a 4 colunas). */
+  /* ---------- Etapas: rolagem fixa no desktop (estilo produto) ---------- */
+  .scrolly__nav {
+    display: none;
+  }
+
+  .home-steps {
+    margin-block-start: var(--space-stack);
+  }
+
   @media (min-width: 64em) {
-    .home-steps :global(.ds-steps--columns) {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+    .scrolly {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    .scrolly__aside {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-8));
+    }
+
+    .home-steps {
+      margin-block-start: 0;
+    }
+
+    .scrolly__nav {
+      display: grid;
+      grid-template-columns: 2px minmax(0, 1fr);
+      gap: var(--space-5);
+      margin-block-start: var(--space-7);
+    }
+
+    .scrolly__rail {
+      position: relative;
+      border-radius: 2px;
+      background: var(--color-border);
+      overflow: hidden;
+    }
+
+    .scrolly__bar {
+      position: absolute;
+      inset: 0;
+      background: var(--color-accent);
+      transform: scaleY(0);
+      transform-origin: 50% 0;
+    }
+
+    .scrolly__marks {
+      display: grid;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .scrolly__mark {
+      transition: color var(--motion-short) var(--motion-ease-in-out), transform var(--motion-short) var(--motion-ease-out);
+    }
+
+    .scrolly__mark .tnum {
+      margin-inline-end: var(--space-2);
+    }
+
+    .scrolly__mark.is-active {
+      color: var(--color-text);
+      font-weight: var(--weight-medium);
+      transform: translateX(4px);
+    }
+
+    /* Com motion: cada etapa ocupa meia tela e a ativa ganha destaque. Inativas seguem legíveis (AA). */
+    :global(html.motion-ready) .home-steps :global(.ds-steps__item) {
+      min-block-size: 44vh;
+      align-content: center;
+      border-block-start-color: var(--color-border-subtle);
+      transition: border-color var(--motion-short) var(--motion-ease-in-out);
+    }
+
+    :global(html.motion-ready) .home-steps :global(.ds-steps__item:last-child) {
+      min-block-size: 36vh;
+    }
+
+    .home-steps :global(.ds-steps__num) {
+      font-size: var(--text-display-md);
+      font-weight: var(--weight-display);
+      line-height: 1;
+      transition: color var(--motion-short) var(--motion-ease-in-out), transform var(--motion-reveal) var(--motion-ease);
+    }
+
+    .home-steps :global(.ds-steps__item) {
+      grid-template-columns: 6rem minmax(0, 1fr);
+    }
+
+    .home-steps :global(.ds-steps__title) {
+      font-size: var(--text-title-lg);
+      transition: color var(--motion-short) var(--motion-ease-in-out);
+    }
+
+    :global(html.motion-ready) .home-steps :global(.ds-steps__item:not(.is-active)) :global(:is(.ds-steps__num, .ds-steps__title)) {
+      color: var(--color-text-muted);
+    }
+
+    :global(html.motion-ready) .home-steps :global(.ds-steps__item.is-active) {
+      border-block-start-color: var(--color-accent);
     }
   }
 

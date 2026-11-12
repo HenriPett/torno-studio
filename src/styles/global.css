@@ -383,7 +383,12 @@ section[id],
   font-size: 1.2em;
   line-height: 1;
   transform: translateY(-0.04em);
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition: transform var(--motion-short) var(--motion-ease-out);
+}
+
+/* Foco por teclado também anda a seta (mesmo retorno do hover). */
+.link--arrow:focus-visible::after {
+  transform: translate(0.25em, -0.04em);
 }
 
 @media (hover: hover) {
@@ -393,7 +398,7 @@ section[id],
   }
 
   .link--arrow:hover::after {
-    transform: translate(0.15em, -0.04em);
+    transform: translate(0.25em, -0.04em);
   }
 }
 
@@ -457,11 +462,28 @@ section[id],
     background-color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    box-shadow var(--motion-short) var(--motion-ease-out),
+    transform var(--motion-short) var(--motion-ease-out);
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+  transition-duration: var(--duration-fast);
+}
+
+.btn__icon {
+  transition: transform var(--motion-short) var(--motion-ease-out);
+}
+
+@media (hover: hover) {
+  .btn:hover .btn__icon {
+    transform: translateX(0.2em);
+  }
+
+  /* Primário: halo suave no hover (o botão "acende", não pula). */
+  .btn--primary:hover {
+    box-shadow: 0 8px 24px -10px var(--color-accent);
+  }
 }
 
 .btn--sm {
@@ -644,26 +666,29 @@ section[id],
   font-weight: var(--weight-semibold);
 }
 
-/* ===================== Movimento: entrada de seção ===================== */
+/* ===================== Movimento (DESIGN-2026-11 §9) ===================== */
 /*
- * Scroll-driven (sem JS): o elemento sobe 24px enquanto entra na viewport. Só transform, nunca
- * opacidade, para o conteúdo estar sempre legível (inclusive para axe/Lighthouse, impressão e
- * navegadores sem suporte, que simplesmente mostram o estado final).
- * Uso: class="reveal" (Section.astro aplica no conteúdo por padrão).
+ * Três camadas, todas progressivas (sem JS, ou com prefers-reduced-motion: reduce, tudo está visível):
+ *
+ * 1. Hero (CSS puro): o script inline do <head> põe html.js-motion antes da 1ª pintura; os filhos do
+ *    SectionHeader h1 (eyebrow → título → lead → ações) e os [data-hero-in] entram em sequência.
+ *    Sem opacidade: o bloco sobe atrás de uma máscara (clip-path), então o contraste é o final desde o 1º quadro.
+ * 2. Revelação por rolagem (src/scripts/motion.ts): o módulo marca como .is-in tudo que já está na tela
+ *    e SÓ DEPOIS põe html.motion-ready, que esconde o resto. Ao entrar, o item ganha .is-in.is-anim;
+ *    itens que entram juntos escalonam (--i). data-reveal="lines": título display com máscara por linha;
+ *    data-reveal="rise": mocks (sobem mais, com leve escala).
+ * 3. Micro-interações: hover/foco de cards, links, botões, FAQ, header, menu (em cada componente).
+ *
+ * Animações usam fill-mode "backwards": ao terminar, o elemento volta aos próprios estilos (hover etc.).
  */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: ds-rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 70%;
-    }
-  }
-}
-
-@keyframes ds-rise {
+@keyframes m-rise {
   from {
-    transform: translateY(1.5rem) scale(0.985);
+    opacity: 0;
+    transform: translate3d(0, var(--motion-distance), 0);
+  }
+
+  40% {
+    opacity: 1;
   }
 
   to {
@@ -671,8 +696,155 @@ section[id],
   }
 }
 
+@keyframes m-rise-lg {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--motion-distance-lg), 0) scale(0.96);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+/* Hero: sem opacidade (o texto tem contraste final desde o 1º quadro, inclusive para axe/Lighthouse).
+   O bloco sobe enquanto uma máscara abre de cima para baixo: lê-se linha por linha. */
+@keyframes m-hero {
+  from {
+    transform: translate3d(0, var(--motion-distance), 0);
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes m-line {
+  from {
+    transform: translate3d(0, 105%, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes m-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Hero */
+  html.js-motion .ds-sh--hero > *,
+  html.js-motion [data-hero-in] {
+    animation: m-hero var(--motion-hero) var(--motion-ease) backwards;
+  }
+
+  html.js-motion .ds-sh--hero > :nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  html.js-motion .ds-sh--hero > :nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  html.js-motion .ds-sh--hero > :nth-child(4) {
+    animation-delay: 210ms;
+  }
+
+  /* Botões sobem menos: o CTA fica onde o olho espera (e acima da faixa de cookies no celular). */
+  html.js-motion .ds-sh--hero > .ds-sh__actions {
+    --motion-distance: var(--motion-distance-sm);
+  }
+
+  html.js-motion [data-hero-in] {
+    animation-delay: var(--hero-delay, 300ms);
+  }
+
+  /* Decorativo (sem texto): pode usar fade. */
+  html.js-motion [data-hero-in="fade"] {
+    animation-name: m-fade;
+  }
+
+  /* 2. Revelação por rolagem */
+  html.motion-ready [data-reveal]:not(.is-in) {
+    opacity: 0;
+  }
+
+  [data-reveal].is-anim {
+    animation: m-rise var(--motion-reveal) var(--motion-ease) backwards;
+    animation-delay: calc(var(--i, 0) * var(--motion-stagger));
+  }
+
+  [data-reveal="rise"].is-anim {
+    animation-name: m-rise-lg;
+    animation-duration: calc(var(--motion-reveal) * 1.25);
+  }
+
+  /* Título display: cada linha sobe por trás de uma máscara (as linhas são montadas pelo JS e desfeitas no fim). */
+  [data-reveal="lines"].is-anim {
+    animation: none;
+  }
+
+  .m-line {
+    display: block;
+    overflow: clip;
+    /* Folga para descendentes (g, p, ç) sem mudar a altura da linha. */
+    padding-block-end: 0.14em;
+    margin-block-end: -0.14em;
+  }
+
+  .m-line__in {
+    display: block;
+    animation: m-line var(--motion-reveal) var(--motion-ease) backwards;
+    animation-delay: calc(var(--i, 0) * var(--motion-stagger) + var(--l, 0) * var(--motion-stagger-line));
+  }
+}
+
 @media print {
-  .reveal {
+  [data-reveal] {
+    opacity: 1 !important;
     animation: none !important;
+  }
+}
+
+/* ---------- Carrossel no celular (< 640) ----------
+ * Grades de cards viram uma faixa horizontal com scroll-snap e "peek" do próximo card. Só com JS
+ * (html.js-motion), porque o módulo de motion dá tabindex à faixa quando ela rola (teclado: setas).
+ * Sem JS, continua a pilha vertical. */
+@media (max-width: 39.99em) {
+  html.js-motion .carousel-sm {
+    display: flex;
+    gap: var(--space-3);
+    margin-inline: calc(-1 * var(--container-pad));
+    padding-inline: var(--container-pad);
+    padding-block: var(--space-2) var(--space-4);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--container-pad);
+    scrollbar-width: none;
+  }
+
+  html.js-motion .carousel-sm::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.js-motion .carousel-sm > * {
+    flex: 0 0 min(84%, 22rem);
+    scroll-snap-align: start;
+  }
+
+  html.js-motion .carousel-sm:focus-visible {
+    outline-offset: -2px;
+    border-radius: var(--radius-lg);
   }
 }

@@ -20,7 +20,7 @@ const slugs: CaseSlug[] = ['loopt', 'bom-capital', 'ascende'];
 const cases = slugs.map((slug) => ({ slug, ...caseStudies[locale][slug] }));
 ---
 
-<ul class="grid grid--3 case-cards" role="list">
+<ul class="grid grid--3 case-cards carousel-sm" role="list" data-reveal-stagger>
   {
     cases.map((item) => (
       <Card as="li" variant={card} padding="lg" radius="xl" interactive class="case-cards__card">

@@ -22,7 +22,7 @@ const rows = [
 ];
 ---
 
-<figure class="result-chart">
+<figure class="result-chart" data-reveal>
   <figcaption>
     <span class="eyebrow">{caseLabels[locale].chartLabel}</span>
     <span class="result-chart__title">{text('Tempo entre proposta e resposta, em horas', 'Time from application to response, in hours')}</span>
@@ -99,6 +99,24 @@ const rows = [
     block-size: 100%;
     background: var(--color-text-muted);
   }
+  /* A barra cresce da esquerda quando o gráfico entra na tela (DESIGN §9). */
+  @media (prefers-reduced-motion: no-preference) {
+    .result-chart:global(.is-anim) .chart-bar {
+      transform-origin: 0 50%;
+      animation: chart-grow var(--motion-long) var(--motion-ease-out) 300ms backwards;
+    }
+
+    .result-chart:global(.is-anim) .chart-row + .chart-row .chart-bar {
+      animation-delay: 450ms;
+    }
+  }
+
+  @keyframes chart-grow {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
   .chart-bar--bound {
     background: transparent;
     border: 2px dashed var(--color-accent-text);

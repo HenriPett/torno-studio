@@ -16,7 +16,7 @@ interface Props {
 const { label, description, caption, stage = 'muted', class: className } = Astro.props;
 ---
 
-<figure class:list={['ds-mock', `ds-mock--${stage}`, className]}>
+<figure class:list={['ds-mock', `ds-mock--${stage}`, className]} data-reveal="rise">
   <div class="ds-mock__stage">
     <div class="ds-mock__window" role="img" aria-label={`${label}: ${description}`}>
       <slot />

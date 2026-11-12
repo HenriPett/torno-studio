@@ -94,7 +94,7 @@ const bars = [62, 70, 68, 74, 30, 22, 58, 76, 80, 78, 84, 81];
         kpis.map((kpi) => (
           <li class="panel__kpi">
             <span class="panel__kpi-label">{kpi.label}</span>
-            <span class="panel__kpi-value tnum">{kpi.value}</span>
+            <span class="panel__kpi-value tnum" data-count>{kpi.value}</span>
             {kpi.delta && <span class:list={['panel__kpi-delta', 'tnum', `is-${kpi.tone ?? 'neutral'}`]}>{kpi.delta}</span>}
           </li>
         ))
@@ -103,7 +103,7 @@ const bars = [62, 70, 68, 74, 30, 22, 58, 76, 80, 78, 84, 81];
     <div class="panel__chart">
       <span class="panel__chart-title">{d.chart}</span>
       <div class="panel__bars" aria-hidden="true">
-        {bars.map((h, i) => <span class:list={[i === 4 || i === 5 ? 'is-low' : '']} style={`--h:${h}%`} />)}
+        {bars.map((h, i) => <span class:list={[i === 4 || i === 5 ? 'is-low' : '']} style={`--h:${h}%;--b:${i}`} />)}
       </div>
     </div>
     <div class="panel__alerts">
@@ -170,6 +170,7 @@ const bars = [62, 70, 68, 74, 30, 22, 58, 76, 80, 78, 84, 81];
   }
 
   .panel__kpi-value {
+    font-variant-numeric: tabular-nums;
     font-size: var(--text-title-lg);
     font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-tight);
@@ -220,6 +221,51 @@ const bars = [62, 70, 68, 74, 30, 22, 58, 76, 80, 78, 84, 81];
     border-radius: 4px 4px 1px 1px;
     background-color: var(--color-accent);
     opacity: 0.85;
+  }
+
+  /* Barras crescem quando o mock entra na tela (.is-anim vem do motion). */
+  @media (prefers-reduced-motion: no-preference) {
+    .panel__bars span {
+      transform-origin: 50% 100%;
+    }
+
+    :global(.is-anim) .panel__bars span {
+      animation: panel-bar var(--motion-long) var(--motion-ease-out) backwards;
+      animation-delay: calc(350ms + var(--b) * 45ms);
+    }
+
+    :global(.is-anim) .panel__alert {
+      animation: panel-alert var(--motion-reveal) var(--motion-ease) backwards;
+    }
+
+    :global(.is-anim) .panel__alert:nth-child(1) {
+      animation-delay: 700ms;
+    }
+
+    :global(.is-anim) .panel__alert:nth-child(2) {
+      animation-delay: 800ms;
+    }
+
+    :global(.is-anim) .panel__alert:nth-child(3) {
+      animation-delay: 900ms;
+    }
+  }
+
+  @keyframes panel-bar {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes panel-alert {
+    from {
+      opacity: 0;
+      transform: translateX(0.75rem);
+    }
+
+    40% {
+      opacity: 1;
+    }
   }
 
   .panel__bars span.is-low {

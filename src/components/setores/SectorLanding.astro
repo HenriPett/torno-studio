@@ -111,13 +111,13 @@ const process = [
     <!-- Dores -->
     <Section labelledby="setor-dores">
       <SectionHeader id="setor-dores" eyebrow="No dia a dia" title={setor.pains.title} size="md" />
-      <FeatureGrid columns={setor.pains.items.length === 4 ? 2 : 3} items={setor.pains.items} />
+      <FeatureGrid columns={setor.pains.items.length === 4 ? 2 : 3} items={setor.pains.items} carousel />
     </Section>
 
     <!-- Áreas atendidas -->
     <Section variant="muted" labelledby="setor-areas">
       <SectionHeader id="setor-areas" eyebrow="Áreas" title={setor.areas.title} lead={setor.areas.intro} size="md" />
-      <ul class="grid grid--3 sector-areas" role="list">
+      <ul class="grid grid--3 sector-areas carousel-sm" role="list" data-reveal-stagger>
         {
           setor.areas.items.map((item) => (
             <Card as="li" variant="surface" padding="lg" class="sector-area">
@@ -166,7 +166,7 @@ const process = [
         </div>
         <div class="sector-brain__inputs">
           <p class="caption sector-brain__inputs-title" id="setor-cerebro-fontes">O que entra na base</p>
-          <ul class="sector-chips" role="list" aria-labelledby="setor-cerebro-fontes">
+          <ul class="sector-chips" role="list" aria-labelledby="setor-cerebro-fontes" data-reveal-stagger>
             {
               setor.brain.inputs.map((input) => (
                 <li>

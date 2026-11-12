@@ -26,11 +26,11 @@ const { locale, items, columns = 3, class: className } = Astro.props;
 const sourceLabel = getChrome(locale).common.source;
 ---
 
-<ul class:list={['grid', `grid--${columns}`, 'ds-stats', className]} role="list">
+<ul class:list={['grid', `grid--${columns}`, 'ds-stats', className]} role="list" data-reveal-stagger>
   {
     items.map((item) => (
       <li class="ds-stats__item">
-        <p class="ds-stats__value tnum">{item.value}</p>
+        <p class="ds-stats__value tnum" data-count>{item.value}</p>
         <p class="ds-stats__label">{item.label}</p>
         <p class="ds-stats__source caption">
           {sourceLabel}:{' '}
@@ -63,6 +63,7 @@ const sourceLabel = getChrome(locale).common.source;
   }
 
   .ds-stats__value {
+    font-variant-numeric: tabular-nums;
     font-size: var(--text-display-lg);
     font-weight: var(--weight-display);
     line-height: 1;
