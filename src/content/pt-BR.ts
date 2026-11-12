@@ -172,7 +172,7 @@ export const ptBR: SiteCopy = {
     hero: {
       eyebrow: 'Diagnóstico de IA para a indústria',
       title: 'Descubra onde a IA ajuda a sua fábrica antes de investir nela.',
-      lead: 'Entrevistas por área, inventário de dados e sistemas e um mapa de oportunidades com esforço, risco e um piloto recomendado. O relatório fica com a empresa.',
+      lead: 'Entrevistas por área, inventário de dados e um mapa de oportunidades com o piloto recomendado. O relatório fica com a empresa.',
       cta: 'Agendar diagnóstico',
       facts: ['Conversa inicial de 45 min, sem custo', 'Proposta fechada antes de começar', 'Confidencialidade assinada, se pedir'],
     },

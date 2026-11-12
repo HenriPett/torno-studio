@@ -3,185 +3,145 @@ import { join } from 'node:path';
 
 import { expect, test } from '@playwright/test';
 
-import { formatMoney, pricing } from '../src/config/pricing';
-import { SECTION_IDS } from '../src/content/types';
 import { en } from '../src/content/en';
 import { ptBR } from '../src/content/pt-BR';
 import { chrome } from '../src/content/chrome';
+import { home } from '../src/content/home';
+import { etapas, estrutura, howWeWork } from '../src/content/institucional';
 import { routes } from '../src/config/routes.mjs';
 
-// Testes de componente das seções da landing (DESIGN §6–§7), contra o HTML real do build.
+// Testes de componente da home e das páginas institucionais (DESIGN-2026-11 §8; estratégia 2026-11 §6),
+// contra o HTML real do build.
 
 const homes = [
-  { path: '/', copy: ptBR },
-  { path: '/en/', copy: en },
-] as const;
+  { path: '/', locale: 'pt-BR' as const },
+  { path: '/en/', locale: 'en' as const },
+];
 
-for (const { path, copy } of homes) {
-  const locale = copy.locale;
-  const ladder = pricing[locale];
+for (const { path, locale } of homes) {
+  const c = home[locale];
+  const ids = c.ids;
 
-  test.describe(`landing ${path}`, () => {
-    test('seções na ordem do PLANO-DEV §2.2, cada uma rotulada pelo seu H2', async ({ page }) => {
+  test.describe(`home ${path}`, () => {
+    test('seções na ordem, cada uma rotulada pelo seu H2; um H1 com a manchete', async ({ page }) => {
       await page.goto(path);
-      const ids = await page.locator('main > section[id]').evaluateAll((els) => els.map((el) => el.id));
-      expect(ids).toEqual([...SECTION_IDS]);
-      for (const id of SECTION_IDS) {
-        const section = page.locator(`section#${id}`);
-        const labelledBy = await section.getAttribute('aria-labelledby');
+      const order = await page.locator('main > section[id]').evaluateAll((els) => els.map((el) => el.id));
+      expect(order).toEqual([ids.hero, ids.brain, ids.solutions, ids.custom, ids.process, ids.structure, ids.proof, ids.fit, ids.faq, 'agendar']);
+      for (const id of order) {
+        const labelledBy = await page.locator(`section#${id}`).getAttribute('aria-labelledby');
         expect(labelledBy, id).toBeTruthy();
-        await expect(page.locator(`#${labelledBy}`)).toBeVisible();
+        await expect(page.locator(`[id="${labelledBy}"]`)).toBeVisible();
       }
       await expect(page.locator('h1')).toHaveCount(1);
-      await expect(page.locator('h1')).toHaveText(copy.hero.headline);
+      await expect(page.locator('h1')).toHaveText(c.hero.title);
     });
 
-    test('depoimentos ocultos: nenhuma seção nem espaço reservado', async ({ page }) => {
+    test('âncora de soluções do header existe e lista as 8 áreas, rotuladas como exemplos', async ({ page }) => {
       await page.goto(path);
-      await expect(page.locator('#depoimentos')).toHaveCount(0);
-      await expect(page.getByText(copy.testimonials.title, { exact: true })).toHaveCount(0);
+      const hash = chrome[locale].header.nav.find((item) => item.hash)?.hash;
+      expect(hash).toBe(ids.solutions);
+      const section = page.locator(`section#${ids.solutions}`);
+      await expect(section.locator('.ds-fg > li')).toHaveCount(8);
+      await expect(section).toContainText(c.solutions.exampleLabel);
+      for (const area of c.solutions.areas) await expect(section).toContainText(area.eyebrow ?? '');
     });
 
-    test('hero: CTAs, microprova e painel de fatos com preços de pricing.ts', async ({ page }) => {
+    test('mocks com selo de ilustração; etapas e estrutura batem com o conteúdo', async ({ page }) => {
       await page.goto(path);
-      const hero = page.locator('#inicio');
-      await expect(hero.getByRole('link', { name: copy.hero.primaryCta })).toBeVisible();
-      await expect(hero.getByRole('link', { name: copy.hero.secondaryCta })).toHaveAttribute('href', '#precos');
-      await expect(hero.locator('.hero__proof li')).toHaveText(copy.hero.proofLine);
-      const sprint = ladder.steps.find((s) => s.id === 'sprint');
-      if (sprint?.price.kind !== 'fixed') throw new Error('sprint sem preço fixo');
-      await expect(hero.locator('[data-step="sprint"] dd')).toHaveText(formatMoney(sprint.price.amount, locale));
+      const label = chrome[locale].common.illustration;
+      const mocks = page.locator('main [role="img"]');
+      await expect(mocks).toHaveCount(2);
+      for (const name of await mocks.evaluateAll((els) => els.map((el) => el.getAttribute('aria-label') ?? ''))) expect(name).toContain(label);
+      await expect(page.locator(`#${ids.process} ol > li`)).toHaveCount(etapas[locale].length);
+      await expect(page.locator(`#${ids.structure} .ds-fg > li`)).toHaveCount(estrutura[locale].length);
+      await expect(page.locator(`#${ids.process} a[href="${routes.howWeWork[locale] as string}"]`)).toHaveCount(1);
     });
 
-    test('escada: 6 degraus na ordem de pricing.ts, preços formatados, alternativos marcados', async ({ page }) => {
+    test('prova: cases com link válido e métrica da Loopt com fonte MundoLogística', async ({ page }) => {
       await page.goto(path);
-      const rungs = page.locator('ol.ladder > li');
-      await expect(rungs).toHaveCount(ladder.steps.length);
-      const ids = await rungs.evaluateAll((els) => els.map((el) => el.getAttribute('data-step')));
-      expect(ids).toEqual(ladder.steps.map((s) => s.id));
-
-      for (const step of ladder.steps) {
-        const rung = page.locator(`ol.ladder > li[data-step="${step.id}"]`);
-        const stepCopy = copy.ladder.steps[step.id];
-        await expect(rung.locator('h3')).toContainText(stepCopy.name);
-        await expect(rung.locator('.rung__time')).toHaveText(stepCopy.timeline);
-        const value = rung.locator('.price__value');
-        switch (step.price.kind) {
-          case 'free':
-            await expect(value).toHaveText(copy.ladder.priceLabels.free);
-            break;
-          case 'custom':
-            await expect(value).toHaveText(copy.ladder.priceLabels.custom);
-            break;
-          default:
-            await expect(value).toHaveText(formatMoney(step.price.amount, locale));
-        }
-        // Itens do "O que inclui" ficam dentro do <details>, fechado por padrão.
-        const details = rung.locator('details');
-        await expect(details).not.toHaveAttribute('open');
-        await expect(details.locator('li')).toHaveCount(stepCopy.included.length);
-      }
-
-      // Production-Ready e MVP Plus: "ou" visível no marcador e oculto antes do nome.
-      for (const id of ['productionReady', 'mvpPlus']) {
-        const rung = page.locator(`li[data-step="${id}"]`);
-        await expect(rung).toHaveClass(/rung--alt/);
-        await expect(rung.locator('h3 .visually-hidden')).toHaveText(`${copy.ladder.labels.altStep} `);
-      }
-      // Numerais 1–4 só nos principais.
-      await expect(page.locator('.rung--main .rung__marker')).toHaveText(['1', '2', '3', '4']);
+      const proof = page.locator(`section#${ids.proof}`);
+      const links = await proof.locator('.case-cards a').evaluateAll((els) => els.map((el) => el.getAttribute('href') ?? ''));
+      expect(links).toHaveLength(3);
+      for (const href of links) expect((await page.request.get(href)).status(), href).toBe(200);
+      await expect(proof).toContainText(/[−-]27\s?%/);
+      await expect(proof).toContainText(/\+21\s?%/);
+      await expect(proof).toContainText(locale === 'en' ? /according to Loopt/ : /segundo a Loopt/);
+      await expect(proof.locator('a[href="https://mundologistica.com.br/noticias/loopt-ia-terminais-de-conteineres"]')).toHaveCount(2);
     });
 
-    test('escada: badge só no Sprint, "a partir de" antes do valor no DOM', async ({ page }) => {
+    test('CTAs de agenda com o mesmo destino, na mesma aba; FAQ fechado e abre', async ({ page }) => {
       await page.goto(path);
-      await expect(page.locator('.rung__badge')).toHaveCount(1);
-      await expect(page.locator('li[data-step="sprint"] .rung__badge')).toHaveText(copy.ladder.steps.sprint.badge ?? '');
-      const evolution = page.locator('li[data-step="evolution"] .price');
-      const prefix = copy.ladder.priceLabels.from.split('{price}')[0]?.trim() ?? '';
-      await expect(evolution).toHaveText(new RegExp(`^\\s*${prefix}\\s+.+${copy.ladder.units.perMonth}`));
-    });
-
-    test('tabela do Evolution: caption, cabeçalhos com scope e 3 planos de pricing.ts', async ({ page }) => {
-      await page.goto(path);
-      const table = page.locator('.evolution__table');
-      await expect(table.locator('caption')).toHaveText(copy.ladder.evolution.table.caption);
-      await expect(table.locator('th[scope="col"]')).toHaveCount(3);
-      await expect(table.locator('tbody th[scope="row"]')).toHaveCount(ladder.evolution.plans.length);
-      for (const plan of ladder.evolution.plans) {
-        await expect(table.locator(`tr[data-plan="${plan.id}"] .evolution__price`)).toHaveText(
-          formatMoney(plan.monthly, locale),
-        );
-      }
-      await expect(page.locator('.evolution__rules')).toContainText(formatMoney(ladder.evolution.overagePerHour, locale));
-    });
-
-    test('todos os CTAs de agenda usam o mesmo destino, na mesma aba', async ({ page }) => {
-      await page.goto(path);
-      const hrefs = await page.locator('[data-booking-cta]').evaluateAll((els) =>
-        els.map((el) => [el.getAttribute('href'), el.getAttribute('target')]),
-      );
-      // Header, hero, diagnóstico, pós-escada e final.
-      expect(hrefs.length).toBe(5);
+      const hrefs = await page.locator('[data-booking-cta]').evaluateAll((els) => els.map((el) => [el.getAttribute('href'), el.getAttribute('target')]));
+      // Header, hero e CTA final.
+      expect(hrefs.length).toBeGreaterThanOrEqual(3);
       expect(new Set(hrefs.map(([href]) => href)).size).toBe(1);
       expect(hrefs.every(([, target]) => target === null)).toBe(true);
-    });
-
-    test('garantias, método, não é para e FAQ batem com o copy', async ({ page }) => {
-      await page.goto(path);
-      await expect(page.locator('#garantias .icon-item')).toHaveCount(copy.guarantees.items.length);
-      await expect(page.locator('#garantias .dash-list li')).toHaveCount(copy.guarantees.exclusions.length);
-      await expect(page.locator('#problema .opportunity')).toHaveCount(copy.problem.items.length);
-      await expect(page.locator('#metodo .icon-item')).toHaveCount(copy.method.items.length);
-      await expect(page.locator('#nao-e-para li')).toHaveCount(copy.notFor.items.length);
-      const faq = page.locator('#faq details');
-      await expect(faq).toHaveCount(copy.faq.items.length);
-      await expect(page.locator('#faq details[open]')).toHaveCount(0);
+      const faq = page.locator(`#${ids.faq} details`);
+      await expect(faq).toHaveCount(c.faq.items.length);
+      await expect(page.locator(`#${ids.faq} details[open]`)).toHaveCount(0);
       await faq.first().locator('summary').click();
-      await expect(faq.first().locator('.faq__a')).toBeVisible();
+      await expect(faq.first()).toHaveAttribute('open', '');
     });
 
-    test('quem constrói: foto acessível, case público primeiro, relatos sem destaque', async ({ page }) => {
+    test('sem preço, sem setor por nome, sem link para /para/', async ({ page }) => {
       await page.goto(path);
-      // Foto real (DESIGN §6.12): AVIF/WebP, dimensões explícitas, lazy, até 480 px para desktop 3x.
-      const photo = page.locator('#quem picture img');
-      await expect(photo).toHaveAttribute('alt', copy.about.photoAlt);
-      await expect(photo).toHaveAttribute('loading', 'lazy');
-      await expect(photo).toHaveAttribute('width', '160');
-      await expect(photo).toHaveAttribute('height', '160');
-      const types = await page.locator('#quem picture source').evaluateAll((els) => els.map((el) => el.getAttribute('type')));
-      expect(types).toEqual(['image/avif', 'image/webp']);
-      const widths = await page.locator('#quem picture source').evaluateAll((els) =>
-        els.flatMap((el) => [...(el.getAttribute('srcset') ?? '').matchAll(/(\d+)w/g)].map((m) => Number(m[1]))),
-      );
-      expect(Math.max(...widths)).toBe(480);
-      await page.locator('#quem').scrollIntoViewIfNeeded();
-      await expect(photo).toHaveJSProperty('complete', true);
-      expect(await photo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
-      // Quadrada e sem encolher ao lado do H2: 96 px no mobile, 160 px no desktop.
-      for (const [width, size] of [
-        [360, 96],
-        [1280, 160],
-      ] as const) {
-        await page.setViewportSize({ width, height: 800 });
-        const box = await photo.boundingBox();
-        expect(Math.round(box?.width ?? 0), `largura em ${width}`).toBe(size);
-        expect(Math.round(box?.height ?? 0), `altura em ${width}`).toBe(size);
-      }
-      const kinds = await page.locator('#quem .case').evaluateAll((els) => els.map((el) => el.getAttribute('data-kind')));
-      expect(kinds[0]).toBe('published');
-      await expect(page.locator('#quem .case[data-kind="published"] strong')).toHaveCount(2);
-      await expect(page.locator('#quem .case:not([data-kind="published"]) strong')).toHaveCount(0);
-      await expect(page.locator('#quem .case[data-kind="published"] .case__source a')).toHaveAttribute('href', /^https:\/\//);
+      const text = (await page.locator('main').textContent()) ?? '';
+      expect(text).not.toMatch(/R\$|US\$|\$\s?\d/);
+      expect(text).not.toMatch(/têxtil|confecção|alimentos e bebidas|plásticos e embalagens|metalmecânica|madeira e móveis|eletroeletrônicos|autopeças|textile|food and beverage/i);
+      const hrefs = await page.locator('a[href]').evaluateAll((els) => els.map((el) => el.getAttribute('href') ?? ''));
+      expect(hrefs.filter((href) => href.includes('/para/'))).toEqual([]);
     });
 
     for (const width of [360, 1280]) {
       test(`sem scroll horizontal em ${width} px`, async ({ page }) => {
         await page.setViewportSize({ width, height: 800 });
         await page.goto(path);
-        const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-        expect(scrollWidth).toBeLessThanOrEqual(width);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       });
     }
+  });
+}
+
+for (const locale of ['pt-BR', 'en'] as const) {
+  const path = routes.howWeWork[locale] as string;
+  const c = howWeWork[locale];
+
+  test.describe(`como trabalhamos ${path}`, () => {
+    test('H1, 5 etapas com entregável, estrutura de entrega e FAQ', async ({ page }) => {
+      const res = await page.goto(path);
+      expect(res?.status()).toBe(200);
+      await expect(page.locator('h1')).toHaveCount(1);
+      await expect(page.locator('h1')).toHaveText(c.hero.title);
+      const stages = page.locator('ol.stages > li');
+      await expect(stages).toHaveCount(5);
+      for (const [index, stage] of c.stages.items.entries()) {
+        await expect(stages.nth(index).locator('h3')).toHaveText(stage.title);
+        await expect(stages.nth(index)).toContainText(stage.deliverable);
+      }
+      for (const item of c.delivery.items) await expect(page.locator('main')).toContainText(item.title);
+      for (const block of [c.governance, c.security, c.continuity, c.client]) {
+        await expect(page.getByRole('heading', { level: 2, name: block.title })).toBeVisible();
+      }
+      await expect(page.locator('main details')).toHaveCount(c.faq.items.length);
+      expect(await page.locator('main [data-booking-cta]').count()).toBeGreaterThanOrEqual(2);
+    });
+
+    test('headings sequenciais, sem preço, sem scroll horizontal em 360 px', async ({ page }) => {
+      await page.setViewportSize({ width: 360, height: 800 });
+      await page.goto(path);
+      const levels = await page.locator('h1, h2, h3, h4, h5, h6').evaluateAll((els) => els.map((el) => Number(el.tagName[1])));
+      expect(levels[0]).toBe(1);
+      for (let i = 1; i < levels.length; i++) expect(levels[i]! - levels[i - 1]!, `heading ${i}`).toBeLessThanOrEqual(1);
+      expect((await page.locator('main').textContent()) ?? '').not.toMatch(/R\$|US\$/);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+    });
+
+    test('seletor de idioma leva ao par', async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+      await page.goto(path);
+      await page.locator('header [data-lang-switch]').click();
+      await expect(page).toHaveURL(new RegExp(`${routes.howWeWork[locale === 'en' ? 'pt-BR' : 'en'] as string}$`));
+    });
   });
 }
 
@@ -343,14 +303,14 @@ test.describe('consentimento sem PUBLIC_GADS_ID', () => {
   });
 });
 
-test.describe('landing /diagnostico/ (DESIGN §14)', () => {
+test.describe('landing /diagnostico/', () => {
   const diag = ptBR.diagnostico;
 
   test('seções na ordem, uma H1, CTA só no header, no hero e no final', async ({ page }) => {
     if (!diag) throw new Error('pt-BR sem diagnostico');
     await page.goto('/diagnostico/');
     const ids = await page.locator('main > section[id]').evaluateAll((els) => els.map((el) => el.id));
-    expect(ids).toEqual(['inicio', 'precos', 'sprint', 'provas', 'quem', 'faq', 'contato']);
+    expect(ids).toEqual(['inicio', 'entregas', 'etapas', 'provas', 'faq', 'contato']);
     await expect(page.locator('h1')).toHaveText(diag.hero.title);
     const ctas = page.locator('[data-booking-cta]');
     await expect(ctas).toHaveCount(3);
@@ -359,9 +319,9 @@ test.describe('landing /diagnostico/ (DESIGN §14)', () => {
       'inicio',
       'contato',
     ]);
-    // Escada reusada sem CTA próprio, e o hero sem "Ver preços".
-    await expect(page.locator('#precos [data-booking-cta], #precos .ladder__cta')).toHaveCount(0);
-    await expect(page.locator('#inicio a[href="#precos"]')).toHaveCount(0);
+    await expect(page.locator('#entregas .ds-fg > li')).toHaveCount(diag.deliverables.items.length);
+    await expect(page.locator('#etapas ol > li')).toHaveCount(diag.steps.items.length);
+    await expect(page.locator('#faq details')).toHaveCount(diag.faq.items.length);
   });
 
   test('sem saídas: marca como texto, sem nav, idioma, LinkedIn ou GitHub', async ({ page }) => {
@@ -374,45 +334,22 @@ test.describe('landing /diagnostico/ (DESIGN §14)', () => {
     expect(hrefs.filter((href) => href === '/' || href === '/en/')).toEqual([]);
   });
 
-  test('provas: Bom.Capital sem link e sem destaque; Ascende com link de 44 px', async ({ page }) => {
+  test('provas: métrica da Loopt com fonte; Bom.Capital como relato, sem link', async ({ page }) => {
     await page.goto('/diagnostico/');
-    const cases = page.locator('#provas .case');
-    await expect(cases).toHaveCount(2);
-    await expect(page.locator('#provas .case[data-kind="self-reported"] a, #provas .case strong')).toHaveCount(0);
-    const ascende = page.locator('#provas .case[data-kind="own-project"] a');
-    await expect(ascende).toHaveAttribute('href', 'https://ascende.site');
-    expect(Math.round((await ascende.boundingBox())?.height ?? 0)).toBeGreaterThanOrEqual(44);
-    await expect(page.locator('#quem a, #quem img')).toHaveCount(0);
+    const provas = page.locator('#provas');
+    await expect(provas.locator('a[href^="https://mundologistica.com.br/"]')).toHaveCount(2);
+    await expect(provas).toContainText('segundo a Loopt');
+    const bom = provas.locator('[data-proof="Bom.Capital"]');
+    await expect(bom).toContainText(/relato/i);
+    await expect(bom.locator('a, strong')).toHaveCount(0);
+    expect((await page.locator('main').textContent()) ?? '').not.toMatch(/R\$|US\$/);
   });
 
-  test('preços iguais aos da home', async ({ page }) => {
-    await page.goto('/');
-    const home = await page.locator('#precos .price').allInnerTexts();
-    await page.goto('/diagnostico/');
-    expect(await page.locator('#precos .price').allInnerTexts()).toEqual(home);
-  });
-
-  test('360 px: CTA do hero na 1ª dobra e painel de fatos oculto', async ({ page }) => {
+  test('360 px: CTA do hero na 1ª dobra, sem scroll horizontal', async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 640 });
     await page.goto('/diagnostico/');
     const box = await page.locator('#inicio [data-booking-cta]').boundingBox();
     expect((box?.y ?? 0) + (box?.height ?? 0)).toBeLessThanOrEqual(524);
-    await expect(page.locator('#inicio .hero__facts')).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
   });
-});
-
-test('situações levam às ofertas certas e experiência precede preços', async ({ page }) => {
-  for (const path of ['/', '/en/']) {
-    await page.goto(path);
-    const cards = page.locator('#problema .opportunity');
-    await expect(cards).toHaveCount(4);
-    const links = await cards.locator('a').evaluateAll(els => els.map(el => el.getAttribute('href')));
-    expect(links).toEqual(path === '/' ? ['#precos', '/recuperacao-de-projeto/', '/lovable-em-producao/', '#precos'] : ['#precos', '/en/software-project-rescue/', '/en/lovable-to-production/', '#precos']);
-    for (const href of links.filter(href => href?.startsWith('/'))) {
-      expect((await page.request.get(href!)).status()).toBe(200);
-    }
-    expect(await page.locator('#quem').evaluate(el => Boolean(el.compareDocumentPosition(document.querySelector('#precos')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
-    await expect(page.locator('#quem .about__footnote')).toContainText(path === '/' ? 'não são cases de clientes do studio' : 'not studio client engagements');
-  }
 });

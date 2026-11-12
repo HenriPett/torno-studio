@@ -112,7 +112,7 @@ const other = lovable
   .cp-checks li { position: relative; padding-block: var(--space-3); padding-inline-start: var(--space-5); border-block-start: var(--border-width) solid var(--color-border-subtle); }
   .cp-checks li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: calc(var(--space-3) + 0.6em); inline-size: 0.5rem; block-size: 0.5rem; border-radius: var(--radius-full); background: var(--color-accent); }
   .cp-checks--out li::before { background: var(--color-border-strong); }
-  .cp-grid { display: grid; gap: var(--space-gutter); padding: 0; list-style: none; margin: 0; }
+  .cp-grid { display: grid; gap: var(--space-gutter); padding: 0; list-style: none; margin-inline: 0; margin-block-end: 0; }
   .cp-grid > :global(li > .ds-card__body > * + *) { margin-block-start: var(--space-3); }
   .cp-deliverable { padding-block-start: var(--space-4); border-block-start: 2px solid var(--color-text); }
   .cp-deliverable dd { margin: var(--space-3) 0 0; }

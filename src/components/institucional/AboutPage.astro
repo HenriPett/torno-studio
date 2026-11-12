@@ -70,7 +70,9 @@ const photo = Object.values(photos)[0]?.default;
       <SectionHeader id={`${id.process}-title`} eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} accent>
         <a class="link link--arrow link--target" href={pathFor('howWeWork', locale)}>{c.process.link}</a>
       </SectionHeader>
-      <Steps items={etapas[locale]} />
+      <div class="about-steps">
+        <Steps items={etapas[locale]} />
+      </div>
     </Section>
 
     <Section id={id.lead} labelledby={`${id.lead}-title`}>
@@ -177,6 +179,10 @@ const photo = Object.values(photos)[0]?.default;
   }
 
   @media (min-width: 64em) {
+    .about-steps :global(.ds-steps--columns) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
     .about-split,
     .about-person {
       grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);

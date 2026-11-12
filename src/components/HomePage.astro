@@ -60,7 +60,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     </Section>
 
     <!-- 2. Cérebro da operação -->
-    <Section id={ids.brain} variant="muted" width="wide" labelledby={`${ids.brain}-title`}>
+    <Section id={ids.brain} variant="muted" labelledby={`${ids.brain}-title`}>
       <div class="media-split home-brain">
         <div class="home-brain__text">
           <SectionHeader id={`${ids.brain}-title`} eyebrow={c.brain.eyebrow} title={c.brain.title} lead={c.brain.lead} accent />
@@ -91,7 +91,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     </Section>
 
     <!-- 4. Software sob medida -->
-    <Section id={ids.custom} variant="muted" width="wide" labelledby={`${ids.custom}-title`}>
+    <Section id={ids.custom} variant="muted" labelledby={`${ids.custom}-title`}>
       <div class="media-split media-split--reverse">
         <div>
           <SectionHeader id={`${ids.custom}-title`} eyebrow={c.custom.eyebrow} title={c.custom.title} lead={c.custom.lead} accent />
@@ -108,7 +108,10 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
       <SectionHeader id={`${ids.process}-title`} eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} accent>
         <a class="link link--arrow link--target" href={howWeWork}>{c.process.link}</a>
       </SectionHeader>
-      <Steps items={etapas[locale]} />
+      {/* id legado "precos": artigos do blog (conteúdo intocável) linkam /#precos; as etapas com proposta por etapa substituem a antiga escada de preços. */}
+      <div id={locale === 'pt-BR' ? 'precos' : undefined} class="home-steps">
+        <Steps items={etapas[locale]} />
+      </div>
     </Section>
 
     <!-- 6. Estrutura de entrega -->
@@ -303,6 +306,28 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
 
   .home-proof__all {
     margin-block-start: var(--space-4);
+  }
+
+  /* 5 etapas lado a lado no desktop (o Steps limita a 4 colunas). */
+  @media (min-width: 64em) {
+    .home-steps :global(.ds-steps--columns) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  /* Estrutura: liderança e rede em destaque na 1ª linha, governança, segurança e continuidade embaixo. */
+  @media (min-width: 64em) {
+    :global(.home-structure.grid--3) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    :global(.home-structure.grid--3) > :global(li) {
+      grid-column: span 2;
+    }
+
+    :global(.home-structure.grid--3) > :global(li:nth-child(-n + 2)) {
+      grid-column: span 3;
+    }
   }
 
   .home-fit {

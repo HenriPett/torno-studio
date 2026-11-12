@@ -85,7 +85,7 @@ const id = en
 
     <Section id={id.governance} variant="muted" labelledby={`${id.governance}-title`}>
       <SectionHeader id={`${id.governance}-title`} eyebrow={c.governance.eyebrow} title={c.governance.title} lead={c.governance.lead} accent />
-      <FeatureGrid columns={3} card="surface" items={c.governance.items} />
+      <FeatureGrid columns={3} card="surface" items={c.governance.items} class="five-up" />
     </Section>
 
     <Section id={id.security} variant="inverse" labelledby={`${id.security}-title`}>
@@ -126,7 +126,6 @@ const id = en
   .stages {
     display: grid;
     gap: var(--space-5);
-    margin: 0;
     padding: 0;
     list-style: none;
   }
@@ -215,10 +214,24 @@ const id = en
   }
 
   .plain-list {
-    margin: 0;
     padding: 0;
     list-style: none;
     --grid-gap: var(--space-7) var(--space-6);
+  }
+
+  /* 5 itens: 3 na 1ª linha e 2 mais largos na 2ª (desktop). */
+  @media (min-width: 64em) {
+    :global(.five-up.grid--3) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    :global(.five-up.grid--3) > :global(li) {
+      grid-column: span 2;
+    }
+
+    :global(.five-up.grid--3) > :global(li:nth-child(n + 4)) {
+      grid-column: span 3;
+    }
   }
 
   .plain-list li {
