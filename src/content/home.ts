@@ -48,6 +48,15 @@ export interface HomeContent {
     sources: string[];
     points: FeatureEntry[];
     mock: { asker: string; question: string; answer: string; sources: AskSource[] };
+    /**
+     * Demo interativa (DESIGN §9): rótulo da aba do `mock` acima e mais exemplos, um por área.
+     * Ilustrativos e genéricos (sem setor, sem porte em número de funcionários), no mesmo estilo do mock.
+     */
+    demo: {
+      tabsLabel: string;
+      mockLabel: string;
+      items: { label: string; asker: string; question: string; answer: string; sources: AskSource[] }[];
+    };
   };
   solutions: { eyebrow: string; title: string; lead: string; exampleLabel: string; areas: FeatureEntry[] };
   custom: {
@@ -115,6 +124,57 @@ export const home: Record<Locale, HomeContent> = {
         sources: [
           { title: 'Ficha técnica 4471, rev. C', detail: 'Parâmetros de processo · p. 2' },
           { title: 'Relatório de não conformidade RNC-0912', detail: 'Causa e ação corretiva' },
+        ],
+      },
+      demo: {
+        tabsLabel: 'Exemplos de perguntas por área',
+        mockLabel: 'Produção',
+        items: [
+          {
+            label: 'Qualidade',
+            asker: 'Analista da qualidade · Inspeção final',
+            question: 'Já tivemos rebarba fora de tolerância no item 3318? O que foi feito da última vez?',
+            answer:
+              'Sim, duas vezes neste ano [1]. Na última, a causa foi desgaste da ferramenta F-207, e a ação foi trocá-la a cada 40 mil ciclos [2]. Desde então não houve nova ocorrência.',
+            sources: [
+              { title: 'Não conformidades RNC-0847 e RNC-1033', detail: 'Inspeção final · item 3318' },
+              { title: 'Relatório 8D-0047', detail: 'Causa raiz e ação corretiva' },
+            ],
+          },
+          {
+            label: 'Manutenção',
+            asker: 'Técnico de manutenção · Turno C',
+            question: 'A prensa P-04 parou com alarme de pressão hidráulica. O que resolveu nas outras vezes?',
+            answer:
+              'Nas três últimas ocorrências, o filtro de retorno estava saturado [1]. O procedimento pede troca do filtro e purga do circuito, com a máquina bloqueada [2]. Há um filtro reserva no almoxarifado, posição B-12 [3].',
+            sources: [
+              { title: 'Ordens de manutenção da P-04', detail: 'OM 5521, 5874 e 6102' },
+              { title: 'Procedimento PM-HID-03, rev. B', detail: 'Troca de filtro e purga' },
+              { title: 'Estoque de peças de reposição', detail: 'ERP · almoxarifado' },
+            ],
+          },
+          {
+            label: 'Comercial',
+            asker: 'Representante comercial · Região Sul',
+            question: 'Consigo prometer 1.200 peças do item 5120 para o fim do mês?',
+            answer:
+              'Sim. Há 480 peças em estoque e uma ordem de produção de 900 peças com término previsto para o dia 22 [1]. O prazo de entrega para a sua região é de 3 dias úteis depois do faturamento [2].',
+            sources: [
+              { title: 'Estoque e ordens de produção', detail: 'ERP · item 5120' },
+              { title: 'Política comercial vigente', detail: 'Prazos por região' },
+            ],
+          },
+          {
+            label: 'Gestão',
+            asker: 'Gerente industrial',
+            question: 'Por que o refugo da linha 3 subiu na semana passada?',
+            answer:
+              'O refugo foi de 2,1% para 3,4%, concentrado no turno da noite de terça e quarta [1]. Nos dois dias entrou um lote novo de matéria-prima, e o laudo de recebimento dele registra umidade acima da especificação [2].',
+            sources: [
+              { title: 'Apontamentos de produção · linha 3', detail: 'Semana 44' },
+              { title: 'Laudo de recebimento do lote 7781', detail: 'Controle de entrada' },
+            ],
+          },
         ],
       },
     },
@@ -312,6 +372,57 @@ export const home: Record<Locale, HomeContent> = {
         sources: [
           { title: 'Technical sheet 4471, rev. C', detail: 'Process parameters · p. 2' },
           { title: 'Non-conformance report NCR-0912', detail: 'Root cause and corrective action' },
+        ],
+      },
+      demo: {
+        tabsLabel: 'Example questions by area',
+        mockLabel: 'Production',
+        items: [
+          {
+            label: 'Quality',
+            asker: 'Quality analyst · Final inspection',
+            question: 'Have we had out-of-tolerance burrs on item 3318 before? What did we do last time?',
+            answer:
+              'Yes, twice this year [1]. Last time the cause was wear on tool F-207, and the action was to replace it every 40,000 cycles [2]. There has been no new occurrence since.',
+            sources: [
+              { title: 'Non-conformances NCR-0847 and NCR-1033', detail: 'Final inspection · item 3318' },
+              { title: '8D report 8D-0047', detail: 'Root cause and corrective action' },
+            ],
+          },
+          {
+            label: 'Maintenance',
+            asker: 'Maintenance technician · Shift C',
+            question: 'Press P-04 stopped with a hydraulic pressure alarm. What fixed it the other times?',
+            answer:
+              'In the last three occurrences, the return filter was clogged [1]. The procedure calls for replacing the filter and purging the circuit, with the machine locked out [2]. There is a spare filter in the storeroom, bin B-12 [3].',
+            sources: [
+              { title: 'P-04 maintenance orders', detail: 'MO 5521, 5874 and 6102' },
+              { title: 'Procedure PM-HID-03, rev. B', detail: 'Filter replacement and purge' },
+              { title: 'Spare parts stock', detail: 'ERP · storeroom' },
+            ],
+          },
+          {
+            label: 'Sales',
+            asker: 'Sales rep · South region',
+            question: 'Can we promise 1,200 units of item 5120 by the end of the month?',
+            answer:
+              'Yes. There are 480 units in stock and a 900-unit work order due to finish on the 22nd [1]. Delivery to your region takes 3 business days after invoicing [2].',
+            sources: [
+              { title: 'Stock and work orders', detail: 'ERP · item 5120' },
+              { title: 'Current commercial policy', detail: 'Lead times by region' },
+            ],
+          },
+          {
+            label: 'Management',
+            asker: 'Plant manager',
+            question: 'Why did scrap on line 3 go up last week?',
+            answer:
+              'Scrap went from 2.1% to 3.4%, concentrated on the Tuesday and Wednesday night shifts [1]. On both days a new raw material batch came in, and its incoming inspection report shows moisture above spec [2].',
+            sources: [
+              { title: 'Production records · line 3', detail: 'Week 44' },
+              { title: 'Incoming report for batch 7781', detail: 'Incoming inspection' },
+            ],
+          },
         ],
       },
     },

@@ -100,6 +100,22 @@ const navItems = t.nav
     z-index: 30;
     background-color: var(--color-header-bg-solid);
     box-shadow: var(--shadow-header);
+    transition:
+      transform var(--motion-short) var(--motion-ease-in-out),
+      box-shadow var(--motion-short) var(--motion-ease-in-out),
+      background-color var(--motion-short) var(--motion-ease-in-out);
+  }
+
+  /* Motion (src/scripts/motion.ts): no topo da página a barra se funde ao fundo; ao rolar ganha a hairline. */
+  :global(html.js-motion) .site-header:not(.is-scrolled) {
+    box-shadow: 0 1px 0 transparent;
+  }
+
+  /* Celular/tablet: esconde ao descer e volta ao subir (nunca com foco dentro nem com o menu aberto). */
+  @media (max-width: 63.99em) and (prefers-reduced-motion: no-preference) {
+    .site-header.is-hidden:not(:focus-within) {
+      transform: translateY(-100%);
+    }
   }
 
   @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
@@ -209,7 +225,35 @@ const navItems = t.nav
 
   @media (prefers-reduced-motion: no-preference) {
     .site-header__panel:popover-open {
-      animation: menu-in var(--duration-base) var(--ease-emphasized);
+      animation: menu-in var(--motion-short) var(--motion-ease-out);
+    }
+
+    /* Links do menu entram em cascata. */
+    .site-header__panel:popover-open .site-header__links li,
+    .site-header__panel:popover-open .site-header__utils,
+    .site-header__panel:popover-open .site-header__close {
+      animation: menu-item var(--motion-reveal) var(--motion-ease) backwards;
+    }
+
+    .site-header__panel:popover-open .site-header__links li:nth-child(2) {
+      animation-delay: 40ms;
+    }
+
+    .site-header__panel:popover-open .site-header__links li:nth-child(3) {
+      animation-delay: 80ms;
+    }
+
+    .site-header__panel:popover-open .site-header__links li:nth-child(4) {
+      animation-delay: 120ms;
+    }
+
+    .site-header__panel:popover-open .site-header__links li:nth-child(5) {
+      animation-delay: 160ms;
+    }
+
+    .site-header__panel:popover-open .site-header__utils,
+    .site-header__panel:popover-open .site-header__close {
+      animation-delay: 200ms;
     }
   }
 
@@ -217,6 +261,17 @@ const navItems = t.nav
     from {
       transform: translateY(-0.5rem);
       opacity: 0;
+    }
+  }
+
+  @keyframes menu-item {
+    from {
+      transform: translateY(0.75rem);
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
     }
   }
 
@@ -289,6 +344,10 @@ const navItems = t.nav
       overflow: visible;
       background: transparent;
       border: 0;
+      animation: none;
+    }
+
+    .site-header__panel:popover-open :is(.site-header__links li, .site-header__utils) {
       animation: none;
     }
 

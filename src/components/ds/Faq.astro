@@ -102,6 +102,27 @@ const { items, name, class: className } = Astro.props;
     margin-block-start: var(--space-3);
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .ds-faq__item[open] .ds-faq__a {
+      animation: ds-faq-in var(--motion-reveal) var(--motion-ease) backwards;
+    }
+
+    .ds-faq__q {
+      transition: color var(--motion-micro) var(--motion-ease-in-out);
+    }
+  }
+
+  @keyframes ds-faq-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.375rem);
+    }
+
+    35% {
+      opacity: 1;
+    }
+  }
+
   /* Abertura animada onde há ::details-content (Chromium 131+); nos demais abre seco. */
   @supports selector(::details-content) {
     @media (prefers-reduced-motion: no-preference) {

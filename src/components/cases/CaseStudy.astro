@@ -180,7 +180,7 @@ const facts: [string, string][] = [
 
     <Section variant="muted" tight labelledby="case-related">
       <SectionHeader id="case-related" title={l.others} size="md" />
-      <div class="grid grid--2 case-gap">
+      <div class="grid grid--2 case-gap carousel-sm" data-reveal-stagger>
         {related.map((key) => <CaseCard locale={locale} slug={key} variant="surface" />)}
       </div>
       <p class="case-all"><a class="link link--arrow link--target" href={pathFor('cases', locale)}>{l.allCases}</a></p>

@@ -84,7 +84,8 @@ for (const p of A11Y_PAGES) {
         const sel = 'a[href], button:not([disabled]), summary, input, select, textarea, [tabindex="0"]';
         return [...document.querySelectorAll<HTMLElement>(sel)].filter((el) => {
           const s = getComputedStyle(el);
-          return s.visibility !== 'hidden' && s.display !== 'none' && !el.closest('[hidden], [inert]') && el.getClientRects().length > 0 && !el.closest('details:not([open]) > :not(summary)');
+          // tabIndex < 0: abas inativas (padrão ARIA de abas com tabindex móvel) não são paradas de Tab.
+          return el.tabIndex >= 0 && s.visibility !== 'hidden' && s.display !== 'none' && !el.closest('[hidden], [inert]') && el.getClientRects().length > 0 && !el.closest('details:not([open]) > :not(summary)');
         }).length;
       });
       const seen: string[] = [];

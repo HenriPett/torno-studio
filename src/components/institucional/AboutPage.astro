@@ -54,7 +54,7 @@ const photo = Object.values(photos)[0]?.default;
           {c.focus.paragraphs.map((p) => <p>{p}</p>)}
         </div>
       </div>
-      <ul class="grid grid--3 about-facts" role="list">
+      <ul class="grid grid--3 about-facts" role="list" data-reveal-stagger>
         {
           c.focus.facts.map((fact) => (
             <li>
