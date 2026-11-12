@@ -6,73 +6,78 @@ import { expect, test, type Page } from './fixtures';
 import { HOMES, NOT_FOUND, PAGES, hits, norm, readableText, word, type Lang } from './helpers';
 
 /**
- * Auditoria de conteúdo contra as regras invioláveis (BRIEFING §3, PLANO-DEV §2.3).
- * CHECKLIST.md §C. Um item proibido = bloqueador (vai para a Batuta, não para o Ritmo).
+ * Auditoria de conteúdo contra as regras de honestidade e voz da Torno (docs/estrategia-2026-11-torno-industria.md
+ * §5 e §9). Um item proibido = bloqueador.
  */
 
 /**
- * Exclusões do fundador (base/03 item 8, Q8) + pessoas citadas na matéria (item 7): nunca nomeados.
- * Ecoporto só pode existir dentro do href da MundoLogística. Sem diferenciar maiúsculas; "Aliança" com ou sem cedilha.
+ * Clientes da Loopt e pessoas da matéria: nunca nomeados (estratégia §5.4). Só podem existir dentro do href
+ * da MundoLogística. Sem diferenciar maiúsculas; "Aliança" com ou sem cedilha.
  */
-const TERMINAL = /eco\s?-?porto|transbrasa|marimex|maersk|bandeirantes|alian[çc]a|bissani|gutierres/i;
+const TERMINAL = /deicmar|eco\s?-?porto|tbsa|santos brasil|transbrasa|marimex|maersk|bandeirantes|alian[çc]a|bissani|gutierres/i;
 
 interface Rule {
   id: string;
   re: RegExp;
 }
 
-/** F4 (PLANO-DEV §5.5): com PUBLIC_LOOPT_AUTHORIZED=true a Loopt pode ser citada nos cases; o build e o teste leem a mesma env. */
-const looptAuthorized = (process.env.PUBLIC_LOOPT_AUTHORIZED ?? '').trim().toLowerCase() === 'true';
-
+/** Valem em todas as páginas auditadas (texto legível: body, title, metas e atributos de texto). */
 const COMMON: Rule[] = [
-  ...(looptAuthorized ? [] : [{ id: 'C1 nome Loopt visível', re: /loopt/i }]),
   { id: 'C2 −41% / −31%', re: /[−\-–]\s?(41|31)\s?%/u },
   { id: 'C4 multiplicador 5x/10x', re: /(?<![\p{L}\p{N}])\d+\s?[x×](?![\p{L}\p{N}])/iu },
   { id: 'C7 placeholder TODO', re: /TODO/ },
-  { id: 'C2 −21% de espera (métrica do terminal, base/03 item 7)', re: /[−\-–]\s?21\s?%/u },
-  { id: 'C30 FinPlan removida (base/03 item 8, D1)', re: /fin\s?plan/i },
-  { id: 'C33 relato de provisionamento removido (30 min)', re: /30\s?min(utos|utes)?/i },
-  { id: 'C33 plataforma interna removida', re: /plataforma interna|internal platform/i },
-  { id: 'C33 "2 semanas" no contexto de provisionamento', re: /provision[^.]{0,120}(2 semanas|2 weeks)|(2 semanas|2 weeks)[^.]{0,60}(provision|30)/i },
   { id: 'C26 cliente-terminal nomeado', re: TERMINAL },
-  { id: 'C27 Vercel citada (deploy e privacidade agora são Netlify, PLANO-DEV §5.6)', re: /vercel/i },
-  { id: 'C7 token não substituído', re: /\{(brand|price|year|n|BOOKING_URL|CONTACT_EMAIL|SITE_BRAND)[^}]*\}/ },
+  { id: 'C27 Vercel citada', re: /vercel/i },
+  { id: 'C7 token não substituído', re: /\{(brand|organization|price|year|n|BOOKING_URL|CONTACT_EMAIL|SITE_BRAND)[^}]*\}/ },
   { id: 'C7 undefined/null/NaN no texto', re: word('(undefined|NaN|null)', 'u') },
+  { id: 'C40 "Studio" no texto (marca é Torno; o domínio tornostudio.com segue)', re: /studio(?!\.com)/i },
 ];
 
-const BY_LANG: Record<Lang, Rule[]> = {
+/** Páginas institucionais novas (escopo da home): regras de voz, preço e vocabulário. */
+const INSTITUTIONAL: { path: string; lang: Lang }[] = [
+  { path: '/', lang: 'pt-BR' },
+  { path: '/en/', lang: 'en' },
+  { path: '/como-trabalhamos/', lang: 'pt-BR' },
+  { path: '/en/how-we-work/', lang: 'en' },
+  { path: '/about/', lang: 'pt-BR' },
+  { path: '/en/about/', lang: 'en' },
+  { path: '/contact/', lang: 'pt-BR' },
+  { path: '/en/contact/', lang: 'en' },
+  { path: '/diagnostico/', lang: 'pt-BR' },
+];
+
+/** Aplicadas ao texto do <main> das páginas institucionais (o banner de consentimento tem texto próprio). */
+const MAIN_RULES: Record<Lang, Rule[]> = {
   'pt-BR': [
-    { id: 'C3 1ª pessoa do plural (nós/nosso)', re: word('(nós|noss[oa]s?)') },
-    { id: 'C3 verbo em 1ª pessoa do plural', re: word('(somos|fazemos|entregamos|construímos|atendemos|oferecemos|trabalhamos|garantimos|cobramos)') },
-    { id: 'C3 equipe fingida', re: /(time|equipe) (nosso|nossa|de engenheiros|de desenvolvedores|dedicad[oa])/iu },
-    { id: 'C4 preço como argumento', re: /mais barat[oa]|mais em conta|menor custo|economi[sz]e/iu },
-    { id: 'C4 promessa proibida', re: /substitui \d+|fa(z|ço|zemos) tudo|sempre mais/iu },
-    { id: 'C6 clientes internacionais', re: /clientes internacionais/iu },
+    { id: 'C3 voz em 1ª pessoa do singular (marca fala em "nós")', re: word('(eu|meu|minha|meus|minhas|comigo)') },
+    { id: 'C41 preço público', re: /R\$|US\$|\$\s?\d/ },
+    { id: 'C4 promessa de resultado', re: /reduz[a-z]* \d+\s?%|ROI em|substitui \d+|10x mais/iu },
+    { id: 'C3 equipe fingida', re: /(nosso|nossa) (time|equipe)|(time|equipe) de (engenheiros|desenvolvedores)|\d+ (funcionários|colaboradores) na Torno/iu },
+    {
+      id: 'C42 palavra proibida (§9)',
+      re: /robust[oa]|revolucion|potencializ|alavanc|jornada|ecossistema|transformação digital|de ponta(?! a ponta)|seamless|desbloque|next level/iu,
+    },
+    { id: 'C43 restos da oferta antiga', re: /founding engineer|product sprint|production-ready|mvp plus|garantia de 60 dias|lovable|ai-native/i },
   ],
   en: [
-    { id: 'C3 first-person plural', re: word('(we|our|ours|we\'re|we\'ll|we\'ve)') },
-    { id: 'C3 "us" (lowercase)', re: word('us', 'u') },
-    { id: 'C3 fake team', re: /\b(our|a dedicated|the) team\b|team of (engineers|developers)/i },
-    { id: 'C4 price as pitch', re: /\bcheap(er|est)?\b|save money|fraction of the cost|lower cost/i },
-    { id: 'C4 forbidden promise', re: /replaces? \d+|we do (it )?all|always (cheaper|faster)/i },
-    { id: 'C6 international clients', re: /international clients/i },
+    { id: 'C3 first-person singular', re: /(?<![\p{L}\p{N}])(I|I'm|I've|I'll|my|mine)(?![\p{L}\p{N}])/u },
+    { id: 'C41 public price', re: /R\$|US\$|\$\s?\d/ },
+    { id: 'C4 outcome promise', re: /cut \w+ by \d+\s?%|ROI in|replaces? \d+|10x faster/i },
+    { id: 'C3 fake team', re: /team of (engineers|developers)|\d+ (employees|engineers) at Torno/i },
+    { id: 'C42 banned word (§9)', re: /\brobust|revolutionar|leverag|journey|ecosystem|digital transformation|cutting[- ]edge|seamless|unlock|next level/i },
+    { id: 'C43 old offer leftovers', re: /founding engineer|product sprint|production-ready|mvp plus|60-day bug warranty|lovable|ai-native/i },
   ],
 };
 
-async function audit(page: Page, path: string, lang: Lang): Promise<string[]> {
+async function audit(page: Page, path: string): Promise<string[]> {
   await page.goto(path);
   const text = await readableText(page);
-  // Na privacidade, "30 minutos" é duração de cookie (tabela do Calendly), não o relato de provisionamento do C33.
-  const isPrivacy = /privac/.test(path);
-  const rules = [...COMMON, ...BY_LANG[lang], ...(path === NOT_FOUND.path ? BY_LANG.en : [])].filter(
-    (r) => !(isPrivacy && r.id.startsWith('C33 relato')),
-  );
-  return rules.flatMap((rule) => hits(text, rule.re).map((h) => `${rule.id}: ${h}`));
+  return COMMON.flatMap((rule) => hits(text, rule.re).map((h) => `${rule.id}: ${h}`));
 }
 
-for (const p of [...PAGES, NOT_FOUND]) {
+for (const p of [...PAGES, NOT_FOUND, ...INSTITUTIONAL.filter((i) => !PAGES.some((q) => q.path === i.path))]) {
   test(`C1–C7 nenhum termo proibido em ${p.path}`, async ({ page }) => {
-    expect(await audit(page, p.path, p.lang)).toEqual([]);
+    expect(await audit(page, p.path)).toEqual([]);
   });
 
   test(`C26 links e recursos não apontam para o cliente-terminal (exceto MundoLogística): ${p.path}`, async ({ page }) => {
@@ -113,120 +118,49 @@ for (const p of [...PAGES, NOT_FOUND]) {
   });
 }
 
-const HEADLINE: Record<Lang, string> = {
-  'pt-BR': 'Seu produto em produção em 6–10 semanas, construído e mantido por um único responsável sênior.',
-  en: 'Ship your product without hiring a team. One senior product engineer, accountable end to end.',
-};
+for (const { path, lang } of INSTITUTIONAL) {
+  test(`C3/C41–C43 voz "nós", sem preço, sem vocabulário proibido nem oferta antiga no <main>: ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
+    const text = norm((await page.locator('main').textContent()) ?? '');
+    const found = MAIN_RULES[lang].flatMap((rule) => hits(text, rule.re).map((h) => `${rule.id}: ${h}`));
+    expect(found).toEqual([]);
+  });
 
-const LABELS: Record<Lang, { selfReported: string; ownProject: string; publicSource: RegExp }> = {
-  'pt-BR': { selfReported: 'Relato meu', ownProject: 'Projeto próprio', publicSource: /Dado público · MundoLogística, jan\/2026/ },
-  en: { selfReported: 'My own account', ownProject: 'Own project', publicSource: /Public data · MundoLogística, Jan 2026/ },
-};
+  test(`C44 títulos e botões sem travessão; nenhum link para /para/: ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const titles = await page.locator('main :is(h1, h2, h3, h4, .btn, button, .eyebrow, .lead)').allInnerTexts();
+    expect(titles.filter((t) => /[—–]/.test(t))).toEqual([]);
+    const hrefs = await page.locator('a[href]').evaluateAll((els) => els.map((el) => el.getAttribute('href') ?? ''));
+    expect(hrefs.filter((href) => href.includes('/para/'))).toEqual([]);
+  });
 
-/** Menor bloco (li/article) da seção #quem que contém o texto. */
-const caseBlock = (page: Page, text: string | RegExp) =>
-  page.locator('#quem').locator('li, article').filter({ hasText: text }).last();
+  test(`C12 links não vazios (sem href="#" nem vazio): ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('a[href="#"], a[href=""], a:not([href])')).toHaveCount(0);
+  });
+
+  test(`C32 nenhum link para domínio da Bom.Capital: ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('a[href*="bom.capital" i], a[href*="bomcapital" i]')).toHaveCount(0);
+  });
+}
 
 for (const { path, lang } of HOMES) {
-  test.describe(`${path} prova social (PLANO-DEV §2.3)`, () => {
-    test('C8 manchete exata e sem "AI-native" no hero', async ({ page }) => {
-      await page.goto(path);
-      await expect(page.locator('h1')).toHaveCount(1);
-      expect(norm(await page.locator('h1').innerText())).toBe(HEADLINE[lang]);
-      expect(await page.locator('#inicio').innerText()).not.toMatch(/AI[- ]native|IA[- ]nativ/i);
-    });
+  test(`C9 métrica pública da Loopt: −27% e +21%, atribuídas à Loopt, com fonte MundoLogística: ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const block = page.locator('main section').filter({ hasText: /27\s?%/ }).last();
+    await expect(block).toContainText(/[−-]\s?27\s?%/);
+    await expect(block).toContainText(/\+\s?21\s?%/);
+    await expect(block).toContainText(lang === 'en' ? /according to Loopt/i : /segundo a Loopt/i);
+    expect(await block.locator('a[href^="https://mundologistica.com.br/"]').count()).toBeGreaterThanOrEqual(1);
+  });
 
-    test('C9 métrica pública: −27% e +21% com fonte MundoLogística, sem nome da empresa', async ({ page }) => {
-      await page.goto(path);
-      const block = caseBlock(page, /27\s?%/);
-      await expect(block).toContainText(/[−-]\s?27\s?%/);
-      await expect(block).toContainText(/\+\s?21\s?%/);
-      const source = block.locator('a[href*="mundologistica.com.br"]');
-      await expect(source).toHaveCount(1);
-      await expect(source).toContainText(LABELS[lang].publicSource);
-      if (looptAuthorized) await expect(block).toContainText('Loopt');
-      else expect(await block.innerText()).not.toMatch(/loopt/i);
-    });
-
-    test('C22 com F4 autorizado, "Loopt" só nos cases de #quem (nunca em title, meta, hero ou OG)', async ({ page }) => {
-      test.skip(!looptAuthorized, 'só com PUBLIC_LOOPT_AUTHORIZED=true');
-      await page.goto(path);
-      const outside = await page.evaluate(() => {
-        const parts = [document.title, ...[...document.querySelectorAll('meta[content]')].map((m) => m.getAttribute('content') ?? '')];
-        const body = document.body.cloneNode(true) as HTMLElement;
-        body.querySelectorAll('#quem, script, style').forEach((el) => el.remove());
-        parts.push(body.textContent ?? '');
-        return parts.join('\n');
-      });
-      expect(hits(outside, /loopt/i)).toEqual([]);
-    });
-
-    test('C10 Bom.Capital só como relato, sem destaque numérico', async ({ page }) => {
-      await page.goto(path);
-      const block = caseBlock(page, 'Bom.Capital');
-      await expect(block).toContainText(LABELS[lang].selfReported);
-      await expect(block).toContainText(/48/);
-      // Relato autodeclarado não leva <strong>/<b>/badge nos números (DESIGN §6.10).
-      const emphasized = await block.locator('strong, b, mark, [class*="badge"], [class*="metric"]').allInnerTexts();
-      expect(emphasized.filter((t) => /\d/.test(t))).toEqual([]);
-    });
-
-
-    test('C11 Ascende como projeto próprio, nunca cliente (FinPlan removida: C30)', async ({ page }) => {
-      await page.goto(path);
-      await expect(caseBlock(page, 'Ascende')).toContainText(lang === 'en' ? /own (project|product)/i : /projeto próprio/i);
-      await expect(caseBlock(page, 'Ascende').locator('a[href^="https://ascende.site"]')).toHaveCount(1);
-      const text = await readableText(page);
-      expect(hits(text, /client[ea]?s?[^.]{0,60}Ascende|Ascende[^.]{0,60}client/iu)).toEqual([]);
-    });
-
-    test('C31 Production-Ready não cita ferramenta (Lovable, Bolt, Cursor)', async ({ page }) => {
-      await page.goto(path);
-      const step = page.locator('#precos li').filter({ has: page.getByRole('heading', { level: 3, name: /Production-Ready/ }) }).last();
-      await expect(step).toHaveCount(1);
-      await step.evaluate((el) => el.querySelectorAll('details').forEach((d) => (d.open = true)));
-      expect(await step.textContent()).not.toMatch(/lovable|bolt|cursor/i);
-    });
-
-    test('C34 ferramentas de protótipo genéricas e sem preço de terceiro (Crivo, retomada item 4)', async ({ page }) => {
-      await page.goto(path);
-      const text = await readableText(page);
-      const generic = lang === 'en' ? /AI prototyping tools \(Lovable, Bolt and the like\)/g : /ferramentas de IA para protótipo \(Lovable, Bolt e similares\)/gi;
-      expect((text.match(generic) ?? []).length, 'card de dor + pergunta da FAQ').toBeGreaterThanOrEqual(2);
-      expect(hits(text, /\$\s?25\b|por bem menos/iu)).toEqual([]);
-      // Toda menção a Lovable/Bolt fica dentro da forma genérica.
-      expect(text.replace(generic, '').match(/lovable|\bbolt\b/gi) ?? []).toEqual([]);
-    });
-
-    test('C9b métrica atribuída: "segundo a Loopt" / "according to Loopt"', async ({ page }) => {
-      // Sem autorização (F4) a Loopt não aparece em lugar nenhum: isso é o C1.
-      test.skip(!looptAuthorized, 'só com PUBLIC_LOOPT_AUTHORIZED=true; sem autorização vale o C1');
-      await page.goto(path);
-      await expect(caseBlock(page, /27\s?%/)).toContainText(lang === 'en' ? /according to Loopt/i : /segundo a Loopt/i);
-    });
-
-    test('C9c Bom.Capital atribuída como relato', async ({ page }) => {
-      await page.goto(path);
-      const bom = caseBlock(page, 'Bom.Capital');
-      await expect(bom).toContainText(lang === 'en' ? /my own account/i : /relato/i);
-      await expect(bom).toContainText(lang === 'en' ? /on average/i : /em média 48 horas/i);
-    });
-
-    test('C23 neptune.ai citada sem link (artigo fora do ar)', async ({ page }) => {
-      await page.goto(path);
-      await expect(page.locator('#quem')).toContainText(/neptune\.ai/);
-      await expect(page.locator('a[href*="neptune"]')).toHaveCount(0);
-    });
-
-    test('C32 nenhum link para domínio da Bom.Capital', async ({ page }) => {
-      await page.goto(path);
-      await expect(page.locator('a[href*="bom.capital" i], a[href*="bomcapital" i]')).toHaveCount(0);
-    });
-
-    test('C12 links não vazios (sem href="#" nem vazio)', async ({ page }) => {
-      await page.goto(path);
-      await expect(page.locator('a[href="#"], a[href=""], a:not([href])')).toHaveCount(0);
-    });
+  test(`C8 manchete única e sem setor por nome: ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('h1')).toHaveCount(1);
+    const text = (await page.locator('main').textContent()) ?? '';
+    expect(hits(text, /têxtil|confecç|alimentos e bebidas|plásticos|metalmecânic|madeira e móveis|eletroeletrônic|autopeças|textile|apparel|food and beverage|plastics|metalworking|furniture|auto parts/iu)).toEqual([]);
   });
 }
 
@@ -248,12 +182,12 @@ test('C26 HTML bruto em dist/: cliente-terminal só dentro do href da MundoLogí
   expect(problems).toEqual([]);
 });
 
-test('C1/C2 HTML bruto em dist/ sem "Loopt" (fora de href) nem −41%/−31%', () => {
+test('C2 HTML bruto em dist/ sem −41%/−31%', () => {
   test.skip(Boolean(process.env.QA_BASE_URL), 'varre o dist/ local; no preview o DOM já é auditado pelos outros C*');
   const problems: string[] = [];
   for (const file of htmlFiles(process.env.QA_OUTDIR ?? 'dist')) {
     const raw = readFileSync(file, 'utf8').replace(/\shref="[^"]*"/g, '');
-    for (const re of [...(looptAuthorized ? [] : [/loopt/i]), /[−\-–]\s?(41|31)\s?%/u, /&minus;\s?(41|31)/]) {
+    for (const re of [/[−\-–]\s?(41|31)\s?%/u, /&minus;\s?(41|31)/]) {
       for (const h of hits(raw, re)) problems.push(`${file}: ${h}`);
     }
   }
@@ -275,9 +209,8 @@ for (const path of ['/privacidade/', '/en/privacy/']) {
     await page.goto(path);
     await expect(page.locator(`main a[href="mailto:${email}"]`).first()).toBeVisible();
     await expect(page.locator('main')).toContainText(email);
-    const home = path.startsWith('/en/') ? '/en/' : '/';
-    await page.goto(home);
-    await expect(page.locator(`#contato a[href="mailto:${email}"]`)).toBeVisible();
+    await page.goto(path.startsWith('/en/') ? '/en/contact/' : '/contact/');
+    await expect(page.locator(`main a[href="mailto:${email}"]`)).toBeVisible();
   });
 }
 
@@ -293,56 +226,19 @@ for (const path of ['/privacidade/', '/en/privacy/']) {
   });
 }
 
-/** F6: a foto do fundador, se presente, carrega de verdade e tem dimensões fixas (sem CLS). */
-for (const { path } of HOMES) {
+/** A foto do fundador, na /about/, carrega de verdade, é pequena e tem dimensões fixas (sem CLS). */
+for (const path of ['/about/', '/en/about/']) {
   test(`C25 foto do fundador carrega com width/height: ${path}`, async ({ page }) => {
     await page.goto(path);
-    const img = page.locator('#quem img');
-    test.skip((await img.count()) === 0, 'sem foto (monograma)');
-    await img.first().scrollIntoViewIfNeeded();
-    await expect(img.first()).toHaveAttribute('alt', 'Henrique Pett');
-    await expect(img.first()).toHaveAttribute('width', /\d+/);
-    await expect(img.first()).toHaveAttribute('height', /\d+/);
-    await expect.poll(() => img.first().evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    const img = page.locator('main img');
+    await expect(img).toHaveCount(1);
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toHaveAttribute('alt', 'Henrique Pett');
+    await expect(img).toHaveAttribute('width', '96');
+    await expect(img).toHaveAttribute('height', '96');
+    await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await expect(page.locator(`main a[href="${path.startsWith('/en/') ? '/en/authors/henrique-pett/' : '/autores/henrique-pett/'}"]`)).toHaveCount(1);
   });
-}
-
-/** f3bcad8: a garantia de 60 dias é só do MVP; nunca aparece sem qualificação no hero nem no og:description. */
-const WARRANTY: Record<Lang, { proof: string; unqualified: RegExp }> = {
-  'pt-BR': { proof: 'Garantia de 60 dias no MVP', unqualified: /garantia de 60 dias(?! no MVP)/i },
-  en: { proof: '60-day bug warranty on MVPs', unqualified: /60-day bug warranty(?! on MVPs)/i },
-};
-
-for (const { path, lang } of HOMES) {
-  test(`C29 garantia de 60 dias qualificada como MVP no hero e no og:description: ${path}`, async ({ page }) => {
-    await page.goto(path);
-    const items = (await page.locator('#inicio .hero__proof li').allInnerTexts()).map(norm);
-    expect(items).toContain(WARRANTY[lang].proof);
-    expect(norm(await page.locator('#inicio').innerText())).not.toMatch(WARRANTY[lang].unqualified);
-    const og = (await page.locator('meta[property="og:description"]').getAttribute('content')) ?? '';
-    expect(og).not.toMatch(WARRANTY[lang].unqualified);
-  });
-
-  for (const width of [360, 768, 1280]) {
-    test(`R5 microprova do hero: cada item em 1 linha, dentro do container, sem scroll horizontal: ${path} ${width}px`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 800 });
-      await page.goto(path);
-      const m = await page.locator('#inicio .hero__proof').evaluate((ul) => {
-        const box = ul.getBoundingClientRect();
-        const items = [...ul.querySelectorAll('li')].map((li) => {
-          const range = document.createRange();
-          range.selectNodeContents(li);
-          const tops: number[] = [];
-          for (const q of range.getClientRects()) if (q.width > 0 && !tops.some((t) => Math.abs(t - q.top) < q.height / 2)) tops.push(q.top);
-          const r = li.getBoundingClientRect();
-          return { text: (li.textContent ?? '').trim(), lines: tops.length, inside: r.left >= box.left - 1 && r.right <= box.right + 1 };
-        });
-        return { items, scroll: document.documentElement.scrollWidth - document.documentElement.clientWidth };
-      });
-      expect(m.items.filter((i) => i.lines > 1 || !i.inside).map((i) => `${i.text} (${i.lines} linhas)`)).toEqual([]);
-      expect(m.scroll).toBeLessThanOrEqual(0);
-    });
-  }
 }
 
 /** SPEC §6: com o Google Ads, a política não pode mais negar cookies nem publicidade. */

@@ -1,13 +1,22 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from './fixtures';
 
-import { HOMES, NOT_FOUND, PAGES, gotoWithTheme, openAllDetails, type Theme } from './helpers';
+import { HOMES, NOT_FOUND, PAGES, gotoWithTheme, openAllDetails, type QaPage, type Theme } from './helpers';
 
 /** Acessibilidade, teclado e foco (CHECKLIST.md §A e §K; DESIGN §6 e §9). */
 
 const THEMES: Theme[] = ['light', 'dark'];
 
-for (const p of [...PAGES, NOT_FOUND]) {
+/** Páginas da refatoração 2026-11 (estratégia §6) além das de PAGES; kind não é usado aqui. */
+const NEW_PAGES: QaPage[] = [
+  { path: '/como-trabalhamos/', lang: 'pt-BR', kind: 'home' },
+  { path: '/en/how-we-work/', lang: 'en', kind: 'home' },
+  { path: '/cases/', lang: 'pt-BR', kind: 'home' },
+  { path: '/en/cases/', lang: 'en', kind: 'home' },
+];
+const A11Y_PAGES = [...PAGES, ...NEW_PAGES];
+
+for (const p of [...A11Y_PAGES, NOT_FOUND]) {
   for (const theme of THEMES) {
     for (const width of [360, 1280]) {
       test(`A1 axe sem violação séria/crítica: ${p.path} ${theme} ${width}px`, async ({ page }) => {
@@ -24,7 +33,7 @@ for (const p of [...PAGES, NOT_FOUND]) {
   }
 }
 
-for (const p of PAGES) {
+for (const p of A11Y_PAGES) {
   test.describe(`${p.path} estrutura`, () => {
     test('A2 um H1, sem salto de nível de heading', async ({ page }) => {
       await page.goto(p.path);
@@ -55,7 +64,9 @@ async function focusIsVisible(page: Page): Promise<{ ok: boolean; desc: string }
   return page.evaluate(() => {
     const el = document.activeElement as HTMLElement | null;
     if (!el || el === document.body) return { ok: false, desc: 'body' };
-    const s = getComputedStyle(el);
+    // Card inteiro clicável (DESIGN-2026-11 §6.4): o anel de foco do .ds-card__link é desenhado no card.
+    const ring = el.matches('.ds-card__link') ? (el.closest('.ds-card') as HTMLElement | null) ?? el : el;
+    const s = getComputedStyle(ring);
     const outline = s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0;
     const shadow = s.boxShadow !== 'none';
     const r = el.getBoundingClientRect();
@@ -64,7 +75,7 @@ async function focusIsVisible(page: Page): Promise<{ ok: boolean; desc: string }
   });
 }
 
-for (const p of PAGES) {
+for (const p of A11Y_PAGES) {
   for (const width of [360, 1280]) {
     test(`K1 Tab percorre tudo com foco visível: ${p.path} ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
@@ -113,7 +124,7 @@ for (const p of PAGES) {
 for (const { path } of HOMES) {
   test(`K3 <details> abre com Enter e fecha com Espaço: ${path}`, async ({ page }) => {
     await page.goto(path);
-    const summaries = page.locator('#faq summary, #precos summary');
+    const summaries = page.locator('#faq summary');
     expect(await summaries.count()).toBeGreaterThan(0);
     const first = page.locator('#faq summary').first();
     await first.focus();
@@ -127,7 +138,8 @@ for (const { path } of HOMES) {
     await page.setViewportSize({ width: 360, height: 800 });
     await page.goto(path);
     const small = await page.evaluate(() => {
-      const sel = 'header a, header button, summary, [data-theme-toggle], [data-lang-switch], main a[class*="btn"], main a[class*="button"], main a[class*="cta"]';
+      // header.site-header: os SectionHeader (<header class="ds-sh">) das seções não são o header do site.
+      const sel = 'header.site-header a, header.site-header button, summary, [data-theme-toggle], [data-lang-switch], main a[class*="btn"], main a[class*="button"], main a[class*="cta"]';
       return [...document.querySelectorAll<HTMLElement>(sel)]
         .filter((el) => el.getClientRects().length > 0 && !el.matches('.visually-hidden, [class*="skip"]'))
         .map((el) => ({ el: `${el.tagName.toLowerCase()} "${(el.textContent ?? '').trim().slice(0, 30)}"`, r: el.getBoundingClientRect() }))
@@ -137,18 +149,18 @@ for (const { path } of HOMES) {
     expect(small).toEqual([]);
   });
 
-  test(`K5 CTA de agenda no header, hero, pós-escada e final: ${path}`, async ({ page }) => {
+  test(`K5 CTA de agenda no header, no hero e no CTA final: ${path}`, async ({ page }) => {
     await page.goto(path);
     const booking = process.env.QA_BOOKING_URL;
     const sel = booking ? `a[href="${booking}"]` : 'a[href$="#agendar"], a[href$="#contato"]';
-    for (const where of ['header', '#inicio', '#precos', '#contato']) {
+    for (const where of ['header.site-header', 'main > section:first-of-type', '#agendar']) {
       expect(await page.locator(`${where} ${sel}`).count(), `CTA de agenda em ${where}`).toBeGreaterThan(0);
     }
     if (booking) {
       // Com agenda real configurada, nenhum CTA pode cair no fallback de âncora.
       await expect(page.locator('a[href$="#agendar"]')).toHaveCount(0);
       const offenders = await page.locator('a').evaluateAll((els, url) =>
-        els.filter((a) => /agend|book|call|diagn/i.test(a.textContent ?? '') && !/#(precos|faq)$/.test(a.getAttribute('href') ?? '') && a.getAttribute('href') !== url && !(a.getAttribute('href') ?? '').startsWith('mailto:')).map((a) => `${(a.textContent ?? '').trim().slice(0, 40)} -> ${a.getAttribute('href')}`), booking);
+        els.filter((a) => /agend|book|call|diagn/i.test(a.textContent ?? '') && !/#(solucoes|solutions|faq)$/.test(a.getAttribute('href') ?? '') && a.getAttribute('href') !== url && !(a.getAttribute('href') ?? '').startsWith('mailto:')).map((a) => `${(a.textContent ?? '').trim().slice(0, 40)} -> ${a.getAttribute('href')}`), booking);
       expect(offenders, 'CTA de agenda fora do Calendly').toEqual([]);
     }
   });

@@ -1,0 +1,58 @@
+---
+/**
+ * Section (DESIGN-2026-11 §6.1): bloco de página com fundo, respiro vertical e container.
+ *
+ * <Section id="areas" variant="muted" labelledby="areas-title">…</Section>
+ *
+ * - variant: default (branco) | muted (cinza claro) | inverse (preto, cores locais claras)
+ * - width: default (1200) | wide (1440) | narrow (736) | full (sem container)
+ * - tight: respiro menor (faixas, CTA). flushTop: zera o topo (2 seções do mesmo fundo seguidas).
+ * - reveal: entrada discreta por scroll (CSS puro, só transform). Padrão true.
+ */
+interface Props {
+  id?: string;
+  variant?: 'default' | 'muted' | 'inverse';
+  width?: 'default' | 'wide' | 'narrow' | 'full';
+  tight?: boolean;
+  flushTop?: boolean;
+  reveal?: boolean;
+  /** id do título que nomeia a seção (aria-labelledby). */
+  labelledby?: string;
+  /** Nome acessível quando não há título visível. */
+  label?: string;
+  as?: 'section' | 'div' | 'aside';
+  class?: string;
+}
+
+const {
+  id,
+  variant = 'default',
+  width = 'default',
+  tight = false,
+  flushTop = false,
+  reveal = true,
+  labelledby,
+  label,
+  as: Tag = 'section',
+  class: className,
+} = Astro.props;
+---
+
+<Tag
+  id={id}
+  class:list={['section', `section--${variant}`, tight && 'section--tight', flushTop && 'section--flush-top', className]}
+  aria-labelledby={labelledby}
+  aria-label={label}
+>
+  {
+    width === 'full' ? (
+      <div class:list={[reveal && 'reveal']}>
+        <slot />
+      </div>
+    ) : (
+      <div class:list={['container', width !== 'default' && `container--${width}`, reveal && 'reveal']}>
+        <slot />
+      </div>
+    )
+  }
+</Tag>

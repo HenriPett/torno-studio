@@ -2,29 +2,19 @@ import { expect, test } from './fixtures';
 
 import { HOMES } from './helpers';
 
-/** Casos de borda que começaram manuais no CHECKLIST.md (A8, E1, K6, K7, K9, K10, T5). */
+/** Casos de borda que começaram manuais no CHECKLIST.md (E1, K6, K7, K9, K10, T5). A8 saiu com a escada de preços. */
 
 for (const { path, lang } of HOMES) {
-  test(`A8 degrau alternativo anunciado com "ou"/"or" antes do nome: ${path}`, async ({ page }) => {
-    await page.goto(path);
-    const alt = lang === 'en' ? 'or' : 'ou';
-    for (const name of ['Production-Ready', 'MVP Plus']) {
-      await expect(page.locator('#precos').getByRole('heading', { level: 3, name: new RegExp(`^${alt}\\b.*${name}`) })).toHaveCount(1);
-    }
-  });
-
-  test(`E1 sem JS: FAQ e "O que inclui" abrem, nav e idioma funcionam: ${path}`, async ({ browser }) => {
-    const ctx = await browser.newContext({ javaScriptEnabled: false });
+  test(`E1 sem JS: FAQ abre, âncora de soluções da nav e idioma funcionam: ${path}`, async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 900 } });
     const page = await ctx.newPage();
     await page.goto(path);
     const faq = page.locator('#faq details').first();
     await faq.locator('summary').click();
     await expect(faq).toHaveAttribute('open', '');
-    const rung = page.locator('#precos details').first();
-    await rung.locator('summary').click();
-    await expect(rung).toHaveAttribute('open', '');
-    await page.locator('header nav a[href$="#faq"]').first().click();
-    await expect(page).toHaveURL(/#faq$/);
+    const anchor = lang === 'en' ? 'solutions' : 'solucoes';
+    await page.locator(`header nav a[href$="#${anchor}"]`).first().click();
+    await expect(page).toHaveURL(new RegExp(`#${anchor}$`));
     await page.locator('header [data-lang-switch]').click();
     await expect(page.locator('html')).toHaveAttribute('lang', lang === 'en' ? 'pt-BR' : 'en');
     await ctx.close();
@@ -91,12 +81,13 @@ test('K10 Back do navegador: âncora e troca de idioma voltam sem perder o tema'
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
   await page.locator('header [data-theme-toggle]').click();
-  await page.locator('header nav a[href$="#precos"]').first().click();
-  await expect(page).toHaveURL(/\/#precos$/);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.locator('header nav a[href$="#solucoes"]').first().click();
+  await expect(page).toHaveURL(/\/#solucoes$/);
   await page.locator('header [data-lang-switch]').click();
   await expect(page).toHaveURL(/\/en\/$/);
   await page.goBack();
-  await expect(page).toHaveURL(/\/#precos$/);
+  await expect(page).toHaveURL(/\/#solucoes$/);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.goBack();
   await expect(page).toHaveURL(/\/$/);

@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import Section from './ds/Section.astro';
+import SectionHeader from './ds/SectionHeader.astro';
 import { site } from '../config/site';
 import { publicBlogEntries } from '../lib/blog';
 import { pathFor, type Locale } from '../lib/i18n';
@@ -9,40 +11,60 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const en = locale === 'en';
 const articles = await publicBlogEntries(locale);
+const org = site.organizationName;
+const cases = (['caseLoopt', 'caseBomCapital', 'caseAscende'] as const).map((route, i) => ({ href: pathFor(route, locale), label: ['Loopt', 'Bom Capital', 'Ascende'][i] }));
 ---
-<Base locale={locale} routeId="author" title={en ? 'Henrique Pett | Product Engineer and author at {brand}' : 'Henrique Pett | Product Engineer e autor na {brand}'} description={en ? 'Meet Henrique Pett, the Product Engineer leading Torno Studio and writing about custom software, integrations and delivery acceptance.' : 'Conheça Henrique Pett, Product Engineer à frente da Torno Studio e autor de artigos sobre software sob medida, integrações e critérios de aceite.'}>
+<Base locale={locale} routeId="author" title={en ? 'Henrique Pett | Founder and author at {brand}' : 'Henrique Pett | Fundador e autor na {brand}'} description={en ? `Meet Henrique Pett, founder and technical lead of ${org}, who writes about custom software, integrations and delivery acceptance.` : `Conheça Henrique Pett, fundador e líder técnico da ${org} e autor de artigos sobre software sob medida, integrações e critérios de aceite.`}>
   <Header locale={locale} routeId="author" />
-  <main id="conteudo" class="section" tabindex="-1">
-    <article class="container author">
-      <h1>Henrique Pett</h1>
-      <p class="lead">{en ? 'Product Engineer · Torno Studio · Blog author' : 'Product Engineer · Torno Studio · Autor do blog'}</p>
-      <section><h2>{en ? 'Who writes these articles?' : 'Quem escreve os artigos?'}</h2>
-        <p>{en ? 'I’m Henrique Pett, the engineer leading Torno Studio. I work on custom web products, internal tools, system integrations and AI applications, from understanding the problem to production. I write the blog to help buyers turn business needs into a defined scope and verifiable acceptance criteria.' : 'Sou Henrique Pett, engenheiro à frente da Torno Studio. Trabalho com produtos web sob medida, ferramentas internas, integrações entre sistemas e aplicações com IA, do entendimento do problema à produção. Escrevo o blog para ajudar quem contrata software a transformar necessidades do negócio em escopo e critérios de aceite verificáveis.'}</p>
-      </section>
-      <section><h2>{en ? 'Experience behind the writing' : 'Experiência que informa os textos'}</h2>
-        <p>{en ? 'My background includes software and AI for container terminal operations, credit analysis and Ascende, my own web product. The case studies document my role and each project’s context. Examples in the blog are illustrative when identified as such.' : 'Minha trajetória inclui software e IA para operação de terminais de contêineres, análise de crédito e o Ascende, produto web próprio. Os cases documentam meu papel e o contexto de cada trabalho. Os exemplos do blog são didáticos quando identificados como tal.'}</p>
-        <ul>{(['caseLoopt','caseBomCapital','caseAscende'] as const).map((route, i) => <li><a class="link link--target" href={pathFor(route, locale)}>{['Loopt','Bom Capital','Ascende'][i]}</a></li>)}</ul>
-      </section>
-      <section><h2>{en ? 'How I write' : 'Como escrevo'}</h2>
-        <p>{en ? 'The articles distinguish proposed checks from demonstrated results. Where technical behavior depends on a provider, they link to primary documentation and state the limits of the reference. A checklist helps prepare a decision; applying it still requires evaluating the actual system, dependencies and agreed scope.' : 'Os artigos distinguem verificações propostas de resultados demonstrados. Quando o comportamento técnico depende de um provedor, trazem referências à documentação primária e os limites da consulta. Um roteiro ajuda a preparar a decisão; aplicá-lo exige avaliar o sistema real, suas dependências e o escopo combinado.'}</p>
-      </section>
-      <section><h2>{en ? 'Articles by Henrique Pett' : 'Artigos de Henrique Pett'}</h2>
-        {articles.length ? <ul>{articles.map(({meta}) => <li><a class="link link--target" href={meta.path}>{meta.data.h1}</a></li>)}</ul> : <p>{en ? 'Articles are currently available in Portuguese.' : 'Os artigos estão disponíveis no blog.'} <a class="link link--target" href="/blog/">Blog em português</a></p>}
-      </section>
-      <section><h2>{en ? 'Contact and professional profiles' : 'Contato e perfis profissionais'}</h2>
-        <p>{en ? 'I work remotely from Jaraguá do Sul, Santa Catarina, Brazil. For questions about an article or to discuss a project, use the official contact page.' : 'Trabalho remotamente a partir de Jaraguá do Sul, Santa Catarina, Brasil. Para conversar sobre um artigo ou avaliar um projeto, use a página oficial de contato.'}</p>
-        <ul><li><a class="link link--target" href={pathFor('contact',locale)}>{en ? 'Contact Henrique' : 'Falar com Henrique'}</a></li><li><a class="link link--target" rel="me" href={site.linkedinUrl}>LinkedIn</a></li><li><a class="link link--target" rel="me" href={site.githubUrl}>GitHub</a></li></ul>
-      </section>
-    </article>
+  <main id="conteudo" tabindex="-1">
+    <Section labelledby="author-title" tight reveal={false}>
+      <SectionHeader as="h1" id="author-title" size="lg" eyebrow={en ? 'Blog author' : 'Autor do blog'} title="Henrique Pett" lead={en ? `Founder and technical lead of ${org}.` : `Fundador e líder técnico da ${org}.`} />
+    </Section>
+    <Section variant="muted" width="default" tight reveal={false} label={en ? 'About Henrique Pett' : 'Sobre Henrique Pett'}>
+      <article class="author">
+        <div class="author__body">
+          <section aria-labelledby="author-who"><h2 id="author-who" class="title">{en ? 'Who writes these articles?' : 'Quem escreve os artigos?'}</h2>
+            <p>{en ? `I’m Henrique Pett, the engineer leading ${org}. I work on custom software, internal tools, system integrations and AI applications, from understanding the problem to production. I write the blog to help buyers turn business needs into a defined scope and verifiable acceptance criteria.` : `Sou Henrique Pett, engenheiro à frente da ${org}. Trabalho com software sob medida, ferramentas internas, integrações entre sistemas e aplicações com IA, do entendimento do problema à produção. Escrevo o blog para ajudar quem contrata software a transformar necessidades do negócio em escopo e critérios de aceite verificáveis.`}</p>
+          </section>
+          <section aria-labelledby="author-experience"><h2 id="author-experience" class="title">{en ? 'Experience behind the writing' : 'Experiência que informa os textos'}</h2>
+            <p>{en ? 'My background includes software and AI for container terminal operations, credit analysis and Ascende, my own web product. The case studies document my role and each project’s context. Examples in the blog are illustrative when identified as such.' : 'Minha trajetória inclui software e IA para operação de terminais de contêineres, análise de crédito e o Ascende, produto web próprio. Os cases documentam meu papel e o contexto de cada trabalho. Os exemplos do blog são didáticos quando identificados como tal.'}</p>
+            <ul class="author__cases" role="list">{cases.map(({ href, label }) => <li><a class="link link--arrow link--target" href={href}>{label}</a></li>)}</ul>
+          </section>
+          <section aria-labelledby="author-how"><h2 id="author-how" class="title">{en ? 'How I write' : 'Como escrevo'}</h2>
+            <p>{en ? 'The articles distinguish proposed checks from demonstrated results. Where technical behavior depends on a provider, they link to primary documentation and state the limits of the reference. A checklist helps prepare a decision; applying it still requires evaluating the actual system, dependencies and agreed scope.' : 'Os artigos distinguem verificações propostas de resultados demonstrados. Quando o comportamento técnico depende de um provedor, trazem referências à documentação primária e os limites da consulta. Um roteiro ajuda a preparar a decisão; aplicá-lo exige avaliar o sistema real, suas dependências e o escopo combinado.'}</p>
+          </section>
+        </div>
+        <aside class="author__contact" aria-labelledby="author-contact">
+          <h2 id="author-contact" class="title">{en ? 'Contact and professional profiles' : 'Contato e perfis profissionais'}</h2>
+          <p>{en ? 'I work remotely from Jaraguá do Sul, Santa Catarina, Brazil. For questions about an article or to discuss a project, use the official contact page.' : 'Trabalho remotamente a partir de Jaraguá do Sul, Santa Catarina, Brasil. Para conversar sobre um artigo ou avaliar um projeto, use a página oficial de contato.'}</p>
+          <ul role="list"><li><a class="link link--arrow link--target" href={pathFor('contact', locale)}>{en ? 'Contact Henrique' : 'Falar com Henrique'}</a></li><li><a class="link link--arrow link--target" rel="me" href={site.linkedinUrl}>LinkedIn</a></li><li><a class="link link--arrow link--target" rel="me" href={site.githubUrl}>GitHub</a></li></ul>
+        </aside>
+      </article>
+    </Section>
+    <Section labelledby="author-articles" reveal={false}>
+      <h2 id="author-articles" class="display-md">{en ? 'Articles by Henrique Pett' : 'Artigos de Henrique Pett'}</h2>
+      {articles.length ? <ul class="author__articles" role="list">{articles.map(({ meta }) => <li><a class="link link--quiet link--target" href={meta.path}>{meta.data.h1}</a></li>)}</ul> : <p class="author__empty">{en ? 'Articles are currently available in Portuguese.' : 'Os artigos estão disponíveis no blog.'} <a class="link link--target" href="/blog/" hreflang="pt-BR">Blog em português</a></p>}
+    </Section>
   </main>
   <Footer locale={locale} routeId="author" />
 </Base>
 <style>
-  .author { max-inline-size:calc(var(--measure) + 2 * var(--container-pad)); }
-  h1 { font-size:var(--text-3xl); line-height:var(--leading-tight); }
-  h2 { font-size:var(--text-xl); }
-  section { margin-block-start:var(--space-6); }
-  p, ul { margin-block-start:var(--space-4); }
-  ul { padding-inline-start:var(--space-5); }
-  li + li { margin-block-start:var(--space-3); }
+  .author { display: grid; gap: var(--space-6); }
+  .author__body { display: grid; gap: var(--space-7); max-inline-size: var(--measure); }
+  .author section > * + *, .author__contact > * + * { margin-block-start: var(--space-3); }
+  .author p { text-wrap: pretty; }
+  .author ul { padding: 0; list-style: none; }
+  .author__cases { display: flex; flex-wrap: wrap; column-gap: var(--space-5); }
+  .author__contact { align-self: start; padding: var(--space-5); background: var(--color-surface); border-radius: var(--radius-lg); }
+  .author__contact p { color: var(--color-text-muted); font-size: var(--text-sm); }
+  .author__articles { margin-block-start: var(--space-6); padding: 0; list-style: none; columns: 1; column-gap: var(--space-7); }
+  .author__articles li { break-inside: avoid; border-block-start: var(--border-width) solid var(--color-border); }
+  .author__articles a { padding-block: var(--space-2); line-height: var(--leading-snug); }
+  @media (hover: hover) { .author__articles a:hover { color: var(--color-accent-text); } }
+  .author__empty { margin-block-start: var(--space-5); }
+  @media (min-width: 48em) { .author__articles { columns: 2; } }
+  @media (min-width: 64em) {
+    .author { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); column-gap: var(--space-8); }
+    .author__contact { position: sticky; inset-block-start: calc(var(--header-height) + var(--space-5)); padding: var(--space-6); }
+  }
 </style>

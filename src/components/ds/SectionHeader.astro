@@ -1,0 +1,94 @@
+---
+/**
+ * SectionHeader (DESIGN-2026-11 §6.2): eyebrow pequeno → título grande → lead curto → ações.
+ *
+ * <SectionHeader id="areas-title" eyebrow="Soluções" title="O cérebro da operação." lead="…" />
+ *
+ * - as: h1 (hero) | h2 (padrão) | h3. size: xl | lg | md (padrão: h1 → xl, h2 → lg, h3 → md).
+ * - align: start | center. O slot padrão (opcional) vem depois do lead: botões/links.
+ * - Slot "title" substitui `title` quando precisa de markup (ex.: <span class="muted">).
+ */
+interface Props {
+  title?: string;
+  eyebrow?: string;
+  lead?: string;
+  as?: 'h1' | 'h2' | 'h3';
+  size?: 'xl' | 'lg' | 'md';
+  align?: 'start' | 'center';
+  /** id do título, para Section labelledby. */
+  id?: string;
+  /** Eyebrow na cor de acento. */
+  accent?: boolean;
+  class?: string;
+}
+
+const { title, eyebrow, lead, as: Heading = 'h2', align = 'start', id, accent = false, class: className } = Astro.props;
+const size = Astro.props.size ?? (Heading === 'h1' ? 'xl' : Heading === 'h2' ? 'lg' : 'md');
+const hasActions = Astro.slots.has('default');
+---
+
+<header class:list={['ds-sh', `ds-sh--${align}`, `ds-sh--${size}`, className]}>
+  {eyebrow && <p class:list={['eyebrow', 'ds-sh__eyebrow', accent && 'eyebrow--accent']}>{eyebrow}</p>}
+  <Heading id={id} class:list={[`display-${size}`, 'ds-sh__title']}>
+    {Astro.slots.has('title') ? <slot name="title" /> : title}
+  </Heading>
+  {lead && <p class="lead ds-sh__lead">{lead}</p>}
+  {
+    hasActions && (
+      <div class="ds-sh__actions actions">
+        <slot />
+      </div>
+    )
+  }
+</header>
+
+<style>
+  .ds-sh {
+    display: grid;
+    justify-items: start;
+  }
+
+  .ds-sh--center {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ds-sh__eyebrow {
+    margin-block-end: var(--space-3);
+  }
+
+  .ds-sh--xl .ds-sh__eyebrow {
+    font-size: var(--text-base);
+  }
+
+  .ds-sh__title {
+    max-inline-size: var(--measure-headline);
+  }
+
+  .ds-sh--md .ds-sh__title {
+    max-inline-size: 24ch;
+  }
+
+  .ds-sh__lead {
+    margin-block-start: var(--space-4);
+  }
+
+  .ds-sh--xl .ds-sh__lead {
+    margin-block-start: var(--space-5);
+    max-inline-size: 40ch;
+  }
+
+  .ds-sh__actions {
+    margin-block-start: var(--space-6);
+  }
+
+  .ds-sh--center .ds-sh__actions {
+    justify-content: center;
+    align-self: stretch;
+  }
+
+  /* Cabeçalho seguido de conteúdo na mesma seção: respiro padrão. */
+  .ds-sh + :global(*) {
+    margin-block-start: var(--space-stack);
+  }
+</style>

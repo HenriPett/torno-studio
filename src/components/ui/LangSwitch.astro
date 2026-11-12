@@ -29,16 +29,19 @@ const other = otherLocale(locale);
     flex: none;
     min-inline-size: var(--tap-min);
     min-block-size: var(--tap-min);
+    padding-inline: var(--space-2);
+    border-radius: var(--radius-full);
     font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
+    font-weight: var(--weight-medium);
     color: var(--color-text);
     text-decoration: none;
     text-underline-offset: 0.2em;
+    transition: background-color var(--duration-fast) var(--ease-out);
   }
 
   @media (hover: hover) {
     .lang-switch:hover {
-      text-decoration-line: underline;
+      background-color: var(--color-surface-muted);
     }
   }
 </style>

@@ -1,0 +1,384 @@
+---
+/**
+ * Landing de UM setor (docs/estrategia-2026-11-torno-industria.md §7).
+ *
+ * ISOLAMENTO (§7.2): recebe um setor por vez e não conhece os outros. Nada aqui itera uma lista de
+ * setores nem linka /para/. Links internos permitidos: /, /como-trabalhamos/, /cases/, /cases/loopt/,
+ * /contact/, /privacidade/. Sem routeId no Base: noindex, nofollow, sem canonical e sem hreflang.
+ *
+ * Ordem das seções (§7.4): hero → contexto (fatos com nota) → dores → áreas → produto (AskMock) →
+ * cérebro da operação → cenário ilustrativo → prova → como trabalhamos → FAQ → CTA → fontes.
+ */
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Section from '../ds/Section.astro';
+import SectionHeader from '../ds/SectionHeader.astro';
+import Card from '../ds/Card.astro';
+import FeatureGrid from '../ds/FeatureGrid.astro';
+import Steps from '../ds/Steps.astro';
+import StatGrid, { type StatItem } from '../ds/StatGrid.astro';
+import Faq from '../ds/Faq.astro';
+import CtaBand from '../ds/CtaBand.astro';
+import Pill from '../ds/Pill.astro';
+import AskMock from '../ds/mocks/AskMock.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import NoteRefs from './NoteRefs.astro';
+import type { SectorLanding } from '../../content/setores/types';
+
+interface Props {
+  setor: SectorLanding;
+}
+
+const { setor } = Astro.props;
+const locale = 'pt-BR' as const;
+
+const HOW_WE_WORK = '/como-trabalhamos/';
+const CASES = '/cases/';
+const CASE_LOOPT = '/cases/loopt/';
+
+const sourceAt = (n: number) => {
+  const source = setor.sources[n - 1];
+  if (!source) throw new Error(`[setores/${setor.slug}] fonte ${n} não existe`);
+  return source;
+};
+
+const stats: StatItem[] = (setor.stats ?? []).map((stat) => {
+  const source = sourceAt(stat.source);
+  return { value: stat.value, label: stat.label, source: { label: source.label, href: source.url } };
+});
+// Prova: números da Loopt só com a fonte pública (estratégia §5.3), atribuídos à empresa.
+const looptSourceIndex = setor.sources.findIndex((source) => source.label.includes('Loopt')) + 1;
+const looptSource = looptSourceIndex > 0 ? sourceAt(looptSourceIndex) : null;
+const proofStats: StatItem[] = looptSource
+  ? [
+      { value: '−27%', label: 'de movimentos improdutivos, segundo a Loopt', source: { label: looptSource.label, href: looptSource.url } },
+      { value: '+21%', label: 'de produtividade, segundo a Loopt', source: { label: looptSource.label, href: looptSource.url } },
+    ]
+  : [];
+
+const statColumns = stats.length === 2 || stats.length === 4 ? (stats.length as 2 | 4) : 3;
+
+const contextRefs = setor.context.body.map((_, index) => {
+  const refs = setor.context.refs?.[index] ?? [];
+  refs.forEach(sourceAt);
+  return refs;
+});
+
+/** "Ficha técnica 4471, rev. C" → título "Ficha técnica 4471", detalhe "rev. C". */
+const mockSources = setor.mock.citations.map((citation) => {
+  const cut = citation.lastIndexOf(', ');
+  return cut > 0 ? { title: citation.slice(0, cut), detail: citation.slice(cut + 2) } : { title: citation, detail: 'Documento interno' };
+});
+
+// Resumo das etapas (estratégia §4.2). O detalhe fica em /como-trabalhamos/.
+const process = [
+  { title: 'Conversa inicial', body: 'Quarenta e cinco minutos, sem custo, para entender a operação, o problema e quem decide.', meta: '45 min' },
+  { title: 'Diagnóstico', body: 'Entrevistas por área, inventário de dados e sistemas e a recomendação de um piloto com critério de sucesso. O relatório fica com a empresa.', meta: '2 a 4 semanas' },
+  { title: 'Piloto', body: 'Uma área e um problema, medidos antes e depois pelo critério combinado.' },
+  { title: 'Implantação por etapas', body: 'As demais áreas entram na ordem que o piloto indicar, sobre a mesma base.' },
+  { title: 'Operação assistida', body: 'Monitoramento, ajustes, novos casos de uso, treinamento e relatório mensal.' },
+];
+---
+
+<Base locale={locale} title={setor.meta.title} description={setor.meta.description}>
+  <Header locale={locale} routeId="home" variant="lean" />
+  <main id="conteudo" tabindex="-1" class="sector" data-sector={setor.slug}>
+    <!-- Hero -->
+    <Section labelledby="setor-hero" class="sector-hero" reveal={false}>
+      <SectionHeader as="h1" id="setor-hero" eyebrow={setor.hero.eyebrow} accent title={setor.hero.title} lead={setor.hero.lead} class="sector-hero__header">
+        <BookingCta locale={locale} size="lg">{setor.hero.cta}</BookingCta>
+        <a class="link link--arrow link--target" href={HOW_WE_WORK}>Ver como trabalhamos</a>
+      </SectionHeader>
+    </Section>
+
+    <!-- Contexto do setor -->
+    <Section variant="muted" labelledby="setor-contexto">
+      <SectionHeader id="setor-contexto" eyebrow="O setor em números" title={setor.context.title} size="md" />
+      <div class="sector-context">
+        {
+          setor.context.body.map((paragraph, index) => (
+            <p class="sector-context__p">
+              {paragraph}
+              <NoteRefs refs={contextRefs[index] ?? []} sources={setor.sources} />
+            </p>
+          ))
+        }
+      </div>
+      {stats.length > 0 && <StatGrid locale={locale} items={stats} columns={statColumns} class="sector-stats" />}
+    </Section>
+
+    <!-- Dores -->
+    <Section labelledby="setor-dores">
+      <SectionHeader id="setor-dores" eyebrow="No dia a dia" title={setor.pains.title} size="md" />
+      <FeatureGrid columns={setor.pains.items.length === 4 ? 2 : 3} items={setor.pains.items} />
+    </Section>
+
+    <!-- Áreas atendidas -->
+    <Section variant="muted" labelledby="setor-areas">
+      <SectionHeader id="setor-areas" eyebrow="Áreas" title={setor.areas.title} lead={setor.areas.intro} size="md" />
+      <ul class="grid grid--3 sector-areas" role="list">
+        {
+          setor.areas.items.map((item) => (
+            <Card as="li" variant="surface" padding="lg" class="sector-area">
+              <p class="eyebrow eyebrow--accent">{item.area}</p>
+              <h3 class="title">{item.title}</h3>
+              <p class="muted">{item.body}</p>
+              <div class="sector-area__example">
+                <p class="sector-area__example-label">Exemplo</p>
+                <p class="sector-area__example-text">{item.example}</p>
+              </div>
+            </Card>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <!-- Produto: pergunta e resposta com fonte -->
+    <Section labelledby="setor-produto" width="wide">
+      <div class="media-split">
+        <SectionHeader
+          id="setor-produto"
+          eyebrow="Assistente da operação"
+          title="A pergunta do chão de fábrica, respondida com o documento"
+          lead="Cada resposta indica a ficha, a ordem ou o registro de onde saiu, para quem pergunta conferir antes de agir."
+          size="md"
+        />
+        <AskMock
+          locale={locale}
+          question={setor.mock.question}
+          answer={setor.mock.answer}
+          sources={mockSources}
+          asker="Pergunta de exemplo"
+          caption="Pergunta, resposta e documentos são fictícios."
+        />
+      </div>
+    </Section>
+
+    <!-- Cérebro da operação -->
+    <Section variant="muted" labelledby="setor-cerebro">
+      <div class="sector-brain">
+        <div class="sector-brain__text">
+          <SectionHeader id="setor-cerebro" eyebrow="Cérebro da operação" title={setor.brain.title} size="md" />
+          <div class="stack">
+            {setor.brain.body.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </div>
+        <div class="sector-brain__inputs">
+          <p class="caption sector-brain__inputs-title" id="setor-cerebro-fontes">O que entra na base</p>
+          <ul class="sector-chips" role="list" aria-labelledby="setor-cerebro-fontes">
+            {
+              setor.brain.inputs.map((input) => (
+                <li>
+                  <Pill tone="outline">{input}</Pill>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Cenário ilustrativo -->
+    <Section labelledby="setor-cenario" class="sector-scenario">
+      <div class="sector-scenario__seal">
+        <Pill tone="warn">Cenário ilustrativo</Pill>
+      </div>
+      <SectionHeader id="setor-cenario" eyebrow="Como um piloto poderia correr" title={setor.scenario.title} lead={setor.scenario.intro} size="md" />
+      <Steps items={setor.scenario.steps} />
+      <p class="caption sector-scenario__note">{setor.scenario.note}</p>
+    </Section>
+
+    <!-- Prova -->
+    <Section variant="inverse" labelledby="setor-prova">
+      <div class="sector-proof">
+        <SectionHeader id="setor-prova" eyebrow="Experiência" title={setor.proof.title} size="md" />
+        <p class="sector-proof__body">
+          {setor.proof.body}
+          <NoteRefs refs={looptSourceIndex > 0 ? [looptSourceIndex] : []} sources={setor.sources} />
+        </p>
+        {proofStats.length > 0 && <StatGrid locale={locale} items={proofStats} columns={2} class="sector-proof__stats" />}
+        <div class="actions">
+          <a class="link link--arrow link--target" href={CASE_LOOPT}>Ler o case da Loopt</a>
+          <a class="link link--arrow link--target" href={CASES}>Ver todos os cases</a>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Como trabalhamos -->
+    <Section variant="muted" labelledby="setor-etapas">
+      <SectionHeader id="setor-etapas" eyebrow="Como trabalhamos" title="Cinco etapas, cada uma com proposta fechada" lead="O diagnóstico define o piloto. O piloto decide a etapa seguinte." size="md">
+        <a class="link link--arrow link--target" href={HOW_WE_WORK}>Ver como trabalhamos</a>
+      </SectionHeader>
+      <Steps items={process} layout="rows" />
+    </Section>
+
+    <!-- FAQ -->
+    <Section labelledby="setor-faq" width="narrow">
+      <SectionHeader id="setor-faq" eyebrow="Perguntas frequentes" title="Antes da primeira conversa" size="md" />
+      <Faq items={setor.faq} name="setor-faq" />
+    </Section>
+
+    <CtaBand locale={locale} title={setor.finalCta.title} text={setor.finalCta.body} cta={setor.hero.cta} />
+
+    <!-- Fontes -->
+    <Section labelledby="setor-fontes" tight reveal={false}>
+      <h2 id="setor-fontes" class="title">Fontes</h2>
+      <ol class="sector-sources">
+        {
+          setor.sources.map((source, index) => (
+            <li id={`fonte-${index + 1}`} class="sector-sources__item">
+              <a class="link" href={source.url} target="_blank" rel="noopener">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="caption sector-sources__more">
+        Para falar sobre estes dados ou sobre a Torno, use a <a class="link" href="/contact/">página de contato</a>. O tratamento de dados pessoais está na <a class="link" href="/privacidade/">política de privacidade</a>.
+      </p>
+    </Section>
+  </main>
+  <Footer locale={locale} routeId="home" lean />
+</Base>
+
+<style>
+  .sector-hero :global(.sector-hero__header) {
+    padding-block: var(--space-6) var(--space-4);
+  }
+
+  .sector-hero :global(.sector-hero__header h1) {
+    max-inline-size: 18ch;
+  }
+
+  .sector-context {
+    display: grid;
+    gap: var(--space-5);
+    max-inline-size: 68ch;
+    margin-block-end: var(--space-8);
+  }
+
+  .sector-context__p {
+    font-size: var(--text-lead);
+    line-height: var(--leading-lead);
+    color: var(--color-text);
+  }
+
+  .sector-areas {
+    list-style: none;
+    padding: 0;
+  }
+
+  :global(.sector-area) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .sector-area__example {
+    margin-block-start: auto;
+    padding-block-start: var(--space-4);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .sector-area__example-label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-block-end: var(--space-1);
+  }
+
+  .sector-area__example-text {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+
+  .sector-brain {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .sector-brain__text {
+    max-inline-size: 64ch;
+  }
+
+  .sector-brain__inputs-title {
+    margin-block-end: var(--space-3);
+    font-weight: var(--weight-semibold);
+  }
+
+  .sector-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+
+  .sector-chips :global(.ds-pill) {
+    white-space: normal;
+    text-align: start;
+  }
+
+  @media (min-width: 1024px) {
+    .sector-brain {
+      grid-template-columns: 7fr 5fr;
+      align-items: start;
+    }
+
+    .sector-brain__inputs {
+      padding-block-start: var(--space-9);
+    }
+  }
+
+  .sector-scenario__seal {
+    margin-block-end: var(--space-4);
+  }
+
+  .sector-scenario__note {
+    margin-block-start: var(--space-7);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-muted);
+    color: var(--color-text);
+    max-inline-size: 72ch;
+  }
+
+  .sector-proof {
+    max-inline-size: 60rem;
+  }
+
+  .sector-proof__body {
+    font-size: var(--text-lead);
+    line-height: var(--leading-lead);
+    color: var(--color-text-muted);
+    max-inline-size: 60ch;
+    margin-block-end: var(--space-6);
+  }
+
+  .sector-proof :global(.sector-proof__stats) {
+    margin-block-end: var(--space-7);
+    max-inline-size: 40rem;
+  }
+
+  .sector-sources {
+    display: grid;
+    gap: var(--space-2);
+    margin-block: var(--space-4) var(--space-5);
+    padding-inline-start: 1.5em;
+    font-size: var(--text-sm);
+  }
+
+  .sector-sources__item {
+    overflow-wrap: anywhere;
+    scroll-margin-block-start: calc(var(--header-height) + var(--space-5));
+  }
+
+  .sector-sources__item:target {
+    background-color: var(--color-accent-subtle);
+    border-radius: var(--radius-xs);
+  }
+</style>

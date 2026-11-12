@@ -20,25 +20,34 @@ const headingId = `page-answer-${routeId}`;
 </section>
 
 <style>
+  /* Resposta curta da página: bloco discreto com filete de acento (funciona sobre fundo branco ou cinza). */
   .page-answer {
     margin-block-start: var(--space-5);
+    padding-block: var(--space-1);
+    padding-inline-start: var(--space-5);
+    border-inline-start: 2px solid var(--color-accent);
   }
 
   .page-answer--standalone {
     margin-block-start: 0;
     padding-block: var(--space-5);
+    padding-inline: var(--container-pad);
+    border-inline-start: 0;
   }
 
   .page-answer h2 {
     max-inline-size: var(--measure);
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     font-weight: var(--weight-semibold);
     line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-body);
     text-wrap: pretty;
   }
 
   .page-answer p {
-    margin-block-start: var(--space-3);
+    margin-block-start: var(--space-2);
+    max-inline-size: var(--measure);
     color: var(--color-text-muted);
+    text-wrap: pretty;
   }
 </style>

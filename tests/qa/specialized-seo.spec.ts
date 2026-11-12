@@ -1,6 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { pricing, formatMoney } from '../../src/config/pricing';
 
 // Contrato independente do mapa de rotas da implementação: detecta pares errados.
 const pairs = [
@@ -12,7 +11,15 @@ const pages = pairs.flatMap((pair, group) => pair.map((path, index) => ({
   path, pair, group, lang: index === 0 ? 'pt-BR' as const : 'en' as const,
 })));
 const indexing = process.env.QA_INDEXING === 'true';
-const origin = process.env.QA_CANONICAL_ORIGIN ?? (indexing ? 'https://tornostudio.com' : process.env.QA_BASE_URL);
+// Sem QA_BASE_URL, vale a origem padrão do build local (site.ts cai em http://localhost:4321, a mesma porta do playwright.config.ts).
+const origin = process.env.QA_CANONICAL_ORIGIN ?? (indexing ? 'https://tornostudio.com' : process.env.QA_BASE_URL ?? 'http://localhost:4321');
+// CTA de agenda: Calendly quando o build tem PUBLIC_BOOKING_URL; sem ela, o fallback é a âncora #agendar da home.
+const bookingHref = /^(https:\/\/calendly\.com\/|\/(en\/)?#agendar$)/;
+// Estratégia 2026-11 §4.3: as páginas mantidas não exibem preço.
+// Schema e sitemap só fecham com origem pública: rode esses @http contra um build com PUBLIC_SITE_URL=https://tornostudio.com
+// (e PUBLIC_ALLOW_INDEXING=true + QA_INDEXING=true para o caso de produção). Num build local (localhost) eles são pulados.
+const publicOrigin = !/localhost|127\.0\.0\.1/.test(origin);
+const priceShown = /(R\$|US\$|€|\$)\s?\d/;
 const normalize = (text: string) => text.replace(/\s+/g, ' ').trim();
 const consent = (page: Page, action: string) => page.locator(`[data-consent-action="${action}"]`);
 const thirdParty = /(^|\.)(google(tagmanager|adservices|syndication)?\.[a-z.]+|doubleclick\.net|calendly\.com|gstatic\.com)$/i;
@@ -35,7 +42,9 @@ for (const p of pages) {
       const links = await alternates();
       expect(links).toHaveLength(3);
       expect(Object.fromEntries(links.map(l => [l.lang, l.href]))).toEqual(expected);
-      const directives = `${await page.locator('meta[name="robots"]').getAttribute('content').catch(() => '')} ${response.headers()['x-robots-tag'] ?? ''}`;
+      // Sem meta robots (build indexável), getAttribute esperaria o elemento até estourar o timeout do teste.
+      const robots = await page.evaluate(() => document.querySelector('meta[name="robots"]')?.getAttribute('content') ?? '');
+      const directives = `${robots} ${response.headers()['x-robots-tag'] ?? ''}`;
       if (indexing) expect(directives).not.toMatch(/noindex|\bnone\b/i);
       else expect(directives).toMatch(/noindex/i);
       await expect(page.locator('main h1')).toHaveCount(1);
@@ -76,9 +85,9 @@ for (const p of pages) {
         const violations = (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations;
         expect(violations.map(v => ({ id: v.id, impact: v.impact, targets: v.nodes.map(n => n.target) }))).toEqual([]);
         const cta = page.locator('main a[data-booking-cta]').first();
-        await expect(cta).toHaveAttribute('href', /^https:\/\/calendly\.com\//);
+        await expect(cta).toHaveAttribute('href', bookingHref);
         await cta.click({ trial: true }); // Nunca agenda ou dispara conversão.
-        await page.screenshot({ path: `docs/qa/seo-especializado-20261013/${p.group}-${p.lang}-${width}.png`, fullPage: true });
+        await page.screenshot({ path: test.info().outputPath(`${p.group}-${p.lang}-${width}.png`), fullPage: true });
       });
     }
 
@@ -106,6 +115,8 @@ for (const p of pages) {
       await page.route(/https:\/\/assets\.calendly\.com\/.*widget\.js/, route => route.fulfill({ contentType: 'application/javascript', body: 'window.__qaBookings=[];window.Calendly={initPopupWidget:o=>window.__qaBookings.push(o)};' }));
       await page.route(/https:\/\/(?:www\.)?calendly\.com\//, route => route.fulfill({ contentType: 'text/html', body: 'QA: agenda interceptada' }));
       await open(page, `${p.path}?utm_source=qa&utm_campaign=seo%20a%C3%A7%C3%A3o&gclid=nao-repassar`);
+      const booking = await page.locator('main a[data-booking-cta]').first().getAttribute('href');
+      test.skip(!booking?.startsWith('https://calendly.com/'), 'build sem PUBLIC_BOOKING_URL do Calendly');
       await consent(page, 'customize').click();
       await page.locator('input[name="medicao"]').check();
       await expect(page.locator('input[name="publicidade"]')).not.toBeChecked();
@@ -147,18 +158,14 @@ for (const p of pages) {
       expect(parseFloat(focus.width)).toBeGreaterThan(0);
     });
 
-    if (p.group < 2) test('Comercial: preços aprovados, escopo e qualificação do cliente', async ({ page }) => {
+    if (p.group < 2) test('Comercial: sem preço exibido, escopo e qualificação do cliente', async ({ page }) => {
       await open(page, p.path);
       const text = normalize(await page.locator('main').innerText());
-      if (p.lang === 'pt-BR' && p.group === 0) expect(text).toMatch(/50\s*[–—-]\s*249/);
-      for (const id of ['productionReady', 'sprint']) {
-        const price = pricing[p.lang].steps.find(s => s.id === id)!.price;
-        expect(price.kind).toBe('fixed');
-        if (price.kind === 'fixed') expect(text).toContain(normalize(formatMoney(price.amount, p.lang)));
-      }
+      if (p.lang === 'pt-BR' && p.group === 0) expect(text).toMatch(/m[ée]dio e grande porte/i);
+      expect(text).not.toMatch(priceShown);
       const patterns = p.lang === 'pt-BR'
         ? [/opera[çc][aã]o/i, /escopo/i, /or[çc]amento/i, /decisor|decis[aã]o/i, /acesso/i, /autoriz/i, /impacto/i]
-        : [/funded|funding|revenue/i, /founder/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i];
+        : [/mid-size|large/i, /manufactur|industr/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i];
       for (const pattern of patterns) expect(text).toMatch(pattern);
     });
 
@@ -175,7 +182,8 @@ for (const p of pages) {
   });
 }
 
-test('@http Sitemap: 10 URLs, pares exatos, sem diagnóstico; robots permite crawler', async ({ request }) => {
+test('@http Sitemap: páginas mantidas com pares exatos, sem diagnóstico nem /para/; robots permite crawler', async ({ request }) => {
+  test.skip(!publicOrigin, 'precisa de build com PUBLIC_SITE_URL público');
   const expectedPaths = ['/', '/en/', '/privacidade/', '/en/privacy/', ...pages.map(p => p.path)];
   const index = await request.get('/sitemap-index.xml');
   expect(index.status()).toBe(200);
@@ -201,7 +209,10 @@ test('@http Sitemap: 10 URLs, pares exatos, sem diagnóstico; robots permite cra
       }
     }
   }
-  expect(found.sort()).toEqual(expectedPaths.sort());
+  // O sitemap cresceu (blog, autor, cases...): aqui conferimos só o contrato destas páginas.
+  for (const path of expectedPaths) expect(found, path).toContain(path);
+  expect(found).not.toContain('/diagnostico/');
+  expect(found.filter(path => path.startsWith('/para/'))).toEqual([]);
   const robots = await request.get('/robots.txt');
   expect(robots.status()).toBe(200);
   const text = await robots.text();
@@ -215,13 +226,23 @@ test('Diagnóstico continua noindex, sem canonical/hreflang', async ({ page }) =
   await expect(page.locator('link[rel="canonical"], link[hreflang]')).toHaveCount(0);
 });
 
-test('Descoberta: home liga comerciais, comerciais ligam guia no idioma', async ({ page }) => {
-  for (const [index, home] of ['/', '/en/'].entries()) {
-    await open(page, home);
-    for (const pair of pairs.slice(0, 2)) await expect(page.locator(`a[href="${pair[index]}"]`).first()).toBeVisible();
-    for (const pair of pairs.slice(0, 2)) {
+// Estratégia 2026-11 §6: as páginas mantidas saíram da navegação; quem as descobre é o blog.
+const blogLinks = [
+  ['/blog/antes-de-refazer-sistema-evidencias/', pairs[0][0]],
+  ['/blog/sistema-multiempresa-isolamento-dados-aceite/', pairs[2][0]],
+] as const;
+
+test('Descoberta: blog liga as páginas mantidas, comerciais ligam o guia e a outra comercial no idioma', async ({ page }) => {
+  for (const [article, target] of blogLinks) {
+    await open(page, article);
+    // Os artigos usam URL absoluta (https://tornostudio.com/...).
+    await expect(page.locator(`main a[href$="${target}"]`).first()).toBeVisible();
+  }
+  for (const index of [0, 1]) {
+    for (const [i, pair] of pairs.slice(0, 2).entries()) {
       await open(page, pair[index]!);
       await expect(page.locator(`main a[href="${pairs[2][index]}"]`).first()).toBeVisible();
+      await expect(page.locator(`main a[href="${pairs[1 - i]![index]}"]`).first()).toBeVisible();
     }
   }
 });
@@ -239,6 +260,7 @@ async function documentOf(html: string) {
 }
 
 for (const p of pages) test(`@http ${p.path} HTML, SEO, schema, conteúdo e links`, async ({ request }, testInfo) => {
+  test.skip(!publicOrigin, 'precisa de build com PUBLIC_SITE_URL público');
   const response = await request.get(`${p.path}?utm_source=qa&gclid=qa`);
   expect(response.status()).toBe(200);
   expect(response.headers()['content-type']).toMatch(/text\/html/);
@@ -274,7 +296,7 @@ for (const p of pages) test(`@http ${p.path} HTML, SEO, schema, conteúdo e link
   const booking = nodes('a').filter(n => n.attrs?.some((a: any) => a.name === 'data-booking-cta'));
   expect(booking.length).toBeGreaterThan(0);
   for (const link of booking) {
-    expect(attr(link, 'href')).toMatch(/^https:\/\/calendly\.com\//);
+    expect(attr(link, 'href')).toMatch(bookingHref);
     expect(attr(link, 'href')).not.toMatch(/utm_|gclid/);
     expect(normalize(text(link)).length).toBeGreaterThan(3);
   }
@@ -298,28 +320,25 @@ for (const p of pages) test(`@http ${p.path} HTML, SEO, schema, conteúdo e link
   }
   for (const hash of internal.filter(u => u.pathname === p.path && u.hash).map(u => decodeURIComponent(u.hash.slice(1)))) expect(all.some(n => attr(n, 'id') === hash), `âncora ${hash}`).toBe(true);
   if (p.group < 2) {
-    if (p.lang === 'pt-BR' && p.group === 0) expect(main).toMatch(/50\s*[–—-]\s*249/);
-    for (const id of ['sprint', 'productionReady']) {
-      const price = pricing[p.lang].steps.find(s => s.id === id)!.price;
-      if (price.kind === 'fixed') expect(main).toContain(normalize(formatMoney(price.amount, p.lang)));
-    }
-    for (const pattern of p.lang === 'pt-BR' ? [/opera[çc][aã]o/i, /escopo/i, /or[çc]amento/i, /decisor|decis[aã]o/i, /acesso/i, /autoriz/i, /impacto/i] : [/funded|funding|revenue/i, /founder/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i]) expect(main).toMatch(pattern);
+    if (p.lang === 'pt-BR' && p.group === 0) expect(main).toMatch(/m[ée]dio e grande porte/i);
+    expect(main).not.toMatch(priceShown);
+    for (const pattern of p.lang === 'pt-BR' ? [/opera[çc][aã]o/i, /escopo/i, /or[çc]amento/i, /decisor|decis[aã]o/i, /acesso/i, /autoriz/i, /impacto/i] : [/mid-size|large/i, /manufactur|industr/i, /users?|pilot/i, /scope/i, /budget/i, /decision/i, /access/i, /authori[sz]/i, /impact/i]) expect(main).toMatch(pattern);
   } else {
     const sql = nodes('pre').map(text).join('\n');
     for (const pattern of [/enable row level security/i, /create policy/i, /auth\.uid\(\)/i, /with check/i]) expect(sql).toMatch(pattern);
   }
 });
 
-test('@http diagnóstico noindex e descoberta nas homes', async ({ request }) => {
+test('@http diagnóstico noindex e descoberta pelo blog', async ({ request }) => {
   const response = await request.get('/diagnostico/');
   expect(response.status()).toBe(200);
   const { all, attr } = await documentOf(await response.text());
   expect(all.filter(n => n.tagName === 'meta' && attr(n, 'name') === 'robots').map(n => attr(n, 'content')).join(' ')).toMatch(/noindex/);
   expect(all.filter(n => n.tagName === 'link' && (attr(n, 'rel') === 'canonical' || attr(n, 'hreflang')))).toHaveLength(0);
-  for (const [index, home] of ['/', '/en/'].entries()) {
-    const response = await request.get(home);
+  for (const [article, target] of blogLinks) {
+    const response = await request.get(article);
     expect(response.status()).toBe(200);
     const doc = await documentOf(await response.text());
-    for (const pair of pairs.slice(0, 2)) expect(doc.all.some(n => n.tagName === 'a' && doc.attr(n, 'href') === pair[index]), `${home} -> ${pair[index]}`).toBe(true);
+    expect(doc.all.some(n => n.tagName === 'a' && doc.attr(n, 'href').endsWith(target)), `${article} -> ${target}`).toBe(true);
   }
 });

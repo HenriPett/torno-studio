@@ -1,0 +1,134 @@
+---
+/**
+ * Card (DESIGN-2026-11 §6.4): tile de cantos generosos, sem sombra por padrão (o contraste vem do fundo).
+ *
+ * <Card variant="muted" padding="lg"><h3 class="title">…</h3><p class="muted">…</p></Card>
+ *
+ * - variant: muted (cinza sobre fundo branco, padrão) | surface (branco sobre seção muted)
+ *            | outline (só borda) | inverse (preto, cores locais claras) | accent (fundo de acento suave)
+ * - padding: sm (20) | md (24–32, padrão) | lg (32–48)
+ * - radius: lg (20, padrão) | xl (28, tiles grandes)
+ * - as: div | article | li. Slot "media" fica acima do corpo, sangrando nas bordas.
+ * - interactive: hover sutil (use quando o card inteiro contém UM link principal com .ds-card__link).
+ */
+interface Props {
+  variant?: 'muted' | 'surface' | 'outline' | 'inverse' | 'accent';
+  padding?: 'sm' | 'md' | 'lg';
+  radius?: 'lg' | 'xl';
+  as?: 'div' | 'article' | 'li';
+  interactive?: boolean;
+  class?: string;
+}
+
+const { variant = 'muted', padding = 'md', radius = 'lg', as: Tag = 'div', interactive = false, class: className } = Astro.props;
+---
+
+<Tag
+  class:list={[
+    'ds-card',
+    `ds-card--${variant}`,
+    `ds-card--pad-${padding}`,
+    `ds-card--r-${radius}`,
+    variant === 'inverse' && 'theme-inverse',
+    interactive && 'ds-card--interactive',
+    className,
+  ]}
+>
+  {Astro.slots.has('media') && <div class="ds-card__media"><slot name="media" /></div>}
+  <div class="ds-card__body"><slot /></div>
+</Tag>
+
+<style>
+  .ds-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+    overflow: hidden;
+    color: var(--color-text);
+    list-style: none;
+  }
+
+  .ds-card--r-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  .ds-card--r-xl {
+    border-radius: var(--radius-xl);
+  }
+
+  .ds-card--muted {
+    background-color: var(--color-surface-muted);
+  }
+
+  .ds-card--surface {
+    background-color: var(--color-surface);
+  }
+
+  .ds-card--outline {
+    background-color: transparent;
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  .ds-card--inverse {
+    background-color: var(--color-bg);
+  }
+
+  .ds-card--accent {
+    background-color: var(--color-accent-subtle);
+  }
+
+  .ds-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: var(--space-3);
+  }
+
+  .ds-card--pad-sm .ds-card__body {
+    padding: var(--space-5);
+  }
+
+  .ds-card--pad-md .ds-card__body {
+    padding: clamp(var(--space-5), 1.2rem + 1vw, var(--space-6));
+  }
+
+  .ds-card--pad-lg .ds-card__body {
+    padding: clamp(var(--space-6), 1.5rem + 2vw, var(--space-7));
+  }
+
+  .ds-card__media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .ds-card--interactive {
+    transition:
+      transform var(--duration-base) var(--ease-emphasized),
+      box-shadow var(--duration-base) var(--ease-emphasized);
+  }
+
+  @media (hover: hover) {
+    .ds-card--interactive:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  /* Link principal que cobre o card inteiro (um alvo só, sem aninhar links). */
+  .ds-card :global(.ds-card__link)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .ds-card :global(.ds-card__link:focus-visible) {
+    outline: none;
+  }
+
+  :global(.ds-card:has(.ds-card__link:focus-visible)) {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+</style>

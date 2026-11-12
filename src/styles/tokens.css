@@ -1,73 +1,124 @@
 /*
- * Design tokens: landing "Founding Engineer sob demanda".
- * Spec: docs/design/DESIGN.md. Owner: Timbre (Product Designer).
+ * Design tokens da Torno (2026-11). Spec: docs/design/DESIGN-2026-11.md.
  *
- * Theme resolution:
- *   1. :root                    → light (default)
- *   2. prefers-color-scheme dark → dark, unless <html data-theme="light">
- *   3. <html data-theme="dark"> → dark, regardless of the OS
- * The toggle only sets/removes data-theme on <html>. Contrast values (WCAG 2.2)
- * are documented in DESIGN.md §3; all text pairs ≥ 4.5:1, UI borders ≥ 3:1.
+ * Linguagem: institucional, contida, "industrial limpa". Fundos brancos e cinza muito claro,
+ * seções inversas pretas, texto quase preto, UM acento (azul cobalto) e tipografia grande com
+ * tracking negativo nos títulos.
+ *
+ * Resolução do tema (igual à versão anterior, o script de tema do Base.astro depende disso):
+ *   1. :root                     → claro (padrão)
+ *   2. prefers-color-scheme dark → escuro, salvo <html data-theme="light">
+ *   3. <html data-theme="dark">  → escuro, independente do sistema
+ *
+ * Escopo inverso: .theme-inverse (e .section--inverse em global.css) redefine as cores
+ * localmente para o fundo preto; todo componente que só usa tokens se adapta sozinho.
+ *
+ * Contraste (WCAG 2.2, calculado; tabela completa em DESIGN-2026-11.md §3):
+ *   claro  — text #1d1d1f: 16.8:1 no bg, 15.5:1 no muted · text-muted #6e6e73: 5.07 / 4.66
+ *            accent #1d4fd7: 6.66 / 6.12 · branco no accent 6.66 · border-strong #86868b: 3.62 / 3.33
+ *   escuro — text #f5f5f7: 18.2:1 · muted #a1a1a6: 7.69 no bg, 6.61 no surface
+ *            accent-text #6b9bff: 7.31 · branco no accent #2f62e8: 5.21 · border-strong #76767c: 4.38
+ *   inverso— text #f5f5f7 no #000: 19.3 · muted #a1a1a6: 8.16 · accent-text #6b9bff: 7.76
+ *
+ * Os nomes antigos (--color-surface-sunken, --text-2xl, --radius-md...) continuam existindo como
+ * aliases para as páginas ainda não migradas (privacidade, guias, consentimento, blog).
  */
 
-/* Font: 1 variable family, self-hosted via @fontsource-variable/ibm-plex-sans
-   (weights 100–700, latin subset). Import the CSS once in the base layout. */
+/* Fonte: Inter Variable (eixos wght + opsz), auto-hospedada, só subset latin.
+   O @font-face é escrito à mão no Base.astro (com preload). */
 
 :root {
   color-scheme: light;
 
-  /* ---------- Color: light ---------- */
-  --color-bg: #f7f6f2; /* page, warm paper */
-  --color-surface: #ffffff; /* cards, header */
-  --color-surface-sunken: #eeece6; /* alternating sections, code, table header */
-  --color-text: #16181a; /* 16.5:1 on bg */
-  --color-text-muted: #52575c; /* 6.7:1 on bg, 6.2:1 on sunken */
-  --color-border: #dcd9d1; /* decorative dividers only (not for UI affordance) */
-  --color-border-strong: #7c8187; /* UI boundaries: buttons, details, toggle; 3.6:1 */
-  --color-accent: #1c5a49; /* primary button bg, rail, links; 7.4:1 on bg */
-  --color-accent-hover: #154536;
-  --color-accent-active: #0f352a;
-  --color-on-accent: #ffffff; /* 8.0:1 on accent */
-  --color-accent-subtle: #e2ede8; /* badge bg, highlighted rung */
-  --color-accent-text: #1c5a49; /* links and accent text on any surface */
-  --color-warn-text: #8a4b0f; /* "fica fora" / not-for markers; 6.3:1 */
-  --color-focus: #1c5a49; /* focus ring; 7.4:1 on bg */
-  --color-placeholder-bg: #fff4d6; /* dev-only placeholder highlight */
-  --color-backdrop: rgb(22 24 26 / 0.55); /* <dialog>::backdrop (consent, 2nd level) */
+  /* ===================== Cor: claro ===================== */
+  /* Fundos */
+  --color-bg: #ffffff; /* página */
+  --color-bg-muted: #f5f5f7; /* seção alternada (cinza muito claro) */
+  --color-bg-inverse: #000000; /* seção inversa (preta) */
+  --color-surface: #ffffff; /* cards sobre fundo muted, menus, diálogos */
+  --color-surface-muted: #f5f5f7; /* tiles/cards sobre fundo branco */
+  --color-surface-raised: #ffffff; /* mocks e molduras "flutuando" */
+  --color-surface-sunken: var(--color-bg-muted); /* alias antigo */
 
-  /* ---------- Typography ---------- */
-  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-features-numeric: "tnum" 1, "lnum" 1; /* prices, metrics, hours */
+  /* Texto */
+  --color-text: #1d1d1f; /* 16.8:1 no bg, 15.5:1 no muted */
+  --color-text-muted: #6e6e73; /* 5.07:1 no bg, 4.66:1 no muted. Não usar sobre #e8e8ed. */
 
-  /* Fluid type scale: 360px → 1280px viewport. */
-  --text-xs: 0.8125rem; /* 13px: legal, footnotes */
-  --text-sm: 0.875rem; /* 14px: meta, badges, labels */
-  --text-base: clamp(1rem, 0.961rem + 0.174vw, 1.0625rem); /* 16 → 17px body */
-  --text-lg: clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem); /* 18 → 20 lead */
-  --text-xl: clamp(1.25rem, 1.152rem + 0.435vw, 1.5rem); /* 20 → 24 h3 */
-  --text-2xl: clamp(1.5rem, 1.304rem + 0.87vw, 2rem); /* 24 → 32 h2 */
-  --text-3xl: clamp(1.75rem, 1.457rem + 1.304vw, 2.5rem); /* 28 → 40 h1 hero */
-  --text-price: clamp(1.375rem, 1.277rem + 0.435vw, 1.625rem); /* 22 → 26 */
-  --text-brand: clamp(0.9375rem, 0.898rem + 0.174vw, 1.0625rem); /* 15 → 17 wordmark */
+  /* Linhas */
+  --color-border: #d2d2d7; /* divisórias decorativas (não servem de affordance) */
+  --color-border-subtle: #e8e8ed; /* hairlines internas de cards e mocks */
+  --color-border-strong: #86868b; /* limites de controle: 3.62:1 no bg, 3.33:1 no muted */
+
+  /* Acento: azul cobalto (único). */
+  --color-accent: #1d4fd7; /* botão primário, links; 6.66:1 no bg, 6.12:1 no muted */
+  --color-accent-hover: #1843b8;
+  --color-accent-active: #13389c;
+  --color-on-accent: #ffffff; /* 6.66:1 no accent */
+  --color-accent-subtle: #eaf0fd; /* fundo de pílula/realce; texto accent sobre ele 5.83:1 */
+  --color-accent-text: #1d4fd7; /* links e texto de acento em qualquer superfície clara */
+
+  /* Sinais (só em mocks/alertas; sempre com texto, nunca só a cor) */
+  --color-warn-text: #b4470b; /* laranja de segurança escurecido: 5.46:1 no bg, 5.01:1 no muted */
+  --color-warn-subtle: #fdf0e7;
+  --color-ok-text: #1b7a3e; /* 5.4:1 no bg */
+  --color-ok-subtle: #e9f6ee;
+
+  --color-focus: #1d4fd7;
+  --color-placeholder-bg: #fff4d6; /* destaque de placeholder em dev */
+  --color-backdrop: rgb(0 0 0 / 0.5); /* <dialog>::backdrop */
+  --color-header-bg: rgb(255 255 255 / 0.78); /* barra translúcida */
+  --color-header-bg-solid: #ffffff; /* fallback sem backdrop-filter */
+
+  /* ===================== Tipografia ===================== */
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  --font-features-numeric: "tnum" 1, "lnum" 1; /* métricas, horas, preços */
+
+  /* Escala fluida 360px → 1440px de viewport. */
+  --text-display-xl: clamp(2.75rem, 1.833rem + 4.074vw, 5.5rem); /* 44 → 88: hero */
+  --text-display-lg: clamp(2.25rem, 1.667rem + 2.593vw, 4rem); /* 36 → 64: título de seção forte */
+  --text-display-md: clamp(1.875rem, 1.5rem + 1.667vw, 3rem); /* 30 → 48: título de seção */
+  --text-title-lg: clamp(1.375rem, 1.167rem + 0.926vw, 2rem); /* 22 → 32: título de card grande */
+  --text-title: clamp(1.1875rem, 1.083rem + 0.463vw, 1.5rem); /* 19 → 24: h3 */
+  --text-lead: clamp(1.125rem, 1.042rem + 0.37vw, 1.375rem); /* 18 → 22: lead */
+  --text-base: clamp(1rem, 0.979rem + 0.093vw, 1.0625rem); /* 16 → 17: corpo */
+  --text-sm: 0.875rem; /* 14: meta, botões, nav */
+  --text-xs: 0.75rem; /* 12: legal, legendas, selos */
+  --text-caption: 0.8125rem; /* 13: legenda de mídia, fonte de número */
+
+  /* Aliases antigos (mesma intenção de uso) */
+  --text-lg: var(--text-lead);
+  --text-xl: var(--text-title);
+  --text-2xl: clamp(1.5rem, 1.25rem + 1.111vw, 2.25rem); /* 24 → 36: h2 antigo */
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.667vw, 3rem); /* 30 → 48: h1 antigo */
+  --text-price: clamp(1.375rem, 1.277rem + 0.435vw, 1.625rem);
+  --text-brand: 1.1875rem; /* 19: wordmark */
 
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
-  --weight-bold: 680; /* variable axis: only headings + wordmark */
+  --weight-bold: 700;
+  --weight-display: 650; /* títulos display: firme sem ficar pesado */
 
-  --leading-tight: 1.15; /* h1, wordmark */
-  --leading-snug: 1.3; /* h2, h3, prices */
-  --leading-normal: 1.6; /* body */
-  --tracking-tight: -0.015em; /* h1, h2 */
-  --tracking-brand: -0.01em;
-  --tracking-caps: 0.06em; /* eyebrow, overline (uppercase) */
+  --leading-display: 1.05;
+  --leading-tight: 1.12;
+  --leading-snug: 1.3;
+  --leading-normal: 1.55;
+  --leading-lead: 1.45;
 
-  --measure: 65ch; /* body copy */
-  --measure-narrow: 44ch; /* lead / subtitles */
-  --measure-headline: 22ch; /* hero h1 */
+  --tracking-display: -0.035em; /* display-xl/lg */
+  --tracking-tight: -0.022em; /* display-md, h2 */
+  --tracking-title: -0.015em; /* h3, títulos de card */
+  --tracking-body: -0.006em;
+  --tracking-brand: -0.03em;
+  --tracking-caps: 0.06em; /* eyebrow em caixa alta (uso raro) */
 
-  /* ---------- Spacing (4px base) ---------- */
+  --measure: 65ch;
+  --measure-narrow: 46ch; /* lead */
+  --measure-headline: 18ch; /* display */
+
+  /* ===================== Espaço (base 4px) ===================== */
   --space-1: 0.25rem; /* 4 */
   --space-2: 0.5rem; /* 8 */
   --space-3: 0.75rem; /* 12 */
@@ -77,77 +128,149 @@
   --space-7: 3rem; /* 48 */
   --space-8: 4rem; /* 64 */
   --space-9: 6rem; /* 96 */
-  --space-section: clamp(4rem, 3.217rem + 3.478vw, 6rem); /* 64 → 96 block padding */
-  --space-gutter: clamp(1rem, 0.739rem + 1.159vw, 1.5rem); /* 16 → 24 */
+  --space-10: 8rem; /* 128 */
+  --space-section: clamp(4.5rem, 3.667rem + 3.704vw, 7.5rem); /* 72 → 120: respiro de seção */
+  --space-section-tight: clamp(3rem, 2.583rem + 1.852vw, 4.5rem); /* 48 → 72 */
+  --space-gutter: clamp(1rem, 0.833rem + 0.741vw, 1.5rem); /* 16 → 24: gap de grid */
+  --space-stack: clamp(2.5rem, 2rem + 2.222vw, 4rem); /* 40 → 64: cabeçalho de seção → conteúdo */
 
-  /* ---------- Layout ---------- */
-  --container-max: 70rem; /* 1120px content */
-  --container-pad: clamp(1rem, 0.217rem + 3.478vw, 2rem); /* 16 → 32 page margin */
-  --header-height: 4rem; /* 64px, fits a 2-line wordmark on mobile */
-  --tap-min: 2.75rem; /* 44px minimum target */
+  /* ===================== Layout ===================== */
+  --container-max: 75rem; /* 1200 */
+  --container-wide: 90rem; /* 1440: faixas de mocks/tiles */
+  --container-narrow: 46rem; /* 736: texto, FAQ */
+  --container-pad: clamp(1rem, 0.333rem + 2.963vw, 2.5rem); /* 16 → 40 */
+  --header-height: 3.25rem; /* 52 */
+  --tap-min: 2.75rem; /* 44 */
 
-  /* ---------- Shape & elevation ---------- */
-  --radius-sm: 4px; /* badges, focus ring */
-  --radius-md: 8px; /* buttons, cards, details */
-  --radius-full: 999px; /* monogram, toggle */
+  /* ===================== Forma e elevação ===================== */
+  --radius-xs: 4px;
+  --radius-sm: 8px; /* selos, inputs, foco */
+  --radius-md: 12px; /* elementos internos, details, cards antigos */
+  --radius-lg: 20px; /* cards */
+  --radius-xl: 28px; /* tiles grandes, molduras de mock */
+  --radius-full: 999px; /* botões (pílula), pills */
   --border-width: 1px;
   --focus-ring: 2px solid var(--color-focus);
-  --focus-offset: 2px;
-  --shadow-header: 0 1px 0 var(--color-border); /* hairline, no blur */
+  --focus-offset: 3px;
 
-  /* ---------- Motion ---------- */
-  --duration-fast: 120ms; /* hover, color */
-  --duration-base: 200ms; /* details open, theme */
+  --shadow-header: 0 1px 0 var(--color-border-subtle);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 2px 6px rgb(0 0 0 / 0.04), 0 12px 32px rgb(0 0 0 / 0.07);
+  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.04), 0 24px 64px rgb(0 0 0 / 0.1);
+
+  /* ===================== Movimento ===================== */
+  --duration-fast: 150ms; /* hover, cor */
+  --duration-base: 250ms; /* abrir details, tema */
+  --duration-slow: 600ms; /* entrada de seção */
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ---------- Paleta escura (dupla: preferência do sistema e toggle) ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --color-bg: #111315;
-    --color-surface: #181b1e;
-    --color-surface-sunken: #0b0d0e;
-    --color-text: #eceae4; /* 15.5:1 on bg */
-    --color-text-muted: #a4a9ae; /* 7.9:1 on bg */
-    --color-border: #2c3034;
-    --color-border-strong: #737a80; /* 4.3:1 on bg */
-    --color-accent: #7fcdb0;
-    --color-accent-hover: #a0dcc5;
-    --color-accent-active: #b8e6d4;
-    --color-on-accent: #0b1f18; /* 9.2:1 on accent */
-    --color-accent-subtle: #16302a;
-    --color-accent-text: #8fd5ba; /* 11:1 on bg */
-    --color-warn-text: #e8b27a;
-    --color-focus: #8fd5ba;
+    --color-bg: #0a0a0b;
+    --color-bg-muted: #161617;
+    --color-bg-inverse: #000000;
+    --color-surface: #1c1c1e;
+    --color-surface-muted: #161617;
+    --color-surface-raised: #1c1c1e;
+    --color-text: #f5f5f7; /* 18.2:1 */
+    --color-text-muted: #a1a1a6; /* 7.69:1 no bg, 6.61:1 no surface */
+    --color-border: #2c2c2e;
+    --color-border-subtle: #232325;
+    --color-border-strong: #76767c; /* 4.38:1 no bg */
+    --color-accent: #2f62e8; /* branco sobre ele: 5.2:1 */
+    --color-accent-hover: #4572f0;
+    --color-accent-active: #5a82f3;
+    --color-on-accent: #ffffff;
+    --color-accent-subtle: #14213f;
+    --color-accent-text: #6b9bff; /* 7.31:1 no bg, 6.29:1 no surface */
+    --color-warn-text: #ffb37a;
+    --color-warn-subtle: #33200f;
+    --color-ok-text: #6fd59a;
+    --color-ok-subtle: #10281a;
+    --color-focus: #6b9bff;
     --color-placeholder-bg: #3a2f12;
     --color-backdrop: rgb(0 0 0 / 0.7);
+    --color-header-bg: rgb(10 10 11 / 0.72);
+    --color-header-bg-solid: #0a0a0b;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 2px 6px rgb(0 0 0 / 0.3), 0 12px 32px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.3), 0 24px 64px rgb(0 0 0 / 0.5);
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-bg: #111315;
-  --color-surface: #181b1e;
-  --color-surface-sunken: #0b0d0e;
-  --color-text: #eceae4;
-  --color-text-muted: #a4a9ae;
-  --color-border: #2c3034;
-  --color-border-strong: #737a80;
-  --color-accent: #7fcdb0;
-  --color-accent-hover: #a0dcc5;
-  --color-accent-active: #b8e6d4;
-  --color-on-accent: #0b1f18;
-  --color-accent-subtle: #16302a;
-  --color-accent-text: #8fd5ba;
-  --color-warn-text: #e8b27a;
-  --color-focus: #8fd5ba;
+  --color-bg: #0a0a0b;
+  --color-bg-muted: #161617;
+  --color-bg-inverse: #000000;
+  --color-surface: #1c1c1e;
+  --color-surface-muted: #161617;
+  --color-surface-raised: #1c1c1e;
+  --color-text: #f5f5f7;
+  --color-text-muted: #a1a1a6;
+  --color-border: #2c2c2e;
+  --color-border-subtle: #232325;
+  --color-border-strong: #76767c;
+  --color-accent: #2f62e8;
+  --color-accent-hover: #4572f0;
+  --color-accent-active: #5a82f3;
+  --color-on-accent: #ffffff;
+  --color-accent-subtle: #14213f;
+  --color-accent-text: #6b9bff;
+  --color-warn-text: #ffb37a;
+  --color-warn-subtle: #33200f;
+  --color-ok-text: #6fd59a;
+  --color-ok-subtle: #10281a;
+  --color-focus: #6b9bff;
   --color-placeholder-bg: #3a2f12;
   --color-backdrop: rgb(0 0 0 / 0.7);
+  --color-header-bg: rgb(10 10 11 / 0.72);
+  --color-header-bg-solid: #0a0a0b;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 2px 6px rgb(0 0 0 / 0.3), 0 12px 32px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.3), 0 24px 64px rgb(0 0 0 / 0.5);
+}
+
+/* ---------- Escopo inverso (fundo preto nos dois temas) ----------
+   Usado por .section--inverse. Os valores são os da paleta escura, com fundo #000. */
+.theme-inverse,
+.section--inverse {
+  color-scheme: dark;
+  --color-bg: #000000;
+  --color-bg-muted: #111112;
+  --color-surface: #1d1d1f;
+  --color-surface-muted: #161617;
+  --color-surface-raised: #1d1d1f;
+  --color-text: #f5f5f7; /* 19.3:1 */
+  --color-text-muted: #a1a1a6; /* 8.16:1 no #000, 6.54:1 no #1d1d1f */
+  --color-border: #2c2c2e;
+  --color-border-subtle: #232325;
+  --color-border-strong: #86868b; /* 5.9:1 no #000 */
+  --color-accent: #2f62e8;
+  --color-accent-hover: #4572f0;
+  --color-accent-active: #5a82f3;
+  --color-on-accent: #ffffff;
+  --color-accent-subtle: #14213f;
+  --color-accent-text: #6b9bff; /* 7.76:1 no #000 */
+  --color-warn-text: #ffb37a;
+  --color-warn-subtle: #33200f;
+  --color-ok-text: #6fd59a;
+  --color-ok-subtle: #10281a;
+  --color-focus: #6b9bff;
+  --shadow-md: 0 2px 6px rgb(0 0 0 / 0.3), 0 12px 32px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.3), 0 24px 64px rgb(0 0 0 / 0.6);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
     --duration-fast: 0ms;
     --duration-base: 0ms;
+    --duration-slow: 0ms;
   }
 }

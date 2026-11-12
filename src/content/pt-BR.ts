@@ -1,26 +1,19 @@
 /**
- * Copy PT-BR. Fonte: docs/copy/pt-BR.md (aprovado pela Batuta).
- * Público: dono, diretor de operações ou CFO de empresa tradicional média; secundário: quem tem protótipo.
- * Regras: BRIEFING §3 e checklist PLANO-DEV §2.3. Convenções e limites: src/content/types.ts.
+ * Copy compartilhado PT-BR (contrato em ./types.ts): meta, OG, rótulos comuns, consentimento, privacidade,
+ * /diagnostico/ e 404. Home e páginas institucionais: ./home.ts e ./institucional.ts.
+ * Regras: docs/estrategia-2026-11-torno-industria.md (§5 honestidade, §9 voz).
  */
 
 import type { SiteCopy } from './types';
-
-/** Placeholder do Mote (/diagnostico/): visível em dev/preview; o build de produção falha se sobrar. */
-
-/** Placeholder até o Verso preencher o consentimento (SPEC §4/§6). */
-
-const MUNDOLOGISTICA_URL = 'https://mundologistica.com.br/noticias/loopt-ia-terminais-de-conteineres';
-const MVP_PAYMENT = '40% na assinatura, 30% no beta em homologação, 30% no go-live.';
 
 export const ptBR: SiteCopy = {
   locale: 'pt-BR',
 
   meta: {
     home: {
-      title: '{organization} | Software sob medida, integrações e IA',
+      title: '{brand} | IA e software sob medida para a indústria',
       description:
-        'Automatize processos ou retome um software travado. Desenvolvimento com Henrique Pett, escopo fechado, preços publicados e código na sua conta.',
+        'Juntamos dados e conhecimento da operação num cérebro da empresa e colocamos agentes de IA nas áreas da fábrica. Implantação por etapas, com a sua TI.',
     },
     privacy: {
       title: 'Privacidade | {brand}',
@@ -34,13 +27,13 @@ export const ptBR: SiteCopy = {
   },
 
   og: {
-    title: 'Software e IA para tirar sua operação do trabalho manual.',
-    description: 'Diagnóstico de 45 minutos, grátis. Preços publicados, escopo fechado, garantia de 60 dias no MVP.',
-    imageAlt: 'Software e IA para tirar sua operação do trabalho manual.',
+    title: 'IA aplicada à operação industrial.',
+    description: 'Cérebro da operação e agentes de IA por área, implantados por etapas e dentro das regras da TI da sua indústria.',
+    imageAlt: 'IA aplicada à operação industrial, desenhada para a sua fábrica e implantada por etapas.',
     imageLines: [
-      '{brand} · Founding Engineer sob demanda',
-      'Software e IA para sua operação.',
-      'Um único responsável sênior, do diagnóstico à produção.',
+      '{brand} · IA e software para a indústria',
+      'IA aplicada à operação industrial.',
+      'Desenhada para a sua fábrica e implantada por etapas.',
     ],
   },
 
@@ -52,371 +45,6 @@ export const ptBR: SiteCopy = {
     // Sem menu mobile no design (Timbre); mantidos porque o contrato exige.
     bookingCtaHeader: 'Agendar diagnóstico',
     bookingCtaHeaderMobile: 'Agendar',
-  },
-
-  header: {
-    navLabel: 'Navegação principal',
-    nav: { precos: 'Preços', garantias: 'Garantias', quem: 'Quem sou', faq: 'FAQ' },
-  },
-
-  hero: {
-    eyebrow: 'Henrique Pett · Desenvolvimento sob demanda',
-    headline: 'Software e IA para tirar sua operação do trabalho manual.',
-    subheadline:
-      'Automatizo processos, conecto sistemas e retomo produtos travados. Você fala direto comigo, do primeiro escopo ao software funcionando.',
-    primaryCta: 'Agendar diagnóstico (45 min, grátis)',
-    secondaryCta: 'Ver preços',
-    emailLead: "Prefere começar por mensagem?",
-    emailCta: "Conte seu problema por e-mail",
-    proofLine: ['Preços publicados', 'Código na sua conta desde o dia 1', 'Garantia de 60 dias no MVP'],
-  },
-
-  problem: {
-    "title": "O que você precisa resolver agora?",
-    "intro": "Podemos começar por um processo específico ou pelo produto que você já tem. Primeiro, entendo o problema e defino com você o que precisa funcionar.",
-    "items": [
-        {
-            "title": "Parar de copiar dados entre sistemas",
-            "body": "E-mails, documentos e planilhas viram um fluxo com conferência, histórico e revisão da equipe quando houver dúvida.",
-            "example": "Exemplo de escopo: receber um documento, extrair os dados e conferir o lançamento.",
-            "href": "#precos",
-            "link": "Ver como começar"
-        },
-        {
-            "title": "Retomar um projeto que travou",
-            "body": "Você já investiu com uma agência ou tentou construir sozinho. Avalio o que dá para aproveitar e quais correções vêm primeiro.",
-            "example": "Ponto de partida: acesso ao código, ao ambiente e ao fluxo que está falhando.",
-            "href": "/recuperacao-de-projeto/",
-            "link": "Entender a recuperação"
-        },
-        {
-            "title": "Levar um app Lovable à produção",
-            "body": "O protótipo existe. Falta conferir acessos, integrações e o caminho do usuário antes de colocar clientes reais dentro dele.",
-            "example": "Com base aproveitável e escopo compatível, o caminho pode ser o Production-Ready.",
-            "href": "/lovable-em-producao/",
-            "link": "Ver o que entra na entrega"
-        },
-        {
-            "title": "Construir um produto para seus clientes",
-            "body": "Um portal, SaaS ou ferramenta interna para uma necessidade concreta. Defino a primeira versão com critérios para aceitar a entrega.",
-            "example": "O Sprint entrega escopo e protótipo navegável. A construção é uma etapa separada.",
-            "href": "#precos",
-            "link": "Comparar etapas e preços"
-        }
-    ]
-},
-
-  ladder: {
-    title: 'Preço publicado, escopo fechado, um degrau de cada vez.',
-    intro:
-      'Você sabe quanto custa antes de assinar. Cada etapa termina com algo que é seu, e você decide se sobe para a próxima. O diagnóstico é grátis e pode terminar em "não construa software agora".',
-    priceLabels: { free: 'Grátis', from: 'a partir de {price}', custom: 'Sob consulta' },
-    labels: { timeline: 'Prazo', included: 'O que inclui', payment: 'Pagamento', altStep: 'ou' },
-    units: { perMonth: '/mês', perHour: '/h', hoursPerMonth: '~{n} h' },
-    steps: {
-      diagnostic: {
-        name: 'Diagnóstico',
-        timeline: '45 minutos',
-        summary: 'Uma conversa para entender o problema e ver se vale construir algo.',
-        included: [
-          'Entender o processo, a dor e quem decide',
-          'Estimar quanto o problema custa hoje',
-          'Indicar o degrau certo, com faixa de preço',
-          'Dizer quando não vale construir agora',
-        ],
-        payment: 'Sem custo e sem compromisso.',
-      },
-      sprint: {
-        name: 'Product Sprint',
-        timeline: '2 semanas',
-        summary: 'O projeto do seu produto, pronto para construir e com preço fechado.',
-        included: [
-          'Problema e métrica de sucesso definidos',
-          'Escopo com critérios de aceite e o que fica fora',
-          'Arquitetura técnica',
-          'Protótipo navegável do fluxo principal',
-          'Plano de marcos com preço fechado do MVP',
-        ],
-        payment: '100% antecipado.',
-        badge: '100% abatido do MVP',
-        note: {
-          text: '100% abatido do MVP se você assinar em até 30 dias. Os entregáveis são seus, mesmo se não seguir comigo.',
-          highlight: true,
-        },
-      },
-      productionReady: {
-        name: 'Production-Ready',
-        timeline: '2–3 semanas',
-        summary: 'Para quem já tem um protótipo e precisa colocá-lo em produção.',
-        included: [
-          'Auditoria de segurança, login, segredos e LGPD básica',
-          'Correção dos problemas críticos e testes do fluxo',
-          'Deploy automatizado, homologação e produção',
-          'Monitoramento, alertas e backup na sua conta',
-          'Documentação de passagem',
-        ],
-        payment: '50% no início, 50% na entrega.',
-        note: {
-          text: 'Não inclui reescrever o produto nem criar funcionalidades novas; isso vai para um MVP ou para o Evolution.',
-        },
-      },
-      mvpCore: {
-        name: 'MVP Core',
-        timeline: '6–7 semanas',
-        summary: 'Seu produto em produção, com o escopo definido no Sprint.',
-        included: [
-          '1 jornada principal, de ponta a ponta',
-          'Até 2 perfis de usuário e até 2 integrações',
-          'Web responsivo, login e painel administrativo',
-          'Deploy, monitoramento e alertas',
-          'Garantia de 60 dias para bugs',
-        ],
-        payment: MVP_PAYMENT,
-      },
-      mvpPlus: {
-        name: 'MVP Plus',
-        timeline: '8–10 semanas',
-        summary: 'O Core com mais perfis, mais integrações e uma camada a mais.',
-        included: [
-          'Tudo do MVP Core',
-          'Até 3 perfis de usuário e até 4 integrações',
-          'Mais 1: IA (LLM, RAG ou agente), pagamentos ou BI',
-          'Garantia de 60 dias para bugs',
-        ],
-        payment: MVP_PAYMENT,
-      },
-      evolution: {
-        name: 'Product Evolution',
-        timeline: 'mensal',
-        summary: 'Depois do go-live, o mesmo responsável segue cuidando do produto.',
-        included: [
-          'Monitoramento, correções e segurança',
-          'Funcionalidades novas de um backlog priorizado',
-          'Horas-teto por mês, sem surpresa na conta',
-        ],
-        payment: 'Mensal, 100% antecipado.',
-      },
-    },
-    diagnosticCta: 'Agendar diagnóstico',
-    evolution: {
-      table: {
-        caption: 'Planos do Product Evolution',
-        headers: { plan: 'Plano', hours: 'Horas/mês', price: 'Preço/mês' },
-      },
-      plans: {
-        essential: {
-          name: 'Essencial',
-          description: 'Monitoramento, correções, segurança e 1 reunião por mês.',
-        },
-        evolution: {
-          name: 'Evolução',
-          description: 'Essencial + 1 entrega de funcionalidade a cada 2 semanas.',
-        },
-        partner: {
-          name: 'Parceiro técnico',
-          description: 'Evolução + roadmap, apoio em captação e 1º dev contratado.',
-        },
-      },
-      rulesNote: 'Mensal antecipado, mínimo de 3 meses. Horas não usadas não acumulam. Hora excedente: {overage}.',
-    },
-    cta: 'Agendar diagnóstico (45 min, grátis)',
-    workingTogether: {
-      title: "Você provavelmente vai gostar de trabalhar comigo se…",
-      items: [
-        "Quer resolver um problema de negócio com um MVP, uma integração ou uma ferramenta interna de escopo fechado.",
-        "Quer participar das decisões e está aberto a questionar comigo prioridades, premissas e riscos.",
-        "Prefere combinar uma entrega viável, com escopo e critérios de aceite claros.",
-      ],
-    },
-    ctaNote: 'Não sabe qual degrau é o seu? É para isso que serve o diagnóstico.',
-  },
-
-  guarantees: {
-    title: 'Regras claras, escritas no contrato.',
-    intro:
-      'Projeto de software dá errado por escopo que cresce sem preço, por dependência de quem construiu e por pagamento desalinhado com entrega. Estas regras existem para isso.',
-    items: [
-      {
-        title: 'Garantia de 60 dias para bugs.',
-        body: 'Depois do go-live, corrijo sem custo tudo o que não cumprir os critérios de aceite. Funcionalidade nova não é bug: vai para o Evolution ou para um aditivo.',
-      },
-      {
-        title: 'Escopo fechado, com o que fica fora.',
-        body: 'O Sprint define o que entra e o que não entra. Mudança no meio do caminho vira aditivo com preço, ou troca de um item por outro sem custo.',
-      },
-      {
-        title: 'Código e nuvem na sua conta desde o dia 1.',
-        body: 'O repositório, o banco e a infraestrutura ficam no seu nome desde o começo. A propriedade intelectual é transferida a você no pagamento final.',
-      },
-      {
-        title: 'Pagamento por marco.',
-        body: 'Você paga por etapa entregue. A etapa seguinte começa depois do pagamento da anterior, sem surpresa para nenhum dos lados.',
-      },
-      {
-        title: 'Um MVP por vez.',
-        body: 'Não pego dois MVPs ao mesmo tempo. Quando eu pego o seu projeto, ele tem a minha atenção.',
-      },
-      {
-        title: 'Demonstração toda semana.',
-        body: 'Uma vez por semana você vê software funcionando, não slide. Ajustes de rota acontecem cedo.',
-      },
-    ],
-    exclusionsTitle: 'O que fica fora de todo projeto, salvo combinado à parte',
-    exclusions: [
-      'Apps nativos iOS/Android (entrego web ou PWA; nativo é à parte)',
-      'Compliance regulado (Bacen, ANS, PCI) e auditoria de segurança',
-      'Migração de mais de uma fonte de dados legada',
-      'Conteúdo, marketing e SEO',
-      'Suporte 24/7',
-      'Custos de nuvem, APIs e licenças (pagos direto por você, na sua conta)',
-      'Treinar modelo de ML próprio (o MVP Plus usa APIs e RAG)',
-    ],
-  },
-
-  about: {
-    title: 'Quem constrói: Henrique Pett',
-    photoAlt: 'Henrique Pett',
-    bio: [
-      'Desde 2021 passei por quase todas as funções de um produto de dados e IA: pesquisa de ML, full stack, ciência de dados, engenharia de ML e gestão de produto. Num produto de IA para terminais de contêiner, construí o modelo como engenheiro de ML e passei a liderar o produto como PM, escrevendo código de produção.',
-      'Não sou especialista profundo em uma camada só, e sei quando um problema precisa de um. O que eu faço bem é pegar um problema de negócio e levá-lo até software em produção, respondendo por cada parte. Também trabalhei remotamente, em inglês, numa consultoria que atendia empresas europeias.',
-    ],
-    casesTitle: 'Experiência que levo para o seu projeto',
-    cases: [
-      {
-        title: 'IA na operação de terminais de contêiner',
-        body: 'Produto de IA que substitui o planejamento manual do pátio. Segundo a empresa: −27% de movimentos improdutivos e +21% de produtividade.',
-        source: { label: 'Dado público · MundoLogística, jan/2026', url: MUNDOLOGISTICA_URL },
-        kind: 'published',
-        detail: { href: '/cases/loopt/', label: 'Ler case completo' },
-        whenAuthorized: {
-          requires: 'loopt',
-          title: 'Loopt: IA na operação de terminais de contêiner',
-          body: 'Produto de IA da Loopt que substitui o planejamento manual do pátio. Segundo a Loopt, o resultado foi −27% de movimentos improdutivos e +21% de produtividade.',
-        },
-      },
-      {
-        title: 'Crédito na Bom.Capital',
-        body: 'Relato meu: como primeiro profissional de dados da fintech, construí o modelo da análise de crédito, que levava em média 48 horas e passou a menos de 2 horas.',
-        source: { label: 'Relato meu' },
-        kind: 'self-reported',
-        detail: { href: '/cases/bom-capital/', label: 'Ler case completo' },
-      },
-      {
-        title: 'Projeto próprio: Ascende',
-        body: 'App com conselheiro de IA que registra finanças, treino e sono a partir de uma frase. Feito por mim, de ponta a ponta.',
-        source: { label: 'ascende.site', url: 'https://ascende.site' },
-        kind: 'own-project',
-        detail: { href: '/cases/ascende/', label: 'Ler case completo' },
-      },
-    ],
-    casesFootnote: 'Experiência anterior ao studio e projeto próprio; não são cases de clientes do studio. "Relato meu" não tem publicação externa.',
-    article: 'Escrevi para o blog da neptune.ai o artigo técnico "How to Build ML Model Training Pipeline" (2023).',
-    linkedinLabel: 'LinkedIn',
-    githubLabel: 'GitHub',
-  },
-
-  method: {
-    title: 'Como uma pessoa só dá conta do produto inteiro',
-    intro:
-      'Trabalho de forma AI-native: agentes de código escrevem e revisam comigo, e testes e infraestrutura são automatizados desde a primeira semana. Isso libera tempo para o que exige julgamento.',
-    items: [
-      {
-        title: 'Agentes de código, com revisão humana.',
-        body: 'Uso agentes de IA para escrever, testar e refatorar. Cada linha que vai para produção passa pela minha revisão e pelos testes.',
-      },
-      {
-        title: 'Testes e deploy automatizados.',
-        body: 'Desde o início, o projeto tem testes do fluxo principal, deploy automático, homologação separada da produção e monitoramento com alertas.',
-      },
-      {
-        title: 'Decisões por escrito.',
-        body: 'Decisões de arquitetura, runbooks e documentação de passagem ficam no repositório. Qualquer engenheiro consegue continuar o trabalho.',
-      },
-      {
-        title: 'Especialistas quando o projeto pede.',
-        body: 'Pentest, design de marca, app nativo ou jurídico: trago um especialista, orçado à parte e combinado com você antes.',
-      },
-    ],
-    closing: 'Você sempre fala comigo. Não há gerente de conta, repasse ou telefone sem fim.',
-  },
-
-  notFor: {
-    title: 'Para quem eu não sou a escolha certa',
-    intro: 'Prefiro dizer agora do que descobrir no meio do projeto.',
-    items: [
-      'Quem precisa de app nativo para iOS e Android como produto principal.',
-      'Projetos de compliance regulado (PCI, HIPAA, Bacen, ANS) sem um especialista da área envolvido.',
-      'Quem procura desenvolvedores alocados ou cobrança por hora.',
-      'Quem decide só pelo menor preço: há opções que custam menos, e eu não compito nisso.',
-      'Quem espera qualquer produto pronto em 2 semanas. Sistema confiável leva o tempo do escopo.',
-    ],
-  },
-
-  faq: {
-    title: 'Perguntas frequentes',
-    items: [
-      {"question": "Dá para começar com um único processo?", "answer": "Sim. No diagnóstico, avaliamos um fluxo, o trabalho que ele gera e como verificar uma melhoria. Se ainda for preciso definir a solução, o Sprint entrega escopo e protótipo navegável, não uma automação em produção. A implementação recebe proposta própria."},
-      {"question": "Já tentei com uma agência ou com Lovable. Você pode continuar?", "answer": "Posso avaliar o que existe com acesso autorizado ao código e ao ambiente. Se a base for aproveitável e as correções couberem no escopo, o Production-Ready pode servir. Se houver necessidade de reconstrução ou novas funções, defino outra proposta antes de começar."},
-
-      {
-        question: 'Quanto tempo leva?',
-        answer:
-          'O Sprint leva 2 semanas. Um Production-Ready, 2 a 3. Um MVP Core fica em produção em 6 a 7 semanas, e um MVP Plus em 8 a 10. O cronograma de marcos sai do Sprint, junto com o preço fechado.',
-      },
-      {
-        question: 'De quem é o código?',
-        answer:
-          'Seu. O repositório, o banco e a nuvem ficam na sua conta desde o primeiro dia. A propriedade intelectual é transferida a você no pagamento final. Os entregáveis do Sprint são seus mesmo se você não seguir para o MVP.',
-      },
-      {
-        question: 'Você é uma pessoa só. E se ficar indisponível?',
-        answer:
-          'O código, o repositório e a nuvem ficam na sua conta desde o primeiro dia, e a documentação é escrita durante o projeto, não no fim: qualquer desenvolvedor sênior consegue assumir. O cronograma tem folga de 15 a 20% para imprevistos. E, se o projeto não puder seguir, você recebe de volta, proporcionalmente, o que pagou e não foi entregue.',
-      },
-      {
-        question: 'Por que não contratar uma software house?',
-        answer:
-          'Pode fazer sentido se você precisa de muita gente alocada por muito tempo. A diferença aqui é que você fala com quem constrói, sem intermediário, e o preço é fechado depois do Sprint, não estimado por hora.',
-      },
-      {
-        question: 'Ferramentas de IA para protótipo (Lovable, Bolt e similares) já não fazem isso?',
-        answer:
-          'Fazem o protótipo, e muitas vezes ele é um ótimo ponto de partida. O que eu entrego é produção: dados protegidos, login, integrações, deploy, monitoramento e alguém responsável quando algo quebra. Para quem já tem o protótipo, existe o Production-Ready.',
-      },
-      {
-        question: 'Você assina NDA e emite nota fiscal?',
-        answer: 'Sim para os dois. Se preferir, assino o NDA antes do diagnóstico. Emito nota fiscal de serviço.',
-      },
-      {
-        question: 'E a LGPD?',
-        answer:
-          'Nos projetos, você é o controlador dos dados do seu produto e indica o seu encarregado; eu atuo como operador, seguindo as suas instruções, com as responsabilidades em contrato (acordo de tratamento de dados). Os dados ficam na infraestrutura da sua conta. Compliance regulado (Bacen, ANS e afins) exige especialista da área, orçado à parte.',
-      },
-      {
-        question: 'O que acontece depois do go-live?',
-        answer:
-          'Durante 60 dias, corrijo bugs sem custo. Depois, você pode seguir sozinho com a documentação que fica no repositório, ou contratar o Product Evolution, com horas-teto por mês.',
-      },
-    ],
-  },
-
-  finalCta: {
-    title: 'Comece por uma conversa de 45 minutos.',
-    body: 'Traga um processo que consome tempo ou um produto que travou. Vamos avaliar o que vale resolver primeiro, qual etapa faz sentido e a faixa de investimento.',
-    cta: 'Agendar diagnóstico (45 min, grátis)',
-    emailLead: 'Prefere e-mail? Escreva para',
-    linkedin: { lead: 'Ou me chame no', label: 'LinkedIn' },
-  },
-
-  testimonials: { title: 'Depoimentos' },
-
-  footer: {
-    tagline: 'Founding Engineer sob demanda · Produtos de software do diagnóstico à produção.',
-    privacyLink: 'Privacidade',
-    otherLanguageLink: 'English',
-    linkedinLabel: 'LinkedIn',
-    githubLabel: 'GitHub',
-    copyright: '© {year} {brand}',
   },
 
   consent: {
@@ -475,7 +103,7 @@ export const ptBR: SiteCopy = {
       },
       {
         title: "Que dados são tratados",
-        body: "Registros técnicos: a Netlify, que hospeda o site e atua como operadora em meu nome, registra dados de cada acesso, como endereço IP, data e hora, página pedida, página de origem, navegador e país aproximado. Eu não mantenho cópia própria desses registros. Conto as visitas à página de diagnóstico de forma agregada (um número por dia), sem cookies e sem guardar IP ou navegador (legítimo interesse, art. 7º, IX). Agendamento e e-mail: só o que você mesmo informa, como nome, e-mail, o assunto da conversa e a resposta à pergunta \"Como chegou até aqui?\" do formulário do Calendly. Com o seu consentimento de Medição: o agendamento do Calendly abre dentro do site, e a origem da visita é repassada a ele, ou seja, os 5 parâmetros UTM da campanha que trouxe você (fonte, meio, campanha, conteúdo e termo); nunca repasso identificadores individuais, como o identificador de clique do anúncio. Com o seu consentimento de Publicidade: o Google Ads grava cookies e identificadores no seu navegador para medir o resultado dos meus anúncios. Se você aceitou as duas categorias e agenda um diagnóstico dentro do site, o Google Ads recebe um aviso de conversão, sem nome, e-mail ou dados do agendamento.",
+        body: "Registros técnicos: a Netlify, que hospeda o site e atua como operadora em meu nome, registra dados de cada acesso, como endereço IP, data e hora, página pedida, página de origem, navegador e país aproximado. Eu não mantenho cópia própria desses registros. Conto as visitas à página de diagnóstico e às páginas de apresentação por setor de forma agregada (um número por página e por dia), sem cookies e sem guardar IP ou navegador (legítimo interesse, art. 7º, IX). Agendamento e e-mail: só o que você mesmo informa, como nome, e-mail, o assunto da conversa e a resposta à pergunta \"Como chegou até aqui?\" do formulário do Calendly. Com o seu consentimento de Medição: o agendamento do Calendly abre dentro do site, e a origem da visita é repassada a ele, ou seja, os 5 parâmetros UTM da campanha que trouxe você (fonte, meio, campanha, conteúdo e termo); nunca repasso identificadores individuais, como o identificador de clique do anúncio. Com o seu consentimento de Publicidade: o Google Ads grava cookies e identificadores no seu navegador para medir o resultado dos meus anúncios. Se você aceitou as duas categorias e agenda um diagnóstico dentro do site, o Google Ads recebe um aviso de conversão, sem nome, e-mail ou dados do agendamento.",
       },
       {
         title: "Para que e com qual base legal",
@@ -537,96 +165,133 @@ export const ptBR: SiteCopy = {
 
   diagnostico: {
     meta: {
-      title: 'Quanto custa um sistema sob medida? | {brand}',
+      title: 'Diagnóstico de IA para a operação industrial | {brand}',
       description:
-        "Sistema sob medida para tirar a operação da planilha, com preço publicado. Diagnóstico grátis de 45 minutos com quem constrói.",
+        'Em 2 a 4 semanas, um mapa de onde a IA ajuda a sua fábrica, com esforço, risco e um piloto recomendado. Comece por uma conversa de 45 minutos.',
     },
     hero: {
-      eyebrow: "Diagnóstico grátis de 45 min",
-      title: "Sistema sob medida para tirar sua operação da planilha, com preço publicado",
-      subtitle:
-        "Sistema novo, MVP ou protótipo em produção, sem montar uma área de TI. Um só responsável sênior, direto com quem constrói.",
-      cta: "Agendar diagnóstico (45 min, grátis)",
-      proofLine: ["Escopo e preço fechados", "Código na sua conta", "Garantia de 60 dias para bugs no MVP"],
+      eyebrow: 'Diagnóstico de IA para a indústria',
+      title: 'Descubra onde a IA ajuda a sua fábrica antes de investir nela.',
+      lead: 'Entrevistas por área, inventário de dados e um mapa de oportunidades com o piloto recomendado. O relatório fica com a empresa.',
+      cta: 'Agendar diagnóstico',
+      facts: ['Conversa inicial de 45 min, sem custo', 'Proposta fechada antes de começar', 'Confidencialidade assinada, se pedir'],
     },
-    ladder: {
-      title: "Quanto custa: preço publicado, um degrau de cada vez",
-      // Intro da home, como pede o texto do Mote.
-      intro:
-        "Você sabe quanto custa antes de assinar. Cada etapa termina com algo que é seu, e você decide se sobe para a próxima. O diagnóstico é grátis e pode terminar em \"não construa software agora\".",
-    },
-    sprint: {
-      title: "O que você recebe no Product Sprint",
-      intro:
-        "Em 2 semanas, o problema vira um projeto pronto para construir, com preço fechado. Os entregáveis são seus, mesmo se você não seguir comigo.",
+    deliverables: {
+      eyebrow: 'O que a empresa recebe',
+      title: 'Um relatório para a diretoria decidir o próximo passo.',
+      lead: 'Os documentos do diagnóstico ficam com a empresa e servem de base para qualquer fornecedor, inclusive para não seguir com a Torno.',
       items: [
-        { title: "Problema e métrica de sucesso", body: "O que precisa mudar na operação e como vamos medir, antes de escrever código." },
-        { title: "Escopo com o que fica fora", body: "Critérios de aceite para cada item e a lista do que não entra, por escrito." },
-        { title: "Arquitetura técnica", body: "Como o sistema se conecta ao que você já usa: dados, integrações e onde a IA entra, se entrar." },
-        { title: "Protótipo navegável", body: "O fluxo principal clicável, para você validar antes do código de produção." },
-        { title: "Plano de marcos", body: "As etapas do MVP, o que cada uma entrega e o pagamento ligado a cada etapa." },
-        { title: "Preço fechado do MVP", body: "Um valor final para construir, definido no fim do Sprint, sem cobrança por hora." },
+        {
+          eyebrow: 'Áreas',
+          title: 'Mapa de oportunidades',
+          body: 'Onde o tempo se perde em produção, qualidade, manutenção, comercial e suprimentos, com exemplos colhidos nas entrevistas.',
+        },
+        {
+          eyebrow: 'Sistemas',
+          title: 'Inventário de dados',
+          body: 'ERP, MES, planilhas, fichas técnicas, procedimentos e históricos: o que existe, onde está, quem responde e em que estado.',
+        },
+        {
+          eyebrow: 'Prioridade',
+          title: 'Esforço e risco por caso',
+          body: 'Estimativa de esforço, dependências da TI e riscos de dados e de adoção, para comparar as opções com o mesmo critério.',
+        },
+        {
+          eyebrow: 'Piloto',
+          title: 'Primeiro passo recomendado',
+          body: 'Uma área, um problema, um responsável e o critério de sucesso que será medido antes e depois do piloto.',
+        },
       ],
-      note: "Se você assinar o MVP em até 30 dias, o valor do Sprint é abatido integralmente.",
+    },
+    steps: {
+      eyebrow: 'Como funciona',
+      title: 'Da primeira conversa ao piloto.',
+      lead: 'Cada etapa tem proposta fechada e termina com uma decisão da empresa.',
+      items: [
+        {
+          meta: '45 minutos, sem custo',
+          title: 'Conversa inicial',
+          body: 'Entendemos a operação, o problema que mais pesa e quem decide. Se não houver encaixe, dizemos na própria conversa.',
+        },
+        {
+          meta: '2 a 4 semanas',
+          title: 'Diagnóstico',
+          body: 'Entrevistas por área, levantamento de dados e sistemas com a TI e o relatório com o mapa de oportunidades.',
+        },
+        {
+          meta: 'Uma área',
+          title: 'Piloto',
+          body: 'Um problema, com o critério de sucesso medido antes e depois, usando dados reais da operação.',
+        },
+        {
+          meta: 'Área por área',
+          title: 'Implantação e operação',
+          body: 'As outras áreas entram na ordem que o piloto indicar, com acompanhamento mensal depois da entrada em uso.',
+        },
+      ],
     },
     proofs: {
-      title: "O que já construí",
+      eyebrow: 'Experiência',
+      title: 'Quem conduz já levou IA para dentro de uma operação.',
+      lead: 'A Torno é conduzida por Henrique Pett, que construiu o modelo de IA e depois liderou o produto usado na operação de terminais de contêineres da Loopt.',
+      stats: [
+        {
+          value: '−27%',
+          label: 'de movimentos improdutivos no pátio',
+          source: { label: 'segundo a Loopt, MundoLogística, 13/01/2026', href: 'https://mundologistica.com.br/noticias/loopt-ia-terminais-de-conteineres' },
+        },
+        {
+          value: '+21%',
+          label: 'de produtividade na operação',
+          source: { label: 'segundo a Loopt, MundoLogística, 13/01/2026', href: 'https://mundologistica.com.br/noticias/loopt-ia-terminais-de-conteineres' },
+        },
+      ],
       items: [
         {
-          title: "Crédito na Bom.Capital (experiência passada)",
-          body: "Como primeiro profissional de dados da fintech, construí o modelo que levou a análise de crédito de, em média, 48 horas para menos de 2 horas.",
-          source: { label: "Relato meu" },
-          kind: 'self-reported',
+          eyebrow: 'IA em operação',
+          title: 'Loopt',
+          body: 'Engenharia de ML e, depois, gestão do produto de IA que recomenda onde posicionar cada contêiner no pátio. Os números acima são da solução da equipe, publicados pela empresa.',
         },
         {
-          title: "Ascende",
-          body: "App em que a pessoa conta o dia numa frase e um conselheiro de IA registra finanças, treino, sono e alimentação. Construído por mim, do zero ao deploy.",
-          source: { label: "Projeto próprio, não é cliente", url: 'https://ascende.site', linkLabel: "ascende.site" },
-          kind: 'own-project',
+          eyebrow: 'Dados e crédito',
+          title: 'Bom.Capital',
+          body: 'Relato do fundador: como primeiro profissional de dados da fintech, construiu o modelo de análise de crédito, que levava em média 48 horas e passou a menos de 2 horas.',
         },
       ],
-    },
-    about: {
-      title: "Quem constrói: Henrique Pett",
-      bio: [
-        "Desde 2021 passei por pesquisa de ML, full stack, ciência de dados, engenharia de ML e produto. Pego um problema de negócio e levo até software em produção, respondendo por cada parte. Trabalho com agentes de código e testes automatizados, com revisão minha em tudo que vai para produção. Quando o projeto pede um especialista, eu trago, orçado à parte e combinado antes. Você sempre fala comigo.",
-      ],
+      note: 'Experiência profissional de quem conduz a Torno, anterior a ela. Loopt e Bom.Capital não são clientes da Torno. O relato da Bom.Capital não tem publicação externa.',
     },
     faq: {
-      // O texto do Mote não traz título para o FAQ: reusa o da home.
-      title: "Perguntas frequentes",
+      title: 'Perguntas frequentes',
       items: [
         {
-          question: "Quanto tempo leva?",
-          answer:
-            "O Sprint leva 2 semanas. Um Production-Ready, 2 a 3. Um MVP Core fica em produção em 6 a 7 semanas, e um MVP Plus em 8 a 10. O cronograma de marcos sai do Sprint, junto com o preço fechado. Depois do go-live, o MVP tem garantia de 60 dias para bugs.",
+          q: 'Quanto custa o diagnóstico?',
+          a: 'O diagnóstico tem proposta fechada, enviada depois da conversa inicial. O valor depende do número de áreas, plantas e sistemas envolvidos. A conversa de 45 minutos não tem custo.',
         },
         {
-          question: "De quem é o código?",
-          answer:
-            "Seu. O repositório, o banco e a nuvem ficam na sua conta desde o primeiro dia. A propriedade intelectual é transferida a você no pagamento final. Os entregáveis do Sprint são seus mesmo se você não seguir para o MVP.",
+          q: 'Precisa trocar o ERP ou mexer nos sistemas?',
+          a: 'Não. Trabalhamos com o que a empresa já usa, seja TOTVS, SAP, Senior ou outro, e só acessamos o que a TI liberar, com perfil de leitura sempre que possível.',
         },
         {
-          question: "Você é uma pessoa só. E se ficar indisponível?",
-          answer:
-            "O código e a nuvem ficam na sua conta, e a documentação é escrita durante o projeto: qualquer desenvolvedor sênior consegue assumir. O cronograma tem folga para imprevistos e, se o projeto não puder seguir, você recebe de volta, proporcionalmente, o que pagou e não foi entregue.",
+          q: 'Os dados saem da empresa?',
+          a: 'No diagnóstico, trabalhamos com entrevistas, amostras e acessos de leitura combinados com a TI. Na implantação, os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI e não são usados para treinar modelos de terceiros.\n\nAssinamos acordo de confidencialidade antes de começar, se a empresa pedir.',
         },
         {
-          question: "Já tenho um protótipo feito numa ferramenta de IA. Serve?",
-          answer:
-            "Muitas vezes é um bom ponto de partida. O Production-Ready leva o que existe à produção: segurança, login, deploy, monitoramento e backup na sua conta. Não inclui reescrever o produto nem criar funcionalidades novas.",
+          q: 'Quem participa do lado da empresa?',
+          a: 'Um patrocinador na diretoria, um ponto focal e uma ou duas pessoas por área entrevistada, cerca de uma hora cada. A TI participa do inventário de sistemas.',
         },
         {
-          question: "Você emite nota fiscal e assina NDA?",
-          answer:
-            "Sim para os dois. Se preferir, assino o NDA antes do diagnóstico. Emito nota fiscal de serviço.",
+          q: 'E se o diagnóstico mostrar que não vale a pena?',
+          a: 'O relatório diz isso e explica os motivos. Ele pertence à empresa, contrate ou não as etapas seguintes.',
+        },
+        {
+          q: 'A Torno é uma pessoa só?',
+          a: 'A Torno tem uma liderança técnica única, Henrique Pett, que responde pelo projeto do diagnóstico à operação. Especialistas em dados, segurança, UX, infraestrutura ou do setor entram conforme o escopo e são nomeados na proposta.',
         },
       ],
     },
     finalCta: {
-      title: "Comece por uma conversa de 45 minutos",
-      body: "Você me conta o problema e eu digo com franqueza se vale construir, qual degrau faz sentido e quanto custa. Se for \"ainda não\", você sai com isso também.",
-      cta: "Agendar diagnóstico (45 min, grátis)",
+      title: 'Comece por uma conversa de 45 minutos.',
+      text: 'Conte qual área mais perde tempo hoje. Ao fim da conversa, você sabe se o diagnóstico faz sentido e o que separar para ele.',
     },
   },
 

@@ -1,21 +1,23 @@
 ---
 /**
- * Wordmark (DESIGN §6.1): só texto, de SITE_BRAND. Funciona de 2 a ~32 caracteres:
- * até 2 linhas abaixo de 1200 px, 1 linha acima. Nunca largura fixa nem fonte calculada pelo tamanho.
+ * Wordmark tipográfico (DESIGN-2026-11 §7): só texto, de SITE_BRAND, Inter 700 com tracking fechado.
+ * Sem monograma. Funciona de 2 a ~32 caracteres (até 2 linhas no celular, 1 acima de 1200 px).
+ * Classes `wordmark`/`wordmark__text` e `data-brand` são usadas pelos testes.
  */
 import { SITE_BRAND } from '../../config/site';
 
 interface Props {
-  /** Sem href, a marca é texto (landing de campanha: um link para a home seria uma saída, DESIGN §14.2). */
+  /** Sem href, a marca é texto (landing de campanha: um link para a home seria uma saída). */
   href?: string | undefined;
+  size?: 'md' | 'lg';
 }
 
-const { href } = Astro.props;
+const { href, size = 'md' } = Astro.props;
 const Tag = href ? 'a' : 'span';
 const placeholder = import.meta.env.DEV && SITE_BRAND.includes('[');
 ---
 
-<Tag class="wordmark" href={href} data-brand data-placeholder={placeholder || undefined}
+<Tag class:list={['wordmark', `wordmark--${size}`]} href={href} data-brand data-placeholder={placeholder || undefined}
   ><span class="wordmark__text">{SITE_BRAND}</span></Tag
 >
 
@@ -32,7 +34,11 @@ const placeholder = import.meta.env.DEV && SITE_BRAND.includes('[');
     letter-spacing: var(--tracking-brand);
     color: var(--color-text);
     text-decoration: none;
-    transition: color var(--duration-fast) var(--ease-out);
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .wordmark--lg {
+    font-size: var(--text-title-lg);
   }
 
   .wordmark__text {
@@ -47,7 +53,7 @@ const placeholder = import.meta.env.DEV && SITE_BRAND.includes('[');
 
   @media (hover: hover) {
     a.wordmark:hover {
-      color: var(--color-accent-text);
+      opacity: 0.72;
     }
   }
 

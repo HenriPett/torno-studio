@@ -1,0 +1,193 @@
+---
+/**
+ * /about/ e /en/about/: Sobre a Torno (institucional). Por que existe, foco em indústria, Jaraguá do Sul,
+ * como trabalhamos, liderança técnica (Henrique Pett, foto pequena, link para o autor) e cases.
+ * Ritmo: default → muted → default → muted → default → inverse → CTA muted.
+ */
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Section from '../ds/Section.astro';
+import SectionHeader from '../ds/SectionHeader.astro';
+import Steps from '../ds/Steps.astro';
+import CtaBand from '../ds/CtaBand.astro';
+import CaseCards from './CaseCards.astro';
+import { about, etapas } from '../../content/institucional';
+import { pathFor, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = about[locale];
+const en = locale === 'en';
+const id = en
+  ? { why: 'why', focus: 'focus', process: 'process', lead: 'leadership', cases: 'cases' }
+  : { why: 'por-que', focus: 'foco', process: 'como-trabalhamos', lead: 'lideranca', cases: 'cases' };
+const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/henrique-pett.{jpg,jpeg,png,webp}', { eager: true });
+const photo = Object.values(photos)[0]?.default;
+---
+
+<Base locale={locale} routeId="about" title={c.meta.title} description={c.meta.description}>
+  <Header locale={locale} routeId="about" />
+  <main id="conteudo" tabindex="-1">
+    <Section labelledby="about-title" reveal={false}>
+      <SectionHeader as="h1" id="about-title" eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} accent />
+    </Section>
+
+    <Section id={id.why} variant="muted" labelledby={`${id.why}-title`}>
+      <div class="about-split">
+        <SectionHeader id={`${id.why}-title`} eyebrow={c.why.eyebrow} title={c.why.title} size="md" accent />
+        <div class="about-prose">
+          {c.why.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </Section>
+
+    <Section id={id.focus} labelledby={`${id.focus}-title`}>
+      <div class="about-split">
+        <SectionHeader id={`${id.focus}-title`} eyebrow={c.focus.eyebrow} title={c.focus.title} size="md" accent />
+        <div class="about-prose">
+          {c.focus.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+      <ul class="grid grid--3 about-facts" role="list">
+        {
+          c.focus.facts.map((fact) => (
+            <li>
+              <h3 class="title">{fact.title}</h3>
+              <p class="muted">{fact.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id={id.process} variant="muted" labelledby={`${id.process}-title`}>
+      <SectionHeader id={`${id.process}-title`} eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} accent>
+        <a class="link link--arrow link--target" href={pathFor('howWeWork', locale)}>{c.process.link}</a>
+      </SectionHeader>
+      <div class="about-steps">
+        <Steps items={etapas[locale]} />
+      </div>
+    </Section>
+
+    <Section id={id.lead} labelledby={`${id.lead}-title`}>
+      <SectionHeader id={`${id.lead}-title`} eyebrow={c.lead.eyebrow} title={c.lead.title} size="md" accent />
+      <div class="about-person">
+        <div class="about-person__id">
+          {
+            photo && (
+              <Picture
+                src={photo}
+                alt={c.lead.photoAlt}
+                formats={['avif', 'webp']}
+                fallbackFormat="jpeg"
+                widths={[96, 192, 288].filter((w) => w <= photo.width)}
+                sizes="96px"
+                width={96}
+                height={96}
+                loading="lazy"
+                decoding="async"
+                class="about-person__photo"
+              />
+            )
+          }
+          <div>
+            <h3 class="title">{c.lead.name}</h3>
+            <p class="muted">{c.lead.role}</p>
+          </div>
+        </div>
+        <div class="about-prose">
+          {c.lead.bio.map((p) => <p>{p}</p>)}
+          <p>
+            <a class="link link--arrow link--target" href={pathFor('author', locale)}>{c.lead.authorLink}</a>
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <Section id={id.cases} variant="inverse" labelledby={`${id.cases}-title`}>
+      <SectionHeader id={`${id.cases}-title`} eyebrow={c.cases.eyebrow} title={c.cases.title} lead={c.cases.lead}>
+        <a class="link link--arrow link--target" href={pathFor('cases', locale)}>{c.cases.link}</a>
+      </SectionHeader>
+      <CaseCards locale={locale} linkLabel={c.cases.caseLink} card="surface" />
+    </Section>
+
+    <CtaBand locale={locale} variant="muted" title={c.cta.title} text={c.cta.text} secondary={{ label: c.cta.secondary, href: pathFor('contact', locale) }} />
+  </main>
+  <Footer locale={locale} routeId="about" />
+</Base>
+
+<style>
+  .about-split {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .about-split > :global(.ds-sh + *) {
+    margin-block-start: 0;
+  }
+
+  .about-prose {
+    display: grid;
+    gap: var(--space-4);
+    max-inline-size: var(--measure);
+    font-size: var(--text-lead);
+    line-height: var(--leading-lead);
+  }
+
+  .about-prose p {
+    text-wrap: pretty;
+  }
+
+  .about-facts {
+    margin-block-start: var(--space-8);
+    padding: 0;
+    list-style: none;
+  }
+
+  .about-facts li {
+    display: grid;
+    gap: var(--space-2);
+    padding-block-start: var(--space-5);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .about-person {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .about-person__id {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    align-self: start;
+  }
+
+  .about-person__photo {
+    display: block;
+    inline-size: 6rem;
+    block-size: 6rem;
+    flex: none;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+  }
+
+  @media (min-width: 64em) {
+    .about-steps :global(.ds-steps--columns) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .about-split,
+    .about-person {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-8);
+      align-items: start;
+    }
+  }
+</style>

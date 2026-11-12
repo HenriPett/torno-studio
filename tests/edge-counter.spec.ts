@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { dayKey, shouldCount } from '../netlify/edge-functions/count-diagnostico';
+import handler, { config, counterTarget, dayKey, SECTOR_SLUGS, SECTOR_STORE, shouldCount, STORE } from '../netlify/edge-functions/count-diagnostico';
 
 // Regras do contador sem cookie (docs/infra/CONTADOR-DIAGNOSTICO.md). A gravação no Blobs é testada no ar.
 const CHROME = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36';
@@ -33,4 +33,38 @@ test('B9: sem navegação de documento não conta (HEAD chega como GET na Netlif
 test('dia no fuso de São Paulo (UTC−3)', () => {
   expect(dayKey(new Date('2026-10-09T02:59:00Z'))).toBe('2026-10-08');
   expect(dayKey(new Date('2026-10-09T03:00:00Z'))).toBe('2026-10-09');
+});
+
+// Landings de setor (estratégia 2026-11 §7.3): mesmas regras, uma chave por setor e dia no store visitas-setores.
+test('rota da função cobre /diagnostico/ e /para/*', () => {
+  expect(config.path).toEqual(['/diagnostico/', '/para/*']);
+});
+
+test('alvo do contador: /diagnostico/ por dia; /para/<slug>/ por dia e setor, só slugs conhecidos', () => {
+  expect(counterTarget('/diagnostico/')).toEqual({ store: STORE, suffix: '' });
+  expect(SECTOR_SLUGS).toHaveLength(8);
+  for (const slug of SECTOR_SLUGS) {
+    expect(slug).toMatch(/^[a-z-]+$/);
+    expect(counterTarget(`/para/${slug}/`)).toEqual({ store: SECTOR_STORE, suffix: `/${slug}` });
+  }
+  expect(SECTOR_STORE).toBe('visitas-setores');
+  for (const path of ['/para/', '/para/textil', '/para/textil/index.html', '/para/textil/x/', '/para/inexistente/', '/para/Textil/', '/para/textil%2F/', '/para/../diagnostico/', '/', '/diagnostico', '/en/']) {
+    expect(counterTarget(path), path).toBeNull();
+  }
+  // Chave do dia + setor; nada de IP, UA, referer ou query string.
+  expect(`${dayKey(new Date('2026-11-12T15:00:00Z'))}${counterTarget('/para/textil/')!.suffix}`).toBe('2026-11-12/textil');
+});
+
+test('handler devolve a resposta original e não grava fora de produção nem em 404/redirect', async () => {
+  const waited: unknown[] = [];
+  for (const [path, status, deploy] of [
+    ['/para/textil/', 200, 'deploy-preview'], ['/para/textil/', 404, 'production'], ['/para/textil/', 301, 'production'],
+    ['/para/inexistente/', 200, 'production'], ['/diagnostico/', 404, 'production'],
+  ] as const) {
+    const original = new Response('<main>x</main>', { status, headers: { 'content-type': 'text/html' } });
+    const r = await handler(new Request(`https://tornostudio.com${path}`, { headers: { accept: 'text/html', 'user-agent': CHROME, 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate' } }),
+      { next: async () => original, waitUntil: (p) => { waited.push(p); }, deploy: { context: deploy } });
+    expect(r, `${path} ${status} ${deploy}`).toBe(original);
+  }
+  expect(waited).toEqual([]);
 });

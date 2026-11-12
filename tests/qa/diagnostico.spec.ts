@@ -5,7 +5,7 @@ import { BANNER_ON, expect, test } from './fixtures';
 import { DIAGNOSTICO, hits, norm, readableText, word } from './helpers';
 
 /**
- * Landing /diagnostico/ (docs/landing/DIAGNOSTICO-SPEC.md, "Pronto quando"; CHECKLIST.md §D).
+ * Landing /diagnostico/ (docs/landing/DIAGNOSTICO-SPEC.md; reescrita para o diagnóstico industrial, estratégia 2026-11 §6).
  * Os casos de consentimento (CS-a..n) rodam também nesta rota em consent.spec.ts (BOOKING_PAGES).
  */
 
@@ -47,21 +47,23 @@ test.describe('/diagnostico/', () => {
     expect(await page.locator('a[href*="/en/diagnostic"]').count()).toBe(0);
   });
 
-  test('D4 conteúdo proibido: sem Loopt, Lovable, FinPlan, exclusões Q8, métricas vetadas, 1ª plural, preço como argumento', async ({ page }) => {
+  test('D4 conteúdo proibido: voz em 1ª pessoa, preço, métricas vetadas, clientes da Loopt, oferta antiga', async ({ page }) => {
     await page.goto(PATH);
     const text = await readableText(page);
-    const rules: [string, RegExp][] = [
-      ['Loopt', /loopt/i],
-      ['Lovable', /lovable/i],
-      ['FinPlan', /fin\s?plan/i],
-      ['exclusões Q8', /eco\s?-?porto|transbrasa|marimex|maersk|bandeirantes|alian[çc]a|bissani|gutierres/i],
-      ['−41/−31/−21%', /[−\-–]\s?(41|31|21)\s?%/u],
-      ['nós/nosso', word('(nós|noss[oa]s?|somos|fazemos|entregamos|construímos)')],
-      ['mais barato', /mais barat[oa]|mais em conta|\d+\s?[x×](?![\p{L}\p{N}])/iu],
-      ['neptune com link', /neptune\.ai\/blog/i],
-      ['TODO/undefined', /TODO|undefined|NaN/],
+    const main = norm((await page.locator('main').textContent()) ?? '');
+    const rules: [string, RegExp, string][] = [
+      ['Lovable', /lovable/i, text],
+      ['FinPlan', /fin\s?plan/i, text],
+      ['clientes da Loopt', /deicmar|eco\s?-?porto|tbsa|santos brasil|transbrasa|marimex|maersk|bandeirantes|alian[çc]a|bissani|gutierres/i, text],
+      ['−41/−31%', /[−\-–]\s?(41|31)\s?%/u, text],
+      ['Studio (fora do domínio tornostudio.com)', /studio(?!\.com)/i, text],
+      ['eu/meu (voz da marca é "nós")', word('(eu|meu|minha|meus|minhas|comigo)'), main],
+      ['preço', /R\$|US\$|mais barat[oa]|\d+\s?[x×](?![\p{L}\p{N}])/iu, main],
+      ['oferta antiga', /product sprint|production-ready|mvp plus|garantia de 60 dias|founding engineer/i, text],
+      ['neptune com link', /neptune\.ai\/blog/i, text],
+      ['TODO/undefined', /TODO|undefined|NaN/, text],
     ];
-    const found = rules.flatMap(([id, re]) => hits(text, re).map((h) => `${id}: ${h}`));
+    const found = rules.flatMap(([id, re, source]) => hits(source, re).map((h) => `${id}: ${h}`));
     expect(found).toEqual([]);
   });
 
@@ -71,52 +73,42 @@ test.describe('/diagnostico/', () => {
     expect(hits(html, /\[Mote:/)).toEqual([]);
   });
 
-  test('D6 links de saída: nenhum linkedin.com, nenhum link da Bom.Capital; só Calendly e ascende.site saem do site', async ({ page, baseURL }) => {
+  test('D6 links de saída: nenhum linkedin.com nem Bom.Capital; fora do CTA, só a fonte pública (MundoLogística)', async ({ page, baseURL }) => {
     await page.goto(PATH);
     await expect(page.locator('a[href*="linkedin.com" i]')).toHaveCount(0);
     await expect(page.locator('a[href*="bom.capital" i], a[href*="bomcapital" i]')).toHaveCount(0);
     const origin = new URL(baseURL!).origin;
-    // Fora do consentimento: só Calendly (CTA) e ascende.site. No diálogo: só as políticas dos fornecedores (SPEC consent §4).
+    // Fora do consentimento: só Calendly (CTA) e a matéria da MundoLogística. No diálogo: só as políticas dos fornecedores.
     const external = await page.locator('a[href]').evaluateAll((els, o) =>
       els
         .map((a) => ({ href: (a as HTMLAnchorElement).href, consent: !!a.closest('dialog[data-consent-dialog], [data-consent-banner]') }))
         .filter((l) => l.href.startsWith('http') && !l.href.startsWith(o)), origin);
-    const onPage = external.filter((l) => !l.consent && !/^https:\/\/(calendly\.com\/henriquepett\/|ascende\.site)/.test(l.href)).map((l) => l.href);
+    const onPage = external
+      .filter((l) => !l.consent && !/^https:\/\/(calendly\.com\/henriquepett\/|mundologistica\.com\.br\/noticias\/loopt-ia-terminais-de-conteineres)/.test(l.href))
+      .map((l) => l.href);
     const vendor = external.filter((l) => l.consent && !/^https:\/\/(calendly\.com\/legal\/|policies\.google\.com\/)/.test(l.href)).map((l) => l.href);
     expect(onPage).toEqual([]);
     expect(vendor).toEqual([]);
   });
 
-  test('D7 provas: Bom.Capital como relato ("em média 48 horas"), sem link nem logo; Ascende como projeto próprio com link', async ({ page }) => {
+  test('D7 provas: métrica da Loopt atribuída e com fonte; Bom.Capital como relato ("em média 48 horas"), sem link nem logo', async ({ page }) => {
     await page.goto(PATH);
-    const bom = page.locator('main li, main article, main p').filter({ hasText: 'Bom.Capital' }).last();
+    const provas = page.locator('#provas');
+    await expect(provas).toContainText(/[−-]27\s?%/);
+    await expect(provas).toContainText(/\+21\s?%/);
+    await expect(provas).toContainText('segundo a Loopt');
+    expect(await provas.locator('a[href^="https://mundologistica.com.br/"]').count()).toBeGreaterThanOrEqual(1);
+    const bom = provas.locator('li').filter({ hasText: 'Bom.Capital' }).last();
     await expect(bom).toContainText(/em média,?\s*48 horas/i);
     await expect(bom).toContainText(/relato/i);
     await expect(bom.locator('a, img')).toHaveCount(0);
-    const asc = page.locator('main li, main article').filter({ hasText: 'Ascende' }).last();
-    await expect(asc).toContainText(/projeto próprio|meu produto|my own/i);
-    await expect(asc.locator('a[href^="https://ascende.site"]')).toHaveCount(1);
   });
 
-  test('D8 preços = pricing.ts: mesmos degraus e textos da escada da home', async ({ page }) => {
-    const ladder = async (path: string) => {
-      await page.goto(path);
-      await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
-      // Compara os dados do degrau. O link de CTA dentro do degrau pode faltar na landing (CTA único, D9).
-      return page.locator('main li[data-step]').evaluateAll((els) =>
-        Object.fromEntries(
-          els.map((el) => {
-            const c = el.cloneNode(true) as HTMLElement;
-            c.querySelectorAll('a[data-booking-cta]').forEach((a) => a.remove());
-            return [el.getAttribute('data-step'), (c.textContent ?? '').replace(/[\s\u00a0\u202f]+/g, ' ').trim()];
-          }),
-        ),
-      );
-    };
-    const home = await ladder('/');
-    const diag = await ladder(PATH);
-    expect(Object.keys(diag).sort()).toEqual(Object.keys(home).sort());
-    expect(diag).toEqual(home);
+  test('D8 sem preço: nenhum valor em R$/US$ e nenhuma escada de preços', async ({ page }) => {
+    await page.goto(PATH);
+    await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
+    expect(hits(norm((await page.locator('main').textContent()) ?? ''), /R\$|US\$/)).toEqual([]);
+    await expect(page.locator('main li[data-step], main .price')).toHaveCount(0);
   });
 
   test('D9 CTA único, repetido no header, no hero e no final, com o mesmo destino; header sem menu', async ({ page }) => {

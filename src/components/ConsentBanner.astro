@@ -129,20 +129,31 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
     inset-inline: 0;
     inset-block-end: 0;
     z-index: 20;
-    background-color: var(--color-surface);
-    border-block-start: var(--border-width) solid var(--color-border-strong);
+    background-color: var(--color-header-bg-solid);
+    border-block-start: var(--border-width) solid var(--color-border);
+    box-shadow: 0 -8px 32px rgb(0 0 0 / 0.06);
+  }
+
+  /* Mesmo vidro do header onde há suporte; sem ele, fundo sólido. */
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .consent-bar {
+      background-color: var(--color-header-bg);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
   }
 
   .consent-bar__inner {
     display: grid;
-    gap: var(--space-2);
-    padding-block: var(--space-3);
+    gap: var(--space-3);
+    padding-block: var(--space-4);
   }
 
   .consent-bar__text {
     font-size: var(--text-sm);
-    line-height: 1.4;
+    line-height: 1.45;
     color: var(--color-text);
+    text-wrap: pretty;
   }
 
   .consent-actions {
@@ -157,10 +168,10 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
   /* Os 3 botões de cada nível são idênticos: Secundário, mesmo tamanho e peso (§13.1). */
   .consent-btn {
     min-block-size: var(--tap-min);
-    padding: var(--space-1);
+    padding: var(--space-1) var(--space-4);
     background-color: var(--color-surface);
     border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     color: var(--color-text);
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
@@ -204,10 +215,11 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
     max-block-size: calc(100dvh - 2 * var(--space-4));
     overflow-y: auto;
     margin: auto;
-    padding: var(--space-5);
+    padding: var(--space-6);
     background-color: var(--color-surface);
-    border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-md);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
     color: var(--color-text);
   }
 
@@ -223,9 +235,10 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
   }
 
   .consent-dialog__title {
-    font-size: var(--text-xl);
-    font-weight: var(--weight-semibold);
-    line-height: var(--leading-snug);
+    font-size: var(--text-title-lg);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-title);
     padding-block-start: var(--space-2);
   }
 
@@ -238,7 +251,7 @@ const policyHref = `${pathFor('privacy', locale)}#cookies`;
     padding: 0;
     background-color: transparent;
     border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     color: var(--color-text);
     cursor: pointer;
   }

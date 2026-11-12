@@ -30,7 +30,7 @@ for (const path of publicPaths) checks.push([`${path}: complete discoverable ide
   assert.equal(person?.['@id'], origin + '/autores/henrique-pett/#person');
   assert.equal(person.name, 'Henrique Pett');
   assert.equal(person.worksFor['@id'], origin + '/#organization');
-  assert.equal(entities.find(s => s['@type'] === 'Organization')?.name, 'Torno Studio');
+  assert.equal(entities.find(s => s['@type'] === 'Organization')?.name, 'Torno');
   const main = tags(doc, 'main')[0];
   for (const input of tags(main, 'input').filter(n=>attr(n,'type')==='checkbox')) assert(attr(input,'aria-label')?.trim(), 'task-list checkbox lacks accessible name');
   const md = await readFile('dist' + path + 'index.md', 'utf8');

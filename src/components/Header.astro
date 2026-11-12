@@ -1,10 +1,22 @@
 ---
 /**
- * Header fixo (DESIGN §6.2, §7.0). Sem menu hambúrguer.
- * < 640: wordmark · idioma · CTA curto. 640–1199: + tema, CTA longo. ≥ 1200: + nav de âncoras.
+ * Header (DESIGN-2026-11 §7.1): barra fina (52 px), translúcida, fixa no topo.
+ *
+ * variant="full" (padrão)
+ *   ≥ 1024: marca · nav (5 links) · idioma · tema · CTA
+ *   < 1024: marca · CTA curto · botão "Menu" → painel com nav, idioma e tema
+ * variant="lean": marca (link para a home) + CTA. Sem nav, idioma nem tema. Landings de campanha/setor.
+ *
+ * Menu móvel SEM JS: `popover` nativo + `popovertarget`. O navegador cuida de abrir/fechar,
+ * Esc, clique fora e da ordem de foco (o painel vem logo depois do botão). No desktop o mesmo
+ * elemento é exibido em linha (CSS sobrescreve o display:none do popover fechado), então há UMA nav só.
+ *
+ * Compatibilidade: `lean` (boolean, legado de /diagnostico/) = variant "lean" com a marca como TEXTO
+ * (sem saída para a home). `languageHref` continua repassado ao LangSwitch (null oculta o seletor).
+ * Regra: nada de links para /para/... aqui.
  */
-import { NAV_SECTION_IDS } from '../content/types';
-import { getCopy, pathFor, type Locale, type RouteId } from '../lib/i18n';
+import { getChrome } from '../content/chrome';
+import { pathFor, type Locale, type RouteId } from '../lib/i18n';
 import BookingCta from './ui/BookingCta.astro';
 import LangSwitch from './ui/LangSwitch.astro';
 import ThemeToggle from './ui/ThemeToggle.astro';
@@ -13,44 +25,70 @@ import Wordmark from './ui/Wordmark.astro';
 interface Props {
   locale: Locale;
   routeId: RouteId;
-  /** null hides unavailable article translation; undefined preserves route behavior. */
+  variant?: 'full' | 'lean';
+  /** null oculta o seletor (artigo sem tradução); undefined usa a rota equivalente. */
   languageHref?: string | null;
-  /** Landing de campanha (DESIGN §14.2): marca como texto + CTA; sem nav, seletor de idioma nem toggle. */
+  /** Legado: variant "lean" com a marca como texto (sem link para a home). */
   lean?: boolean;
+  /** Força a marca como texto (true) ou link (false). Padrão: link, salvo `lean` legado. */
+  brandAsText?: boolean;
 }
 
 const { locale, routeId, languageHref, lean = false } = Astro.props;
-const copy = getCopy(locale);
+const variant = lean ? 'lean' : (Astro.props.variant ?? 'full');
+const brandAsText = Astro.props.brandAsText ?? lean;
+const t = getChrome(locale).header;
+const common = getChrome(locale).common;
 const home = pathFor('home', locale);
+const menuId = 'site-menu';
+const currentPath = Astro.url.pathname;
+const navItems = t.nav
+  .map((item) => {
+    const path = pathFor(item.routeId, locale);
+    const href = item.hash ? `${path}#${item.hash}` : path;
+    const current = !item.hash && path !== home && currentPath.startsWith(path);
+    return { ...item, href, current };
+  });
 ---
 
-<header class:list={['site-header', lean && 'site-header--lean']}>
-  <div class="container site-header__inner">
+<header class:list={['site-header', `site-header--${variant}`]}>
+  <div class="container container--wide site-header__inner">
     <div class="site-header__brand">
-      <Wordmark href={lean ? undefined : home} />
+      <Wordmark href={brandAsText ? undefined : home} />
     </div>
     {
-      !lean && (
-        <>
-          <nav class="site-header__nav" aria-label={copy.header.navLabel}>
-            <ul>
-              {NAV_SECTION_IDS.map((id) => (
+      variant === 'full' && (
+        <nav class="site-header__nav" aria-label={t.navLabel}>
+          <button type="button" class="site-header__menu-btn" popovertarget={menuId} popovertargetaction="toggle">
+            <svg class="site-header__menu-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 8h16M4 16h16" />
+            </svg>
+            <span>{t.menuOpen}</span>
+          </button>
+          <div class="site-header__panel" id={menuId} popover>
+            <ul class="site-header__links">
+              {navItems.map((item) => (
                 <li>
-                  <a href={`${home}#${id}`}>{copy.header.nav[id]}</a>
+                  <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
-          </nav>
-          <LangSwitch locale={locale} routeId={routeId} href={languageHref} />
-          <div class="site-header__theme">
-            <ThemeToggle label={copy.common.themeToggleLabel} />
+            <div class="site-header__utils">
+              <LangSwitch locale={locale} routeId={routeId} href={languageHref} />
+              <ThemeToggle label={common.themeToggleLabel} />
+            </div>
+            <button type="button" class="site-header__close" popovertarget={menuId} popovertargetaction="hide">
+              {t.menuClose}
+            </button>
           </div>
-        </>
+        </nav>
       )
     }
     <BookingCta locale={locale} size="md" class="site-header__cta">
-      <span class="site-header__cta-long">{copy.common.bookingCtaHeader}</span>
-      <span class="site-header__cta-short">{copy.common.bookingCtaHeaderMobile}</span>
+      <span class="site-header__cta-long">{t.cta}</span>
+      <span class="site-header__cta-short">{t.ctaShort}</span>
     </BookingCta>
   </div>
 </header>
@@ -59,17 +97,24 @@ const home = pathFor('home', locale);
   .site-header {
     position: sticky;
     top: 0;
-    z-index: 10;
-    background-color: var(--color-bg);
+    z-index: 30;
+    background-color: var(--color-header-bg-solid);
     box-shadow: var(--shadow-header);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .site-header {
+      background-color: var(--color-header-bg);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
   }
 
   .site-header__inner {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-2);
     min-block-size: var(--header-height);
-    padding-block: var(--space-2);
   }
 
   /* A marca é o item que encolhe; os controles à direita não. */
@@ -79,28 +124,18 @@ const home = pathFor('home', locale);
     min-inline-size: 0;
   }
 
-  .site-header__nav,
-  .site-header__theme,
+  /* CTA md (alvo de 44 px, WCAG/tests K4) com respiro lateral de botão pequeno. */
+  :global(.site-header__cta) {
+    flex: none;
+    white-space: nowrap;
+    padding-inline: var(--space-4);
+  }
+
   .site-header__cta-long {
     display: none;
   }
 
-  :global(.site-header__cta) {
-    flex: none;
-    white-space: nowrap;
-  }
-
-  /* Sem a nav (que empurrava o CTA a partir de 1200 px), o CTA vai à direita sozinho (DESIGN §14.2). */
-  .site-header--lean :global(.site-header__cta) {
-    margin-inline-start: auto;
-  }
-
-  @media (min-width: 40em) {
-    .site-header__theme {
-      display: flex;
-      flex: none;
-    }
-
+  @media (min-width: 30em) {
     .site-header__cta-long {
       display: inline;
     }
@@ -110,42 +145,193 @@ const home = pathFor('home', locale);
     }
   }
 
-  @media (min-width: 75em) {
-    .site-header__brand {
-      flex: 0 1 auto;
-    }
+  /* ---------- Nav: celular/tablet (< 1024) = botão + painel popover ---------- */
 
-    .site-header__nav {
-      display: block;
-      flex: 1 1 auto;
+  /* Celular: marca · CTA · Menu (a nav vem visualmente por último). */
+  .site-header__nav {
+    order: 3;
+    display: flex;
+    flex: none;
+  }
+
+  .site-header__menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-block-size: var(--tap-min);
+    min-inline-size: var(--tap-min);
+    padding-inline: var(--space-3);
+    margin-inline-end: calc(-1 * var(--space-3));
+    background: none;
+    border: 0;
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+  }
+
+  .site-header__menu-icon {
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+
+  /* O painel aberto fica no top layer: ocupa a tela abaixo da barra. */
+  .site-header__panel {
+    position: fixed;
+    inset: var(--header-height) 0 0 0;
+    inline-size: 100%;
+    max-inline-size: none;
+    block-size: auto;
+    max-block-size: none;
+    margin: 0;
+    padding: var(--space-5) var(--container-pad) var(--space-7);
+    overflow-y: auto;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 0;
+    border-block-start: var(--border-width) solid var(--color-border-subtle);
+  }
+
+  .site-header__panel::backdrop {
+    background: transparent;
+  }
+
+  .site-header__panel:popover-open {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header__panel:popover-open {
+      animation: menu-in var(--duration-base) var(--ease-emphasized);
     }
   }
 
-  .site-header__nav ul {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-5);
+  @keyframes menu-in {
+    from {
+      transform: translateY(-0.5rem);
+      opacity: 0;
+    }
+  }
+
+  .site-header__links {
     list-style: none;
     padding: 0;
   }
 
-  .site-header__nav a {
-    display: inline-flex;
+  .site-header__panel .site-header__links a {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    min-inline-size: var(--tap-min);
-    min-block-size: var(--tap-min);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
+    min-block-size: 3.25rem;
+    font-size: var(--text-title-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
     color: var(--color-text);
     text-decoration: none;
-    text-underline-offset: 0.2em;
-    white-space: nowrap;
   }
 
-  @media (hover: hover) {
-    .site-header__nav a:hover {
-      text-decoration-line: underline;
+  .site-header__utils {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .site-header__close {
+    align-self: flex-start;
+    min-block-size: var(--tap-min);
+    padding-inline: var(--space-4);
+    background: none;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+  }
+
+  /* ---------- Desktop (≥ 1024): o mesmo painel em linha ---------- */
+
+  @media (min-width: 64em) {
+    .site-header__inner {
+      gap: var(--space-4);
     }
+
+    .site-header__brand {
+      flex: 0 1 auto;
+    }
+
+    .site-header__menu-btn,
+    .site-header__close {
+      display: none;
+    }
+
+    .site-header__nav {
+      order: 0;
+      display: block;
+      flex: 1 1 auto;
+    }
+
+    /* Sobrescreve o display:none/top layer do popover fechado. */
+    .site-header__panel,
+    .site-header__panel:popover-open {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0;
+      overflow: visible;
+      background: transparent;
+      border: 0;
+      animation: none;
+    }
+
+    .site-header__links {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: center;
+      gap: var(--space-1);
+    }
+
+    .site-header__panel .site-header__links a {
+      min-block-size: var(--tap-min);
+      padding-inline: var(--space-3);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-regular);
+      letter-spacing: 0;
+      color: var(--color-text);
+      opacity: 0.86;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      transition: opacity var(--duration-fast) var(--ease-out);
+    }
+
+    .site-header__panel .site-header__links a[aria-current='page'] {
+      opacity: 1;
+      font-weight: var(--weight-medium);
+    }
+
+    .site-header__utils {
+      gap: 0;
+    }
+  }
+
+  @media (min-width: 64em) and (hover: hover) {
+    .site-header__panel .site-header__links a:hover {
+      opacity: 1;
+      text-decoration-line: underline;
+      text-underline-offset: 0.3em;
+    }
+  }
+
+  /* Lean: sem nav, o CTA vai à direita sozinho. */
+  .site-header--lean :global(.site-header__cta) {
+    margin-inline-start: auto;
   }
 </style>

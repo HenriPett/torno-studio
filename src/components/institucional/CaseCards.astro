@@ -1,0 +1,76 @@
+---
+/**
+ * Cards dos cases publicados (home e /about/). Lê só `name`, `title`, `description`, `category` e `routeId`
+ * de src/content/cases.ts (contrato combinado com o fluxo de cases). Um link por card (card inteiro clicável).
+ */
+import Card from '../ds/Card.astro';
+import { caseStudies, type CaseSlug } from '../../content/cases';
+import { pathFor, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  linkLabel: string;
+  /** Variante do card: surface em seção inversa ou muted; muted em seção branca. */
+  card?: 'surface' | 'muted';
+  headingLevel?: 'h3' | 'h4';
+}
+
+const { locale, linkLabel, card = 'surface', headingLevel: H = 'h3' } = Astro.props;
+const slugs: CaseSlug[] = ['loopt', 'bom-capital', 'ascende'];
+const cases = slugs.map((slug) => ({ slug, ...caseStudies[locale][slug] }));
+---
+
+<ul class="grid grid--3 case-cards" role="list">
+  {
+    cases.map((item) => (
+      <Card as="li" variant={card} padding="lg" radius="xl" interactive class="case-cards__card">
+        <p class="eyebrow case-cards__category">{item.category}</p>
+        <H class="title case-cards__title">{item.name}</H>
+        <p class="case-cards__headline">{item.title}</p>
+        <p class="muted case-cards__desc">{item.description}</p>
+        <a class="link link--arrow ds-card__link case-cards__link" href={pathFor(item.routeId, locale)} aria-label={`${linkLabel}: ${item.name}`}>
+          {linkLabel}
+        </a>
+      </Card>
+    ))
+  }
+</ul>
+
+<style>
+  .case-cards {
+    list-style: none;
+    padding: 0;
+  }
+
+  :global(.case-cards__card) :global(.ds-card__body) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    block-size: 100%;
+  }
+
+  /* O anel de foco do card inteiro clicável vem do ds/Card, mas lá o seletor `:has(:global(...))` sai literal no
+     CSS compilado (inválido) e o anel some. Regra local até o Card ser corrigido. */
+  :global(.case-cards__card:has(.ds-card__link:focus-visible)) {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
+  .case-cards__title {
+    font-size: var(--text-title-lg);
+  }
+
+  .case-cards__headline {
+    font-weight: var(--weight-medium);
+    text-wrap: pretty;
+  }
+
+  .case-cards__desc {
+    text-wrap: pretty;
+  }
+
+  .case-cards__link {
+    margin-block-start: auto;
+    padding-block-start: var(--space-3);
+  }
+</style>

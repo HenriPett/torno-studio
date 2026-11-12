@@ -1,22 +1,25 @@
 ---
 /**
- * ThemeToggle (DESIGN §6.4). Nasce `hidden`; o script inline do Base.astro o mostra e liga o clique.
- * Sem JS o botão não aparece e vale prefers-color-scheme. O script mantém aria-pressed (true = escuro).
+ * ThemeToggle. Nasce `hidden`; o script inline do Base.astro o mostra e liga o clique
+ * (seletor `[data-theme-toggle]`, não renomeie). Sem JS o botão não aparece e vale
+ * prefers-color-scheme. O script mantém aria-pressed (true = escuro).
  */
 import Icon from './Icon.astro';
 
 interface Props {
   label: string;
+  class?: string;
 }
 
-const { label } = Astro.props;
+const { label, class: className } = Astro.props;
 ---
 
-<button type="button" class="theme-toggle" data-theme-toggle aria-label={label} hidden>
+<button type="button" class:list={['theme-toggle', className]} data-theme-toggle aria-label={label} hidden>
   <Icon name="theme" class="theme-toggle__icon" />
 </button>
 
 <style>
+  /* Ícone sem moldura (estilo barra de produto); alvo de 44 px; o ícone tem a cor do texto. */
   .theme-toggle {
     display: inline-grid;
     place-items: center;
@@ -25,8 +28,8 @@ const { label } = Astro.props;
     block-size: var(--tap-min);
     padding: 0;
     background-color: transparent;
-    border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-md);
+    border: 0;
+    border-radius: var(--radius-full);
     color: var(--color-text);
     cursor: pointer;
     transition: background-color var(--duration-fast) var(--ease-out);
@@ -34,12 +37,12 @@ const { label } = Astro.props;
 
   @media (hover: hover) {
     .theme-toggle:hover {
-      background-color: var(--color-surface-sunken);
+      background-color: var(--color-surface-muted);
     }
   }
 
   .theme-toggle :global(.theme-toggle__icon) {
-    inline-size: 1.25rem;
-    block-size: 1.25rem;
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
   }
 </style>

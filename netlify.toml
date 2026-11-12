@@ -65,3 +65,11 @@
     Content-Type = "text/markdown; charset=utf-8"
     X-Robots-Tag = "noindex"
     Link = '</llms.txt>; rel="describedby"'
+
+# Landings de setor (estratégia 2026-11 §7.2): fora de qualquer índice, também pelo header.
+# Não há "Disallow: /para/" no robots.txt de propósito (revelaria o caminho); o crawler precisa
+# rastrear a página para ler o noindex. Este arquivo não vai para o dist/.
+[[headers]]
+  for = "/para/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

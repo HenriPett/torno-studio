@@ -1,0 +1,125 @@
+---
+/**
+ * Faq (DESIGN-2026-11 §6.8): perguntas em <details>/<summary> nativos (teclado e leitor de tela
+ * de graça, funciona sem JS). Respostas em texto simples; parágrafos separados por "\n\n".
+ *
+ * <Faq items={[{ q: 'Quanto tempo leva?', a: '…' }]} />
+ *
+ * - name: agrupa os <details> (abrir um fecha o outro, onde suportado). Omitido = independentes.
+ */
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  name?: string;
+  class?: string;
+}
+
+const { items, name, class: className } = Astro.props;
+---
+
+<div class:list={['ds-faq', className]}>
+  {
+    items.map((item) => (
+      <details class="ds-faq__item" name={name}>
+        <summary class="ds-faq__q">
+          <span>{item.q}</span>
+          <svg class="ds-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </summary>
+        <div class="ds-faq__a">
+          {item.a.split(/\n{2,}/).map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .ds-faq {
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .ds-faq__item {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .ds-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-block-size: var(--tap-min);
+    padding-block: var(--space-5);
+    font-size: var(--text-title);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-title);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .ds-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .ds-faq__icon {
+    flex: none;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    color: var(--color-text-muted);
+    transition: transform var(--duration-base) var(--ease-emphasized);
+  }
+
+  .ds-faq__item[open] .ds-faq__icon {
+    transform: rotate(45deg);
+  }
+
+  @media (hover: hover) {
+    .ds-faq__q:hover .ds-faq__icon {
+      color: var(--color-text);
+    }
+  }
+
+  .ds-faq__a {
+    padding-block-end: var(--space-5);
+    padding-inline-end: var(--space-7);
+    color: var(--color-text-muted);
+    max-inline-size: var(--measure);
+  }
+
+  .ds-faq__a > p + p {
+    margin-block-start: var(--space-3);
+  }
+
+  /* Abertura animada onde há ::details-content (Chromium 131+); nos demais abre seco. */
+  @supports selector(::details-content) {
+    @media (prefers-reduced-motion: no-preference) {
+      .ds-faq {
+        interpolate-size: allow-keywords;
+      }
+
+      .ds-faq__item::details-content {
+        block-size: 0;
+        overflow: clip;
+        transition:
+          block-size var(--duration-base) var(--ease-emphasized),
+          content-visibility var(--duration-base) allow-discrete;
+      }
+
+      .ds-faq__item[open]::details-content {
+        block-size: auto;
+      }
+    }
+  }
+</style>

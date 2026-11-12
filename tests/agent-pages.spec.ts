@@ -9,7 +9,7 @@ type HtmlNode = { tagName?: string; value?: string; children?: HtmlNode[]; prope
 const nodes = (node: HtmlNode): HtmlNode[] => [node, ...(node.children || []).flatMap(nodes)];
 const nodeText = (node: HtmlNode): string => node.value || (node.children || []).map(nodeText).join('');
 
-for (const path of ['/', '/en/', '/about/', '/contact/', '/en/about/', '/en/contact/', '/privacidade/', '/en/privacy/']) {
+for (const path of ['/', '/en/', '/como-trabalhamos/', '/en/how-we-work/', '/cases/', '/en/cases/', '/about/', '/contact/', '/en/about/', '/en/contact/', '/privacidade/', '/en/privacy/']) {
   test(`${path}: meaningful raw content, H1 first, sequential headings and organization where applicable`, async ({ request }) => {
     const response = await request.get(path); expect(response.status()).toBe(200);
     const tree = nodes(unified().use(rehypeParse).parse(await response.text()) as HtmlNode);
@@ -20,8 +20,9 @@ for (const path of ['/', '/en/', '/about/', '/contact/', '/en/about/', '/en/cont
     for (let i = 1; i < headings.length; i++) expect(headings[i]! - headings[i-1]!).toBeLessThanOrEqual(1);
     if (!path.includes('privac')) {
       const json = tree.filter(n => n.tagName === 'script' && n.properties?.type === 'application/ld+json').map(nodeText);
-      const org = json.map(j => JSON.parse(j)).find(j => j['@type'] === 'Organization');
-      expect(org.name.length).toBeGreaterThan(0); expect(new URL(org.url).pathname).toBe('/');
+      const org = json.map(j => JSON.parse(j)).flatMap(j => j['@graph'] ?? [j]).find(j => j['@type'] === 'Organization');
+      expect(org.name.length).toBeGreaterThan(0); expect(org.name).not.toMatch(/Studio/); expect(new URL(org.url).pathname).toBe('/');
+      expect(org.description).toMatch(/indústria|industrial/); expect(org.aggregateRating).toBeUndefined(); expect(org.numberOfEmployees).toBeUndefined();
       const mail = tree.find(n => n.tagName === 'a' && String(n.properties?.href).startsWith('mailto:'));
       if (mail) { expect(org.contactPoint.contactType).toBe('sales'); expect(org.contactPoint.email).toBe(String(mail.properties!.href).slice(7)); }
       else expect(org.contactPoint).toBeUndefined();
@@ -29,7 +30,8 @@ for (const path of ['/', '/en/', '/about/', '/contact/', '/en/about/', '/en/cont
       expect(org.location.address['@type']).toBe('PostalAddress'); expect(org.address).toBeUndefined();
     }
     expect(tree.some(n => n.tagName === 'link' && (n.properties?.rel as string[] | undefined)?.includes('describedby') && n.properties?.href === '/llms.txt')).toBe(true);
-    expect(tree.filter(n => n.tagName === 'dialog')).toHaveLength(1);
+    // O diálogo de consentimento só existe com PUBLIC_GADS_ID (ConsentBanner.astro); o build e o teste leem a mesma env.
+    expect(tree.filter(n => n.tagName === 'dialog')).toHaveLength(process.env.PUBLIC_GADS_ID ? 1 : 0);
   });
 }
 
@@ -46,21 +48,29 @@ test('llms.txt follows file-list format, gives actionable guidance, and only lin
   const r = await request.get('/llms.txt'); expect(r.ok()).toBe(true);
   expect(r.headers()['content-type']).toContain('text/plain'); const body = await r.text();
   expect(body).toMatch(/^# [^\n]+\n\n> /); expect(body).toContain('When to use this'); expect(body).toContain('How to engage');
-  for (const section of body.split(/^## /m).slice(1)) for (const line of section.split('\n').slice(1).filter(Boolean)) expect(line).toMatch(/^- \[[^\]]+\]\(https:\/\/[^)]+\)/);
-  for (const [, href] of body.matchAll(/\]\((https:\/\/[^)]+)\)/g)) {
-    const path = new URL(href!).pathname; const linked = await request.get(path); expect(linked.ok(), path).toBe(true);
-  }
+  // Posicionamento 2026-11: marca sem "Studio", indústria, sem preços publicados, sem landings de setor.
+  expect(body).not.toMatch(/Studio|estúdio/i); expect(body).toMatch(/indústria/);
+  expect(body).not.toMatch(/R\$\s?\d|US\$|USD|BRL|\/para\//);
+  // Origem do site: https em produção; http://localhost no preview local.
+  for (const section of body.split(/^## /m).slice(1)) for (const line of section.split('\n').slice(1).filter(Boolean)) expect(line).toMatch(/^- \[[^\]]+\]\(https?:\/\/[^)]+\): \S/);
+  const linked = [...body.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map(([, href]) => new URL(href!).pathname);
+  for (const path of ['/index.md', '/en/index.md', '/como-trabalhamos/index.md', '/en/how-we-work/index.md', '/cases/index.md', '/en/cases/index.md', '/about/index.md', '/contact/index.md', '/autores/henrique-pett/index.md', '/privacidade/index.md', '/blog/index.md']) expect(linked, path).toContain(path);
+  for (const path of linked) { const res = await request.get(path); expect(res.ok(), path).toBe(true); }
 });
 
 test('every public rendered page has nonempty Markdown; sitemap includes trust pages', async ({ request }) => {
+  // Sem Markdown de propósito: landings de setor (isoladas, §7.2) e a referência interna /design-system/.
   const files = (await readdir(resolve('dist'), { recursive: true })).filter(f => f.endsWith('index.html'));
-  for (const file of files) {
+  for (const file of files.filter(f => !/^(?:para|design-system)[\\/]/.test(f))) {
     const md = await readFile(resolve('dist', file.replace(/\.html$/, '.md')), 'utf8');
     const html = await readFile(resolve('dist', file), 'utf8');
     const title = nodes(unified().use(rehypeParse).parse(html) as HtmlNode).find(n => n.tagName === 'title');
     expect(md).toContain(`> ${nodeText(title!)}`);
     expect(md.length, file).toBeGreaterThan(20); expect(md, file).not.toMatch(/<script|<style|data-consent-dialog/);
   }
+  for (const file of files.filter(f => /^(?:para|design-system)[\\/]/.test(f))) {
+    await expect(readFile(resolve('dist', file.replace(/\.html$/, '.md')), 'utf8'), file).rejects.toThrow();
+  }
   const xml = await (await request.get('/sitemap-0.xml')).text();
-  for (const path of ['/about/', '/contact/', '/en/about/', '/en/contact/']) expect(xml).toContain(`${path}</loc>`);
+  for (const path of ['/about/', '/contact/', '/en/about/', '/en/contact/', '/cases/', '/en/cases/', '/como-trabalhamos/', '/en/how-we-work/']) expect(xml).toContain(`${path}</loc>`);
 });

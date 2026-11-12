@@ -1,0 +1,70 @@
+---
+/**
+ * Índice /cases/ e /en/cases/: intro curta, os três cards e a seção honesta "Na sua indústria"
+ * (a Torno ainda não tem case publicado numa fábrica; os primeiros projetos começam pelo diagnóstico).
+ * Sem setores listados nem links para /para/.
+ */
+import Base from '../../layouts/Base.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Section from '../ds/Section.astro';
+import SectionHeader from '../ds/SectionHeader.astro';
+import BookingCta from '../ui/BookingCta.astro';
+import CaseCard from './CaseCard.astro';
+import { caseSlugs, casesIndex } from '../../content/cases';
+import { pathFor, type Locale } from '../../lib/i18n';
+import { getChrome } from '../../content/chrome';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = casesIndex[locale];
+const howWeWork = pathFor('howWeWork', locale);
+const showHowWeWork = true;
+---
+
+<Base locale={locale} routeId="cases" title={t.title} description={t.description} ogImagePath={`/og/cases/index-${locale}.png`} ogImageAlt={t.heading}>
+  <Header locale={locale} routeId="cases" />
+  <main id="conteudo" tabindex="-1">
+    <Section labelledby="cases-title">
+      <SectionHeader as="h1" size="lg" id="cases-title" eyebrow={t.eyebrow} accent title={t.heading} lead={t.lead} />
+    </Section>
+
+    <Section flushTop labelledby="cases-list">
+      <h2 id="cases-list" class="visually-hidden">{t.listTitle}</h2>
+      <ul class="grid grid--3 cases-list" role="list">
+        {
+          caseSlugs.map((slug) => (
+            <li>
+              <CaseCard locale={locale} slug={slug} />
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id="agendar" variant="inverse" labelledby="cases-industry">
+      <SectionHeader id="cases-industry" size="md" eyebrow={t.industry.eyebrow} title={t.industry.title} lead={t.industry.text}>
+        <BookingCta locale={locale} variant="on-inverse">{getChrome(locale).common.bookingCta}</BookingCta>
+        {showHowWeWork && <a class="link link--arrow link--target" href={howWeWork}>{t.industry.secondary}</a>}
+      </SectionHeader>
+    </Section>
+  </main>
+  <Footer locale={locale} routeId="cases" />
+</Base>
+
+<style>
+  .cases-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .cases-list > li {
+    display: flex;
+  }
+  .cases-list > li > :global(*) {
+    flex: 1;
+  }
+</style>

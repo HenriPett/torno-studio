@@ -15,6 +15,10 @@ const BASE = process.env.QA_BASE_URL;
 const MODE = process.env.QA_COUNTER; // 'production' | 'preview' | undefined
 const STORE = 'visitas-diagnostico';
 const PATH = '/diagnostico/';
+/** Landings de setor (estratégia 2026-11 §7.3): mesmo contador, store próprio, chave AAAA-MM-DD/<slug>. */
+const SECTOR_STORE = 'visitas-setores';
+const SECTOR = 'textil';
+const SECTOR_PATH = `/para/${SECTOR}/`;
 
 /** UA de navegador real (o HeadlessChrome padrão do Playwright é tratado como robô, de propósito). */
 const REAL_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36';
@@ -28,10 +32,10 @@ function todayKey(): string {
   return d.toISOString().slice(0, 10);
 }
 
-function readBlob(key = todayKey()): { raw: string; value: Record<string, unknown> | null } {
+function readBlob(key = todayKey(), store = STORE): { raw: string; value: Record<string, unknown> | null } {
   let raw = '';
   try {
-    raw = execFileSync('npx', ['netlify', 'blobs:get', STORE, key], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+    raw = execFileSync('npx', ['netlify', 'blobs:get', store, key], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
   } catch {
     raw = '';
   }
@@ -45,6 +49,8 @@ function readBlob(key = todayKey()): { raw: string; value: Record<string, unknow
 }
 
 const count = (key?: string) => Number(readBlob(key).value?.n ?? 0);
+const sectorKey = () => `${todayKey()}/${SECTOR}`;
+const sectorCount = () => Number(readBlob(sectorKey(), SECTOR_STORE).value?.n ?? 0);
 
 /** Espera o waitUntil da função gravar (até ~10 s) e devolve o n final. */
 async function settle(expectedAtLeast: number): Promise<number> {
@@ -174,10 +180,57 @@ test.describe('B3 contador /diagnostico/', () => {
 
   test('B3-f política PT/EN com a linha do contador agregado', async ({ page }) => {
     await page.goto('/privacidade/');
-    await expect(page.locator('main')).toContainText(/visitas à página de diagnóstico de forma agregada/i);
+    await expect(page.locator('main')).toContainText(/visitas à página de diagnóstico/i);
+    await expect(page.locator('main')).toContainText(/de forma agregada/i);
     await expect(page.locator('main')).toContainText(/sem cookies e sem guardar IP ou navegador/i);
     await page.goto('/en/privacy/');
     await expect(page.locator('main')).toContainText(/diagnostic/i);
     await expect(page.locator('main')).toContainText(/aggregate|one number per day/i);
+  });
+});
+
+test.describe('B3-s contador das landings de setor /para/<slug>/', () => {
+  test('B3-s1 GET da landing não cria cookie nem header novo (comparado à home), e manda X-Robots-Tag noindex', async ({ request }) => {
+    const res = await request.get(SECTOR_PATH, { headers: { 'user-agent': 'QA-header-check-bot', accept: HTML } });
+    expect(res.status()).toBe(200);
+    expect(res.headers()['set-cookie']).toBeUndefined();
+    expect(res.headers()['x-robots-tag'] ?? '').toMatch(/noindex/);
+    const sector = await headerNames(request, SECTOR_PATH);
+    const home = await headerNames(request, '/');
+    expect(sector.filter((h) => !home.includes(h) && h !== 'x-robots-tag'), 'headers presentes só na landing').toEqual([]);
+  });
+
+  test('B3-s2 +1 por visita de browser real na chave AAAA-MM-DD/<slug>; blob guarda SÓ {n} (production)', async ({ browser }, info) => {
+    test.skip(MODE !== 'production', 'incremento só em production: QA_COUNTER=production');
+    test.setTimeout(120000);
+    const before = sectorCount();
+    const diagBefore = count();
+    const ctx = await browser.newContext({ userAgent: REAL_UA });
+    const page = await ctx.newPage();
+    await page.goto(SECTOR_PATH, { waitUntil: 'load' });
+    await ctx.close();
+    let after = sectorCount();
+    for (let i = 0; i < 10 && after < before + 1; i++) { await new Promise((r) => setTimeout(r, 1000)); after = sectorCount(); }
+    info.annotations.push({ type: 'qa-visits', description: `1 visita de QA contada em ${sectorKey()} (antes=${before}, depois=${after})` });
+    expect(after - before).toBeGreaterThanOrEqual(1);
+    expect(count(), 'a landing não conta na /diagnostico/').toBe(diagBefore);
+    const blob = readBlob(sectorKey(), SECTOR_STORE);
+    expect(Object.keys(blob.value ?? {})).toEqual(['n']);
+    expect(blob.raw).not.toMatch(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|mozilla|chrome|http|utm_|referer/i);
+  });
+
+  test('B3-s3 robô, HEAD, prefetch, slug inexistente e /para/ (404) não contam (production/preview)', async ({ request, browser }) => {
+    test.skip(MODE !== 'production' && MODE !== 'preview', 'QA_COUNTER=production ou preview');
+    test.setTimeout(120000);
+    const before = sectorCount();
+    await request.head(SECTOR_PATH, { headers: { 'user-agent': REAL_UA, accept: HTML } });
+    await request.get(SECTOR_PATH, { headers: { 'user-agent': REAL_UA, accept: HTML, 'sec-purpose': 'prefetch', 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate' } });
+    await request.get(SECTOR_PATH, { headers: { 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', accept: HTML, 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate' } });
+    const ctx = await browser.newContext({ userAgent: REAL_UA });
+    const page = await ctx.newPage();
+    for (const other of ['/para/', '/para/qa-inexistente/']) await page.goto(other);
+    await ctx.close();
+    await new Promise((r) => setTimeout(r, 6000));
+    expect(sectorCount(), 'nada disso pode contar').toBe(before);
   });
 });
