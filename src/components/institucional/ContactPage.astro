@@ -1,6 +1,7 @@
 ---
 /**
- * /contact/ e /en/contact/: agenda, e-mail (só com PUBLIC_CONTACT_EMAIL), LinkedIn da empresa, o que levar
+ * /contact/ e /en/contact/: agenda, demonstração (sem link: o acesso vai em privado), e-mail (só com
+ * PUBLIC_CONTACT_EMAIL), LinkedIn da empresa, o que levar
  * para a conversa e o que acontece depois. Ritmo: default → muted → default → muted → CTA inverse.
  */
 import Base from '../../layouts/Base.astro';
@@ -40,13 +41,18 @@ const id = en ? { channels: 'channels', prepare: 'prepare', next: 'next-steps' }
 
     <Section id={id.channels} variant="muted" labelledby={`${id.channels}-title`}>
       <SectionHeader id={`${id.channels}-title`} eyebrow={c.channels.eyebrow} title={c.channels.title} size="md" accent />
-      <ul class:list={['grid', site.contactEmail ? 'grid--3' : 'grid--2', 'channels']} role="list">
+      {/* 4 cartões (com e-mail) em 2 × 2; 3 cartões numa linha. */}
+      <ul class:list={['grid', site.contactEmail ? 'grid--2' : 'grid--3', 'channels']} role="list">
         <Card as="li" variant="surface" padding="lg" radius="xl">
           <h3 class="title">{c.channels.booking.title}</h3>
           <p class="muted">{c.channels.booking.body}</p>
           <div class="channels__action">
             <BookingCta locale={locale} size="md">{cta}</BookingCta>
           </div>
+        </Card>
+        <Card as="li" variant="surface" padding="lg" radius="xl">
+          <h3 class="title">{c.channels.demo.title}</h3>
+          <p class="muted">{c.channels.demo.body}</p>
         </Card>
         {
           site.contactEmail && (

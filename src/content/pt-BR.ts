@@ -13,7 +13,7 @@ export const ptBR: SiteCopy = {
     home: {
       title: '{brand} | IA e software sob medida para a indústria',
       description:
-        'Juntamos dados e conhecimento da operação num cérebro da empresa e colocamos agentes de IA nas áreas da fábrica. Implantação por etapas, com a sua TI.',
+        'Juntamos dados e conhecimento da empresa num cérebro da operação e colocamos agentes de IA nas áreas da fábrica. Implantação por etapas, com a sua TI.',
     },
     privacy: {
       title: 'Privacidade | {brand}',
@@ -49,7 +49,7 @@ export const ptBR: SiteCopy = {
 
   consent: {
     regionLabel: "Aviso de cookies",
-    text: "Uso cookies de medição e publicidade só se você aceitar.",
+    text: "Usamos cookies de medição e publicidade só se você aceitar.",
     policyLink: "Política de privacidade",
     accept: "Aceitar",
     reject: "Recusar",
@@ -75,7 +75,7 @@ export const ptBR: SiteCopy = {
         advertising: {
           name: "Publicidade",
           description:
-            "Carrega a tag do Google Ads, que grava cookies para medir o resultado dos meus anúncios e avisa quando um diagnóstico é agendado. Nome, e-mail e dados do agendamento não são enviados ao Google.",
+            "Carrega a tag do Google Ads, que grava cookies para medir o resultado dos nossos anúncios e avisa quando um diagnóstico é agendado. Nome, e-mail e dados do agendamento não são enviados ao Google.",
           vendors: [{ label: "Cookies do Google Ads", url: "https://policies.google.com/technologies/ads?hl=pt-BR" }],
         },
       },
@@ -95,15 +95,15 @@ export const ptBR: SiteCopy = {
     sections: [
       {
         title: "Resumo",
-        body: "Este site apresenta o meu trabalho. Não tem cadastro nem formulário. Uso cookies de medição e de publicidade só se você aceitar no aviso de cookies; recusar não muda nada no site. Esta política segue a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018).",
+        body: "Este site apresenta o trabalho da Torno. Não tem cadastro nem formulário. Usamos cookies de medição e de publicidade só se você aceitar no aviso de cookies; recusar não muda nada no site. Esta política segue a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018).",
       },
       {
         title: "Quem trata os dados",
-        body: "O controlador é a empresa identificada no fim desta página, pela qual presto os serviços apresentados aqui. Como agente de tratamento de pequeno porte, ela não indicou encarregado (Resolução CD/ANPD nº 2/2022, art. 11). O canal para pedidos e reclamações sobre seus dados é o e-mail de contato abaixo, que chega direto a mim.",
+        body: "O controlador é a empresa identificada no fim desta página, pela qual prestamos os serviços apresentados aqui. Como agente de tratamento de pequeno porte, ela não indicou encarregado (Resolução CD/ANPD nº 2/2022, art. 11). O canal para pedidos e reclamações sobre seus dados é o e-mail de contato abaixo, que chega direto à Torno.",
       },
       {
         title: "Que dados são tratados",
-        body: "Registros técnicos: a Netlify, que hospeda o site e atua como operadora em meu nome, registra dados de cada acesso, como endereço IP, data e hora, página pedida, página de origem, navegador e país aproximado. Eu não mantenho cópia própria desses registros. Conto as visitas à página de diagnóstico e às páginas de apresentação por setor de forma agregada (um número por página e por dia), sem cookies e sem guardar IP ou navegador (legítimo interesse, art. 7º, IX). Agendamento e e-mail: só o que você mesmo informa, como nome, e-mail, o assunto da conversa e a resposta à pergunta \"Como chegou até aqui?\" do formulário do Calendly. Com o seu consentimento de Medição: o agendamento do Calendly abre dentro do site, e a origem da visita é repassada a ele, ou seja, os 5 parâmetros UTM da campanha que trouxe você (fonte, meio, campanha, conteúdo e termo); nunca repasso identificadores individuais, como o identificador de clique do anúncio. Com o seu consentimento de Publicidade: o Google Ads grava cookies e identificadores no seu navegador para medir o resultado dos meus anúncios. Se você aceitou as duas categorias e agenda um diagnóstico dentro do site, o Google Ads recebe um aviso de conversão, sem nome, e-mail ou dados do agendamento.",
+        body: "Registros técnicos: a Netlify, que hospeda o site e atua como operadora em nosso nome, registra dados de cada acesso, como endereço IP, data e hora, página pedida, página de origem, navegador e país aproximado. Não mantemos cópia própria desses registros. Contamos as visitas à página de diagnóstico e às páginas de apresentação por setor de forma agregada (um número por página e por dia), sem cookies e sem guardar IP ou navegador (legítimo interesse, art. 7º, IX). Agendamento e e-mail: só o que você mesmo informa, como nome, e-mail, o assunto da conversa e a resposta à pergunta \"Como chegou até aqui?\" do formulário do Calendly. Com o seu consentimento de Medição: o agendamento do Calendly abre dentro do site, e a origem da visita é repassada a ele, ou seja, os 5 parâmetros UTM da campanha que trouxe você (fonte, meio, campanha, conteúdo e termo); nunca repassamos identificadores individuais, como o identificador de clique do anúncio. Com o seu consentimento de Publicidade: o Google Ads grava cookies e identificadores no seu navegador para medir o resultado dos nossos anúncios. Se você aceitou as duas categorias e agenda um diagnóstico dentro do site, o Google Ads recebe um aviso de conversão, sem nome, e-mail ou dados do agendamento.",
       },
       {
         title: "Para que e com qual base legal",
@@ -111,11 +111,11 @@ export const ptBR: SiteCopy = {
       },
       {
         title: "Cookies e armazenamento no navegador",
-        body: "Antes da sua escolha, nada de terceiros é carregado. Necessários: guardo no seu navegador a sua escolha sobre cookies e, se você trocar, a preferência de tema; isso não sai do seu dispositivo. Medição: o agendamento abre dentro do site num quadro do próprio Calendly, que aplica a política e os cookies dele e pode carregar ferramentas de terceiros que o Calendly usa, inclusive de publicidade, como Google Analytics, Facebook, Segment, Braze, OneTrust, Stripe e reCAPTCHA. Assim que o quadro abre, antes da sua escolha no aviso do próprio Calendly, essas ferramentas podem receber o seu endereço IP e o endereço da página; a origem da visita fica guardada só nesta sessão do navegador. Sem Medição, o botão abre a página do próprio Calendly. Publicidade: carrega a tag do Google Ads, que grava cookies para medir o resultado dos meus anúncios. A lista completa está na tabela abaixo.",
+        body: "Antes da sua escolha, nada de terceiros é carregado. Necessários: guardamos no seu navegador a sua escolha sobre cookies e, se você trocar, a preferência de tema; isso não sai do seu dispositivo. Medição: o agendamento abre dentro do site num quadro do próprio Calendly, que aplica a política e os cookies dele e pode carregar ferramentas de terceiros que o Calendly usa, inclusive de publicidade, como Google Analytics, Facebook, Segment, Braze, OneTrust, Stripe e reCAPTCHA. Assim que o quadro abre, antes da sua escolha no aviso do próprio Calendly, essas ferramentas podem receber o seu endereço IP e o endereço da página; a origem da visita fica guardada só nesta sessão do navegador. Sem Medição, o botão abre a página do próprio Calendly. Publicidade: carrega a tag do Google Ads, que grava cookies para medir o resultado dos nossos anúncios. A lista completa está na tabela abaixo.",
       },
       {
         title: "Com quem os dados são compartilhados",
-        body: "Só com os fornecedores que fazem o site, o contato e a medição de anúncios funcionarem, e só para isso: a Netlify (hospedagem); o Calendly (agenda), que abre dentro do site só com o seu consentimento de Medição e, sem ele, na página do próprio Calendly; nos dois casos, vale a política de privacidade e de cookies do Calendly; e o Google, que hospeda o meu e-mail e, com o seu consentimento de Publicidade, opera o Google Ads. Cada um segue a própria política de privacidade. Não vendo dados. Autoridades só recebem dados mediante requisição legal.",
+        body: "Só com os fornecedores que fazem o site, o contato e a medição de anúncios funcionarem, e só para isso: a Netlify (hospedagem); o Calendly (agenda), que abre dentro do site só com o seu consentimento de Medição e, sem ele, na página do próprio Calendly; nos dois casos, vale a política de privacidade e de cookies do Calendly; e o Google, que hospeda o nosso e-mail e, com o seu consentimento de Publicidade, opera o Google Ads. Cada um segue a própria política de privacidade. Não vendemos dados. Autoridades só recebem dados mediante requisição legal.",
       },
       {
         title: "Transferência internacional",
@@ -123,25 +123,25 @@ export const ptBR: SiteCopy = {
       },
       {
         title: "Por quanto tempo",
-        body: "Os registros técnicos de acesso ficam com a Netlify pelo prazo de retenção dela, e eu não os guardo à parte. Os dados do Google Ads ficam pelo prazo da política do Google, e cada cookie dura o prazo indicado na tabela abaixo. A sua escolha sobre cookies fica guardada no seu navegador por 6 meses; depois disso, o aviso aparece de novo. Mensagens e dados de agendamento ficam enquanto forem necessários para a conversa. Se ela virar contrato, guardo o que a lei exigir pelo prazo legal; se não virar, apago quando deixarem de ser necessários ou quando você pedir.",
+        body: "Os registros técnicos de acesso ficam com a Netlify pelo prazo de retenção dela, e não os guardamos à parte. Os dados do Google Ads ficam pelo prazo da política do Google, e cada cookie dura o prazo indicado na tabela abaixo. A sua escolha sobre cookies fica guardada no seu navegador por 6 meses; depois disso, o aviso aparece de novo. Mensagens e dados de agendamento ficam enquanto forem necessários para a conversa. Se ela virar contrato, guardamos o que a lei exigir pelo prazo legal; se não virar, apagamos quando deixarem de ser necessários ou quando você pedir.",
       },
       {
         title: "Seus direitos",
-        body: "Pela LGPD (art. 18), você pode pedir: confirmação de que trato seus dados e acesso a eles; correção; anonimização, bloqueio ou eliminação; portabilidade; informação sobre com quem eles foram compartilhados; e se opor a um tratamento baseado em legítimo interesse. Você pode revogar ou mudar o seu consentimento a qualquer momento em \"Preferências de cookies\", no rodapé de todas as páginas. Respondo em até 15 dias pelo contato abaixo. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).",
+        body: "Pela LGPD (art. 18), você pode pedir: confirmação de que tratamos seus dados e acesso a eles; correção; anonimização, bloqueio ou eliminação; portabilidade; informação sobre com quem eles foram compartilhados; e se opor a um tratamento baseado em legítimo interesse. Você pode revogar ou mudar o seu consentimento a qualquer momento em \"Preferências de cookies\", no rodapé de todas as páginas. Respondemos em até 15 dias pelo contato abaixo. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).",
       },
       {
         title: "Segurança",
-        body: "O site é estático, servido só por HTTPS, e não guarda dados pessoais em banco de dados próprio. O acesso às contas dos fornecedores é restrito a mim.",
+        body: "O site é estático, servido só por HTTPS, e não guarda dados pessoais em banco de dados próprio. O acesso às contas dos fornecedores é restrito à Torno.",
       },
       {
         title: "Mudanças nesta política",
-        body: "Quando esta política mudar, atualizo a data no topo da página.",
+        body: "Quando esta política mudar, atualizamos a data no topo da página.",
       },
     ],
     contact: {
       title: 'Contato',
       controllerLabel: 'Controlador',
-      linkedinFallback: { lead: 'Para qualquer pedido sobre seus dados, fale comigo pelo', label: 'LinkedIn' },
+      linkedinFallback: { lead: 'Para qualquer pedido sobre seus dados, fale com a gente pelo', label: 'LinkedIn' },
     },
     backLink: 'Voltar para a página inicial',
     cookies: {
@@ -174,7 +174,8 @@ export const ptBR: SiteCopy = {
       title: 'Descubra onde a IA ajuda a sua fábrica antes de investir nela.',
       lead: 'Entrevistas por área, inventário de dados e um mapa de oportunidades com o piloto recomendado. O relatório fica com a empresa.',
       cta: 'Agendar diagnóstico',
-      facts: ['Conversa inicial de 45 min, sem custo', 'Proposta fechada antes de começar', 'Confidencialidade assinada, se pedir'],
+      // A conversa gratuita de 45 min aparece na microcopy do CTA (chrome.common.bookingNote), logo acima.
+      facts: ['Proposta fechada antes de começar', 'Confidencialidade assinada, se pedir'],
     },
     deliverables: {
       eyebrow: 'O que a empresa recebe',
