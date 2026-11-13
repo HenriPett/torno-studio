@@ -496,3 +496,5 @@
 .op-meta, .op-card-foot { min-width: 0; }
 :is(.cb-page, .com-page, .mkt-page, .op-page) .ref-chip { max-width: 100%; min-width: 0; }
 :is(.cb-page, .com-page, .mkt-page, .op-page) .ref-chip__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.com-other-rules, .com-other-rules li { min-width: 0; overflow-wrap: anywhere; }
+:is(.com-prop-form, .mkt-respond-form, .cb-vercomo-field) :is(.control, .select-wrap, .select) { width: 100%; }
