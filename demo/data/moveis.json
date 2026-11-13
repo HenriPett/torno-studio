@@ -1,0 +1,3639 @@
+{
+  "id": "moveis",
+  "setor": "Madeira e móveis",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Indústria Moveleira Trilha Alta S.A.",
+    "cidade": "São Bento do Sul",
+    "uf": "SC",
+    "funcionarios": 2140,
+    "descricao": "Fabrica móveis seriados de dormitório, sala e home office em MDP e MDF e uma linha de planejados sob medida vendida por lojistas, com rede de representantes em todo o país."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "modelo",
+    "produtos": "modelos",
+    "cliente": "lojista",
+    "clientes": "lojistas",
+    "representante": "representante",
+    "representantes": "representantes",
+    "maquina": "máquina",
+    "maquinas": "máquinas",
+    "linha": "linha",
+    "linhas": "linhas",
+    "unidade": "unidades",
+    "lote": "lote"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP, corte e engenharia de produto"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e assistência técnica"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção"
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial, representantes e lojistas"
+    },
+    {
+      "id": "marketing",
+      "nome": "Catálogo e marketing"
+    },
+    {
+      "id": "operadores",
+      "nome": "Chão de fábrica (corte, fita, furação e montagem)"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Fábrica de seriados",
+      "cidade": "São Bento do Sul"
+    },
+    {
+      "id": "P2",
+      "nome": "Fábrica de planejados e pintura",
+      "cidade": "Rio Negrinho"
+    },
+    {
+      "id": "P3",
+      "nome": "Centro de distribuição e assistência técnica",
+      "cidade": "Campo Alegre"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-COR",
+      "nome": "Corte de painéis (seccionadoras)",
+      "planta": "P1",
+      "tipo": "corte"
+    },
+    {
+      "id": "L-BOR",
+      "nome": "Coladeiras de borda",
+      "planta": "P1",
+      "tipo": "acabamento de borda"
+    },
+    {
+      "id": "L-FUR",
+      "nome": "Furação e usinagem CNC",
+      "planta": "P1",
+      "tipo": "usinagem"
+    },
+    {
+      "id": "L-PIN",
+      "nome": "Pintura UV e laca",
+      "planta": "P2",
+      "tipo": "pintura"
+    },
+    {
+      "id": "L-PLA",
+      "nome": "Planejados sob medida (nesting e montagem)",
+      "planta": "P2",
+      "tipo": "sob medida"
+    },
+    {
+      "id": "L-EMB",
+      "nome": "Embalagem e expedição",
+      "planta": "P3",
+      "tipo": "expedição"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "SEC-01",
+      "nome": "Seccionadora automática 1",
+      "linha": "L-COR",
+      "tipo": "seccionadora",
+      "fabricante": "Fabricante A",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 38900,
+      "mtbf_h": 520,
+      "proxima_preventiva": "2026-12-02",
+      "manual": "DOC-MAN-SEC"
+    },
+    {
+      "id": "SEC-02",
+      "nome": "Seccionadora automática 2",
+      "linha": "L-COR",
+      "tipo": "seccionadora",
+      "fabricante": "Fabricante A",
+      "ano": 2011,
+      "status": "parada",
+      "horimetro": 61200,
+      "mtbf_h": 290,
+      "proxima_preventiva": "2026-11-30",
+      "manual": "DOC-MAN-SEC"
+    },
+    {
+      "id": "BOR-01",
+      "nome": "Coladeira de borda 1",
+      "linha": "L-BOR",
+      "tipo": "coladeira de borda",
+      "fabricante": "Fabricante B",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 24300,
+      "mtbf_h": 610,
+      "proxima_preventiva": "2026-11-16",
+      "manual": "DOC-MAN-BOR"
+    },
+    {
+      "id": "BOR-02",
+      "nome": "Coladeira de borda 2",
+      "linha": "L-BOR",
+      "tipo": "coladeira de borda",
+      "fabricante": "Fabricante B",
+      "ano": 2013,
+      "status": "alerta",
+      "horimetro": 52800,
+      "mtbf_h": 240,
+      "proxima_preventiva": "2026-11-18",
+      "manual": "DOC-MAN-BOR"
+    },
+    {
+      "id": "FUR-01",
+      "nome": "Furadeira múltipla automática 1",
+      "linha": "L-FUR",
+      "tipo": "furadeira múltipla",
+      "fabricante": "Fabricante C",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 41700,
+      "mtbf_h": 560,
+      "proxima_preventiva": "2026-12-07",
+      "manual": "DOC-MAN-CNC"
+    },
+    {
+      "id": "CNC-01",
+      "nome": "Centro de usinagem CNC 1",
+      "linha": "L-FUR",
+      "tipo": "centro de usinagem",
+      "fabricante": "Fabricante C",
+      "ano": 2020,
+      "status": "manutencao",
+      "horimetro": 19800,
+      "mtbf_h": 480,
+      "proxima_preventiva": "2027-05-12",
+      "manual": "DOC-MAN-CNC"
+    },
+    {
+      "id": "CNC-02",
+      "nome": "Router CNC nesting (planejados)",
+      "linha": "L-PLA",
+      "tipo": "router nesting",
+      "fabricante": "Fabricante D",
+      "ano": 2022,
+      "status": "operando",
+      "horimetro": 9600,
+      "mtbf_h": 750,
+      "proxima_preventiva": "2026-12-09",
+      "manual": "DOC-MAN-CNC"
+    },
+    {
+      "id": "BOR-03",
+      "nome": "Coladeira de borda de planejados",
+      "linha": "L-PLA",
+      "tipo": "coladeira de borda",
+      "fabricante": "Fabricante B",
+      "ano": 2021,
+      "status": "operando",
+      "horimetro": 12100,
+      "mtbf_h": 690,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-BOR"
+    },
+    {
+      "id": "PIN-01",
+      "nome": "Linha de pintura UV",
+      "linha": "L-PIN",
+      "tipo": "pintura UV",
+      "fabricante": "Fabricante E",
+      "ano": 2015,
+      "status": "operando",
+      "horimetro": 33400,
+      "mtbf_h": 580,
+      "proxima_preventiva": "2026-12-03",
+      "manual": "DOC-MAN-PIN"
+    },
+    {
+      "id": "PIN-02",
+      "nome": "Cabine de pintura laca PU",
+      "linha": "L-PIN",
+      "tipo": "cabine de pintura",
+      "fabricante": "Fabricante E",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 21700,
+      "mtbf_h": 640,
+      "proxima_preventiva": "2026-11-27",
+      "manual": "DOC-MAN-PIN"
+    },
+    {
+      "id": "MON-01",
+      "nome": "Prensa de montagem de caixas",
+      "linha": "L-PLA",
+      "tipo": "prensa de montagem",
+      "fabricante": "Fabricante G",
+      "ano": 2014,
+      "status": "operando",
+      "horimetro": 28800,
+      "mtbf_h": 900,
+      "proxima_preventiva": "2026-12-11",
+      "manual": "DOC-MAN-EMB"
+    },
+    {
+      "id": "EMB-01",
+      "nome": "Embaladora termoencolhível",
+      "linha": "L-EMB",
+      "tipo": "embaladora",
+      "fabricante": "Fabricante F",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 26500,
+      "mtbf_h": 700,
+      "proxima_preventiva": "2026-11-20",
+      "manual": "DOC-MAN-EMB"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "TA-3040",
+      "nome": "Cômoda Aurora 6 gavetas",
+      "familia": "Dormitório seriado",
+      "unidade": "unidades",
+      "preco": 489,
+      "prazo_dias": 20,
+      "estoque": 140,
+      "estoque_minimo": 250,
+      "descricao_comercial": "Cômoda de 6 gavetas com corrediças telescópicas e puxador em perfil. Em freijó com off-white ou carvalho com grafite, puxador preto ou dourado. Sai em 2 volumes, com montagem guiada por QR code.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP; frentes em MDF 15 mm",
+          "Dimensões (L×A×P)": "90 × 96 × 45 cm",
+          "Acabamentos": "Freijó/off-white, carvalho/grafite",
+          "Puxadores": "Perfil preto ou dourado",
+          "Ferragens": "Corrediça telescópica 350 mm (6 pares)",
+          "Volumes": "2"
+        },
+        "roteiro": [
+          "Corte (SEC-01/SEC-02)",
+          "Coladeira de borda (BOR-01/BOR-02)",
+          "Furação (FUR-01)",
+          "Embalagem (EMB-01)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Folga entre frentes de gaveta",
+            "nominal": "3",
+            "tolerancia": "±0,5",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-3050",
+      "nome": "Cômoda Aurora 4 gavetas e 1 porta",
+      "familia": "Dormitório seriado",
+      "unidade": "unidades",
+      "preco": 429,
+      "prazo_dias": 20,
+      "estoque": 310,
+      "estoque_minimo": 200,
+      "descricao_comercial": "A irmã da cômoda 3040, com porta e prateleira interna para sapatos. Mesmos acabamentos e puxadores da linha Aurora.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP; frentes em MDF 15 mm",
+          "Dimensões (L×A×P)": "110 × 90 × 45 cm",
+          "Acabamentos": "Freijó/off-white, carvalho/grafite",
+          "Ferragens": "Corrediça telescópica 350 mm (4 pares), 2 dobradiças com amortecedor",
+          "Volumes": "2"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Furação",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-6P20",
+      "nome": "Roupeiro Horizonte 6 portas de correr com espelho",
+      "familia": "Dormitório seriado",
+      "unidade": "unidades",
+      "preco": 1890,
+      "prazo_dias": 25,
+      "estoque": 85,
+      "estoque_minimo": 60,
+      "descricao_comercial": "Roupeiro casal de 6 portas de correr, 2 delas com espelho, 4 gavetas internas e cabideiros em alumínio. Trilho superior com roldanas de nylon e freio, para a porta correr sem bater.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP; portas em MDF 18 mm",
+          "Dimensões (L×A×P)": "270 × 225 × 58 cm",
+          "Acabamentos": "Carvalho natural, branco, carvalho/grafite",
+          "Ferragens": "Trilho de alumínio, roldanas com freio, corrediça 400 mm",
+          "Lista de peças": "Rev. E",
+          "Volumes": "7"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Furação (CNC-01/FUR-01)",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Empeno de porta de correr",
+            "nominal": "≤ 2",
+            "tolerancia": "0",
+            "unidade": "mm/m"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-4P10",
+      "nome": "Roupeiro Horizonte 4 portas e 2 gavetas",
+      "familia": "Dormitório seriado",
+      "unidade": "unidades",
+      "preco": 1290,
+      "prazo_dias": 25,
+      "estoque": 120,
+      "estoque_minimo": 80,
+      "descricao_comercial": "Roupeiro de 4 portas de abrir com dobradiças com amortecedor e 2 gavetas externas. Boa opção para quarto de solteiro ou casal compacto.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP",
+          "Dimensões (L×A×P)": "160 × 220 × 52 cm",
+          "Acabamentos": "Carvalho natural, branco",
+          "Ferragens": "12 dobradiças com amortecedor, corrediça 400 mm",
+          "Volumes": "5"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Furação",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Empeno de porta",
+            "nominal": "≤ 2",
+            "tolerancia": "0",
+            "unidade": "mm/m"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-RK18",
+      "nome": "Rack Prisma para TV até 65\"",
+      "familia": "Sala",
+      "unidade": "unidades",
+      "preco": 549,
+      "prazo_dias": 15,
+      "estoque": 420,
+      "estoque_minimo": 150,
+      "descricao_comercial": "Rack de 1,80 m com 2 portas basculantes e nicho aberto para aparelhos, passa-fios traseiro e pés em aço. Aguenta TV de até 65\" e 40 kg no tampo.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP; tampo MDP 25 mm",
+          "Dimensões (L×A×P)": "180 × 55 × 40 cm",
+          "Acabamentos": "Freijó/off-white, nogueira/preto",
+          "Carga no tampo": "40 kg",
+          "Volumes": "2"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Usinagem (CNC-01)",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Posição dos furos de cavilha",
+            "nominal": "32",
+            "tolerancia": "±0,3",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-PN22",
+      "nome": "Painel Prisma para TV 1,80 m",
+      "familia": "Sala",
+      "unidade": "unidades",
+      "preco": 389,
+      "prazo_dias": 15,
+      "estoque": 260,
+      "estoque_minimo": 150,
+      "descricao_comercial": "Painel de 1,80 m com suporte para TV, 2 prateleiras e passa-fios embutido. Combina com o rack Prisma.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 18 mm BP",
+          "Dimensões (L×A×P)": "180 × 120 × 3,5 cm",
+          "Acabamentos": "Freijó/off-white, nogueira/preto",
+          "Volumes": "1"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Furação",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-CB30",
+      "nome": "Cabeceira painel casal Aurora",
+      "familia": "Dormitório seriado",
+      "unidade": "unidades",
+      "preco": 359,
+      "prazo_dias": 15,
+      "estoque": 95,
+      "estoque_minimo": 120,
+      "descricao_comercial": "Cabeceira painel para cama casal com 2 criados suspensos e iluminação de LED opcional. Completa o dormitório Aurora.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP",
+          "Dimensões (L×A×P)": "240 × 95 × 30 cm",
+          "Acabamentos": "Freijó/off-white, carvalho/grafite",
+          "Volumes": "2"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Furação (FUR-01)",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-MS40",
+      "nome": "Mesa de jantar Vértice 6 lugares",
+      "familia": "Sala de jantar",
+      "unidade": "unidades",
+      "preco": 1150,
+      "prazo_dias": 30,
+      "estoque": 70,
+      "estoque_minimo": 40,
+      "descricao_comercial": "Mesa de 1,80 m com tampo em MDF laqueado de alto brilho e base em lâmina natural. A laca PU resiste a calor de prato e a riscos do dia a dia.",
+      "ficha": {
+        "atributos": {
+          "Material": "Tampo MDF 25 mm laqueado; base MDF revestido de lâmina",
+          "Dimensões (L×A×P)": "180 × 76 × 90 cm",
+          "Acabamentos": "Off-white brilho, preto brilho",
+          "Volumes": "2"
+        },
+        "roteiro": [
+          "Corte",
+          "Usinagem (CNC-01)",
+          "Pintura laca PU (PIN-02)",
+          "Lixamento e polimento",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Brilho da laca (60°)",
+            "nominal": "≥ 85",
+            "tolerancia": "0",
+            "unidade": "UB"
+          },
+          {
+            "caracteristica": "Viscosidade do verniz PU (copo Ford 4)",
+            "nominal": "18 a 22",
+            "tolerancia": "0",
+            "unidade": "s"
+          },
+          {
+            "caracteristica": "Planicidade do tampo",
+            "nominal": "≤ 1",
+            "tolerancia": "0",
+            "unidade": "mm/m"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-HM12",
+      "nome": "Escrivaninha Foco com gaveteiro",
+      "familia": "Home office",
+      "unidade": "unidades",
+      "preco": 449,
+      "prazo_dias": 15,
+      "estoque": 210,
+      "estoque_minimo": 120,
+      "descricao_comercial": "Escrivaninha de 1,20 m com gaveteiro de 3 gavetas com chave e passa-fios no tampo. Monta em 30 minutos.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDP 15 mm BP; tampo 25 mm",
+          "Dimensões (L×A×P)": "120 × 75 × 60 cm",
+          "Acabamentos": "Branco, carvalho/grafite",
+          "Volumes": "1"
+        },
+        "roteiro": [
+          "Corte",
+          "Coladeira de borda",
+          "Furação",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda",
+            "nominal": "≥ 2,5",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Esquadro da caixa (diagonais)",
+            "nominal": "0",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-PLC-80",
+      "nome": "Módulo aéreo de cozinha planejada 80 cm",
+      "familia": "Planejados",
+      "unidade": "módulos",
+      "preco": 620,
+      "prazo_dias": 35,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Módulo aéreo sob medida da linha de planejados, em MDF 15 mm com frentes em MDF 18 mm em 14 cores. Largura de 30 a 90 cm por módulo e dobradiças com amortecedor.",
+      "ficha": {
+        "atributos": {
+          "Material": "Caixa MDF 15 mm; frente MDF 18 mm",
+          "Largura": "30 a 90 cm (acima de 90 cm, com divisória)",
+          "Profundidade": "35 cm",
+          "Ferragens": "Dobradiça 35 mm com amortecedor; suporte de pendurar regulável",
+          "Cores": "14 cores do catálogo de planejados"
+        },
+        "roteiro": [
+          "Conferência técnica do pedido",
+          "Nesting (CNC-02)",
+          "Coladeira de borda (BOR-03)",
+          "Montagem de caixas (MON-01)",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Largura máxima sem divisória",
+            "nominal": "≤ 90",
+            "tolerancia": "0",
+            "unidade": "cm"
+          },
+          {
+            "caracteristica": "Furação da dobradiça (centro à borda)",
+            "nominal": "22,5",
+            "tolerancia": "±0,2",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-PLD-120",
+      "nome": "Módulo de roupeiro planejado 120 cm",
+      "familia": "Planejados",
+      "unidade": "módulos",
+      "preco": 1480,
+      "prazo_dias": 40,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Módulo de roupeiro sob medida com cabideiro, gaveteiro interno e portas de abrir ou de correr. Projetado pelo lojista e conferido pela nossa engenharia antes do corte.",
+      "ficha": {
+        "atributos": {
+          "Material": "Caixa MDF 18 mm; frentes MDF 18 mm",
+          "Largura": "Até 120 cm por módulo",
+          "Altura": "Até 260 cm",
+          "Ferragens": "Corrediça telescópica (profundidade da caixa − 50 mm); 3 ou 4 dobradiças por porta"
+        },
+        "roteiro": [
+          "Conferência técnica do pedido",
+          "Nesting (CNC-02)",
+          "Coladeira de borda (BOR-03)",
+          "Montagem de caixas (MON-01)",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Comprimento da corrediça",
+            "nominal": "profundidade interna − 50",
+            "tolerancia": "0",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Empeno de porta",
+            "nominal": "≤ 2",
+            "tolerancia": "0",
+            "unidade": "mm/m"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TA-PLB-60",
+      "nome": "Gabinete de banheiro planejado 60 cm",
+      "familia": "Planejados",
+      "unidade": "módulos",
+      "preco": 690,
+      "prazo_dias": 35,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Gabinete sob medida em MDF resistente à umidade, com gavetão e recorte para sifão. Fita de borda com cola PUR nas peças próximas da água.",
+      "ficha": {
+        "atributos": {
+          "Material": "MDF RU 18 mm",
+          "Largura": "40 a 120 cm",
+          "Borda": "Fita PVC 1 mm com cola PUR",
+          "Ferragens": "Corrediça oculta com amortecedor"
+        },
+        "roteiro": [
+          "Conferência técnica do pedido",
+          "Nesting (CNC-02)",
+          "Coladeira de borda (BOR-03, cola PUR)",
+          "Montagem de caixas",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Arrancamento da fita de borda (PUR)",
+            "nominal": "≥ 3,0",
+            "tolerancia": "0",
+            "unidade": "N/mm"
+          },
+          {
+            "caracteristica": "Inchamento em 24 h de imersão",
+            "nominal": "≤ 8",
+            "tolerancia": "0",
+            "unidade": "%"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-71830",
+      "sku": "TA-3040",
+      "quantidade": 600,
+      "linha": "L-BOR",
+      "inicio": "2026-10-26",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 55,
+      "pedido": "PD-9902",
+      "motivo_atraso": "Descolamento de fita de borda em 180 frentes de gaveta (arrancamento de 1,4 N/mm, mínimo 2,5): temperatura da cola instável na BOR-02 e lote de fita FB-2210. Frentes refeitas na BOR-01.",
+      "historico": [
+        {
+          "data": "2026-10-26",
+          "evento": "OP liberada: 600 cômodas freijó/off-white"
+        },
+        {
+          "data": "2026-11-06",
+          "evento": "Corte e furação concluídos"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "180 frentes de gaveta reprovadas no teste de arrancamento (1,4 N/mm); aberta a NC-2026-087"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Frentes recortadas e refeitas na BOR-01; nova previsão de conclusão 19/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-71836",
+      "sku": "TA-6P20",
+      "quantidade": 200,
+      "linha": "L-COR",
+      "inicio": "2026-10-28",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 40,
+      "pedido": "PD-9910",
+      "motivo_atraso": "Seccionadora SEC-02 parada desde 09/11 com rolamento do motor da serra principal travado (OS-4412); todo o corte concentrado na SEC-01.",
+      "historico": [
+        {
+          "data": "2026-10-28",
+          "evento": "OP liberada: 200 roupeiros 6P carvalho natural"
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "SEC-02 parada; OS-4412 aberta"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "PCP prioriza as portas do roupeiro na SEC-01 em 2 turnos"
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Motor da SEC-02 no rebobinamento externo, retorno previsto 17/11; nova previsão da OP 21/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-71842",
+      "sku": "TA-MS40",
+      "quantidade": 120,
+      "linha": "L-PIN",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-10",
+      "status": "atrasada",
+      "progresso": 70,
+      "pedido": "PD-9915",
+      "motivo_atraso": "Lote de verniz PU com viscosidade de 28 s (especificado 18 a 22 s) deixou casca de laranja em 34 tampos, que foram lixados e repintados (NC-2026-081).",
+      "historico": [
+        {
+          "data": "2026-10-27",
+          "evento": "OP liberada"
+        },
+        {
+          "data": "2026-11-05",
+          "evento": "34 tampos com casca de laranja na inspeção de brilho"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Lote novo de verniz recebido do fornecedor de tintas; repintura iniciada"
+        }
+      ]
+    },
+    {
+      "id": "OP-71838",
+      "sku": "TA-RK18",
+      "quantidade": 500,
+      "linha": "L-FUR",
+      "inicio": "2026-10-30",
+      "prazo": "2026-11-13",
+      "status": "atrasada",
+      "progresso": 80,
+      "pedido": null,
+      "motivo_atraso": "CNC-01 parada para preventiva que encontrou folga no fuso do eixo Z (OS-4418); usinagem dos tampos passada para a FUR-01, com setup extra.",
+      "historico": [
+        {
+          "data": "2026-10-30",
+          "evento": "OP de reposição de estoque liberada"
+        },
+        {
+          "data": "2026-11-03",
+          "evento": "Furos de cavilha deslocados 1 mm em 40 tampos (NC-2026-083)"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "CNC-01 em preventiva com troca do conjunto porca-fuso; nova previsão 17/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-71840",
+      "sku": "TA-4P10",
+      "quantidade": 250,
+      "linha": "L-EMB",
+      "inicio": "2026-10-29",
+      "prazo": "2026-11-16",
+      "status": "em_producao",
+      "progresso": 90,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Embalagem de 225 de 250 roupeiros concluída"
+        }
+      ]
+    },
+    {
+      "id": "OP-71843",
+      "sku": "TA-HM12",
+      "quantidade": 400,
+      "linha": "L-FUR",
+      "inicio": "2026-11-02",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 60,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-02",
+          "evento": "OP de estoque liberada"
+        }
+      ]
+    },
+    {
+      "id": "OP-71845",
+      "sku": "TA-3040",
+      "quantidade": 400,
+      "linha": "L-COR",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-24",
+      "status": "em_producao",
+      "progresso": 20,
+      "pedido": "PD-9926",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-09",
+          "evento": "OP liberada; corte apenas na SEC-01"
+        }
+      ]
+    },
+    {
+      "id": "OP-71847",
+      "sku": "TA-PN22",
+      "quantidade": 350,
+      "linha": "L-BOR",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-23",
+      "status": "em_producao",
+      "progresso": 35,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Bordas na BOR-01 enquanto a BOR-02 está em alerta"
+        }
+      ]
+    },
+    {
+      "id": "OP-71848",
+      "sku": "TA-CB30",
+      "quantidade": 300,
+      "linha": "L-FUR",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-25",
+      "status": "em_producao",
+      "progresso": 45,
+      "pedido": "PD-9933",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "OP liberada para repor cabeceira abaixo do mínimo"
+        }
+      ]
+    },
+    {
+      "id": "OP-71852",
+      "sku": "TA-PLC-80",
+      "quantidade": 20,
+      "linha": "L-PLA",
+      "inicio": "2026-11-10",
+      "prazo": "2026-12-08",
+      "status": "em_producao",
+      "progresso": 30,
+      "pedido": "PD-9924",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-09",
+          "evento": "Pedido aprovado na conferência técnica sem apontamentos"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Nesting concluído na CNC-02"
+        }
+      ]
+    },
+    {
+      "id": "OP-71855",
+      "sku": "TA-PLD-120",
+      "quantidade": 6,
+      "linha": "L-PLA",
+      "inicio": "2026-11-11",
+      "prazo": "2026-12-11",
+      "status": "em_producao",
+      "progresso": 15,
+      "pedido": "PD-9930",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Conferência técnica aprovou com ajuste de 2 dobradiças para 3 numa porta de 1,10 m"
+        }
+      ]
+    },
+    {
+      "id": "OP-71860",
+      "sku": "TA-PLC-80",
+      "quantidade": 26,
+      "linha": "L-PLA",
+      "inicio": "2026-11-24",
+      "prazo": "2026-12-22",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PD-9937",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "OP planejada após conferência técnica aprovada"
+        }
+      ]
+    },
+    {
+      "id": "OP-71862",
+      "sku": "TA-3040",
+      "quantidade": 500,
+      "linha": "L-COR",
+      "inicio": "2026-11-23",
+      "prazo": "2026-12-04",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PD-9940",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "OP planejada para repor a cômoda 3040 abaixo do mínimo"
+        }
+      ]
+    },
+    {
+      "id": "OP-71864",
+      "sku": "TA-6P20",
+      "quantidade": 150,
+      "linha": "L-COR",
+      "inicio": "2026-11-25",
+      "prazo": "2026-12-10",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "OP de estoque planejada; depende da SEC-02 voltar"
+        }
+      ]
+    },
+    {
+      "id": "OP-71866",
+      "sku": "TA-MS40",
+      "quantidade": 80,
+      "linha": "L-COR",
+      "inicio": "2026-11-30",
+      "prazo": "2026-12-14",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-13",
+          "evento": "OP de estoque planejada"
+        }
+      ]
+    },
+    {
+      "id": "OP-71801",
+      "sku": "TA-RK18",
+      "quantidade": 900,
+      "linha": "L-EMB",
+      "inicio": "2026-10-05",
+      "prazo": "2026-11-03",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PD-9890",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "OP encerrada e embarcada"
+        }
+      ]
+    },
+    {
+      "id": "OP-71806",
+      "sku": "TA-HM12",
+      "quantidade": 700,
+      "linha": "L-EMB",
+      "inicio": "2026-10-10",
+      "prazo": "2026-11-06",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PD-9894",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "OP encerrada"
+        }
+      ]
+    },
+    {
+      "id": "OP-71809",
+      "sku": "TA-3050",
+      "quantidade": 300,
+      "linha": "L-EMB",
+      "inicio": "2026-10-12",
+      "prazo": "2026-11-07",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PD-9897",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-07",
+          "evento": "OP encerrada"
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-BOR",
+      "produzido": 2640,
+      "refugo": 84,
+      "paradas_min": 70,
+      "resumo": "A BOR-02 trabalhou com a temperatura da cola oscilando entre 175 e 195 °C. No fim do turno, o teste de arrancamento das frentes da cômoda 3040 deu 1,4 N/mm e 84 frentes foram separadas. Produção em peças com fita aplicada.",
+      "ocorrencias": [
+        "84 frentes da OP-71830 reprovadas no arrancamento (1,4 N/mm, mínimo 2,5)",
+        "Lote de fita FB-2210 em uso desde 03/11",
+        "Limpeza do tanque de cola da BOR-02: 40 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-BOR",
+      "produzido": 2860,
+      "refugo": 96,
+      "paradas_min": 55,
+      "resumo": "Mais 96 frentes da cômoda 3040 separadas antes da troca do lote de fita, somando 180. Manutenção abriu a OS-4415 na BOR-02 e as frentes passaram para a BOR-01.",
+      "ocorrencias": [
+        "96 frentes reprovadas; total de 180 na OP-71830",
+        "OS-4415 aberta na BOR-02",
+        "Lote de fita FB-2210 segregado"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-COR",
+      "produzido": 6400,
+      "refugo": 70,
+      "paradas_min": 500,
+      "resumo": "Só a SEC-01 cortou: a SEC-02 está parada desde 09/11. Planos de corte com um pedido por chapa, sem misturar pedidos, e aproveitamento de 86,9% no turno.",
+      "ocorrencias": [
+        "SEC-02 parada 480 min (OS-4412)",
+        "Troca de serra na SEC-01: 20 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-COR",
+      "produzido": 5900,
+      "refugo": 64,
+      "paradas_min": 485,
+      "resumo": "Segundo turno da SEC-01 dedicado às portas do roupeiro 6P (OP-71836). 142 sobras acima de 300 × 300 mm voltaram para o estoque de sobras.",
+      "ocorrencias": [
+        "SEC-02 parada 480 min",
+        "Falta de chapa MDF 18 mm carvalho por 5 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-FUR",
+      "produzido": 4100,
+      "refugo": 38,
+      "paradas_min": 60,
+      "resumo": "CNC-01 em preventiva (OS-4418); tampos do rack RK18 usinados na FUR-01 com setup extra de 60 minutos.",
+      "ocorrencias": [
+        "CNC-01 em preventiva: folga no fuso do eixo Z",
+        "Setup da FUR-01 para tampos de 25 mm: 60 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-PIN",
+      "produzido": 420,
+      "refugo": 12,
+      "paradas_min": 40,
+      "resumo": "Repintura dos tampos da mesa Vértice com o lote novo de verniz, viscosidade medida em 20 s. 12 peças com poeira voltaram para lixamento.",
+      "ocorrencias": [
+        "Viscosidade do verniz conferida a cada 2 h: 20 s",
+        "Limpeza da cabine PIN-02: 40 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-PLA",
+      "produzido": 640,
+      "refugo": 12,
+      "paradas_min": 20,
+      "resumo": "Nesting e montagem dos módulos do PD-9924 e do PD-9930. A conferência técnica devolveu o PD-9921 ao lojista antes do corte.",
+      "ocorrencias": [
+        "PD-9921 devolvido: módulo aéreo de 92 cm e corrediça maior que a caixa",
+        "Troca de fresa na CNC-02: 20 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-EMB",
+      "produzido": 610,
+      "refugo": 3,
+      "paradas_min": 15,
+      "resumo": "Embalagem do roupeiro 4P e das escrivaninhas. Conferência de kit de ferragens reforçada depois da reclamação das Lojas Sol Nascente.",
+      "ocorrencias": [
+        "Conferência de kit de ferragens por pesagem em 100% dos volumes"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-076",
+      "data": "2026-09-15",
+      "sku": "TA-RK18",
+      "linha": "L-BOR",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Magazine Bom Lar reclamou de fita de borda soltando na porta basculante do rack RK18 em 22 unidades de 800.",
+      "causa": "Pressão dos rolos da BOR-01 em 2,2 bar (especificado 3 a 4 bar) depois de troca de cilindro pneumático.",
+      "acao": "Pressão corrigida, checklist de partida da coladeira com pressão e temperatura, teste de arrancamento a cada 2 horas.",
+      "status": "encerrada",
+      "responsavel": "Luciana Hartmann",
+      "oito_d": {
+        "D1": "Equipe: Luciana Hartmann (qualidade), Joel Machado (operador de coladeira), Anderson Ribeiro (manutenção), Ricardo Tavares (representante).",
+        "D2": "22 de 800 racks RK18 com fita descolando na porta basculante em até 30 dias de loja. Arrancamento medido: 1,8 N/mm (mínimo 2,5).",
+        "D3": "22 portas trocadas pela assistência técnica; 140 racks em estoque inspecionados, 6 retrabalhados.",
+        "D4": "Causa raiz: pressão dos rolos em 2,2 bar após a troca de um cilindro pneumático, sem conferência na partida.",
+        "D5": "Ajustar pressão para 3,5 bar e criar checklist de partida com pressão, temperatura e teste de arrancamento.",
+        "D6": "Implantado em 22/09; 30 dias de testes acima de 2,8 N/mm.",
+        "D7": "Teste de arrancamento a cada 2 horas e a cada troca de lote de fita, registrado no MES.",
+        "D8": "Encerrada em 20/10 com o lojista atendido."
+      }
+    },
+    {
+      "id": "NC-2026-080",
+      "data": "2026-10-24",
+      "sku": "TA-CB30",
+      "linha": "L-BOR",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Fita de borda carvalho com diferença de tom em relação à chapa em 30 cabeceiras.",
+      "causa": "Lote de fita de outro padrão de impressão enviado pelo fornecedor de fitas de borda.",
+      "acao": "Peças refeitas; conferência de tom contra a chapa no recebimento.",
+      "status": "encerrada",
+      "responsavel": "Luciana Hartmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-081",
+      "data": "2026-11-05",
+      "sku": "TA-MS40",
+      "linha": "L-PIN",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "34 tampos da mesa Vértice com casca de laranja na laca. Verniz PU do lote recebido com viscosidade de 28 s no copo Ford 4 (especificado 18 a 22 s).",
+      "causa": "Lote de verniz fora da especificação do fornecedor de tintas; a viscosidade não foi medida no recebimento.",
+      "acao": "Tampos lixados e repintados com lote novo; medição de viscosidade no recebimento e a cada 2 horas na cabine.",
+      "status": "em_analise",
+      "responsavel": "Luciana Hartmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-083",
+      "data": "2026-11-03",
+      "sku": "TA-RK18",
+      "linha": "L-FUR",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Furos de cavilha deslocados 1 mm em 40 tampos do rack RK18 (tolerância ±0,3 mm).",
+      "causa": "Folga no fuso do eixo Z da CNC-01.",
+      "acao": "Tampos refurados na FUR-01; preventiva da CNC-01 antecipada (OS-4418).",
+      "status": "em_analise",
+      "responsavel": "Paulo Roberto Engel",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-084",
+      "data": "2026-11-04",
+      "sku": "TA-6P20",
+      "linha": "L-COR",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Assistência técnica: roupeiro 6P do pedido 7120 (vendido em 2024 pela Casa Mineira Móveis) com porta de correr esquerda empenada 6 mm.",
+      "causa": "Em análise: a porta foi cortada de chapa do recebimento 3315, liberado com umidade de 9,8% (limite 8%). Há outras 2 reclamações de empeno do mesmo recebimento.",
+      "acao": "Porta RP-6P-07 enviada; levantamento dos pedidos com peças do recebimento 3315 em andamento.",
+      "status": "em_analise",
+      "responsavel": "Luciana Hartmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-085",
+      "data": "2026-10-30",
+      "sku": "TA-PLC-80",
+      "linha": "L-PLA",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Pedido de planejados PD-9899 chegou à produção com módulo aéreo de 95 cm sem divisória; 6 peças cortadas à toa.",
+      "causa": "O pedido entrou antes da conferência técnica por urgência comercial.",
+      "acao": "Peças recortadas; nenhum pedido de planejados entra no nesting sem conferência aprovada (RC-04).",
+      "status": "encerrada",
+      "responsavel": "Rosângela Schroeder",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-086",
+      "data": "2026-11-08",
+      "sku": "TA-HM12",
+      "linha": "L-COR",
+      "origem": "fornecedor",
+      "severidade": "baixa",
+      "descricao": "18 chapas de MDP 15 mm BP branco com risco superficial vindas do fornecedor de painéis.",
+      "causa": "Transporte sem separador entre chapas.",
+      "acao": "Chapas devolvidas para crédito; inspeção visual reforçada no recebimento.",
+      "status": "encerrada",
+      "responsavel": "Paulo Roberto Engel",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-087",
+      "data": "2026-11-11",
+      "sku": "TA-3040",
+      "linha": "L-BOR",
+      "origem": "interna",
+      "severidade": "alta",
+      "descricao": "180 frentes de gaveta da cômoda 3040 (OP-71830) com fita de borda PVC 1 mm descolando. Arrancamento de 1,4 N/mm contra mínimo de 2,5 N/mm.",
+      "causa": "Temperatura da cola EVA oscilando entre 175 e 195 °C na BOR-02 (faixa do manual: 190 a 200 °C) e lote de fita FB-2210 com primer fraco, recebido em 02/11 sem teste.",
+      "acao": "Frentes refeitas na BOR-01; lote FB-2210 segregado; OS-4415 aberta para resistência e termopar do tanque de cola.",
+      "status": "aberta",
+      "responsavel": "Luciana Hartmann",
+      "oito_d": {
+        "D1": "Equipe: Luciana Hartmann (qualidade), Joel Machado (operador da BOR-02), Anderson Ribeiro (manutenção), Valmir Krüger (PCP e corte).",
+        "D2": "180 frentes da cômoda 3040, OP-71830, com arrancamento de 1,4 N/mm (mínimo 2,5 pela NI-Q-02, item 3.1).",
+        "D3": "Frentes recortadas e refeitas na BOR-01; lote de fita FB-2210 bloqueado; cômodas da OP ainda não embaladas.",
+        "D4": "Duas causas: resistência do tanque de cola da BOR-02 com isolamento danificado e lote de fita FB-2210 com primer fraco.",
+        "D5": "Trocar resistência e termopar (DOC-PRO-031); devolver o lote FB-2210; teste de arrancamento a cada troca de lote de fita.",
+        "D6": "Em andamento: OS-4415 aberta; lote FB-2210 em devolução.",
+        "D7": "Pendente: incluir teste de primer no recebimento de fita (amostra colada e arrancada antes de liberar o lote).",
+        "D8": "Pendente."
+      }
+    },
+    {
+      "id": "NC-2026-088",
+      "data": "2026-11-12",
+      "sku": "TA-4P10",
+      "linha": "L-EMB",
+      "origem": "cliente",
+      "severidade": "baixa",
+      "descricao": "Lojas Sol Nascente receberam 6 roupeiros 4P sem o saquinho de ferragens.",
+      "causa": "Kit de ferragens separado em bancada sem conferência por peso.",
+      "acao": "Kits enviados por transportadora expressa; conferência por pesagem em 100% dos volumes.",
+      "status": "aberta",
+      "responsavel": "Paulo Roberto Engel",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-4415",
+      "maquina": "BOR-02",
+      "tipo": "corretiva",
+      "data": "2026-11-12",
+      "status": "aberta",
+      "tecnico": "Anderson Ribeiro",
+      "duracao_h": 2,
+      "descricao": "Temperatura do tanque de cola oscilando entre 175 e 195 °C. Resistência 2 do tanque com isolamento danificado e termopar com leitura instável. Troca programada para 14/11, com a máquina fria.",
+      "pecas": [
+        "Resistência do tanque de cola 1.500 W",
+        "Termopar tipo J",
+        "Cabo de compensação (3 m)"
+      ],
+      "procedimento": "DOC-PRO-031"
+    },
+    {
+      "id": "OS-4412",
+      "maquina": "SEC-02",
+      "tipo": "corretiva",
+      "data": "2026-11-09",
+      "status": "em_execucao",
+      "tecnico": "Mauro Tomaselli",
+      "duracao_h": 9,
+      "descricao": "Rolamento do motor da serra principal travado. Motor enviado para rebobinamento externo, com retorno previsto em 17/11; troca dos rolamentos do eixo da serra junto.",
+      "pecas": [
+        "Rolamentos 6308 (2 un.)",
+        "Correia da serra principal"
+      ],
+      "procedimento": "DOC-MAN-SEC"
+    },
+    {
+      "id": "OS-4418",
+      "maquina": "CNC-01",
+      "tipo": "preventiva",
+      "data": "2026-11-12",
+      "status": "em_execucao",
+      "tecnico": "Anderson Ribeiro",
+      "duracao_h": 7,
+      "descricao": "Preventiva semestral antecipada por causa da NC-2026-083. Encontrada folga de 0,12 mm no fuso do eixo Z; troca do conjunto porca-fuso.",
+      "pecas": [
+        "Conjunto porca-fuso eixo Z",
+        "Graxa para fuso"
+      ],
+      "procedimento": "DOC-MAN-CNC"
+    },
+    {
+      "id": "OS-4401",
+      "maquina": "BOR-02",
+      "tipo": "corretiva",
+      "data": "2026-10-22",
+      "status": "concluida",
+      "tecnico": "Anderson Ribeiro",
+      "duracao_h": 3,
+      "descricao": "Temperatura da cola abaixo do ajuste. Limpeza do tanque e reaperto dos bornes; o problema voltou em novembro.",
+      "pecas": [],
+      "procedimento": "DOC-PRO-031"
+    },
+    {
+      "id": "OS-4405",
+      "maquina": "SEC-01",
+      "tipo": "preventiva",
+      "data": "2026-11-03",
+      "status": "concluida",
+      "tecnico": "Mauro Tomaselli",
+      "duracao_h": 5,
+      "descricao": "Alinhamento do riscador, troca de serra e lubrificação das guias.",
+      "pecas": [
+        "Serra principal 380 mm",
+        "Serra riscadora 180 mm"
+      ],
+      "procedimento": "DOC-MAN-SEC"
+    },
+    {
+      "id": "OS-4408",
+      "maquina": "PIN-01",
+      "tipo": "preventiva",
+      "data": "2026-11-05",
+      "status": "concluida",
+      "tecnico": "Gilberto Ramos",
+      "duracao_h": 4,
+      "descricao": "Troca de 2 lâmpadas UV com potência abaixo de 70% e limpeza dos refletores.",
+      "pecas": [
+        "Lâmpada UV (2 un.)"
+      ],
+      "procedimento": "DOC-MAN-PIN"
+    },
+    {
+      "id": "OS-4410",
+      "maquina": "FUR-01",
+      "tipo": "preditiva",
+      "data": "2026-11-07",
+      "status": "concluida",
+      "tecnico": "Gilberto Ramos",
+      "duracao_h": 1,
+      "descricao": "Análise de vibração dos cabeçotes: dentro do limite.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-CNC"
+    },
+    {
+      "id": "OS-4414",
+      "maquina": "EMB-01",
+      "tipo": "corretiva",
+      "data": "2026-11-10",
+      "status": "concluida",
+      "tecnico": "Gilberto Ramos",
+      "duracao_h": 1.5,
+      "descricao": "Barra de solda do filme com temperatura baixa; troca do teflon da barra.",
+      "pecas": [
+        "Fita de teflon da barra de solda"
+      ],
+      "procedimento": "DOC-MAN-EMB"
+    },
+    {
+      "id": "OS-4416",
+      "maquina": "CNC-02",
+      "tipo": "preditiva",
+      "data": "2026-11-11",
+      "status": "concluida",
+      "tecnico": "Anderson Ribeiro",
+      "duracao_h": 0.5,
+      "descricao": "Termografia do spindle e do painel: sem pontos quentes.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-CNC"
+    },
+    {
+      "id": "OS-4420",
+      "maquina": "BOR-01",
+      "tipo": "preventiva",
+      "data": "2026-11-16",
+      "status": "aberta",
+      "tecnico": "Anderson Ribeiro",
+      "duracao_h": 4,
+      "descricao": "Preventiva mensal: limpeza do tanque de cola, conferência de pressão dos rolos e afiação das fresas de refilo.",
+      "pecas": [
+        "Fresas de refilo (2 un.)"
+      ],
+      "procedimento": "DOC-MAN-BOR"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-11",
+      "nome": "Sérgio Luiz Wagner",
+      "regiao": "Santa Catarina",
+      "telefone": "(47) 9••••-6612",
+      "meta_mes": 1400000,
+      "realizado_mes": 612300
+    },
+    {
+      "id": "REP-12",
+      "nome": "Fernanda Rocha",
+      "regiao": "Paraná e Mato Grosso do Sul",
+      "telefone": "(43) 9••••-2048",
+      "meta_mes": 1650000,
+      "realizado_mes": 598700
+    },
+    {
+      "id": "REP-13",
+      "nome": "Ricardo Tavares",
+      "regiao": "São Paulo",
+      "telefone": "(11) 9••••-7350",
+      "meta_mes": 1900000,
+      "realizado_mes": 1021400
+    },
+    {
+      "id": "REP-14",
+      "nome": "Eliane Brandão",
+      "regiao": "Rio Grande do Sul",
+      "telefone": "(51) 9••••-3196",
+      "meta_mes": 1100000,
+      "realizado_mes": 530800
+    },
+    {
+      "id": "REP-15",
+      "nome": "Paulo César Nunes",
+      "regiao": "MG, RJ e ES",
+      "telefone": "(31) 9••••-8823",
+      "meta_mes": 1250000,
+      "realizado_mes": 488900
+    },
+    {
+      "id": "REP-16",
+      "nome": "Gustavo Henrique Lima",
+      "regiao": "GO, DF e Nordeste",
+      "telefone": "(62) 9••••-4407",
+      "meta_mes": 980000,
+      "realizado_mes": 402600
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-201",
+      "nome": "Casa & Conforto Móveis — Londrina",
+      "cidade": "Londrina",
+      "uf": "PR",
+      "segmento": "loja de móveis multimarcas",
+      "representante": "REP-12",
+      "condicao_pagamento": "28/56/84",
+      "limite_credito": 180000,
+      "tabela_preco": "Tabela Sul",
+      "ultimo_pedido": "2026-11-12"
+    },
+    {
+      "id": "CLI-202",
+      "nome": "Rede Lar Feliz Magazine (34 lojas)",
+      "cidade": "Maringá",
+      "uf": "PR",
+      "segmento": "rede varejista",
+      "representante": "REP-12",
+      "condicao_pagamento": "30/60/90/120",
+      "limite_credito": 1200000,
+      "tabela_preco": "Tabela Redes",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-203",
+      "nome": "Ambientes Planejados Bianchi",
+      "cidade": "Joinville",
+      "uf": "SC",
+      "segmento": "lojista de planejados",
+      "representante": "REP-11",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 250000,
+      "tabela_preco": "Tabela Planejados",
+      "ultimo_pedido": "2026-11-11"
+    },
+    {
+      "id": "CLI-204",
+      "nome": "Móveis Ponto Novo — Blumenau",
+      "cidade": "Blumenau",
+      "uf": "SC",
+      "segmento": "loja de móveis multimarcas",
+      "representante": "REP-11",
+      "condicao_pagamento": "28/56",
+      "limite_credito": 120000,
+      "tabela_preco": "Tabela Sul",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-205",
+      "nome": "Studio Casa Viva Planejados",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "segmento": "lojista de planejados",
+      "representante": "REP-13",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 300000,
+      "tabela_preco": "Tabela Planejados",
+      "ultimo_pedido": "2026-11-05"
+    },
+    {
+      "id": "CLI-206",
+      "nome": "Magazine Bom Lar (18 lojas)",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "segmento": "rede varejista",
+      "representante": "REP-13",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 900000,
+      "tabela_preco": "Tabela Redes",
+      "ultimo_pedido": "2026-11-12"
+    },
+    {
+      "id": "CLI-207",
+      "nome": "Móveis Gaúcha Lar — Passo Fundo",
+      "cidade": "Passo Fundo",
+      "uf": "RS",
+      "segmento": "loja de móveis multimarcas",
+      "representante": "REP-14",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 140000,
+      "tabela_preco": "Tabela Sul",
+      "ultimo_pedido": "2026-10-16"
+    },
+    {
+      "id": "CLI-208",
+      "nome": "Decora Interiores Planejados",
+      "cidade": "Porto Alegre",
+      "uf": "RS",
+      "segmento": "lojista de planejados",
+      "representante": "REP-14",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 220000,
+      "tabela_preco": "Tabela Planejados",
+      "ultimo_pedido": "2026-11-07"
+    },
+    {
+      "id": "CLI-209",
+      "nome": "Casa Mineira Móveis",
+      "cidade": "Belo Horizonte",
+      "uf": "MG",
+      "segmento": "loja de móveis multimarcas",
+      "representante": "REP-15",
+      "condicao_pagamento": "28/56/84",
+      "limite_credito": 160000,
+      "tabela_preco": "Tabela Sudeste",
+      "ultimo_pedido": "2026-10-24"
+    },
+    {
+      "id": "CLI-210",
+      "nome": "Lojas Sol Nascente Móveis (9 lojas)",
+      "cidade": "Vitória",
+      "uf": "ES",
+      "segmento": "rede varejista",
+      "representante": "REP-15",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 420000,
+      "tabela_preco": "Tabela Redes",
+      "ultimo_pedido": "2026-10-22"
+    },
+    {
+      "id": "CLI-211",
+      "nome": "Móveis Cerrado Forte — Goiânia",
+      "cidade": "Goiânia",
+      "uf": "GO",
+      "segmento": "loja de móveis multimarcas",
+      "representante": "REP-16",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 150000,
+      "tabela_preco": "Tabela Centro-Nordeste",
+      "ultimo_pedido": "2026-11-09"
+    },
+    {
+      "id": "CLI-212",
+      "nome": "Planeta Casa Planejados — Recife",
+      "cidade": "Recife",
+      "uf": "PE",
+      "segmento": "lojista de planejados",
+      "representante": "REP-16",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 200000,
+      "tabela_preco": "Tabela Planejados",
+      "ultimo_pedido": "2026-11-10"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PD-9890",
+      "cliente": "CLI-206",
+      "representante": "REP-13",
+      "data": "2026-10-08",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-06",
+      "ordem": "OP-71801",
+      "itens": [
+        {
+          "sku": "TA-RK18",
+          "quantidade": 800,
+          "preco_unit": 505.08
+        },
+        {
+          "sku": "TA-PN22",
+          "quantidade": 400,
+          "preco_unit": 357.88
+        }
+      ],
+      "observacao": "Entregue no CD da rede em 06/11."
+    },
+    {
+      "id": "PD-9894",
+      "cliente": "CLI-202",
+      "representante": "REP-12",
+      "data": "2026-10-14",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": "OP-71806",
+      "itens": [
+        {
+          "sku": "TA-HM12",
+          "quantidade": 600,
+          "preco_unit": 413.08
+        },
+        {
+          "sku": "TA-4P10",
+          "quantidade": 150,
+          "preco_unit": 1186.8
+        }
+      ],
+      "observacao": "Carga completa; NF emitida em 11/11."
+    },
+    {
+      "id": "PD-9897",
+      "cliente": "CLI-207",
+      "representante": "REP-14",
+      "data": "2026-10-16",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-10",
+      "ordem": "OP-71809",
+      "itens": [
+        {
+          "sku": "TA-3050",
+          "quantidade": 120,
+          "preco_unit": 429
+        },
+        {
+          "sku": "TA-CB30",
+          "quantidade": 60,
+          "preco_unit": 359
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PD-9902",
+      "cliente": "CLI-201",
+      "representante": "REP-12",
+      "data": "2026-10-20",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-71830",
+      "itens": [
+        {
+          "sku": "TA-3040",
+          "quantidade": 180,
+          "preco_unit": 489
+        },
+        {
+          "sku": "TA-RK18",
+          "quantidade": 60,
+          "preco_unit": 549
+        }
+      ],
+      "observacao": "Previsão original 14/11, reprogramada para 24/11: frentes de gaveta da cômoda 3040 refeitas por descolamento de fita (OP-71830). Os racks já estão separados no CD. Total R$ 120.960,00."
+    },
+    {
+      "id": "PD-9910",
+      "cliente": "CLI-210",
+      "representante": "REP-15",
+      "data": "2026-10-22",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-26",
+      "ordem": "OP-71836",
+      "itens": [
+        {
+          "sku": "TA-6P20",
+          "quantidade": 90,
+          "preco_unit": 1738.8
+        },
+        {
+          "sku": "TA-4P10",
+          "quantidade": 40,
+          "preco_unit": 1186.8
+        }
+      ],
+      "observacao": "Previsão original 17/11. Roupeiros 6P dependem do corte com a SEC-02 parada (OP-71836)."
+    },
+    {
+      "id": "PD-9915",
+      "cliente": "CLI-209",
+      "representante": "REP-15",
+      "data": "2026-10-24",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-71842",
+      "itens": [
+        {
+          "sku": "TA-MS40",
+          "quantidade": 48,
+          "preco_unit": 1173
+        }
+      ],
+      "observacao": "Previsão original 13/11. Repintura de tampos por verniz fora de especificação (NC-2026-081)."
+    },
+    {
+      "id": "PD-9918",
+      "cliente": "CLI-204",
+      "representante": "REP-11",
+      "data": "2026-11-03",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-19",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "TA-RK18",
+          "quantidade": 40,
+          "preco_unit": 549
+        },
+        {
+          "sku": "TA-PN22",
+          "quantidade": 40,
+          "preco_unit": 389
+        },
+        {
+          "sku": "TA-HM12",
+          "quantidade": 30,
+          "preco_unit": 449
+        }
+      ],
+      "observacao": "Pronta entrega; carga fracionada para Blumenau."
+    },
+    {
+      "id": "PD-9921",
+      "cliente": "CLI-203",
+      "representante": "REP-11",
+      "data": "2026-11-11",
+      "status": "em_analise",
+      "previsao_entrega": "2026-12-22",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "TA-PLC-80",
+          "quantidade": 14,
+          "preco_unit": 620
+        },
+        {
+          "sku": "TA-PLD-120",
+          "quantidade": 3,
+          "preco_unit": 1480
+        }
+      ],
+      "observacao": "Conferência técnica devolveu ao lojista em 12/11: módulo aéreo de 92 cm sem divisória (máximo 90 cm, regra 4.2) e corrediça de 450 mm numa caixa de 400 mm de profundidade (regra 6.1 pede 350 mm). Prazo conta a partir da aprovação."
+    },
+    {
+      "id": "PD-9924",
+      "cliente": "CLI-205",
+      "representante": "REP-13",
+      "data": "2026-11-05",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-11",
+      "ordem": "OP-71852",
+      "itens": [
+        {
+          "sku": "TA-PLC-80",
+          "quantidade": 18,
+          "preco_unit": 620
+        },
+        {
+          "sku": "TA-PLB-60",
+          "quantidade": 2,
+          "preco_unit": 690
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PD-9926",
+      "cliente": "CLI-202",
+      "representante": "REP-12",
+      "data": "2026-11-06",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-27",
+      "ordem": "OP-71845",
+      "itens": [
+        {
+          "sku": "TA-3040",
+          "quantidade": 300,
+          "preco_unit": 449.88
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PD-9930",
+      "cliente": "CLI-208",
+      "representante": "REP-14",
+      "data": "2026-11-07",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-15",
+      "ordem": "OP-71855",
+      "itens": [
+        {
+          "sku": "TA-PLD-120",
+          "quantidade": 6,
+          "preco_unit": 1480
+        }
+      ],
+      "observacao": "Ajuste da conferência técnica aceito pelo lojista: 3 dobradiças na porta de 1,10 m."
+    },
+    {
+      "id": "PD-9933",
+      "cliente": "CLI-211",
+      "representante": "REP-16",
+      "data": "2026-11-09",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-30",
+      "ordem": "OP-71848",
+      "itens": [
+        {
+          "sku": "TA-CB30",
+          "quantidade": 80,
+          "preco_unit": 376.95
+        },
+        {
+          "sku": "TA-HM12",
+          "quantidade": 60,
+          "preco_unit": 471.45
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PD-9937",
+      "cliente": "CLI-212",
+      "representante": "REP-16",
+      "data": "2026-11-10",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-28",
+      "ordem": "OP-71860",
+      "itens": [
+        {
+          "sku": "TA-PLC-80",
+          "quantidade": 22,
+          "preco_unit": 620
+        },
+        {
+          "sku": "TA-PLB-60",
+          "quantidade": 4,
+          "preco_unit": 690
+        }
+      ],
+      "observacao": "Conferência técnica aprovada sem apontamentos."
+    },
+    {
+      "id": "PD-9940",
+      "cliente": "CLI-201",
+      "representante": "REP-12",
+      "data": "2026-11-12",
+      "status": "em_analise",
+      "previsao_entrega": "2026-12-09",
+      "ordem": "OP-71862",
+      "itens": [
+        {
+          "sku": "TA-3040",
+          "quantidade": 120,
+          "preco_unit": 489
+        }
+      ],
+      "observacao": "Cômoda 3040 abaixo do estoque mínimo (140 de 250): prazo pela OP-71862 (04/12) mais 3 dias úteis de expedição, conforme RC-03. Total R$ 58.680,00."
+    },
+    {
+      "id": "PD-9942",
+      "cliente": "CLI-206",
+      "representante": "REP-13",
+      "data": "2026-11-12",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-19",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "TA-PN22",
+          "quantidade": 100,
+          "preco_unit": 357.88
+        }
+      ],
+      "observacao": "Pronta entrega."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Desconto máximo do representante",
+      "texto": "Até 4% sem aprovação; de 4% a 7% com o gerente comercial regional (Marcelo Fontana); acima de 7%, só com a diretoria comercial."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Pedido mínimo e frete",
+      "texto": "Pedido mínimo de R$ 8.000,00 para seriados. Frete CIF para Sul e Sudeste em pedidos acima de R$ 15.000,00; abaixo disso, frete FOB ou carga fracionada."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Prazo de entrega de seriados",
+      "texto": "Modelo com estoque acima do mínimo: embarque em até 5 dias úteis após a aprovação de crédito. Modelo abaixo do mínimo: o estoque fica reservado para pedidos já aprovados e o pedido novo entra com o prazo da próxima OP mais 3 dias úteis de expedição."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Conferência técnica de planejados",
+      "texto": "Todo pedido de planejados passa pela conferência de módulos, medidas e ferragens da engenharia de produto antes do nesting. Pedido com item fora da regra volta ao lojista, e o prazo de 35 a 40 dias úteis conta a partir da aprovação."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Crédito",
+      "texto": "Pedido que, somado aos pedidos em aberto, passa do limite de crédito do lojista vai para análise do financeiro. Não confirmar prazo antes da aprovação."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Assistência técnica e garantia",
+      "texto": "Garantia de 1 ano para seriados e de 5 anos para ferragens dos planejados. Peça de reposição enviada em até 10 dias úteis após identificada. Acabamento descontinuado há mais de 3 anos: peça no acabamento mais próximo do catálogo."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "aproveitamento_chapa",
+      "nome": "Aproveitamento de chapa por plano de corte",
+      "valor": 87.6,
+      "unidade": "%",
+      "meta": 90,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        89.4,
+        89.9,
+        90.3,
+        89.7,
+        90.1,
+        89.5,
+        89.8,
+        89.2,
+        89,
+        88.6,
+        88.3,
+        87.6
+      ],
+      "explicacao": "Com a SEC-02 parada desde 09/11, a SEC-01 corta sozinha em planos com um pedido por chapa, sem misturar pedidos. Isso derrubou o aproveitamento para 87,6% na semana 46, e 142 sobras acima de 300 × 300 mm foram para o estoque sem destino.",
+      "caminho": [
+        "Otimizador de corte › relatório de planos da semana 46",
+        "Planilha de plano de corte e sobras",
+        "Cálculo: área das peças ÷ área das chapas cortadas"
+      ],
+      "fontes": [
+        "maq:SEC-02",
+        "os:OS-4412",
+        "turno:2026-11-12|1º|L-COR",
+        "turno:2026-11-12|2º|L-COR",
+        "doc:DOC-PLA-CORTE#t1"
+      ]
+    },
+    {
+      "id": "otif",
+      "nome": "Pedidos entregues completos e no prazo",
+      "valor": 86.3,
+      "unidade": "%",
+      "meta": 95,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        93.1,
+        92.4,
+        94,
+        93.6,
+        92.8,
+        91.9,
+        92.5,
+        91,
+        90.2,
+        89.4,
+        88.1,
+        86.3
+      ],
+      "explicacao": "Nos últimos 30 dias, 145 de 168 pedidos saíram completos e no prazo. Hoje há 3 pedidos de lojistas atrasados, ligados ao descolamento de fita na cômoda 3040, à SEC-02 parada e ao verniz da mesa Vértice.",
+      "caminho": [
+        "ERP › pedidos faturados nos últimos 30 dias",
+        "Transportadoras › comprovantes de entrega",
+        "Cálculo: pedidos completos no prazo ÷ pedidos entregues"
+      ],
+      "fontes": [
+        "pedido:PD-9902",
+        "pedido:PD-9910",
+        "pedido:PD-9915",
+        "op:OP-71830"
+      ]
+    },
+    {
+      "id": "pedidos_planejados_erro",
+      "nome": "Pedidos de planejados com erro que chegam à produção",
+      "valor": 7.8,
+      "unidade": "%",
+      "meta": 2,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        9.6,
+        10.2,
+        9.1,
+        9.8,
+        8.7,
+        9.4,
+        8.9,
+        9.3,
+        8.5,
+        8.2,
+        8,
+        7.8
+      ],
+      "explicacao": "Em outubro, 9 de 115 pedidos de planejados chegaram à produção com erro de módulo, medida ou ferragem. A conferência técnica já barrou o PD-9921 antes do corte; os erros mais comuns são aéreo acima de 90 cm e corrediça maior que a caixa.",
+      "caminho": [
+        "ERP › pedidos de planejados com retrabalho de engenharia",
+        "Planilha da conferência técnica",
+        "Cálculo: pedidos com erro na produção ÷ pedidos de planejados do mês"
+      ],
+      "fontes": [
+        "pedido:PD-9921",
+        "nc:NC-2026-085",
+        "doc:DOC-REG-MOD#t1",
+        "saber:SB-104"
+      ]
+    },
+    {
+      "id": "consultas_rep",
+      "nome": "Consultas de representantes ao comercial interno por dia",
+      "valor": 138,
+      "unidade": "consultas",
+      "meta": 60,
+      "direcao": "menor_melhor",
+      "area": "comercial",
+      "tendencia": [
+        121,
+        126,
+        118,
+        130,
+        135,
+        129,
+        141,
+        147,
+        152,
+        149,
+        144,
+        138
+      ],
+      "explicacao": "São 138 ligações e mensagens por dia ao comercial interno, a maioria sobre acabamento, prazo e status de pedido. A alta de agosto a outubro acompanhou os atrasos; o piloto do assistente no WhatsApp começou a reduzir o volume em novembro.",
+      "caminho": [
+        "Central telefônica › chamadas do ramal do comercial interno",
+        "WhatsApp Business › mensagens de representantes",
+        "Cálculo: média por dia útil"
+      ],
+      "fontes": [
+        "integ:whatsapp",
+        "rep:REP-12",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "id": "dias_peca_reposicao",
+      "nome": "Dias para identificar uma peça de reposição",
+      "valor": 4.6,
+      "unidade": "dias",
+      "meta": 1,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        5.8,
+        6.1,
+        5.5,
+        5.9,
+        5.2,
+        5.6,
+        5.4,
+        5.1,
+        4.9,
+        5,
+        4.8,
+        4.6
+      ],
+      "explicacao": "A assistência técnica leva em média 4,6 dias para descobrir pedido original, acabamento e código da peça de um móvel vendido. Em móveis com mais de 2 anos, a lista de peças mudou de revisão e o técnico precisa procurar na pasta de cada modelo.",
+      "caminho": [
+        "Sistema de chamados › data de abertura e data de identificação da peça",
+        "Listas de peças por revisão (PLM)",
+        "Cálculo: média de dias corridos"
+      ],
+      "fontes": [
+        "doc:DOC-CHM-5521#t1",
+        "doc:DOC-LP-6P20#t1",
+        "saber:SB-105"
+      ]
+    },
+    {
+      "id": "retrabalho_borda",
+      "nome": "Retrabalho na coladeira de borda",
+      "valor": 3.9,
+      "unidade": "%",
+      "meta": 1.5,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        1.4,
+        1.3,
+        1.6,
+        1.2,
+        1.5,
+        1.8,
+        2.6,
+        2.1,
+        1.7,
+        1.9,
+        2.4,
+        3.9
+      ],
+      "explicacao": "O retrabalho subiu para 3,9% em novembro por causa da BOR-02, com a cola oscilando entre 175 e 195 °C, e do lote de fita FB-2210 com primer fraco: 180 frentes da cômoda 3040 refeitas. O pico de setembro foi a pressão de rolos da BOR-01 (NC-2026-076).",
+      "caminho": [
+        "MES › peças retrabalhadas na L-BOR",
+        "Registro de teste de arrancamento",
+        "Cálculo: peças retrabalhadas ÷ peças com fita aplicada"
+      ],
+      "fontes": [
+        "maq:BOR-02",
+        "nc:NC-2026-087",
+        "turno:2026-11-11|2º|L-BOR",
+        "turno:2026-11-12|1º|L-BOR"
+      ]
+    },
+    {
+      "id": "oee_corte",
+      "nome": "OEE do corte (seccionadoras)",
+      "valor": 58.3,
+      "unidade": "%",
+      "meta": 75,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        73.8,
+        74.6,
+        72.9,
+        75.2,
+        74.1,
+        73.5,
+        72.8,
+        73.9,
+        71.6,
+        72.4,
+        70.1,
+        58.3
+      ],
+      "explicacao": "O OEE das duas seccionadoras despencou em novembro porque a SEC-02 está parada desde 09/11: cada turno perde 480 minutos de uma das duas máquinas. A SEC-01, sozinha, está com 81%.",
+      "caminho": [
+        "MES › apontamentos de parada da L-COR",
+        "Planilha de paradas › aba Nov",
+        "Cálculo: disponibilidade × desempenho × qualidade das duas máquinas"
+      ],
+      "fontes": [
+        "maq:SEC-02",
+        "maq:SEC-01",
+        "os:OS-4412",
+        "turno:2026-11-12|1º|L-COR"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-MAN-SEC",
+      "titulo": "Manual das seccionadoras automáticas",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-08-12",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "7.3 Motor da serra principal",
+          "texto": "Ruído de rolamento ou aquecimento acima de 80 °C na carcaça do motor exige parada para inspeção. Trocar os rolamentos 6308 a cada 8.000 horas."
+        },
+        {
+          "id": "t2",
+          "secao": "5.1 Alinhamento do riscador",
+          "texto": "O riscador deve ficar alinhado à serra principal com desvio máximo de 0,1 mm para evitar lascamento do BP na face inferior."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-BOR",
+      "titulo": "Manual das coladeiras de borda",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-02-03",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.2 Temperatura da cola EVA",
+          "texto": "Trabalhar entre 190 e 200 °C no rolo aplicador. Abaixo de 185 °C a cola perde molhabilidade e a adesão cai pela metade."
+        },
+        {
+          "id": "t2",
+          "secao": "5.4 Pressão dos rolos",
+          "texto": "Pressão dos rolos de prensagem entre 3 e 4 bar para fita PVC de 0,45 a 2 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "8.1 Limpeza do tanque",
+          "texto": "Limpar o tanque de cola a cada 40 horas de operação; cola carbonizada no fundo engana a leitura do termopar."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-CNC",
+      "titulo": "Manual dos centros de usinagem CNC e furadeiras múltiplas",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-05-21",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "9.4 Folga dos fusos",
+          "texto": "Folga axial admissível de até 0,03 mm por eixo. Acima de 0,05 mm, trocar o conjunto porca-fuso; a folga aparece primeiro como furo deslocado em peças grossas."
+        },
+        {
+          "id": "t2",
+          "secao": "6.2 Furação de dobradiça",
+          "texto": "Caneco de 35 mm com 12,5 mm de profundidade e centro a 22,5 mm da borda da porta."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PIN",
+      "titulo": "Manual da linha de pintura UV e da cabine de laca",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-01-15",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.3 Viscosidade",
+          "texto": "Verniz PU aplicado com viscosidade entre 18 e 22 s no copo Ford 4 a 25 °C. Acima de 24 s aparece casca de laranja."
+        },
+        {
+          "id": "t2",
+          "secao": "7.1 Lâmpadas UV",
+          "texto": "Trocar a lâmpada quando a potência medida cair abaixo de 70% da nominal ou a cada 1.500 horas."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-EMB",
+      "titulo": "Manual da embaladora e da prensa de montagem",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-06-30",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.4 Barra de solda",
+          "texto": "Temperatura da barra de solda entre 160 e 180 °C; trocar o teflon quando o filme grudar na barra."
+        },
+        {
+          "id": "t2",
+          "secao": "5.2 Prensa de caixas",
+          "texto": "Pressão de 4 a 5 bar e tempo de prensagem de 20 s para caixas com cavilha e cola."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-031",
+      "titulo": "Procedimento de troca de resistência e termopar do tanque de cola",
+      "tipo": "procedimento",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-03-18",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2 Pré-requisitos",
+          "texto": "Tanque abaixo de 60 °C e esvaziado. Separar resistência de 1.500 W, termopar tipo J e cabo de compensação antes de iniciar."
+        },
+        {
+          "id": "t2",
+          "secao": "3 Bloqueio",
+          "texto": "Desligar a chave geral da coladeira, aplicar cadeado e etiqueta e medir ausência de tensão nos bornes da resistência."
+        },
+        {
+          "id": "t3",
+          "secao": "5 Teste",
+          "texto": "Aquecer até 195 °C e conferir com termômetro de contato no rolo aplicador: diferença máxima de 3 °C para o painel por 30 minutos. Depois, teste de arrancamento em 3 peças (mínimo 2,5 N/mm)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-REG-MOD",
+      "titulo": "Regras de módulos, medidas e ferragens — planejados, rev. 9",
+      "tipo": "norma",
+      "area": "producao",
+      "origem": "PLM",
+      "atualizado": "2026-06-10",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "comercial",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.2 Largura de módulo aéreo",
+          "texto": "Largura máxima de 90 cm para módulo aéreo sem divisória em MDF 15 mm. Acima disso, divisória obrigatória ou dois módulos."
+        },
+        {
+          "id": "t2",
+          "secao": "6.1 Corrediças",
+          "texto": "O comprimento da corrediça telescópica é a profundidade interna da caixa menos 50 mm. Caixa de 400 mm leva corrediça de 350 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "7.3 Dobradiças por porta",
+          "texto": "Portas até 60 cm de altura: 2 dobradiças; de 61 a 120 cm: 3; acima de 120 cm: 4."
+        }
+      ]
+    },
+    {
+      "id": "DOC-NOR-QUA",
+      "titulo": "NI-Q-02 Norma interna de inspeção de móveis",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-01-28",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.1 Fita de borda",
+          "texto": "Arrancamento mínimo de 2,5 N/mm para cola EVA e 3,0 N/mm para cola PUR. Teste em 3 peças a cada 2 horas e a cada troca de lote de fita."
+        },
+        {
+          "id": "t2",
+          "secao": "3.4 Empeno",
+          "texto": "Empeno máximo de 2 mm por metro em portas e tampos, medido com régua sobre a diagonal."
+        },
+        {
+          "id": "t3",
+          "secao": "2.2 Recebimento de chapas",
+          "texto": "Umidade das chapas entre 5% e 8%. Lote fora da faixa só com concessão da qualidade e uso prioritário em peças pequenas."
+        }
+      ]
+    },
+    {
+      "id": "DOC-LP-6P20",
+      "titulo": "Lista de peças do roupeiro Horizonte 6P, rev. E",
+      "tipo": "ficha_tecnica",
+      "area": "producao",
+      "origem": "PLM",
+      "atualizado": "2025-11-04",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "comercial",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Portas",
+          "texto": "RP-6P-07: porta de correr esquerda, 2.180 × 600 mm, MDF 18 mm, carvalho natural. Peça em linha, igual nas revisões D e E."
+        },
+        {
+          "id": "t2",
+          "secao": "Ferragens",
+          "texto": "RP-6P-31: kit de roldanas com freio (6 pares). RP-6P-32: trilho superior de alumínio 2,70 m."
+        },
+        {
+          "id": "t3",
+          "secao": "Revisões",
+          "texto": "Rev. E (11/2025): corrediça interna passou de 350 para 400 mm. Pedidos de 2024 usam a rev. D."
+        }
+      ]
+    },
+    {
+      "id": "DOC-REC-CHAPA",
+      "titulo": "Planilha de recebimento de chapas e fitas de borda",
+      "tipo": "planilha",
+      "area": "qualidade",
+      "origem": "Planilha",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Recebimento 3315 (11/06/2024)",
+          "texto": "240 chapas MDF 18 mm carvalho natural do fornecedor de painéis B, umidade 9,8% (limite 8%), liberado com concessão. Reclamações vinculadas: chamados 5390, 5468 e 5521 (empeno de porta)."
+        },
+        {
+          "id": "t2",
+          "secao": "Recebimento 5102 (02/11/2026)",
+          "texto": "Fita de borda PVC 1 mm, lote FB-2210, do fornecedor de fitas. Teste de primer não registrado. Lote segregado em 12/11."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CHM-5521",
+      "titulo": "Chamado de assistência técnica 5521 — roupeiro do pedido 7120",
+      "tipo": "chamado",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-06",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Relato",
+          "texto": "Cliente final da Casa Mineira Móveis: roupeiro 6 portas carvalho natural do pedido 7120 (entregue em 07/2024) com a porta de correr esquerda empenada, raspando no trilho."
+        },
+        {
+          "id": "t2",
+          "secao": "Diagnóstico",
+          "texto": "Empeno de 6 mm na porta (limite 2 mm/m). Peça identificada: RP-6P-07, cortada de chapa do recebimento 3315."
+        },
+        {
+          "id": "t3",
+          "secao": "Encaminhamento",
+          "texto": "Porta RP-6P-07 enviada em 06/11 dentro da garantia; montador da assistência agendado com o lojista."
+        }
+      ]
+    },
+    {
+      "id": "DOC-POL-COM",
+      "titulo": "Política comercial 2026 — seriados e planejados",
+      "tipo": "norma",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-02-01",
+      "acesso": [
+        "comercial",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2 Descontos",
+          "texto": "Desconto de até 4% a critério do representante; de 4% a 7% com o gerente comercial regional; acima de 7%, só com a diretoria comercial."
+        },
+        {
+          "id": "t2",
+          "secao": "3 Tabelas",
+          "texto": "Tabela Sul é a referência. Tabela Redes tem 8% a menos; Tabela Sudeste, 2% a mais; Tabela Centro-Nordeste, 5% a mais. Planejados seguem a Tabela Planejados."
+        },
+        {
+          "id": "t3",
+          "secao": "4 Prazos",
+          "texto": "Modelo abaixo do estoque mínimo entra com o prazo da próxima OP mais 3 dias úteis de expedição."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CAT-26",
+      "titulo": "Catálogo 2026/27 e tabela de acabamentos",
+      "tipo": "catalogo",
+      "area": "marketing",
+      "origem": "SharePoint",
+      "atualizado": "2026-08-01",
+      "acesso": [
+        "marketing",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Linha Aurora",
+          "texto": "Cômodas 3040 e 3050 e cabeceira CB30 em freijó com off-white ou carvalho com grafite. Puxador em perfil preto ou dourado, sem custo adicional."
+        },
+        {
+          "id": "t2",
+          "secao": "Acabamentos descontinuados",
+          "texto": "Nogueira Toscana saiu de linha em 2023. Para reposição, usar nogueira com preto, o acabamento mais próximo."
+        },
+        {
+          "id": "t3",
+          "secao": "Planejados",
+          "texto": "14 cores de frente em MDF 18 mm, dobradiças e corrediças com amortecedor de série e 5 anos de garantia nas ferragens."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLA-CORTE",
+      "titulo": "Plano de corte e controle de sobras — semana 46",
+      "tipo": "planilha",
+      "area": "producao",
+      "origem": "Planilha",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Resumo da semana",
+          "texto": "Aproveitamento médio de 87,6% (meta 90%). 142 sobras acima de 300 × 300 mm em estoque, 61 delas de MDP 15 mm freijó."
+        },
+        {
+          "id": "t2",
+          "secao": "Observação do programador",
+          "texto": "Com a SEC-02 parada, os planos estão saindo com um pedido por chapa para não atrasar o roupeiro 6P; sem misturar pedidos, o aproveitamento cai cerca de 2 pontos."
+        }
+      ]
+    },
+    {
+      "id": "DOC-EML-VERNIZ",
+      "titulo": "E-mail do fornecedor de tintas sobre o lote de verniz PU",
+      "tipo": "email",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-07",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Resposta do fornecedor",
+          "texto": "Confirmamos que o lote 26-118 saiu com viscosidade acima do padrão por falha na diluição. Enviamos lote de reposição em 10/11, sem custo."
+        },
+        {
+          "id": "t2",
+          "secao": "Nossa resposta",
+          "texto": "Solicitamos laudo de viscosidade em cada lote e reembolso das horas de repintura dos 34 tampos."
+        }
+      ]
+    },
+    {
+      "id": "DOC-INS-FITA",
+      "titulo": "Instrução de trabalho da coladeira de borda",
+      "tipo": "instrucao",
+      "area": "operadores",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-09-25",
+      "acesso": [
+        "operadores",
+        "qualidade",
+        "manutencao",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "1 Checklist de partida",
+          "texto": "Conferir temperatura da cola (190 a 200 °C), pressão dos rolos (3 a 4 bar) e fresas de refilo antes da primeira peça."
+        },
+        {
+          "id": "t2",
+          "secao": "4 Troca de lote de fita",
+          "texto": "A cada lote novo de fita, colar 3 peças de teste e fazer o arrancamento antes de rodar a produção. Registrar o lote no MES."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-101",
+      "autor": "Joel Machado",
+      "funcao": "Operador de coladeira de borda",
+      "tempo_casa_anos": 19,
+      "area": "operadores",
+      "maquina": "BOR-02",
+      "titulo": "Não confiar no visor de temperatura da BOR-02",
+      "dica": "Na BOR-02 eu não confio no visor: encosto o termômetro de contato no rolo aplicador. Se der menos de 185 °C, a fita solta em uma semana na loja. Com fita de lote novo, colo 3 peças e puxo com a unha antes de rodar o lote.",
+      "validado_por": "Paulo Roberto Engel (supervisor de produção)",
+      "data": "2026-10-14",
+      "tags": [
+        "fita de borda",
+        "cola EVA",
+        "temperatura",
+        "BOR-02"
+      ]
+    },
+    {
+      "id": "SB-102",
+      "autor": "Valmir Krüger",
+      "funcao": "Programador de corte",
+      "tempo_casa_anos": 21,
+      "area": "producao",
+      "maquina": "SEC-01",
+      "titulo": "Misturar pedidos no plano de corte sem atrasar ninguém",
+      "dica": "Junto as laterais de roupeiro com tampos de cômoda da mesma cor de chapa: as sobras de um viram peça do outro. Só não misturo pedido que embarca em dias diferentes, para não segurar carga.",
+      "validado_por": "Carlos Eduardo Sell (coordenador de PCP)",
+      "data": "2026-08-27",
+      "tags": [
+        "plano de corte",
+        "sobras",
+        "aproveitamento"
+      ]
+    },
+    {
+      "id": "SB-103",
+      "autor": "Anderson Ribeiro",
+      "funcao": "Técnico de manutenção",
+      "tempo_casa_anos": 11,
+      "area": "manutencao",
+      "maquina": "BOR-02",
+      "titulo": "Termopar do tanque de cola que pula",
+      "dica": "Se a leitura pula ±10 °C de um segundo para o outro, é cabo de compensação, não termopar. Se oscila devagar, é resistência ou cola carbonizada no fundo do tanque. Na BOR-02 foram os dois.",
+      "validado_por": "Gilberto Ramos (supervisor de manutenção)",
+      "data": "2026-11-12",
+      "tags": [
+        "termopar",
+        "tanque de cola",
+        "BOR-02"
+      ]
+    },
+    {
+      "id": "SB-104",
+      "autor": "Rosângela Schroeder",
+      "funcao": "Conferente de pedidos de planejados (engenharia de produto)",
+      "tempo_casa_anos": 14,
+      "area": "producao",
+      "maquina": null,
+      "titulo": "Os três erros que mais voltam nos pedidos dos lojistas",
+      "dica": "Aéreo com mais de 90 cm sem divisória, corrediça do tamanho da caixa (tem que ser 50 mm menor) e porta alta com 2 dobradiças. Quando o projetista do lojista é novo, confiro esses três primeiro e ligo para ele antes de devolver.",
+      "validado_por": "Carlos Eduardo Sell (coordenador de PCP)",
+      "data": "2026-10-02",
+      "tags": [
+        "planejados",
+        "conferência",
+        "módulos",
+        "ferragens"
+      ]
+    },
+    {
+      "id": "SB-105",
+      "autor": "Nelson Mayer",
+      "funcao": "Montador da assistência técnica",
+      "tempo_casa_anos": 23,
+      "area": "operadores",
+      "maquina": null,
+      "titulo": "Achar a peça pela etiqueta do móvel",
+      "dica": "A etiqueta fica na lateral interna, embaixo. Os 5 primeiros dígitos são o pedido e os 4 últimos, a semana e o ano de fabricação. Com o ano eu sei a revisão da lista de peças: roupeiro de 2024 é rev. D.",
+      "validado_por": "Luciana Hartmann (coordenadora da qualidade)",
+      "data": "2026-09-09",
+      "tags": [
+        "assistência técnica",
+        "etiqueta",
+        "peça de reposição"
+      ]
+    },
+    {
+      "id": "SB-106",
+      "autor": "Cleide Marquardt",
+      "funcao": "Pintora",
+      "tempo_casa_anos": 17,
+      "area": "operadores",
+      "maquina": "PIN-02",
+      "titulo": "Verniz PU no frio",
+      "dica": "Em manhã fria o verniz engrossa: meço no copo Ford antes de começar e de novo depois do almoço. Se passar de 22 s, corrijo com diluente, no máximo 5%; acima disso, o lote tem problema e chamo a qualidade.",
+      "validado_por": "Luciana Hartmann (coordenadora da qualidade)",
+      "data": "2026-11-08",
+      "tags": [
+        "laca",
+        "verniz PU",
+        "viscosidade"
+      ]
+    },
+    {
+      "id": "SB-107",
+      "autor": "Luiz Carlos Hass",
+      "funcao": "Operador de furadeira múltipla",
+      "tempo_casa_anos": 13,
+      "area": "operadores",
+      "maquina": "FUR-01",
+      "titulo": "Setup rápido para tampo de 25 mm na FUR-01",
+      "dica": "Quando a CNC-01 para e os tampos de 25 mm vêm para a FUR-01, uso o gabarito de altura que deixei marcado em amarelo e só ajusto o batente traseiro. O setup cai de 60 para 25 minutos.",
+      "validado_por": "Paulo Roberto Engel (supervisor de produção)",
+      "data": "2026-11-12",
+      "tags": [
+        "setup",
+        "furação",
+        "FUR-01"
+      ]
+    },
+    {
+      "id": "SB-108",
+      "autor": "Mauro Tomaselli",
+      "funcao": "Técnico de manutenção (seccionadoras)",
+      "tempo_casa_anos": 16,
+      "area": "manutencao",
+      "maquina": "SEC-02",
+      "titulo": "O motor da serra avisa antes de travar",
+      "dica": "Na SEC-02, quando o motor começa a esquentar a carcaça acima de 70 °C no fim do turno, faltam umas duas semanas para o rolamento travar. Vale medir com o termômetro infravermelho toda sexta.",
+      "validado_por": "Gilberto Ramos (supervisor de manutenção)",
+      "data": "2026-11-10",
+      "tags": [
+        "seccionadora",
+        "rolamento",
+        "motor",
+        "SEC-02"
+      ]
+    },
+    {
+      "id": "SB-109",
+      "autor": "Edson Pacheco",
+      "funcao": "Líder de expedição",
+      "tempo_casa_anos": 10,
+      "area": "operadores",
+      "maquina": "EMB-01",
+      "titulo": "Carga fracionada sem trocar volume de lojista",
+      "dica": "Carrego do último destino para o primeiro e coloco etiqueta colorida por cidade nos volumes. Kit de ferragens eu peso: saquinho com menos de 380 g para roupeiro 4P está faltando peça.",
+      "validado_por": "Paulo Roberto Engel (supervisor de produção)",
+      "data": "2026-11-12",
+      "tags": [
+        "expedição",
+        "carga fracionada",
+        "kit de ferragens"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: Senior ou TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:35",
+      "registros": 241860,
+      "observacao": "Pedidos, carteira, estoque, OPs, notas e clientes"
+    },
+    {
+      "id": "mes",
+      "nome": "MES / apontamento de produção",
+      "tipo": "MES",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:50",
+      "registros": 118300,
+      "observacao": "Paradas, retrabalho e testes de arrancamento por turno"
+    },
+    {
+      "id": "otimizador",
+      "nome": "Otimizador de plano de corte",
+      "tipo": "Plano de corte",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:20",
+      "registros": 9420,
+      "observacao": "Planos de corte, aproveitamento e sobras"
+    },
+    {
+      "id": "projeto",
+      "nome": "Software de projeto dos lojistas (arquivos de pedido de planejados)",
+      "tipo": "Projeto",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T07:10",
+      "registros": 3150,
+      "observacao": "Leitura dos arquivos de pedido para a conferência de módulos e ferragens"
+    },
+    {
+      "id": "sharepoint",
+      "nome": "SharePoint, PLM e planilhas",
+      "tipo": "Documentos",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T05:00",
+      "registros": 8740,
+      "observacao": "Manuais, listas de peças, regras de módulos, catálogo e planilhas"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail da qualidade e do comercial",
+      "tipo": "E-mail",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:30",
+      "registros": 19600,
+      "observacao": "Fornecedores, lojistas e atas"
+    },
+    {
+      "id": "chamados",
+      "nome": "Chamados de assistência técnica",
+      "tipo": "Chamados",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:45",
+      "registros": 5560,
+      "observacao": "Chamados desde 2022, ligados ao pedido original"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business dos representantes",
+      "tipo": "Mensageria",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T19:20",
+      "registros": 11240,
+      "observacao": "Piloto com 12 representantes; webhook fora do ar desde a noite de 12/11, TI verificando"
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 7
+    },
+    {
+      "id": "pcp",
+      "nome": "PCP e programação de corte",
+      "areas": [
+        "producao",
+        "operadores",
+        "qualidade"
+      ],
+      "usuarios": 12
+    },
+    {
+      "id": "engenharia",
+      "nome": "Engenharia de produto (conferência de planejados)",
+      "areas": [
+        "producao",
+        "qualidade",
+        "comercial"
+      ],
+      "usuarios": 8
+    },
+    {
+      "id": "manutencao",
+      "nome": "Técnico de manutenção",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 15
+    },
+    {
+      "id": "assistencia",
+      "nome": "Qualidade e assistência técnica",
+      "areas": [
+        "qualidade",
+        "operadores",
+        "comercial"
+      ],
+      "usuarios": 10
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial interno e marketing",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 14
+    },
+    {
+      "id": "representante",
+      "nome": "Representante (só a própria carteira)",
+      "areas": [
+        "comercial"
+      ],
+      "usuarios": 46
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T07:05",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Quanto de sobra de MDP freijó temos para o plano de hoje?",
+      "fontes": [
+        "doc:DOC-PLA-CORTE#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:22",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Procedimento de troca da resistência do tanque de cola",
+      "fontes": [
+        "doc:DOC-PRO-031#t2",
+        "os:OS-4415"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:40",
+      "perfil": "engenharia",
+      "area": "producao",
+      "pergunta": "Regra de corrediça para caixa de 400 mm",
+      "fontes": [
+        "doc:DOC-REG-MOD#t2",
+        "pedido:PD-9921"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:02",
+      "perfil": "representante",
+      "area": "comercial",
+      "pergunta": "Status do pedido 9902 da Casa & Conforto",
+      "fontes": [
+        "pedido:PD-9902",
+        "op:OP-71830"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:15",
+      "perfil": "assistencia",
+      "area": "qualidade",
+      "pergunta": "Qual a porta do roupeiro do pedido 7120?",
+      "fontes": [
+        "doc:DOC-CHM-5521#t2",
+        "doc:DOC-LP-6P20#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:33",
+      "perfil": "representante",
+      "area": "comercial",
+      "pergunta": "Cômoda 3040 freijó com puxador preto para dezembro?",
+      "fontes": [
+        "sku:TA-3040",
+        "op:OP-71862",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:50",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o OEE do corte caiu tanto?",
+      "fontes": [
+        "kpi:oee_corte",
+        "maq:SEC-02"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:10",
+      "perfil": "assistencia",
+      "area": "qualidade",
+      "pergunta": "De qual lote é a fita que descolou na cômoda?",
+      "fontes": [
+        "nc:NC-2026-087",
+        "doc:DOC-REC-CHAPA#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:28",
+      "perfil": "comercial",
+      "area": "marketing",
+      "pergunta": "Texto aprovado da cômoda 3040 para o catálogo",
+      "fontes": [
+        "sku:TA-3040",
+        "doc:DOC-CAT-26#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:46",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Quando volta o motor da SEC-02?",
+      "fontes": [
+        "os:OS-4412",
+        "saber:SB-108"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o aproveitamento de chapa caiu?",
+      "resposta": "O aproveitamento está em 87,6%, contra meta de 90%. Com a SEC-02 parada desde 09/11 (OS-4412), a SEC-01 corta sozinha em planos com um pedido por chapa, sem misturar pedidos, o que custa cerca de 2 pontos. Na semana 46 ficaram 142 sobras acima de 300 × 300 mm em estoque, 61 delas de MDP 15 mm freijó.",
+      "fontes": [
+        "kpi:aproveitamento_chapa",
+        "maq:SEC-02",
+        "os:OS-4412",
+        "doc:DOC-PLA-CORTE#t1",
+        "doc:DOC-PLA-CORTE#t2"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "O que eu preciso ver hoje?",
+      "resposta": "Há 4 OPs atrasadas (OP-71830, OP-71836, OP-71842 e OP-71838) e 3 pedidos de lojistas atrasados (PD-9902, PD-9910 e PD-9915). A BOR-02 está em alerta, a SEC-02 está parada e a CNC-01 está em preventiva. São 2 NCs abertas, incluindo a NC-2026-087, de severidade alta (descolamento de fita na cômoda 3040), e 3 em análise.",
+      "fontes": [
+        "op:OP-71830",
+        "op:OP-71836",
+        "op:OP-71842",
+        "op:OP-71838",
+        "pedido:PD-9902",
+        "maq:BOR-02",
+        "maq:SEC-02",
+        "nc:NC-2026-087"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quantos pedidos de planejados chegam com erro à produção?",
+      "resposta": "Em outubro foram 9 de 115 pedidos (7,8%), contra meta de 2%. Os erros mais comuns são módulo aéreo acima de 90 cm sem divisória e corrediça maior que a caixa. A conferência técnica já barrou o PD-9921 antes do corte, e desde a NC-2026-085 nenhum pedido entra no nesting sem conferência aprovada.",
+      "fontes": [
+        "kpi:pedidos_planejados_erro",
+        "pedido:PD-9921",
+        "nc:NC-2026-085",
+        "saber:SB-104"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "O roupeiro do pedido 7120 voltou com porta empenada. Qual peça mandamos e de qual lote era a chapa?",
+      "resposta": "O pedido 7120 saiu em 07/2024 com o roupeiro 6 portas em carvalho natural. A porta de correr esquerda é a peça RP-6P-07, ainda em linha e igual nas revisões D e E da lista de peças; ela foi enviada em 06/11. A chapa veio do recebimento 3315, liberado com umidade de 9,8% (limite 8%), que tem outras duas reclamações de empeno (chamados 5390 e 5468).",
+      "fontes": [
+        "doc:DOC-CHM-5521#t1",
+        "doc:DOC-LP-6P20#t1",
+        "doc:DOC-REC-CHAPA#t1",
+        "nc:NC-2026-084"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "O descolamento de fita de borda deste mês vem de qual lote?",
+      "resposta": "Do lote de fita PVC FB-2210, recebido em 02/11 sem teste de primer (recebimento 5102), somado à temperatura da cola oscilando entre 175 e 195 °C na BOR-02. Foram 180 frentes da cômoda 3040 com arrancamento de 1,4 N/mm. Em setembro houve um caso parecido no rack RK18, mas a causa era a pressão dos rolos da BOR-01 (NC-2026-076, encerrada).",
+      "fontes": [
+        "nc:NC-2026-087",
+        "doc:DOC-REC-CHAPA#t2",
+        "maq:BOR-02",
+        "nc:NC-2026-076"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Qual a regra de corrediça para gaveta de planejado?",
+      "resposta": "Pela regra 6.1 das regras de módulos (rev. 9), a corrediça telescópica tem a profundidade interna da caixa menos 50 mm: caixa de 400 mm leva corrediça de 350 mm. Foi esse o erro do PD-9921, que veio com corrediça de 450 mm.",
+      "fontes": [
+        "doc:DOC-REG-MOD#t2",
+        "pedido:PD-9921"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quais OPs estão atrasadas e por quê?",
+      "resposta": "São 4. OP-71830 (cômoda 3040): 180 frentes refeitas por descolamento de fita, nova previsão 19/11. OP-71836 (roupeiro 6P): SEC-02 parada, nova previsão 21/11. OP-71842 (mesa Vértice): 34 tampos repintados por verniz fora de especificação. OP-71838 (rack RK18): CNC-01 em preventiva com troca do fuso do eixo Z, nova previsão 17/11.",
+      "fontes": [
+        "op:OP-71830",
+        "op:OP-71836",
+        "op:OP-71842",
+        "op:OP-71838"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "O pedido 9921 tem algum módulo fora das medidas permitidas?",
+      "resposta": "Tem dois problemas. Um módulo aéreo de 92 cm sem divisória, quando o máximo é 90 cm (regra 4.2), e corrediça de 450 mm numa caixa de 400 mm de profundidade, quando a regra 6.1 pede 350 mm. A conferência técnica devolveu o pedido à Ambientes Planejados Bianchi em 12/11, e o prazo conta a partir da aprovação (RC-04).",
+      "fontes": [
+        "pedido:PD-9921",
+        "doc:DOC-REG-MOD#t1",
+        "doc:DOC-REG-MOD#t2",
+        "regra:RC-04",
+        "cliente:CLI-203"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Como fica o corte com a SEC-02 parada?",
+      "resposta": "A SEC-01 está cortando em 2 turnos, com prioridade para as portas do roupeiro 6P (OP-71836, 40%). Cada turno perde 480 minutos da SEC-02, e o OEE do corte caiu para 58,3%. O motor volta do rebobinamento em 17/11. Até lá, as OPs planejadas OP-71862 e OP-71864 dependem só da SEC-01.",
+      "fontes": [
+        "maq:SEC-02",
+        "os:OS-4412",
+        "op:OP-71836",
+        "kpi:oee_corte",
+        "turno:2026-11-12|1º|L-COR"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Quais NCs estão abertas e o que falta para fechar?",
+      "resposta": "Duas abertas. NC-2026-087 (alta): descolamento de fita na cômoda 3040; falta trocar resistência e termopar da BOR-02 (OS-4415), devolver o lote FB-2210 e incluir teste de primer no recebimento. NC-2026-088 (baixa): 6 roupeiros 4P sem kit de ferragens nas Lojas Sol Nascente; kits enviados e pesagem em 100% dos volumes. Em análise estão a NC-2026-081 (verniz), a NC-2026-083 (furação) e a NC-2026-084 (porta empenada).",
+      "fontes": [
+        "nc:NC-2026-087",
+        "nc:NC-2026-088",
+        "os:OS-4415",
+        "nc:NC-2026-081",
+        "nc:NC-2026-083",
+        "nc:NC-2026-084"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Gera o 8D do descolamento de fita da cômoda 3040.",
+      "resposta": "D2: 180 frentes da OP-71830 com arrancamento de 1,4 N/mm (mínimo 2,5). D3: frentes refeitas na BOR-01 e lote FB-2210 bloqueado. D4: resistência do tanque de cola da BOR-02 com isolamento danificado e fita com primer fraco. D5: trocar resistência e termopar e devolver o lote. D7 proposto: teste de primer no recebimento de cada lote de fita.",
+      "fontes": [
+        "nc:NC-2026-087",
+        "doc:DOC-NOR-QUA#t1",
+        "doc:DOC-PRO-031#t3",
+        "os:OS-4415"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "O teste de arrancamento deu 2,2 N/mm na cômoda. Libera o lote?",
+      "resposta": "Não. A NI-Q-02, item 3.1, pede no mínimo 2,5 N/mm para cola EVA. Com 2,2 N/mm, o lote volta para retrabalho e vale conferir a temperatura da cola no rolo aplicador: abaixo de 185 °C a adesão cai pela metade, segundo o manual da coladeira.",
+      "fontes": [
+        "doc:DOC-NOR-QUA#t1",
+        "doc:DOC-MAN-BOR#t1",
+        "saber:SB-101"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "O que está acontecendo com a BOR-02?",
+      "resposta": "A BOR-02 está em alerta: a temperatura da cola oscila entre 175 e 195 °C, quando o manual pede 190 a 200 °C. A OS-4415 encontrou a resistência 2 do tanque com isolamento danificado e o termopar instável; a troca está marcada para 14/11. É reincidência: em 22/10 a OS-4401 só limpou o tanque. O Anderson registrou que leitura pulando ±10 °C é cabo de compensação.",
+      "fontes": [
+        "maq:BOR-02",
+        "os:OS-4415",
+        "os:OS-4401",
+        "doc:DOC-MAN-BOR#t1",
+        "saber:SB-103"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quando a SEC-02 volta a cortar?",
+      "resposta": "O motor da serra principal está no rebobinamento externo, com retorno previsto em 17/11; os rolamentos 6308 do eixo serão trocados junto (OS-4412). O Mauro Tomaselli registrou que a carcaça acima de 70 °C no fim do turno avisa umas duas semanas antes de o rolamento travar, e vale medir toda sexta.",
+      "fontes": [
+        "maq:SEC-02",
+        "os:OS-4412",
+        "saber:SB-108",
+        "doc:DOC-MAN-SEC#t1"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quais preventivas vencem nos próximos 7 dias?",
+      "resposta": "Três: a BOR-01 em 16/11 (OS-4420), a BOR-02 em 18/11 e a embaladora EMB-01 em 20/11. Na BOR-02, vale fazer a preventiva junto com a troca de resistência da OS-4415. A CNC-01 está em preventiva agora (OS-4418).",
+      "fontes": [
+        "maq:BOR-01",
+        "os:OS-4420",
+        "maq:BOR-02",
+        "maq:EMB-01",
+        "os:OS-4418"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "A cômoda 3040 em freijó com puxador preto tem entrega para dezembro?",
+      "resposta": "Tem, mas não do estoque. São 140 unidades, abaixo do mínimo de 250, e pela RC-03 o estoque fica para pedidos já aprovados. Pedido novo entra com o prazo da OP-71862, que termina em 04/12, mais 3 dias úteis de expedição: embarque em 09/12. Freijó com off-white e puxador preto é combinação de catálogo, sem custo adicional.",
+      "fontes": [
+        "sku:TA-3040",
+        "op:OP-71862",
+        "regra:RC-03",
+        "doc:DOC-CAT-26#t1"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Quais modelos estão abaixo do estoque mínimo e quais pedidos dependem deles?",
+      "resposta": "Dois. Cômoda 3040: 140 unidades contra mínimo de 250; dependem dela o PD-9902 da Casa & Conforto (atrasado, previsão 24/11), o PD-9926 da Rede Lar Feliz (OP-71845, 24/11) e o PD-9940 da Casa & Conforto (OP-71862, embarque 09/12). Cabeceira CB30: 95 unidades contra mínimo de 120; o PD-9933 da Móveis Cerrado Forte depende da OP-71848, com prazo em 25/11.",
+      "fontes": [
+        "sku:TA-3040",
+        "sku:TA-CB30",
+        "pedido:PD-9902",
+        "pedido:PD-9926",
+        "pedido:PD-9940",
+        "pedido:PD-9933"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Prepara a visita à Casa & Conforto Móveis em Londrina.",
+      "resposta": "Loja multimarcas da carteira da Fernanda Rocha, Tabela Sul, 28/56/84, limite de crédito de R$ 180.000,00. Tem em aberto o PD-9902 (R$ 120.960,00, atrasado, nova previsão 24/11) e o PD-9940 (R$ 58.680,00, cômoda 3040 com embarque em 09/12). Juntos somam R$ 179.640,00: sobram R$ 360,00 de limite, e qualquer pedido novo vai para o financeiro (RC-05). Leve a explicação do atraso e o rack RK18, com estoque.",
+      "fontes": [
+        "cliente:CLI-201",
+        "pedido:PD-9902",
+        "pedido:PD-9940",
+        "regra:RC-05",
+        "sku:TA-RK18"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Escreve a descrição da cômoda 3040 para o catálogo.",
+      "resposta": "Rascunho a partir da ficha aprovada: \"Cômoda Aurora de 6 gavetas com corrediças telescópicas, 90 × 96 × 45 cm, em freijó com off-white ou carvalho com grafite e puxador em perfil preto ou dourado. Sai em 2 volumes, com montagem guiada por QR code.\" Evitei prometer prazo de entrega, porque o modelo está abaixo do estoque mínimo.",
+      "fontes": [
+        "sku:TA-3040",
+        "doc:DOC-CAT-26#t1"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Escreve um texto técnico para os lojistas sobre a garantia dos planejados.",
+      "resposta": "Proposta: \"Nos planejados, dobradiças e corrediças têm amortecedor de série e 5 anos de garantia. Cada pedido passa pela conferência de módulos, medidas e ferragens da nossa engenharia antes do corte, para chegar certo na casa do seu cliente.\" O texto está em revisão (MK-02).",
+      "fontes": [
+        "doc:DOC-CAT-26#t3",
+        "regra:RC-06",
+        "regra:RC-04"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como o operador confere a temperatura da cola na BOR-02?",
+      "resposta": "Pelo saber do Joel Machado (19 anos de casa, validado pelo supervisor Paulo Roberto Engel): não confiar no visor e medir com termômetro de contato no rolo aplicador. Abaixo de 185 °C, a fita solta em cerca de uma semana na loja. Com lote novo de fita, colar 3 peças e testar antes de rodar o lote, como pede a instrução de trabalho.",
+      "fontes": [
+        "saber:SB-101",
+        "doc:DOC-INS-FITA#t2",
+        "maq:BOR-02"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Quais erros mais aparecem nos pedidos de planejados?",
+      "resposta": "Pela Rosângela Schroeder, conferente há 14 anos: módulo aéreo com mais de 90 cm sem divisória, corrediça do tamanho da caixa (tem que ser 50 mm menor) e porta alta com 2 dobradiças (acima de 60 cm são 3; acima de 120 cm, 4). Com projetista novo do lojista, ela confere esses três primeiro e liga antes de devolver.",
+      "fontes": [
+        "saber:SB-104",
+        "doc:DOC-REG-MOD#t3",
+        "doc:DOC-REG-MOD#t2"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como achar a peça de reposição pela etiqueta do móvel?",
+      "resposta": "Pelo Nelson Mayer, montador da assistência há 23 anos: a etiqueta fica na lateral interna, embaixo. Os 5 primeiros dígitos são o pedido e os 4 últimos, a semana e o ano de fabricação. O ano indica a revisão da lista de peças: um roupeiro 6P de 2024 é rev. D.",
+      "fontes": [
+        "saber:SB-105",
+        "doc:DOC-LP-6P20#t3"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Onde está o meu pedido PD-9902?",
+      "resposta": "O pedido PD-9902 (180 cômodas Aurora 3040 e 60 racks Prisma RK18) está atrasado: refizemos as frentes de gaveta das cômodas para garantir a colagem da fita de borda. A nova previsão de entrega é 24/11. Os racks já estão separados e seguem na mesma carga.",
+      "fontes": [
+        "pedido:PD-9902",
+        "sku:TA-3040",
+        "sku:TA-RK18"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Quero repor o rack RK18. Tem pronta entrega?",
+      "resposta": "Tem: 420 unidades em estoque, acima do mínimo, com embarque em até 5 dias úteis após a aprovação de crédito. Pela Tabela Sul, R$ 549,00 a unidade. O pedido mínimo de seriados é R$ 8.000,00, e acima de R$ 15.000,00 o frete é CIF para o Sul e o Sudeste.",
+      "fontes": [
+        "sku:TA-RK18",
+        "regra:RC-03",
+        "regra:RC-02"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "10:03",
+      "texto": "Oi! A Casa & Conforto de Londrina tá perguntando do pedido 9902. Era pra ter chegado amanhã. O que houve?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "10:03",
+      "texto": "Oi, Fernanda. O PD-9902 (180 cômodas 3040 e 60 racks RK18) está atrasado: 180 frentes de gaveta das cômodas foram refeitas porque a fita de borda não passou no teste de colagem. A nova previsão de entrega é 24/11; os racks já estão separados no CD e vão na mesma carga.",
+      "fontes": [
+        "pedido:PD-9902",
+        "op:OP-71830"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "10:06",
+      "texto": "Ok. Ela quer mais 60 cômodas 3040 freijó com puxador preto pra dezembro. Consigo dar 8% pra compensar o atraso?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "10:06",
+      "texto": "A 3040 tem 140 unidades em estoque, abaixo do mínimo de 250, então o pedido novo entra com o prazo da próxima OP: a OP-71862 termina em 04/12 e o embarque fica para 09/12. Freijó com puxador preto é combinação de catálogo, sem custo adicional.",
+      "fontes": [
+        "sku:TA-3040",
+        "op:OP-71862",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "de": "assistente",
+      "hora": "10:07",
+      "texto": "Sobre o desconto: até 4% você aprova; de 4% a 7% precisa do Marcelo Fontana; 8% só com a diretoria comercial. Com 4%, a cômoda sai a R$ 469,44 (Tabela Sul: R$ 489,00), R$ 28.166,40 pelas 60.",
+      "fontes": [
+        "regra:RC-01",
+        "doc:DOC-POL-COM#t1",
+        "cliente:CLI-201"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "10:09",
+      "texto": "Vou de 4%. Posso confirmar 09/12 pra ela?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "10:09",
+      "texto": "Ainda não. Ela tem em aberto o PD-9902 (R$ 120.960,00) e o PD-9940 (R$ 58.680,00), que somam R$ 179.640,00 de um limite de R$ 180.000,00. Com mais R$ 28.166,40, o pedido vai para análise do financeiro antes de confirmar prazo. Deixo o rascunho pronto para você enviar?",
+      "fontes": [
+        "regra:RC-05",
+        "pedido:PD-9940",
+        "cliente:CLI-201"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "10:10",
+      "texto": "Pode deixar. Aviso ela que depende do crédito.",
+      "fontes": []
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Cômoda Aurora 3040 — ficha para o catálogo",
+      "status": "aprovado",
+      "sku": "TA-3040",
+      "texto": "Cômoda Aurora de 6 gavetas com corrediças telescópicas, 90 × 96 × 45 cm. Em freijó com off-white ou carvalho com grafite, com puxador em perfil preto ou dourado. Sai em 2 volumes, com montagem guiada por QR code.",
+      "fontes": [
+        "sku:TA-3040",
+        "doc:DOC-CAT-26#t1"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Garantia e conferência técnica dos planejados",
+      "status": "em_revisao",
+      "sku": "TA-PLD-120",
+      "texto": "Nos planejados, dobradiças e corrediças têm amortecedor de série e 5 anos de garantia. Cada pedido passa pela conferência de módulos, medidas e ferragens da nossa engenharia antes do corte, para chegar certo na casa do seu cliente.",
+      "fontes": [
+        "doc:DOC-CAT-26#t3",
+        "regra:RC-04",
+        "regra:RC-06"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta à Casa Mineira Móveis sobre a porta empenada",
+      "status": "rascunho",
+      "sku": "TA-6P20",
+      "texto": "Olá, equipe da Casa Mineira. A porta RP-6P-07 do roupeiro do pedido 7120 foi enviada em 06/11, dentro da garantia, e o montador da assistência vai agendar a troca com vocês. Estamos revisando outros móveis feitos com o mesmo lote de chapa.",
+      "fontes": [
+        "doc:DOC-CHM-5521#t3",
+        "nc:NC-2026-084",
+        "cliente:CLI-209"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "post",
+      "titulo": "Sala Prisma: rack e painel para TV até 65\"",
+      "status": "aprovado",
+      "sku": "TA-RK18",
+      "texto": "Rack de 1,80 m com passa-fios e pés em aço, e painel com suporte para TV: a sala Prisma aguenta TV de até 65\" e chega com pronta entrega. Peça ao seu representante.",
+      "fontes": [
+        "sku:TA-RK18",
+        "sku:TA-PN22"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Mesa Vértice — ficha para o catálogo",
+      "status": "em_revisao",
+      "sku": "TA-MS40",
+      "texto": "Mesa de jantar de 1,80 m para 6 lugares, com tampo em MDF laqueado de alto brilho (mínimo de 85 UB) e base revestida de lâmina natural. Em off-white ou preto brilho.",
+      "fontes": [
+        "sku:TA-MS40",
+        "doc:DOC-MAN-PIN#t1"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do lojista",
+    "boas_vindas": "Olá! Aqui você vê o catálogo com o preço da sua tabela, acompanha seus pedidos e abre chamados de assistência pelo número do pedido.",
+    "destaques": [
+      "TA-RK18",
+      "TA-3040",
+      "TA-6P20",
+      "TA-PLC-80"
+    ],
+    "avisos": [
+      {
+        "titulo": "Cômoda Aurora 3040",
+        "texto": "Novos pedidos da cômoda 3040 embarcam a partir de 09/12. Pedidos já aprovados seguem com a data informada."
+      },
+      {
+        "titulo": "Planejados",
+        "texto": "Envie o arquivo do projeto completo: a conferência técnica responde em até 2 dias úteis."
+      },
+      {
+        "titulo": "Assistência técnica",
+        "texto": "Abra o chamado com a foto da etiqueta do móvel (lateral interna, embaixo): assim achamos a peça mais rápido."
+      }
+    ]
+  }
+}

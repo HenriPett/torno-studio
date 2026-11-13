@@ -66,6 +66,9 @@
 .pt-faixa-icone { display: inline-flex; flex: none; margin-top: 1px; }
 .pt-faixa-texto { margin: 0; font-size: 0.9375rem; }
 .pt-entrar { max-width: 32rem; }
+.pt-entrar .control { width: 100%; max-width: 100%; }
+.pt-root .control { max-width: 100%; min-width: 0; }
+.pt-root .select, .pt-root .select-wrap { max-width: 100%; min-width: 0; }
 
 /* Loja: fundo levemente diferente das telas internas */
 .pt-loja { display: flex; flex-direction: column; gap: var(--space-5); }
@@ -358,7 +361,10 @@
 .seg-perfil-areas { display: flex; flex-wrap: wrap; gap: var(--space-1); }
 
 /* Matriz */
-.seg-matriz-wrap { overflow-x: auto; }
+/* contain: content isola o scroll horizontal da tabela larga para que ela role
+   dentro do próprio container, sem arrastar a página (a casca usa overflow-x:hidden
+   no body, que sozinho não segura um container rolável aninhado). */
+.seg-matriz-wrap { overflow-x: auto; contain: content; }
 .seg-matriz { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 32rem; }
 .seg-matriz th, .seg-matriz td { padding: var(--space-2) var(--space-3); text-align: left; border-bottom: 1px solid var(--color-border-subtle); }
 .seg-matriz thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text-muted); border-bottom: 2px solid var(--color-border); vertical-align: bottom; }
