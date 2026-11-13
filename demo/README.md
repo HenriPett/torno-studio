@@ -1,126 +1,96 @@
 # Torno Demo
 
-Demonstração navegável da oferta da Torno para indústrias: cérebro da operação, agentes por área e
-software sob medida, com **dados 100% fictícios** de oito setores. Serve para reuniões com
-prospects: escolhe-se o setor do cliente, ligam-se só os módulos que interessam e mostra-se a
-demo funcionando, com ou sem IA real.
+Demo privada da oferta da Torno para indústrias, dentro do site: **tornostudio.com/demo/&lt;id&gt;**, com
+senha por link, gerada sob demanda no **tornostudio.com/admin**. Oito setores com dados 100% fictícios
+(base de conhecimento pré-setada), IA de verdade que consulta esses dados e **aprende com o que o
+visitante registra**, e as áreas da empresa (Produção, Qualidade, Manutenção, Comercial, Marketing,
+Portal do cliente) no mesmo formato leve.
 
-- Sem etapa de build: HTML, módulos ES e JSON. Roda em qualquer servidor estático.
-- Publicada como Artifact privado do claude.ai (o "link aleatório"): https://claude.ai/artifact/NuBtJUKT9uBr6mo2PA8dA6. Para republicar, publique `demo/index.html` com os arquivos de `css/`, `src/`, `data/` e `styles.css` e as capacidades `{db: {rules: [{path: "config", read: "view", write: "admin"}]}, user: {}, sample: {}}`.
-- Fica fora do site: o Astro não lê `demo/` (o `tsconfig.json` exclui a pasta).
+- Não indexada: `X-Robots-Tag: noindex` nas rotas da demo, `meta robots`, fora do sitemap, nenhum link
+  no site, conteúdo só depois da senha.
+- Sem etapa de build própria: `demo/web` é HTML + módulos ES; o build do Astro copia para `dist/demo-app/`
+  (`scripts/demo-app.mjs`) e a Netlify Function `netlify/functions/demo-api.mjs` serve a API.
+- Documentos de projeto: `PLANO-V2.md` (arquitetura e API), `UX.md` (spec de UX), `server/README.md`
+  (servidor), `PLANO.md` (v1, histórico).
+
+## Colocar no ar (uma vez)
+
+Na Netlify → Site configuration → Environment variables, crie:
+
+| Variável | Valor |
+|---|---|
+| `DEMO_ADMIN_PASSWORD` | a sua senha do /admin |
+| `DEMO_SESSION_SECRET` | 32+ caracteres aleatórios (`openssl rand -base64 48`) |
+| `ANTHROPIC_API_KEY` | chave da API da Anthropic (sem ela a demo responde pelo roteiro local) |
+
+Opcionais: `DEMO_MODEL` (padrão `claude-sonnet-5-5`), `DEMO_DAILY_MESSAGES` (padrão 200 por demo por dia).
+O armazenamento (Netlify Blobs, store `torno-demos`) se cria sozinho. Depois do deploy, abra `/admin`.
+
+## Usar
+
+1. `/admin` → **Novo link**: nome do prospect, setor, preset de módulos (Completa, Comercial e PCP,
+   Qualidade e manutenção ou Personalizar), senha gerada ou digitada.
+2. Copie o link e a senha (ou a **mensagem pronta**) e mande ao prospect. A senha só aparece na criação;
+   se perder, gere uma nova (derruba quem estava dentro).
+3. Acompanhe acessos, último acesso e o que o prospect registrou. Desative, renove a senha, zere o
+   aprendizado para reaproveitar o link, ou apague.
+
+Na reunião, o caminho que mais impressiona: **pergunte** (resposta com fontes) → **Ensinar** algo que só a
+equipe sabe → **Perguntar sobre isso** → a resposta passa a citar o registro ("Registrado por … · agora"),
+que também aparece no Cérebro e na página da área.
 
 ## Rodar localmente
 
 ```bash
-node demo/scripts/serve.mjs 4400     # http://localhost:4400
-node demo/scripts/validate.mjs       # valida os 8 pacotes de dados
+DEMO_ADMIN_PASSWORD=admin-dev node demo/scripts/serve.mjs 4400   # http://localhost:4400/admin
+node demo/server/test.mjs                                          # API (20 testes)
+node demo/web/src/ui/markdown.test.mjs                             # Markdown das respostas
+node demo/scripts/validate.mjs                                     # 8 pacotes de dados
 ```
 
-Fora do claude.ai não existe `window.claude`: a demo entra em **modo local** (config no
-localStorage, admin liberado, assistente no roteiro determinístico).
-
-## Como usar numa reunião
-
-| Quero… | Faça |
-|---|---|
-| Mostrar outro setor | Seletor **Setor** no topo (vale só para a sua sessão) ou abra o link com `#textil`, `#alimentos`, `#plasticos`, `#maquinas`, `#metalmecanica`, `#moveis`, `#eletroeletronicos`, `#autopecas` |
-| Deixar a demo pronta para um cliente | `#admin` → setor, nome exibido da empresa e módulos → **Salvar**. Vale para todo mundo que abrir o link |
-| Trocar de cenário rápido | `#admin` → **Perfis de demo**: salve a configuração atual com um nome (ex.: "Têxtil — só comercial e PCP") e aplique antes da reunião |
-| Esconder um módulo | `#admin` → desligue. Some do menu, a rota volta para a visão geral e o assistente deixa de usar e citar os dados dele |
-
-O admin só aparece para quem pode editar o Artifact (`user.canEdit()`); quem só tem o link vê a demo.
+Com `ANTHROPIC_API_KEY` no ambiente, a conversa usa a IA real também em dev.
 
 ## Arquitetura
 
 ```
 demo/
-  index.html, styles.css, css/      casca e estilos (tokens da Torno, claro/escuro, celular)
-  data/sectors.json                 índice dos setores
-  data/<setor>.json                 pacote fictício do setor (esquema em PLANO.md §3 e data/schema.md)
-  src/app.js, state.js              boot, roteador (#rota), casca, gaveta de detalhes
-  src/features.js                   registro de módulos (id, nome, ícone, rota, dependências)
-  src/config.js                     config padrão, perfis de demo, dependências
-  src/admin.js                      tela #admin
-  src/ui.js, format.js              componentes e formatação pt-BR
-  src/modules/<id>.js               uma tela por módulo: export function render(el, ctx)
-  src/ai/                           ferramentas sobre os dados, motor local e orquestração do assistente
-  src/ui/chat.js                    painel de conversa com fontes (padrão, WhatsApp, celular)
-  src/adapters/
-    data-source.js                  DataSource: de onde vêm os dados   (hoje: JSON fictício)
-    config-store.js                 ConfigStore: onde fica a config      (hoje: db do Artifact ou localStorage)
-    ai-provider.js                  AIProvider: quem responde            (hoje: capacidade sample ou roteiro local)
-  scripts/serve.mjs, validate.mjs
+  web/              navegador: casca, tela de senha, admin, Início, conversa, Cérebro, áreas, Portal
+    src/api.js      cliente da API (SSE da conversa com rodadas)
+    src/ui/         markdown, conversa, fontes, ensinar, páginas de área
+    src/ai/local-engine.js   motor determinístico (roda no servidor quando não há chave)
+  data/             pacotes fictícios dos 8 setores + validador
+  server/           API: auth, store (Blobs/arquivo), demos, aprendizado, IA com ferramentas
+  scripts/          serve.mjs (dev), validate.mjs
+netlify/functions/demo-api.mjs   /api/demo/*, /api/admin/*
+scripts/demo-app.mjs             copia demo/web para dist/demo-app no build
 ```
 
-Três camadas separadas, para que a mesma tela sirva a demo e um cliente real:
+Separação para replicar num cliente real:
 
-1. **Dados** (`DataSource`). As telas e o assistente só leem o objeto do setor no formato do
-   esquema. Trocar o JSON por conectores reais (ERP, MES, pasta de documentos, e-mail) é escrever
-   outra implementação de `loadSector()` que devolve o mesmo formato.
-2. **Config** (`features.js` + `ConfigStore`). Quais módulos existem, quais estão ligados, setor e
-   nome exibido. Num cliente real vira a config do tenant.
-3. **IA** (`AIProvider`). Na demo, a capacidade `sample` do claude.ai responde usando ferramentas
-   (tools) que consultam o pacote do setor; sem ela, o motor local responde com perguntas
-   sugeridas pré-calculadas, consultas por ID e busca por palavra-chave. Num cliente real, troca-se
-   por uma API própria (Claude via API, na nuvem aprovada pela TI do cliente) com as mesmas tools.
+1. **Dados**: hoje `server/catalogo.mjs` importa `data/<setor>.json`. Num cliente, troque por conectores
+   (ERP, MES, documentos) que devolvem o mesmo formato (`data/schema.md`).
+2. **Config e acesso**: hoje uma demo por link com senha (Blobs). Num cliente, login da empresa (SSO) e
+   permissões por perfil aplicadas no servidor.
+3. **IA**: `server/ai.mjs` chama a API da Anthropic com as ferramentas de `server/tools.mjs`; o aprendizado
+   vira a base de conhecimento viva da empresa (com revisão de quem é dono da área).
 
-### O assistente
+### Adicionar um setor ou um módulo
 
-- Ferramentas por módulo (`src/ai/tools.js`): buscar documentos, ordens, turnos, NCs, manutenção,
-  pedidos, estoque e preço, clientes e representantes, regras comerciais, KPIs, saberes,
-  integrações, perfis e registro de uso. Só entram as dos módulos ligados e, no Cérebro, só os
-  documentos que o perfil escolhido em "Ver como" pode ver.
-- Toda resposta cita fontes (`tipo:id`, ex.: `op:OP-24518`, `doc:DOC-PRO-012#t1`), que viram chips
-  clicáveis e abrem o registro na gaveta lateral.
-- **Funciona 100% sem IA real.** Se `sample` não existir (visitante de fora da organização,
-  servidor local) ou for negada, o roteiro local responde e a interface mostra "Roteiro local".
-
-## Adicionar um setor
-
-1. Copie um pacote parecido para `data/<novo>.json` e reescreva os dados seguindo `PLANO.md` §3
-   (vocabulário, nomes de área, KPIs e documentos no jargão do setor; tudo fictício).
-2. Acrescente `{ "id", "nome", "arquivo" }` em `data/sectors.json`.
-3. `node demo/scripts/validate.mjs <novo>` até zerar os erros (inclui referências cruzadas e fontes).
-4. O seletor, o admin e a rota `#<novo>` passam a oferecer o setor sozinhos.
-
-## Adicionar um módulo
-
-1. Registre em `src/features.js`: `{ id, nome, icone, rota, depende, descricao, oferta }`.
-2. Crie `src/modules/<id>.js` com `export function render(el, ctx)` usando `ctx.data`,
-   `ctx.term()`, `ctx.areaName()`, os componentes de `src/ui.js` e, se quiser conversa,
-   `chatPanel({ ctx, modulo: '<id>' })`. Estilos em `css/` com prefixo próprio, só com os tokens.
-3. Se tiver dados novos: amplie o esquema (PLANO.md §3), o validador e os pacotes; se o
-   assistente deve consultá-los, crie a tool em `src/ai/tools.js` marcada com o módulo e,
-   se fizer sentido, `perguntas_sugeridas` com `modulo: '<id>'`.
-4. O admin lista o módulo automaticamente.
-
-## Subir para um cliente real
-
-1. Fork da pasta para um repositório do cliente (ver abaixo). Remova os setores que não usa.
-2. Escreva um `DataSource` que lê dos sistemas do cliente (ERP, MES, documentos) e devolve o formato
-   do esquema; comece por um export noturno em JSON e evolua para consultas sob demanda.
-3. Troque `SampleProvider` por um provedor que chama uma API própria (servidor do cliente com
-   Claude via API e as mesmas tools rodando no backend, com permissão por perfil aplicada no servidor).
-4. Troque o `ConfigStore` pelo banco do cliente e a checagem de admin pelo login dele (SSO).
-5. Deixe ligados só os módulos contratados no admin ou fixe a config no código.
-6. Tire a faixa "Dados fictícios" só quando os dados forem reais.
+- Setor: crie `data/<novo>.json` (esquema em `data/schema.md`), registre em `data/sectors.json` e em
+  `server/catalogo.mjs`, rode `node demo/scripts/validate.mjs <novo>`.
+- Módulo: registre em `web/src/features.js` e `server/catalogo.mjs`, crie a tela em `web/src/modules/` com
+  `areaPage()` de `web/src/ui/area-page.js`, e as ferramentas da IA em `server/tools.mjs`.
 
 ## Mover para um repositório próprio
 
-A pasta é autocontida (nenhum import aponta para fora dela):
-
-```bash
-git subtree split --prefix=demo -b demo-only          # histórico só da demo
-git push git@github.com:<conta>/torno-demo.git demo-only:main
-# ou, sem histórico: copie a pasta demo/ para a raiz do novo repositório
-```
-
-Depois, remova `demo/` deste repositório e a entrada `"demo"` do `exclude` em `tsconfig.json`.
-Para hospedar fora do claude.ai (Netlify, GitHub Pages), publique a pasta como site estático; a
-config cai no modo local até existir um `ConfigStore` com backend.
+`demo/` + `netlify/functions/demo-api.mjs` + `scripts/demo-app.mjs` formam a demo inteira. Para separar:
+copie as três coisas para um repositório novo, troque a integração do Astro por uma cópia simples de
+`demo/web` para a pasta publicada (ou publique `demo/web` direto, com `/demo-app/` apontando para ela), e
+mantenha os redirects e headers do fim do `netlify.toml`. Depois apague `demo/`, a função, a integração e
+esses blocos daqui.
 
 ## Honestidade
 
-Empresas, pessoas, clientes, números e documentos são inventados para demonstração. Nenhuma
-empresa real aparece como cliente; sistemas aparecem com nomes genéricos ("ERP (ex.: TOTVS)") sem
-afirmar parceria. Indicadores da demo não são resultados de projeto.
+Empresas, pessoas, números e documentos são inventados e rotulados como fictícios. Nenhuma empresa real
+aparece como cliente; sistemas aparecem como "ERP (ex.: TOTVS)" sem afirmar parceria. O que o visitante
+registra fica só na demo dele e some quando a demo é apagada.
