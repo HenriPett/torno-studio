@@ -416,7 +416,11 @@ function similaridade(a, b) {
 const temId = (s) => /\b[a-z]{1,5}-\d[\w-]*/i.test(s);
 
 export function sugeridasLigadas(ctx) {
-  return (ctx?.data?.perguntas_sugeridas ?? []).filter((p) => ligado(ctx, p.modulo));
+  // A resposta pronta cita no texto os registros das fontes: se alguma fonte for de módulo
+  // desligado, a pergunta sai da lista (senão o texto vazaria dados do módulo desligado).
+  return (ctx?.data?.perguntas_sugeridas ?? []).filter(
+    (p) => ligado(ctx, p.modulo) && (p.fontes ?? []).every((r) => refOk(ctx, r))
+  );
 }
 
 export function sugestoes(ctx, modulo, n = 3) {
@@ -597,14 +601,27 @@ function intencoes(ctx, pergunta) {
 
 /** → {texto, fontes, modo: "local"} */
 export function responder(ctx, pergunta, { modulo, perfil } = {}) {
-  const pronto = (texto, fontes) => ({ texto, fontes: filtraRefs(ctx, fontes), modo: "local" });
+  const areas = perfilAreas(ctx, perfil);
+  // "Ver como": mesmas regras da busca (corpus) — documentos pelo acesso, saberes/NCs/regras pela área.
+  const AREA_REF = { saber: "operadores", nc: "qualidade", regra: "comercial" };
+  const perfilOk = (ref) => {
+    if (!areas) return true;
+    const tipo = String(ref).split(":")[0];
+    if (tipo === "doc") {
+      const doc = by(ctx.data?.documentos, "id", String(ref).slice(4).split("#")[0]);
+      return !!doc && docVisivel(ctx, doc, areas);
+    }
+    return !AREA_REF[tipo] || areas.includes(AREA_REF[tipo]);
+  };
+  const pronto = (texto, fontes) => ({ texto, fontes: filtraRefs(ctx, (fontes ?? []).filter(perfilOk)), modo: "local" });
   const p = String(pergunta ?? "").trim();
   if (!p || !ctx?.data) return pronto("Escreva uma pergunta sobre a operação desta demo.", []);
-  const areas = perfilAreas(ctx, perfil);
 
-  // (a) pergunta sugerida (igual ou parecida)
+  // (a) pergunta sugerida (igual ou parecida); a resposta pronta só vale se o perfil vê todas as fontes
   const s = casaSugerida(ctx, p, modulo);
-  if (s) return pronto(s.resposta, s.fontes ?? []);
+  let negadaPorPerfil = false;
+  if (s && (s.fontes ?? []).every(perfilOk)) return pronto(s.resposta, s.fontes ?? []);
+  if (s) negadaPorPerfil = true;
 
   // (b) ID de registro
   const regs = idsNaPergunta(ctx, p, areas);
@@ -622,6 +639,10 @@ export function responder(ctx, pergunta, { modulo, perfil } = {}) {
   }
 
   // (e) nada
+  if (negadaPorPerfil) {
+    const nome = (ctx.data.perfis_acesso ?? []).find((x) => x.id === (typeof perfil === "object" ? perfil?.id : perfil))?.nome;
+    return pronto(`Essa resposta usa documentos ou registros que o perfil ${nome ? `“${nome}” ` : ""}não pode consultar.`, []);
+  }
   const sug = sugestoes(ctx, modulo, 3);
   return pronto(
     "Não encontrei isso nos dados desta demo." + (sug.length ? " Experimente perguntar:\n" + sug.map((x) => `- ${x}`).join("\n") : ""),

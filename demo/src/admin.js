@@ -16,10 +16,10 @@ const SECTOR_LABEL = {
 
 // empresa fictícia de cada setor (preenchida do pacote quando carregado; aqui o fallback)
 const SECTOR_EMPRESA = {
-  textil: 'Malharia Vale do Itajuí S.A.', alimentos: 'Alimentos Serra Boa Ltda.',
-  plasticos: 'Embalagens Polimax S.A.', maquinas: 'Mecânica Pesada Aurora S.A.',
-  metalmecanica: 'Metalúrgica Campo Largo Ltda.', moveis: 'Móveis Rio Bonito S.A.',
-  eletroeletronicos: 'Eletro Motores Paraná Ltda.', autopecas: 'Autopeças Guarani S.A.',
+  textil: 'Malharia Serra do Itajuí S.A.', alimentos: 'Lácteos Tribeira S.A.',
+  plasticos: 'Morretiba Embalagens Plásticas S.A.', maquinas: 'Cambucá Equipamentos Industriais S.A.',
+  metalmecanica: 'Metalúrgica Alto Piraí S.A.', moveis: 'Indústria Moveleira Trilha Alta S.A.',
+  eletroeletronicos: 'Correntia Motores e Painéis S.A.', autopecas: 'Altaponte Componentes Automotivos S.A.',
 };
 
 export function render(root, ctx) {

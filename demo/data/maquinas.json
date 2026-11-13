@@ -1014,10 +1014,10 @@
       "sku": "MH-6000",
       "quantidade": 1,
       "linha": "L-COR",
-      "inicio": "2026-11-10",
+      "inicio": "2026-11-24",
       "prazo": "2027-01-29",
       "status": "planejada",
-      "progresso": 5,
+      "progresso": 0,
       "pedido": "PV-4124",
       "motivo_atraso": null,
       "historico": [
@@ -1601,7 +1601,7 @@
       "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
       "limite_credito": 1000000,
       "tabela_preco": "Tabela Cooperativas",
-      "ultimo_pedido": "2026-08-28"
+      "ultimo_pedido": "2026-09-22"
     },
     {
       "id": "CLI-08",

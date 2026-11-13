@@ -105,6 +105,15 @@ async function boot() {
   assistant = await loadAssistant();
   setState({ mode: assistant.modo ? assistant.modo() : 'local' });
 
+  // o assistente detecta a IA de forma assíncrona (e pode perdê-la): mantém o selo do topo em dia
+  if (typeof assistant.onModeChange === 'function') {
+    assistant.onModeChange((modo) => {
+      if (getState().mode === modo) return;
+      setState({ mode: modo });
+      if (el.modeTag) updateModeTag();
+    });
+  }
+
   // 4. setor efetivo + dados (sem renderizar a rota aqui: onHashChange faz o primeiro render,
   //    para não disparar dois renderRoute em corrida no boot)
   resolveSector();
@@ -268,7 +277,12 @@ function renderShell() {
     onChange: (id) => changeSector(id),
   }));
   el.empresaTag.textContent = ctx.empresa;
-  const ia = (s.mode || 'local') === 'ia';
+  updateModeTag();
+}
+
+function updateModeTag() {
+  if (!el.modeTag) return;
+  const ia = (getState().mode || 'local') === 'ia';
   el.modeTag.replaceChildren(
     icon(ia ? 'sparkles' : 'cpu', { size: 14 }),
     h('span', null, ia ? 'IA ativa' : 'Roteiro local'));
