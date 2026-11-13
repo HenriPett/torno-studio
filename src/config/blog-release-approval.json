@@ -2082,6 +2082,32 @@
           "sha256": "ad4bdc4c4618a216e06361e97d5e4dd7d0acced56611f5fb2f48bbf9231f611d"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261113-manutencao-preventiva-sistema",
+      "intentId": "buyer-preventive-maintenance-plan-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/manutencao-preventiva-sistema-mtbf-mttr-aceite/",
+      "contentRevision": "70a3c1a6083a6f8e3e24a8f7729a7bebf9934de61958c231233ded61318c809d",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-13T21:36:32Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-13T21:35:46Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-13-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): NO-GO às 2026-11-13T21:25:21Z por dois bloqueios (novembro contado como 672 h em vez de 720 h na Regra B; texto que sugeria aprovação interna para passar da periodicidade do fabricante da NR-12 12.11.1), corrigidos pelo autor junto com as sugestões (dias de produção com feriados de 02/11 e 20/11, datas 09/12 e 20/12→18/12, leitura do painel, backlog como convenção, termo do item 12.11.2.2); GO na re-revisão às 2026-11-13T21:35:46Z, aritmética refeita, SVGs re-renderizados e hashes conferidos; diff final sujeito a revisão final independente. Fontes abertas em 13/11/2026: IEC Electropedia (IEC 60050-192: 192-03-01, 192-05-03, 192-05-04, 192-05-13, 192-06-05, 192-06-07, 192-07-06, 192-07-13, 192-07-19, 192-07-23); ISO 14224:2016 (página do catálogo ISO); EN 13306:2017 (página da EVS); ABNT NBR 5462 (páginas de catálogo, situação ambígua); NR-12 (texto atualizado do MTE, itens 12.11.1 a 12.11.5); Lei nº 14.759/2023 (Câmara dos Deputados, art. 1º); IBM Maximo 7.6.2 (PM frequency schedules); SAP Help Portal (fatores de deslocamento). Não lidos: textos pagos da IEC 60050-192 (figuras de tempos), ISO 14224, EN 13306 e NBR 5462; página de parâmetros de programação da ajuda SAP (bloqueada por robots). Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-preventiva-horimetro-calendario.svg",
+          "sha256": "2e1c63ab128758f21c4daa334db1f276a461a3c7825d7d1d26255374bd751f01"
+        },
+        {
+          "path": "torno-preventiva-linha-tempo-mtbf.svg",
+          "sha256": "3ee2717989503dcad87577e5d802d027e1836bccf203ed8a64ba3970338dff1d"
+        }
+      ]
     }
   ]
 }
