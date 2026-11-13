@@ -256,7 +256,7 @@
 .int-tom-danger { border-color: var(--color-danger-subtle); }
 
 /* Diagrama */
-.int-diagrama-wrap { overflow-x: auto; }
+.int-diagrama-wrap { overflow-x: auto; contain: content; }
 .int-diagrama {
   display: grid; gap: var(--space-3); align-items: center;
   grid-template-columns: 1fr; min-width: 0;
