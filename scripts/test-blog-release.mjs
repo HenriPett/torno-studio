@@ -81,6 +81,7 @@ const expected = [
   ['torno-artigo-pt-20261112-devolucao-troca', '/blog/devolucao-troca-mercadoria-sistema-aceite/', '50b04c228eb83706480e9543e1d714e8e89d5ba0cf935480d66b43c39a9949a0', ['torno-devolucao-bancada-conferencia.svg', 'torno-devolucao-recibo-canhotos.svg']],
   ['torno-artigo-pt-20261112-inventario-contagem', '/blog/inventario-contagem-estoque-sistema-aceite/', '8a1b2a16c399d4a9306e516b34a974c100f45b4dafe39150fab88bbbff70908f', ['torno-inventario-estante-relogio.svg', 'torno-inventario-ficha-cega.svg']],
   ['torno-artigo-pt-20261113-assistente-ia-documentos', '/blog/assistente-ia-documentos-internos-testar-respostas/', '4182729c32fb08e9363882de5a7d364881711be153264b98e72c867cb1400d67', ['torno-assistente-arquivo-vigente.svg', 'torno-assistente-boletim-prova.svg']],
+  ['torno-artigo-pt-20261113-oee-sistema', '/blog/oee-sistema-calculo-definicoes-aceite/', '8ed5607fb42df4393215b6e48cc75a480375428609c8d766001d982b341f22bd', ['torno-oee-manometro-tres-regras.svg', 'torno-oee-ampulheta-turno.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

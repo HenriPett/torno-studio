@@ -2056,6 +2056,32 @@
           "sha256": "cd4d37aba5b66d0be5d00b45872df202e1921df0a42ac0298d1c0f4d920de8b5"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261113-oee-sistema",
+      "intentId": "buyer-oee-calculation-definitions-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/oee-sistema-calculo-definicoes-aceite/",
+      "contentRevision": "8ed5607fb42df4393215b6e48cc75a480375428609c8d766001d982b341f22bd",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-13T15:28:43Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-13T15:23:19Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-13-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator) GO às 2026-11-13T15:23:19Z, sem bloqueios; aritmética do exemplo recalculada (regras A/B/C, microparadas, dois produtos, soma de turnos) e conferida com as figuras. Sugestões aplicadas pelo autor: Anexo B da ISO 22400-2 mencionado pelo sumário sem leitura do texto, atribuição a Muchiri e Pintelon via artigo de 2020, minutos de microparadas, legenda da ampulheta, cores do manômetro, link para dados de máquina; correções conferidas pelo integrador; diff final sujeito a revisão final independente. Fontes abertas em 13/11/2026: ISO 22400-2:2014 e ISO/DIS 22400-2 (páginas do catálogo ISO); sumário da norma publicado pelo DIN; NIST (Kang et al., IJPR 2016, resumo); Bengtsson, Andersson e Ekström, SPS2020 (IOS Press); Muchiri e Pintelon, IJPR 2008 (metadados e resumo); Tambare et al., Sensors 2022; ISA-95 (ISA). Não abriram: texto da ISO 22400-2 (pago), livro de Nakajima, HAL hal-00512968. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-oee-ampulheta-turno.svg",
+          "sha256": "a97117ac67f63aab94fa733a151d29f7db460e7c2f61f396d2c989dd1dfc7252"
+        },
+        {
+          "path": "torno-oee-manometro-tres-regras.svg",
+          "sha256": "ad4bdc4c4618a216e06361e97d5e4dd7d0acced56611f5fb2f48bbf9231f611d"
+        }
+      ]
     }
   ]
 }
