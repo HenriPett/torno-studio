@@ -1,0 +1,3475 @@
+{
+  "id": "metalmecanica",
+  "setor": "Metalmecânica",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Metalúrgica Alto Piraí S.A.",
+    "cidade": "Joinville",
+    "uf": "SC",
+    "funcionarios": 1650,
+    "descricao": "Usina, estampa, solda, forja e trata termicamente componentes sob desenho do cliente para fabricantes de implementos agrícolas, compressores, redutores, carrocerias e máquinas pesadas."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "peça",
+    "produtos": "peças",
+    "cliente": "cliente",
+    "clientes": "clientes",
+    "representante": "vendedor técnico",
+    "representantes": "vendedores técnicos",
+    "maquina": "máquina",
+    "maquinas": "máquinas",
+    "linha": "célula",
+    "linhas": "células",
+    "unidade": "peças",
+    "lote": "lote"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP e programação"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e metrologia"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção"
+    },
+    {
+      "id": "comercial",
+      "nome": "Orçamentação e vendas técnicas"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing e catálogo de capacidades"
+    },
+    {
+      "id": "operadores",
+      "nome": "Usinagem, estamparia, solda e forjaria"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Planta Joinville (usinagem e tratamento térmico)",
+      "cidade": "Joinville"
+    },
+    {
+      "id": "P2",
+      "nome": "Planta Guaramirim (estamparia e solda)",
+      "cidade": "Guaramirim"
+    },
+    {
+      "id": "P3",
+      "nome": "Planta São Bento do Sul (forjaria)",
+      "cidade": "São Bento do Sul"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-TOR",
+      "nome": "Tornearia CNC e retífica",
+      "planta": "P1",
+      "tipo": "usinagem"
+    },
+    {
+      "id": "L-CUV",
+      "nome": "Centros de usinagem",
+      "planta": "P1",
+      "tipo": "usinagem"
+    },
+    {
+      "id": "L-TT",
+      "nome": "Tratamento térmico",
+      "planta": "P1",
+      "tipo": "tratamento térmico"
+    },
+    {
+      "id": "L-EST",
+      "nome": "Estamparia",
+      "planta": "P2",
+      "tipo": "estampagem"
+    },
+    {
+      "id": "L-SOL",
+      "nome": "Solda e caldeiraria",
+      "planta": "P2",
+      "tipo": "soldagem"
+    },
+    {
+      "id": "L-FOR",
+      "nome": "Forjaria a quente",
+      "planta": "P3",
+      "tipo": "forjamento"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "TCN-03",
+      "nome": "Torno CNC 3 (Ø 500 mm)",
+      "linha": "L-TOR",
+      "tipo": "torno CNC",
+      "fabricante": "Fabricante A",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 34210,
+      "mtbf_h": 610,
+      "proxima_preventiva": "2026-12-03",
+      "manual": "DOC-MAN-TOR"
+    },
+    {
+      "id": "TCN-07",
+      "nome": "Torno CNC 7 com eixo C",
+      "linha": "L-TOR",
+      "tipo": "torno CNC",
+      "fabricante": "Fabricante A",
+      "ano": 2020,
+      "status": "operando",
+      "horimetro": 19870,
+      "mtbf_h": 720,
+      "proxima_preventiva": "2026-11-28",
+      "manual": "DOC-MAN-TOR"
+    },
+    {
+      "id": "RET-01",
+      "nome": "Retífica cilíndrica CNC",
+      "linha": "L-TOR",
+      "tipo": "retífica",
+      "fabricante": "Fabricante D",
+      "ano": 2010,
+      "status": "operando",
+      "horimetro": 47650,
+      "mtbf_h": 540,
+      "proxima_preventiva": "2026-11-19",
+      "manual": "DOC-MAN-TOR"
+    },
+    {
+      "id": "CUV-04",
+      "nome": "Centro de usinagem vertical 4",
+      "linha": "L-CUV",
+      "tipo": "centro de usinagem vertical",
+      "fabricante": "Fabricante B",
+      "ano": 2014,
+      "status": "alerta",
+      "horimetro": 41380,
+      "mtbf_h": 260,
+      "proxima_preventiva": "2026-11-22",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "CUV-06",
+      "nome": "Centro de usinagem vertical 6",
+      "linha": "L-CUV",
+      "tipo": "centro de usinagem vertical",
+      "fabricante": "Fabricante B",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 22940,
+      "mtbf_h": 680,
+      "proxima_preventiva": "2026-12-05",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "CUH-02",
+      "nome": "Centro de usinagem horizontal 2",
+      "linha": "L-CUV",
+      "tipo": "centro de usinagem horizontal",
+      "fabricante": "Fabricante C",
+      "ano": 2012,
+      "status": "manutencao",
+      "horimetro": 50120,
+      "mtbf_h": 330,
+      "proxima_preventiva": "2026-11-10",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "FOR-01",
+      "nome": "Forno de têmpera com atmosfera controlada",
+      "linha": "L-TT",
+      "tipo": "forno de têmpera",
+      "fabricante": "Fabricante H",
+      "ano": 2009,
+      "status": "parada",
+      "horimetro": 88400,
+      "mtbf_h": 410,
+      "proxima_preventiva": "2026-12-12",
+      "manual": "DOC-MAN-TT"
+    },
+    {
+      "id": "IND-01",
+      "nome": "Têmpera por indução",
+      "linha": "L-TT",
+      "tipo": "indução",
+      "fabricante": "Fabricante I",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 26730,
+      "mtbf_h": 900,
+      "proxima_preventiva": "2026-12-09",
+      "manual": "DOC-MAN-TT"
+    },
+    {
+      "id": "PRE-400",
+      "nome": "Prensa excêntrica 400 t",
+      "linha": "L-EST",
+      "tipo": "prensa excêntrica",
+      "fabricante": "Fabricante E",
+      "ano": 2005,
+      "status": "alerta",
+      "horimetro": 71260,
+      "mtbf_h": 230,
+      "proxima_preventiva": "2026-11-15",
+      "manual": "DOC-MAN-PRE"
+    },
+    {
+      "id": "PRE-250",
+      "nome": "Prensa servo 250 t",
+      "linha": "L-EST",
+      "tipo": "prensa servo",
+      "fabricante": "Fabricante E",
+      "ano": 2022,
+      "status": "operando",
+      "horimetro": 9840,
+      "mtbf_h": 950,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-PRE"
+    },
+    {
+      "id": "PRE-160",
+      "nome": "Prensa progressiva 160 t",
+      "linha": "L-EST",
+      "tipo": "prensa excêntrica",
+      "fabricante": "Fabricante K",
+      "ano": 2013,
+      "status": "operando",
+      "horimetro": 43110,
+      "mtbf_h": 520,
+      "proxima_preventiva": "2026-11-26",
+      "manual": "DOC-MAN-PRE"
+    },
+    {
+      "id": "ROB-03",
+      "nome": "Célula robotizada de solda 3",
+      "linha": "L-SOL",
+      "tipo": "robô de solda MAG",
+      "fabricante": "Fabricante F",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 24560,
+      "mtbf_h": 470,
+      "proxima_preventiva": "2026-11-30",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "DOB-01",
+      "nome": "Dobradeira CNC 220 t",
+      "linha": "L-SOL",
+      "tipo": "dobradeira",
+      "fabricante": "Fabricante G",
+      "ano": 2015,
+      "status": "operando",
+      "horimetro": 30780,
+      "mtbf_h": 640,
+      "proxima_preventiva": "2026-12-08",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "MAR-01",
+      "nome": "Prensa de forjar 1.600 t",
+      "linha": "L-FOR",
+      "tipo": "prensa de forjar",
+      "fabricante": "Fabricante J",
+      "ano": 2008,
+      "status": "operando",
+      "horimetro": 58920,
+      "mtbf_h": 380,
+      "proxima_preventiva": "2026-12-02",
+      "manual": "DOC-MAN-SOL"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "FL-1045-320",
+      "nome": "Flange Ø 320 × 45 mm em SAE 1045",
+      "familia": "Usinados",
+      "unidade": "peças",
+      "preco": 214.5,
+      "prazo_dias": 20,
+      "estoque": 260,
+      "estoque_minimo": 150,
+      "descricao_comercial": "Flange torneada em SAE 1045 laminado, com furação de 8 furos e faceamento com batimento axial de 0,05 mm. Feita sob desenho para redutores e bombas.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 1045 laminado",
+          "Dimensões": "Ø 320 × 45 mm",
+          "Furação": "8 × Ø 18 em PCD 280",
+          "Acabamento": "Ra 1,6 µm nas faces"
+        },
+        "roteiro": [
+          "Corte de barra",
+          "Torneamento CNC (TCN-03)",
+          "Furação (CUV-06)",
+          "Inspeção dimensional",
+          "Proteção anticorrosiva",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Batimento axial da face",
+            "nominal": "≤ 0,05",
+            "tolerancia": "—",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Diâmetro do encaixe",
+            "nominal": "200",
+            "tolerancia": "H7 (+0,046 / 0)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Posição dos furos",
+            "nominal": "0",
+            "tolerancia": "±0,1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "E-3307",
+      "nome": "Eixo E-3307 em SAE 4140 temperado e retificado (Ø 85 × 640 mm)",
+      "familia": "Usinados com tratamento térmico",
+      "unidade": "peças",
+      "preco": 486,
+      "prazo_dias": 25,
+      "estoque": 30,
+      "estoque_minimo": 120,
+      "descricao_comercial": "Eixo intermediário de redutor em SAE 4140, temperado e revenido, com assentos de rolamento retificados em h6. Fornecido em regime de kanban com estoque mínimo contratado.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 4140",
+          "Dimensões": "Ø 85 × 640 mm",
+          "Dureza": "50 a 54 HRC",
+          "Acabamento": "Ra 0,4 µm nos assentos"
+        },
+        "roteiro": [
+          "Corte de barra",
+          "Torneamento CNC (TCN-07)",
+          "Fresamento do rasgo (CUV-06)",
+          "Têmpera e revenimento (FOR-01)",
+          "Retífica (RET-01)",
+          "Inspeção dimensional e dureza",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do assento de rolamento",
+            "nominal": "85",
+            "tolerancia": "h6 (0 / −0,022)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Dureza",
+            "nominal": "52",
+            "tolerancia": "±2",
+            "unidade": "HRC"
+          },
+          {
+            "caracteristica": "Batimento radial nos assentos",
+            "nominal": "≤ 0,02",
+            "tolerancia": "—",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CB-2210",
+      "nome": "Cubo de roda forjado de 8 furos (SAE 1045)",
+      "familia": "Forjados",
+      "unidade": "peças",
+      "preco": 312,
+      "prazo_dias": 30,
+      "estoque": 480,
+      "estoque_minimo": 300,
+      "descricao_comercial": "Cubo de roda forjado a quente e usinado, para eixos de semirreboque e implemento. O forjamento mantém a fibra contínua e dispensa fundido.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 1045 forjado",
+          "Massa": "18,4 kg",
+          "Furação": "8 × M22 × 1,5",
+          "Normalização": "sim"
+        },
+        "roteiro": [
+          "Corte de tarugo",
+          "Aquecimento por indução",
+          "Forjamento (MAR-01)",
+          "Rebarbação",
+          "Normalização",
+          "Usinagem (TCN-03 / CUV-06)",
+          "Inspeção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro da pista do rolamento",
+            "nominal": "150",
+            "tolerancia": "P6",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Dureza após normalização",
+            "nominal": "170 a 210",
+            "tolerancia": "—",
+            "unidade": "HB"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SP-4471",
+      "nome": "Suporte estampado do feixe de molas (LNE 380, 6,3 mm)",
+      "familia": "Estampados",
+      "unidade": "peças",
+      "preco": 7.4,
+      "prazo_dias": 15,
+      "estoque": 1800,
+      "estoque_minimo": 4000,
+      "descricao_comercial": "Suporte estampado em estampo progressivo, em aço LNE 380 de 6,3 mm, para o chassi de ônibus. Item seriado com PPAP aprovado e plano de controle.",
+      "ficha": {
+        "atributos": {
+          "Material": "LNE 380, 6,3 mm",
+          "Processo": "estampo progressivo de 5 estágios",
+          "Cadência nominal": "30 golpes/min",
+          "PPAP": "aprovado em 2025"
+        },
+        "roteiro": [
+          "Bobina",
+          "Estampagem (PRE-400)",
+          "Rebarbação",
+          "Inspeção (passa/não passa)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Rebarba na borda de corte",
+            "nominal": "≤ 0,2",
+            "tolerancia": "—",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Furo de fixação",
+            "nominal": "17",
+            "tolerancia": "+0,2 / 0",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Posição do furo",
+            "nominal": "0",
+            "tolerancia": "±0,15",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TR-7730",
+      "nome": "Travessa estampada do chassi (4,75 mm)",
+      "familia": "Estampados",
+      "unidade": "peças",
+      "preco": 18.9,
+      "prazo_dias": 15,
+      "estoque": 6200,
+      "estoque_minimo": 3000,
+      "descricao_comercial": "Travessa estampada em prensa servo para chassi de ônibus, com repuxo raso e furação no próprio estampo.",
+      "ficha": {
+        "atributos": {
+          "Material": "LNE 380, 4,75 mm",
+          "Processo": "prensa servo 250 t",
+          "Comprimento": "780 mm"
+        },
+        "roteiro": [
+          "Bobina",
+          "Estampagem (PRE-250)",
+          "Inspeção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Planicidade",
+            "nominal": "≤ 1,0",
+            "tolerancia": "—",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Distância entre furos",
+            "nominal": "640",
+            "tolerancia": "±0,3",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "BR-1180",
+      "nome": "Braço de suspensão soldado (S355, 12,5 mm)",
+      "familia": "Conjuntos soldados",
+      "unidade": "peças",
+      "preco": 645,
+      "prazo_dias": 30,
+      "estoque": 60,
+      "estoque_minimo": 40,
+      "descricao_comercial": "Braço de suspensão em chapa S355 de 12,5 mm, cortado, dobrado e soldado em célula robotizada com gabarito dedicado.",
+      "ficha": {
+        "atributos": {
+          "Material": "chapa S355 de 12,5 mm",
+          "Massa": "38 kg",
+          "Solda": "MAG robotizada, EPS-022"
+        },
+        "roteiro": [
+          "Corte a plasma",
+          "Dobra (DOB-01)",
+          "Solda (ROB-03)",
+          "Usinagem das buchas (CUV-04)",
+          "Pintura (terceiro)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Distância entre centros das buchas",
+            "nominal": "920",
+            "tolerancia": "±0,5",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Empeno",
+            "nominal": "≤ 1,5",
+            "tolerancia": "—",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PZ-8620",
+      "nome": "Pinhão Z14 em SAE 8620 cementado e temperado",
+      "familia": "Usinados com tratamento térmico",
+      "unidade": "peças",
+      "preco": 238,
+      "prazo_dias": 35,
+      "estoque": 310,
+      "estoque_minimo": 200,
+      "descricao_comercial": "Pinhão de 14 dentes em SAE 8620, cementado e temperado, com dentes fresados e retificados para redutores industriais.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 8620",
+          "Dentes": "14",
+          "Módulo": "5",
+          "Camada cementada": "0,8 a 1,2 mm"
+        },
+        "roteiro": [
+          "Torneamento (TCN-07)",
+          "Fresamento dos dentes (terceiro)",
+          "Cementação e têmpera (FOR-01)",
+          "Retífica (RET-01)",
+          "Inspeção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Dureza superficial",
+            "nominal": "60",
+            "tolerancia": "±2",
+            "unidade": "HRC"
+          },
+          {
+            "caracteristica": "Camada efetiva",
+            "nominal": "1,0",
+            "tolerancia": "±0,2",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CR-0912",
+      "nome": "Carcaça de compressor usinada (ferro fundido nodular)",
+      "familia": "Usinados",
+      "unidade": "peças",
+      "preco": 398,
+      "prazo_dias": 28,
+      "estoque": 90,
+      "estoque_minimo": 60,
+      "descricao_comercial": "Carcaça em ferro fundido nodular fornecida pelo cliente via fundição homologada e usinada em centro de usinagem com dispositivo dedicado.",
+      "ficha": {
+        "atributos": {
+          "Material": "ferro fundido nodular",
+          "Processo": "fresamento e mandrilhamento (CUV-04)",
+          "Teste de estanqueidade": "6 bar por 60 s"
+        },
+        "roteiro": [
+          "Recebimento do fundido",
+          "Fresamento das faces (CUV-04)",
+          "Mandrilhamento dos alojamentos (CUV-04)",
+          "Teste de estanqueidade",
+          "Inspeção na CMM",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do alojamento do rolamento",
+            "nominal": "110",
+            "tolerancia": "H7 (+0,035 / 0)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Planicidade da face de vedação",
+            "nominal": "≤ 0,03",
+            "tolerancia": "—",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "BU-0450",
+      "nome": "Bucha temperada por indução Ø 50 × 80 mm",
+      "familia": "Usinados com tratamento térmico",
+      "unidade": "peças",
+      "preco": 42.8,
+      "prazo_dias": 18,
+      "estoque": 2400,
+      "estoque_minimo": 1500,
+      "descricao_comercial": "Bucha em SAE 1045 temperada por indução no diâmetro interno, para articulações de cilindros hidráulicos e implementos.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 1045",
+          "Dimensões": "Ø 50 × 80 mm",
+          "Dureza da pista": "55 a 60 HRC"
+        },
+        "roteiro": [
+          "Torneamento (TCN-03)",
+          "Têmpera por indução (IND-01)",
+          "Retífica interna (RET-01)",
+          "Inspeção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro interno",
+            "nominal": "40",
+            "tolerancia": "H8 (+0,039 / 0)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Profundidade de têmpera",
+            "nominal": "1,5",
+            "tolerancia": "±0,3",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "GF-0330",
+      "nome": "Garfo forjado de articulação (SAE 4140)",
+      "familia": "Forjados",
+      "unidade": "peças",
+      "preco": 156,
+      "prazo_dias": 30,
+      "estoque": 380,
+      "estoque_minimo": 250,
+      "descricao_comercial": "Garfo de articulação forjado em SAE 4140, temperado e revenido, para cardãs de plantadeiras e implementos.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 4140 forjado",
+          "Massa": "4,2 kg",
+          "Dureza": "28 a 34 HRC"
+        },
+        "roteiro": [
+          "Corte de tarugo",
+          "Forjamento (MAR-01)",
+          "Têmpera e revenimento (FOR-01)",
+          "Usinagem (CUV-06)",
+          "Inspeção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Distância entre olhais",
+            "nominal": "96",
+            "tolerancia": "±0,1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Dureza",
+            "nominal": "31",
+            "tolerancia": "±3",
+            "unidade": "HRC"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PN-2041",
+      "nome": "Pino de articulação Ø 40 temperado por indução e cromado",
+      "familia": "Usinados",
+      "unidade": "peças",
+      "preco": 89.5,
+      "prazo_dias": 22,
+      "estoque": 950,
+      "estoque_minimo": 600,
+      "descricao_comercial": "Pino de articulação em SAE 1045, temperado por indução e cromado duro, para implementos agrícolas.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 1045",
+          "Dimensões": "Ø 40 × 210 mm",
+          "Cromo": "20 µm (terceiro)"
+        },
+        "roteiro": [
+          "Torneamento (TCN-07)",
+          "Têmpera por indução (IND-01)",
+          "Retífica (RET-01)",
+          "Cromo duro (terceiro)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro",
+            "nominal": "40",
+            "tolerancia": "f7 (−0,025 / −0,050)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Camada de cromo",
+            "nominal": "20",
+            "tolerancia": "±5",
+            "unidade": "µm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CS-5520",
+      "nome": "Conjunto soldado da base de cilindro hidráulico",
+      "familia": "Conjuntos soldados",
+      "unidade": "peças",
+      "preco": 128,
+      "prazo_dias": 25,
+      "estoque": 140,
+      "estoque_minimo": 100,
+      "descricao_comercial": "Base de cilindro hidráulico com olhal soldado e furo usinado após a solda, com teste de estanqueidade.",
+      "ficha": {
+        "atributos": {
+          "Material": "SAE 1020 e tubo ST52",
+          "Solda": "MAG robotizada",
+          "Teste": "estanqueidade a 250 bar"
+        },
+        "roteiro": [
+          "Corte",
+          "Solda (ROB-03)",
+          "Usinagem do olhal (TCN-03)",
+          "Teste de estanqueidade",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do olhal",
+            "nominal": "30",
+            "tolerancia": "H9 (+0,052 / 0)",
+            "unidade": "mm"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-60412",
+      "sku": "E-3307",
+      "quantidade": 180,
+      "linha": "L-TOR",
+      "inicio": "2026-08-18",
+      "prazo": "2026-09-12",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-7690",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-09-04",
+          "evento": "Retífica apontou 1 h 40 min por peça, 25 min acima do padrão, por sobremetal após a têmpera"
+        },
+        {
+          "data": "2026-09-11",
+          "evento": "Lote liberado com certificado de dureza (51 a 53 HRC)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60466",
+      "sku": "FL-1045-320",
+      "quantidade": 250,
+      "linha": "L-TOR",
+      "inicio": "2026-10-13",
+      "prazo": "2026-10-30",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-7702",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-10-29",
+          "evento": "Torneamento apontado de 22 min por peça (padrão 18 min); lote expedido"
+        }
+      ]
+    },
+    {
+      "id": "OP-60479",
+      "sku": "SP-4471",
+      "quantidade": 10000,
+      "linha": "L-EST",
+      "inicio": "2026-10-14",
+      "prazo": "2026-10-28",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-7712",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-10-27",
+          "evento": "Lote expedido; punção afiado com 52.000 golpes"
+        },
+        {
+          "data": "2026-11-05",
+          "evento": "Cliente reclamou de rebarba (NC-2026-211)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60471",
+      "sku": "E-3307",
+      "quantidade": 240,
+      "linha": "L-TT",
+      "inicio": "2026-10-20",
+      "prazo": "2026-11-10",
+      "status": "atrasada",
+      "progresso": 65,
+      "pedido": "PV-7718",
+      "motivo_atraso": "Forno FOR-01 parado desde 06/11 (resistência da zona 3 e termopar). Têmpera passada para terceiro qualificado; a 1ª carga de 60 eixos saiu com 47 HRC e foi retemperada (NC-2026-218). Nova previsão de término: 21/11.",
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "FOR-01 para com falha na zona 3 (OS-6608)"
+        },
+        {
+          "data": "2026-11-07",
+          "evento": "Redutores Itapocu aprova por escrito a têmpera em terceiro"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "1ª carga do terceiro com 47 HRC (especificado 50 a 54); retêmpera"
+        }
+      ]
+    },
+    {
+      "id": "OP-60488",
+      "sku": "SP-4471",
+      "quantidade": 12000,
+      "linha": "L-EST",
+      "inicio": "2026-11-03",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 55,
+      "pedido": "PV-7731",
+      "motivo_atraso": "PRE-400 com embreagem patinando: a cadência caiu de 30 para 18 golpes/min (OS-6612). 6.600 de 12.000 suportes feitos; nova previsão de término em 19/11.",
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "Cadência reduzida para 18 golpes/min por patinação da embreagem"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "OS-6612 aberta: lonas gastas e ângulo de parada de 11°"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "6.600 suportes acumulados; 310 refugados no 1º turno por rebarba"
+        }
+      ]
+    },
+    {
+      "id": "OP-60495",
+      "sku": "CR-0912",
+      "quantidade": 180,
+      "linha": "L-CUV",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 48,
+      "pedido": "PV-7740",
+      "motivo_atraso": "38 carcaças fundidas reprovadas por porosidade no teste de estanqueidade (NC-2026-214); reposição da fundição prevista para 17/11. O CUV-04 opera com rotação limitada.",
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "38 carcaças vazaram no teste de 6 bar"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "CUV-04 com eixo-árvore a 58 °C; rotação limitada a 6.000 rpm"
+        }
+      ]
+    },
+    {
+      "id": "OP-60502",
+      "sku": "BR-1180",
+      "quantidade": 400,
+      "linha": "L-SOL",
+      "inicio": "2026-10-29",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 30,
+      "pedido": "PV-7744",
+      "motivo_atraso": "Falta de chapa S355 de 12,5 mm: o fornecedor de aço atrasou a entrega de 18 t para 16/11. 120 braços feitos com o saldo de estoque.",
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "Fornecedor de aço adia entrega da chapa S355 12,5 mm para 16/11"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Saldo de chapa acabou com 120 braços; célula remanejada"
+        }
+      ]
+    },
+    {
+      "id": "OP-60510",
+      "sku": "FL-1045-320",
+      "quantidade": 300,
+      "linha": "L-TOR",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 70,
+      "pedido": "PV-7748",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Setup no TCN-03 levou 65 min (padrão 35); castanhas moles usinadas conforme LA-031"
+        }
+      ]
+    },
+    {
+      "id": "OP-60514",
+      "sku": "CB-2210",
+      "quantidade": 1200,
+      "linha": "L-FOR",
+      "inicio": "2026-11-02",
+      "prazo": "2026-11-27",
+      "status": "em_producao",
+      "progresso": 45,
+      "pedido": "PV-7735",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-13",
+          "evento": "520 cubos forjados no 1º turno"
+        }
+      ]
+    },
+    {
+      "id": "OP-60519",
+      "sku": "PZ-8620",
+      "quantidade": 600,
+      "linha": "L-TOR",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-26",
+      "status": "em_producao",
+      "progresso": 40,
+      "pedido": "PV-7751",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Torneamento concluído; cementação aguarda a volta do FOR-01 em 18/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-60523",
+      "sku": "TR-7730",
+      "quantidade": 8000,
+      "linha": "L-EST",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 60,
+      "pedido": "PV-7733",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "4.800 travessas estampadas na PRE-250"
+        }
+      ]
+    },
+    {
+      "id": "OP-60527",
+      "sku": "BU-0450",
+      "quantidade": 3000,
+      "linha": "L-TT",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-24",
+      "status": "em_producao",
+      "progresso": 35,
+      "pedido": "PV-7753",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "1.150 buchas temperadas por indução no 1º turno"
+        }
+      ]
+    },
+    {
+      "id": "OP-60531",
+      "sku": "GF-0330",
+      "quantidade": 500,
+      "linha": "L-FOR",
+      "inicio": "2026-11-17",
+      "prazo": "2026-12-04",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-7755",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-60534",
+      "sku": "PN-2041",
+      "quantidade": 1500,
+      "linha": "L-TOR",
+      "inicio": "2026-11-16",
+      "prazo": "2026-12-01",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-7757",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-60538",
+      "sku": "CS-5520",
+      "quantidade": 800,
+      "linha": "L-SOL",
+      "inicio": "2026-11-18",
+      "prazo": "2026-12-05",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-7753",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-60541",
+      "sku": "E-3307",
+      "quantidade": 120,
+      "linha": "L-TOR",
+      "inicio": "2026-11-23",
+      "prazo": "2026-12-11",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-7751",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Planejada para recompor o kanban de 120 eixos da Redutores Itapocu"
+        }
+      ]
+    },
+    {
+      "id": "OP-60545",
+      "sku": "BR-1180",
+      "quantidade": 200,
+      "linha": "L-SOL",
+      "inicio": "2026-11-24",
+      "prazo": "2026-12-15",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-7762",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Liberação depende da definição do material pelo cliente (S355 ou S275)"
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-EST",
+      "produzido": 9400,
+      "refugo": 310,
+      "paradas_min": 85,
+      "resumo": "Estamparia com 9.400 peças e 310 refugadas, quase todas suportes SP-4471 com rebarba. A PRE-400 rodou a 18 golpes/min por patinação da embreagem e parou 45 min para ajuste do freio.",
+      "ocorrencias": [
+        "PRE-400 parada 45 min para ajuste do freio; ângulo de parada de 11° (OS-6612)",
+        "Afiação do punção do estampo do SP-4471: 40 min",
+        "310 suportes com rebarba acima de 0,2 mm"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-EST",
+      "produzido": 7900,
+      "refugo": 260,
+      "paradas_min": 70,
+      "resumo": "PRE-400 seguiu a 18 golpes/min. A PRE-250 manteve as travessas TR-7730 no ritmo. Parada de 70 min por falta de bobina LNE 380 na alimentação.",
+      "ocorrencias": [
+        "Troca de bobina atrasada: 70 min sem alimentação na PRE-400",
+        "260 suportes refugados por rebarba e furo deslocado"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-TT",
+      "produzido": 1150,
+      "refugo": 8,
+      "paradas_min": 480,
+      "resumo": "Só a indução trabalhou: 1.150 buchas BU-0450 temperadas. O forno FOR-01 ficou parado o turno inteiro aguardando a resistência da zona 3.",
+      "ocorrencias": [
+        "FOR-01 parado 480 min aguardando resistência da zona 3 (OS-6608)",
+        "Eixos E-3307 da OP-60471 em retêmpera no terceiro"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-CUV",
+      "produzido": 210,
+      "refugo": 6,
+      "paradas_min": 110,
+      "resumo": "O CUV-04 trabalhou com rotação limitada a 6.000 rpm por temperatura de 58 °C no eixo-árvore. Faltaram carcaças fundidas para a OP-60495 e o CUH-02 seguiu em reforma.",
+      "ocorrencias": [
+        "CUV-04 parado 50 min para medição de temperatura e vibração do eixo-árvore (OS-6615)",
+        "Centro sem carcaças fundidas por 60 min (NC-2026-214)"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-SOL",
+      "produzido": 120,
+      "refugo": 3,
+      "paradas_min": 240,
+      "resumo": "Acabou a chapa S355 de 12,5 mm e a OP-60502 parou com 120 braços. Soldadores remanejados para bases de cilindro.",
+      "ocorrencias": [
+        "Célula do BR-1180 parada 240 min por falta de chapa S355 12,5 mm",
+        "3 braços com empeno acima de 1,5 mm (retrabalho no gabarito)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-TOR",
+      "produzido": 340,
+      "refugo": 9,
+      "paradas_min": 65,
+      "resumo": "Tornearia com 340 peças. O setup das flanges FL-1045-320 no TCN-03 levou 65 min contra 35 min do padrão, porque as castanhas moles tiveram de ser usinadas no turno.",
+      "ocorrencias": [
+        "Setup das flanges no TCN-03: 65 min (padrão 35 min)",
+        "9 flanges com batimento de face entre 0,06 e 0,08 mm antes da troca das castanhas"
+      ]
+    },
+    {
+      "data": "2026-11-13",
+      "turno": "1º",
+      "linha": "L-FOR",
+      "produzido": 520,
+      "refugo": 11,
+      "paradas_min": 30,
+      "resumo": "Forjaria com 520 cubos CB-2210 e 11 refugos por dobra de forjamento. Parada de 30 min para pré-aquecer a matriz após a troca.",
+      "ocorrencias": [
+        "Troca e pré-aquecimento da matriz do cubo: 30 min",
+        "11 cubos com dobra de forjamento (tarugo abaixo de 1.180 °C)"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-211",
+      "data": "2026-11-05",
+      "sku": "SP-4471",
+      "linha": "L-EST",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Carrocerias Serra Gaúcha encontrou rebarba de até 0,35 mm (máximo 0,2 mm) e furo Ø 17 deslocado 0,25 mm (tolerância ±0,15 mm) em cerca de 4% dos suportes do lote da OP-60479.",
+      "causa": "Punção afiado só com 52.000 golpes, acima do limite de 40.000, e guia do estampo com folga; a PRE-400 com embreagem patinando agravou a variação.",
+      "acao": "Afiação a cada 40.000 golpes com registro no MES; troca da guia; estoque de 1.800 suportes reinspecionado 100% em 10/11.",
+      "status": "aberta",
+      "responsavel": "Roberto Mattos",
+      "oito_d": {
+        "D1": "Equipe: Roberto Mattos (qualidade), Tiago Mendes (engenharia de processo), Luiz Carlos Pires (operador da PRE-400), Rafael Cordeiro (manutenção).",
+        "D2": "Rebarba de até 0,35 mm e furo deslocado 0,25 mm em cerca de 4% dos 10.000 suportes do PV-7712, contra 0,2 mm e ±0,15 mm do plano de controle.",
+        "D3": "Contenção: 1.800 suportes em estoque reinspecionados 100% em 10/11; seleção no cliente feita por dois inspetores da Alto Piraí.",
+        "D4": "Causas: afiação do punção com 52.000 golpes (a instrução pede 40.000) e guia do estampo com folga de 0,12 mm; patinação da embreagem da PRE-400 aumentou a variação.",
+        "D5": "Ações: contador de golpes no MES com bloqueio em 40.000; guia nova; lonas da embreagem trocadas na OS-6612.",
+        "D6": "Implementação: guia trocada em 12/11; troca das lonas programada para 15/11.",
+        "D7": "Prevenção: plano de controle com verificação de rebarba a cada 500 peças mantido e contador de golpes em todos os estampos progressivos.",
+        "D8": "Entrega do 8D ao cliente até 20/11, como pedido por e-mail."
+      }
+    },
+    {
+      "id": "NC-2026-205",
+      "data": "2026-10-21",
+      "sku": "FL-1045-320",
+      "linha": "L-TOR",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Redutores Itapocu reprovou 14 flanges FL-1045-320 do PV-7702 com batimento axial da face de 0,08 mm (máximo 0,05 mm).",
+      "causa": "Flange fixada em castanhas duras no 2º turno, deformando a peça. É a mesma causa da NC-2025-187, cuja lição aprendida (LA-031) só foi divulgada no 1º turno.",
+      "acao": "Castanhas moles usinadas e pressão de 18 bar na instrução de setup; LA-031 mostrada no painel do TCN-03 nos dois turnos.",
+      "status": "em_analise",
+      "responsavel": "Roberto Mattos",
+      "oito_d": {
+        "D1": "Equipe: Roberto Mattos (qualidade), Wilson Gonçalves (preparador), Jair Fernandes (programação CNC), Vanessa Prado (PCP).",
+        "D2": "14 flanges com batimento axial de 0,08 mm, acima de 0,05 mm, no PV-7702. NC repetida: a NC-2025-187 teve a mesma causa.",
+        "D3": "Contenção: 260 flanges em estoque medidas; 9 retrabalhadas em 12/11.",
+        "D4": "Causa raiz: castanhas duras e pressão de 30 bar no 2º turno. A ação da LA-031 (castanhas moles, 18 bar) não chegou ao 2º turno.",
+        "D5": "Ação: instrução de setup revisada (seção 4.3) com castanhas moles para flanges finas e pressão de 18 bar.",
+        "D6": "Validação em andamento na OP-60510: 1ª peça com 0,03 mm após a troca das castanhas.",
+        "D7": "Prevenção: lições aprendidas aparecem no assistente para quem programa e para quem opera a máquina, com a fonte.",
+        "D8": "Encerramento previsto após o fim da OP-60510."
+      }
+    },
+    {
+      "id": "NC-2026-214",
+      "data": "2026-11-06",
+      "sku": "CR-0912",
+      "linha": "L-CUV",
+      "origem": "fornecedor",
+      "severidade": "alta",
+      "descricao": "38 carcaças de ferro fundido nodular vazaram no teste de estanqueidade de 6 bar por porosidade na parede do alojamento.",
+      "causa": "Em análise pela fundição homologada; porosidade concentrada na mesma região do molde.",
+      "acao": "Carcaças segregadas e devolvidas; reposição prevista para 17/11; teste de estanqueidade antes da usinagem de acabamento.",
+      "status": "em_analise",
+      "responsavel": "Roberto Mattos",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-218",
+      "data": "2026-11-11",
+      "sku": "E-3307",
+      "linha": "L-TT",
+      "origem": "fornecedor",
+      "severidade": "alta",
+      "descricao": "1ª carga de 60 eixos E-3307 temperada no terceiro saiu com 47 HRC, abaixo dos 50 a 54 HRC da especificação.",
+      "causa": "Terceiro revenia a 260 °C, acima dos 200 °C da especificação de tratamento térmico.",
+      "acao": "Retêmpera da carga com corpo de prova; especificação enviada junto da ordem de serviço do terceiro; dureza medida em 100% dos eixos.",
+      "status": "aberta",
+      "responsavel": "Cláudia Weiss",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-220",
+      "data": "2026-11-11",
+      "sku": "BR-1180",
+      "linha": "L-SOL",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "3 braços BR-1180 com empeno de 2,4 a 3,0 mm (máximo 1,5 mm) após a solda.",
+      "causa": "Gabarito sem a pré-deformação de 2 mm usada pelo soldador do 1º turno.",
+      "acao": "Calço de pré-deformação fixado no gabarito; braços desempenados a frio e medidos.",
+      "status": "aberta",
+      "responsavel": "Tiago Mendes",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-209",
+      "data": "2026-10-30",
+      "sku": "CB-2210",
+      "linha": "L-FOR",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "42 cubos com dobra de forjamento na aba, detectada na usinagem.",
+      "causa": "Tarugos forjados abaixo de 1.180 °C depois de parada da linha de indução.",
+      "acao": "Pirômetro com bloqueio abaixo de 1.180 °C; tarugos frios voltam ao forno.",
+      "status": "encerrada",
+      "responsavel": "Antônio Barbosa",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-216",
+      "data": "2026-10-24",
+      "sku": "PZ-8620",
+      "linha": "L-TT",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Camada cementada de 0,6 mm em 20 pinhões, abaixo dos 0,8 a 1,2 mm especificados.",
+      "causa": "Tempo de cementação encurtado em 40 min para encaixar uma carga urgente.",
+      "acao": "Pinhões sucateados; ciclo de cementação travado no controlador do FOR-01.",
+      "status": "encerrada",
+      "responsavel": "Rosângela Duarte",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-222",
+      "data": "2026-11-12",
+      "sku": "GF-0330",
+      "linha": "L-FOR",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "Certificado de barra SAE 4140 com cromo de 0,76%, abaixo da faixa de 0,80 a 1,10%.",
+      "causa": "Em análise com o fornecedor de aço; corrida diferente da informada no romaneio.",
+      "acao": "Lote de 6 t bloqueado; OP-60531 usará barra de outra corrida.",
+      "status": "aberta",
+      "responsavel": "Cláudia Weiss",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-201",
+      "data": "2026-10-09",
+      "sku": "PN-2041",
+      "linha": "L-TOR",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "1ª peça do lote de pinos fora no diâmetro (Ø 40,02 mm, especificado f7).",
+      "causa": "Ferramenta de acabamento sem zerar no presetter após troca.",
+      "acao": "Zeragem obrigatória no presetter registrada no MES antes da liberação da 1ª peça.",
+      "status": "encerrada",
+      "responsavel": "Wilson Gonçalves",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-6612",
+      "maquina": "PRE-400",
+      "tipo": "corretiva",
+      "data": "2026-11-11",
+      "status": "aberta",
+      "tecnico": "Rafael Cordeiro",
+      "duracao_h": 8,
+      "descricao": "Embreagem patinando e ângulo de parada de 11° no monitor de freio (máximo 8°). Trocar as lonas da embreagem e do freio e reajustar o monitor. Programada para domingo, 15/11.",
+      "pecas": [
+        "Jogo de lonas da embreagem",
+        "Jogo de lonas do freio",
+        "Válvula de segurança dupla (revisão)"
+      ],
+      "procedimento": "DOC-MAN-PRE"
+    },
+    {
+      "id": "OS-6608",
+      "maquina": "FOR-01",
+      "tipo": "corretiva",
+      "data": "2026-11-06",
+      "status": "em_execucao",
+      "tecnico": "Marcelo Pacheco",
+      "duracao_h": 38,
+      "descricao": "Resistência da zona 3 rompida e termopar tipo K com desvio de 7 °C. Resistência chega em 16/11; volta do forno prevista para 18/11, após a verificação de uniformidade.",
+      "pecas": [
+        "Resistência 45 kW da zona 3",
+        "Termopar tipo K"
+      ],
+      "procedimento": "DOC-MAN-TT"
+    },
+    {
+      "id": "OS-6615",
+      "maquina": "CUV-04",
+      "tipo": "preditiva",
+      "data": "2026-11-12",
+      "status": "aberta",
+      "tecnico": "Diego Fontana",
+      "duracao_h": 2,
+      "descricao": "Eixo-árvore a 58 °C após aquecimento (limite 50 °C) e vibração de 3,8 mm/s. Rotação limitada a 6.000 rpm até a troca dos rolamentos, programada para 22/11.",
+      "pecas": [
+        "Jogo de rolamentos do eixo-árvore",
+        "Graxa para eixo-árvore"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-6541",
+      "maquina": "CUV-04",
+      "tipo": "corretiva",
+      "data": "2026-08-27",
+      "status": "concluida",
+      "tecnico": "Diego Fontana",
+      "duracao_h": 9.5,
+      "descricao": "Última falha no eixo-árvore: mola-prato do sistema de fixação da ferramenta rompida, força de fixação em 11 kN. Pacote de molas trocado; força voltou a 19 kN.",
+      "pecas": [
+        "Pacote de molas-prato do eixo-árvore"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-6603",
+      "maquina": "CUH-02",
+      "tipo": "preventiva",
+      "data": "2026-11-10",
+      "status": "em_execucao",
+      "tecnico": "Rafael Cordeiro",
+      "duracao_h": 24,
+      "descricao": "Reforma programada do magazine de ferramentas e troca das guias do trocador. Volta prevista para 16/11.",
+      "pecas": [
+        "Guias do trocador de ferramentas",
+        "Corrente do magazine"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-6590",
+      "maquina": "TCN-03",
+      "tipo": "preventiva",
+      "data": "2026-11-03",
+      "status": "concluida",
+      "tecnico": "Diego Fontana",
+      "duracao_h": 2.5,
+      "descricao": "Lubrificação da placa, verificação da pressão hidráulica e troca do filtro do refrigerante.",
+      "pecas": [
+        "Filtro do refrigerante"
+      ],
+      "procedimento": "DOC-MAN-TOR"
+    },
+    {
+      "id": "OS-6594",
+      "maquina": "PRE-250",
+      "tipo": "preventiva",
+      "data": "2026-11-04",
+      "status": "concluida",
+      "tecnico": "Rafael Cordeiro",
+      "duracao_h": 3,
+      "descricao": "Inspeção do servomotor, lubrificação das guias e teste do monitor de freio (ângulo de parada de 4°).",
+      "pecas": [],
+      "procedimento": "DOC-MAN-PRE"
+    },
+    {
+      "id": "OS-6598",
+      "maquina": "MAR-01",
+      "tipo": "preventiva",
+      "data": "2026-11-07",
+      "status": "concluida",
+      "tecnico": "Marcelo Pacheco",
+      "duracao_h": 6,
+      "descricao": "Ajuste das guias do martelo e inspeção do sistema de pré-aquecimento das matrizes.",
+      "pecas": [
+        "Calços de ajuste das guias"
+      ],
+      "procedimento": "DOC-MAN-SOL"
+    },
+    {
+      "id": "OS-6601",
+      "maquina": "ROB-03",
+      "tipo": "corretiva",
+      "data": "2026-11-09",
+      "status": "concluida",
+      "tecnico": "Diego Fontana",
+      "duracao_h": 1.5,
+      "descricao": "Bico de contato desgastado causando arco instável; trocado e TCP conferido.",
+      "pecas": [
+        "Bico de contato 1,2 mm (10 un)"
+      ],
+      "procedimento": "DOC-MAN-SOL"
+    },
+    {
+      "id": "OS-6618",
+      "maquina": "IND-01",
+      "tipo": "preditiva",
+      "data": "2026-11-12",
+      "status": "concluida",
+      "tecnico": "Marcelo Pacheco",
+      "duracao_h": 1,
+      "descricao": "Medição da vazão de água do indutor (46 L/min) e termografia dos barramentos sem anomalia.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-TT"
+    },
+    {
+      "id": "OS-6620",
+      "maquina": "RET-01",
+      "tipo": "preventiva",
+      "data": "2026-11-19",
+      "status": "aberta",
+      "tecnico": "Diego Fontana",
+      "duracao_h": 4,
+      "descricao": "Balanceamento do rebolo e verificação do cabeçote porta-peça.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-TOR"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-01",
+      "nome": "Leandro Martins",
+      "regiao": "SC",
+      "telefone": "(47) 9••••-6124",
+      "meta_mes": 2400000,
+      "realizado_mes": 1910000
+    },
+    {
+      "id": "REP-02",
+      "nome": "Aline Ferreira",
+      "regiao": "RS",
+      "telefone": "(54) 9••••-3087",
+      "meta_mes": 1800000,
+      "realizado_mes": 1120000
+    },
+    {
+      "id": "REP-03",
+      "nome": "Gustavo Ribeiro",
+      "regiao": "PR e SP",
+      "telefone": "(41) 9••••-5539",
+      "meta_mes": 1500000,
+      "realizado_mes": 1385000
+    },
+    {
+      "id": "REP-04",
+      "nome": "Simone Carvalho",
+      "regiao": "GO, MT e MG",
+      "telefone": "(62) 9••••-2716",
+      "meta_mes": 900000,
+      "realizado_mes": 948000
+    },
+    {
+      "id": "REP-05",
+      "nome": "Eduardo Nunes",
+      "regiao": "Novos clientes (cotações por desenho)",
+      "telefone": "(47) 9••••-8850",
+      "meta_mes": 600000,
+      "realizado_mes": 214000
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-101",
+      "nome": "Implementos Agrícolas Campo Forte",
+      "cidade": "Não-Me-Toque",
+      "uf": "RS",
+      "segmento": "implementos agrícolas",
+      "representante": "REP-02",
+      "condicao_pagamento": "28/42/56",
+      "limite_credito": 600000,
+      "tabela_preco": "Contrato anual",
+      "ultimo_pedido": "2026-11-09"
+    },
+    {
+      "id": "CLI-102",
+      "nome": "Ar Pleno Compressores",
+      "cidade": "Jaraguá do Sul",
+      "uf": "SC",
+      "segmento": "compressores",
+      "representante": "REP-01",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 450000,
+      "tabela_preco": "Contrato anual",
+      "ultimo_pedido": "2026-10-22"
+    },
+    {
+      "id": "CLI-103",
+      "nome": "Carrocerias Serra Gaúcha",
+      "cidade": "Caxias do Sul",
+      "uf": "RS",
+      "segmento": "carrocerias de ônibus",
+      "representante": "REP-02",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 900000,
+      "tabela_preco": "Contrato anual (PPAP)",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-104",
+      "nome": "Máquinas Pesadas Rio Iguaçu",
+      "cidade": "Curitiba",
+      "uf": "PR",
+      "segmento": "máquinas de construção",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 800000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-10-28"
+    },
+    {
+      "id": "CLI-105",
+      "nome": "Hidráulica Vale do Taquari",
+      "cidade": "Lajeado",
+      "uf": "RS",
+      "segmento": "cilindros hidráulicos",
+      "representante": "REP-02",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 350000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-106",
+      "nome": "Redutores Itapocu",
+      "cidade": "Schroeder",
+      "uf": "SC",
+      "segmento": "redutores e transmissões",
+      "representante": "REP-01",
+      "condicao_pagamento": "28/56",
+      "limite_credito": 1200000,
+      "tabela_preco": "Contrato kanban",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-107",
+      "nome": "Semirreboques Oeste",
+      "cidade": "Chapecó",
+      "uf": "SC",
+      "segmento": "implementos rodoviários",
+      "representante": "REP-01",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 500000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-10-30"
+    },
+    {
+      "id": "CLI-108",
+      "nome": "Bombas Centro-Sul",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "segmento": "bombas industriais",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 300000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-109",
+      "nome": "Plantadeiras Cerrado Verde",
+      "cidade": "Rio Verde",
+      "uf": "GO",
+      "segmento": "implementos agrícolas",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 400000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-110",
+      "nome": "Guindastes Litoral",
+      "cidade": "Itajaí",
+      "uf": "SC",
+      "segmento": "equipamentos portuários",
+      "representante": "REP-01",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 250000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-11-11"
+    },
+    {
+      "id": "CLI-111",
+      "nome": "Ferroviária Paraná Sul",
+      "cidade": "Ponta Grossa",
+      "uf": "PR",
+      "segmento": "vagões e componentes ferroviários",
+      "representante": "REP-03",
+      "condicao_pagamento": "45 dias",
+      "limite_credito": 700000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-06-17"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-7690",
+      "cliente": "CLI-106",
+      "representante": "REP-01",
+      "data": "2026-08-10",
+      "status": "entregue",
+      "previsao_entrega": "2026-09-15",
+      "ordem": "OP-60412",
+      "itens": [
+        {
+          "sku": "E-3307",
+          "quantidade": 180,
+          "preco_unit": 486
+        }
+      ],
+      "observacao": "Base do orçamento 0981."
+    },
+    {
+      "id": "PV-7702",
+      "cliente": "CLI-106",
+      "representante": "REP-01",
+      "data": "2026-10-06",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-03",
+      "ordem": "OP-60466",
+      "itens": [
+        {
+          "sku": "FL-1045-320",
+          "quantidade": 250,
+          "preco_unit": 214.5
+        }
+      ],
+      "observacao": "14 flanges reprovadas pelo cliente (NC-2026-205)."
+    },
+    {
+      "id": "PV-7712",
+      "cliente": "CLI-103",
+      "representante": "REP-02",
+      "data": "2026-10-08",
+      "status": "entregue",
+      "previsao_entrega": "2026-10-30",
+      "ordem": "OP-60479",
+      "itens": [
+        {
+          "sku": "SP-4471",
+          "quantidade": 10000,
+          "preco_unit": 7.4
+        }
+      ],
+      "observacao": "Reclamação de rebarba e furo deslocado (NC-2026-211)."
+    },
+    {
+      "id": "PV-7718",
+      "cliente": "CLI-106",
+      "representante": "REP-01",
+      "data": "2026-10-15",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-60471",
+      "itens": [
+        {
+          "sku": "E-3307",
+          "quantidade": 240,
+          "preco_unit": 486
+        }
+      ],
+      "observacao": "Previsão original 13/11. Contrato prevê multa de 0,5% por semana de atraso."
+    },
+    {
+      "id": "PV-7731",
+      "cliente": "CLI-103",
+      "representante": "REP-02",
+      "data": "2026-10-29",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-21",
+      "ordem": "OP-60488",
+      "itens": [
+        {
+          "sku": "SP-4471",
+          "quantidade": 12000,
+          "preco_unit": 7.4
+        }
+      ],
+      "observacao": "Previsão original 14/11. Cliente tem suporte até 18/11 e pediu entrega parcial."
+    },
+    {
+      "id": "PV-7733",
+      "cliente": "CLI-103",
+      "representante": "REP-02",
+      "data": "2026-11-04",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-60523",
+      "itens": [
+        {
+          "sku": "TR-7730",
+          "quantidade": 8000,
+          "preco_unit": 18.9
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-7735",
+      "cliente": "CLI-107",
+      "representante": "REP-01",
+      "data": "2026-10-30",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-01",
+      "ordem": "OP-60514",
+      "itens": [
+        {
+          "sku": "CB-2210",
+          "quantidade": 1200,
+          "preco_unit": 305.8
+        }
+      ],
+      "observacao": "Desconto de 2% por volume."
+    },
+    {
+      "id": "PV-7740",
+      "cliente": "CLI-102",
+      "representante": "REP-01",
+      "data": "2026-10-22",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-26",
+      "ordem": "OP-60495",
+      "itens": [
+        {
+          "sku": "CR-0912",
+          "quantidade": 180,
+          "preco_unit": 398
+        }
+      ],
+      "observacao": "Previsão original 16/11. Fundidos com porosidade (NC-2026-214)."
+    },
+    {
+      "id": "PV-7744",
+      "cliente": "CLI-104",
+      "representante": "REP-03",
+      "data": "2026-10-28",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-28",
+      "ordem": "OP-60502",
+      "itens": [
+        {
+          "sku": "BR-1180",
+          "quantidade": 400,
+          "preco_unit": 632.1
+        }
+      ],
+      "observacao": "Previsão original 17/11. Chapa S355 12,5 mm chega em 16/11."
+    },
+    {
+      "id": "PV-7748",
+      "cliente": "CLI-108",
+      "representante": "REP-03",
+      "data": "2026-11-03",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-60510",
+      "itens": [
+        {
+          "sku": "FL-1045-320",
+          "quantidade": 300,
+          "preco_unit": 214.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-7751",
+      "cliente": "CLI-106",
+      "representante": "REP-01",
+      "data": "2026-11-06",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-15",
+      "ordem": "OP-60519",
+      "itens": [
+        {
+          "sku": "PZ-8620",
+          "quantidade": 600,
+          "preco_unit": 238
+        },
+        {
+          "sku": "E-3307",
+          "quantidade": 120,
+          "preco_unit": 486
+        }
+      ],
+      "observacao": "Os 120 eixos (OP-60541) recompõem o kanban contratado."
+    },
+    {
+      "id": "PV-7753",
+      "cliente": "CLI-105",
+      "representante": "REP-02",
+      "data": "2026-11-10",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-08",
+      "ordem": "OP-60527",
+      "itens": [
+        {
+          "sku": "BU-0450",
+          "quantidade": 3000,
+          "preco_unit": 41.5
+        },
+        {
+          "sku": "CS-5520",
+          "quantidade": 800,
+          "preco_unit": 128
+        }
+      ],
+      "observacao": "Bases de cilindro na OP-60538."
+    },
+    {
+      "id": "PV-7755",
+      "cliente": "CLI-109",
+      "representante": "REP-04",
+      "data": "2026-11-06",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-10",
+      "ordem": "OP-60531",
+      "itens": [
+        {
+          "sku": "GF-0330",
+          "quantidade": 500,
+          "preco_unit": 156
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-7757",
+      "cliente": "CLI-101",
+      "representante": "REP-02",
+      "data": "2026-11-09",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-04",
+      "ordem": "OP-60534",
+      "itens": [
+        {
+          "sku": "PN-2041",
+          "quantidade": 1500,
+          "preco_unit": 89.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-7762",
+      "cliente": "CLI-110",
+      "representante": "REP-01",
+      "data": "2026-11-11",
+      "status": "em_analise",
+      "previsao_entrega": "2026-12-18",
+      "ordem": "OP-60545",
+      "itens": [
+        {
+          "sku": "BR-1180",
+          "quantidade": 200,
+          "preco_unit": 645
+        }
+      ],
+      "observacao": "Cliente pediu trocar S355 por S275 para reduzir custo; aguarda aprovação por escrito da engenharia do cliente (RC-04)."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Desconto máximo do vendedor técnico",
+      "texto": "Até 5% sem aprovação; de 5% a 8% com o gerente regional (Hélio Bastos); acima de 8%, só com a diretoria."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Validade da cotação",
+      "texto": "Cotações valem 15 dias. Depois disso, o material é recalculado pelo preço do aço do mês, que pesa de 35% a 55% no custo de peças usinadas."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Entrega parcial e estoque abaixo do mínimo",
+      "texto": "Entrega parcial sem frete adicional quando o atraso é de responsabilidade da Alto Piraí. Estoque abaixo do mínimo de item com contrato só sai com liberação do PCP (Vanessa Prado)."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Mudança de material ou especificação",
+      "texto": "Troca de material, tratamento ou tolerância só com aprovação por escrito da engenharia do cliente e revisão do desenho. O comercial não aceita substituição combinada por telefone."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Ferramental",
+      "texto": "Estampos, matrizes e dispositivos dedicados são cobrados à parte ou amortizados em 12 meses; passam a ser do cliente após a quitação."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Lote mínimo",
+      "texto": "Lote mínimo de 50 peças usinadas, 5.000 estampadas e 300 forjadas. Abaixo disso, a cotação inclui o custo de setup."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "oee_estamparia",
+      "nome": "OEE da estamparia",
+      "valor": 61.2,
+      "unidade": "%",
+      "meta": 75,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        74,
+        73.2,
+        74.8,
+        72.9,
+        73.5,
+        72.1,
+        71,
+        70.2,
+        68.4,
+        66,
+        64.1,
+        61.2
+      ],
+      "explicacao": "O OEE da estamparia caiu de 74,8% para 61,2% em dez meses. A PRE-400 roda a 18 golpes/min em vez de 30 por patinação da embreagem, e o refugo por rebarba subiu. Em 12/11 foram 85 min de parada no 1º turno e 70 min no 2º.",
+      "caminho": [
+        "MES › contador de golpes e paradas (L-EST)",
+        "Qualidade › refugo por turno",
+        "Cálculo: disponibilidade × desempenho × qualidade"
+      ],
+      "fontes": [
+        "maq:PRE-400",
+        "os:OS-6612",
+        "turno:2026-11-12|1º|L-EST",
+        "turno:2026-11-12|2º|L-EST"
+      ]
+    },
+    {
+      "id": "otif",
+      "nome": "OTIF",
+      "valor": 79,
+      "unidade": "%",
+      "meta": 95,
+      "direcao": "maior_melhor",
+      "area": "comercial",
+      "tendencia": [
+        93,
+        92,
+        94,
+        91,
+        90,
+        92,
+        89,
+        88,
+        86,
+        84,
+        82,
+        79
+      ],
+      "explicacao": "Pedidos entregues completos na data prometida. Quatro estão atrasados agora: PV-7718 (forno parado), PV-7731 (prensa lenta), PV-7740 (fundido com porosidade) e PV-7744 (falta de chapa).",
+      "caminho": [
+        "ERP › pedidos com data prometida",
+        "ERP › notas fiscais de saída",
+        "Cálculo: entregas no prazo e completas ÷ entregas do período"
+      ],
+      "fontes": [
+        "pedido:PV-7718",
+        "pedido:PV-7731",
+        "pedido:PV-7740",
+        "pedido:PV-7744"
+      ]
+    },
+    {
+      "id": "cotacoes_prazo",
+      "nome": "Cotações respondidas no prazo pedido",
+      "valor": 58,
+      "unidade": "%",
+      "meta": 85,
+      "direcao": "maior_melhor",
+      "area": "comercial",
+      "tendencia": [
+        61,
+        63,
+        60,
+        57,
+        62,
+        59,
+        55,
+        56,
+        60,
+        58,
+        57,
+        58
+      ],
+      "explicacao": "Em outubro chegaram 142 pedidos de cotação e 82 saíram no prazo pedido pelo cliente. Orçar peça nova depende do Jair Fernandes ou da Bruna Oliveira acharem uma peça parecida; em novembro, 21 das 37 cotações abertas esperam por eles.",
+      "caminho": [
+        "Planilha de cotações 2026 › aba Out",
+        "E-mail comercial › data de entrada",
+        "Cálculo: cotações enviadas até a data pedida ÷ cotações recebidas"
+      ],
+      "fontes": [
+        "doc:DOC-PLA-COT#t1",
+        "doc:DOC-PLA-COT#t3",
+        "saber:SB-101"
+      ]
+    },
+    {
+      "id": "retrabalho",
+      "nome": "Retrabalho e refugo",
+      "valor": 3.4,
+      "unidade": "%",
+      "meta": 1.5,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        1.8,
+        1.7,
+        1.9,
+        2,
+        1.8,
+        2.1,
+        2.3,
+        2.4,
+        2.6,
+        2.9,
+        3.1,
+        3.4
+      ],
+      "explicacao": "Puxado pela estamparia, com 310 suportes refugados por rebarba no 1º turno de 12/11, e pelas flanges com batimento de face, uma NC que se repetiu porque a ação anterior não chegou ao 2º turno.",
+      "caminho": [
+        "MES › apontamento de refugo e retrabalho",
+        "Qualidade › registro de NCs",
+        "Cálculo: peças refugadas ou retrabalhadas ÷ peças produzidas"
+      ],
+      "fontes": [
+        "turno:2026-11-12|1º|L-EST",
+        "nc:NC-2026-211",
+        "nc:NC-2026-205"
+      ]
+    },
+    {
+      "id": "setup_cnc",
+      "nome": "Tempo médio de setup nos tornos CNC",
+      "valor": 52,
+      "unidade": "min",
+      "meta": 35,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        44,
+        43,
+        45,
+        46,
+        44,
+        47,
+        48,
+        47,
+        49,
+        50,
+        51,
+        52
+      ],
+      "explicacao": "Lotes menores e peças novas aumentaram o número de setups. O setup das flanges no TCN-03 levou 65 min no 2º turno de 12/11, contra 35 min do padrão, porque as castanhas moles tiveram de ser usinadas na hora.",
+      "caminho": [
+        "MES › apontamentos de setup (L-TOR)",
+        "Instrução de setup › tempo padrão",
+        "Cálculo: média dos setups do mês"
+      ],
+      "fontes": [
+        "turno:2026-11-12|2º|L-TOR",
+        "doc:DOC-IT-SET#t1",
+        "saber:SB-116"
+      ]
+    },
+    {
+      "id": "mttr",
+      "nome": "MTTR",
+      "valor": 4.9,
+      "unidade": "h",
+      "meta": 3,
+      "direcao": "menor_melhor",
+      "area": "manutencao",
+      "tendencia": [
+        3.1,
+        3.3,
+        3,
+        3.4,
+        3.2,
+        3.6,
+        3.8,
+        4,
+        4.2,
+        4.5,
+        4.6,
+        4.9
+      ],
+      "explicacao": "O tempo médio de reparo subiu com o forno FOR-01, que soma 38 h de OS esperando resistência, e com a embreagem da PRE-400, que precisa de uma parada de 8 h no domingo.",
+      "caminho": [
+        "Sistema de manutenção › OS corretivas",
+        "Cálculo: horas de reparo ÷ número de corretivas (12 meses móveis)"
+      ],
+      "fontes": [
+        "os:OS-6608",
+        "os:OS-6612",
+        "maq:FOR-01"
+      ]
+    },
+    {
+      "id": "aderencia_roteiro",
+      "nome": "Aderência do tempo apontado ao padrão",
+      "valor": 81,
+      "unidade": "%",
+      "meta": 95,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        88,
+        87,
+        88,
+        86,
+        85,
+        86,
+        84,
+        83,
+        83,
+        82,
+        82,
+        81
+      ],
+      "explicacao": "O roteiro do ERP diz uma coisa e o apontamento mostra outra. No E-3307, o padrão é 3 h 15 min de usinagem e o apontado na OP-60412 foi 3 h 40 min, com a retífica 25 min acima por sobremetal após a têmpera.",
+      "caminho": [
+        "ERP › roteiros e tempos padrão",
+        "MES › apontamentos por operação",
+        "Cálculo: operações dentro de ±10% do padrão ÷ operações apontadas"
+      ],
+      "fontes": [
+        "doc:DOC-ROT-E3307#t1",
+        "doc:DOC-ROT-E3307#t2",
+        "op:OP-60412"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-DES-55118",
+      "titulo": "Desenho do cliente 55-118 rev. A (eixo intermediário)",
+      "tipo": "ficha_tecnica",
+      "area": "comercial",
+      "origem": "PLM",
+      "atualizado": "2026-11-10",
+      "acesso": [
+        "comercial",
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Material e tratamento",
+          "texto": "SAE 4140 temperado e revenido, 50 a 54 HRC. Ø 92 h6 nos assentos de rolamento e comprimento total de 700 mm."
+        },
+        {
+          "id": "t2",
+          "secao": "Tolerâncias geométricas",
+          "texto": "Batimento radial de 0,02 mm nos assentos e rugosidade Ra 0,4 µm após retífica."
+        },
+        {
+          "id": "t3",
+          "secao": "Nota de sigilo",
+          "texto": "Desenho de propriedade do cliente; uso restrito à cotação e à fabricação."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ROT-E3307",
+      "titulo": "Roteiro do eixo E-3307 rev. B e apontamentos da OP-60412",
+      "tipo": "ficha_tecnica",
+      "area": "producao",
+      "origem": "ERP",
+      "atualizado": "2026-09-12",
+      "acesso": [
+        "producao",
+        "comercial",
+        "qualidade",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Roteiro rev. B",
+          "texto": "10 Corte de barra; 20 Torneamento CNC (TCN-07) 1 h 35 min; 30 Fresamento do rasgo (CUV-06) 25 min; 40 Têmpera e revenimento (FOR-01); 50 Retífica (RET-01) 1 h 15 min. Usinagem padrão: 3 h 15 min por peça."
+        },
+        {
+          "id": "t2",
+          "secao": "Apontamentos da OP-60412",
+          "texto": "180 eixos com média de 3 h 40 min de usinagem por peça. A retífica apontou 1 h 40 min, 25 min acima do padrão, por sobremetal deixado para corrigir a deformação da têmpera."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLA-COT",
+      "titulo": "Planilha de cotações 2026",
+      "tipo": "planilha",
+      "area": "comercial",
+      "origem": "Planilha",
+      "atualizado": "2026-11-13",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Aba Out",
+          "texto": "142 cotações recebidas e 82 respondidas no prazo pedido pelo cliente (58%). Prazo médio de resposta: 6,8 dias."
+        },
+        {
+          "id": "t2",
+          "secao": "Orçamento 0981",
+          "texto": "Eixo E-3307 para a Redutores Itapocu: 3 h 15 min de usinagem, SAE 4140 a R$ 14,20/kg e têmpera interna. Preço de R$ 486,00 por peça."
+        },
+        {
+          "id": "t3",
+          "secao": "Aba Nov",
+          "texto": "37 cotações abertas, 21 aguardando o Jair Fernandes ou a Bruna Oliveira indicarem peça semelhante."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-COT",
+      "titulo": "Procedimento de cotação por desenho",
+      "tipo": "procedimento",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-06-02",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2 Prazo",
+          "texto": "Responder no prazo pedido pelo cliente; quando ele não informa, em até 5 dias úteis."
+        },
+        {
+          "id": "t2",
+          "secao": "3 Base de custo",
+          "texto": "Partir da peça semelhante com roteiro e tempo apontado, não do tempo padrão. Terceiros (tratamento, cromo, fresamento de dentes) com cotação do mês."
+        },
+        {
+          "id": "t3",
+          "secao": "5 Desenho do cliente",
+          "texto": "Guardar o desenho na pasta do cliente, com acesso restrito ao comercial, à engenharia e à qualidade."
+        }
+      ]
+    },
+    {
+      "id": "DOC-IT-SET",
+      "titulo": "Instrução de setup dos tornos CNC",
+      "tipo": "instrucao",
+      "area": "producao",
+      "origem": "SharePoint",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "producao",
+        "operadores",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3 Setup padrão",
+          "texto": "Setup padrão de 35 min: troca de castanhas, zeragem das ferramentas no presetter e 1ª peça medida na metrologia."
+        },
+        {
+          "id": "t2",
+          "secao": "4.3 Flanges finas (revisado em 12/11)",
+          "texto": "Flanges com espessura menor que 15% do diâmetro: castanhas moles usinadas no diâmetro da peça e pressão de fixação de 18 bar (LA-031)."
+        },
+        {
+          "id": "t3",
+          "secao": "5 Liberação",
+          "texto": "A 1ª peça aprovada é registrada no MES antes de rodar o lote."
+        }
+      ]
+    },
+    {
+      "id": "DOC-IT-EST",
+      "titulo": "Instrução de trabalho da PRE-400 e segurança (NR-12)",
+      "tipo": "instrucao",
+      "area": "producao",
+      "origem": "SharePoint",
+      "atualizado": "2026-08-20",
+      "acesso": [
+        "producao",
+        "operadores",
+        "manutencao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2 Teste de parada",
+          "texto": "No início de cada turno, testar o monitor de freio: ângulo de parada máximo de 8°. Acima disso, bloquear a prensa e chamar a manutenção."
+        },
+        {
+          "id": "t2",
+          "secao": "4 Estampo do SP-4471",
+          "texto": "Afiar o punção a cada 40.000 golpes ou quando a rebarba passar de 0,15 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "5 Cadência",
+          "texto": "Cadência nominal do SP-4471: 30 golpes por minuto."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ESP-TT",
+      "titulo": "Especificação de tratamento térmico",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-04-15",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.1 SAE 4140 (E-3307)",
+          "texto": "Austenitizar a 850 °C, temperar em óleo e revenir a 200 °C por 2 h. Dureza final de 50 a 54 HRC."
+        },
+        {
+          "id": "t2",
+          "secao": "3.4 SAE 8620 (PZ-8620)",
+          "texto": "Cementação a 920 °C com camada efetiva de 0,8 a 1,2 mm e dureza superficial de 58 a 62 HRC."
+        },
+        {
+          "id": "t3",
+          "secao": "6 Tratamento em terceiro",
+          "texto": "Só com fornecedor qualificado, especificação anexada à ordem de serviço e corpo de prova em cada carga."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PC-4471",
+      "titulo": "Plano de controle do suporte SP-4471 (PPAP aprovado)",
+      "tipo": "ficha_tecnica",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2025-09-03",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Característica 4",
+          "texto": "Rebarba máxima de 0,2 mm na borda de corte, verificada a cada 500 peças."
+        },
+        {
+          "id": "t2",
+          "secao": "Característica 7",
+          "texto": "Furo Ø 17 +0,2/0 com posição de ±0,15 mm em relação ao furo de referência; dispositivo passa/não passa a cada 500 peças."
+        },
+        {
+          "id": "t3",
+          "secao": "Documentação do lote",
+          "texto": "Cada lote segue com certificado de material da bobina LNE 380 e relatório dimensional de 5 peças."
+        }
+      ]
+    },
+    {
+      "id": "DOC-LA-031",
+      "titulo": "Lição aprendida LA-031: batimento de face em flanges finas",
+      "tipo": "instrucao",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2025-02-18",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Origem",
+          "texto": "NC-2025-187: flange Ø 300 com batimento axial de 0,07 mm. Causa: castanhas duras deformando a flange na fixação."
+        },
+        {
+          "id": "t2",
+          "secao": "Ação e divulgação",
+          "texto": "Castanhas moles usinadas e pressão de 18 bar. Divulgada em fevereiro de 2025 só para o 1º turno da tornearia."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PRE",
+      "titulo": "Manuais das prensas (PRE-400, PRE-250, PRE-160)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-07-14",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "PRE-400 · 6.2 Embreagem e freio",
+          "texto": "Folga das lonas de 1,0 a 1,5 mm; trocar as lonas com espessura abaixo de 6 mm."
+        },
+        {
+          "id": "t2",
+          "secao": "PRE-400 · 6.3 Pressão de ar",
+          "texto": "Embreagem a 5,5 bar. Pressão abaixo de 5 bar provoca patinação e perda de cadência."
+        },
+        {
+          "id": "t3",
+          "secao": "PRE-400 · 8.1 Monitor de freio",
+          "texto": "Reajustar o monitor de ângulo de parada após qualquer intervenção na embreagem ou no freio."
+        },
+        {
+          "id": "t4",
+          "secao": "PRE-250 · 3.2 Servo",
+          "texto": "Curva de movimento do SP-4471 ou da TR-7730 gravada por receita; não alterar a velocidade de contato sem a engenharia."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-USI",
+      "titulo": "Manuais dos centros de usinagem (CUV-04, CUV-06, CUH-02)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-09-02",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "CUV-04 · 7.1 Eixo-árvore",
+          "texto": "Temperatura acima de 50 °C após o aquecimento ou vibração acima de 3,5 mm/s: limitar a rotação a 6.000 rpm e programar a troca dos rolamentos."
+        },
+        {
+          "id": "t2",
+          "secao": "CUV-04 · 7.3 Fixação da ferramenta",
+          "texto": "Força de fixação mínima de 18 kN, medida a cada 1.000 horas com o medidor de força."
+        },
+        {
+          "id": "t3",
+          "secao": "CUH-02 · 5.4 Magazine",
+          "texto": "Inspecionar guias e corrente do trocador a cada 4.000 horas; reforma geral a cada 20.000 horas."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-TOR",
+      "titulo": "Manuais dos tornos CNC e da retífica (TCN-03, TCN-07, RET-01)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-05-28",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "TCN-03 · 4.1 Placa hidráulica",
+          "texto": "Pressão de fixação de 10 a 35 bar. Peças de parede fina pedem a menor pressão que segure o corte."
+        },
+        {
+          "id": "t2",
+          "secao": "RET-01 · 6.2 Rebolo",
+          "texto": "Balancear o rebolo a cada troca e a cada 200 horas; vibração acima de 1,0 mm/s marca a peça."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-TT",
+      "titulo": "Manuais do forno FOR-01 e da indução IND-01",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-10-05",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "qualidade",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "FOR-01 · 3.2 Zonas de aquecimento",
+          "texto": "Quatro zonas com resistências de 45 kW. Com uma zona fora, o forno não garante a uniformidade de ±5 °C e não pode temperar."
+        },
+        {
+          "id": "t2",
+          "secao": "FOR-01 · 5.1 Termopares",
+          "texto": "Termopares tipo K trocados a cada 12 meses ou após desvio de 3 °C na verificação."
+        },
+        {
+          "id": "t3",
+          "secao": "IND-01 · 4.4 Refrigeração",
+          "texto": "Vazão mínima de água do indutor de 40 L/min; abaixo disso a máquina bloqueia."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-SOL",
+      "titulo": "Manuais da solda, dobra e forjaria (ROB-03, DOB-01, MAR-01)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-06-30",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "ROB-03 · 5.1 Tocha",
+          "texto": "Trocar o bico de contato a cada 8 horas de arco e conferir o TCP após qualquer colisão."
+        },
+        {
+          "id": "t2",
+          "secao": "DOB-01 · 4.2 Bombeamento",
+          "texto": "Compensação de bombeamento pela tabela de espessura; conferir ângulo na 1ª e na última peça."
+        },
+        {
+          "id": "t3",
+          "secao": "MAR-01 · 6.1 Matrizes",
+          "texto": "Pré-aquecer as matrizes a 200–250 °C antes de forjar. Tarugo entre 1.180 e 1.220 °C."
+        }
+      ]
+    },
+    {
+      "id": "DOC-EML-7731",
+      "titulo": "E-mail da Carrocerias Serra Gaúcha sobre o PV-7731",
+      "tipo": "email",
+      "area": "comercial",
+      "origem": "E-mail",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "comercial",
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Mensagem do cliente",
+          "texto": "Nossa montagem de chassis tem suporte SP-4471 até 18/11. Precisamos de uma entrega parcial antes dessa data."
+        },
+        {
+          "id": "t2",
+          "secao": "Pedido de 8D",
+          "texto": "Pedimos também o relatório 8D da reclamação de rebarba até 20/11."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CTR-ITA",
+      "titulo": "Contrato de fornecimento com a Redutores Itapocu",
+      "tipo": "contrato",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-01-20",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Cláusula 4 Kanban",
+          "texto": "A Alto Piraí mantém estoque mínimo de 120 eixos E-3307 disponíveis para retirada."
+        },
+        {
+          "id": "t2",
+          "secao": "Cláusula 9 Atraso",
+          "texto": "Atraso de responsabilidade do fornecedor: multa de 0,5% do valor do pedido por semana, limitada a 5%."
+        },
+        {
+          "id": "t3",
+          "secao": "Cláusula 11 Processo especial",
+          "texto": "Mudança de material ou tratamento térmico em terceiro exige aviso prévio e aprovação por escrito do cliente."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-101",
+      "autor": "Jair Fernandes",
+      "funcao": "Programador CNC e orçamentista",
+      "tempo_casa_anos": 31,
+      "area": "comercial",
+      "maquina": "TCN-03",
+      "titulo": "Estimativa rápida de torneamento de flange",
+      "dica": "Para flange em SAE 1045 acima de 300 mm, conto 2 min de desbaste por 10 mm de diâmetro e somo 6 min de acabamento por face. Na FL-1045-320 dá 22 min, que é o apontado; o padrão de 18 min do ERP está otimista.",
+      "validado_por": "Tiago Mendes (engenharia de processo)",
+      "data": "2026-10-30",
+      "tags": [
+        "cotação",
+        "flange",
+        "tempo de usinagem"
+      ]
+    },
+    {
+      "id": "SB-104",
+      "autor": "Luiz Carlos Pires",
+      "funcao": "Operador de prensa",
+      "tempo_casa_anos": 26,
+      "area": "operadores",
+      "maquina": "PRE-400",
+      "titulo": "Quando a PRE-400 começa a dar rebarba",
+      "dica": "A embreagem patinando faz o martelo descer mais devagar no fim do curso e a rebarba aparece antes do contador chegar nos 40 mil golpes. Quando ouço o chiado na embreagem, meço a rebarba a cada 200 peças e não a cada 500.",
+      "validado_por": "Sandro Lemos (supervisor de manutenção)",
+      "data": "2026-11-09",
+      "tags": [
+        "estampagem",
+        "rebarba",
+        "embreagem"
+      ]
+    },
+    {
+      "id": "SB-107",
+      "autor": "Adriano Moretti",
+      "funcao": "Operador de centro de usinagem",
+      "tempo_casa_anos": 17,
+      "area": "operadores",
+      "maquina": "CUV-04",
+      "titulo": "Aquecimento do eixo-árvore do CUV-04",
+      "dica": "Antes de mandrilhar o alojamento da carcaça, aqueço o eixo-árvore 20 min em rotação escalonada. Se passa de 50 °C, mando a medição para a metrologia porque o H7 do alojamento começa a fugir.",
+      "validado_por": "Diego Fontana (técnico de manutenção)",
+      "data": "2026-11-12",
+      "tags": [
+        "eixo-árvore",
+        "temperatura",
+        "carcaça"
+      ]
+    },
+    {
+      "id": "SB-110",
+      "autor": "Rosângela Duarte",
+      "funcao": "Operadora de tratamento térmico",
+      "tempo_casa_anos": 22,
+      "area": "operadores",
+      "maquina": "FOR-01",
+      "titulo": "Carga do E-3307 no forno",
+      "dica": "O eixo comprido empena menos pendurado na vertical. Monto o cesto com 30 eixos em pé e deixo um corpo de prova no meio da carga para medir a dureza. Assim a retífica precisa de menos sobremetal.",
+      "validado_por": "Cláudia Weiss (metrologia)",
+      "data": "2026-09-18",
+      "tags": [
+        "têmpera",
+        "empeno",
+        "eixo"
+      ]
+    },
+    {
+      "id": "SB-113",
+      "autor": "Paulo Henrique Rosa",
+      "funcao": "Soldador",
+      "tempo_casa_anos": 19,
+      "area": "operadores",
+      "maquina": "ROB-03",
+      "titulo": "Pré-deformação no braço BR-1180",
+      "dica": "Coloco um calço de 2 mm no centro do gabarito antes de soldar. A solda puxa o braço de volta e ele sai reto, dentro de 1,5 mm de empeno. Sem o calço, sai com 2,5 a 3 mm.",
+      "validado_por": "Tiago Mendes (engenharia de processo)",
+      "data": "2026-07-22",
+      "tags": [
+        "solda",
+        "empeno",
+        "gabarito"
+      ]
+    },
+    {
+      "id": "SB-116",
+      "autor": "Wilson Gonçalves",
+      "funcao": "Preparador de máquinas",
+      "tempo_casa_anos": 24,
+      "area": "operadores",
+      "maquina": "TCN-03",
+      "titulo": "Fixar flange fina sem perder batimento",
+      "dica": "Flange fina em castanha dura vira prato. Uso castanha mole usinada no diâmetro da peça e baixo a pressão para 18 bar. Deixo as castanhas moles da FL-1045-320 guardadas com etiqueta, assim o setup volta para 35 min.",
+      "validado_por": "Roberto Mattos (qualidade)",
+      "data": "2026-11-12",
+      "tags": [
+        "setup",
+        "flange",
+        "batimento"
+      ]
+    },
+    {
+      "id": "SB-119",
+      "autor": "Antônio Barbosa",
+      "funcao": "Forjador",
+      "tempo_casa_anos": 28,
+      "area": "operadores",
+      "maquina": "MAR-01",
+      "titulo": "Tarugo frio dá dobra",
+      "dica": "Depois de qualquer parada da indução, os primeiros tarugos saem abaixo de 1.180 °C e fazem dobra na aba do cubo. Descarto os três primeiros de volta ao forno e só forjo com o pirômetro marcando acima de 1.180 °C.",
+      "validado_por": "Roberto Mattos (qualidade)",
+      "data": "2026-11-03",
+      "tags": [
+        "forjamento",
+        "temperatura",
+        "dobra"
+      ]
+    },
+    {
+      "id": "SB-122",
+      "autor": "Cláudia Weiss",
+      "funcao": "Metrologista",
+      "tempo_casa_anos": 15,
+      "area": "qualidade",
+      "maquina": null,
+      "titulo": "Medir dureza depois da têmpera",
+      "dica": "Peça que chega quente do terceiro mede dureza errada. Espero a peça chegar a 20 °C e lixo a carepa antes de medir. Na dúvida, corto o corpo de prova da carga.",
+      "validado_por": "Roberto Mattos (qualidade)",
+      "data": "2026-11-12",
+      "tags": [
+        "dureza",
+        "metrologia",
+        "tratamento térmico"
+      ]
+    },
+    {
+      "id": "SB-125",
+      "autor": "Joel Antunes",
+      "funcao": "Encarregado da caldeiraria",
+      "tempo_casa_anos": 25,
+      "area": "operadores",
+      "maquina": "DOB-01",
+      "titulo": "Falta de chapa não se resolve trocando material",
+      "dica": "Quando falta S355, a tentação é usar S275, que tem no estoque. Não faço: o braço perde resistência e o cliente precisa aprovar por escrito. Prefiro avisar o PCP e remanejar a célula.",
+      "validado_por": "Vanessa Prado (PCP)",
+      "data": "2026-11-11",
+      "tags": [
+        "chapa",
+        "material",
+        "caldeiraria"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:35",
+      "registros": 286540,
+      "observacao": "Pedidos, OPs, roteiros, tempos padrão, estoque e custos"
+    },
+    {
+      "id": "mes",
+      "nome": "MES / apontamento de produção",
+      "tipo": "MES",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T08:10",
+      "registros": 412870,
+      "observacao": "Apontamentos por operação, contador de golpes, paradas e refugo"
+    },
+    {
+      "id": "plm",
+      "nome": "PLM/CAD (desenhos de cliente e roteiros)",
+      "tipo": "PLM",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:20",
+      "registros": 38410,
+      "observacao": "Desenhos de cliente com acesso restrito por perfil"
+    },
+    {
+      "id": "cmm",
+      "nome": "Software da máquina de medição (CMM)",
+      "tipo": "Metrologia",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:50",
+      "registros": 52300,
+      "observacao": "Relatórios dimensionais por OP e lote"
+    },
+    {
+      "id": "planilhas",
+      "nome": "Planilhas (cotações, paradas)",
+      "tipo": "Planilhas",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:10",
+      "registros": 4280,
+      "observacao": "Planilha de cotações e controles da manutenção"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail comercial (ex.: Microsoft 365)",
+      "tipo": "E-mail",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:12",
+      "registros": 23640,
+      "observacao": "Pedidos de cotação, desenhos recebidos e reclamações"
+    },
+    {
+      "id": "sharepoint",
+      "nome": "SharePoint / pasta da qualidade",
+      "tipo": "Documentos",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T22:00",
+      "registros": 9120,
+      "observacao": "Pasta de certificados de material sem permissão de leitura desde 12/11; TI avisada"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business (vendedores técnicos)",
+      "tipo": "Mensagens",
+      "status": "planejado",
+      "ultima_sync": null,
+      "registros": 0,
+      "observacao": "Piloto com 5 vendedores técnicos previsto para janeiro"
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 6
+    },
+    {
+      "id": "pcp",
+      "nome": "PCP e programação",
+      "areas": [
+        "producao",
+        "qualidade",
+        "operadores"
+      ],
+      "usuarios": 14
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e metrologia",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 11
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 18
+    },
+    {
+      "id": "orcamentos",
+      "nome": "Orçamentação",
+      "areas": [
+        "comercial",
+        "producao",
+        "marketing"
+      ],
+      "usuarios": 5
+    },
+    {
+      "id": "vendedor",
+      "nome": "Vendedor técnico",
+      "areas": [
+        "comercial"
+      ],
+      "usuarios": 5
+    },
+    {
+      "id": "operador",
+      "nome": "Operador e preparador (celular)",
+      "areas": [
+        "operadores"
+      ],
+      "usuarios": 120
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T07:41",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Quais OPs da caldeiraria estão paradas por falta de chapa?",
+      "fontes": [
+        "op:OP-60502",
+        "turno:2026-11-11|2º|L-SOL"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:58",
+      "perfil": "orcamentos",
+      "area": "comercial",
+      "pergunta": "Já usinamos algo parecido com o desenho 55-118?",
+      "fontes": [
+        "doc:DOC-DES-55118#t1",
+        "doc:DOC-ROT-E3307#t2",
+        "doc:DOC-PLA-COT#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:06",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Montar pacote de documentação do pedido 7731",
+      "fontes": [
+        "pedido:PV-7731",
+        "doc:DOC-PC-4471#t3",
+        "nc:NC-2026-211"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:15",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Última falha no eixo-árvore do CUV-04",
+      "fontes": [
+        "os:OS-6541",
+        "os:OS-6615"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:22",
+      "perfil": "operador",
+      "area": "operadores",
+      "pergunta": "Pressão de fixação para flange fina no TCN-03",
+      "fontes": [
+        "saber:SB-116",
+        "doc:DOC-IT-SET#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:37",
+      "perfil": "vendedor",
+      "area": "comercial",
+      "pergunta": "Tem SP-4471 em estoque para a Carrocerias Serra Gaúcha?",
+      "fontes": [
+        "sku:SP-4471",
+        "pedido:PV-7731",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:01",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o OEE da estamparia está em 61,2%?",
+      "fontes": [
+        "kpi:oee_estamparia",
+        "maq:PRE-400"
+      ]
+    },
+    {
+      "data": "2026-11-12T17:20",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Temperatura de revenimento do 4140",
+      "fontes": [
+        "doc:DOC-ESP-TT#t1",
+        "nc:NC-2026-218"
+      ]
+    },
+    {
+      "data": "2026-11-12T15:44",
+      "perfil": "operador",
+      "area": "operadores",
+      "pergunta": "Como evitar empeno no braço BR-1180",
+      "fontes": [
+        "saber:SB-113",
+        "nc:NC-2026-220"
+      ]
+    },
+    {
+      "data": "2026-11-12T10:03",
+      "perfil": "vendedor",
+      "area": "comercial",
+      "pergunta": "Cliente quer trocar S355 por S275 no BR-1180, pode?",
+      "fontes": [
+        "regra:RC-04",
+        "saber:SB-125",
+        "pedido:PV-7762"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o OEE da estamparia caiu para 61,2%?",
+      "resposta": "O OEE da estamparia está em 61,2%, contra meta de 75%. A PRE-400 roda a 18 golpes/min em vez de 30 por patinação da embreagem (OS-6612, troca das lonas no domingo, 15/11), e o refugo por rebarba subiu: 310 suportes no 1º turno de 12/11. Somando os dois turnos daquele dia foram 155 min de parada.",
+      "fontes": [
+        "kpi:oee_estamparia",
+        "maq:PRE-400",
+        "os:OS-6612",
+        "turno:2026-11-12|1º|L-EST",
+        "turno:2026-11-12|2º|L-EST"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quais pedidos estão atrasados e o que segura cada um?",
+      "resposta": "Quatro pedidos estão atrasados e explicam o OTIF de 79%: PV-7718 da Redutores Itapocu (forno FOR-01 parado), PV-7731 da Carrocerias Serra Gaúcha (PRE-400 a 18 golpes/min), PV-7740 da Ar Pleno Compressores (38 carcaças fundidas com porosidade) e PV-7744 da Máquinas Pesadas Rio Iguaçu (falta de chapa S355 de 12,5 mm).",
+      "fontes": [
+        "kpi:otif",
+        "pedido:PV-7718",
+        "pedido:PV-7731",
+        "pedido:PV-7740",
+        "pedido:PV-7744"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Já usinamos algo parecido com o desenho 55-118 do cliente? Quanto tempo levou?",
+      "resposta": "Sim. A mais próxima é o eixo E-3307, no mesmo SAE 4140 e com diâmetro 8% menor (Ø 85 contra Ø 92), com torneamento CNC, fresamento, têmpera e retífica. Na OP-60412 a usinagem apontada foi de 3 h 40 min por peça, 25 min acima do padrão por causa da retífica. O orçamento 0981 fechou em R$ 486,00 por peça.",
+      "fontes": [
+        "doc:DOC-DES-55118#t1",
+        "doc:DOC-ROT-E3307#t1",
+        "doc:DOC-ROT-E3307#t2",
+        "doc:DOC-PLA-COT#t2",
+        "op:OP-60412"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Que flanges em aço 1045 acima de 300 mm já usinamos e quanto levaram no torno CNC?",
+      "resposta": "A FL-1045-320 (Ø 320 × 45 mm). Na OP-60466, de 250 peças, o torneamento apontado foi de 22 min por peça, contra 18 min do padrão do ERP. O Jair Fernandes estima 2 min de desbaste por 10 mm de diâmetro mais 6 min de acabamento por face, o que bate com o apontado.",
+      "fontes": [
+        "sku:FL-1045-320",
+        "op:OP-60466",
+        "saber:SB-101"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quais ordens da caldeiraria estão paradas por falta de chapa?",
+      "resposta": "A OP-60502, de 400 braços BR-1180 para a Máquinas Pesadas Rio Iguaçu, está parada com 30%: o saldo de chapa S355 de 12,5 mm acabou com 120 braços e a célula ficou 240 min parada no 2º turno de 11/11. O fornecedor de aço entrega 18 t em 16/11 e o PV-7744 foi reprogramado para 28/11.",
+      "fontes": [
+        "op:OP-60502",
+        "pedido:PV-7744",
+        "turno:2026-11-11|2º|L-SOL"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quando ficam prontos os eixos E-3307 da Redutores Itapocu?",
+      "resposta": "A OP-60471, de 240 eixos, está com 65% e nova previsão de término em 21/11. O FOR-01 está parado desde 06/11 e a têmpera foi para um terceiro, com aprovação por escrito do cliente; a 1ª carga saiu com 47 HRC e está em retêmpera (NC-2026-218). A entrega do PV-7718 passou para 24/11, e o contrato prevê multa de 0,5% por semana de atraso.",
+      "fontes": [
+        "op:OP-60471",
+        "pedido:PV-7718",
+        "nc:NC-2026-218",
+        "doc:DOC-CTR-ITA#t2",
+        "doc:DOC-CTR-ITA#t3"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Monte o pacote de documentação do pedido 7731.",
+      "resposta": "O pacote do PV-7731 (12.000 suportes SP-4471) leva o certificado de material da bobina LNE 380 e o relatório dimensional de 5 peças por lote, como pede o plano de controle. Vale anexar o 8D da NC-2026-211, que o cliente pediu até 20/11. A pasta de certificados está sem leitura desde 12/11, então os certificados precisam ser conferidos à mão.",
+      "fontes": [
+        "pedido:PV-7731",
+        "doc:DOC-PC-4471#t3",
+        "nc:NC-2026-211",
+        "doc:DOC-EML-7731#t2",
+        "integ:sharepoint"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Essa NC da flange já tinha acontecido antes?",
+      "resposta": "Sim. A NC-2026-205 (14 flanges com batimento de 0,08 mm, máximo 0,05) repete a NC-2025-187, com a mesma causa: castanhas duras deformando a flange. A lição aprendida LA-031 foi divulgada em fevereiro de 2025 só para o 1º turno. Agora a instrução de setup (seção 4.3) pede castanhas moles e 18 bar.",
+      "fontes": [
+        "nc:NC-2026-205",
+        "doc:DOC-LA-031#t1",
+        "doc:DOC-LA-031#t2",
+        "doc:DOC-IT-SET#t2"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Qual foi a última falha no eixo-árvore do centro de usinagem 4?",
+      "resposta": "Em 27/08 (OS-6541): mola-prato do sistema de fixação rompida, força de fixação em 11 kN; o reparo levou 9,5 h e a força voltou a 19 kN. Agora o CUV-04 está em alerta com o eixo-árvore a 58 °C e vibração de 3,8 mm/s (OS-6615), rodando limitado a 6.000 rpm até a troca dos rolamentos em 22/11.",
+      "fontes": [
+        "os:OS-6541",
+        "os:OS-6615",
+        "maq:CUV-04",
+        "doc:DOC-MAN-USI#t1"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quando o forno FOR-01 volta a operar?",
+      "resposta": "O FOR-01 está parado desde 06/11 com a resistência da zona 3 rompida e um termopar com desvio de 7 °C (OS-6608, 38 h até agora). A resistência chega em 16/11 e a volta está prevista para 18/11, depois da verificação de uniformidade. Com uma zona fora, o forno não garante os ±5 °C e não pode temperar.",
+      "fontes": [
+        "maq:FOR-01",
+        "os:OS-6608",
+        "doc:DOC-MAN-TT#t1"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Temos suporte SP-4471 para atender a Carrocerias Serra Gaúcha?",
+      "resposta": "Só em parte. O estoque é de 1.800 suportes, abaixo do mínimo de 4.000, e o PV-7731 pede 12.000. A OP-60488 tem 6.600 feitos e nova previsão de término em 19/11, com entrega em 21/11. O cliente tem suporte até 18/11; pela RC-03 dá para mandar parcial sem frete extra, com liberação do PCP para o estoque abaixo do mínimo.",
+      "fontes": [
+        "sku:SP-4471",
+        "pedido:PV-7731",
+        "op:OP-60488",
+        "regra:RC-03",
+        "doc:DOC-EML-7731#t1"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "A Guindastes Litoral quer trocar S355 por S275 no braço BR-1180. Posso aceitar?",
+      "resposta": "Não por conta própria. Pela RC-04, troca de material só com aprovação por escrito da engenharia do cliente e revisão do desenho; por isso o PV-7762, de 200 braços a R$ 645,00, está em análise. O Joel Antunes, encarregado da caldeiraria, lembra que o braço perde resistência com S275.",
+      "fontes": [
+        "regra:RC-04",
+        "pedido:PV-7762",
+        "saber:SB-125"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Como está a carteira da Aline Ferreira no mês?",
+      "resposta": "A Aline Ferreira (RS) realizou R$ 1.120.000 de uma meta de R$ 1.800.000. O maior cliente dela, a Carrocerias Serra Gaúcha, tem o PV-7731 atrasado e uma reclamação de rebarba aberta (NC-2026-211). O PV-7757 da Implementos Campo Forte (1.500 pinos) foi aprovado em 09/11.",
+      "fontes": [
+        "rep:REP-02",
+        "pedido:PV-7731",
+        "nc:NC-2026-211",
+        "pedido:PV-7757"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Escreva uma resposta ao cliente que perguntou por que cubo forjado e não fundido.",
+      "resposta": "O rascunho MK-03 usa só dados aprovados: o CB-2210 é forjado a quente em SAE 1045 e normalizado, com dureza de 170 a 210 HB, e o forjamento mantém a fibra contínua do material. O texto ainda precisa da revisão da engenharia antes de sair.",
+      "fontes": [
+        "sku:CB-2210"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Que conteúdos de capacidade técnica já estão aprovados?",
+      "resposta": "A ficha MK-01, de eixos temperados e retificados, está aprovada com os dados do E-3307 (SAE 4140, 50 a 54 HRC, assentos em h6 e Ra 0,4 µm). O artigo MK-02, sobre tolerância geométrica em flanges, está em revisão com a qualidade.",
+      "fontes": [
+        "sku:E-3307",
+        "doc:DOC-ESP-TT#t1",
+        "sku:FL-1045-320"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como fixar uma flange fina no torno sem perder o batimento?",
+      "resposta": "O Wilson Gonçalves, preparador com 24 anos de casa, usa castanha mole usinada no diâmetro da peça e baixa a pressão para 18 bar. Ele guarda as castanhas da FL-1045-320 etiquetadas para o setup voltar aos 35 min do padrão; no 2º turno de 12/11, sem elas, o setup levou 65 min.",
+      "fontes": [
+        "saber:SB-116",
+        "doc:DOC-IT-SET#t2",
+        "turno:2026-11-12|2º|L-TOR"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como saber que a PRE-400 vai começar a dar rebarba?",
+      "resposta": "O Luiz Carlos Pires, operador de prensa com 26 anos de casa, ouve o chiado da embreagem: com ela patinando, a rebarba aparece antes dos 40.000 golpes. Nesse caso ele mede a rebarba a cada 200 peças em vez de 500. A instrução pede afiação quando a rebarba passa de 0,15 mm.",
+      "fontes": [
+        "saber:SB-104",
+        "doc:DOC-IT-EST#t2",
+        "maq:PRE-400"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Quando chega meu pedido PV-7744?",
+      "resposta": "O PV-7744, de 400 braços BR-1180, tem nova previsão de entrega em 28/11. A produção parou com 120 braços por falta de chapa S355 de 12,5 mm, que chega do fornecedor em 16/11.",
+      "fontes": [
+        "pedido:PV-7744",
+        "op:OP-60502"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Qual a dureza especificada do eixo E-3307 e como ela é garantida?",
+      "resposta": "O E-3307 é temperado em óleo a partir de 850 °C e revenido a 200 °C por 2 h, com dureza final de 50 a 54 HRC. Quando a têmpera é feita em terceiro, cada carga leva corpo de prova e a dureza é medida em 100% dos eixos.",
+      "fontes": [
+        "sku:E-3307",
+        "doc:DOC-ESP-TT#t1",
+        "doc:DOC-ESP-TT#t3",
+        "nc:NC-2026-218"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Posso pedir 2.000 travessas TR-7730 com entrega em 15 dias?",
+      "resposta": "Sim. A TR-7730 custa R$ 18,90, tem 6.200 peças em estoque e prazo de 15 dias para lotes novos; 2.000 peças saem do estoque. O lote mínimo de estampados para produção é de 5.000 peças (RC-06).",
+      "fontes": [
+        "sku:TR-7730",
+        "regra:RC-06"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "09:05",
+      "texto": "Bom dia! A Carrocerias Serra Gaúcha tá cobrando o PV-7731 dos suportes. Tem como mandar alguma coisa do estoque agora pra não parar a linha deles?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:05",
+      "texto": "Bom dia, Aline. O PV-7731 (12.000 SP-4471) está atrasado: a OP-60488 tem 6.600 feitos, porque a PRE-400 roda a 18 golpes/min com a embreagem patinando. Nova previsão de entrega: 21/11. O estoque é de 1.800 suportes, abaixo do mínimo de 4.000.",
+      "fontes": [
+        "pedido:PV-7731",
+        "op:OP-60488",
+        "maq:PRE-400",
+        "sku:SP-4471"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:07",
+      "texto": "Eles têm suporte só até dia 18. Dá pra mandar os 1.800 já?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:08",
+      "texto": "Pela RC-03, a entrega parcial sai sem frete extra porque o atraso é nosso, mas o estoque abaixo do mínimo precisa da liberação da Vanessa Prado, do PCP. Esses 1.800 foram reinspecionados 100% em 10/11 por causa da reclamação de rebarba (NC-2026-211).",
+      "fontes": [
+        "regra:RC-03",
+        "nc:NC-2026-211",
+        "doc:DOC-EML-7731#t1"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:11",
+      "texto": "Show. Eles também querem 7% de desconto no próximo pedido de travessas pelo transtorno.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:11",
+      "texto": "A TR-7730 está a R$ 18,90. Pela RC-01 você aprova até 5% (R$ 17,96); 7% (R$ 17,58) precisa do gerente regional, o Hélio Bastos. Acima de 8%, só a diretoria.",
+      "fontes": [
+        "regra:RC-01",
+        "sku:TR-7730"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:13",
+      "texto": "Fechado, vou pedir pro Hélio e pra Vanessa. Valeu!",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:13",
+      "texto": "Combinado. Se quiser, monto a mensagem para o cliente com a entrega parcial e a nova data de 21/11. Lembre que ele pediu o 8D até 20/11.",
+      "fontes": [
+        "pedido:PV-7731",
+        "doc:DOC-EML-7731#t2"
+      ]
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha de capacidade: eixos temperados e retificados",
+      "status": "aprovado",
+      "sku": "E-3307",
+      "texto": "Usinamos, temperamos e retificamos eixos sob desenho em SAE 4140 e 8620. Exemplo: eixo de Ø 85 × 640 mm com dureza de 50 a 54 HRC, assentos em h6 e rugosidade Ra 0,4 µm, com tratamento térmico na própria planta e relatório de dureza por lote.",
+      "fontes": [
+        "sku:E-3307",
+        "doc:DOC-ESP-TT#t1"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Por que indicar a tolerância geométrica no desenho da flange",
+      "status": "em_revisao",
+      "sku": "FL-1045-320",
+      "texto": "Uma flange de 320 mm pode estar dentro das cotas e mesmo assim vazar se a face tiver batimento. Indicar o batimento axial (por exemplo, 0,05 mm) no desenho define o método de fixação e de medição desde a cotação.",
+      "fontes": [
+        "sku:FL-1045-320",
+        "doc:DOC-IT-SET#t2"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta: cubo forjado ou fundido?",
+      "status": "rascunho",
+      "sku": "CB-2210",
+      "texto": "O cubo CB-2210 é forjado a quente em SAE 1045 e normalizado, com dureza de 170 a 210 HB. O forjamento mantém a fibra contínua do material, o que ajuda na resistência à fadiga em eixos de semirreboque.",
+      "fontes": [
+        "sku:CB-2210"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "post",
+      "titulo": "Post: do desenho ao certificado",
+      "status": "aprovado",
+      "sku": "SP-4471",
+      "texto": "Cada lote de estampados sai com certificado de material da bobina e relatório dimensional de 5 peças. Para itens com PPAP, seguimos o plano de controle aprovado com o cliente.",
+      "fontes": [
+        "doc:DOC-PC-4471#t3"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha de capacidade: conjuntos soldados",
+      "status": "em_revisao",
+      "sku": "BR-1180",
+      "texto": "Conjuntos soldados em célula robotizada com gabarito dedicado, em chapa até 12,5 mm. Exemplo: braço de suspensão de 38 kg com distância entre buchas de 920 ± 0,5 mm.",
+      "fontes": [
+        "sku:BR-1180"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do cliente Alto Piraí",
+    "boas_vindas": "Acompanhe suas OPs e pedidos, baixe certificados e relatórios dimensionais e envie desenhos para cotação.",
+    "destaques": [
+      "TR-7730",
+      "FL-1045-320",
+      "BU-0450",
+      "PN-2041"
+    ],
+    "avisos": [
+      {
+        "titulo": "Tratamento térmico",
+        "texto": "O forno de têmpera volta a operar em 18/11. Pedidos com têmpera podem ter prazo revisto; o vendedor técnico informa a nova data."
+      },
+      {
+        "titulo": "Cotação por desenho",
+        "texto": "Envie o desenho com material, tratamento e tolerâncias geométricas. Desenhos de cliente ficam com acesso restrito ao comercial, à engenharia e à qualidade."
+      }
+    ]
+  }
+}

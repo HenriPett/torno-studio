@@ -1,0 +1,3435 @@
+{
+  "id": "plasticos",
+  "setor": "Plásticos e embalagens",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Morretiba Embalagens Plásticas S.A.",
+    "cidade": "Joinville",
+    "uf": "SC",
+    "funcionarios": 1260,
+    "descricao": "Transformadora que injeta tampas, potes e baldes, sopra frascos e galões de PEAD e extruda filmes de polietileno para indústrias de bebidas, alimentos, limpeza, tintas e lubrificantes."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "item",
+    "produtos": "itens",
+    "cliente": "cliente",
+    "clientes": "clientes",
+    "representante": "representante",
+    "representantes": "representantes",
+    "maquina": "máquina",
+    "maquinas": "máquinas",
+    "linha": "célula",
+    "linhas": "células",
+    "unidade": "milheiros",
+    "lote": "lote"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP e programação de moldes"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e laboratório"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção e ferramentaria"
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial e representantes"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing e catálogo técnico"
+    },
+    {
+      "id": "operadores",
+      "nome": "Processo e setup (preparadores)"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria industrial"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Planta Joinville (injeção e ferramentaria)",
+      "cidade": "Joinville"
+    },
+    {
+      "id": "P2",
+      "nome": "Planta Guaramirim (sopro e extrusão)",
+      "cidade": "Guaramirim"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-INJT",
+      "nome": "Injeção de tampas",
+      "planta": "P1",
+      "tipo": "injeção"
+    },
+    {
+      "id": "L-INJP",
+      "nome": "Injeção de potes e baldes",
+      "planta": "P1",
+      "tipo": "injeção"
+    },
+    {
+      "id": "L-SOP",
+      "nome": "Sopro de frascos e galões",
+      "planta": "P2",
+      "tipo": "extrusão-sopro"
+    },
+    {
+      "id": "L-EXT",
+      "nome": "Extrusão de filmes",
+      "planta": "P2",
+      "tipo": "extrusão balão"
+    },
+    {
+      "id": "L-REC",
+      "nome": "Moagem e reaproveitamento de refugo",
+      "planta": "P2",
+      "tipo": "reciclagem interna"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "INJ-07",
+      "nome": "Injetora 7 (350 t)",
+      "linha": "L-INJT",
+      "tipo": "injetora hidráulica",
+      "fabricante": "Fabricante A",
+      "ano": 2014,
+      "status": "operando",
+      "horimetro": 68420,
+      "mtbf_h": 420,
+      "proxima_preventiva": "2026-11-27",
+      "manual": "DOC-MAN-INJ"
+    },
+    {
+      "id": "INJ-09",
+      "nome": "Injetora 9 (450 t)",
+      "linha": "L-INJT",
+      "tipo": "injetora hidráulica",
+      "fabricante": "Fabricante A",
+      "ano": 2016,
+      "status": "alerta",
+      "horimetro": 57310,
+      "mtbf_h": 180,
+      "proxima_preventiva": "2026-11-20",
+      "manual": "DOC-MAN-INJ"
+    },
+    {
+      "id": "INJ-11",
+      "nome": "Injetora 11 (350 t, elétrica)",
+      "linha": "L-INJT",
+      "tipo": "injetora elétrica",
+      "fabricante": "Fabricante D",
+      "ano": 2021,
+      "status": "operando",
+      "horimetro": 31940,
+      "mtbf_h": 690,
+      "proxima_preventiva": "2026-12-09",
+      "manual": "DOC-MAN-INJ"
+    },
+    {
+      "id": "INJ-14",
+      "nome": "Injetora 14 (650 t)",
+      "linha": "L-INJP",
+      "tipo": "injetora hidráulica",
+      "fabricante": "Fabricante A",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 44860,
+      "mtbf_h": 510,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-INJ"
+    },
+    {
+      "id": "INJ-15",
+      "nome": "Injetora 15 (800 t)",
+      "linha": "L-INJP",
+      "tipo": "injetora hidráulica",
+      "fabricante": "Fabricante A",
+      "ano": 2012,
+      "status": "manutencao",
+      "horimetro": 80120,
+      "mtbf_h": 340,
+      "proxima_preventiva": "2027-02-10",
+      "manual": "DOC-MAN-INJ"
+    },
+    {
+      "id": "MOL-214",
+      "nome": "Molde 214 — tampa 38 mm, 48 cavidades, câmara quente",
+      "linha": "L-INJT",
+      "tipo": "molde de injeção",
+      "fabricante": "Ferramentaria parceira B",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 31200,
+      "mtbf_h": 900,
+      "proxima_preventiva": "2026-12-15",
+      "manual": "DOC-MAN-MOL"
+    },
+    {
+      "id": "MOL-305",
+      "nome": "Molde 305 — pote 500 mL, 8 cavidades",
+      "linha": "L-INJP",
+      "tipo": "molde de injeção",
+      "fabricante": "Ferramentaria própria",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 22650,
+      "mtbf_h": 1400,
+      "proxima_preventiva": "2027-01-20",
+      "manual": "DOC-MAN-MOL"
+    },
+    {
+      "id": "SOP-03",
+      "nome": "Sopradora 3 (dupla estação)",
+      "linha": "L-SOP",
+      "tipo": "sopradora por extrusão",
+      "fabricante": "Fabricante B",
+      "ano": 2015,
+      "status": "operando",
+      "horimetro": 61770,
+      "mtbf_h": 470,
+      "proxima_preventiva": "2026-11-17",
+      "manual": "DOC-MAN-SOP"
+    },
+    {
+      "id": "SOP-04",
+      "nome": "Sopradora 4 (dupla estação)",
+      "linha": "L-SOP",
+      "tipo": "sopradora por extrusão",
+      "fabricante": "Fabricante B",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 36480,
+      "mtbf_h": 560,
+      "proxima_preventiva": "2026-12-03",
+      "manual": "DOC-MAN-SOP"
+    },
+    {
+      "id": "SOP-05",
+      "nome": "Sopradora 5 (galões até 5 L)",
+      "linha": "L-SOP",
+      "tipo": "sopradora por extrusão com acumulador",
+      "fabricante": "Fabricante B",
+      "ano": 2013,
+      "status": "parada",
+      "horimetro": 70930,
+      "mtbf_h": 290,
+      "proxima_preventiva": "2026-11-24",
+      "manual": "DOC-MAN-SOP"
+    },
+    {
+      "id": "EXT-01",
+      "nome": "Extrusora balão 1 (monocamada)",
+      "linha": "L-EXT",
+      "tipo": "extrusora de filme",
+      "fabricante": "Fabricante C",
+      "ano": 2011,
+      "status": "operando",
+      "horimetro": 88210,
+      "mtbf_h": 780,
+      "proxima_preventiva": "2026-12-06",
+      "manual": "DOC-MAN-EXT"
+    },
+    {
+      "id": "EXT-02",
+      "nome": "Extrusora balão 2 (coextrusão 3 camadas)",
+      "linha": "L-EXT",
+      "tipo": "extrusora de filme",
+      "fabricante": "Fabricante C",
+      "ano": 2018,
+      "status": "alerta",
+      "horimetro": 49650,
+      "mtbf_h": 360,
+      "proxima_preventiva": "2026-11-22",
+      "manual": "DOC-MAN-EXT"
+    },
+    {
+      "id": "MOI-01",
+      "nome": "Moinho granulador 1",
+      "linha": "L-REC",
+      "tipo": "moinho de facas",
+      "fabricante": "Fabricante C",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 27340,
+      "mtbf_h": 950,
+      "proxima_preventiva": "2026-11-26",
+      "manual": "DOC-MAN-EXT"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "TP-38",
+      "nome": "Tampa 38 mm com lacre (PP)",
+      "familia": "Tampas",
+      "unidade": "milheiros",
+      "preco": 128,
+      "prazo_dias": 7,
+      "estoque": 1850,
+      "estoque_minimo": 3000,
+      "descricao_comercial": "Tampa rosqueável de 38 mm em PP com anel de lacre destacável, para garrafas de suco, chá e óleo. Vedação sem liner e torque de remoção controlado lote a lote.",
+      "ficha": {
+        "atributos": {
+          "Material": "PP homopolímero (até 30% de PP reciclado pós-industrial)",
+          "Molde": "214 (48 cavidades, câmara quente)",
+          "Máquina padrão": "Injetora 9",
+          "Peso": "3,1 g",
+          "Embalagem": "Caixa com 5 milheiros"
+        },
+        "roteiro": [
+          "Secagem e dosagem de masterbatch",
+          "Injeção (INJ-09, molde 214)",
+          "Inspeção visual e dimensional por amostragem",
+          "Contagem e embalagem",
+          "Quarentena de 24 h (pós-contração)",
+          "Liberação e expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro interno da rosca",
+            "nominal": "35,60",
+            "tolerancia": "±0,10",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Altura total",
+            "nominal": "18,00",
+            "tolerancia": "±0,15",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Torque de remoção (após 24 h)",
+            "nominal": "1,5",
+            "tolerancia": "1,2 a 1,8",
+            "unidade": "N·m"
+          },
+          {
+            "caracteristica": "Chupagem no topo",
+            "nominal": "0",
+            "tolerancia": "máximo 0,10",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TP-28",
+      "nome": "Tampa 28 mm PCO 1881 (PEAD)",
+      "familia": "Tampas",
+      "unidade": "milheiros",
+      "preco": 46,
+      "prazo_dias": 5,
+      "estoque": 9200,
+      "estoque_minimo": 6000,
+      "descricao_comercial": "Tampa curta de 28 mm em PEAD para água mineral e bebidas sem gás. Leve, com lacre de segurança e ótima estabilidade de torque na linha de envase.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEAD",
+          "Molde": "118 (72 cavidades)",
+          "Máquina padrão": "Injetora 7",
+          "Peso": "1,9 g"
+        },
+        "roteiro": [
+          "Dosagem de masterbatch",
+          "Injeção (INJ-07, molde 118)",
+          "Inspeção",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Altura",
+            "nominal": "11,8",
+            "tolerancia": "±0,1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Torque de remoção",
+            "nominal": "1,1",
+            "tolerancia": "0,8 a 1,4",
+            "unidade": "N·m"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "TP-24",
+      "nome": "Tampa flip-top 24/410 (PP)",
+      "familia": "Tampas",
+      "unidade": "milheiros",
+      "preco": 92,
+      "prazo_dias": 8,
+      "estoque": 1100,
+      "estoque_minimo": 900,
+      "descricao_comercial": "Tampa flip-top 24/410 em PP com dobradiça integrada, para frascos de xampu, condicionador e sabonete líquido. Clique firme e abertura com uma mão.",
+      "ficha": {
+        "atributos": {
+          "Material": "PP copolímero",
+          "Molde": "221 (32 cavidades)",
+          "Máquina padrão": "Injetora 11",
+          "Cores": "Branco, natural e cores sob consulta"
+        },
+        "roteiro": [
+          "Dosagem de masterbatch",
+          "Injeção (INJ-11, molde 221)",
+          "Fechamento automático da dobradiça",
+          "Inspeção",
+          "Embalagem"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Força de abertura do flip",
+            "nominal": "12",
+            "tolerancia": "8 a 16",
+            "unidade": "N"
+          },
+          {
+            "caracteristica": "Diâmetro do orifício",
+            "nominal": "4,0",
+            "tolerancia": "±0,1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PT-500",
+      "nome": "Pote 500 mL com tampa (PP)",
+      "familia": "Potes e baldes",
+      "unidade": "milheiros",
+      "preco": 410,
+      "prazo_dias": 10,
+      "estoque": 640,
+      "estoque_minimo": 500,
+      "descricao_comercial": "Pote redondo de 500 mL em PP com tampa de encaixe, para margarina, requeijão e doces. Resiste a envase a quente até 85 °C e empilha bem no palete.",
+      "ficha": {
+        "atributos": {
+          "Material": "PP copolímero alto fluxo",
+          "Molde": "305 (8 cavidades) e tampa 306",
+          "Máquina padrão": "Injetora 14",
+          "Envase a quente": "até 85 °C"
+        },
+        "roteiro": [
+          "Injeção do pote (INJ-14, molde 305)",
+          "Injeção da tampa (molde 306)",
+          "Inspeção de empenamento",
+          "Embalagem em sacos de 250",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Empenamento da borda",
+            "nominal": "0",
+            "tolerancia": "máximo 0,3",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Força de compressão de topo",
+            "nominal": "≥ 350",
+            "tolerancia": "mínimo",
+            "unidade": "N"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PT-2000",
+      "nome": "Pote 2 L para sorvete (PP)",
+      "familia": "Potes e baldes",
+      "unidade": "milheiros",
+      "preco": 1180,
+      "prazo_dias": 12,
+      "estoque": 210,
+      "estoque_minimo": 150,
+      "descricao_comercial": "Pote retangular de 2 L em PP para sorvete, com tampa e lacre de abertura. Resiste a −25 °C sem trincar.",
+      "ficha": {
+        "atributos": {
+          "Material": "PP copolímero de impacto",
+          "Molde": "312 (4 cavidades)",
+          "Máquina padrão": "Injetora 14",
+          "Temperatura de uso": "−25 a 40 °C"
+        },
+        "roteiro": [
+          "Injeção (INJ-14, molde 312)",
+          "Inspeção",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Queda a −18 °C (cheio)",
+            "nominal": "1,0 m",
+            "tolerancia": "0 quebras em 10",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Espessura de parede",
+            "nominal": "0,65",
+            "tolerancia": "±0,05",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "BD-3600",
+      "nome": "Balde 3,6 L com alça (PP)",
+      "familia": "Potes e baldes",
+      "unidade": "peças",
+      "preco": 3.85,
+      "prazo_dias": 7,
+      "estoque": 26000,
+      "estoque_minimo": 15000,
+      "descricao_comercial": "Balde de 3,6 L em PP com alça e tampa com lacre, para tintas, massas e argamassas. Passa no teste de queda de 1,2 m cheio.",
+      "ficha": {
+        "atributos": {
+          "Material": "PP copolímero de impacto",
+          "Molde": "330 (1 cavidade) e tampa 331",
+          "Máquina padrão": "Injetora 15",
+          "Alça": "Aço galvanizado"
+        },
+        "roteiro": [
+          "Injeção (INJ-15, molde 330)",
+          "Montagem da alça",
+          "Teste de queda por amostragem",
+          "Paletização"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Queda cheio de água",
+            "nominal": "1,2 m",
+            "tolerancia": "0 vazamentos em 6",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Peso",
+            "nominal": "182",
+            "tolerancia": "±4",
+            "unidade": "g"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "FR-0500",
+      "nome": "Frasco 500 mL PEAD branco",
+      "familia": "Frascos e galões",
+      "unidade": "milheiros",
+      "preco": 420,
+      "prazo_dias": 8,
+      "estoque": 380,
+      "estoque_minimo": 250,
+      "descricao_comercial": "Frasco de 500 mL em PEAD branco para detergente e limpadores, gargalo 28 mm. Parede uniforme e boa área de rótulo.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEAD sopro",
+          "Gargalo": "28 mm",
+          "Máquina padrão": "Sopradora 4",
+          "Peso": "24 g"
+        },
+        "roteiro": [
+          "Dosagem de masterbatch branco",
+          "Sopro (SOP-04)",
+          "Rebarbação e teste de vazamento 100%",
+          "Embalagem"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura mínima de parede",
+            "nominal": "0,40",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Volume total",
+            "nominal": "530",
+            "tolerancia": "±8",
+            "unidade": "mL"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "FR-1000",
+      "nome": "Frasco 1 L PEAD azul (amaciante)",
+      "familia": "Frascos e galões",
+      "unidade": "milheiros",
+      "preco": 780,
+      "prazo_dias": 10,
+      "estoque": 90,
+      "estoque_minimo": 200,
+      "descricao_comercial": "Frasco de 1 L em PEAD azul com alça, para amaciantes e lava-roupas. Cor controlada por espectrofotômetro em cada lote, conforme o padrão do cliente.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEAD sopro",
+          "Cor": "Azul padrão do cliente (masterbatch exclusivo)",
+          "Máquina padrão": "Sopradora 3",
+          "Peso": "42 g"
+        },
+        "roteiro": [
+          "Dosagem de masterbatch azul (2,0%)",
+          "Sopro (SOP-03)",
+          "Rebarbação e teste de vazamento 100%",
+          "Medição de cor por lote",
+          "Embalagem"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diferença de cor (ΔE) contra o padrão",
+            "nominal": "≤ 1,0",
+            "tolerancia": "máximo",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Espessura mínima de parede",
+            "nominal": "0,45",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Queda cheio",
+            "nominal": "1,5 m",
+            "tolerancia": "0 vazamentos em 10",
+            "unidade": ""
+          }
+        ]
+      }
+    },
+    {
+      "sku": "FR-2000",
+      "nome": "Frasco 2 L PEAD branco (alvejante)",
+      "familia": "Frascos e galões",
+      "unidade": "milheiros",
+      "preco": 1150,
+      "prazo_dias": 10,
+      "estoque": 140,
+      "estoque_minimo": 100,
+      "descricao_comercial": "Frasco de 2 L em PEAD branco opaco com alça, para alvejantes e desinfetantes. Barreira à luz para proteger o produto.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEAD sopro",
+          "Máquina padrão": "Sopradora 3 ou 4",
+          "Peso": "68 g"
+        },
+        "roteiro": [
+          "Dosagem de masterbatch branco",
+          "Sopro",
+          "Teste de vazamento 100%",
+          "Embalagem"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura mínima de parede",
+            "nominal": "0,50",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Opacidade",
+            "nominal": "≥ 98",
+            "tolerancia": "mínimo",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "GL-5000",
+      "nome": "Galão 5 L PEAD natural",
+      "familia": "Frascos e galões",
+      "unidade": "peças",
+      "preco": 2.9,
+      "prazo_dias": 8,
+      "estoque": 8500,
+      "estoque_minimo": 12000,
+      "descricao_comercial": "Galão de 5 L em PEAD natural com alça e visor de nível, para lubrificantes, aditivos e saneantes. Empilhável e com tampa de 42 mm com lacre.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEAD sopro de alta massa molar",
+          "Máquina padrão": "Sopradora 5",
+          "Peso": "210 g"
+        },
+        "roteiro": [
+          "Sopro com acumulador (SOP-05)",
+          "Rebarbação",
+          "Teste de vazamento 100%",
+          "Paletização"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura mínima no fundo",
+            "nominal": "0,60",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Empilhamento (carga de topo)",
+            "nominal": "≥ 400",
+            "tolerancia": "mínimo",
+            "unidade": "N"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "FL-50",
+      "nome": "Filme termoencolhível PEBD 50 µm",
+      "familia": "Filmes",
+      "unidade": "kg",
+      "preco": 13.4,
+      "prazo_dias": 7,
+      "estoque": 14200,
+      "estoque_minimo": 12000,
+      "descricao_comercial": "Filme termoencolhível de PEBD com 50 µm para fardos de bebidas e enfardamento de embalagens. Encolhimento equilibrado e boa transparência.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEBD + PEBDL",
+          "Largura": "500 a 1.200 mm",
+          "Bobina": "Até 30 kg em tubete de 3\"",
+          "Máquina padrão": "Extrusora 2"
+        },
+        "roteiro": [
+          "Mistura de resinas",
+          "Extrusão balão (EXT-02)",
+          "Tratamento e rebobinamento",
+          "Ensaio de encolhimento por bobina",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura",
+            "nominal": "50",
+            "tolerancia": "±5",
+            "unidade": "µm"
+          },
+          {
+            "caracteristica": "Encolhimento longitudinal a 160 °C",
+            "nominal": "70",
+            "tolerancia": "±5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Géis visíveis",
+            "nominal": "0",
+            "tolerancia": "máximo 3 por m²",
+            "unidade": ""
+          }
+        ]
+      }
+    },
+    {
+      "sku": "FL-120",
+      "nome": "Filme coextrusado para sacaria 120 µm",
+      "familia": "Filmes",
+      "unidade": "kg",
+      "preco": 15.8,
+      "prazo_dias": 10,
+      "estoque": 18000,
+      "estoque_minimo": 10000,
+      "descricao_comercial": "Filme coextrusado de 3 camadas com 120 µm para sacaria industrial de 25 kg. Alta resistência à perfuração e à solda.",
+      "ficha": {
+        "atributos": {
+          "Material": "PEBDL + PEAD (3 camadas)",
+          "Largura": "600 a 1.400 mm",
+          "Máquina padrão": "Extrusora 1 ou 2"
+        },
+        "roteiro": [
+          "Mistura de resinas",
+          "Extrusão balão",
+          "Impressão (terceirizada, se pedido)",
+          "Rebobinamento",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura",
+            "nominal": "120",
+            "tolerancia": "±10",
+            "unidade": "µm"
+          },
+          {
+            "caracteristica": "Resistência ao impacto (dardo)",
+            "nominal": "≥ 600",
+            "tolerancia": "mínimo",
+            "unidade": "g"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-51877",
+      "sku": "TP-38",
+      "quantidade": 3000,
+      "linha": "L-INJT",
+      "inicio": "2026-11-04",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 64,
+      "pedido": "PV-30412",
+      "motivo_atraso": "Chupagem na tampa 38 mm com o blend de PP reciclado: ciclo do molde 214 na INJ-09 subiu de 16,5 s para 18,0 s e o refugo chegou a 3,9%; zona 3 da INJ-09 oscilando ±7 °C.",
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "Setup do molde 214 na INJ-09 aprovado em 54 min (ficha 214-INJ09 rev. F). Lote 51877-01."
+        },
+        {
+          "data": "2026-11-07",
+          "evento": "Entrou o lote de PP reciclado pós-industrial RC-0912 (30% no blend). Primeiras tampas com chupagem no topo."
+        },
+        {
+          "data": "2026-11-08",
+          "evento": "Bebidas Rio Peixe reclamou do lote 51877-02 (NC-2026-061). Ciclo aumentado para 18,0 s para reduzir a chupagem."
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Zona 3 da INJ-09 oscilando ±7 °C; aberta a OS-8841."
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Acumulado de 1.920 milheiros, 1.850 aprovados em estoque. Término previsto para 17/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-51890",
+      "sku": "FR-1000",
+      "quantidade": 400,
+      "linha": "L-SOP",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 35,
+      "pedido": "PV-30418",
+      "motivo_atraso": "Masterbatch azul do lote MB-7731 reprovado na cor (ΔE 1,8 contra máximo de 1,0); sopro parado à espera do lote de reposição (NC-2026-063).",
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "Início na SOP-03 com o saldo do lote MB-7702; 140 milheiros produzidos e aprovados."
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "Lote MB-7731 reprovado na medição de cor de entrada (ΔE 1,8). Produção suspensa."
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Fornecedor de masterbatch promete lote corrigido para 16/11. PCP reprograma término para 19/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-51882",
+      "sku": "GL-5000",
+      "quantidade": 40000,
+      "linha": "L-SOP",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 55,
+      "pedido": "PV-30405",
+      "motivo_atraso": "Sopradora SOP-05 parada desde 10/11 por falha na servoválvula do controlador de parison; 22.000 de 40.000 galões prontos.",
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "Início na SOP-05, lote 51882-01."
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "Espessura do fundo caiu para 0,55 mm (mínimo 0,60) em amostras do 2º turno (NC-2026-062)."
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "SOP-05 parada: servoválvula do parison sem resposta. OS-8838 aberta; peça importada pelo Fabricante B."
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Servoválvula com chegada prevista em 15/11; término da OP revisto para 17/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-51895",
+      "sku": "FL-50",
+      "quantidade": 30000,
+      "linha": "L-EXT",
+      "inicio": "2026-11-08",
+      "prazo": "2026-11-13",
+      "status": "atrasada",
+      "progresso": 68,
+      "pedido": "PV-30421",
+      "motivo_atraso": "EXT-02 com pressão de massa subindo (310 bar, limite de 330): velocidade reduzida em 15% e géis no filme (NC-2026-060).",
+      "historico": [
+        {
+          "data": "2026-11-08",
+          "evento": "Início na EXT-02, bobinas do lote 51895-01."
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Géis acima de 3 por m² em 6 bobinas do lote 51895-03; bobinas segregadas."
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Pressão de massa em 310 bar; velocidade reduzida em 15%. OS-8846 para troca do pacote de telas."
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Acumulado de 20.400 kg. Término previsto para 15/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-51860",
+      "sku": "TP-28",
+      "quantidade": 6000,
+      "linha": "L-INJT",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-03",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-30399",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "Concluída na INJ-07 com refugo de 1,1%."
+        }
+      ]
+    },
+    {
+      "id": "OP-51866",
+      "sku": "PT-500",
+      "quantidade": 1000,
+      "linha": "L-INJP",
+      "inicio": "2026-10-29",
+      "prazo": "2026-11-05",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-30402",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "Concluída na INJ-14 com molde 305; empenamento médio de 0,12 mm."
+        }
+      ]
+    },
+    {
+      "id": "OP-51871",
+      "sku": "BD-3600",
+      "quantidade": 30000,
+      "linha": "L-INJP",
+      "inicio": "2026-10-31",
+      "prazo": "2026-11-07",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-07",
+          "evento": "Concluída na INJ-15 antes da parada para preventiva da unidade hidráulica."
+        }
+      ]
+    },
+    {
+      "id": "OP-51874",
+      "sku": "FR-2000",
+      "quantidade": 200,
+      "linha": "L-SOP",
+      "inicio": "2026-11-02",
+      "prazo": "2026-11-05",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "Concluída na SOP-04."
+        }
+      ]
+    },
+    {
+      "id": "OP-51884",
+      "sku": "PT-2000",
+      "quantidade": 400,
+      "linha": "L-INJP",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-17",
+      "status": "em_producao",
+      "progresso": 45,
+      "pedido": "PV-30409",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Setup do molde 312 na INJ-14 em 61 min."
+        }
+      ]
+    },
+    {
+      "id": "OP-51886",
+      "sku": "TP-28",
+      "quantidade": 8000,
+      "linha": "L-INJT",
+      "inicio": "2026-11-11",
+      "prazo": "2026-11-19",
+      "status": "em_producao",
+      "progresso": 38,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Setup do molde 118 na INJ-07 em 52 min, 1º turno."
+        }
+      ]
+    },
+    {
+      "id": "OP-51888",
+      "sku": "TP-24",
+      "quantidade": 1800,
+      "linha": "L-INJT",
+      "inicio": "2026-11-12",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 12,
+      "pedido": "PV-30416",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Setup do molde 221 na INJ-11 levou 118 min no 3º turno (padrão 55 min); refugo de partida de 4.200 peças."
+        }
+      ]
+    },
+    {
+      "id": "OP-51893",
+      "sku": "FL-120",
+      "quantidade": 40000,
+      "linha": "L-EXT",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 30,
+      "pedido": "PV-30425",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Início na EXT-01."
+        }
+      ]
+    },
+    {
+      "id": "OP-51899",
+      "sku": "TP-38",
+      "quantidade": 2000,
+      "linha": "L-INJT",
+      "inicio": "2026-11-17",
+      "prazo": "2026-11-21",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-30427",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Programada em sequência à OP-51877, no mesmo molde 214, para não repetir o setup."
+        }
+      ]
+    },
+    {
+      "id": "OP-51901",
+      "sku": "FR-1000",
+      "quantidade": 300,
+      "linha": "L-SOP",
+      "inicio": "2026-11-19",
+      "prazo": "2026-11-24",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Reposição de estoque; depende do masterbatch azul corrigido."
+        }
+      ]
+    },
+    {
+      "id": "OP-51903",
+      "sku": "PT-500",
+      "quantidade": 1200,
+      "linha": "L-INJP",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-25",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Programada na INJ-14 após a OP-51884."
+        }
+      ]
+    },
+    {
+      "id": "OP-51905",
+      "sku": "GL-5000",
+      "quantidade": 30000,
+      "linha": "L-SOP",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-24",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-13",
+          "evento": "Reposição de estoque (8.500 peças, mínimo 12.000); depende do retorno da SOP-05."
+        }
+      ]
+    },
+    {
+      "id": "OP-51897",
+      "sku": "FL-50",
+      "quantidade": 20000,
+      "linha": "L-EXT",
+      "inicio": "2026-11-16",
+      "prazo": "2026-11-20",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Programada após troca do pacote de telas da EXT-02."
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-INJT",
+      "produzido": 182400,
+      "refugo": 6900,
+      "paradas_min": 70,
+      "resumo": "Célula de tampas com refugo de 3,8%, puxado pela tampa 38 mm na INJ-09 (molde 214) com chupagem. Ciclo mantido em 18,0 s; zona 3 oscilando.",
+      "ocorrencias": [
+        "INJ-09: zona 3 oscilando entre 218 e 232 °C, 3 alarmes",
+        "INJ-09: 2 paradas de 20 min para limpar cavidades com rebarba",
+        "INJ-07: parada de 30 min para troca de bobina de masterbatch"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "3º",
+      "linha": "L-INJT",
+      "produzido": 151200,
+      "refugo": 7860,
+      "paradas_min": 145,
+      "resumo": "Setup do molde 221 na INJ-11 levou 118 min, contra padrão de 55, com preparador substituto (o titular está de férias). Refugo de partida de 4.200 peças até estabilizar a dobradiça do flip-top.",
+      "ocorrencias": [
+        "INJ-11: setup do molde 221 em 118 min; câmara quente fechada antes de atingir temperatura",
+        "INJ-11: refugo de partida de 4.200 peças",
+        "INJ-09: chupagem persistente na tampa 38 mm"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-INJT",
+      "produzido": 194600,
+      "refugo": 3100,
+      "paradas_min": 25,
+      "resumo": "Melhor turno da semana. Osmar fez o setup do molde 118 na INJ-07 em 52 min e aplicou o recalque +5% no molde 214, reduzindo a chupagem.",
+      "ocorrencias": [
+        "INJ-07: setup do molde 118 em 52 min",
+        "INJ-09: recalque ajustado de 420 para 441 bar"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-SOP",
+      "produzido": 21400,
+      "refugo": 960,
+      "paradas_min": 520,
+      "resumo": "SOP-05 parada o turno todo (servoválvula do parison). Na SOP-03, troca de cor de azul para branco com 38 kg de purga, acima dos 15 kg do padrão.",
+      "ocorrencias": [
+        "SOP-05 parada 480 min (OS-8838)",
+        "SOP-03: troca de cor azul → branco com 38 kg de purga e 40 min de parada"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-SOP",
+      "produzido": 26800,
+      "refugo": 1420,
+      "paradas_min": 95,
+      "resumo": "Duas trocas de cor no mesmo turno por falta do masterbatch azul: natural → azul e azul → natural. Perda de 56 kg em purga e frascos fora de cor.",
+      "ocorrencias": [
+        "SOP-03: troca natural → azul, 30 min",
+        "SOP-03: lote MB-7731 reprovado; troca azul → natural, 45 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-EXT",
+      "produzido": 6850,
+      "refugo": 290,
+      "paradas_min": 40,
+      "resumo": "EXT-02 com pressão de massa em 310 bar e velocidade reduzida em 15%. Refugo de 4,2%, acima do padrão de 2%, por géis no filme de 50 µm.",
+      "ocorrencias": [
+        "EXT-02: pressão de massa de 295 para 310 bar em 6 h",
+        "EXT-02: 2 bobinas segregadas por géis"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "3º",
+      "linha": "L-INJP",
+      "produzido": 38600,
+      "refugo": 520,
+      "paradas_min": 30,
+      "resumo": "Só a INJ-14 rodando (INJ-15 na preventiva da unidade hidráulica). Pote 2 L estável.",
+      "ocorrencias": [
+        "INJ-14: parada de 30 min para ajuste da placa extratora"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-061",
+      "data": "2026-11-08",
+      "sku": "TP-38",
+      "linha": "L-INJT",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Bebidas Rio Peixe reclamou de chupagem (afundamento) no topo da tampa 38 mm do lote 51877-02: 0,18 mm medidos, contra máximo de 0,10 mm da especificação. 12 caixas devolvidas.",
+      "causa": "Em análise. Entrada do PP reciclado RC-0912 (30% no blend) com fluidez mais alta, sem ajuste do recalque previsto na ficha 214-INJ09; zona 3 da INJ-09 oscilando ±7 °C; canal de refrigeração do macho com incrustação.",
+      "acao": "Lotes 51877-02 e 51877-03 retidos e reinspecionados 100%; recalque de 420 para 441 bar (+5%); ciclo de 16,5 para 18,0 s até a troca do termopar e da resistência da zona 3 (OS-8841).",
+      "status": "em_analise",
+      "responsavel": "Daniela Fuck Hasse",
+      "oito_d": {
+        "D1": "Equipe: Daniela Fuck Hasse (qualidade, líder), Osmar Klitzke (preparador), Cleiton Bona (ferramentaria), Jéssica Tomio (PCP), Robson Eggert (comercial).",
+        "D2": "Tampas TP-38 do lote 51877-02 com chupagem de 0,18 mm no topo (máximo 0,10 mm); molde 214, INJ-09, 2º e 3º turnos de 07/11.",
+        "D3": "Contenção: lotes 51877-02 e 51877-03 retidos; inspeção 100% com relógio comparador; reposição de 12 caixas ao cliente em 10/11.",
+        "D4": "Causas prováveis: recalque não ajustado ao PP reciclado (ficha rev. F, seção 4), zona 3 instável e refrigeração do macho com incrustação (OS-8822).",
+        "D5": "Proposta: tornar obrigatório o ajuste de recalque +5% ao trocar para blend com PCR e trocar termopar e resistência da zona 3.",
+        "D6": "Recalque ajustado em 12/11 no 1º turno; troca da zona 3 marcada para 14/11.",
+        "D7": "Previsto: incluir campo \"tem PCR?\" na liberação de setup do MES e alerta de pressão diferencial no circuito de água do molde 214.",
+        "D8": "Pendente: encerrar após 3 lotes seguidos com chupagem até 0,10 mm."
+      }
+    },
+    {
+      "id": "NC-2026-063",
+      "data": "2026-11-09",
+      "sku": "FR-1000",
+      "linha": "L-SOP",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "Masterbatch azul do lote MB-7731 com ΔE de 1,8 contra o padrão do cliente Saneantes Brisa Clara (máximo 1,0 pela especificação de cor).",
+      "causa": "Fornecedor de masterbatch trocou o pigmento ftalocianina de origem; o laudo dele mediu ΔE 0,9 em placa e não no frasco soprado.",
+      "acao": "Lote MB-7731 devolvido; fornecedor envia lote corrigido em 16/11; medição de cor de entrada passa a ser em frasco soprado de teste.",
+      "status": "aberta",
+      "responsavel": "Daniela Fuck Hasse",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-060",
+      "data": "2026-11-11",
+      "sku": "FL-50",
+      "linha": "L-EXT",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Géis acima de 3 por m² em 6 bobinas do filme termoencolhível de 50 µm, lote 51895-03.",
+      "causa": "Pacote de telas do trocador da EXT-02 saturado (pressão de massa de 295 para 310 bar); resina com finos do silo 4.",
+      "acao": "Bobinas segregadas para moagem; troca do pacote de telas (OS-8846); limpeza do silo 4.",
+      "status": "em_analise",
+      "responsavel": "Paulo Roberto Weiss",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-062",
+      "data": "2026-11-09",
+      "sku": "GL-5000",
+      "linha": "L-SOP",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Espessura do fundo do galão 5 L em 0,55 mm (mínimo 0,60) em 18 amostras do 2º turno, lote 51882-02.",
+      "causa": "Servoválvula do controlador de parison da SOP-05 respondendo com atraso; programa de parison não corrigia o fundo.",
+      "acao": "1.200 galões do lote 51882-02 moídos; SOP-05 parada até a troca da servoválvula (OS-8838).",
+      "status": "em_analise",
+      "responsavel": "Paulo Roberto Weiss",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-055",
+      "data": "2026-10-16",
+      "sku": "PT-500",
+      "linha": "L-INJP",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Alimentos Taquaruçu relatou que a tampa não fechava em 2% dos potes de 500 mL do lote 51829-04 por empenamento da borda (0,45 mm; máximo 0,3 mm).",
+      "causa": "Temperatura da água do molde 305 desbalanceada entre lado fixo (18 °C) e móvel (31 °C) após troca de mangueira.",
+      "acao": "Circuito refeito; termorreguladores separados por lado; verificação de ΔT entre lados no checklist de setup.",
+      "status": "encerrada",
+      "responsavel": "Daniela Fuck Hasse",
+      "oito_d": {
+        "D1": "Equipe: Daniela Fuck Hasse (líder), Cleiton Bona (ferramentaria), Alcides Marquardt (preparador), Cristiano Hillesheim (comercial).",
+        "D2": "Potes PT-500 do lote 51829-04 com empenamento de 0,45 mm na borda; 2% sem fechamento na linha do cliente.",
+        "D3": "Contenção: 180 milheiros do lote reinspecionados; 3,6 milheiros segregados; cliente abastecido com o lote 51829-05.",
+        "D4": "Causa raiz: mangueiras invertidas na troca de 14/10 deixaram o lado móvel a 31 °C e o fixo a 18 °C.",
+        "D5": "Ação: identificar mangueiras por cor e lado; termorreguladores independentes.",
+        "D6": "Implantado em 20/10; empenamento médio caiu para 0,12 mm.",
+        "D7": "Prevenção: item \"ΔT entre lados ≤ 5 °C\" no checklist de setup (IT-PRC-03, seção 3).",
+        "D8": "Encerrada em 06/11 com 4 lotes conformes."
+      }
+    },
+    {
+      "id": "NC-2026-058",
+      "data": "2026-10-29",
+      "sku": "TP-28",
+      "linha": "L-INJT",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Rebarba no lacre da tampa 28 mm em 4 cavidades do molde 118 após setup no 3º turno.",
+      "causa": "Força de fechamento ajustada abaixo da ficha (280 t contra 310 t).",
+      "acao": "Ajuste da força; força de fechamento incluída na conferência da primeira peça.",
+      "status": "encerrada",
+      "responsavel": "Márcia Vieira Schroeder",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-057",
+      "data": "2026-10-22",
+      "sku": "FR-2000",
+      "linha": "L-SOP",
+      "origem": "fornecedor",
+      "severidade": "baixa",
+      "descricao": "Resina PEAD de sopro com índice de fluidez de 0,42 g/10 min (especificação 0,30 ± 0,05) no lote recebido do fornecedor de resinas.",
+      "causa": "Erro de grade na expedição do fornecedor.",
+      "acao": "Lote devolvido; certificado de análise conferido antes da descarga.",
+      "status": "encerrada",
+      "responsavel": "Paulo Roberto Weiss",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-064",
+      "data": "2026-11-12",
+      "sku": "TP-24",
+      "linha": "L-INJT",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Força de abertura do flip-top em 18 N (especificação 8 a 16 N) nas peças de partida do molde 221, lote 51888-01.",
+      "causa": "Setup no 3º turno fechou a câmara quente antes de atingir temperatura; dobradiça com espessura irregular nas primeiras injeções.",
+      "acao": "4.200 peças de partida moídas; reforço do passo de pré-aquecimento da IT-PRC-03 com o preparador substituto.",
+      "status": "aberta",
+      "responsavel": "Márcia Vieira Schroeder",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-059",
+      "data": "2026-10-25",
+      "sku": "BD-3600",
+      "linha": "L-INJP",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "2 de 6 baldes do lote 51851-02 vazaram no teste de queda de 1,2 m.",
+      "causa": "Material com 25% de moído, acima do limite de 15% para o balde.",
+      "acao": "Dosador de moído travado em 15%; lote reinspecionado.",
+      "status": "encerrada",
+      "responsavel": "Márcia Vieira Schroeder",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-8841",
+      "maquina": "INJ-09",
+      "tipo": "corretiva",
+      "data": "2026-11-11",
+      "status": "aberta",
+      "tecnico": "Fabiano Jesus Correa",
+      "duracao_h": 2.5,
+      "descricao": "Zona 3 do cilindro oscilando ±7 °C (218 a 232 °C). Termopar com mau contato e resistência de banda com isolação baixa. Troca programada para 14/11, na troca de turno das 14:00.",
+      "pecas": [
+        "Termopar tipo J",
+        "Resistência de banda 220 V 1.200 W"
+      ],
+      "procedimento": "DOC-MAN-INJ"
+    },
+    {
+      "id": "OS-8846",
+      "maquina": "EXT-02",
+      "tipo": "corretiva",
+      "data": "2026-11-12",
+      "status": "aberta",
+      "tecnico": "Gerson Becker",
+      "duracao_h": 1.5,
+      "descricao": "Pressão de massa em 310 bar (limite 330). Trocar o pacote de telas do trocador e conferir o transdutor de pressão.",
+      "pecas": [
+        "Pacote de telas 20/80/120/20 mesh",
+        "Junta do trocador de telas"
+      ],
+      "procedimento": "DOC-MAN-EXT"
+    },
+    {
+      "id": "OS-8838",
+      "maquina": "SOP-05",
+      "tipo": "corretiva",
+      "data": "2026-11-10",
+      "status": "em_execucao",
+      "tecnico": "Gerson Becker",
+      "duracao_h": 8,
+      "descricao": "Servoválvula do controlador de parison sem resposta; espessura de fundo do galão fora. Peça do Fabricante B chega em 15/11; depois, recalibrar o programa de parison de 100 pontos.",
+      "pecas": [
+        "Servoválvula do parison",
+        "Filtro de óleo de alta pressão"
+      ],
+      "procedimento": "DOC-MAN-SOP"
+    },
+    {
+      "id": "OS-8830",
+      "maquina": "INJ-15",
+      "tipo": "preventiva",
+      "data": "2026-11-09",
+      "status": "em_execucao",
+      "tecnico": "Fabiano Jesus Correa",
+      "duracao_h": 16,
+      "descricao": "Preventiva de 10.000 h da unidade hidráulica: troca de óleo (600 L), filtros e inspeção das bombas. Retorno previsto em 15/11.",
+      "pecas": [
+        "Óleo hidráulico 600 L",
+        "Kit de filtros de sucção e retorno"
+      ],
+      "procedimento": "DOC-MAN-INJ"
+    },
+    {
+      "id": "OS-8822",
+      "maquina": "MOL-214",
+      "tipo": "corretiva",
+      "data": "2026-10-28",
+      "status": "concluida",
+      "tecnico": "Cleiton Bona",
+      "duracao_h": 6,
+      "descricao": "Limpeza química dos canais de refrigeração dos machos (incrustação de calcário); vazão subiu de 9 para 14 L/min. Molde com 1.240.000 ciclos desde a última revisão completa.",
+      "pecas": [
+        "Anéis de vedação dos machos (48)"
+      ],
+      "procedimento": "DOC-MAN-MOL"
+    },
+    {
+      "id": "OS-8835",
+      "maquina": "MOL-305",
+      "tipo": "preventiva",
+      "data": "2026-11-05",
+      "status": "concluida",
+      "tecnico": "Cleiton Bona",
+      "duracao_h": 5,
+      "descricao": "Revisão de 400.000 ciclos: polimento das cavidades e troca de 6 pinos extratores.",
+      "pecas": [
+        "6 pinos extratores Ø 6 mm"
+      ],
+      "procedimento": "DOC-MAN-MOL"
+    },
+    {
+      "id": "OS-8827",
+      "maquina": "INJ-07",
+      "tipo": "preditiva",
+      "data": "2026-11-04",
+      "status": "concluida",
+      "tecnico": "Fabiano Jesus Correa",
+      "duracao_h": 0.5,
+      "descricao": "Análise de óleo hidráulico: contaminação ISO 17/15/12, dentro do limite. Próxima coleta em 60 dias.",
+      "pecas": [],
+      "procedimento": null
+    },
+    {
+      "id": "OS-8832",
+      "maquina": "MOI-01",
+      "tipo": "preventiva",
+      "data": "2026-11-06",
+      "status": "concluida",
+      "tecnico": "Gerson Becker",
+      "duracao_h": 2,
+      "descricao": "Afiação das facas e ajuste da folga para 0,2 mm.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-EXT"
+    },
+    {
+      "id": "OS-8844",
+      "maquina": "INJ-11",
+      "tipo": "corretiva",
+      "data": "2026-11-10",
+      "status": "concluida",
+      "tecnico": "Fabiano Jesus Correa",
+      "duracao_h": 1,
+      "descricao": "Sensor da porta de segurança com falha intermitente; sensor trocado.",
+      "pecas": [
+        "Sensor indutivo M18"
+      ],
+      "procedimento": "DOC-MAN-INJ"
+    },
+    {
+      "id": "OS-8849",
+      "maquina": "SOP-03",
+      "tipo": "preventiva",
+      "data": "2026-11-17",
+      "status": "aberta",
+      "tecnico": "Gerson Becker",
+      "duracao_h": 6,
+      "descricao": "Preventiva programada: cabeçote de extrusão, facas de corte do parison e calibração dos sopradores.",
+      "pecas": [
+        "Faca de corte do parison"
+      ],
+      "procedimento": "DOC-MAN-SOP"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-11",
+      "nome": "Cristiano Hillesheim",
+      "regiao": "Vale do Itajaí e Oeste de SC",
+      "telefone": "(47) 9••••-4182",
+      "meta_mes": 1400000,
+      "realizado_mes": 760000
+    },
+    {
+      "id": "REP-12",
+      "nome": "Tatiane Rosa Mafra",
+      "regiao": "Grande Florianópolis e Sul de SC",
+      "telefone": "(48) 9••••-3375",
+      "meta_mes": 1200000,
+      "realizado_mes": 690000
+    },
+    {
+      "id": "REP-13",
+      "nome": "Leandro Gaspar Nunes",
+      "regiao": "Paraná",
+      "telefone": "(41) 9••••-8820",
+      "meta_mes": 1300000,
+      "realizado_mes": 610000
+    },
+    {
+      "id": "REP-14",
+      "nome": "Vanessa Goulart",
+      "regiao": "Rio Grande do Sul",
+      "telefone": "(51) 9••••-1946",
+      "meta_mes": 1100000,
+      "realizado_mes": 540000
+    },
+    {
+      "id": "REP-15",
+      "nome": "Robson Eggert",
+      "regiao": "Contas-chave (bebidas e saneantes)",
+      "telefone": "(47) 9••••-6057",
+      "meta_mes": 2000000,
+      "realizado_mes": 1180000
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-501",
+      "nome": "Bebidas Rio Peixe Ltda.",
+      "cidade": "Videira",
+      "uf": "SC",
+      "segmento": "sucos e chás",
+      "representante": "REP-15",
+      "condicao_pagamento": "28/42 dias",
+      "limite_credito": 600000,
+      "tabela_preco": "Contrato anual",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-502",
+      "nome": "Saneantes Brisa Clara Ltda.",
+      "cidade": "Pinhais",
+      "uf": "PR",
+      "segmento": "produtos de limpeza",
+      "representante": "REP-15",
+      "condicao_pagamento": "28/35/42 dias",
+      "limite_credito": 520000,
+      "tabela_preco": "Contrato anual",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-503",
+      "nome": "Lubrificantes Ponte Alta Ltda.",
+      "cidade": "Canoas",
+      "uf": "RS",
+      "segmento": "lubrificantes e aditivos",
+      "representante": "REP-14",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 280000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-10-30"
+    },
+    {
+      "id": "CLI-504",
+      "nome": "Sorvetes Neve Sul Indústria",
+      "cidade": "Caxias do Sul",
+      "uf": "RS",
+      "segmento": "sorvetes",
+      "representante": "REP-14",
+      "condicao_pagamento": "28/42 dias",
+      "limite_credito": 450000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-11-01"
+    },
+    {
+      "id": "CLI-505",
+      "nome": "Alimentos Taquaruçu",
+      "cidade": "Chapecó",
+      "uf": "SC",
+      "segmento": "margarinas e doces",
+      "representante": "REP-11",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 380000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-10-29"
+    },
+    {
+      "id": "CLI-506",
+      "nome": "Tintas Cordilheira Ltda.",
+      "cidade": "Gaspar",
+      "uf": "SC",
+      "segmento": "tintas e massas",
+      "representante": "REP-11",
+      "condicao_pagamento": "21/28 dias",
+      "limite_credito": 210000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-507",
+      "nome": "Higiene Pessoal Lírio Branco Indústria",
+      "cidade": "São José",
+      "uf": "SC",
+      "segmento": "cosméticos e higiene",
+      "representante": "REP-12",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 240000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-508",
+      "nome": "Águas Minerais Fonte Sertaneja",
+      "cidade": "Santo Amaro da Imperatriz",
+      "uf": "SC",
+      "segmento": "água mineral",
+      "representante": "REP-12",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 330000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-10-28"
+    },
+    {
+      "id": "CLI-509",
+      "nome": "Atacado de Embalagens Tamoio",
+      "cidade": "Curitiba",
+      "uf": "PR",
+      "segmento": "distribuidor de embalagens",
+      "representante": "REP-13",
+      "condicao_pagamento": "28/35 dias",
+      "limite_credito": 260000,
+      "tabela_preco": "Tabela Distribuidor",
+      "ultimo_pedido": "2026-11-13"
+    },
+    {
+      "id": "CLI-510",
+      "nome": "Bebidas Lagoa Funda",
+      "cidade": "Criciúma",
+      "uf": "SC",
+      "segmento": "refrigerantes regionais",
+      "representante": "REP-12",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 290000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-11-05"
+    },
+    {
+      "id": "CLI-511",
+      "nome": "Sacaria Industrial Paranaguá Ltda.",
+      "cidade": "Paranaguá",
+      "uf": "PR",
+      "segmento": "sacaria industrial",
+      "representante": "REP-13",
+      "condicao_pagamento": "35 dias",
+      "limite_credito": 480000,
+      "tabela_preco": "Tabela Indústria",
+      "ultimo_pedido": "2026-11-09"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-30412",
+      "cliente": "CLI-501",
+      "representante": "REP-15",
+      "data": "2026-11-02",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-19",
+      "ordem": "OP-51877",
+      "itens": [
+        {
+          "sku": "TP-38",
+          "quantidade": 2400,
+          "preco_unit": 128
+        }
+      ],
+      "observacao": "Previsão original 12/11. Depende da OP-51877 (chupagem, NC-2026-061). Contrato prevê estoque de segurança de 1.000 milheiros de TP-38."
+    },
+    {
+      "id": "PV-30418",
+      "cliente": "CLI-502",
+      "representante": "REP-15",
+      "data": "2026-11-04",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-51890",
+      "itens": [
+        {
+          "sku": "FR-1000",
+          "quantidade": 180,
+          "preco_unit": 780
+        },
+        {
+          "sku": "FR-0500",
+          "quantidade": 120,
+          "preco_unit": 420
+        }
+      ],
+      "observacao": "Previsão original 13/11. FR-0500 separado; FR-1000 aguarda o masterbatch azul corrigido (NC-2026-063)."
+    },
+    {
+      "id": "PV-30405",
+      "cliente": "CLI-503",
+      "representante": "REP-14",
+      "data": "2026-10-30",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-51882",
+      "itens": [
+        {
+          "sku": "GL-5000",
+          "quantidade": 24000,
+          "preco_unit": 2.9
+        }
+      ],
+      "observacao": "Previsão original 11/11. SOP-05 parada; cliente aceitou 8.500 galões do estoque em 14/11 e o saldo em 18/11."
+    },
+    {
+      "id": "PV-30421",
+      "cliente": "CLI-510",
+      "representante": "REP-12",
+      "data": "2026-11-05",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-17",
+      "ordem": "OP-51895",
+      "itens": [
+        {
+          "sku": "FL-50",
+          "quantidade": 18000,
+          "preco_unit": 13.4
+        }
+      ],
+      "observacao": "Previsão original 13/11. EXT-02 com velocidade reduzida."
+    },
+    {
+      "id": "PV-30399",
+      "cliente": "CLI-508",
+      "representante": "REP-12",
+      "data": "2026-10-28",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-05",
+      "ordem": "OP-51860",
+      "itens": [
+        {
+          "sku": "TP-28",
+          "quantidade": 6000,
+          "preco_unit": 46
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-30402",
+      "cliente": "CLI-505",
+      "representante": "REP-11",
+      "data": "2026-10-29",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": "OP-51866",
+      "itens": [
+        {
+          "sku": "PT-500",
+          "quantidade": 900,
+          "preco_unit": 410
+        }
+      ],
+      "observacao": "Laudo de empenamento por lote anexado (histórico da NC-2026-055)."
+    },
+    {
+      "id": "PV-30409",
+      "cliente": "CLI-504",
+      "representante": "REP-14",
+      "data": "2026-11-01",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-51884",
+      "itens": [
+        {
+          "sku": "PT-2000",
+          "quantidade": 350,
+          "preco_unit": 1180
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-30414",
+      "cliente": "CLI-506",
+      "representante": "REP-11",
+      "data": "2026-11-03",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-16",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "BD-3600",
+          "quantidade": 18000,
+          "preco_unit": 3.85
+        }
+      ],
+      "observacao": "Atendido do estoque."
+    },
+    {
+      "id": "PV-30416",
+      "cliente": "CLI-507",
+      "representante": "REP-12",
+      "data": "2026-11-04",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-51888",
+      "itens": [
+        {
+          "sku": "TP-24",
+          "quantidade": 1500,
+          "preco_unit": 92
+        }
+      ],
+      "observacao": "Cor branca; lote de partida 51888-01 moído (NC-2026-064)."
+    },
+    {
+      "id": "PV-30423",
+      "cliente": "CLI-509",
+      "representante": "REP-13",
+      "data": "2026-11-06",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-12",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "FR-2000",
+          "quantidade": 60,
+          "preco_unit": 1150
+        },
+        {
+          "sku": "FL-50",
+          "quantidade": 4000,
+          "preco_unit": 13.4
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-30425",
+      "cliente": "CLI-511",
+      "representante": "REP-13",
+      "data": "2026-11-09",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-23",
+      "ordem": "OP-51893",
+      "itens": [
+        {
+          "sku": "FL-120",
+          "quantidade": 26000,
+          "preco_unit": 15.8
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-30427",
+      "cliente": "CLI-501",
+      "representante": "REP-15",
+      "data": "2026-11-10",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-26",
+      "ordem": "OP-51899",
+      "itens": [
+        {
+          "sku": "TP-38",
+          "quantidade": 1800,
+          "preco_unit": 128
+        }
+      ],
+      "observacao": "Programado no molde 214 logo após a OP-51877."
+    },
+    {
+      "id": "PV-30430",
+      "cliente": "CLI-509",
+      "representante": "REP-13",
+      "data": "2026-11-13",
+      "status": "em_analise",
+      "previsao_entrega": "2026-11-27",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "TP-38",
+          "quantidade": 600,
+          "preco_unit": 128
+        },
+        {
+          "sku": "PT-500",
+          "quantidade": 300,
+          "preco_unit": 410
+        }
+      ],
+      "observacao": "Cliente pediu 6% de desconto (acima de 5% depende do gerente regional, RC-11) e o certificado da resina PP. TP-38 abaixo do mínimo e reservado à Rio Peixe; PT-500 sai em 20/11."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-11",
+      "titulo": "Alçada de desconto",
+      "texto": "Até 5% sobre a tabela do cliente o representante aprova. De 5% a 8%, o gerente regional. Acima de 8% ou em contrato anual, a diretoria comercial."
+    },
+    {
+      "id": "RC-12",
+      "titulo": "Reajuste por resina",
+      "texto": "Preços são revistos quando o custo médio da resina (PP ou PEAD) varia mais de 5% em relação à última tabela. Cotação vale por 10 dias."
+    },
+    {
+      "id": "RC-13",
+      "titulo": "Lote mínimo e cores especiais",
+      "texto": "Cor especial exige lote mínimo de 100 milheiros (ou 2.000 kg de filme). Masterbatch exclusivo de cliente é comprado sob pedido e o prazo começa na chegada dele."
+    },
+    {
+      "id": "RC-14",
+      "titulo": "Prioridade em ruptura",
+      "texto": "Com estoque abaixo do mínimo, a ordem é: 1) contratos anuais com estoque de segurança, 2) pedidos por data de entrada, 3) pedidos novos. Prazo de item em ruptura só com confirmação do PCP."
+    },
+    {
+      "id": "RC-15",
+      "titulo": "Laudos e certificados",
+      "texto": "O comercial pode enviar ao cliente, sem abrir chamado, os documentos marcados como aprovados pela qualidade na pasta de laudos (certificado da resina, laudo dimensional do lote, ficha técnica). Laudo de ensaio novo passa pela qualidade."
+    },
+    {
+      "id": "RC-16",
+      "titulo": "Frete",
+      "texto": "Frete CIF para pedidos acima de R$ 15.000 em SC, PR e RS. Abaixo disso, FOB ou frete cobrado à parte."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "oee-tampas",
+      "nome": "OEE da injeção de tampas",
+      "valor": 72.4,
+      "unidade": "%",
+      "meta": 80,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        79.2,
+        80.1,
+        78.6,
+        79.8,
+        80.4,
+        79.1,
+        78.3,
+        77.9,
+        76.5,
+        75.8,
+        74.6,
+        72.4
+      ],
+      "explicacao": "A INJ-09 puxa o OEE para baixo: o molde 214 roda com ciclo de 18,0 s em vez de 16,5 s para conter a chupagem (−8% de desempenho) e o refugo chegou a 3,8% no 2º turno de 12/11. O setup de 118 min no 3º turno também pesou.",
+      "caminho": [
+        "MES › ciclos e paradas por injetora (L-INJT)",
+        "Apontamento de refugo por molde",
+        "Cálculo: disponibilidade × desempenho × qualidade"
+      ],
+      "fontes": [
+        "maq:INJ-09",
+        "turno:2026-11-12|2º|L-INJT",
+        "turno:2026-11-12|3º|L-INJT",
+        "op:OP-51877"
+      ]
+    },
+    {
+      "id": "tempo-setup",
+      "nome": "Tempo médio de setup de molde",
+      "valor": 94,
+      "unidade": "min",
+      "meta": 60,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        66,
+        63,
+        61,
+        64,
+        62,
+        60,
+        65,
+        68,
+        71,
+        76,
+        83,
+        94
+      ],
+      "explicacao": "O 1º turno, com o Osmar, fez setup em 52 min; o 3º turno, com preparador substituto, levou 118 min no molde 221 e gerou 4.200 peças de refugo de partida. A diferença está no pré-aquecimento da câmara quente, que o substituto pulou.",
+      "caminho": [
+        "MES › eventos de troca de molde (início e primeira peça aprovada)",
+        "Cálculo: média do mês por célula"
+      ],
+      "fontes": [
+        "turno:2026-11-12|1º|L-INJT",
+        "turno:2026-11-12|3º|L-INJT",
+        "saber:SB-22",
+        "doc:DOC-IT-SETUP#t1"
+      ]
+    },
+    {
+      "id": "refugo-214",
+      "nome": "Refugo do molde 214 (tampa 38 mm)",
+      "valor": 3.9,
+      "unidade": "%",
+      "meta": 1.5,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        1.4,
+        1.3,
+        1.6,
+        1.5,
+        1.2,
+        1.4,
+        1.8,
+        1.6,
+        1.7,
+        1.5,
+        2.1,
+        3.9
+      ],
+      "explicacao": "O refugo subiu com a entrada do PP reciclado RC-0912 (30% no blend) em 07/11, sem o ajuste de recalque previsto na ficha, e com a zona 3 da INJ-09 instável. No 1º turno de 12/11, com recalque +5%, a chupagem caiu.",
+      "caminho": [
+        "MES › refugo apontado por molde",
+        "Inspeção de qualidade › chupagem medida com relógio comparador"
+      ],
+      "fontes": [
+        "maq:MOL-214",
+        "nc:NC-2026-061",
+        "doc:DOC-FP-214#t3",
+        "os:OS-8841"
+      ]
+    },
+    {
+      "id": "perda-troca-cor",
+      "nome": "Material perdido em troca de cor (semana)",
+      "valor": 1840,
+      "unidade": "kg",
+      "meta": 1200,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        1180,
+        1240,
+        1120,
+        1300,
+        1150,
+        1210,
+        1260,
+        1190,
+        1350,
+        1420,
+        1510,
+        1840
+      ],
+      "explicacao": "Na semana 46 houve 14 trocas de cor no sopro, 5 a mais que o plano, por causa do masterbatch azul reprovado: a SOP-03 voltou ao natural e depois ao branco, com purgas de até 38 kg (padrão 15 kg).",
+      "caminho": [
+        "Planilha de troca de cor e purga (sopro)",
+        "Balança da moagem › kg de purga por troca"
+      ],
+      "fontes": [
+        "doc:DOC-PLAN-SEQ#t1",
+        "turno:2026-11-12|2º|L-SOP",
+        "turno:2026-11-11|2º|L-SOP",
+        "nc:NC-2026-063"
+      ]
+    },
+    {
+      "id": "otif",
+      "nome": "OTIF (entregas completas e no prazo)",
+      "valor": 87.5,
+      "unidade": "%",
+      "meta": 96,
+      "direcao": "maior_melhor",
+      "area": "comercial",
+      "tendencia": [
+        95.8,
+        96.4,
+        95.1,
+        96.2,
+        95.7,
+        94.9,
+        95.3,
+        94.2,
+        93.6,
+        92.1,
+        91.4,
+        87.5
+      ],
+      "explicacao": "Quatro pedidos estão atrasados (PV-30412, PV-30418, PV-30405 e PV-30421), cada um ligado a uma OP atrasada: chupagem no molde 214, masterbatch azul reprovado, SOP-05 parada e EXT-02 lenta.",
+      "caminho": [
+        "ERP › pedidos com data prometida × data de entrega",
+        "Cálculo: pedidos completos e no prazo ÷ pedidos do mês"
+      ],
+      "fontes": [
+        "pedido:PV-30412",
+        "pedido:PV-30418",
+        "pedido:PV-30405",
+        "pedido:PV-30421"
+      ]
+    },
+    {
+      "id": "tempo-laudo",
+      "nome": "Tempo para enviar laudo ou certificado ao cliente",
+      "valor": 26,
+      "unidade": "h",
+      "meta": 4,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        31,
+        29,
+        34,
+        30,
+        28,
+        33,
+        27,
+        29,
+        30,
+        28,
+        27,
+        26
+      ],
+      "explicacao": "Hoje cada pedido de laudo vira chamado para a qualidade, que leva em média 26 h para responder. Com a pasta de documentos aprovados (RC-15), o comercial poderia enviar o certificado da resina na hora.",
+      "caminho": [
+        "Sistema de chamados › pedidos de laudo (abertura × resposta)",
+        "Cálculo: média do mês"
+      ],
+      "fontes": [
+        "regra:RC-15",
+        "doc:DOC-CERT-PP#t1",
+        "integ:chamados"
+      ]
+    },
+    {
+      "id": "paradas-molde",
+      "nome": "Paradas não planejadas de molde (mês)",
+      "valor": 6,
+      "unidade": "paradas",
+      "meta": 2,
+      "direcao": "menor_melhor",
+      "area": "manutencao",
+      "tendencia": [
+        2,
+        3,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        3,
+        4,
+        5,
+        6
+      ],
+      "explicacao": "Quatro das 6 paradas de novembro foram no molde 214: limpeza de cavidades com rebarba e incrustação nos canais de refrigeração. O molde tem 1.240.000 ciclos desde a última revisão completa; o plano pede revisão a 1.500.000.",
+      "caminho": [
+        "ERP › OS de ferramentaria por molde",
+        "Planilha de vida dos moldes",
+        "MES › paradas com motivo \"molde\""
+      ],
+      "fontes": [
+        "maq:MOL-214",
+        "os:OS-8822",
+        "doc:DOC-PLAN-MOL#t1",
+        "turno:2026-11-12|2º|L-INJT"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-FP-214",
+      "titulo": "Ficha de processo 214-INJ09, rev. F — tampa 38 mm",
+      "tipo": "ficha_tecnica",
+      "area": "operadores",
+      "origem": "PLM",
+      "atualizado": "2026-07-22",
+      "acesso": [
+        "operadores",
+        "producao",
+        "qualidade",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Temperaturas",
+          "texto": "Zona 1: 210 °C; zona 2: 220 °C; zona 3: 225 °C; bico: 230 °C; câmara quente: 235 °C. Água do molde a 14 °C na entrada, vazão mínima de 12 L/min por circuito."
+        },
+        {
+          "id": "t2",
+          "secao": "3. Injeção e recalque",
+          "texto": "Pressão de recalque de 420 bar por 4,2 s; resfriamento de 11 s; ciclo padrão de 16,5 s. Força de fechamento de 380 t."
+        },
+        {
+          "id": "t3",
+          "secao": "4. PP reciclado",
+          "texto": "Com blend de até 30% de PP reciclado pós-industrial, subir a pressão de recalque em cerca de 5% (para 441 bar) e medir a chupagem no topo nas 3 primeiras injeções."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ESP-RIOPEIXE",
+      "titulo": "Especificação do cliente Bebidas Rio Peixe — tampa 38 mm (rev. 3)",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-02-14",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.1 Dimensional",
+          "texto": "Diâmetro interno da rosca de 35,60 ± 0,10 mm e altura total de 18,00 ± 0,15 mm, medidos após 24 h da injeção."
+        },
+        {
+          "id": "t2",
+          "secao": "4.3 Torque",
+          "texto": "Torque de remoção entre 1,2 e 1,8 N·m na garrafa de teste, aplicado a 2,0 N·m de fechamento."
+        },
+        {
+          "id": "t3",
+          "secao": "5. Aparência",
+          "texto": "Chupagem no topo de no máximo 0,10 mm. Plano de amostragem: 80 tampas por lote, nível de qualidade aceitável de 0,65 para defeitos maiores."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ESP-BRISA",
+      "titulo": "Especificação de cor e de frasco — Saneantes Brisa Clara, frasco 1 L azul",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2025-12-03",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3. Cor",
+          "texto": "ΔE máximo de 1,0 contra o padrão físico, medido no corpo do frasco com iluminante D65. Lote fora de cor é recusado no recebimento."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Desempenho",
+          "texto": "Espessura mínima de parede de 0,45 mm e nenhum vazamento em 10 frascos cheios na queda de 1,5 m."
+        }
+      ]
+    },
+    {
+      "id": "DOC-LAU-MB",
+      "titulo": "E-mail do fornecedor de masterbatch — lote MB-7731",
+      "tipo": "email",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Mensagem de 10/11",
+          "texto": "Nosso laudo do lote MB-7731 indica ΔE 0,9 em placa injetada. Vamos avaliar a medição de vocês em frasco soprado."
+        },
+        {
+          "id": "t2",
+          "secao": "Mensagem de 12/11",
+          "texto": "Confirmamos a diferença: houve troca de origem do pigmento azul. Lote corrigido sai em 15/11 e chega em 16/11, com laudo medido em frasco."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CERT-PP",
+      "titulo": "Certificados de análise — PP para tampas e PP reciclado RC-0912",
+      "tipo": "ficha_tecnica",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-11-07",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "producao",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "PP homopolímero (fornecedor de resinas)",
+          "texto": "Índice de fluidez de 12 g/10 min (230 °C/2,16 kg), densidade de 0,905 g/cm³. Status na pasta: aprovado pela qualidade, pode ser enviado a clientes."
+        },
+        {
+          "id": "t2",
+          "secao": "PP reciclado pós-industrial RC-0912",
+          "texto": "Índice de fluidez de 16 g/10 min (faixa 15 ± 3), teor de umidade de 0,04%. Uso limitado a 30% no blend. Documento interno, não enviar a clientes."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-INJ",
+      "titulo": "Manual de injetoras hidráulicas e elétricas — Fabricantes A e D",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-09-10",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "7.2 Diagnóstico de zona de aquecimento",
+          "texto": "Oscilação maior que ±3 °C com saída do controlador em 100% indica resistência fraca; oscilação com leitura saltando indica termopar com mau contato. Medir a isolação da resistência: mínimo 1 MΩ."
+        },
+        {
+          "id": "t2",
+          "secao": "7.4 Troca de resistência de banda",
+          "texto": "Desligar e bloquear o painel, esperar o cilindro abaixo de 60 °C, soltar a cinta e instalar a nova com torque de 6 N·m. Reapertar após o primeiro aquecimento."
+        },
+        {
+          "id": "t3",
+          "secao": "9.1 Unidade hidráulica",
+          "texto": "Trocar óleo e filtros a cada 10.000 h ou quando a análise indicar contaminação acima de ISO 19/17/14."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-SOP",
+      "titulo": "Manual de sopradoras por extrusão — Fabricante B",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2023-05-18",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "6.3 Controlador de parison",
+          "texto": "A servoválvula comanda o mandril em 100 pontos por ciclo. Resposta acima de 15 ms gera variação de espessura, primeiro no fundo do artigo."
+        },
+        {
+          "id": "t2",
+          "secao": "8.1 Troca de cor",
+          "texto": "Para trocar de cor escura para clara, purgar com composto de limpeza e depois com o material novo até 3 artigos seguidos sem estrias. Consumo típico: 15 kg."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-EXT",
+      "titulo": "Manual de extrusoras balão e moinho — Fabricante C",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-01-25",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.2 Trocador de telas",
+          "texto": "Pacote padrão 20/80/120/20 mesh. Pressão de massa de trabalho até 330 bar; trocar o pacote quando a pressão subir 30 bar acima do valor de tela limpa."
+        },
+        {
+          "id": "t2",
+          "secao": "5.5 Géis",
+          "texto": "Géis no filme com pressão subindo indicam tela saturada ou contaminação da resina; conferir silo e secador antes de mexer na temperatura."
+        },
+        {
+          "id": "t3",
+          "secao": "Anexo B — Moinho",
+          "texto": "Afiar as facas a cada 400 h e manter folga de 0,2 mm entre faca rotativa e fixa."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-MOL",
+      "titulo": "PM-FER-01 — Plano de manutenção de moldes",
+      "tipo": "procedimento",
+      "area": "manutencao",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-03-02",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3. Revisão completa",
+          "texto": "Moldes de tampa: revisão completa a cada 1.500.000 ciclos ou 12 meses, o que vier antes. Moldes de pote e balde: a cada 400.000 ciclos."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Refrigeração",
+          "texto": "Medir a vazão de cada circuito a cada 300.000 ciclos; vazão abaixo de 10 L/min pede limpeza química dos canais."
+        },
+        {
+          "id": "t3",
+          "secao": "6. Registro",
+          "texto": "Toda intervenção registra contador de ciclos, peças trocadas e quem executou, na OS e na planilha de vida do molde."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLAN-MOL",
+      "titulo": "Planilha de vida dos moldes — ferramentaria",
+      "tipo": "planilha",
+      "area": "manutencao",
+      "origem": "Planilha",
+      "atualizado": "2026-11-13",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Molde 214",
+          "texto": "1.240.000 ciclos desde a última revisão completa (10/03/2026). Próxima revisão a 1.500.000 ciclos, estimada para 15/12/2026. 4 paradas não planejadas em novembro."
+        },
+        {
+          "id": "t2",
+          "secao": "Molde 305",
+          "texto": "Revisão de 400.000 ciclos feita em 05/11/2026; contador zerado. Sem pendências."
+        }
+      ]
+    },
+    {
+      "id": "DOC-IT-SETUP",
+      "titulo": "IT-PRC-03 — Troca rápida de molde em injetoras",
+      "tipo": "instrucao",
+      "area": "operadores",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-05-06",
+      "acesso": [
+        "operadores",
+        "producao",
+        "manutencao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Preparação externa",
+          "texto": "Pré-aquecer o molde seguinte na estufa por 40 min e ligar a câmara quente só depois de montado, esperando atingir a temperatura da ficha antes de fechar e injetar."
+        },
+        {
+          "id": "t2",
+          "secao": "3. Checklist de montagem",
+          "texto": "Conferir mangueiras por cor e lado, ΔT entre lado fixo e móvel até 5 °C, força de fechamento conforme ficha e programa carregado pelo número do molde."
+        },
+        {
+          "id": "t3",
+          "secao": "4. Primeira peça",
+          "texto": "Liberar a produção após 3 ciclos estáveis, dimensional conforme e aprovação da qualidade registrada no MES. Meta de setup: 60 min."
+        }
+      ]
+    },
+    {
+      "id": "DOC-IT-COR",
+      "titulo": "IT-PRC-05 — Troca de cor e purga",
+      "tipo": "instrucao",
+      "area": "operadores",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-04-11",
+      "acesso": [
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Sequência",
+          "texto": "Programar sempre do mais claro para o mais escuro: natural → branco → cores claras → azul → escuras. Voltar do azul para o natural custa o dobro de purga."
+        },
+        {
+          "id": "t2",
+          "secao": "3. Purga",
+          "texto": "Injeção: até 6 kg de composto de limpeza. Sopro: até 15 kg. Purga acima disso é registrada com motivo na planilha de troca de cor."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLAN-SEQ",
+      "titulo": "Planilha de troca de cor e sequenciamento — sopro (semanas 46 e 47)",
+      "tipo": "planilha",
+      "area": "producao",
+      "origem": "Planilha",
+      "atualizado": "2026-11-13",
+      "acesso": [
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Semana 46",
+          "texto": "14 trocas de cor (9 planejadas) e 1.840 kg de material perdido entre purga e frascos fora de cor. Maior perda: SOP-03, azul → branco, 38 kg em 12/11."
+        },
+        {
+          "id": "t2",
+          "secao": "Semana 47 (sugestão)",
+          "texto": "Agrupar na SOP-03: natural (GL-5000 de reposição) → branco (FR-0500, FR-2000) → azul (FR-1000, quando o masterbatch chegar em 16/11). Estimativa: 7 trocas e 980 kg de perda."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CTR-RIOPEIXE",
+      "titulo": "Contrato anual de fornecimento — Bebidas Rio Peixe (2026)",
+      "tipo": "contrato",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-01-15",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Cláusula 4 — Estoque de segurança",
+          "texto": "O fornecedor mantém estoque de segurança de 1.000 milheiros de tampa 38 mm aprovados, reservados ao cliente."
+        },
+        {
+          "id": "t2",
+          "secao": "Cláusula 7 — Qualidade",
+          "texto": "Cada lote segue com laudo dimensional e de torque. Lote com defeito maior acima do nível de qualidade aceitável é devolvido com frete por conta do fornecedor."
+        },
+        {
+          "id": "t3",
+          "secao": "Cláusula 9 — Preço",
+          "texto": "Preço de R$ 128,00 por milheiro, revisto trimestralmente pelo índice de custo do PP."
+        }
+      ]
+    },
+    {
+      "id": "DOC-EMAIL-RIOPEIXE",
+      "titulo": "E-mail da Bebidas Rio Peixe — reclamação de chupagem",
+      "tipo": "email",
+      "area": "comercial",
+      "origem": "E-mail",
+      "atualizado": "2026-11-08",
+      "acesso": [
+        "comercial",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Mensagem de 08/11",
+          "texto": "Na inspeção de recebimento, o lote 51877-02 apresentou afundamento no topo das tampas e falha de impressão do nosso logo. Devolvemos 12 caixas e precisamos de reposição até 10/11."
+        },
+        {
+          "id": "t2",
+          "secao": "Mensagem de 12/11",
+          "texto": "Recebemos a reposição. Para o pedido de 2.400 milheiros, conseguimos aceitar até 19/11 se vier com laudo de chupagem por lote."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CAT-2026",
+      "titulo": "Catálogo técnico 2026 — tampas, potes, frascos e filmes",
+      "tipo": "catalogo",
+      "area": "marketing",
+      "origem": "SharePoint",
+      "atualizado": "2026-06-30",
+      "acesso": [
+        "marketing",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Tampas",
+          "texto": "Tampas de 24 a 38 mm em PP e PEAD, com lacre de segurança e torque controlado por lote. Cores sob consulta a partir de 100 milheiros."
+        },
+        {
+          "id": "t2",
+          "secao": "Sustentabilidade",
+          "texto": "Linhas com até 30% de material reciclado pós-industrial, com o mesmo desempenho dimensional. Não declarar percentual de reciclado pós-consumo nem selos de certificação ambiental."
+        },
+        {
+          "id": "t3",
+          "secao": "Frascos e galões",
+          "texto": "Frascos de 500 mL a 2 L e galões de 5 L em PEAD, teste de vazamento em 100% das peças e cor medida por espectrofotômetro."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-21",
+      "autor": "Osmar Klitzke",
+      "funcao": "Preparador de injeção (1º turno)",
+      "tempo_casa_anos": 23,
+      "area": "operadores",
+      "maquina": "INJ-09",
+      "titulo": "PP reciclado no molde 214: recalque 5% acima",
+      "dica": "Quando entra lote de PP reciclado, o material flui mais e a tampa chupa no topo. Suba o recalque uns 5% (de 420 para 441 bar) antes de mexer no ciclo, e meça as 3 primeiras injeções com o relógio. Só aumente o resfriamento se a chupagem passar de 0,10 mm mesmo assim.",
+      "validado_por": "Daniela Fuck Hasse (qualidade)",
+      "data": "2026-07-22",
+      "tags": [
+        "chupagem",
+        "PP reciclado",
+        "molde 214"
+      ]
+    },
+    {
+      "id": "SB-22",
+      "autor": "Alcides Marquardt",
+      "funcao": "Preparador sênior (3º turno)",
+      "tempo_casa_anos": 27,
+      "area": "operadores",
+      "maquina": "INJ-11",
+      "titulo": "Câmara quente: espere a temperatura antes de fechar",
+      "dica": "O erro mais comum no setup é ligar a câmara quente e fechar o molde logo em seguida. No molde 221 a câmara leva 25 min para estabilizar; injetar antes disso deixa a dobradiça do flip-top grossa e a força de abertura passa de 16 N. Pré-aqueça o molde na estufa enquanto a máquina ainda produz.",
+      "validado_por": "Ivan Schulz (supervisor de injeção)",
+      "data": "2026-09-10",
+      "tags": [
+        "setup",
+        "câmara quente",
+        "flip-top"
+      ]
+    },
+    {
+      "id": "SB-23",
+      "autor": "Silvana Raduenz",
+      "funcao": "Operadora de sopro",
+      "tempo_casa_anos": 15,
+      "area": "operadores",
+      "maquina": "SOP-03",
+      "titulo": "Nunca volte do azul para o natural",
+      "dica": "Voltar do azul para o natural custa 2 a 3 vezes mais purga que ir do natural para o azul. Se faltar masterbatch azul, segure a SOP-03 no branco e deixe o natural para a SOP-04. Na purga, passe 5 kg de composto antes do material novo, não depois.",
+      "validado_por": "Jéssica Tomio (PCP)",
+      "data": "2026-08-05",
+      "tags": [
+        "troca de cor",
+        "purga",
+        "sopro"
+      ]
+    },
+    {
+      "id": "SB-24",
+      "autor": "Dirceu Moretti",
+      "funcao": "Extrusor",
+      "tempo_casa_anos": 18,
+      "area": "operadores",
+      "maquina": "EXT-02",
+      "titulo": "Pressão subindo 10 bar por hora: troque a tela",
+      "dica": "Se a pressão de massa sobe 10 bar por hora, a tela está saturando e os géis vêm em seguida. Troque o pacote antes de passar de 320 bar, na troca de bobina, para não perder filme. Se a pressão sobe rápido logo depois de trocar, o problema é finos na resina: confira o silo.",
+      "validado_por": "Paulo Roberto Weiss (qualidade P2)",
+      "data": "2026-06-17",
+      "tags": [
+        "géis",
+        "trocador de telas",
+        "filme"
+      ]
+    },
+    {
+      "id": "SB-25",
+      "autor": "Cleiton Bona",
+      "funcao": "Ferramenteiro",
+      "tempo_casa_anos": 20,
+      "area": "manutencao",
+      "maquina": "MOL-214",
+      "titulo": "Chupagem no centro da tampa: olhe a água do macho",
+      "dica": "Se a chupagem aparece sempre nas mesmas cavidades, é refrigeração do macho, não processo. Meça a vazão de cada circuito: abaixo de 10 L/min tem calcário. A limpeza química resolve, mas volta em uns 4 meses se a água da torre não for tratada.",
+      "validado_por": "Ivan Schulz (supervisor de injeção)",
+      "data": "2026-10-30",
+      "tags": [
+        "molde 214",
+        "refrigeração",
+        "chupagem"
+      ]
+    },
+    {
+      "id": "SB-26",
+      "autor": "Márcia Vieira Schroeder",
+      "funcao": "Inspetora de qualidade",
+      "tempo_casa_anos": 12,
+      "area": "qualidade",
+      "maquina": "INJ-07",
+      "titulo": "Torque de tampa só depois de 24 horas",
+      "dica": "A tampa de PP ainda contrai por 24 h depois de injetada. Medir o torque na hora dá valor menor e aprova lote que vai reprovar no cliente. Use a amostra da quarentena e anote a hora da injeção na etiqueta.",
+      "validado_por": "Daniela Fuck Hasse (qualidade)",
+      "data": "2026-03-28",
+      "tags": [
+        "torque",
+        "pós-contração",
+        "inspeção"
+      ]
+    },
+    {
+      "id": "SB-27",
+      "autor": "Roberto Ehlert",
+      "funcao": "Preparador de sopro",
+      "tempo_casa_anos": 16,
+      "area": "operadores",
+      "maquina": "SOP-05",
+      "titulo": "Fundo do galão fino avisa a servoválvula",
+      "dica": "Quando a servoválvula do parison começa a falhar, o primeiro sinal é o fundo do galão ficando fino, antes de qualquer alarme. Se duas amostras seguidas derem abaixo de 0,62 mm no fundo, chame a manutenção e não tente compensar no programa.",
+      "validado_por": "Ivan Schulz (supervisor)",
+      "data": "2026-05-14",
+      "tags": [
+        "parison",
+        "galão",
+        "espessura"
+      ]
+    },
+    {
+      "id": "SB-28",
+      "autor": "Jéssica Tomio",
+      "funcao": "Programadora de PCP",
+      "tempo_casa_anos": 8,
+      "area": "producao",
+      "maquina": "INJ-14",
+      "titulo": "Agrupe os moldes de PP natural na INJ-14",
+      "dica": "Na INJ-14, programe primeiro os potes em PP natural (PT-500, PT-2000) e só depois os coloridos. Cada troca de natural para cor e de volta custa cerca de 1 h e 6 kg de purga. Molde 312 e molde 305 usam o mesmo bico: troque só o molde.",
+      "validado_por": "Ivan Schulz (supervisor)",
+      "data": "2026-10-08",
+      "tags": [
+        "sequenciamento",
+        "PCP",
+        "troca de cor"
+      ]
+    },
+    {
+      "id": "SB-29",
+      "autor": "Valmor Rech",
+      "funcao": "Operador de moagem",
+      "tempo_casa_anos": 11,
+      "area": "operadores",
+      "maquina": "MOI-01",
+      "titulo": "Moído de tampa não vai para balde acima de 15%",
+      "dica": "O moído das tampas é PP homopolímero e deixa o balde quebradiço. Separe os moídos por família e respeite 15% no balde e 20% nos potes. Etiquete o big bag com o número do molde de origem.",
+      "validado_por": "Márcia Vieira Schroeder (qualidade)",
+      "data": "2026-11-03",
+      "tags": [
+        "moído",
+        "reaproveitamento",
+        "balde"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:45",
+      "registros": 168930,
+      "observacao": "Carteira, pedidos, estoque, OPs e compras de resina e masterbatch."
+    },
+    {
+      "id": "mes",
+      "nome": "MES e apontamento das injetoras",
+      "tipo": "MES",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:00",
+      "registros": 241500,
+      "observacao": "Ciclos, paradas, setups e refugo lidos dos CLPs das máquinas."
+    },
+    {
+      "id": "plm",
+      "nome": "Fichas de processo (PLM)",
+      "tipo": "PLM",
+      "status": "conectado",
+      "ultima_sync": "2026-11-12T22:00",
+      "registros": 1860,
+      "observacao": "Fichas por molde e máquina, com revisões."
+    },
+    {
+      "id": "planilhas",
+      "nome": "Planilhas de setup, troca de cor e vida de molde",
+      "tipo": "Planilhas",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T07:30",
+      "registros": 12470,
+      "observacao": "Pasta compartilhada do PCP e da ferramentaria."
+    },
+    {
+      "id": "laudos",
+      "nome": "Pasta de laudos e certificados (SharePoint)",
+      "tipo": "Documentos",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:50",
+      "registros": 4320,
+      "observacao": "Certificados de resina, laudos dimensionais e especificações de clientes, com status de aprovação."
+    },
+    {
+      "id": "email",
+      "nome": "E-mail do comercial e da qualidade",
+      "tipo": "E-mail",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T07:55",
+      "registros": 9410,
+      "observacao": "Reclamações de clientes e laudos de fornecedores."
+    },
+    {
+      "id": "chamados",
+      "nome": "Sistema de chamados interno",
+      "tipo": "Chamados",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T17:20",
+      "registros": 2870,
+      "observacao": "Mudança de versão do sistema quebrou a exportação; TI corrige até 14/11."
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business dos representantes",
+      "tipo": "Mensageria",
+      "status": "planejado",
+      "ultima_sync": null,
+      "registros": 0,
+      "observacao": "Piloto com um representante previsto para dezembro."
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "processo",
+      "nome": "Preparador e técnico de processo",
+      "areas": [
+        "operadores",
+        "producao",
+        "manutencao"
+      ],
+      "usuarios": 31
+    },
+    {
+      "id": "pcp",
+      "nome": "Programador de PCP",
+      "areas": [
+        "producao",
+        "operadores",
+        "comercial"
+      ],
+      "usuarios": 6
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e laboratório",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 12
+    },
+    {
+      "id": "ferramentaria",
+      "nome": "Manutenção e ferramentaria",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 19
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial e representantes",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 11
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing",
+      "areas": [
+        "marketing",
+        "comercial"
+      ],
+      "usuarios": 3
+    },
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 5
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T06:20",
+      "perfil": "processo",
+      "area": "operadores",
+      "pergunta": "Que parâmetros usamos no molde 214 na injetora 9 com PP reciclado?",
+      "fontes": [
+        "doc:DOC-FP-214#t3",
+        "saber:SB-21"
+      ]
+    },
+    {
+      "data": "2026-11-13T06:55",
+      "perfil": "ferramentaria",
+      "area": "manutencao",
+      "pergunta": "Quantos ciclos o molde 214 tem desde a última revisão?",
+      "fontes": [
+        "doc:DOC-PLAN-MOL#t1",
+        "maq:MOL-214"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:30",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Qual sequência da semana tem menos trocas de cor no sopro?",
+      "fontes": [
+        "doc:DOC-PLAN-SEQ#t2",
+        "saber:SB-23"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:52",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "O que resolveu a chupagem na tampa 38 mm da última vez?",
+      "fontes": [
+        "nc:NC-2026-061",
+        "os:OS-8822",
+        "saber:SB-25"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:15",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o tempo de setup subiu para 94 min?",
+      "fontes": [
+        "kpi:tempo-setup",
+        "turno:2026-11-12|3º|L-INJT"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:40",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Posso mandar o certificado da resina PP para o Tamoio?",
+      "fontes": [
+        "doc:DOC-CERT-PP#t1",
+        "regra:RC-15"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:05",
+      "perfil": "ferramentaria",
+      "area": "manutencao",
+      "pergunta": "Como diagnosticar a zona 3 da INJ-09?",
+      "fontes": [
+        "doc:DOC-MAN-INJ#t1",
+        "os:OS-8841"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:20",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Quando sai a tampa 38 mm da Rio Peixe?",
+      "fontes": [
+        "pedido:PV-30412",
+        "op:OP-51877"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:44",
+      "perfil": "marketing",
+      "area": "marketing",
+      "pergunta": "Posso falar em material reciclado no post das tampas?",
+      "fontes": [
+        "doc:DOC-CAT-2026#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T10:02",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Quais OPs dependem da SOP-05?",
+      "fontes": [
+        "op:OP-51882",
+        "op:OP-51905",
+        "os:OS-8838"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "O que explica a queda do OEE da injeção de tampas?",
+      "resposta": "O OEE está em 72,4%, contra meta de 80%. O molde 214 roda na INJ-09 com ciclo de 18,0 s em vez de 16,5 s para conter a chupagem, e o 2º turno de 12/11 teve 3,8% de refugo na célula. O setup de 118 min no 3º turno também pesou.",
+      "fontes": [
+        "kpi:oee-tampas",
+        "maq:INJ-09",
+        "turno:2026-11-12|2º|L-INJT",
+        "turno:2026-11-12|3º|L-INJT"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quais são os alertas do dia?",
+      "resposta": "Quatro OPs atrasadas (OP-51877, OP-51890, OP-51882 e OP-51895) seguram 4 pedidos e levaram o OTIF a 87,5%. A INJ-09 e a EXT-02 estão em alerta, com OS abertas, e a SOP-05 está parada esperando a servoválvula, prevista para 15/11.",
+      "fontes": [
+        "kpi:otif",
+        "op:OP-51877",
+        "maq:INJ-09",
+        "maq:EXT-02",
+        "os:OS-8838"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quanto material perdemos em troca de cor?",
+      "resposta": "Foram 1.840 kg na semana 46, contra meta de 1.200 kg. Houve 14 trocas no sopro, 5 a mais que o plano, por causa do masterbatch azul reprovado. A sequência sugerida para a semana 47 cai para 7 trocas e 980 kg.",
+      "fontes": [
+        "kpi:perda-troca-cor",
+        "doc:DOC-PLAN-SEQ#t1",
+        "doc:DOC-PLAN-SEQ#t2"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Qual setup funcionou para o molde 214 na injetora 9 com PP reciclado?",
+      "resposta": "A ficha 214-INJ09 rev. F pede zona 3 a 225 °C, recalque de 420 bar por 4,2 s e resfriamento de 11 s. Com blend de até 30% de PP reciclado, ela manda subir o recalque cerca de 5%, para 441 bar. O Osmar aplicou isso no 1º turno de 12/11 e a chupagem caiu.",
+      "fontes": [
+        "doc:DOC-FP-214#t1",
+        "doc:DOC-FP-214#t2",
+        "doc:DOC-FP-214#t3",
+        "saber:SB-21",
+        "turno:2026-11-12|1º|L-INJT"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "O que o contrato da Rio Peixe exige de nós?",
+      "resposta": "Estoque de segurança de 1.000 milheiros de tampa 38 mm aprovados, laudo dimensional e de torque por lote e preço de R$ 128,00 por milheiro, revisto a cada trimestre. Lote com defeito maior acima do nível de qualidade aceitável volta com frete por nossa conta.",
+      "fontes": [
+        "doc:DOC-CTR-RIOPEIXE#t1",
+        "doc:DOC-CTR-RIOPEIXE#t2",
+        "doc:DOC-CTR-RIOPEIXE#t3"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quais OPs estão atrasadas e por quê?",
+      "resposta": "Quatro. A OP-51877 (tampa 38 mm) está em 64% por causa da chupagem com PP reciclado. A OP-51890 (frasco azul) espera o masterbatch corrigido, previsto para 16/11. A OP-51882 (galão 5 L) está em 55% com a SOP-05 parada. A OP-51895 (filme 50 µm) está em 68% com a EXT-02 15% mais lenta.",
+      "fontes": [
+        "op:OP-51877",
+        "op:OP-51890",
+        "op:OP-51882",
+        "op:OP-51895"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Qual sequência da semana tem menos trocas de cor no sopro?",
+      "resposta": "Agrupar na SOP-03 natural, depois branco (FR-0500 e FR-2000) e só então azul (FR-1000), quando o masterbatch chegar em 16/11. A estimativa é de 7 trocas e 980 kg de perda. A Silvana recomenda não voltar do azul para o natural, que custa 2 a 3 vezes mais purga.",
+      "fontes": [
+        "doc:DOC-PLAN-SEQ#t2",
+        "saber:SB-23",
+        "doc:DOC-IT-COR#t1"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Por que o setup demora mais no 3º turno?",
+      "resposta": "O titular do 3º turno, Alcides, está de férias. O substituto fechou a câmara quente do molde 221 antes de atingir a temperatura, e o setup levou 118 min, contra padrão de 55, com 4.200 peças de refugo de partida. No 1º turno o Osmar fez o setup do molde 118 em 52 min.",
+      "fontes": [
+        "turno:2026-11-12|3º|L-INJT",
+        "turno:2026-11-12|1º|L-INJT",
+        "saber:SB-22",
+        "kpi:tempo-setup"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "O que resolveu a chupagem na tampa 38 mm da última vez?",
+      "resposta": "Em outubro, a limpeza química dos canais de refrigeração do molde 214 subiu a vazão de 9 para 14 L/min (OS-8822). Agora a NC-2026-061 combina três causas: PP reciclado sem ajuste de recalque, zona 3 da INJ-09 instável e refrigeração. O limite da especificação do cliente é 0,10 mm; o lote reclamado tinha 0,18 mm.",
+      "fontes": [
+        "os:OS-8822",
+        "nc:NC-2026-061",
+        "doc:DOC-ESP-RIOPEIXE#t3",
+        "saber:SB-25"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "O frasco azul da Brisa Clara pode sair com o masterbatch MB-7731?",
+      "resposta": "Não. O lote mediu ΔE de 1,8 no frasco e a especificação da Brisa Clara aceita no máximo 1,0, com recusa no recebimento. O fornecedor confirmou troca de origem do pigmento e manda lote corrigido em 16/11 (NC-2026-063).",
+      "fontes": [
+        "nc:NC-2026-063",
+        "doc:DOC-ESP-BRISA#t1",
+        "doc:DOC-LAU-MB#t2"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quantos ciclos o molde 214 tem desde a última revisão?",
+      "resposta": "São 1.240.000 ciclos desde a revisão completa de 10/03/2026. O plano pede revisão a 1.500.000 ciclos, estimada para 15/12. Em novembro, o molde teve 4 das 6 paradas não planejadas da fábrica.",
+      "fontes": [
+        "doc:DOC-PLAN-MOL#t1",
+        "doc:DOC-MAN-MOL#t1",
+        "kpi:paradas-molde",
+        "maq:MOL-214"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Como diagnosticar a zona 3 da INJ-09?",
+      "resposta": "A zona 3 oscila ±7 °C (218 a 232 °C). Pelo manual, se a leitura salta é termopar com mau contato; se a saída fica em 100% é resistência fraca, com isolação mínima de 1 MΩ. A OS-8841 troca os dois em 14/11, na troca de turno das 14:00.",
+      "fontes": [
+        "os:OS-8841",
+        "doc:DOC-MAN-INJ#t1",
+        "doc:DOC-MAN-INJ#t2"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quando trocar o pacote de telas da EXT-02?",
+      "resposta": "Já. A pressão de massa está em 310 bar e o manual manda trocar quando sobe 30 bar acima da tela limpa (limite de trabalho de 330 bar). O Dirceu recomenda trocar antes de 320 bar, na troca de bobina. A OS-8846 está aberta.",
+      "fontes": [
+        "os:OS-8846",
+        "doc:DOC-MAN-EXT#t1",
+        "saber:SB-24",
+        "maq:EXT-02"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Quais itens estão abaixo do estoque mínimo e que pedidos afetam?",
+      "resposta": "Três: TP-38 (1.850 milheiros, mínimo 3.000), FR-1000 (90 milheiros, mínimo 200) e GL-5000 (8.500 peças, mínimo 12.000). A tampa afeta o PV-30412 da Rio Peixe (2.400 milheiros) e o novo PV-30430 do Tamoio; o frasco azul, o PV-30418 da Brisa Clara; o galão, o PV-30405 da Ponte Alta.",
+      "fontes": [
+        "sku:TP-38",
+        "sku:FR-1000",
+        "sku:GL-5000",
+        "pedido:PV-30412",
+        "pedido:PV-30430",
+        "pedido:PV-30418",
+        "pedido:PV-30405"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Prepare a visita à Bebidas Rio Peixe.",
+      "resposta": "Pontos: o PV-30412 (2.400 milheiros de TP-38) passou de 12/11 para 19/11, data que o cliente aceitou se vier com laudo de chupagem por lote. A NC-2026-061 está com 8D até o D6. O contrato pede estoque de segurança de 1.000 milheiros. Há ainda o PV-30427 (1.800 milheiros) para 26/11.",
+      "fontes": [
+        "pedido:PV-30412",
+        "doc:DOC-EMAIL-RIOPEIXE#t2",
+        "nc:NC-2026-061",
+        "doc:DOC-CTR-RIOPEIXE#t1",
+        "pedido:PV-30427"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Posso mandar o certificado da resina para um cliente?",
+      "resposta": "Pode, se for o certificado do PP homopolímero: ele está marcado como aprovado pela qualidade na pasta, e a RC-15 libera o envio sem chamado. O certificado do PP reciclado RC-0912 é documento interno e não deve ser enviado.",
+      "fontes": [
+        "regra:RC-15",
+        "doc:DOC-CERT-PP#t1",
+        "doc:DOC-CERT-PP#t2"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Posso falar em material reciclado no post das tampas?",
+      "resposta": "Sim, com limite: o catálogo aprova \"até 30% de material reciclado pós-industrial, com o mesmo desempenho dimensional\". Não declare percentual de reciclado pós-consumo nem selos de certificação ambiental.",
+      "fontes": [
+        "doc:DOC-CAT-2026#t2",
+        "sku:TP-38"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Rascunhe a ficha do galão de 5 L.",
+      "resposta": "Galão de 5 L em PEAD natural com alça e visor de nível, para lubrificantes, aditivos e saneantes. Empilhável, com carga de topo mínima de 400 N, tampa de 42 mm com lacre e teste de vazamento em 100% das peças.",
+      "fontes": [
+        "sku:GL-5000",
+        "doc:DOC-CAT-2026#t3"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que um preparador novo precisa saber antes do setup de um molde com câmara quente?",
+      "resposta": "O Alcides, com 27 anos de casa, ensina a esperar a câmara quente estabilizar (25 min no molde 221) antes de fechar e injetar. A IT-PRC-03 manda pré-aquecer o molde na estufa por 40 min e liberar só após 3 ciclos estáveis. Pular isso causou o setup de 118 min do 3º turno.",
+      "fontes": [
+        "saber:SB-22",
+        "doc:DOC-IT-SETUP#t1",
+        "doc:DOC-IT-SETUP#t3",
+        "turno:2026-11-12|3º|L-INJT"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Quando medir o torque da tampa?",
+      "resposta": "Só depois de 24 h, porque o PP ainda contrai. A Márcia registrou que medir na hora dá valor menor e aprova lote que reprova no cliente. A especificação da Rio Peixe pede torque de remoção entre 1,2 e 1,8 N·m, medido após 24 h.",
+      "fontes": [
+        "saber:SB-26",
+        "doc:DOC-ESP-RIOPEIXE#t2",
+        "doc:DOC-ESP-RIOPEIXE#t1"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Onde está meu pedido de tampas? (Bebidas Rio Peixe)",
+      "resposta": "O PV-30412, de 2.400 milheiros de tampa 38 mm, está com entrega prevista para 19/11. A OP-51877 está em 64%, e cada lote sai com laudo de chupagem e de torque, como pedido. O PV-30427, de 1.800 milheiros, está programado para 26/11.",
+      "fontes": [
+        "pedido:PV-30412",
+        "op:OP-51877",
+        "pedido:PV-30427"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Posso recomprar 18.000 baldes de 3,6 L?",
+      "resposta": "Sim. Há 26.000 baldes em estoque, com prazo padrão de 7 dias, a R$ 3,85 por peça na tabela. Pedidos acima de R$ 15.000 têm frete CIF em SC, PR e RS.",
+      "fontes": [
+        "sku:BD-3600",
+        "regra:RC-16"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "09:20",
+      "texto": "Bom dia! O Tamoio quer 600 milheiros de tampa 38 mm e 300 de pote 500 mL. Tem pronta entrega? E pediu o certificado da resina.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:20",
+      "texto": "Bom dia, Leandro. Pote 500 mL (PT-500): 640 milheiros em estoque, os 300 saem em 20/11. Tampa 38 mm (TP-38): 1.850 milheiros, abaixo do mínimo de 3.000, e reservados à Rio Peixe (PV-30412, contrato com estoque de segurança). Pela RC-14, contrato anual vem primeiro.",
+      "fontes": [
+        "sku:PT-500",
+        "sku:TP-38",
+        "pedido:PV-30412",
+        "regra:RC-14"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:23",
+      "texto": "E quando consigo a tampa? Ele também pediu 6% de desconto no pacote.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:24",
+      "texto": "A próxima OP no molde 214 é a OP-51899 (2.000 milheiros), de 17 a 21/11, que já atende o PV-30427 da Rio Peixe. Para 600 milheiros ao Tamoio, o PCP precisa confirmar; a estimativa é 27/11. Desconto: até 5% você aprova; 6% depende do gerente regional (RC-11).",
+      "fontes": [
+        "op:OP-51899",
+        "pedido:PV-30427",
+        "regra:RC-11"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:26",
+      "texto": "Ok, vou pedir ao gerente. E o certificado, posso mandar direto?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:26",
+      "texto": "Pode. O certificado do PP homopolímero está aprovado pela qualidade na pasta (fluidez de 12 g/10 min, densidade de 0,905 g/cm³), e a RC-15 libera o envio sem chamado. O do PP reciclado é interno: não envie.",
+      "fontes": [
+        "doc:DOC-CERT-PP#t1",
+        "doc:DOC-CERT-PP#t2",
+        "regra:RC-15"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:28",
+      "texto": "Show, obrigado. Vou lançar o pedido com tampa para 27/11.",
+      "fontes": []
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha — tampa 38 mm com lacre",
+      "texto": "Tampa rosqueável de 38 mm em PP com anel de lacre destacável, para sucos, chás e óleos. Torque de remoção controlado lote a lote (1,2 a 1,8 N·m) e até 30% de material reciclado pós-industrial, com o mesmo desempenho dimensional.",
+      "status": "aprovado",
+      "sku": "TP-38",
+      "fontes": [
+        "sku:TP-38",
+        "doc:DOC-CAT-2026#t2"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "post",
+      "titulo": "Post — reciclado pós-industrial nas tampas",
+      "texto": "Parte do PP das nossas tampas volta para a linha: usamos até 30% de material reciclado pós-industrial, com controle de chupagem e torque em cada lote.",
+      "status": "em_revisao",
+      "sku": "TP-38",
+      "fontes": [
+        "doc:DOC-CAT-2026#t2",
+        "doc:DOC-FP-214#t3"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta à Bebidas Rio Peixe — chupagem no lote 51877-02",
+      "texto": "Os lotes 51877-02 e 51877-03 foram retidos e reinspecionados 100%. Ajustamos o processo no molde 214 e cada novo lote segue com laudo de chupagem (máximo 0,10 mm) e de torque. As 12 caixas devolvidas foram repostas em 10/11.",
+      "status": "aprovado",
+      "sku": "TP-38",
+      "fontes": [
+        "nc:NC-2026-061",
+        "doc:DOC-ESP-RIOPEIXE#t3"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Por que medimos a cor no frasco, e não na placa",
+      "texto": "A cor de um masterbatch muda entre a placa de teste e o frasco soprado, porque a parede é mais fina e esticada. Por isso medimos o ΔE no corpo do frasco, com iluminante D65, e recusamos lote acima de 1,0.",
+      "status": "rascunho",
+      "sku": "FR-1000",
+      "fontes": [
+        "nc:NC-2026-063",
+        "doc:DOC-ESP-BRISA#t1"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha — galão 5 L PEAD",
+      "texto": "Galão de 5 L em PEAD natural com alça e visor de nível, para lubrificantes, aditivos e saneantes. Empilhável, com carga de topo mínima de 400 N e teste de vazamento em 100% das peças.",
+      "status": "aprovado",
+      "sku": "GL-5000",
+      "fontes": [
+        "sku:GL-5000",
+        "doc:DOC-CAT-2026#t3"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do cliente Morretiba",
+    "boas_vindas": "Consulte preços, prazos e laudos dos seus itens e acompanhe seus pedidos.",
+    "destaques": [
+      "TP-28",
+      "BD-3600",
+      "FL-120",
+      "PT-500"
+    ],
+    "avisos": [
+      {
+        "titulo": "Frasco 1 L azul com prazo maior",
+        "texto": "O masterbatch azul de reposição chega em 16/11. Pedidos novos de frasco azul têm entrega a partir de 24/11."
+      },
+      {
+        "titulo": "Laudos por lote",
+        "texto": "Certificados de resina e laudos dimensionais aprovados pela qualidade agora podem ser pedidos ao seu representante, sem chamado."
+      },
+      {
+        "titulo": "Feriado de 20/11",
+        "texto": "Sem expedição em 20/11 nas plantas de Joinville e Guaramirim; entregas desse dia passam para 21/11."
+      }
+    ]
+  }
+}

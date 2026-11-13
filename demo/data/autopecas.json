@@ -1,0 +1,3314 @@
+{
+  "id": "autopecas",
+  "setor": "Autopeças e implementos",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Altaponte Componentes Automotivos S.A.",
+    "cidade": "Indaial",
+    "uf": "SC",
+    "funcionarios": 2300,
+    "descricao": "Fabrica estampados, conjuntos soldados e peças usinadas para montadoras, sistemistas e fabricantes de implementos rodoviários, com sistema da qualidade certificado IATF 16949."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "peça",
+    "produtos": "peças",
+    "cliente": "cliente",
+    "clientes": "clientes",
+    "representante": "executivo de contas",
+    "representantes": "executivos de contas",
+    "maquina": "máquina",
+    "maquinas": "máquinas",
+    "linha": "linha",
+    "linhas": "linhas",
+    "unidade": "peças",
+    "lote": "lote"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP e logística (programação EDI)"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e APQP"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção e ferramentaria"
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial e contas de montadora"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing e catálogo de reposição"
+    },
+    {
+      "id": "operadores",
+      "nome": "Estamparia, solda e usinagem"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria industrial"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Planta Indaial (estamparia, solda e pintura)",
+      "cidade": "Indaial"
+    },
+    {
+      "id": "P2",
+      "nome": "Planta Timbó (usinagem e montagem)",
+      "cidade": "Timbó"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-PRE",
+      "nome": "Estamparia (prensas)",
+      "planta": "P1",
+      "tipo": "estamparia"
+    },
+    {
+      "id": "L-SOL",
+      "nome": "Solda robotizada",
+      "planta": "P1",
+      "tipo": "solda"
+    },
+    {
+      "id": "L-PIN",
+      "nome": "Pintura KTL (e-coat)",
+      "planta": "P1",
+      "tipo": "pintura"
+    },
+    {
+      "id": "L-USI",
+      "nome": "Usinagem CNC",
+      "planta": "P2",
+      "tipo": "usinagem"
+    },
+    {
+      "id": "L-MON",
+      "nome": "Montagem e inspeção final",
+      "planta": "P2",
+      "tipo": "montagem"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "PRE-01",
+      "nome": "Prensa mecânica 400 t",
+      "linha": "L-PRE",
+      "tipo": "prensa mecânica",
+      "fabricante": "Fabricante A",
+      "ano": 2009,
+      "status": "operando",
+      "horimetro": 88400,
+      "mtbf_h": 610,
+      "proxima_preventiva": "2026-11-29",
+      "manual": "DOC-MAN-PRE"
+    },
+    {
+      "id": "PRE-02",
+      "nome": "Prensa mecânica 250 t",
+      "linha": "L-PRE",
+      "tipo": "prensa mecânica",
+      "fabricante": "Fabricante A",
+      "ano": 2006,
+      "status": "alerta",
+      "horimetro": 104250,
+      "mtbf_h": 380,
+      "proxima_preventiva": "2026-11-22",
+      "manual": "DOC-MAN-PRE"
+    },
+    {
+      "id": "PRE-03",
+      "nome": "Prensa progressiva 600 t",
+      "linha": "L-PRE",
+      "tipo": "prensa progressiva",
+      "fabricante": "Fabricante A",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 46200,
+      "mtbf_h": 720,
+      "proxima_preventiva": "2026-11-19",
+      "manual": "DOC-MAN-PRE"
+    },
+    {
+      "id": "SOL-01",
+      "nome": "Célula de solda robotizada 1",
+      "linha": "L-SOL",
+      "tipo": "célula de solda MIG",
+      "fabricante": "Fabricante B",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 39800,
+      "mtbf_h": 540,
+      "proxima_preventiva": "2026-12-03",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "SOL-02",
+      "nome": "Célula de solda robotizada 2",
+      "linha": "L-SOL",
+      "tipo": "célula de solda MIG",
+      "fabricante": "Fabricante B",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 40120,
+      "mtbf_h": 460,
+      "proxima_preventiva": "2026-11-26",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "SOL-03",
+      "nome": "Célula de solda robotizada 3",
+      "linha": "L-SOL",
+      "tipo": "célula de solda MIG",
+      "fabricante": "Fabricante B",
+      "ano": 2021,
+      "status": "manutencao",
+      "horimetro": 22650,
+      "mtbf_h": 590,
+      "proxima_preventiva": "2026-11-12",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "PIN-01",
+      "nome": "Linha de pintura KTL (tanque e estufa)",
+      "linha": "L-PIN",
+      "tipo": "pintura por eletrodeposição",
+      "fabricante": "Fabricante D",
+      "ano": 2013,
+      "status": "operando",
+      "horimetro": 67300,
+      "mtbf_h": 830,
+      "proxima_preventiva": "2026-12-06",
+      "manual": "DOC-MAN-PIN"
+    },
+    {
+      "id": "USI-01",
+      "nome": "Torno CNC 1",
+      "linha": "L-USI",
+      "tipo": "torno CNC",
+      "fabricante": "Fabricante C",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 41900,
+      "mtbf_h": 650,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "USI-02",
+      "nome": "Torno CNC 2",
+      "linha": "L-USI",
+      "tipo": "torno CNC",
+      "fabricante": "Fabricante C",
+      "ano": 2012,
+      "status": "parada",
+      "horimetro": 63800,
+      "mtbf_h": 410,
+      "proxima_preventiva": "2026-11-24",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "USI-03",
+      "nome": "Centro de usinagem vertical",
+      "linha": "L-USI",
+      "tipo": "centro de usinagem",
+      "fabricante": "Fabricante C",
+      "ano": 2020,
+      "status": "operando",
+      "horimetro": 27400,
+      "mtbf_h": 780,
+      "proxima_preventiva": "2026-12-08",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "USI-04",
+      "nome": "Brochadeira vertical",
+      "linha": "L-USI",
+      "tipo": "brochadeira",
+      "fabricante": "Fabricante C",
+      "ano": 2010,
+      "status": "operando",
+      "horimetro": 58700,
+      "mtbf_h": 900,
+      "proxima_preventiva": "2026-12-12",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "MON-01",
+      "nome": "Prensa hidráulica de montagem de buchas com monitoramento de força",
+      "linha": "L-MON",
+      "tipo": "prensa de montagem",
+      "fabricante": "Fabricante E",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 30100,
+      "mtbf_h": 1100,
+      "proxima_preventiva": "2026-11-28",
+      "manual": "DOC-MAN-MON"
+    },
+    {
+      "id": "MED-01",
+      "nome": "Máquina de medição por coordenadas (CMM)",
+      "linha": "L-MON",
+      "tipo": "metrologia",
+      "fabricante": "Fabricante E",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 18300,
+      "mtbf_h": 2400,
+      "proxima_preventiva": "2027-01-15",
+      "manual": "DOC-MAN-MON"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "AP-4471-B",
+      "nome": "Suporte do coxim do motor (estampado)",
+      "familia": "Estampados",
+      "unidade": "peças",
+      "preco": 18.4,
+      "prazo_dias": 7,
+      "estoque": 3250,
+      "estoque_minimo": 12000,
+      "descricao_comercial": "Suporte estampado em aço de alta resistência para fixação do coxim do motor. Fornecido com PPAP nível 3 aprovado e rastreabilidade por lote de bobina.",
+      "ficha": {
+        "atributos": {
+          "Material": "aço laminado a quente de alta resistência",
+          "Espessura": "3,0 mm",
+          "Ferramenta": "88-14 (progressiva)",
+          "PPAP": "nível 3, aprovado"
+        },
+        "roteiro": [
+          "Corte de bobina",
+          "Estampagem (ferramenta 88-14)",
+          "Inspeção de furo (calibrador)",
+          "Pintura KTL",
+          "Embalagem retornável",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do furo de fixação",
+            "nominal": "10,5",
+            "tolerancia": "+0,1 / 0",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Altura de rebarba no furo",
+            "nominal": "≤ 0,1",
+            "tolerancia": "máximo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Espessura da chapa",
+            "nominal": "3,0",
+            "tolerancia": "±0,10",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-5120-A",
+      "nome": "Braço de controle inferior lado esquerdo (conjunto soldado)",
+      "familia": "Conjuntos soldados",
+      "unidade": "peças",
+      "preco": 96.8,
+      "prazo_dias": 10,
+      "estoque": 820,
+      "estoque_minimo": 1500,
+      "descricao_comercial": "Braço de controle inferior soldado por robô, com pintura KTL e buchas montadas. Característica de segurança com ensaio destrutivo de solda por turno.",
+      "ficha": {
+        "atributos": {
+          "Processo": "estampagem + solda MIG robotizada + KTL",
+          "Característica especial": "solda de segurança (CC)",
+          "Lado": "esquerdo"
+        },
+        "roteiro": [
+          "Estampagem das cascas",
+          "Solda robotizada",
+          "Pintura KTL",
+          "Montagem de buchas",
+          "Medição em CMM (amostragem)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Penetração da solda (macrografia)",
+            "nominal": "≥ 1,2",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Comprimento do cordão principal",
+            "nominal": "85",
+            "tolerancia": "±5",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Posição do furo da bucha",
+            "nominal": "0",
+            "tolerancia": "±0,3",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-5121-A",
+      "nome": "Braço de controle inferior lado direito (conjunto soldado)",
+      "familia": "Conjuntos soldados",
+      "unidade": "peças",
+      "preco": 96.8,
+      "prazo_dias": 10,
+      "estoque": 1740,
+      "estoque_minimo": 1500,
+      "descricao_comercial": "Par do braço de controle esquerdo, com o mesmo processo de solda robotizada, pintura KTL e buchas montadas.",
+      "ficha": {
+        "atributos": {
+          "Processo": "estampagem + solda MIG robotizada + KTL",
+          "Característica especial": "solda de segurança (CC)",
+          "Lado": "direito"
+        },
+        "roteiro": [
+          "Estampagem das cascas",
+          "Solda robotizada",
+          "Pintura KTL",
+          "Montagem de buchas",
+          "Medição em CMM (amostragem)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Penetração da solda (macrografia)",
+            "nominal": "≥ 1,2",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-3308",
+      "nome": "Reforço da coluna B (estampado)",
+      "familia": "Estampados",
+      "unidade": "peças",
+      "preco": 12.9,
+      "prazo_dias": 7,
+      "estoque": 18400,
+      "estoque_minimo": 15000,
+      "descricao_comercial": "Reforço estrutural estampado em prensa progressiva para a coluna B da carroceria.",
+      "ficha": {
+        "atributos": {
+          "Material": "aço de alta resistência",
+          "Espessura": "1,8 mm",
+          "Prensa": "PRE-03 (progressiva)"
+        },
+        "roteiro": [
+          "Corte de bobina",
+          "Estampagem progressiva",
+          "Inspeção visual de trinca",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Trinca na dobra",
+            "nominal": "ausente",
+            "tolerancia": "0 defeitos",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Perfil (CMM)",
+            "nominal": "0",
+            "tolerancia": "±0,5",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-3350",
+      "nome": "Reforço do assoalho (estampado)",
+      "familia": "Estampados",
+      "unidade": "peças",
+      "preco": 15.1,
+      "prazo_dias": 7,
+      "estoque": 9800,
+      "estoque_minimo": 8000,
+      "descricao_comercial": "Reforço do assoalho estampado e pintado em KTL, fornecido a sistemista de estruturas.",
+      "ficha": {
+        "atributos": {
+          "Espessura": "2,0 mm",
+          "Acabamento": "KTL preto"
+        },
+        "roteiro": [
+          "Estampagem",
+          "Pintura KTL",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Camada de KTL",
+            "nominal": "18 a 25",
+            "tolerancia": "faixa",
+            "unidade": "µm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-6604",
+      "nome": "Travessa do painel (conjunto soldado)",
+      "familia": "Conjuntos soldados",
+      "unidade": "peças",
+      "preco": 74.5,
+      "prazo_dias": 12,
+      "estoque": 960,
+      "estoque_minimo": 600,
+      "descricao_comercial": "Travessa tubular do painel de instrumentos com suportes soldados, para veículos comerciais leves.",
+      "ficha": {
+        "atributos": {
+          "Tubo": "Ø 38 × 1,5 mm",
+          "Suportes soldados": "9"
+        },
+        "roteiro": [
+          "Corte e curvamento de tubo",
+          "Estampagem dos suportes",
+          "Solda robotizada",
+          "Medição em dispositivo",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Posição dos furos de fixação (dispositivo)",
+            "nominal": "0",
+            "tolerancia": "±0,5",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-7012",
+      "nome": "Bucha de suspensão usinada",
+      "familia": "Usinados",
+      "unidade": "peças",
+      "preco": 8.75,
+      "prazo_dias": 5,
+      "estoque": 21500,
+      "estoque_minimo": 10000,
+      "descricao_comercial": "Bucha metálica usinada para suspensão, vendida a sistemistas e no mercado de reposição em embalagem com 50 peças.",
+      "ficha": {
+        "atributos": {
+          "Material": "aço SAE 1045",
+          "Diâmetro externo": "32 mm",
+          "Embalagem reposição": "50 peças"
+        },
+        "roteiro": [
+          "Corte de barra",
+          "Torneamento CNC",
+          "Tratamento superficial (fornecedor)",
+          "Inspeção dimensional",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro externo",
+            "nominal": "32,00",
+            "tolerancia": "+0,025 / 0",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Força de extração após montagem",
+            "nominal": "≥ 8",
+            "tolerancia": "mínimo",
+            "unidade": "kN"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-7210",
+      "nome": "Cubo de roda usinado",
+      "familia": "Usinados",
+      "unidade": "peças",
+      "preco": 62.3,
+      "prazo_dias": 10,
+      "estoque": 40,
+      "estoque_minimo": 250,
+      "descricao_comercial": "Cubo de roda forjado e usinado em torno CNC, com alojamento de rolamento em tolerância H7. Item de segurança com medição em CMM por amostragem.",
+      "ficha": {
+        "atributos": {
+          "Bruto": "forjado (fornecedor)",
+          "Característica especial": "alojamento do rolamento (CC)"
+        },
+        "roteiro": [
+          "Recebimento do forjado",
+          "Torneamento CNC (USI-01 / USI-02)",
+          "Furação (centro de usinagem)",
+          "Medição em CMM",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do alojamento do rolamento",
+            "nominal": "72 H7",
+            "tolerancia": "+0,030 / 0",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Batimento radial",
+            "nominal": "≤ 0,02",
+            "tolerancia": "máximo",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-7415",
+      "nome": "Eixo de articulação usinado",
+      "familia": "Usinados",
+      "unidade": "peças",
+      "preco": 23.6,
+      "prazo_dias": 8,
+      "estoque": 3100,
+      "estoque_minimo": 2000,
+      "descricao_comercial": "Eixo de articulação torneado e retificado para máquinas agrícolas.",
+      "ficha": {
+        "atributos": {
+          "Material": "aço SAE 4140 temperado",
+          "Comprimento": "186 mm"
+        },
+        "roteiro": [
+          "Corte de barra",
+          "Torneamento CNC",
+          "Tratamento térmico (fornecedor)",
+          "Retífica",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do mancal",
+            "nominal": "25,00",
+            "tolerancia": "-0,020 / -0,041",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-2290",
+      "nome": "Suporte do para-choque (estampado, KTL)",
+      "familia": "Estampados",
+      "unidade": "peças",
+      "preco": 9.4,
+      "prazo_dias": 7,
+      "estoque": 12600,
+      "estoque_minimo": 6000,
+      "descricao_comercial": "Suporte estampado com pintura KTL para fixação do para-choque. Vendido também para reposição em caixas de 100 peças.",
+      "ficha": {
+        "atributos": {
+          "Espessura": "2,5 mm",
+          "Acabamento": "KTL preto"
+        },
+        "roteiro": [
+          "Estampagem",
+          "Pintura KTL",
+          "Embalagem",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Camada de KTL",
+            "nominal": "18 a 25",
+            "tolerancia": "faixa",
+            "unidade": "µm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-8830",
+      "nome": "Suporte de para-lama para implemento rodoviário",
+      "familia": "Implementos",
+      "unidade": "peças",
+      "preco": 41,
+      "prazo_dias": 12,
+      "estoque": 150,
+      "estoque_minimo": 120,
+      "descricao_comercial": "Suporte de para-lama em chapa de 4,75 mm, soldado e pintado em KTL, para semirreboques e carrocerias.",
+      "ficha": {
+        "atributos": {
+          "Espessura": "4,75 mm",
+          "Acabamento": "KTL + pó (opcional)"
+        },
+        "roteiro": [
+          "Corte a laser (fornecedor)",
+          "Dobra",
+          "Solda",
+          "Pintura KTL",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Aderência da pintura (quadriculado)",
+            "nominal": "Gt0 a Gt1",
+            "tolerancia": "máximo Gt1",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Camada de KTL",
+            "nominal": "18 a 25",
+            "tolerancia": "faixa",
+            "unidade": "µm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "AP-8845",
+      "nome": "Suporte do tanque de combustível para implemento",
+      "familia": "Implementos",
+      "unidade": "peças",
+      "preco": 57.2,
+      "prazo_dias": 15,
+      "estoque": 210,
+      "estoque_minimo": 100,
+      "descricao_comercial": "Suporte soldado para tanque de combustível de semirreboques, com furação padrão para cintas de fixação.",
+      "ficha": {
+        "atributos": {
+          "Espessura": "6,3 mm",
+          "Acabamento": "KTL"
+        },
+        "roteiro": [
+          "Corte",
+          "Dobra",
+          "Solda robotizada",
+          "Pintura KTL",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Distância entre furos de cinta",
+            "nominal": "420",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-88104",
+      "sku": "AP-4471-B",
+      "quantidade": 24000,
+      "linha": "L-PRE",
+      "inicio": "2026-11-03",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 62,
+      "pedido": "PV-77405",
+      "motivo_atraso": "Ferramenta 88-14 parada para afiação após a reclamação de rebarba (NC-2026-311), muro de qualidade com inspeção 100% e prensa PRE-02 rodando com cadência reduzida pelo tempo de parada do freio.",
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "OP liberada pela programação EDI firme da semana 46 (24.000 peças)"
+        },
+        {
+          "data": "2026-11-04",
+          "evento": "Reclamação de rebarba da Montadora A; contenção iniciada"
+        },
+        {
+          "data": "2026-11-08",
+          "evento": "Ferramenta 88-14 afiada (OS-9433); produção retomada"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "14.880 peças produzidas; 2 embarques atrasados"
+        }
+      ]
+    },
+    {
+      "id": "OP-88120",
+      "sku": "AP-5120-A",
+      "quantidade": 3000,
+      "linha": "L-SOL",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-13",
+      "status": "atrasada",
+      "progresso": 48,
+      "pedido": "PV-77412",
+      "motivo_atraso": "Firme da semana 47 subiu de 2.400 para 3.000 peças em 09/11 e a célula SOL-03 está em manutenção desde 12/11; a SOL-02 ainda reprova cordões por porosidade (NC-2026-318).",
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "OP liberada com 2.400 peças"
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "Programação EDI: firme da semana 47 subiu para 3.000 (+25%)"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "SOL-03 entrou em manutenção (OS-9425); 1.440 braços soldados"
+        }
+      ]
+    },
+    {
+      "id": "OP-88131",
+      "sku": "AP-7210",
+      "quantidade": 1200,
+      "linha": "L-USI",
+      "inicio": "2026-11-04",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 55,
+      "pedido": "PV-77420",
+      "motivo_atraso": "Torno CNC 2 (USI-02) parado desde 10/11 por falha no encoder do fuso (OS-9428); 18 cubos com alojamento fora do H7 (NC-2026-315).",
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "OP liberada"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "USI-02 parou; 18 cubos segregados"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Operação concentrada no USI-01, com metade da capacidade"
+        }
+      ]
+    },
+    {
+      "id": "OP-88115",
+      "sku": "AP-8830",
+      "quantidade": 800,
+      "linha": "L-PIN",
+      "inicio": "2026-10-30",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 70,
+      "pedido": "PV-77388",
+      "motivo_atraso": "240 suportes reprovados no ensaio de aderência (NC-2026-309) e repintados após ajuste do pré-tratamento.",
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "Ensaio de quadriculado Gt2 (limite Gt1); lote segregado"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Banho de fosfato ajustado; repintura iniciada"
+        }
+      ]
+    },
+    {
+      "id": "OP-88135",
+      "sku": "AP-3308",
+      "quantidade": 30000,
+      "linha": "L-PRE",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-19",
+      "status": "em_producao",
+      "progresso": 45,
+      "pedido": "PV-77430",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "13.500 peças na PRE-03"
+        }
+      ]
+    },
+    {
+      "id": "OP-88138",
+      "sku": "AP-6604",
+      "quantidade": 2400,
+      "linha": "L-SOL",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-21",
+      "status": "em_producao",
+      "progresso": 30,
+      "pedido": "PV-77433",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Rodando na SOL-01"
+        }
+      ]
+    },
+    {
+      "id": "OP-88133",
+      "sku": "AP-7415",
+      "quantidade": 5000,
+      "linha": "L-USI",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 58,
+      "pedido": "PV-77426",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Retífica no fornecedor sem atraso"
+        }
+      ]
+    },
+    {
+      "id": "OP-88112",
+      "sku": "AP-5121-A",
+      "quantidade": 2400,
+      "linha": "L-SOL",
+      "inicio": "2026-11-11",
+      "prazo": "2026-11-19",
+      "status": "em_producao",
+      "progresso": 35,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Rodando na SOL-01 entre lotes da travessa"
+        }
+      ]
+    },
+    {
+      "id": "OP-88128",
+      "sku": "AP-2290",
+      "quantidade": 8000,
+      "linha": "L-PIN",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-18",
+      "status": "em_producao",
+      "progresso": 60,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88142",
+      "sku": "AP-8845",
+      "quantidade": 500,
+      "linha": "L-SOL",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-27",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-77437",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88145",
+      "sku": "AP-8830",
+      "quantidade": 400,
+      "linha": "L-PIN",
+      "inicio": "2026-11-20",
+      "prazo": "2026-11-30",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-77442",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88147",
+      "sku": "AP-7012",
+      "quantidade": 12000,
+      "linha": "L-USI",
+      "inicio": "2026-11-17",
+      "prazo": "2026-11-26",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-77444",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88150",
+      "sku": "AP-5120-A",
+      "quantidade": 2000,
+      "linha": "L-SOL",
+      "inicio": "2026-11-16",
+      "prazo": "2026-11-23",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Recompor estoque mínimo: AP-5120-A com 820 de 1.500"
+        }
+      ]
+    },
+    {
+      "id": "OP-88140",
+      "sku": "AP-4471-B",
+      "quantidade": 24000,
+      "linha": "L-PRE",
+      "inicio": "2026-11-17",
+      "prazo": "2026-11-26",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Previsão EDI da semana 48 da Montadora A"
+        }
+      ]
+    },
+    {
+      "id": "OP-88110",
+      "sku": "AP-3350",
+      "quantidade": 18000,
+      "linha": "L-PRE",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-06",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-77401",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88101",
+      "sku": "AP-5121-A",
+      "quantidade": 2600,
+      "linha": "L-SOL",
+      "inicio": "2026-10-22",
+      "prazo": "2026-11-04",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-77395",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88108",
+      "sku": "AP-2290",
+      "quantidade": 6000,
+      "linha": "L-PRE",
+      "inicio": "2026-10-24",
+      "prazo": "2026-11-03",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-77418",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-88125",
+      "sku": "AP-7012",
+      "quantidade": 8000,
+      "linha": "L-USI",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-11",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Concluída para estoque de reposição"
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-PRE",
+      "produzido": 4100,
+      "refugo": 62,
+      "paradas_min": 85,
+      "resumo": "4.100 suportes AP-4471-B na PRE-02, abaixo dos 6.000 programados. A cadência ficou em 14 golpes/min (padrão 18) pelo tempo de parada do freio, e o muro de qualidade segurou a saída.",
+      "ocorrencias": [
+        "PRE-02: tempo de parada do freio em 235 ms (padrão 180 ms, limite 250 ms); cadência reduzida",
+        "Inspeção 100% do furo no muro de qualidade: 62 peças segregadas",
+        "Troca de bobina: 25 min"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-PRE",
+      "produzido": 3900,
+      "refugo": 48,
+      "paradas_min": 95,
+      "resumo": "3.900 suportes AP-4471-B. Duas paradas para medir o freio da PRE-02 e o muro de qualidade com dois inspetores.",
+      "ocorrencias": [
+        "PRE-02: 2 medições do freio (40 min)",
+        "Espera de embalagem retornável da Montadora A (55 min)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-SOL",
+      "produzido": 410,
+      "refugo": 9,
+      "paradas_min": 120,
+      "resumo": "410 braços de controle soldados com duas células. A SOL-03 entrou em manutenção e a SOL-02 teve 9 cordões reprovados por porosidade.",
+      "ocorrencias": [
+        "SOL-03 em manutenção (OS-9425): 120 min sem a célula",
+        "SOL-02: 9 braços AP-5120-A com porosidade no cordão principal"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "3º",
+      "linha": "L-SOL",
+      "produzido": 520,
+      "refugo": 11,
+      "paradas_min": 30,
+      "resumo": "520 braços soldados com três células. Macrografia de penetração aprovada no início do turno.",
+      "ocorrencias": [
+        "SOL-02: troca do bico de contato (30 min)",
+        "Macrografia: penetração de 1,6 mm (mínimo 1,2 mm)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-USI",
+      "produzido": 95,
+      "refugo": 2,
+      "paradas_min": 480,
+      "resumo": "Só o USI-01 rodou cubos AP-7210: 95 peças. O USI-02 seguiu parado aguardando o encoder do fuso.",
+      "ocorrencias": [
+        "USI-02 parado o turno inteiro (OS-9428)",
+        "2 cubos com batimento acima de 0,02 mm no USI-01"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-PIN",
+      "produzido": 3600,
+      "refugo": 18,
+      "paradas_min": 20,
+      "resumo": "3.600 peças pintadas, incluindo 240 suportes AP-8830 repintados. Aderência Gt1 no ensaio de quadriculado.",
+      "ocorrencias": [
+        "Ensaio de aderência: Gt1 (aprovado)",
+        "Correção da condutividade do banho (20 min)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-MON",
+      "produzido": 2900,
+      "refugo": 5,
+      "paradas_min": 15,
+      "resumo": "2.900 buchas montadas em braços com monitoramento de força. Cinco montagens fora da janela de força foram rejeitadas automaticamente.",
+      "ocorrencias": [
+        "MON-01: 5 curvas de força fora da janela (rejeição automática)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "3º",
+      "linha": "L-PRE",
+      "produzido": 5200,
+      "refugo": 21,
+      "paradas_min": 30,
+      "resumo": "5.200 reforços AP-3308 na PRE-03, turno estável.",
+      "ocorrencias": [
+        "Troca de bobina: 30 min"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-311",
+      "data": "2026-11-04",
+      "sku": "AP-4471-B",
+      "linha": "L-PRE",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Montadora A encontrou 38 suportes AP-4471-B com rebarba de até 0,35 mm no furo de Ø 10,5 mm (limite 0,1 mm), impedindo a montagem do parafuso do coxim.",
+      "causa": "Punção do furo da ferramenta 88-14 com 58.300 golpes sem afiação (limite de 40.000). O contador de golpes ficou na PRE-01 quando a ferramenta foi transferida para a PRE-02.",
+      "acao": "Contenção com inspeção 100% e muro de qualidade; ferramenta afiada; contador de golpes gravado na ferramenta com bloqueio no MES; PFMEA e plano de controle revisados.",
+      "status": "em_analise",
+      "responsavel": "Carla Mendes",
+      "oito_d": {
+        "D1": "Equipe: Carla Mendes (engenheira de qualidade do cliente, líder), Jonas Becker (ferramentaria), Valmir Costa (supervisor da estamparia), Rafaela Teixeira (APQP) e Ademir Souza (manutenção).",
+        "D2": "Em 04/11 a Montadora A, pelo portal do fornecedor, rejeitou 38 suportes AP-4471-B do lote de 03/11 com rebarba de até 0,35 mm no furo de Ø 10,5 mm (limite 0,1 mm). A rebarba impedia o parafuso do coxim do motor de assentar. Característica do plano de controle, não é de segurança.",
+        "D3": "Contenção em 18 h: 8.600 peças em estoque e 6.000 em trânsito inspecionadas 100% com calibrador passa-não-passa e verificação de rebarba; 112 segregadas. Muro de qualidade na expedição com etiqueta verde de peça inspecionada até o fechamento do 8D.",
+        "D4": "Causa de ocorrência: o punção da ferramenta 88-14 rodou 58.300 golpes sem afiação, acima do limite de 40.000 definido no 8D 017. A ferramenta foi transferida da PRE-01 para a PRE-02 em 21/10 e o contador ficou na prensa, zerando a contagem. Causa de não detecção: a verificação a cada 2 h (plano de controle rev. G) não pegou o crescimento gradual da rebarba entre amostras.",
+        "D5": "Ações escolhidas: contador de golpes gravado na própria ferramenta (etiqueta lida por qualquer prensa) com bloqueio no MES ao atingir 40.000 golpes; verificação do furo a cada 1 h por duas semanas, voltando a 2 h após eficácia comprovada.",
+        "D6": "Afiação feita em 08/11 (OS-9433). Contador na ferramenta implantado em 12/11 nas 22 ferramentas de estampo críticas. Verificação: nenhuma rebarba acima de 0,1 mm em 11.200 peças produzidas desde 08/11.",
+        "D7": "PFMEA rev. F com o modo de falha \"contador não acompanha a ferramenta\"; plano de controle rev. H; procedimento de afiação revisado; lição aprendida levada às ferramentas das famílias 88 e 90.",
+        "D8": "Fechamento previsto para 27/11, depois de três semanas sem reincidência e com o aceite da Montadora A no portal do fornecedor. A equipe será reconhecida na reunião mensal da qualidade."
+      }
+    },
+    {
+      "id": "NC-2026-318",
+      "data": "2026-11-12",
+      "sku": "AP-5120-A",
+      "linha": "L-SOL",
+      "origem": "interna",
+      "severidade": "alta",
+      "descricao": "9 braços AP-5120-A reprovados no 1º turno de 12/11 por porosidade no cordão principal soldado na SOL-02 (característica de segurança).",
+      "causa": "Em análise: suspeita de vazão de gás de proteção instável após troca do regulador; bico de contato trocado em 10/11 sem efeito.",
+      "acao": "Peças segregadas e sucateadas; macrografia a cada 2 h na SOL-02; vazão medida no bocal a cada troca de cilindro.",
+      "status": "aberta",
+      "responsavel": "Rafaela Teixeira",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-315",
+      "data": "2026-11-10",
+      "sku": "AP-7210",
+      "linha": "L-USI",
+      "origem": "interna",
+      "severidade": "alta",
+      "descricao": "18 cubos AP-7210 com diâmetro do alojamento do rolamento acima do H7 (medido 72,034 a 72,041 mm; máximo 72,030 mm).",
+      "causa": "Falha intermitente no encoder do fuso do torno USI-02 alterando a posição de corte.",
+      "acao": "Cubos segregados para sucata; USI-02 parado (OS-9428); 100% dos cubos do dia medidos em CMM.",
+      "status": "aberta",
+      "responsavel": "Carla Mendes",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-309",
+      "data": "2026-11-06",
+      "sku": "AP-8830",
+      "linha": "L-PIN",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "240 suportes AP-8830 com aderência Gt2 no ensaio de quadriculado (limite Gt1).",
+      "causa": "Concentração do banho de fosfato abaixo da faixa por falha na dosagem automática.",
+      "acao": "Lote decapado e repintado; dosagem conferida por titulação a cada turno.",
+      "status": "em_analise",
+      "responsavel": "Rafaela Teixeira",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-321",
+      "data": "2026-11-11",
+      "sku": "AP-4471-B",
+      "linha": "L-PRE",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Auditoria interna de processo achou o calibrador passa-não-passa CAL-1050 do furo de Ø 10,5 mm com calibração vencida desde 31/10.",
+      "causa": "Calibrador reserva sem lembrete no sistema de calibração; entrou em uso durante a contenção da NC-2026-311.",
+      "acao": "Calibrador recolhido e calibrado (aprovado); peças verificadas com ele reavaliadas com o calibrador principal; reservas incluídas no sistema.",
+      "status": "aberta",
+      "responsavel": "Rafaela Teixeira",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-304",
+      "data": "2026-10-22",
+      "sku": "AP-4471-B",
+      "linha": "L-PRE",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "Bobina de aço com espessura de 2,85 mm em parte do comprimento (especificado 3,00 ± 0,10 mm).",
+      "causa": "Falha de laminação no fornecedor de aço.",
+      "acao": "Bobina devolvida; fornecedor passou a enviar perfil de espessura por bobina.",
+      "status": "encerrada",
+      "responsavel": "Carla Mendes",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-299",
+      "data": "2026-10-14",
+      "sku": "AP-7012",
+      "linha": "L-MON",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Sistemista Eixos Planalto relatou 6 buchas AP-7012 com força de extração de 6,8 kN (mínimo 8 kN) em ensaio de recebimento.",
+      "causa": "Diâmetro externo no limite inferior combinado com janela de força da MON-01 aberta demais.",
+      "acao": "Janela de força da MON-01 estreitada; diâmetro externo controlado por CEP com Cpk mínimo de 1,67.",
+      "status": "encerrada",
+      "responsavel": "Carla Mendes",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-292",
+      "data": "2026-10-03",
+      "sku": "AP-3308",
+      "linha": "L-PRE",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Trinca na dobra em 0,4% dos reforços AP-3308 em um turno.",
+      "causa": "Lubrificação da tira insuficiente na estação 4 da progressiva.",
+      "acao": "Bico de lubrificação reposicionado; inspeção visual de trinca a cada 30 min no turno seguinte.",
+      "status": "encerrada",
+      "responsavel": "Rafaela Teixeira",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-301",
+      "data": "2026-10-18",
+      "sku": "AP-6604",
+      "linha": "L-SOL",
+      "origem": "cliente",
+      "severidade": "baixa",
+      "descricao": "Montadora B recebeu um palete de AP-6604 com etiqueta de embalagem de outro part number.",
+      "causa": "Etiqueta impressa antes da troca de OP na expedição.",
+      "acao": "Impressão de etiqueta passou a ser liberada só após leitura da OP no coletor.",
+      "status": "encerrada",
+      "responsavel": "Carla Mendes",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-9431",
+      "maquina": "PRE-02",
+      "tipo": "preditiva",
+      "data": "2026-11-11",
+      "status": "aberta",
+      "tecnico": "Ademir Souza",
+      "duracao_h": 8,
+      "descricao": "Tempo de parada do freio subiu de 180 para 235 ms (limite de segurança 250 ms). Trocar lonas do conjunto freio-embreagem e regular; parada programada para sábado, 14/11.",
+      "pecas": [
+        "Jogo de lonas do freio",
+        "Molas de retorno (6 un.)"
+      ],
+      "procedimento": "DOC-MAN-PRE"
+    },
+    {
+      "id": "OS-9433",
+      "maquina": "PRE-02",
+      "tipo": "preventiva",
+      "data": "2026-11-08",
+      "status": "concluida",
+      "tecnico": "Jonas Becker",
+      "duracao_h": 6,
+      "descricao": "Afiação da ferramenta 88-14 (punção do furo de Ø 10,5 mm e matriz) após 58.300 golpes; contador de golpes zerado e gravado na ferramenta.",
+      "pecas": [
+        "Punção Ø 10,5 mm reserva"
+      ],
+      "procedimento": "DOC-PRO-FER"
+    },
+    {
+      "id": "OS-9428",
+      "maquina": "USI-02",
+      "tipo": "corretiva",
+      "data": "2026-11-10",
+      "status": "em_execucao",
+      "tecnico": "Ademir Souza",
+      "duracao_h": 22,
+      "descricao": "Encoder do fuso com falha intermitente; peça de reposição chega em 16/11 e o torno volta no 1º turno de 17/11.",
+      "pecas": [
+        "Encoder do fuso principal",
+        "Cabo blindado do encoder"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-9425",
+      "maquina": "SOL-03",
+      "tipo": "preventiva",
+      "data": "2026-11-12",
+      "status": "em_execucao",
+      "tecnico": "Luciano Ferraz",
+      "duracao_h": 12,
+      "descricao": "Preventiva anual do robô: troca do cabo de massa, do conduíte de arame e calibração do ponto central da ferramenta (TCP). Volta prevista para 14/11.",
+      "pecas": [
+        "Cabo de massa",
+        "Conduíte de arame 1,2 mm"
+      ],
+      "procedimento": "DOC-MAN-SOL"
+    },
+    {
+      "id": "OS-9422",
+      "maquina": "SOL-02",
+      "tipo": "corretiva",
+      "data": "2026-11-10",
+      "status": "concluida",
+      "tecnico": "Luciano Ferraz",
+      "duracao_h": 1,
+      "descricao": "Bico de contato e difusor de gás trocados por porosidade; a porosidade voltou em 12/11 (NC-2026-318).",
+      "pecas": [
+        "Bico de contato 1,2 mm",
+        "Difusor de gás"
+      ],
+      "procedimento": "DOC-INS-SOL-12"
+    },
+    {
+      "id": "OS-9436",
+      "maquina": "PRE-03",
+      "tipo": "preventiva",
+      "data": "2026-11-19",
+      "status": "aberta",
+      "tecnico": "Ademir Souza",
+      "duracao_h": 6,
+      "descricao": "Preventiva trimestral da prensa progressiva: lubrificação central, folga de biela e alimentador de tira.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-PRE"
+    },
+    {
+      "id": "OS-9410",
+      "maquina": "PRE-01",
+      "tipo": "preventiva",
+      "data": "2026-10-29",
+      "status": "concluida",
+      "tecnico": "Ademir Souza",
+      "duracao_h": 7,
+      "descricao": "Preventiva trimestral: tempo de parada do freio medido em 172 ms; folgas dentro do manual.",
+      "pecas": [
+        "Filtro de ar da embreagem"
+      ],
+      "procedimento": "DOC-MAN-PRE"
+    },
+    {
+      "id": "OS-9415",
+      "maquina": "PIN-01",
+      "tipo": "corretiva",
+      "data": "2026-11-05",
+      "status": "concluida",
+      "tecnico": "Luciano Ferraz",
+      "duracao_h": 4,
+      "descricao": "Bomba dosadora do banho de fosfato travada; substituída (origem da NC-2026-309).",
+      "pecas": [
+        "Bomba dosadora"
+      ],
+      "procedimento": "DOC-MAN-PIN"
+    },
+    {
+      "id": "OS-9418",
+      "maquina": "USI-03",
+      "tipo": "preventiva",
+      "data": "2026-11-03",
+      "status": "concluida",
+      "tecnico": "Ademir Souza",
+      "duracao_h": 5,
+      "descricao": "Preventiva semestral: geometria e folga do fuso verificadas.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-9420",
+      "maquina": "MED-01",
+      "tipo": "preventiva",
+      "data": "2026-10-20",
+      "status": "concluida",
+      "tecnico": "Rafaela Teixeira",
+      "duracao_h": 3,
+      "descricao": "Verificação intermediária da CMM com esfera-padrão; erro de apalpação dentro do especificado.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-MON"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-01",
+      "nome": "Gustavo Pereira",
+      "regiao": "Contas de montadoras (Sul)",
+      "telefone": "(41) 9••••-6604",
+      "meta_mes": 3200000,
+      "realizado_mes": 2214000
+    },
+    {
+      "id": "REP-02",
+      "nome": "Daniela Zanella",
+      "regiao": "Sistemistas (nacional)",
+      "telefone": "(11) 9••••-3127",
+      "meta_mes": 2600000,
+      "realizado_mes": 1985000
+    },
+    {
+      "id": "REP-03",
+      "nome": "Eduardo Ramos",
+      "regiao": "Implementos rodoviários e agrícolas",
+      "telefone": "(54) 9••••-8840",
+      "meta_mes": 780000,
+      "realizado_mes": 512600
+    },
+    {
+      "id": "REP-04",
+      "nome": "Simone Araújo",
+      "regiao": "Reposição (nacional)",
+      "telefone": "(47) 9••••-1450",
+      "meta_mes": 540000,
+      "realizado_mes": 431200
+    },
+    {
+      "id": "REP-05",
+      "nome": "Paulo Steffens",
+      "regiao": "Montadoras de veículos comerciais e máquinas agrícolas",
+      "telefone": "(47) 9••••-7319",
+      "meta_mes": 1400000,
+      "realizado_mes": 1126000
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-501",
+      "nome": "Montadora A (planta Paraná)",
+      "cidade": "Campo Largo",
+      "uf": "PR",
+      "segmento": "montadora de automóveis",
+      "representante": "REP-01",
+      "condicao_pagamento": "56 dias fora a semana",
+      "limite_credito": 2500000,
+      "tabela_preco": "Contrato de fornecimento MA-2025",
+      "ultimo_pedido": "2026-11-09"
+    },
+    {
+      "id": "CLI-502",
+      "nome": "Montadora B (veículos comerciais)",
+      "cidade": "Jundiaí",
+      "uf": "SP",
+      "segmento": "montadora de veículos comerciais",
+      "representante": "REP-05",
+      "condicao_pagamento": "45 dias",
+      "limite_credito": 1200000,
+      "tabela_preco": "Contrato de fornecimento MB-2026",
+      "ultimo_pedido": "2026-11-11"
+    },
+    {
+      "id": "CLI-503",
+      "nome": "Norte Suspensões Sistemas Automotivos Ltda.",
+      "cidade": "Sorocaba",
+      "uf": "SP",
+      "segmento": "sistemista de suspensão (tier 1)",
+      "representante": "REP-02",
+      "condicao_pagamento": "60 dias",
+      "limite_credito": 900000,
+      "tabela_preco": "Contrato NS-2026",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-504",
+      "nome": "Eixos Planalto S.A.",
+      "cidade": "Caxias do Sul",
+      "uf": "RS",
+      "segmento": "sistemista de eixos (tier 1)",
+      "representante": "REP-02",
+      "condicao_pagamento": "60 dias",
+      "limite_credito": 650000,
+      "tabela_preco": "Contrato EP-2025",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-505",
+      "nome": "Implementos Rodosul Ltda.",
+      "cidade": "Erechim",
+      "uf": "RS",
+      "segmento": "fabricante de implementos rodoviários",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 220000,
+      "tabela_preco": "Tabela Implementos",
+      "ultimo_pedido": "2026-10-28"
+    },
+    {
+      "id": "CLI-506",
+      "nome": "Carrocerias Vale do Uruguai",
+      "cidade": "Concórdia",
+      "uf": "SC",
+      "segmento": "fabricante de carrocerias",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 140000,
+      "tabela_preco": "Tabela Implementos",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-507",
+      "nome": "Distribuidora Autopeças Rota 101",
+      "cidade": "Itajaí",
+      "uf": "SC",
+      "segmento": "distribuidor de reposição",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 180000,
+      "tabela_preco": "Tabela Reposição",
+      "ultimo_pedido": "2026-11-12"
+    },
+    {
+      "id": "CLI-508",
+      "nome": "Atlântica Estruturas e Bancos Automotivos",
+      "cidade": "Betim",
+      "uf": "MG",
+      "segmento": "sistemista de estruturas (tier 1)",
+      "representante": "REP-02",
+      "condicao_pagamento": "60 dias",
+      "limite_credito": 500000,
+      "tabela_preco": "Contrato AT-2026",
+      "ultimo_pedido": "2026-10-26"
+    },
+    {
+      "id": "CLI-509",
+      "nome": "Graneleiros Cerrado Implementos",
+      "cidade": "Rio Verde",
+      "uf": "GO",
+      "segmento": "fabricante de implementos rodoviários",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 160000,
+      "tabela_preco": "Tabela Implementos",
+      "ultimo_pedido": "2026-11-11"
+    },
+    {
+      "id": "CLI-510",
+      "nome": "Montadora C (máquinas agrícolas)",
+      "cidade": "Canoas",
+      "uf": "RS",
+      "segmento": "montadora de máquinas agrícolas",
+      "representante": "REP-05",
+      "condicao_pagamento": "45 dias",
+      "limite_credito": 800000,
+      "tabela_preco": "Contrato MC-2026",
+      "ultimo_pedido": "2026-11-05"
+    },
+    {
+      "id": "CLI-511",
+      "nome": "Bandeirantes Reposição Automotiva",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "segmento": "distribuidor de reposição",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 150000,
+      "tabela_preco": "Tabela Reposição",
+      "ultimo_pedido": "2026-10-23"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-77405",
+      "cliente": "CLI-501",
+      "representante": "REP-01",
+      "data": "2026-11-02",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-17",
+      "ordem": "OP-88104",
+      "itens": [
+        {
+          "sku": "AP-4471-B",
+          "quantidade": 24000,
+          "preco_unit": 18.4
+        }
+      ],
+      "observacao": "Programação EDI firme da semana 46 (6.000 peças/dia). Dois embarques atrasados; frete expresso aprovado para 13/11."
+    },
+    {
+      "id": "PV-77412",
+      "cliente": "CLI-503",
+      "representante": "REP-02",
+      "data": "2026-11-03",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-88120",
+      "itens": [
+        {
+          "sku": "AP-5120-A",
+          "quantidade": 3000,
+          "preco_unit": 96.8
+        }
+      ],
+      "observacao": "Firme da semana 47 subiu de 2.400 para 3.000 peças (+25%) pela programação EDI de 09/11."
+    },
+    {
+      "id": "PV-77420",
+      "cliente": "CLI-504",
+      "representante": "REP-02",
+      "data": "2026-11-04",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-88131",
+      "itens": [
+        {
+          "sku": "AP-7210",
+          "quantidade": 1200,
+          "preco_unit": 62.3
+        }
+      ],
+      "observacao": "Entrega original 13/11. Torno CNC 2 parado."
+    },
+    {
+      "id": "PV-77388",
+      "cliente": "CLI-505",
+      "representante": "REP-03",
+      "data": "2026-10-28",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-88115",
+      "itens": [
+        {
+          "sku": "AP-8830",
+          "quantidade": 800,
+          "preco_unit": 41
+        }
+      ],
+      "observacao": "Entrega original 12/11. Repintura após reprovação de aderência."
+    },
+    {
+      "id": "PV-77430",
+      "cliente": "CLI-501",
+      "representante": "REP-01",
+      "data": "2026-11-09",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-21",
+      "ordem": "OP-88135",
+      "itens": [
+        {
+          "sku": "AP-3308",
+          "quantidade": 30000,
+          "preco_unit": 12.9
+        }
+      ],
+      "observacao": "Programação EDI firme da semana 47."
+    },
+    {
+      "id": "PV-77433",
+      "cliente": "CLI-502",
+      "representante": "REP-05",
+      "data": "2026-11-11",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-88138",
+      "itens": [
+        {
+          "sku": "AP-6604",
+          "quantidade": 2400,
+          "preco_unit": 74.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-77426",
+      "cliente": "CLI-510",
+      "representante": "REP-05",
+      "data": "2026-11-05",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-22",
+      "ordem": "OP-88133",
+      "itens": [
+        {
+          "sku": "AP-7415",
+          "quantidade": 5000,
+          "preco_unit": 23.6
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-77401",
+      "cliente": "CLI-508",
+      "representante": "REP-02",
+      "data": "2026-10-26",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": "OP-88110",
+      "itens": [
+        {
+          "sku": "AP-3350",
+          "quantidade": 18000,
+          "preco_unit": 15.1
+        }
+      ],
+      "observacao": "Faturado em 11/11."
+    },
+    {
+      "id": "PV-77395",
+      "cliente": "CLI-503",
+      "representante": "REP-02",
+      "data": "2026-10-20",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-06",
+      "ordem": "OP-88101",
+      "itens": [
+        {
+          "sku": "AP-5121-A",
+          "quantidade": 2600,
+          "preco_unit": 96.8
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-77418",
+      "cliente": "CLI-511",
+      "representante": "REP-04",
+      "data": "2026-10-23",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-05",
+      "ordem": "OP-88108",
+      "itens": [
+        {
+          "sku": "AP-2290",
+          "quantidade": 6000,
+          "preco_unit": 8.93
+        }
+      ],
+      "observacao": "Desconto de 5% (RC-01)."
+    },
+    {
+      "id": "PV-77440",
+      "cliente": "CLI-507",
+      "representante": "REP-04",
+      "data": "2026-11-12",
+      "status": "em_analise",
+      "previsao_entrega": "2026-11-24",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "AP-7012",
+          "quantidade": 2000,
+          "preco_unit": 8.31
+        },
+        {
+          "sku": "AP-7210",
+          "quantidade": 300,
+          "preco_unit": 59.19
+        }
+      ],
+      "observacao": "Reposição com 5% de desconto. Cubo AP-7210 sem estoque livre até a OP-88131 atender a Eixos Planalto."
+    },
+    {
+      "id": "PV-77437",
+      "cliente": "CLI-506",
+      "representante": "REP-03",
+      "data": "2026-11-10",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-01",
+      "ordem": "OP-88142",
+      "itens": [
+        {
+          "sku": "AP-8845",
+          "quantidade": 500,
+          "preco_unit": 57.2
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-77442",
+      "cliente": "CLI-509",
+      "representante": "REP-03",
+      "data": "2026-11-11",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-03",
+      "ordem": "OP-88145",
+      "itens": [
+        {
+          "sku": "AP-8830",
+          "quantidade": 400,
+          "preco_unit": 41
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-77444",
+      "cliente": "CLI-502",
+      "representante": "REP-05",
+      "data": "2026-11-11",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-28",
+      "ordem": "OP-88147",
+      "itens": [
+        {
+          "sku": "AP-7012",
+          "quantidade": 12000,
+          "preco_unit": 8.75
+        }
+      ],
+      "observacao": ""
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Desconto na reposição e em implementos",
+      "texto": "Até 5% sobre a tabela sem aprovação; de 5% a 8% com o gerente comercial; acima de 8% só com a diretoria. Contratos de montadora e sistemista não têm desconto: o preço é o do contrato."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Programação firme e prevista (EDI)",
+      "texto": "Aceitar variação de até +15% no firme sem renegociar prazo. Acima disso, o PCP confirma a capacidade em até 24 h e o executivo de contas avisa o cliente da quantidade que dá para cumprir."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Mudança de processo, ferramenta ou fornecedor",
+      "texto": "Nenhuma mudança vai para peça embarcada sem notificação ao cliente e, quando exigido pelo manual do cliente, nova submissão de PPAP aprovada."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Frete expresso por atraso nosso",
+      "texto": "Quando o atraso é causado pela empresa, o frete expresso é por nossa conta. Até R$ 5.000 o gerente de logística aprova; acima disso, a diretoria."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Pedido mínimo e prazo na reposição",
+      "texto": "Pedido mínimo de R$ 5.000 para distribuidores de reposição. Item com estoque acima do mínimo sai em até 2 dias úteis; abaixo do mínimo, o prazo vem da OP no ERP."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Reajuste de contrato",
+      "texto": "Preços de contrato com montadoras e sistemistas são reajustados uma vez por ano pela fórmula do aço prevista em cada contrato."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "ppm_cliente",
+      "nome": "PPM de cliente (montadoras e sistemistas, 3 meses)",
+      "valor": 48,
+      "unidade": "ppm",
+      "meta": 25,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        22,
+        19,
+        24,
+        21,
+        18,
+        23,
+        20,
+        26,
+        24,
+        21,
+        27,
+        48
+      ],
+      "explicacao": "O PPM de cliente saltou para 48 por causa de uma única reclamação: 38 suportes AP-4471-B com rebarba rejeitados pela Montadora A, sobre cerca de 790 mil peças entregues a ela nos últimos 3 meses. O 8D (NC-2026-311) está na verificação de eficácia.",
+      "caminho": [
+        "Portal do fornecedor da Montadora A › rejeições",
+        "ERP › peças entregues por cliente nos últimos 3 meses",
+        "Cálculo: peças rejeitadas ÷ peças entregues × 1.000.000"
+      ],
+      "fontes": [
+        "nc:NC-2026-311",
+        "cliente:CLI-501",
+        "doc:DOC-MSC-A#t3"
+      ]
+    },
+    {
+      "id": "otif_edi",
+      "nome": "OTIF das programações EDI",
+      "valor": 91.2,
+      "unidade": "%",
+      "meta": 98,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        97.8,
+        98.2,
+        97.5,
+        98.4,
+        97.9,
+        98.1,
+        97,
+        96.8,
+        96.2,
+        95.4,
+        94.1,
+        91.2
+      ],
+      "explicacao": "Quatro pedidos estão atrasados por quatro OPs atrasadas: rebarba e freio na estamparia (PV-77405), aumento de 25% no firme com célula de solda parada (PV-77412), torno CNC 2 parado (PV-77420) e repintura de suportes (PV-77388).",
+      "caminho": [
+        "Programação EDI › datas de entrega firmes",
+        "ERP › notas de saída por embarque",
+        "Cálculo: embarques completos no dia ÷ embarques programados"
+      ],
+      "fontes": [
+        "pedido:PV-77405",
+        "pedido:PV-77412",
+        "pedido:PV-77420",
+        "pedido:PV-77388"
+      ]
+    },
+    {
+      "id": "oee_pre",
+      "nome": "OEE da estamparia",
+      "valor": 68.5,
+      "unidade": "%",
+      "meta": 75,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        74.2,
+        75.1,
+        73.8,
+        74.6,
+        75.4,
+        74,
+        73.5,
+        72.9,
+        73.1,
+        71.8,
+        71,
+        68.5
+      ],
+      "explicacao": "O OEE caiu para 68,5% com a PRE-02: o tempo de parada do freio chegou a 235 ms e a cadência foi reduzida de 18 para 14 golpes/min. Somaram-se as paradas para medir o freio (95 min em 11/11 e 85 min em 12/11, 2º turno) e a afiação da ferramenta 88-14.",
+      "caminho": [
+        "MES › paradas e cadência por prensa",
+        "Planilha de medição do freio",
+        "Cálculo: disponibilidade × desempenho × qualidade"
+      ],
+      "fontes": [
+        "maq:PRE-02",
+        "os:OS-9431",
+        "turno:2026-11-11|2º|L-PRE",
+        "turno:2026-11-12|2º|L-PRE"
+      ]
+    },
+    {
+      "id": "dias_8d",
+      "nome": "Dias até o fechamento do 8D (média de 6 meses)",
+      "valor": 41,
+      "unidade": "dias",
+      "meta": 30,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        47,
+        46,
+        49,
+        45,
+        44,
+        46,
+        43,
+        44,
+        42,
+        43,
+        42,
+        41
+      ],
+      "explicacao": "O fechamento leva 41 dias porque a maior parte do tempo vai em achar ocorrências parecidas, PFMEA e plano de controle da peça. A contenção já cumpre as 24 h do manual da Montadora A; o gargalo é a análise de causa.",
+      "caminho": [
+        "Sistema da qualidade › 8D abertos e encerrados",
+        "Cálculo: média de dias entre D1 e D8"
+      ],
+      "fontes": [
+        "nc:NC-2026-311",
+        "doc:DOC-MSC-A#t1",
+        "doc:DOC-8D-HIST#t1"
+      ]
+    },
+    {
+      "id": "refugo",
+      "nome": "Refugo interno",
+      "valor": 1.9,
+      "unidade": "%",
+      "meta": 1.2,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        1.1,
+        1.2,
+        1,
+        1.3,
+        1.2,
+        1.1,
+        1.3,
+        1.4,
+        1.3,
+        1.5,
+        1.6,
+        1.9
+      ],
+      "explicacao": "O refugo subiu com três causas ao mesmo tempo: porosidade na SOL-02 (NC-2026-318), cubos fora do H7 no torno USI-02 (NC-2026-315) e 240 suportes repintados por aderência (NC-2026-309).",
+      "caminho": [
+        "MES › apontamentos de refugo por linha",
+        "Cálculo: peças refugadas ÷ peças produzidas"
+      ],
+      "fontes": [
+        "nc:NC-2026-318",
+        "nc:NC-2026-315",
+        "nc:NC-2026-309",
+        "turno:2026-11-12|1º|L-SOL"
+      ]
+    },
+    {
+      "id": "horas_replan",
+      "nome": "Horas por semana para replanejar a programação EDI",
+      "valor": 14,
+      "unidade": "h/semana",
+      "meta": 4,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        11,
+        12,
+        10,
+        12,
+        13,
+        11,
+        12,
+        13,
+        12,
+        13,
+        15,
+        14
+      ],
+      "explicacao": "O PCP gasta 14 h por semana comparando cada programação EDI com a anterior e com o estoque em planilha. Na semana 47 o firme do AP-5120-A subiu 25% e só foi percebido dois dias depois.",
+      "caminho": [
+        "Planilha de replanejamento do PCP",
+        "Programação EDI › semanas 46 e 47"
+      ],
+      "fontes": [
+        "doc:DOC-EDI-W47#t1",
+        "pedido:PV-77412"
+      ]
+    },
+    {
+      "id": "horas_auditoria",
+      "nome": "Horas da equipe para preparar a auditoria IATF 16949",
+      "valor": 220,
+      "unidade": "h",
+      "meta": 80,
+      "direcao": "menor_melhor",
+      "area": "gestao",
+      "tendencia": [
+        240,
+        240,
+        240,
+        235,
+        235,
+        235,
+        230,
+        230,
+        230,
+        225,
+        225,
+        220
+      ],
+      "explicacao": "A última preparação de auditoria consumiu cerca de 220 horas da equipe porque calibração, MSA e treinamento ficam em pastas diferentes. A auditoria interna de novembro ainda achou um calibrador vencido (NC-2026-321).",
+      "caminho": [
+        "Planilha de horas da preparação de auditoria",
+        "Matriz de requisitos e evidências"
+      ],
+      "fontes": [
+        "doc:DOC-IATF-REQ#t1",
+        "nc:NC-2026-321"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-PC-4471B",
+      "titulo": "Plano de controle do suporte AP-4471-B (rev. H)",
+      "tipo": "procedimento",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Op. 30 Puncionamento: diâmetro do furo",
+          "texto": "Ø 10,5 +0,1/0 mm verificado com calibrador passa-não-passa CAL-1050, 5 peças a cada 1 h nas duas semanas após a NC-2026-311; depois, a cada 2 h."
+        },
+        {
+          "id": "t2",
+          "secao": "Op. 30 Puncionamento: rebarba",
+          "texto": "Altura de rebarba no furo de no máximo 0,1 mm, verificada com relógio comparador na mesma frequência do diâmetro."
+        },
+        {
+          "id": "t3",
+          "secao": "Plano de reação",
+          "texto": "Peça fora: parar a prensa, segregar tudo desde a última verificação aprovada e chamar a ferramentaria antes de reiniciar."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PFMEA-4471B",
+      "titulo": "PFMEA do suporte AP-4471-B (rev. F)",
+      "tipo": "planilha",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Op. 30: modo de falha \"rebarba no furo\"",
+          "texto": "Efeito: parafuso do coxim não assenta na montadora. Severidade 7. Causa: desgaste do punção acima do intervalo de afiação."
+        },
+        {
+          "id": "t2",
+          "secao": "Op. 30: novo modo de falha (rev. F)",
+          "texto": "Causa incluída: contador de golpes não acompanha a ferramenta na troca de prensa. Controle de prevenção: contador gravado na ferramenta com bloqueio no MES a 40.000 golpes."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PPAP-4471B",
+      "titulo": "Pacote PPAP nível 3 do suporte AP-4471-B",
+      "tipo": "ficha_tecnica",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2025-06-30",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Situação",
+          "texto": "PPAP nível 3 aprovado pela Montadora A em 30/06/2025, com ferramenta 88-14 e aço do fornecedor homologado de bobinas."
+        },
+        {
+          "id": "t2",
+          "secao": "Elementos a revisar numa troca de fornecedor de chapa",
+          "texto": "Certificado do material, resultados dimensionais de nova amostra, PFMEA, plano de controle e notificação ao cliente antes do primeiro embarque; o manual da Montadora A pede nova submissão."
+        },
+        {
+          "id": "t3",
+          "secao": "Estudo de capabilidade",
+          "texto": "Diâmetro do furo com Ppk de 1,82 em 300 peças na aprovação inicial."
+        }
+      ]
+    },
+    {
+      "id": "DOC-8D-HIST",
+      "titulo": "Histórico de 8D do AP-4471-B (8D 017 e 8D 052)",
+      "tipo": "planilha",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2025-09-18",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "8D 017 (2024)",
+          "texto": "Rebarba no furo por desgaste do punção da ferramenta 88-14. Ação: afiação fixada a cada 40 mil golpes."
+        },
+        {
+          "id": "t2",
+          "secao": "8D 052 (2025)",
+          "texto": "Rebarba voltou após troca de fornecedor de chapa (aço mais duro). Ação: plano de controle rev. G passou a verificar o furo a cada 2 h."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MSC-A",
+      "titulo": "Manual do fornecedor da Montadora A: requisitos específicos do cliente",
+      "tipo": "contrato",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-02-01",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.2 Resposta a reclamação",
+          "texto": "Resumo interno: contenção (D3) em até 24 h, causa raiz (D4) em até 10 dias úteis e 8D completo em até 30 dias, tudo pelo portal do fornecedor."
+        },
+        {
+          "id": "t2",
+          "secao": "6.1 Mudanças",
+          "texto": "Resumo interno: qualquer mudança de processo, local, ferramenta ou subfornecedor exige notificação prévia e nova aprovação de PPAP antes do embarque."
+        },
+        {
+          "id": "t3",
+          "secao": "7.3 Indicadores",
+          "texto": "Meta de PPM de 25 em 3 meses móveis; acima disso o fornecedor entra em monitoramento."
+        }
+      ]
+    },
+    {
+      "id": "DOC-IATF-REQ",
+      "titulo": "Matriz de requisitos IATF 16949 × evidências",
+      "tipo": "planilha",
+      "area": "qualidade",
+      "origem": "Planilha",
+      "atualizado": "2026-10-28",
+      "acesso": [
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Recursos de monitoramento e medição",
+          "texto": "Resumo interno: todo instrumento usado no plano de controle precisa de calibração em dia e estudo de MSA. Evidências: sistema de calibração e pasta MSA, por instrumento."
+        },
+        {
+          "id": "t2",
+          "secao": "Competência",
+          "texto": "Resumo interno: operador de característica especial precisa de treinamento registrado. Evidência: matriz de habilidades do RH, por posto."
+        },
+        {
+          "id": "t3",
+          "secao": "Aprovação de produto",
+          "texto": "Resumo interno: toda peça em produção com PPAP aprovado e vigente. Evidência: pasta PPAP por part number."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MSA-021",
+      "titulo": "Estudo de MSA (R&R) do calibrador do furo de Ø 10,5 mm",
+      "tipo": "planilha",
+      "area": "qualidade",
+      "origem": "Planilha",
+      "atualizado": "2026-03-14",
+      "acesso": [
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Resultado",
+          "texto": "Estudo por atributos com 3 avaliadores e 50 peças: concordância de 98% com a referência. Instrumento aprovado: CAL-1050 (principal)."
+        },
+        {
+          "id": "t2",
+          "secao": "Escopo",
+          "texto": "O calibrador reserva não foi incluído no estudo e precisa de estudo próprio antes do uso."
+        }
+      ]
+    },
+    {
+      "id": "DOC-EDI-W47",
+      "titulo": "Programação EDI da semana 47: comparação com a semana 46",
+      "tipo": "planilha",
+      "area": "producao",
+      "origem": "ERP",
+      "atualizado": "2026-11-09",
+      "acesso": [
+        "producao",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "AP-5120-A (Norte Suspensões)",
+          "texto": "Firme da semana 47 subiu de 2.400 para 3.000 peças (+25%); previsão das semanas 48 e 49 mantida em 2.500."
+        },
+        {
+          "id": "t2",
+          "secao": "AP-4471-B (Montadora A)",
+          "texto": "Firme mantido em 6.000 peças por dia; previsão da semana 48 de 24.000 peças."
+        },
+        {
+          "id": "t3",
+          "secao": "AP-7210 (Eixos Planalto)",
+          "texto": "Firme de 1.200 cubos mantido, com entrega até 13/11."
+        }
+      ]
+    },
+    {
+      "id": "DOC-INS-SOL-12",
+      "titulo": "Instrução de trabalho: solda robotizada do braço de controle",
+      "tipo": "instrucao",
+      "area": "producao",
+      "origem": "MES",
+      "atualizado": "2026-05-20",
+      "acesso": [
+        "producao",
+        "operadores",
+        "qualidade",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3. Parâmetros",
+          "texto": "Arame de 1,2 mm, 235 A, 24,5 V, velocidade de 55 cm/min; gás de proteção com vazão de 15 a 18 L/min medida no bocal."
+        },
+        {
+          "id": "t2",
+          "secao": "5. Ensaio destrutivo",
+          "texto": "Macrografia de uma peça por turno e por célula; penetração mínima de 1,2 mm no cordão principal."
+        },
+        {
+          "id": "t3",
+          "secao": "6. Porosidade",
+          "texto": "Porosidade visível no cordão principal reprova a peça (característica de segurança); conferir vazão de gás e bico antes de reiniciar."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-FER",
+      "titulo": "Procedimento de afiação e controle de golpes de ferramentas de estampo",
+      "tipo": "procedimento",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Intervalos",
+          "texto": "Ferramenta 88-14: afiação do punção a cada 40.000 golpes. Ferramentas das famílias 88 e 90: conforme ficha de cada ferramenta."
+        },
+        {
+          "id": "t2",
+          "secao": "3. Contador (rev. 2026-11)",
+          "texto": "O contador de golpes fica gravado na ferramenta e é lido por qualquer prensa; o MES bloqueia a prensa quando o limite é atingido."
+        },
+        {
+          "id": "t3",
+          "secao": "4. Afiação",
+          "texto": "Remover no máximo 0,2 mm por afiação; medir altura do punção e registrar na ficha da ferramenta."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PRE",
+      "titulo": "Manual das prensas mecânicas e progressiva (Fabricante A)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2022-08-09",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "8.2 Tempo de parada do freio",
+          "texto": "Medir o tempo de parada a cada semana. Valor de referência de 180 ms; acima de 250 ms a prensa deve ser bloqueada até a regulagem ou troca das lonas."
+        },
+        {
+          "id": "t2",
+          "secao": "8.4 Lonas",
+          "texto": "Trocar o jogo de lonas completo e as molas de retorno; regular a folga para 0,8 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "11.1 Lubrificação central",
+          "texto": "Verificar nível e pressão da lubrificação central a cada turno."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-SOL",
+      "titulo": "Manual das células de solda robotizada (Fabricante B)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2023-04-17",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "6.3 Calibração do TCP",
+          "texto": "Recalibrar o ponto central da ferramenta após qualquer colisão ou troca de tocha."
+        },
+        {
+          "id": "t2",
+          "secao": "9.1 Gás de proteção",
+          "texto": "Regulador com vazamento ou mangueira dobrada causa vazão instável e porosidade."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-USI",
+      "titulo": "Manual dos tornos CNC, centro de usinagem e brochadeira (Fabricante C)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2021-10-05",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "12.4 Encoder do fuso",
+          "texto": "Alarme intermitente de posição do fuso indica encoder ou cabo danificado; trocar o conjunto e refazer a referência do eixo C."
+        },
+        {
+          "id": "t2",
+          "secao": "5.2 Aquecimento",
+          "texto": "Rodar o programa de aquecimento por 15 min no início do turno antes de peças em tolerância H7."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PIN",
+      "titulo": "Manual da linha de pintura KTL (Fabricante D)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2020-12-11",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.1 Pré-tratamento",
+          "texto": "Concentração do fosfato conforme ficha do fornecedor de químicos; conferir por titulação a cada turno."
+        },
+        {
+          "id": "t2",
+          "secao": "6.2 Camada",
+          "texto": "Camada de 18 a 25 µm com tensão do banho entre 220 e 260 V e cura a 180 °C por 20 min."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-MON",
+      "titulo": "Manual da prensa de montagem de buchas e da CMM (Fabricante E)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-01-22",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.2 Janela de força",
+          "texto": "Definir a janela de força-deslocamento por part number; curva fora da janela rejeita a peça automaticamente."
+        },
+        {
+          "id": "t2",
+          "secao": "7.1 Verificação da CMM",
+          "texto": "Verificação intermediária com esfera-padrão a cada 3 meses; calibração completa anual."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CAT-REP",
+      "titulo": "Catálogo de reposição 2026",
+      "tipo": "catalogo",
+      "area": "marketing",
+      "origem": "SharePoint",
+      "atualizado": "2026-03-10",
+      "acesso": [
+        "marketing",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Buchas",
+          "texto": "Bucha de suspensão AP-7012 em embalagem com 50 peças, mesma especificação da peça original fornecida aos sistemistas."
+        },
+        {
+          "id": "t2",
+          "secao": "Suportes",
+          "texto": "Suporte de para-choque AP-2290 com pintura KTL, caixa com 100 peças."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-201",
+      "autor": "Osni Bertoldi",
+      "funcao": "Operador de prensa",
+      "tempo_casa_anos": 23,
+      "area": "operadores",
+      "maquina": "PRE-02",
+      "titulo": "Freio da prensa 2 avisa pelo som",
+      "dica": "Quando o freio da PRE-02 começa a passar do ponto, o martelo desce um pouquinho depois do pedal soltar e dá para ouvir um chiado diferente. Nessa hora eu peço a medição do tempo de parada na hora, sem esperar a semana. Se passar de 230 ms, baixo a cadência e aviso o supervisor.",
+      "validado_por": "Valmir Costa (supervisor da estamparia)",
+      "data": "2026-07-21",
+      "tags": [
+        "freio",
+        "segurança",
+        "prensa"
+      ]
+    },
+    {
+      "id": "SB-202",
+      "autor": "Jonas Becker",
+      "funcao": "Ferramenteiro",
+      "tempo_casa_anos": 18,
+      "area": "operadores",
+      "maquina": "PRE-02",
+      "titulo": "Rebarba no furo da 88-14 começa pequena",
+      "dica": "A rebarba do furo da 88-14 cresce devagar a partir de uns 35 mil golpes. Passe a unha na borda do furo: se enroscar, a ferramenta já pede afiação mesmo antes do contador. E não confie no contador da prensa quando a ferramenta trocar de máquina.",
+      "validado_por": "Carla Mendes (qualidade)",
+      "data": "2026-11-10",
+      "tags": [
+        "rebarba",
+        "ferramenta 88-14",
+        "afiação"
+      ]
+    },
+    {
+      "id": "SB-203",
+      "autor": "Marcelo Fontana",
+      "funcao": "Soldador e programador de robô",
+      "tempo_casa_anos": 14,
+      "area": "operadores",
+      "maquina": "SOL-02",
+      "titulo": "Porosidade que volta depois da troca do bico",
+      "dica": "Se a porosidade volta logo depois de trocar bico e difusor, o problema é o gás. Meça a vazão no bocal, não no regulador: já achei regulador marcando 16 L/min com 9 saindo na tocha por causa de mangueira dobrada atrás do robô.",
+      "validado_por": "Rafaela Teixeira (APQP)",
+      "data": "2026-09-02",
+      "tags": [
+        "porosidade",
+        "gás de proteção",
+        "solda"
+      ]
+    },
+    {
+      "id": "SB-204",
+      "autor": "Ivo Rech",
+      "funcao": "Torneiro CNC",
+      "tempo_casa_anos": 20,
+      "area": "operadores",
+      "maquina": "USI-02",
+      "titulo": "Cubo fora do H7 no primeiro lote do dia",
+      "dica": "O torno 2 é mais velho e esquenta devagar. Rode o aquecimento completo de 15 minutos antes do primeiro cubo e meça a primeira peça na CMM. Se a medida pular de uma peça para outra sem padrão, é encoder, não desgaste de inserto.",
+      "validado_por": "Ademir Souza (manutenção)",
+      "data": "2026-06-15",
+      "tags": [
+        "H7",
+        "encoder",
+        "aquecimento"
+      ]
+    },
+    {
+      "id": "SB-205",
+      "autor": "Neusa Rodrigues",
+      "funcao": "Operadora de pintura KTL",
+      "tempo_casa_anos": 16,
+      "area": "operadores",
+      "maquina": "PIN-01",
+      "titulo": "Aderência ruim começa no fosfato",
+      "dica": "Quando o quadriculado dá Gt2, olhe o fosfato antes de mexer na tensão do banho. A bomba dosadora trava sem alarme; faço a titulação no começo do turno mesmo quando o painel diz que está tudo normal.",
+      "validado_por": "Rafaela Teixeira (APQP)",
+      "data": "2026-11-07",
+      "tags": [
+        "KTL",
+        "aderência",
+        "fosfato"
+      ]
+    },
+    {
+      "id": "SB-206",
+      "autor": "Rogério Kniess",
+      "funcao": "Operador de montagem",
+      "tempo_casa_anos": 12,
+      "area": "operadores",
+      "maquina": "MON-01",
+      "titulo": "Curva de força da bucha",
+      "dica": "Se a MON-01 começar a rejeitar bucha por força baixa em sequência, separe a caixa e mande medir o diâmetro externo. Quase sempre o lote está no limite de baixo, e aí a bucha sai fácil no ensaio de extração do cliente.",
+      "validado_por": "Carla Mendes (qualidade)",
+      "data": "2026-10-20",
+      "tags": [
+        "bucha",
+        "força de extração"
+      ]
+    },
+    {
+      "id": "SB-207",
+      "autor": "Lúcia Hartmann",
+      "funcao": "Metrologista",
+      "tempo_casa_anos": 13,
+      "area": "operadores",
+      "maquina": "MED-01",
+      "titulo": "Peça quente na CMM mente",
+      "dica": "Cubo que acabou de sair do torno precisa de 30 minutos na sala da CMM antes de medir. Medir quente dá até 8 micrômetros a mais no alojamento e reprova peça boa.",
+      "validado_por": "Carla Mendes (qualidade)",
+      "data": "2026-05-04",
+      "tags": [
+        "CMM",
+        "temperatura",
+        "medição"
+      ]
+    },
+    {
+      "id": "SB-208",
+      "autor": "Edson Kuhnen",
+      "funcao": "Preparador de prensa progressiva",
+      "tempo_casa_anos": 22,
+      "area": "operadores",
+      "maquina": "PRE-03",
+      "titulo": "Trinca na dobra do reforço da coluna",
+      "dica": "Trinca na dobra do AP-3308 quase sempre é lubrificação da tira na estação 4. Confira se o bico está apontado para o raio da dobra e não para o centro da tira.",
+      "validado_por": "Valmir Costa (supervisor da estamparia)",
+      "data": "2026-10-06",
+      "tags": [
+        "trinca",
+        "lubrificação",
+        "progressiva"
+      ]
+    },
+    {
+      "id": "SB-209",
+      "autor": "Sandro Pires",
+      "funcao": "Operador de brochadeira",
+      "tempo_casa_anos": 19,
+      "area": "operadores",
+      "maquina": "USI-04",
+      "titulo": "Brocha cega aparece no acabamento",
+      "dica": "Antes de dar medida errada, a brocha cega deixa o estriado com brilho riscado. Quando eu vejo isso, troco a brocha no fim da caixa em andamento.",
+      "validado_por": "Ademir Souza (manutenção)",
+      "data": "2026-04-11",
+      "tags": [
+        "brocha",
+        "acabamento"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: SAP Business One)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:45",
+      "registros": 268900,
+      "observacao": "Pedidos, estoque, OPs, notas fiscais e lotes de bobina"
+    },
+    {
+      "id": "edi",
+      "nome": "Portal EDI das montadoras e sistemistas",
+      "tipo": "EDI",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:00",
+      "registros": 14820,
+      "observacao": "Programações firmes e previstas, avisos de embarque e rejeições"
+    },
+    {
+      "id": "mes",
+      "nome": "MES da fábrica",
+      "tipo": "MES",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:10",
+      "registros": 112400,
+      "observacao": "Produção, paradas, golpes por ferramenta e refugo"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Sistema da qualidade (8D, PPAP e calibração)",
+      "tipo": "Qualidade",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T07:20",
+      "registros": 8640,
+      "observacao": "8D, pacotes PPAP, PFMEA, planos de controle, calibração e MSA"
+    },
+    {
+      "id": "cmm",
+      "nome": "Dados de medição da CMM e CEP",
+      "tipo": "Metrologia",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:00",
+      "registros": 395000,
+      "observacao": "Medições por peça e cartas de controle"
+    },
+    {
+      "id": "sharepoint",
+      "nome": "SharePoint da engenharia e manutenção",
+      "tipo": "Documentos",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T05:00",
+      "registros": 5310,
+      "observacao": "Manuais, procedimentos e catálogo de reposição"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail da qualidade de cliente",
+      "tipo": "E-mail",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T19:40",
+      "registros": 22700,
+      "observacao": "Permissão da caixa compartilhada expirou; mensagens de 13/11 ainda não importadas"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business da reposição",
+      "tipo": "Mensageria",
+      "status": "planejado",
+      "ultima_sync": null,
+      "registros": 0,
+      "observacao": "Piloto com a equipe de reposição previsto para jan/2027"
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 7
+    },
+    {
+      "id": "pcp",
+      "nome": "PCP e logística",
+      "areas": [
+        "producao",
+        "comercial"
+      ],
+      "usuarios": 11
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e APQP",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 16
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção e ferramentaria",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 28
+    },
+    {
+      "id": "comercial",
+      "nome": "Executivos de contas",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 9
+    },
+    {
+      "id": "supervisao",
+      "nome": "Supervisores de produção",
+      "areas": [
+        "producao",
+        "operadores",
+        "manutencao",
+        "qualidade"
+      ],
+      "usuarios": 14
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T07:35",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Qual item fica sem cobertura com a programação EDI desta semana?",
+      "fontes": [
+        "doc:DOC-EDI-W47#t1",
+        "sku:AP-5120-A"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:48",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Já tivemos rebarba no furo do suporte 4471-B?",
+      "fontes": [
+        "doc:DOC-8D-HIST#t1",
+        "doc:DOC-8D-HIST#t2",
+        "nc:NC-2026-311"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:02",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Quantos golpes a ferramenta 88-14 tem desde a última afiação?",
+      "fontes": [
+        "os:OS-9433",
+        "doc:DOC-PRO-FER#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:14",
+      "perfil": "supervisao",
+      "area": "operadores",
+      "pergunta": "O que fazer com porosidade que volta depois de trocar o bico?",
+      "fontes": [
+        "saber:SB-203",
+        "nc:NC-2026-318"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:26",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o PPM da Montadora A subiu?",
+      "fontes": [
+        "kpi:ppm_cliente",
+        "nc:NC-2026-311"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:41",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Tenho cubo de roda para a Rota 101?",
+      "fontes": [
+        "sku:AP-7210",
+        "op:OP-88131"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:55",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Que evidências de MSA temos para o calibrador do furo de 10,5?",
+      "fontes": [
+        "doc:DOC-MSA-021#t1",
+        "doc:DOC-MSA-021#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:08",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Quando o torno CNC 2 volta?",
+      "fontes": [
+        "os:OS-9428"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:20",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Se trocarmos o fornecedor de chapa do suporte, o que do PPAP precisa ser revisado?",
+      "fontes": [
+        "doc:DOC-PPAP-4471B#t2",
+        "doc:DOC-MSC-A#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:33",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Quanto tempo gastamos preparando a auditoria IATF?",
+      "fontes": [
+        "kpi:horas_auditoria"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o PPM de cliente estourou a meta?",
+      "resposta": "O PPM de cliente está em 48, contra meta de 25 do manual da Montadora A. Uma única reclamação explica o salto: 38 suportes AP-4471-B com rebarba no furo, sobre cerca de 790 mil peças entregues em 3 meses. O 8D (NC-2026-311) está em verificação de eficácia, com fechamento previsto para 27/11.",
+      "fontes": [
+        "kpi:ppm_cliente",
+        "nc:NC-2026-311",
+        "doc:DOC-MSC-A#t3"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quais entregas para montadoras e sistemistas estão em risco?",
+      "resposta": "Quatro pedidos estão atrasados, cada um por uma OP atrasada: PV-77405 da Montadora A (OP-88104, suporte AP-4471-B), PV-77412 da Norte Suspensões (OP-88120, braço AP-5120-A), PV-77420 da Eixos Planalto (OP-88131, cubo AP-7210) e PV-77388 da Implementos Rodosul (OP-88115, suporte AP-8830). O OTIF das programações EDI caiu para 91,2%, meta de 98%.",
+      "fontes": [
+        "kpi:otif_edi",
+        "pedido:PV-77405",
+        "pedido:PV-77412",
+        "pedido:PV-77420",
+        "pedido:PV-77388"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "O que derrubou o OEE da estamparia?",
+      "resposta": "O OEE da estamparia está em 68,5% (meta 75%). A PRE-02 teve o tempo de parada do freio em 235 ms e rodou a 14 golpes/min em vez de 18; as medições do freio pararam a linha 95 min em 11/11 e 85 min em 12/11 (2º turno). A troca das lonas está na OS-9431, marcada para 14/11.",
+      "fontes": [
+        "kpi:oee_pre",
+        "maq:PRE-02",
+        "turno:2026-11-11|2º|L-PRE",
+        "turno:2026-11-12|2º|L-PRE",
+        "os:OS-9431"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Já tivemos rebarba no furo do suporte 4471-B? O que foi feito?",
+      "resposta": "Sim, duas vezes antes da atual. No 8D 017 a causa foi desgaste do punção da ferramenta 88-14 e a afiação passou para cada 40 mil golpes. No 8D 052 a rebarba voltou após a troca do fornecedor de chapa e o plano de controle rev. G passou a verificar o furo a cada 2 h. Na NC-2026-311 a ferramenta chegou a 58.300 golpes porque o contador ficou na prensa antiga.",
+      "fontes": [
+        "doc:DOC-8D-HIST#t1",
+        "doc:DOC-8D-HIST#t2",
+        "nc:NC-2026-311"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Se trocarmos o fornecedor de chapa do suporte, o que do PPAP precisa ser revisado?",
+      "resposta": "Pelo pacote PPAP do AP-4471-B: certificado do material, dimensional de nova amostra, PFMEA, plano de controle e notificação ao cliente antes do primeiro embarque. O manual da Montadora A pede nova aprovação de PPAP para troca de subfornecedor, e a regra RC-03 proíbe embarcar antes disso.",
+      "fontes": [
+        "doc:DOC-PPAP-4471B#t2",
+        "doc:DOC-MSC-A#t2",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Onde estão as evidências de calibração e MSA do furo para a auditoria IATF?",
+      "resposta": "A matriz de requisitos aponta o sistema de calibração e a pasta MSA por instrumento. O estudo do calibrador principal CAL-1050 teve 98% de concordância com 3 avaliadores e 50 peças. Atenção: o calibrador reserva não tem estudo próprio e estava com calibração vencida (NC-2026-321).",
+      "fontes": [
+        "doc:DOC-IATF-REQ#t1",
+        "doc:DOC-MSA-021#t1",
+        "doc:DOC-MSA-021#t2",
+        "nc:NC-2026-321"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Qual item fica sem cobertura com a programação EDI desta semana?",
+      "resposta": "O braço AP-5120-A. O firme da semana 47 da Norte Suspensões subiu de 2.400 para 3.000 peças (+25%), acima dos 15% aceitos sem renegociar (RC-02). Há 820 em estoque, abaixo do mínimo de 1.500, e a OP-88120 está com 48% e atrasada pela SOL-03 em manutenção. A OP-88150 (2.000 peças) começa em 16/11.",
+      "fontes": [
+        "doc:DOC-EDI-W47#t1",
+        "sku:AP-5120-A",
+        "op:OP-88120",
+        "op:OP-88150",
+        "regra:RC-02"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Por que a OP-88131 dos cubos está atrasada?",
+      "resposta": "O torno CNC 2 (USI-02) parou em 10/11 por falha no encoder do fuso e 18 cubos saíram com o alojamento acima do H7 (NC-2026-315). Só o USI-01 está rodando: no 2º turno de 12/11 saíram 95 cubos. O encoder chega em 16/11 e o torno volta em 17/11; a nova previsão do PV-77420 é 20/11.",
+      "fontes": [
+        "op:OP-88131",
+        "os:OS-9428",
+        "nc:NC-2026-315",
+        "turno:2026-11-12|2º|L-USI",
+        "pedido:PV-77420"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Em que pé está o 8D da Montadora A?",
+      "resposta": "A NC-2026-311 está em análise com D1 a D7 feitos. A contenção saiu em 18 h (8.600 peças em estoque e 6.000 em trânsito inspecionadas, 112 segregadas). A causa foi a ferramenta 88-14 com 58.300 golpes sem afiação. Desde 08/11, 11.200 peças sem rebarba; fechamento previsto para 27/11.",
+      "fontes": [
+        "nc:NC-2026-311",
+        "doc:DOC-MSC-A#t1",
+        "os:OS-9433"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Com que frequência o plano de controle manda verificar o furo do suporte?",
+      "resposta": "O plano de controle rev. H manda verificar o Ø 10,5 +0,1/0 mm com o calibrador CAL-1050, 5 peças a cada 1 h por duas semanas após a NC-2026-311, e depois a cada 2 h. A rebarba tem limite de 0,1 mm. Peça fora: parar a prensa e segregar tudo desde a última verificação aprovada.",
+      "fontes": [
+        "doc:DOC-PC-4471B#t1",
+        "doc:DOC-PC-4471B#t2",
+        "doc:DOC-PC-4471B#t3"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "O que está causando a porosidade no braço de controle?",
+      "resposta": "Na NC-2026-318, 9 braços AP-5120-A da SOL-02 reprovaram por porosidade no 1º turno de 12/11. A troca de bico e difusor em 10/11 (OS-9422) não resolveu; a suspeita é vazão de gás instável. A instrução pede 15 a 18 L/min medidos no bocal, e o soldador Marcelo Fontana registrou um caso de regulador marcando 16 L/min com 9 saindo na tocha.",
+      "fontes": [
+        "nc:NC-2026-318",
+        "os:OS-9422",
+        "doc:DOC-INS-SOL-12#t1",
+        "saber:SB-203"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quais máquinas estão em alerta ou paradas?",
+      "resposta": "A PRE-02 está em alerta: tempo de parada do freio em 235 ms, com limite de 250 ms no manual; a OS-9431 troca as lonas em 14/11. O torno USI-02 está parado (OS-9428, encoder chega em 16/11) e a célula SOL-03 está em preventiva até 14/11 (OS-9425).",
+      "fontes": [
+        "maq:PRE-02",
+        "os:OS-9431",
+        "doc:DOC-MAN-PRE#t1",
+        "os:OS-9428",
+        "os:OS-9425"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quantos golpes a ferramenta 88-14 tem desde a última afiação?",
+      "resposta": "A 88-14 foi afiada em 08/11 (OS-9433) e desde então fez 11.200 golpes, de um limite de 40.000. Com o contador agora gravado na ferramenta, o MES bloqueia a prensa ao atingir o limite. O ferramenteiro Jonas Becker lembra que a rebarba começa a crescer por volta de 35 mil golpes.",
+      "fontes": [
+        "os:OS-9433",
+        "doc:DOC-PRO-FER#t1",
+        "doc:DOC-PRO-FER#t2",
+        "saber:SB-202"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "A Norte Suspensões subiu o firme em 25%. Podemos aceitar?",
+      "resposta": "Não sem renegociar. A RC-02 aceita até +15% no firme; acima disso o PCP confirma a capacidade em 24 h. Com 820 braços AP-5120-A em estoque e a OP-88120 em 48%, a previsão do PV-77412 é 18/11. A executiva Daniela Zanella deve avisar o cliente da quantidade possível na semana.",
+      "fontes": [
+        "regra:RC-02",
+        "pedido:PV-77412",
+        "sku:AP-5120-A",
+        "op:OP-88120",
+        "rep:REP-02"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Tenho cubo de roda para o pedido da Rota 101?",
+      "resposta": "Não de imediato. O AP-7210 tem 40 peças em estoque, abaixo do mínimo de 250, e a OP-88131 atende primeiro os 1.200 cubos da Eixos Planalto. Por isso o PV-77440 (2.000 buchas e 300 cubos, com 5% de desconto) está em análise; as buchas têm 21.500 em estoque e saem em até 2 dias úteis.",
+      "fontes": [
+        "sku:AP-7210",
+        "op:OP-88131",
+        "pedido:PV-77440",
+        "sku:AP-7012",
+        "regra:RC-05"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Como está a carteira de reposição no mês?",
+      "resposta": "Simone Araújo realizou R$ 431.200 de uma meta de R$ 540.000 (79,9%). Estão abertos o PV-77440 da Rota 101 em análise e o histórico do PV-77418 da Bandeirantes, entregue com 5% de desconto.",
+      "fontes": [
+        "rep:REP-04",
+        "pedido:PV-77440",
+        "pedido:PV-77418"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Que conteúdos estão esperando aprovação?",
+      "resposta": "Em revisão estão o artigo técnico sobre especificação de bucha de suspensão (MK-02) e a resposta à Montadora A sobre o andamento do 8D (MK-03). O post do suporte de para-lama AP-8830 (MK-04) ainda é rascunho. As fichas da bucha AP-7012 e do suporte AP-2290 estão aprovadas.",
+      "fontes": [
+        "sku:AP-7012",
+        "sku:AP-8830",
+        "nc:NC-2026-311"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Que dados posso usar na ficha de reposição da bucha?",
+      "resposta": "Use os dados aprovados: aço SAE 1045, diâmetro externo de 32,00 mm (+0,025/0), força de extração mínima de 8 kN após montagem e embalagem com 50 peças. O catálogo de reposição 2026 diz que é a mesma especificação da peça fornecida aos sistemistas.",
+      "fontes": [
+        "sku:AP-7012",
+        "doc:DOC-CAT-REP#t1"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que os operadores mais antigos sabem sobre o freio da prensa 2?",
+      "resposta": "Osni Bertoldi, com 23 anos de casa, registrou que o freio da PRE-02 avisa pelo som: o martelo desce um pouco depois de soltar o pedal. Ele pede a medição na hora e, acima de 230 ms, reduz a cadência. O manual manda bloquear a prensa acima de 250 ms.",
+      "fontes": [
+        "saber:SB-201",
+        "doc:DOC-MAN-PRE#t1"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que um torneiro novo precisa saber do torno 2?",
+      "resposta": "Ivo Rech (20 anos de casa) ensina a rodar o aquecimento completo de 15 minutos e medir a primeira peça na CMM. Medida que pula sem padrão é encoder, não inserto. Lúcia Hartmann completa: cubo quente precisa de 30 minutos na sala da CMM, senão mede até 8 µm a mais.",
+      "fontes": [
+        "saber:SB-204",
+        "saber:SB-207",
+        "doc:DOC-MAN-USI#t2"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Onde está o meu pedido de cubos de roda?",
+      "resposta": "O PV-77420, de 1.200 cubos AP-7210, está atrasado: a OP-88131 está em 55% porque um dos tornos CNC parou em 10/11. A nova previsão de entrega é 20/11.",
+      "fontes": [
+        "pedido:PV-77420",
+        "op:OP-88131"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Quero recomprar suportes de para-choque para reposição.",
+      "resposta": "O último pedido (PV-77418) foi de 6.000 suportes AP-2290 a R$ 8,93 e já foi entregue. Há 12.600 em estoque, acima do mínimo de 6.000, e o prazo padrão é de 7 dias. O pedido mínimo de reposição é R$ 5.000.",
+      "fontes": [
+        "pedido:PV-77418",
+        "sku:AP-2290",
+        "regra:RC-05"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "10:05",
+      "texto": "Oi! A Rota 101 quer 2.000 buchas AP-7012 e 300 cubos AP-7210. Tem estoque?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "10:05",
+      "texto": "Oi, Simone. Bucha AP-7012: 21.500 em estoque, acima do mínimo, então sai em até 2 dias úteis. Cubo AP-7210: só 40 peças, abaixo do mínimo de 250, e a OP-88131 está atrasada atendendo a Eixos Planalto.",
+      "fontes": [
+        "sku:AP-7012",
+        "sku:AP-7210",
+        "op:OP-88131",
+        "regra:RC-05"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "10:07",
+      "texto": "Quando eu teria os cubos? E consigo 7% de desconto no pacote?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "10:08",
+      "texto": "O torno parado volta em 17/11 e a OP-88131 tem previsão de terminar os cubos da Eixos Planalto em 20/11; peça ao PCP a data dos 300 antes de prometer. Sobre o desconto: você aprova até 5% (bucha a R$ 8,31 e cubo a R$ 59,19); 7% precisa do gerente comercial.",
+      "fontes": [
+        "os:OS-9428",
+        "pedido:PV-77420",
+        "regra:RC-01"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "10:10",
+      "texto": "Beleza. Então mando as buchas agora e os cubos depois, com 5%.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "10:10",
+      "texto": "Combinado. O PV-77440 já está registrado com 5% e em análise. Separando em duas entregas, as buchas somam R$ 16.620,00, acima do pedido mínimo de R$ 5.000.",
+      "fontes": [
+        "pedido:PV-77440",
+        "regra:RC-05"
+      ]
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha de reposição: bucha de suspensão AP-7012",
+      "texto": "Bucha metálica usinada em aço SAE 1045, diâmetro externo de 32 mm e força de extração mínima de 8 kN após montagem. Mesma especificação da peça fornecida aos sistemistas, em embalagem com 50 peças.",
+      "status": "aprovado",
+      "sku": "AP-7012",
+      "fontes": [
+        "sku:AP-7012",
+        "doc:DOC-CAT-REP#t1"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Como especificar bucha de suspensão para reposição",
+      "texto": "O que conferir numa bucha metálica de reposição: diâmetro externo, material e força de extração. Explicamos por que a tolerância de 0,025 mm faz diferença na montagem.",
+      "status": "em_revisao",
+      "sku": "AP-7012",
+      "fontes": [
+        "sku:AP-7012",
+        "nc:NC-2026-299"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Atualização do 8D para a Montadora A",
+      "texto": "A contenção foi feita em 18 h, com 112 peças segregadas. A causa raiz foi o intervalo de afiação da ferramenta excedido na troca de prensa; o contador de golpes agora fica na ferramenta. Não houve reincidência em 11.200 peças desde 08/11.",
+      "status": "em_revisao",
+      "sku": "AP-4471-B",
+      "fontes": [
+        "nc:NC-2026-311",
+        "os:OS-9433"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "post",
+      "titulo": "Suporte de para-lama com pintura KTL",
+      "texto": "Suporte de para-lama em chapa de 4,75 mm, soldado e pintado em KTL, para semirreboques e carrocerias. Aderência controlada por ensaio a cada turno.",
+      "status": "rascunho",
+      "sku": "AP-8830",
+      "fontes": [
+        "sku:AP-8830"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha de reposição: suporte de para-choque AP-2290",
+      "texto": "Suporte estampado de 2,5 mm com pintura KTL de 18 a 25 µm, em caixa com 100 peças.",
+      "status": "aprovado",
+      "sku": "AP-2290",
+      "fontes": [
+        "sku:AP-2290",
+        "doc:DOC-CAT-REP#t2"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do cliente: sistemistas, implementos e reposição",
+    "boas_vindas": "Acompanhe suas programações, o status de cada pedido e a documentação de qualidade das peças que você compra.",
+    "destaques": [
+      "AP-7012",
+      "AP-2290",
+      "AP-8830",
+      "AP-8845"
+    ],
+    "avisos": [
+      {
+        "titulo": "Cubo de roda AP-7210 com prazo maior",
+        "texto": "Por uma parada de máquina, novos pedidos de cubo têm entrega a partir de 20/11. Fale com seu executivo de contas antes de programar."
+      },
+      {
+        "titulo": "Inventário anual",
+        "texto": "Não haverá expedição em 30 e 31/12 por causa do inventário anual."
+      }
+    ]
+  }
+}

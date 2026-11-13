@@ -1,0 +1,67 @@
+// Qualidade (UX §4.8): NCs abertas · graves · encerradas em 30 dias; lista de NCs; gaveta `nc`
+// com 8D registrado ou [Gerar rascunho de 8D] transmitido no corpo da gaveta.
+import { h } from '../ui.js';
+import {
+  areaPage, listSection, statusBadge, seloRegistros, notesFor, learnItems, origemDados, cap, T, fmtOf, tag,
+} from '../ui/area-page.js';
+
+const RANK_ST = { aberta: 0, em_analise: 1, encerrada: 2 };
+const RANK_SEV = { alta: 0, media: 1, baixa: 2 };
+const ORIGEM = { interna: 'Interna', cliente: 'Cliente', fornecedor: 'Fornecedor' };
+
+export function render(el, ctx) {
+  const f = fmtOf(ctx);
+  const d = ctx.data || {};
+  const ncs = d.nao_conformidades || [];
+  const prodBy = Object.fromEntries((d.produtos || []).map((p) => [p.sku, p]));
+  const aberta = (n) => n.status !== 'encerrada';
+  const grave = (n) => aberta(n) && n.severidade === 'alta';
+
+  const nAbertas = ncs.filter(aberta).length;
+  const nGraves = ncs.filter(grave).length;
+  const enc30 = ncs.filter((n) => n.status === 'encerrada' && f.daysFromToday(n.data, ctx.today) >= -30).length;
+
+  let notas = learnItems(ctx);
+  const nNotas = (n) => notesFor(ctx, { ids: [n.id] }, notas).length;
+
+  const lista = listSection({
+    rotulo: 'Não conformidades',
+    filtros: [
+      { id: 'abertas', label: 'Abertas', fn: aberta },
+      { id: 'graves', label: 'Graves', fn: grave },
+      { id: 'todas', label: 'Todas', fn: () => true },
+    ],
+    busca: { placeholder: `Buscar NC ou ${T(ctx, 'produto')}`, texto: (n) => `${n.id} ${n.sku || ''} ${prodBy[n.sku]?.nome || ''} ${n.descricao || ''}` },
+    linhas: () => ncs,
+    ordenar: (a, b) => ((RANK_ST[a.status] ?? 9) - (RANK_ST[b.status] ?? 9)) || ((RANK_SEV[a.severidade] ?? 9) - (RANK_SEV[b.severidade] ?? 9)) || String(b.data).localeCompare(String(a.data)),
+    chave: (n) => n.id,
+    onClick: (n) => ctx.openRef?.(`nc:${n.id}`),
+    vazio: (filtro) => `Nenhuma NC ${filtro}.`,
+    colunas: [
+      { m: 'id', largura: 'minmax(84px,104px)', render: (n) => h('strong', { class: 'ar-id' }, n.id) },
+      {
+        m: 'main', largura: 'minmax(0,2.4fr)',
+        render: (n) => h('span', { class: 'ar-trunc', title: n.descricao || '' }, prodBy[n.sku]?.nome || n.descricao || n.sku || ''),
+      },
+      { m: null, largura: 'minmax(84px,110px)', render: (n) => h('span', { class: 'ar-muted' }, ORIGEM[n.origem] || cap(n.origem || '')) },
+      { m: 'sub', largura: 'minmax(72px,96px)', render: (n) => (n.severidade === 'alta' ? tag('Grave', 'danger') : h('span', { class: 'ar-muted' }, `Sev. ${n.severidade === 'media' ? 'média' : n.severidade || '—'}`)) },
+      { m: 'status', largura: 'minmax(150px,auto)', render: (n) => h('span', { class: 'ar-status' }, statusBadge(n.status), seloRegistros(nNotas(n))) },
+    ],
+  });
+
+  const page = areaPage({
+    ctx,
+    modulo: 'qualidade',
+    titulo: ctx.areaName?.('qualidade') || 'Qualidade',
+    subtitulo: ['Não conformidades, causas e 8D', origemDados(ctx, 'qualidade')].filter(Boolean).join(' · '),
+    numeros: [
+      { valor: f.num(nAbertas), rotulo: nAbertas === 1 ? 'NC aberta' : 'NCs abertas', tom: nGraves ? 'danger' : nAbertas ? 'warn' : 'ok' },
+      { valor: f.num(nGraves), rotulo: nGraves === 1 ? 'grave' : 'graves' },
+      { valor: f.num(enc30), rotulo: 'encerradas em 30 dias' },
+    ],
+    corpo: lista.el,
+  });
+  page.onLearning(() => { notas = learnItems(ctx); lista.refresh(); });
+  el.replaceChildren(page.el);
+  return () => page.cleanup();
+}

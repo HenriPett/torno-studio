@@ -73,3 +73,47 @@
   for = "/para/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Demo privada da Torno (demo/PLANO-V2.md). /demo/<id> e /admin abrem o app estático; os dados e a IA só
+# saem da função netlify/functions/demo-api.mjs (/api/demo/*, /api/admin/*) depois da senha.
+# Nunca indexar: header em tudo que é da demo, sem link no site, fora do sitemap e sem Disallow no
+# robots.txt (o Disallow revelaria o caminho e impediria o crawler de ler o noindex).
+[[redirects]]
+  from = "/demo/*"
+  to = "/demo-app/index.html"
+  status = 200
+[[redirects]]
+  from = "/admin"
+  to = "/demo-app/index.html"
+  status = 200
+[[redirects]]
+  from = "/admin/"
+  to = "/demo-app/index.html"
+  status = 200
+
+[[headers]]
+  for = "/demo/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "no-store"
+[[headers]]
+  for = "/admin*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "no-store"
+[[headers]]
+  for = "/demo-app/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "public, max-age=0, must-revalidate"
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"
+
+[functions]
+  node_bundler = "esbuild"

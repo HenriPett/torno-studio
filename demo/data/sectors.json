@@ -1,0 +1,10 @@
+[
+  { "id": "textil", "nome": "Têxtil e confecção", "arquivo": "data/textil.json" },
+  { "id": "alimentos", "nome": "Alimentos e bebidas", "arquivo": "data/alimentos.json" },
+  { "id": "plasticos", "nome": "Plásticos e embalagens", "arquivo": "data/plasticos.json" },
+  { "id": "maquinas", "nome": "Máquinas e equipamentos", "arquivo": "data/maquinas.json" },
+  { "id": "metalmecanica", "nome": "Metalmecânica", "arquivo": "data/metalmecanica.json" },
+  { "id": "moveis", "nome": "Madeira e móveis", "arquivo": "data/moveis.json" },
+  { "id": "eletroeletronicos", "nome": "Material elétrico e eletroeletrônicos", "arquivo": "data/eletroeletronicos.json" },
+  { "id": "autopecas", "nome": "Autopeças e implementos", "arquivo": "data/autopecas.json" }
+]

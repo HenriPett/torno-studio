@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import agentMarkdown from './scripts/agent-markdown.mjs';
 import sectorIsolation from './scripts/check-sector-isolation.mjs';
+import demoApp from './scripts/demo-app.mjs';
 import { readdirSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -141,6 +142,8 @@ export default defineConfig({
       serialize: (item) => ({ ...item, url: blogUrl(item.url), links: links.get(blogUrl(item.url)) ?? [], ...(blogDates.get(blogUrl(item.url)) ? { lastmod: blogDates.get(blogUrl(item.url)) } : {}) }),
     }),
     { name: 'blog-link-guard', hooks: { 'astro:build:done': async ({ dir }) => { await validateBlogOutput(fileURLToPath(dir), blogManifest); } } },
+    // Demo privada (demo/PLANO-V2.md): copia demo/web para dist/demo-app/ antes da checagem de isolamento.
+    demoApp(),
     // Por último: confere o dist/ já com sitemap e Markdown gerados. Falha o build se algo citar /para/.
     sectorIsolation(),
   ],

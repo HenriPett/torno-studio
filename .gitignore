@@ -11,3 +11,6 @@ playwright-report/
 test-results/
 .lighthouseci/
 .vercel
+
+# Dados do servidor de dev da demo (node demo/scripts/serve.mjs)
+demo/.dev-store/
