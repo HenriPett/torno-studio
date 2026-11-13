@@ -8,8 +8,9 @@
 //     info = resolveRef(ref) (+ close/sheet, como o app.openRef passa) ou a string "tipo:id".
 //     drawerNode(out) junta corpo + ações num Node só.
 //     ctx.cliente (gaveta aberta do Portal, com ctxDoCliente de fontes.js): os dados já vêm na versão do
-//     cliente; as ações internas (resposta ao cliente, visita, proposta) somem e a gaveta não mostra
-//     sugestão interna, meta de representante, estoque mínimo nem preço de referência.
+//     cliente; as ações internas (resposta ao cliente, visita, proposta) e o "Ensinar" somem e a gaveta
+//     não mostra sugestão interna, meta de representante, limite de crédito, estoque mínimo nem preço de
+//     referência.
 //
 // Só usa o contrato do ctx (term, areaName, isEnabled, resolveRef, openRef, navigate, fmt, learning,
 // perguntar, ensinar, renderMarkdown, sheet, api, demo, ia). Qualquer peça ausente: o botão some.
@@ -689,7 +690,7 @@ function bloco(tom, titulo, texto) {
 function gaveta(ctx, sheetApi, { titulo, subtitulo, eyebrow, topo, secoes, acoes, pergunta, modulo, area, maquina, origem }) {
   const corpo = h('div', { class: 'ar-drawer' });
   const lista = [];
-  // versão do cliente (Portal): só "Perguntar" e "Ensinar"; as ações da equipe ficam de fora
+  // versão do cliente (Portal): só "Perguntar"; as ações da equipe e o "Ensinar" ficam de fora
   for (const a of (ctx?.cliente ? [] : acoes) || []) {
     lista.push(btn(a.label, {
       variant: a.variant || 'secondary', icone: a.icone,
@@ -702,7 +703,7 @@ function gaveta(ctx, sheetApi, { titulo, subtitulo, eyebrow, topo, secoes, acoes
       onClick: () => { fecharFolha(corpo, sheetApi); perguntar(ctx, pergunta, { modulo }); },
     }));
   }
-  if (can(ctx, 'ensinar')) {
+  if (!ctx?.cliente && can(ctx, 'ensinar')) {
     lista.push(btn('Ensinar algo sobre isto', {
       variant: lista.length ? 'ghost' : 'secondary', icone: 'lightbulb',
       onClick: () => { fecharFolha(corpo, sheetApi); ensinar(ctx, { area: area || modulo, maquina: maquina || null, origem }); },
@@ -1215,7 +1216,8 @@ function drawerCliente(arg, ctx, sheetApi) {
         [cap(T(ctx, 'representante')), rep?.nome || c.representante],
         ['Tabela de preço', c.tabela_preco],
         ['Pagamento', c.condicao_pagamento],
-        ['Limite de crédito', c.limite_credito != null ? f.money(c.limite_credito) : null],
+        // crédito é interno: no Portal (ctx.cliente) não aparece, nem que o dado venha
+        ['Limite de crédito', !ctx?.cliente && c.limite_credito != null ? f.money(c.limite_credito) : null],
         ['Último pedido', c.ultimo_pedido ? `${f.date(c.ultimo_pedido)} (${f.rel(c.ultimo_pedido, today(ctx))})` : null],
       ]),
       teamNotes(ctx, { ids: [c.id, curto(c.nome)] }),

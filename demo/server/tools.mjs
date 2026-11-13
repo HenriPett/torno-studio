@@ -248,7 +248,9 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     execute(input) {
       const cs = (d.clientes ?? []).map((c) => ({
         ref: `cliente:${c.id}`, tipo: "cliente", id: c.id, nome: c.nome, cidade: `${c.cidade}/${c.uf}`, segmento: c.segmento,
-        representante: c.representante, condicao_pagamento: c.condicao_pagamento, limite_credito: c.limite_credito,
+        representante: c.representante, condicao_pagamento: c.condicao_pagamento,
+        // limite de crédito é interno: fora do Portal do cliente (a visão do cliente já vem sem ele)
+        ...(ctx?.cliente ? {} : { limite_credito: c.limite_credito }),
         tabela_preco: c.tabela_preco, ultimo_pedido: c.ultimo_pedido,
       }));
       const rs = (d.representantes ?? []).map((r) => ({

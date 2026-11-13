@@ -329,6 +329,57 @@ export function motivoParaCliente(texto) {
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
 
+// campos de crédito do cadastro do cliente (limite, saldo, bloqueio…): política interna, fora do Portal
+const CAMPO_DE_CREDITO = /credito|limite|saldo|inadimpl|bloque/i;
+
+const escapaRe = (t) => String(t).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+// o que sobra entre parênteses depois de tirar a máquina: só separadores ("/", ",", "ou", "e")
+const SEPARADOR = String.raw`(?:[\s,;/+&·]|(?<=^|\s)(?:ou|e)(?=\s|$))`;
+const SO_SEPARADOR = new RegExp(`^${SEPARADOR}*$`, "i");
+const SEP_INICIO = new RegExp(`^${SEPARADOR}+`, "i");
+const SEP_FIM = new RegExp(`${SEPARADOR}+$`, "i");
+
+/**
+ * Tira os códigos de máquina de um texto da ficha técnica, para o Portal do cliente:
+ * "Malharia (TEA-07)" → "Malharia"; "Tinturaria em 2 banhos (TIN-03 ou TIN-05)" → "Tinturaria em 2 banhos";
+ * "Injeção (INJ-09, molde 214)" → "Injeção (molde 214)"; "PRE-03 (progressiva)" → "progressiva";
+ * "Prensa: PRE-03" → "" (o rótulo que sobra sai junto). `re`: regex global dos ids de máquina.
+ * → texto limpo ("" quando era só máquina)
+ */
+function semMaquinas(txt, re) {
+  let t = String(txt ?? "");
+  re.lastIndex = 0;
+  if (!re.test(t)) return t;
+  const limpa = (x) => x.replace(re, " ").replace(/\s+/g, " ")
+    .replace(SEP_INICIO, "").replace(SEP_FIM, "")
+    .replace(/\s*([,;/])\s*(?:[,;/]\s*)+/g, "$1 ").trim();
+  // dentro dos parênteses: tira a máquina e os separadores que ficaram; parêntese vazio sai
+  t = t.replace(/\(([^()]*)\)/g, (_, dentro) => {
+    const r = limpa(dentro);
+    return r && !SO_SEPARADOR.test(r) ? `(${r})` : "";
+  });
+  t = limpa(t)
+    .replace(/(^|[,;]\s*)[^\s,;:()][^,;:()]*:\s*(?=$|[,;])/g, "$1") // rótulo sem valor ("Prensa:")
+    .replace(/\s+([,;:)])/g, "$1").replace(/\(\s+/g, "(").replace(/\s+/g, " ");
+  t = limpa(t).replace(/[,;:]+$/, "").trim();
+  const so = /^\(([^()]*)\)$/.exec(t); // sobrou só o parêntese: "(progressiva)" → "progressiva"
+  if (so) t = so[1].trim();
+  return SO_SEPARADOR.test(t) ? "" : t;
+}
+
+/** Ficha técnica para o Portal: roteiro e atributos sem códigos de máquina (o que era só máquina sai). */
+function fichaParaCliente(ficha, re) {
+  if (!ficha || typeof ficha !== "object") return ficha;
+  const out = { ...ficha };
+  if (Array.isArray(ficha.roteiro)) out.roteiro = ficha.roteiro.map((e) => (typeof e === "string" ? semMaquinas(e, re) : e)).filter((e) => e !== "");
+  if (ficha.atributos && typeof ficha.atributos === "object") {
+    out.atributos = Object.fromEntries(Object.entries(ficha.atributos)
+      .map(([k, v]) => [k, typeof v === "string" ? semMaquinas(v, re) : v])
+      .filter(([, v]) => v !== ""));
+  }
+  return out;
+}
+
 /**
  * Portal do cliente: ctx com os dados filtrados para o cliente `clienteId` (só os pedidos dele, as
  * ordens desses pedidos, ele mesmo e o representante dele, catálogo, as regras comerciais marcadas
@@ -337,7 +388,9 @@ export function motivoParaCliente(texto) {
  * Ordens e pedidos vêm na versão para o cliente: status, %, previsão e um motivo genérico de atraso
  * (sem códigos de máquina, OS ou NC); o representante vem só com id, nome, região e telefone (sem meta,
  * realizado nem nada derivado deles); as perguntas sugeridas vêm sem a resposta pronta (que usa a tabela
- * de referência), para o motor responder com a tabela do cliente. O preço da tabela dele sai das regras
+ * de referência), para o motor responder com a tabela do cliente; o cadastro do cliente vem sem limite de
+ * crédito (nem outro campo de crédito); a ficha técnica dos produtos vem sem códigos de máquina no roteiro
+ * e nos atributos (fichaParaCliente). O preço da tabela dele sai das regras
  * internas guardadas em ctx.regrasDePreco (fora de ctx.data: nenhuma busca nem ferramenta as lê).
  * isEnabled só deixa passar MODULOS_DO_CLIENTE.
  * → ctx (com ctx.cliente) ou null se o cliente não existe no pacote.
@@ -366,9 +419,12 @@ export function visaoDoCliente(ctx, clienteId) {
     const motivo = motivoParaCliente(o?.motivo_atraso || observacao || "");
     return { ...resto, observacao: `Entrega reprogramada para ${f.data(p.previsao_entrega)}. Motivo: ${motivo.charAt(0).toLowerCase()}${motivo.slice(1)}.` };
   });
+  const ids = (d.maquinas ?? []).map((m) => m.id).filter(Boolean).sort((a, b) => b.length - a.length);
+  const reMaq = ids.length ? new RegExp(`(?<![\\w-])(?:${ids.map(escapaRe).join("|")})(?![\\w])`, "g") : null;
   const data = {
     ...d,
-    clientes: [cli],
+    clientes: [Object.fromEntries(Object.entries(cli).filter(([k]) => !CAMPO_DE_CREDITO.test(k)))],
+    produtos: reMaq ? (d.produtos ?? []).map((p) => (p?.ficha ? { ...p, ficha: fichaParaCliente(p.ficha, reMaq) } : p)) : d.produtos,
     // só o que identifica e o contato: nada de meta, realizado ou % da meta
     representantes: (d.representantes ?? []).filter((r) => r.id === cli.representante)
       .map(({ id, nome, regiao, telefone }) => ({ id, nome, regiao, telefone })),
@@ -424,6 +480,11 @@ export function precoNaTabela(ctx, produto, cliente) {
   return out;
 }
 
+// artigos e possessivos que não mudam a pergunta ("o meu pedido" = "meu pedido")
+const ARTIGO_OU_POSSESSIVO = /\b(?:o|a|os|as|um|uma|uns|umas|meu|minha|meus|minhas|seu|sua|seus|suas|nosso|nossa|nossos|nossas)\b/g;
+/** Chave para comparar perguntas sugeridas: minúsculas, sem acento, sem pontuação, artigos nem possessivos. */
+const chaveDaSugestao = (q) => norm(q).replace(/[^\w\s-]/g, " ").replace(ARTIGO_OU_POSSESSIVO, " ").replace(/\s+/g, " ").trim();
+
 /**
  * Perguntas sugeridas do Portal para o cliente `clienteId`, tiradas da visão dele (visaoDoCliente): as
  * sugeridas do portal cujas fontes e códigos citados (pedido, ordem, produto) são dele, depois
@@ -438,10 +499,12 @@ export function sugestoesDoPortal(ctx, clienteId, n = 3) {
     ...(d.pedidos ?? []).map((p) => norm(p.id)), ...(d.ordens ?? []).map((o) => norm(o.id)), ...(d.produtos ?? []).map((p) => norm(p.sku)),
   ]);
   const out = [];
+  const vistas = new Set(); // texto normalizado: "Quando chega meu pedido X?" = "Quando chega o meu pedido X?"
   const add = (q) => {
-    if (!q || out.includes(q)) return;
+    if (!q || vistas.has(chaveDaSugestao(q))) return;
     if ((norm(q).match(/\b[a-z]{1,5}-\d[\w-]*/g) ?? []).some((c) => !meus.has(c))) return; // código de outro cliente ou interno
     out.push(q);
+    vistas.add(chaveDaSugestao(q));
   };
   for (const p of sugeridasLigadas(v)) if (p.modulo === "portal") add(p.pergunta);
   const aberto = [...(d.pedidos ?? [])].filter((p) => !["entregue", "faturado"].includes(p.status))
@@ -716,7 +779,8 @@ function descreveCliente(ctx, c) {
   const d = ctx.data;
   const rep = by(d.representantes, "id", c.representante);
   const linhas = [
-    `**${c.nome}**[[cliente:${c.id}]] (${c.cidade}/${c.uf}, ${c.segmento}): condição ${c.condicao_pagamento}, ${c.tabela_preco}, limite de ${f.money(c.limite_credito)}.`,
+    // limite de crédito é interno: no Portal (ctx.cliente) não aparece, nem que o dado venha
+    `**${c.nome}**[[cliente:${c.id}]] (${c.cidade}/${c.uf}, ${c.segmento}): condição ${c.condicao_pagamento}, ${c.tabela_preco}${!ctx.cliente && c.limite_credito != null ? `, limite de ${f.money(c.limite_credito)}` : ""}.`,
     `- Último pedido em ${f.data(c.ultimo_pedido)}${rep ? `; ${term(ctx, "representante")}: ${rep.nome}` : ""}`,
   ];
   const pvs = (d.pedidos ?? []).filter((p) => p.cliente === c.id && !["entregue", "faturado"].includes(p.status)).slice(0, 3);

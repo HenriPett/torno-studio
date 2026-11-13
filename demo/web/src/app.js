@@ -367,19 +367,21 @@ async function reverApresentacao() {
 }
 
 /**
- * C1: o /estado diz `ia: 'real' | 'local'` (quem responde nesta demo). Versões anteriores mandavam
- * {disponivel, modelo}. → {modo: 'real'|'local', disponivel, modelo}; sem o campo, 'local'.
+ * C1: o /estado diz `ia: 'real' | 'local'` (quem responde nesta demo) e `ia_modelo` (o modelo, ou null).
+ * Versões anteriores mandavam {disponivel, modelo}. → {modo: 'real'|'local', disponivel, modelo}; sem o
+ * campo, 'local'.
  * ctx.ia.modo decide o texto das boas-vindas e de Como funciona; ctx.ia.disponivel segue valendo
  * para quem já lia o formato antigo (assistente, área).
  */
 function iaDoEstado(r) {
   const ia = r?.ia;
-  if (ia === 'real' || ia === 'local') return { modo: ia, disponivel: ia === 'real', modelo: null };
+  const modelo = typeof r?.ia_modelo === 'string' && r.ia_modelo ? r.ia_modelo : null; // /estado: ia_modelo ao lado de ia
+  if (ia === 'real' || ia === 'local') return { modo: ia, disponivel: ia === 'real', modelo };
   if (ia && typeof ia === 'object') {
     const modo = ia.modo === 'real' || ia.modo === 'local' ? ia.modo : ia.disponivel ? 'real' : 'local';
-    return { ...ia, modo, disponivel: modo === 'real', modelo: ia.modelo ?? null };
+    return { ...ia, modo, disponivel: modo === 'real', modelo: ia.modelo ?? modelo };
   }
-  return { modo: 'local', disponivel: false, modelo: null };
+  return { modo: 'local', disponivel: false, modelo };
 }
 
 function empresaNome() {
@@ -1072,7 +1074,7 @@ function refIcon(tipo) {
 
 /**
  * [Perguntar sobre isto] [Ensinar algo sobre isto] para qualquer registro. Na versão do cliente
- * (ctx.cliente), a pergunta vai para o assistente do Portal (ctx.perguntar de ctxDoCliente).
+ * (ctx.cliente), a pergunta vai para o assistente do Portal (ctx.perguntar de ctxDoCliente) e não há Ensinar.
  */
 export function acoesPadrao(resolved, s, ctx = null) {
   const pergunta = ctx?.cliente && typeof ctx.perguntar === 'function' ? ctx.perguntar : perguntar;
@@ -1088,11 +1090,12 @@ export function acoesPadrao(resolved, s, ctx = null) {
       variant: 'primary', icone: 'search',
       onClick: () => { s.close(); pergunta(`O que preciso saber sobre ${nome}?`, { modulo }); },
     }),
-    ui.button('Ensinar algo sobre isto', {
+    // no Portal (ctx.cliente) o cliente não ensina o cérebro da fábrica (o servidor também não registra)
+    ctx?.cliente ? null : ui.button('Ensinar algo sobre isto', {
       icone: 'lightbulb',
       onClick: () => { s.close(); ensinar({ area: area || undefined, maquina: maquina || undefined, origem: resolved.ref }); },
     }),
-  ];
+  ].filter(Boolean);
 }
 
 /** Gaveta genérica legível por tipo (nunca JSON cru). Herdada da v1, em tom calmo. */

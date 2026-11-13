@@ -712,6 +712,99 @@ teste('portal: o representante não leva meta nem realizado (visão, resolveRef,
   assert.ok(!/meta|realiz|%/.test(r.texto), r.texto);
 });
 
+teste('portal: ficha técnica sem código de máquina no roteiro e nos atributos; nada da visão cita máquina (8 setores)', async () => {
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const maquinas = ctx.data.maquinas.map((m) => m.id);
+    const antes = JSON.stringify(ctx.data.produtos);
+    for (const c of ctx.data.clientes) {
+      const v = motor.visaoDoCliente(ctx, c.id);
+      const txt = JSON.stringify(v);
+      const cita = maquinas.find((id) => new RegExp(`(?<![\\w-])${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`).test(txt));
+      assert.equal(cita, undefined, `${setor}/${c.id}: a visão do cliente cita a máquina ${cita}`);
+      for (const p of v.data.produtos) {
+        for (const x of [...(p.ficha?.roteiro ?? []), ...Object.entries(p.ficha?.atributos ?? {}).flat()]) {
+          assert.ok(!/\(\s*\)|^\s*$|:\s*$|^[\s,;/]|[\s,;/]$/.test(x), `${setor}/${p.sku}: sobra de limpeza em "${x}"`);
+        }
+      }
+    }
+    assert.equal(JSON.stringify(ctx.data.produtos), antes, `${setor}: os dados internos continuam com a ficha completa`);
+  }
+  // roteiro: "Malharia (TEA-07)" → "Malharia"; "(TIN-03 ou TIN-05)" e "(SEC-01/SEC-02)" somem; "(INJ-09, molde 214)" → "(molde 214)"
+  const acha = (setor, pred) => {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const v = motor.visaoDoCliente(ctx, ctx.data.clientes[0].id);
+    const i = ctx.data.produtos.findIndex(pred);
+    assert.ok(i >= 0, `${setor}: produto de exemplo`);
+    return [ctx.data.produtos[i].ficha, v.data.produtos[i].ficha];
+  };
+  let [a, b] = acha('textil', (p) => p.ficha?.roteiro?.some((e) => /TIN-03 ou TIN-05/.test(e)));
+  assert.equal(b.roteiro.length, a.roteiro.length, 'nenhuma etapa some (todas têm nome além da máquina)');
+  assert.equal(b.roteiro[0], 'Malharia');
+  assert.ok(b.roteiro.includes('Tinturaria em 2 banhos'), b.roteiro.join(' > '));
+  [a, b] = acha('textil', (p) => p.ficha?.atributos?.Malha === 'Piquet (TEA-12)');
+  assert.equal(b.atributos.Malha, 'Piquet');
+  [a, b] = acha('plasticos', (p) => p.ficha?.roteiro?.includes('Injeção (INJ-09, molde 214)'));
+  assert.ok(b.roteiro.includes('Injeção (molde 214)'), b.roteiro.join(' > '));
+  [a, b] = acha('moveis', (p) => p.ficha?.roteiro?.[0] === 'Corte (SEC-01/SEC-02)');
+  assert.deepEqual(b.roteiro.slice(0, 2), ['Corte', 'Coladeira de borda']);
+  [a, b] = acha('autopecas', (p) => p.ficha?.atributos?.Prensa);
+  assert.equal(b.atributos.Prensa, 'progressiva', 'o id da prensa sai; o tipo fica');
+  assert.deepEqual(Object.keys(b.atributos), Object.keys(a.atributos));
+  [a, b] = acha('metalmecanica', (p) => p.ficha?.atributos?.Processo === 'fresamento e mandrilhamento (CUV-04)');
+  assert.equal(b.atributos.Processo, 'fresamento e mandrilhamento');
+  // atributo que era só máquina sai inteiro; rótulo que sobra ("Prensa:") sai junto
+  const ctx = criaCtx({ setor: 'autopecas', modulos: {} }, []);
+  const prod = { ...ctx.data.produtos[0], ficha: { roteiro: ['Prensa: PRE-03', 'Estampagem (PRE-01 / PRE-02)', 'Solda (SOL-01), inspeção'], atributos: { Prensa: 'PRE-03', Linha: 'Prensa: PRE-02', Material: 'aço' } } };
+  const v = motor.visaoDoCliente({ ...ctx, data: { ...ctx.data, produtos: [prod] } }, ctx.data.clientes[0].id);
+  assert.deepEqual(v.data.produtos[0].ficha.roteiro, ['Estampagem', 'Solda, inspeção']);
+  assert.deepEqual(v.data.produtos[0].ficha.atributos, { Material: 'aço' });
+});
+
+teste('portal: sem limite de crédito do cliente (visão, ferramenta, resposta local, 8 setores); por dentro continua', async () => {
+  const dinheiro = (n) => Number(n).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    for (const c of ctx.data.clientes) {
+      const v = motor.visaoDoCliente(ctx, c.id);
+      assert.deepEqual(Object.keys(v.data.clientes[0]).filter((k) => /credito|limite|saldo/i.test(k)), [], `${setor}/${c.id}`);
+      const t = buildTools(v, {}).find((x) => x.name === 'consultar_clientes_representantes');
+      const txt = JSON.stringify([t.execute({}), t.execute({ id: c.id }), t.description]);
+      assert.ok(!/limite|cr[eé]dito/i.test(txt), `${setor}/${c.id}: ferramenta: ${txt.slice(0, 300)}`);
+      const curto = c.nome.split(/\s+[—–-]\s+/)[0];
+      for (const q of [`Como está a ${curto}?`, `Como está a ${c.nome}?`, 'Qual o meu limite de crédito?', 'Qual o meu cadastro?', `Me fala da ${curto}`]) {
+        const r = motor.responder(ctx, q, { modulo: 'portal', cliente: c.id });
+        assert.ok(!/limite/i.test(r.texto) && (c.limite_credito == null || !r.texto.includes(dinheiro(c.limite_credito))),
+          `${setor}/${c.id}: "${q}" mostrou o crédito: ${r.texto}`);
+      }
+    }
+  }
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, []);
+  const r = motor.responder(ctx, 'Como está a Moda Ponto Certo?', { modulo: 'portal', cliente: 'CLI-1042' });
+  assert.match(r.texto, /condição 30\/60\/90, Tabela B\./);
+  // por dentro (comercial), o limite continua
+  assert.equal(buildTools(ctx, {}).find((x) => x.name === 'consultar_clientes_representantes').execute({ id: 'CLI-1042' }).itens[0].limite_credito, 120000);
+  assert.match(motor.responder(ctx, 'Como está a Moda Ponto Certo?', {}).texto, /limite de cr[eé]dito de R\$\s?120\.000,00/);
+});
+
+teste('portal: sugestões sem quase duplicadas ("meu pedido" = "o meu pedido"), 8 setores', async () => {
+  const ctx = criaCtx({ setor: 'metalmecanica', modulos: {} }, []);
+  const c = ctx.data.clientes.find((x) => ctx.data.perguntas_sugeridas.some((p) => p.modulo === 'portal' && /Quando chega meu pedido/.test(p.pergunta)
+    && ctx.data.pedidos.some((pv) => pv.cliente === x.id && p.pergunta.includes(pv.id))));
+  assert.ok(c, 'há uma sugerida do portal "Quando chega meu pedido …?" de um cliente');
+  const s = motor.sugestoesDoPortal(ctx, c.id, 5);
+  assert.equal(s.filter((q) => /^Quando chega (o )?meu pedido/.test(q)).length, 1, s.join(' | '));
+  const chave = (q) => q.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\w\s-]/g, ' ')
+    .replace(/\b(o|a|os|as|um|uma|meu|minha|meus|minhas|seu|sua|seus|suas)\b/g, ' ').replace(/\s+/g, ' ').trim();
+  for (const setor of SETOR_IDS) {
+    const c8 = criaCtx({ setor, modulos: {} }, []);
+    for (const cli of c8.data.clientes) {
+      const sug = motor.sugestoesDoPortal(c8, cli.id, 10);
+      assert.equal(new Set(sug.map(chave)).size, sug.length, `${setor}/${cli.id}: ${sug.join(' | ')}`);
+    }
+  }
+});
+
 teste('conversa (front): portal com conversa própria por cliente, separada da interna (fio, chave de sessão, histórico)', async () => {
   const conv = await import('../web/src/ui/conversa.js');
   assert.equal(conv.fioDaConversa({}), 'interna');

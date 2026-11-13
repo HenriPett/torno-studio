@@ -1,7 +1,7 @@
 // A conversa com o cérebro (UX §4.5): a conversa interna da sessão, mostrada em #conversa (página) e no
 // painel das áreas, e uma conversa própria por cliente do Portal (painel do portal). Streaming com linhas
-// de ferramenta, Markdown seguro, fontes numeradas, Parar, erros, Copiar, "Ensinar algo sobre isso" e o
-// registro pela conversa ("anota que…").
+// de ferramenta, Markdown seguro, fontes numeradas, Parar, erros, Copiar, "Ensinar algo sobre isso" (fora
+// do Portal) e o registro pela conversa ("anota que…").
 //
 // Conversas ("fios"): 'interna' (todas as telas internas) e 'portal:<CLI-…>' (o Portal, por cliente do
 // "Ver como"). Cada fio tem a sua chave no sessionStorage (chaveDaConversa): td_conv_<demo> e
@@ -15,7 +15,7 @@
 
 import { h, icon, button, iconButton, toast, copyText, sheet as uiSheet } from '../ui.js';
 import { renderMarkdown, criaCitas, textoParaCopiar, markdownToText, refsDoTexto } from './markdown.js';
-import { blocoFontes, citeNodeLigado, rotulosParaCopiar, atualizaQuandos, marco } from './fontes.js';
+import { blocoFontes, citeNodeLigado, rotulosParaCopiar, atualizaQuandos, marco, ctxDoCliente } from './fontes.js';
 import { abrirEnsinar, perguntaDerivada } from './ensinar.js';
 import { createAssistant, clientePortalAtual, aoTrocarClientePortal } from '../ai/assistant.js';
 import * as motor from '../ai/local-engine.js';
@@ -395,7 +395,9 @@ const clienteDaMsg = (m) => (m?.modulo === 'portal' && m.cliente ? m.cliente : u
 function corpoResposta(ctx, m, raiz) {
   const streaming = m.estado === 'streaming';
   const cliente = clienteDaMsg(m);
-  const citas = criaCitas({ ctx });
+  // no Portal, a numeração só aceita o que resolve na versão do cliente (nunca nos dados internos)
+  const ctxCitas = cliente ? ctxDoCliente(ctx, cliente) : ctx;
+  const citas = ctxCitas ? criaCitas({ ctx: ctxCitas }) : criaCitas({ aceita: () => false });
   const citeNode = citeNodeLigado(raiz, ctx, { cliente });
   const partes = [];
   const semTexto = !m.texto;
@@ -445,6 +447,8 @@ function acoesResposta(ctx, m, citas) {
       setTimeout(() => { copiar.replaceChildren(icon('copy', { size: 16 }), h('span', { class: 'btn__label' }, 'Copiar')); }, 1500);
     },
   });
+  // no Portal o cliente não ensina o cérebro da fábrica (o servidor também não registra): só Copiar
+  if (ctx?.cliente || m?.modulo === 'portal') return h('div', { class: 'cv-acoes' }, copiar);
   const dica = !S.dicaUsada && S.respostas <= 1;
   const ensinarBtn = button('Ensinar algo sobre isso', {
     variant: 'ghost', size: 'sm', icone: 'lightbulb', class: ['cv-acao', dica && 'has-dica'].filter(Boolean).join(' '),
