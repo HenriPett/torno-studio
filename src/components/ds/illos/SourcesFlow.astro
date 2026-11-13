@@ -340,10 +340,15 @@ const { inTitle, inputs, core, coreNote, outTitle, outputs, id = 'sf', tone = 's
     }
   }
 
+  /* Texto entra por máscara, sem opacidade (contraste final desde o 1º quadro). */
   @keyframes sf-in {
     from {
-      opacity: 0;
+      clip-path: inset(0 100% 0 0 round var(--radius-full));
       transform: translateY(8px);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0 round var(--radius-full));
     }
   }
 

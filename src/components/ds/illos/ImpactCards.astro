@@ -141,6 +141,13 @@ const trend = (value: string) => (/^[−-]/.test(value.trim()) ? 'down' : /^\+/.
     font-variant-numeric: tabular-nums;
   }
 
+  /* 4 por linha: número um pouco menor, para "5 mil h/mês" caber em uma linha. */
+  @media (min-width: 64em) {
+    .ic--4 .ic__value {
+      font-size: var(--text-title-lg);
+    }
+  }
+
   .ic__trend {
     display: grid;
     place-items: center;

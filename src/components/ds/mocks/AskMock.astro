@@ -491,13 +491,18 @@ const description = threads[0]!.description;
 
   /* ---------- Sequência: digitando → enviada → pensando → resposta → fontes ---------- */
 
+  /* Texto entra por máscara (clip-path) e não por opacidade: o contraste é o final desde o 1º quadro (axe e
+     Lighthouse medem no meio da sequência, que agora toca na 1ª dobra). Escondido = visibility: hidden. */
   .ask__q,
   .ask__spark,
   .ask__text,
   .ask__sources-title,
+  .ask__sources,
   .ask__source {
     transition:
       opacity 0.45s var(--motion-ease),
+      clip-path 0.6s var(--motion-ease),
+      visibility 0s,
       transform 0.6s var(--motion-ease);
   }
 
@@ -506,14 +511,21 @@ const description = threads[0]!.description;
     transition: none;
   }
 
+  /* Durante a sequência a máscara existe sempre (aberta = inset(-1rem)), para interpolar. */
+  .ask__thread[data-state] :is(.ask__q, .ask__text, .ask__sources-title, .ask__sources, .ask__source) {
+    clip-path: inset(-1rem);
+  }
+
   .ask__thread[data-state] .ask__a-body > *,
   .ask__thread[data-state] .ask__source {
-    opacity: 0;
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
     transform: translateY(0.5rem);
   }
 
   .ask__thread[data-state="typing"] .ask__q {
-    opacity: 0;
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
     transform: translateY(1rem) scale(0.97);
     transform-origin: 100% 100%;
   }
@@ -529,7 +541,8 @@ const description = threads[0]!.description;
   }
 
   .ask__thread:is([data-state="answer"], [data-state="sources"]) .ask__a-body > .ask__text {
-    opacity: 1;
+    visibility: visible;
+    clip-path: inset(-1rem);
     transform: none;
   }
 
@@ -539,7 +552,8 @@ const description = threads[0]!.description;
 
   .ask__thread[data-state="sources"] .ask__a-body > :is(.ask__sources-title, .ask__sources),
   .ask__thread[data-state="sources"] .ask__sources > .ask__source {
-    opacity: 1;
+    visibility: visible;
+    clip-path: inset(-1rem);
     transform: none;
   }
 
@@ -556,7 +570,6 @@ const description = threads[0]!.description;
   @keyframes ask-cite {
     from {
       transform: scale(0.4);
-      opacity: 0;
     }
   }
 

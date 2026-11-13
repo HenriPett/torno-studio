@@ -274,10 +274,15 @@ const { items, labels = { before: 'Hoje', after: 'Com a Torno', measure: 'Medimo
     }
   }
 
+  /* Texto entra por máscara, sem opacidade (contraste final desde o 1º quadro). */
   @keyframes hf-in {
     from {
-      opacity: 0;
+      clip-path: inset(0 100% 0 0 round var(--radius-md));
       transform: translateX(-12px);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0 round var(--radius-md));
     }
   }
 

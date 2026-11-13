@@ -148,28 +148,28 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
           <div class="media-split home-adoption">
             <div class="home-adoption__text">
               <SectionHeader id={`${ui.adoptionId}-title`} eyebrow={adoption.eyebrow} title={adoption.title} lead={adoption.lead} size="md" accent />
-              {otherFacts.length > 0 && (
-                <ul class="home-facts" role="list" data-reveal-stagger>
-                  {otherFacts.map((fact) => (
-                    <li>
-                      <p class="home-facts__value tnum">{fact.value}</p>
-                      <p class="home-facts__label">{fact.label}</p>
-                      <p class="caption home-facts__source">
-                        {sourceWord}:{' '}
-                        <a class="link" href={fact.source.href} target="_blank" rel="noopener">
-                          {fact.source.label}
-                        </a>
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
             <div class="home-adoption__visual">
               {adoption.series.length > 1 && <AdoptionBars locale={locale} series={adoption.series} source={seriesSource} />}
               {dots && <FactoryDots locale={locale} ai={dots.ai.value} aiLabel={dots.ai.label} prod={dots.prod.value} prodLabel={dots.prod.label} source={dots.prod.source} />}
             </div>
           </div>
+          {otherFacts.length > 0 && (
+            <ul class="grid grid--2 home-facts" role="list" data-reveal-stagger>
+              {otherFacts.map((fact) => (
+                <li>
+                  <p class="home-facts__value tnum">{fact.value}</p>
+                  <p class="home-facts__label">{fact.label}</p>
+                  <p class="caption home-facts__source">
+                    {sourceWord}:{' '}
+                    <a class="link" href={fact.source.href} target="_blank" rel="noopener">
+                      {fact.source.label}
+                    </a>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
           {adoption.note && <p class="caption home-adoption__note">{adoption.note}</p>}
         </Section>
       )
@@ -432,9 +432,8 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
   }
 
   .home-facts {
-    display: grid;
-    gap: var(--space-5);
-    margin-block-start: var(--space-7);
+    --grid-gap: var(--space-5) var(--space-7);
+    margin-block-start: var(--space-8);
     padding: 0;
     list-style: none;
   }

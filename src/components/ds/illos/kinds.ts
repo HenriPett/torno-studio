@@ -35,10 +35,10 @@ export function stepKind(title: string, index: number): StepKind {
   return STEP.find(([, re]) => re.test(title))?.[0] ?? FALLBACK[index % FALLBACK.length]!;
 }
 
-/** "~4 em 10" → 4; "41,9%" → 4 (arredonda para "em 10"); sem número → null. */
+/** "~4 em 10" → 4; "1 em 5" → 2; "41,9%" → 4 (arredonda para "em 10"); sem número → null. */
 export function outOfTen(value: string): number | null {
-  const m = value.match(/(\d+(?:[.,]\d+)?)\s*(?:em|in|de|of)\s*10\b/i);
-  if (m) return Math.round(parseFloat(m[1]!.replace(',', '.')));
+  const m = value.match(/(\d+(?:[.,]\d+)?)\s*(?:em|in|de|of)\s*(\d+)\b/i);
+  if (m && Number(m[2]) > 0) return Math.round((parseFloat(m[1]!.replace(',', '.')) / Number(m[2])) * 10);
   const p = value.match(/(\d+(?:[.,]\d+)?)\s*%/);
   return p ? Math.round(parseFloat(p[1]!.replace(',', '.')) / 10) : null;
 }
