@@ -2030,6 +2030,32 @@
           "sha256": "71055e01ae2404e6b0304601c8938004da5192f50716c7b47157c8dae4e10450"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261113-assistente-ia-documentos",
+      "intentId": "buyer-internal-documents-ai-assistant-rag-evaluation-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/assistente-ia-documentos-internos-testar-respostas/",
+      "contentRevision": "4182729c32fb08e9363882de5a7d364881711be153264b98e72c867cb1400d67",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-13T11:41:30Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-13T11:35:33Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-13-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator) NO-GO às 2026-11-13T11:35:33Z por dois pontos — classificação dos problemas atribuída ao NIST AI 600-1, que só define confabulation, e campos de aprovação preenchidos antes da revisão — corrigidos (texto pelo autor; manifesto pelo integrador), com sugestões aplicadas (superlativos suavizados, rev. C fora de resposta operacional, meta de fidelidade 30/30, nota da figura 2, referência ISO 62085, currículo como envenenamento de dados no OWASP, repetições cortadas, 17 critérios); correções conferidas pelo integrador; diff final sujeito a revisão final independente. Fontes abertas em 13/11/2026: arXiv 2005.11401 (Lewis et al., RAG); NIST AI 600-1 (Generative AI Profile, 26/07/2024) e notícia do lançamento do AI RMF 1.0 (26/01/2023); OWASP Top 10 for LLM Applications 2025 — lista, LLM01:2025 Prompt Injection e LLM08:2025 Vector and Embedding Weaknesses; Anthropic, documentação de Citations; Microsoft Learn, avaliadores de RAG da Microsoft Foundry (02/06/2026); ISO, página da ISO 9001:2015 e \"ISO 9001 explained\" (texto da cláusula de informação documentada não disponível na fonte pública); Lei 13.709/2018 no texto da publicação original no Senado. Não abriram: página principal do AI RMF no nist.gov (ferramenta recusou o endereço); texto da ISO 9001 (não público). Sem revisão pessoal atribuída a Henrique; não é parecer jurídico.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; sem revisão pessoal atribuída a Henrique; não recomenda modelo, ferramenta nem fornecedor; não é parecer jurídico."
+      },
+      "assets": [
+        {
+          "path": "torno-assistente-arquivo-vigente.svg",
+          "sha256": "39301d0ef9aaaf4bcd02c72ac8cf0b67bd2ea1810d49cec906283678483e7acc"
+        },
+        {
+          "path": "torno-assistente-boletim-prova.svg",
+          "sha256": "cd4d37aba5b66d0be5d00b45872df202e1921df0a42ac0298d1c0f4d920de8b5"
+        }
+      ]
     }
   ]
 }
