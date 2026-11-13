@@ -1,0 +1,3511 @@
+{
+  "id": "eletroeletronicos",
+  "setor": "Material elétrico e eletroeletrônicos",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Correntia Motores e Painéis S.A.",
+    "cidade": "Guaramirim",
+    "uf": "SC",
+    "funcionarios": 1850,
+    "descricao": "Fabrica motores elétricos de baixa potência, quadros de comando e inversores de frequência com rastreio por número de série, para fabricantes de máquinas e distribuidores."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "produto",
+    "produtos": "produtos",
+    "cliente": "cliente",
+    "clientes": "clientes",
+    "representante": "representante",
+    "representantes": "representantes",
+    "maquina": "equipamento",
+    "maquinas": "equipamentos",
+    "linha": "linha",
+    "linhas": "linhas",
+    "unidade": "unidades",
+    "lote": "lote de série"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP e montagem"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade, ensaios e garantia"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção industrial"
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial, distribuidores e assistência técnica"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing técnico e catálogo"
+    },
+    {
+      "id": "operadores",
+      "nome": "Bobinagem, SMT e chão de fábrica"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria industrial"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Planta Guaramirim (motores)",
+      "cidade": "Guaramirim"
+    },
+    {
+      "id": "P2",
+      "nome": "Planta Schroeder (painéis e eletrônica)",
+      "cidade": "Schroeder"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-BOB",
+      "nome": "Bobinagem e impregnação",
+      "planta": "P1",
+      "tipo": "bobinagem"
+    },
+    {
+      "id": "L-MOT",
+      "nome": "Montagem de motores",
+      "planta": "P1",
+      "tipo": "montagem"
+    },
+    {
+      "id": "L-SMT",
+      "nome": "SMT de placas eletrônicas",
+      "planta": "P2",
+      "tipo": "eletrônica"
+    },
+    {
+      "id": "L-PAI",
+      "nome": "Montagem de painéis e quadros",
+      "planta": "P2",
+      "tipo": "montagem"
+    },
+    {
+      "id": "L-ENS",
+      "nome": "Ensaio elétrico e teste final",
+      "planta": "P1",
+      "tipo": "ensaio"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "BOB-01",
+      "nome": "Bobinadeira automática 1",
+      "linha": "L-BOB",
+      "tipo": "bobinadeira",
+      "fabricante": "Fabricante A",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 38420,
+      "mtbf_h": 520,
+      "proxima_preventiva": "2026-12-02",
+      "manual": "DOC-MAN-BOB"
+    },
+    {
+      "id": "BOB-02",
+      "nome": "Bobinadeira automática 2",
+      "linha": "L-BOB",
+      "tipo": "bobinadeira",
+      "fabricante": "Fabricante A",
+      "ano": 2015,
+      "status": "alerta",
+      "horimetro": 47960,
+      "mtbf_h": 290,
+      "proxima_preventiva": "2026-11-25",
+      "manual": "DOC-MAN-BOB"
+    },
+    {
+      "id": "BOB-03",
+      "nome": "Inseridora de bobinas no estator",
+      "linha": "L-BOB",
+      "tipo": "inseridora",
+      "fabricante": "Fabricante A",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 26310,
+      "mtbf_h": 610,
+      "proxima_preventiva": "2026-12-09",
+      "manual": "DOC-MAN-BOB"
+    },
+    {
+      "id": "IMP-01",
+      "nome": "Estufa de impregnação de verniz",
+      "linha": "L-BOB",
+      "tipo": "estufa",
+      "fabricante": "Fabricante E",
+      "ano": 2012,
+      "status": "operando",
+      "horimetro": 71200,
+      "mtbf_h": 880,
+      "proxima_preventiva": "2026-11-28",
+      "manual": "DOC-MAN-BOB"
+    },
+    {
+      "id": "MOT-01",
+      "nome": "Prensa de encaixe de rolamentos",
+      "linha": "L-MOT",
+      "tipo": "prensa",
+      "fabricante": "Fabricante F",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 29870,
+      "mtbf_h": 740,
+      "proxima_preventiva": "2026-12-05",
+      "manual": "DOC-MAN-MOT"
+    },
+    {
+      "id": "MOT-02",
+      "nome": "Balanceadora de rotores",
+      "linha": "L-MOT",
+      "tipo": "balanceadora",
+      "fabricante": "Fabricante F",
+      "ano": 2016,
+      "status": "manutencao",
+      "horimetro": 34150,
+      "mtbf_h": 690,
+      "proxima_preventiva": "2026-11-13",
+      "manual": "DOC-MAN-MOT"
+    },
+    {
+      "id": "SMT-01",
+      "nome": "Impressora de pasta de solda",
+      "linha": "L-SMT",
+      "tipo": "impressora de pasta",
+      "fabricante": "Fabricante B",
+      "ano": 2020,
+      "status": "operando",
+      "horimetro": 21480,
+      "mtbf_h": 560,
+      "proxima_preventiva": "2026-11-27",
+      "manual": "DOC-MAN-SMT"
+    },
+    {
+      "id": "SMT-02",
+      "nome": "Pick-and-place",
+      "linha": "L-SMT",
+      "tipo": "montadora de SMD",
+      "fabricante": "Fabricante B",
+      "ano": 2020,
+      "status": "operando",
+      "horimetro": 21390,
+      "mtbf_h": 430,
+      "proxima_preventiva": "2026-11-30",
+      "manual": "DOC-MAN-SMT"
+    },
+    {
+      "id": "SMT-03",
+      "nome": "Forno de refusão (8 zonas)",
+      "linha": "L-SMT",
+      "tipo": "forno de refusão",
+      "fabricante": "Fabricante B",
+      "ano": 2014,
+      "status": "alerta",
+      "horimetro": 52700,
+      "mtbf_h": 470,
+      "proxima_preventiva": "2026-11-21",
+      "manual": "DOC-MAN-SMT"
+    },
+    {
+      "id": "SMT-04",
+      "nome": "Inspeção óptica automática (AOI)",
+      "linha": "L-SMT",
+      "tipo": "AOI",
+      "fabricante": "Fabricante G",
+      "ano": 2021,
+      "status": "operando",
+      "horimetro": 17840,
+      "mtbf_h": 950,
+      "proxima_preventiva": "2026-12-15",
+      "manual": "DOC-MAN-SMT"
+    },
+    {
+      "id": "PAI-01",
+      "nome": "Puncionadeira CNC de chapas",
+      "linha": "L-PAI",
+      "tipo": "puncionadeira",
+      "fabricante": "Fabricante C",
+      "ano": 2011,
+      "status": "parada",
+      "horimetro": 61930,
+      "mtbf_h": 340,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-PAI"
+    },
+    {
+      "id": "ENS-01",
+      "nome": "Bancada de ensaio de motores (isolação, tensão aplicada e surto)",
+      "linha": "L-ENS",
+      "tipo": "bancada de ensaio",
+      "fabricante": "Fabricante D",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 24600,
+      "mtbf_h": 1200,
+      "proxima_preventiva": "2026-12-10",
+      "manual": "DOC-MAN-ENS"
+    },
+    {
+      "id": "ENS-02",
+      "nome": "Testador funcional de inversores (teste final)",
+      "linha": "L-ENS",
+      "tipo": "testador funcional",
+      "fabricante": "Fabricante D",
+      "ano": 2021,
+      "status": "operando",
+      "horimetro": 16950,
+      "mtbf_h": 1050,
+      "proxima_preventiva": "2026-11-18",
+      "manual": "DOC-MAN-ENS"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "CM-M071-4P",
+      "nome": "Motor trifásico IE3 0,5 cv 4 polos carcaça 71",
+      "familia": "Motores trifásicos",
+      "unidade": "unidades",
+      "preco": 689,
+      "prazo_dias": 10,
+      "estoque": 640,
+      "estoque_minimo": 300,
+      "descricao_comercial": "Motor trifásico de alto rendimento para ventiladores, exaustores e transportadores leves. Carcaça em alumínio, proteção IP55 e rolamentos blindados.",
+      "ficha": {
+        "atributos": {
+          "Potência": "0,5 cv (0,37 kW)",
+          "Polos": "4",
+          "Tensão": "220/380 V",
+          "Rendimento": "IE3",
+          "Proteção": "IP55"
+        },
+        "roteiro": [
+          "Estampagem de chapa (fornecedor)",
+          "Bobinagem",
+          "Inserção e impregnação",
+          "Montagem",
+          "Ensaio elétrico",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Resistência de isolamento a 500 Vcc",
+            "nominal": "≥ 100",
+            "tolerancia": "mínimo",
+            "unidade": "MΩ"
+          },
+          {
+            "caracteristica": "Corrente nominal a 380 V",
+            "nominal": "0,98",
+            "tolerancia": "±5%",
+            "unidade": "A"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CM-M080-2P",
+      "nome": "Motor trifásico IE3 1 cv 2 polos carcaça 80",
+      "familia": "Motores trifásicos",
+      "unidade": "unidades",
+      "preco": 845,
+      "prazo_dias": 10,
+      "estoque": 410,
+      "estoque_minimo": 250,
+      "descricao_comercial": "Motor de 2 polos para bombas centrífugas e compressores pequenos. Nível de rendimento IE3, IP55 e caixa de ligação giratória.",
+      "ficha": {
+        "atributos": {
+          "Potência": "1 cv (0,75 kW)",
+          "Polos": "2",
+          "Tensão": "220/380 V",
+          "Rendimento nominal certificado": "82,8%",
+          "Proteção": "IP55"
+        },
+        "roteiro": [
+          "Bobinagem",
+          "Inserção e impregnação",
+          "Montagem",
+          "Balanceamento",
+          "Ensaio elétrico",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Rendimento a 100% da carga",
+            "nominal": "82,8",
+            "tolerancia": "conforme certificado",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Desbalanceamento residual do rotor",
+            "nominal": "≤ 1,5",
+            "tolerancia": "máximo",
+            "unidade": "g·mm/kg"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CM-M090-4P",
+      "nome": "Motor trifásico IE3 2 cv 4 polos carcaça 90S",
+      "familia": "Motores trifásicos",
+      "unidade": "unidades",
+      "preco": 1290,
+      "prazo_dias": 15,
+      "estoque": 186,
+      "estoque_minimo": 150,
+      "descricao_comercial": "Motor de uso geral para secadores, misturadores e transportadores. Alto rendimento, IP55 e sensor térmico opcional no enrolamento.",
+      "ficha": {
+        "atributos": {
+          "Potência": "2 cv (1,5 kW)",
+          "Polos": "4",
+          "Tensão": "220/380 V",
+          "Rendimento": "IE3",
+          "Classe de isolação": "F"
+        },
+        "roteiro": [
+          "Bobinagem",
+          "Inserção e impregnação",
+          "Montagem",
+          "Balanceamento",
+          "Ensaio elétrico",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Desbalanceamento residual do rotor",
+            "nominal": "≤ 1,5",
+            "tolerancia": "máximo",
+            "unidade": "g·mm/kg"
+          },
+          {
+            "caracteristica": "Corrente de fuga no ensaio de tensão aplicada",
+            "nominal": "≤ 5",
+            "tolerancia": "máximo",
+            "unidade": "mA"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CM-M100-4P",
+      "nome": "Motor trifásico IE3 3 cv 4 polos carcaça 100L",
+      "familia": "Motores trifásicos",
+      "unidade": "unidades",
+      "preco": 1780,
+      "prazo_dias": 15,
+      "estoque": 38,
+      "estoque_minimo": 120,
+      "descricao_comercial": "Motor de 3 cv para pivôs de irrigação, bombas e ventiladores industriais. Rendimento IE3, IP55 e pintura para ambiente agrícola.",
+      "ficha": {
+        "atributos": {
+          "Potência": "3 cv (2,2 kW)",
+          "Polos": "4",
+          "Tensão": "220/380/440 V",
+          "Rendimento": "IE3",
+          "Pintura": "epóxi para ambiente agrícola"
+        },
+        "roteiro": [
+          "Bobinagem",
+          "Inserção e impregnação",
+          "Montagem",
+          "Balanceamento",
+          "Ensaio elétrico",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diferença de área no ensaio de surto (EAR)",
+            "nominal": "≤ 10",
+            "tolerancia": "máximo",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Resistência de isolamento a 500 Vcc",
+            "nominal": "≥ 100",
+            "tolerancia": "mínimo",
+            "unidade": "MΩ"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CM-MM063",
+      "nome": "Motor monofásico 0,33 cv carcaça 63 para bombas",
+      "familia": "Motores monofásicos",
+      "unidade": "unidades",
+      "preco": 412,
+      "prazo_dias": 10,
+      "estoque": 1320,
+      "estoque_minimo": 800,
+      "descricao_comercial": "Motor monofásico com capacitor de partida, feito para bombas d’água residenciais e periféricas. Eixo em aço inox e vedação reforçada.",
+      "ficha": {
+        "atributos": {
+          "Potência": "0,33 cv (0,25 kW)",
+          "Tensão": "127/220 V",
+          "Eixo": "aço inox",
+          "Proteção": "IP44"
+        },
+        "roteiro": [
+          "Bobinagem",
+          "Inserção e impregnação",
+          "Montagem",
+          "Ensaio elétrico",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Corrente de fuga no ensaio de tensão aplicada",
+            "nominal": "≤ 5",
+            "tolerancia": "máximo",
+            "unidade": "mA"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CM-MM071C",
+      "nome": "Motor monofásico 0,75 cv capacitor permanente carcaça 71",
+      "familia": "Motores monofásicos",
+      "unidade": "unidades",
+      "preco": 538,
+      "prazo_dias": 12,
+      "estoque": 470,
+      "estoque_minimo": 400,
+      "descricao_comercial": "Motor monofásico silencioso para compressores de pistão e lavadoras industriais. Capacitor permanente e rolamentos com folga C3.",
+      "ficha": {
+        "atributos": {
+          "Potência": "0,75 cv (0,55 kW)",
+          "Tensão": "220 V",
+          "Capacitor": "20 µF permanente",
+          "Rolamentos": "6202 ZZ C3"
+        },
+        "roteiro": [
+          "Bobinagem",
+          "Inserção e impregnação",
+          "Montagem (encaixe de rolamento)",
+          "Ensaio elétrico",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diferença de área no ensaio de surto (EAR)",
+            "nominal": "≤ 10",
+            "tolerancia": "máximo",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Ruído a 1 m em vazio",
+            "nominal": "≤ 58",
+            "tolerancia": "máximo",
+            "unidade": "dB(A)"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CP-QDC-12",
+      "nome": "Quadro de comando para bomba 12 cv com soft-starter",
+      "familia": "Painéis e quadros",
+      "unidade": "unidades",
+      "preco": 4890,
+      "prazo_dias": 25,
+      "estoque": 14,
+      "estoque_minimo": 10,
+      "descricao_comercial": "Quadro de comando pronto para instalação em estações de bombeamento, com soft-starter, relé de falta de fase e chave de nível. Sai ensaiado de fábrica com relatório por número de série.",
+      "ficha": {
+        "atributos": {
+          "Potência máxima": "12 cv em 380 V",
+          "Grau de proteção": "IP54",
+          "Partida": "soft-starter",
+          "Invólucro": "aço carbono pintado"
+        },
+        "roteiro": [
+          "Puncionamento de chapa",
+          "Dobra e pintura",
+          "Montagem de componentes",
+          "Fiação",
+          "Ensaio de tensão aplicada",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Distância de isolação no barramento",
+            "nominal": "≥ 8",
+            "tolerancia": "mínimo",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Ensaio de tensão aplicada no circuito de força",
+            "nominal": "2.500 V CA por 1 s",
+            "tolerancia": "sem ruptura",
+            "unidade": ""
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CP-QDL-24",
+      "nome": "Quadro de distribuição de sobrepor 24 circuitos",
+      "familia": "Painéis e quadros",
+      "unidade": "unidades",
+      "preco": 1650,
+      "prazo_dias": 20,
+      "estoque": 52,
+      "estoque_minimo": 30,
+      "descricao_comercial": "Quadro de distribuição com barramento de cobre, porta com fecho e espaço para 24 disjuntores. Indicado para indústrias, galpões e prédios comerciais.",
+      "ficha": {
+        "atributos": {
+          "Circuitos": "24",
+          "Corrente do barramento": "100 A",
+          "Grau de proteção": "IP40"
+        },
+        "roteiro": [
+          "Puncionamento de chapa",
+          "Dobra e pintura",
+          "Montagem do barramento",
+          "Inspeção final",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura da chapa",
+            "nominal": "1,5",
+            "tolerancia": "±0,1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CP-CCM-04",
+      "nome": "Centro de controle de motores com 4 gavetas extraíveis",
+      "familia": "Painéis e quadros",
+      "unidade": "unidades",
+      "preco": 38500,
+      "prazo_dias": 60,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Centro de controle de motores sob projeto, com gavetas extraíveis e intertravamento mecânico. Projeto elétrico e ensaios de rotina inclusos.",
+      "ficha": {
+        "atributos": {
+          "Gavetas": "4 extraíveis",
+          "Tensão nominal": "440 V",
+          "Corrente do barramento": "630 A",
+          "Fornecimento": "sob encomenda"
+        },
+        "roteiro": [
+          "Projeto elétrico",
+          "Puncionamento de chapa",
+          "Montagem estrutural",
+          "Montagem de gavetas",
+          "Ensaios de rotina",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Resistência de isolamento do barramento",
+            "nominal": "≥ 1",
+            "tolerancia": "mínimo",
+            "unidade": "MΩ"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CE-INV-075",
+      "nome": "Inversor de frequência 0,75 kW entrada monofásica 220 V",
+      "familia": "Inversores e eletrônica",
+      "unidade": "unidades",
+      "preco": 1180,
+      "prazo_dias": 12,
+      "estoque": 140,
+      "estoque_minimo": 200,
+      "descricao_comercial": "Inversor compacto para bombas, ventiladores e esteiras de até 1 cv. Entrada monofásica 220 V, controle vetorial simples e parametrização pelo teclado frontal.",
+      "ficha": {
+        "atributos": {
+          "Potência": "0,75 kW",
+          "Entrada": "220 V monofásica",
+          "Saída": "trifásica 0-220 V",
+          "Corrente nominal": "4,2 A",
+          "Firmware (rev. F)": "3.8.2"
+        },
+        "roteiro": [
+          "SMT da placa de potência",
+          "SMT da placa de controle",
+          "Inspeção AOI",
+          "Montagem",
+          "Gravação de firmware",
+          "Teste final por número de série",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Tensão do regulador de 15 V",
+            "nominal": "15,0",
+            "tolerancia": "±0,5",
+            "unidade": "V"
+          },
+          {
+            "caracteristica": "Corrente de saída em carga nominal",
+            "nominal": "4,2",
+            "tolerancia": "±3%",
+            "unidade": "A"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CE-INV-220",
+      "nome": "Inversor de frequência 2,2 kW trifásico 380 V",
+      "familia": "Inversores e eletrônica",
+      "unidade": "unidades",
+      "preco": 2350,
+      "prazo_dias": 15,
+      "estoque": 118,
+      "estoque_minimo": 80,
+      "descricao_comercial": "Inversor trifásico para máquinas e bombas de até 3 cv, com entrada para sensor PTC do motor e comunicação serial. Mesmo firmware da linha 0,75 kW.",
+      "ficha": {
+        "atributos": {
+          "Potência": "2,2 kW",
+          "Entrada": "380 V trifásica",
+          "Comunicação": "serial RS-485",
+          "Firmware (rev. F)": "3.8.2"
+        },
+        "roteiro": [
+          "SMT da placa de potência",
+          "SMT da placa de controle",
+          "Inspeção AOI",
+          "Montagem",
+          "Gravação de firmware",
+          "Teste final por número de série",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Tensão do regulador de 15 V",
+            "nominal": "15,0",
+            "tolerancia": "±0,5",
+            "unidade": "V"
+          },
+          {
+            "caracteristica": "Limiar de desarme por subtensão",
+            "nominal": "320",
+            "tolerancia": "±5",
+            "unidade": "V CC"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CE-PLC-SP",
+      "nome": "Placa de controle de soft-starter (para fabricantes)",
+      "familia": "Inversores e eletrônica",
+      "unidade": "unidades",
+      "preco": 186,
+      "prazo_dias": 18,
+      "estoque": 2400,
+      "estoque_minimo": 1500,
+      "descricao_comercial": "Placa de controle montada e testada para fabricantes de quadros e bombas. Entregue em embalagem antiestática com número de série gravado.",
+      "ficha": {
+        "atributos": {
+          "Alimentação": "24 V CC",
+          "Camadas": "4",
+          "Processo": "SMT sem chumbo"
+        },
+        "roteiro": [
+          "Impressão de pasta",
+          "Pick-and-place",
+          "Refusão",
+          "Inspeção AOI",
+          "Teste funcional",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Pico de temperatura na placa (refusão)",
+            "nominal": "245",
+            "tolerancia": "±5",
+            "unidade": "°C"
+          },
+          {
+            "caracteristica": "Tempo acima de 217 °C",
+            "nominal": "60 a 90",
+            "tolerancia": "faixa",
+            "unidade": "s"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CE-REL-TM",
+      "nome": "Relé eletrônico de sobrecarga 0,4 a 16 A",
+      "familia": "Inversores e eletrônica",
+      "unidade": "unidades",
+      "preco": 214,
+      "prazo_dias": 10,
+      "estoque": 890,
+      "estoque_minimo": 500,
+      "descricao_comercial": "Relé de proteção de motor com ajuste de corrente e detecção de falta de fase. Montagem direta no contator e sinalização por LED.",
+      "ficha": {
+        "atributos": {
+          "Faixa de ajuste": "0,4 a 16 A",
+          "Classe de disparo": "10",
+          "Montagem": "direta no contator"
+        },
+        "roteiro": [
+          "SMT",
+          "Montagem",
+          "Calibração",
+          "Teste final",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Tempo de disparo a 7,2 × In (classe 10)",
+            "nominal": "4 a 10",
+            "tolerancia": "faixa",
+            "unidade": "s"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-60412",
+      "sku": "CM-M100-4P",
+      "quantidade": 480,
+      "linha": "L-BOB",
+      "inicio": "2026-10-30",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 55,
+      "pedido": "PV-31877",
+      "motivo_atraso": "Bobinadeira 2 (BOB-02) com vibração no tensionador e rompimento de fio desde 06/11; os estatores de 3 cv estão sendo bobinados só na BOB-01.",
+      "historico": [
+        {
+          "data": "2026-10-30",
+          "evento": "OP liberada: 480 motores (120 do PV-31877 e 360 para reposição de estoque)"
+        },
+        {
+          "data": "2026-11-06",
+          "evento": "BOB-02 com rompimento de fio; OS-5512 aberta"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Prazo perdido com 264 estatores bobinados; nova previsão 19/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-60398",
+      "sku": "CE-INV-075",
+      "quantidade": 600,
+      "linha": "L-SMT",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-10",
+      "status": "atrasada",
+      "progresso": 70,
+      "pedido": "PV-31852",
+      "motivo_atraso": "12 inversores reprovados no teste final (NC-2026-201) e falta do capacitor C-4471 até a liberação da alternativa C-4471A pela ECN-118 em 08/11.",
+      "historico": [
+        {
+          "data": "2026-10-27",
+          "evento": "OP liberada com 600 unidades"
+        },
+        {
+          "data": "2026-11-03",
+          "evento": "Capacitor C-4471 em falta; 180 placas de potência paradas"
+        },
+        {
+          "data": "2026-11-08",
+          "evento": "ECN-118 aprovou o C-4471A; SMT retomado"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "12 reprovações no teste final por tensão do regulador de 15 V"
+        }
+      ]
+    },
+    {
+      "id": "OP-60377",
+      "sku": "CP-QDC-12",
+      "quantidade": 40,
+      "linha": "L-PAI",
+      "inicio": "2026-10-28",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 45,
+      "pedido": "PV-31840",
+      "motivo_atraso": "Puncionadeira CNC (PAI-01) parada desde 11/11 por vazamento na unidade hidráulica (OS-5506); portas e placas de montagem em espera.",
+      "historico": [
+        {
+          "data": "2026-10-28",
+          "evento": "OP liberada: 40 quadros para a Bombas Serra Azul"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "PAI-01 parada; 18 quadros com chapas cortadas, 22 aguardando"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Montagem seguiu com 6 quadros no 1º turno"
+        }
+      ]
+    },
+    {
+      "id": "OP-60420",
+      "sku": "CM-MM071C",
+      "quantidade": 1200,
+      "linha": "L-BOB",
+      "inicio": "2026-11-03",
+      "prazo": "2026-11-13",
+      "status": "atrasada",
+      "progresso": 62,
+      "pedido": "PV-31890",
+      "motivo_atraso": "Lote de fio esmaltado F-8812 segregado após falhas no ensaio de surto (NC-2026-198); bobinagem refeita com o lote F-8840.",
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "OP liberada com 1.200 motores"
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "38 estatores reprovados no surto; lote F-8812 bloqueado"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Troca para o lote F-8840 no 2º turno; nova previsão 17/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-60431",
+      "sku": "CE-PLC-SP",
+      "quantidade": 3000,
+      "linha": "L-SMT",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-19",
+      "status": "em_producao",
+      "progresso": 40,
+      "pedido": "PV-31901",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Esteira do forno reduzida 10% por 50 min (zona 5); 1.200 placas prontas"
+        }
+      ]
+    },
+    {
+      "id": "OP-60402",
+      "sku": "CM-MM063",
+      "quantidade": 2500,
+      "linha": "L-MOT",
+      "inicio": "2026-10-31",
+      "prazo": "2026-11-12",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-31845",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Concluída e faturada no prazo"
+        }
+      ]
+    },
+    {
+      "id": "OP-60415",
+      "sku": "CM-M071-4P",
+      "quantidade": 800,
+      "linha": "L-MOT",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-17",
+      "status": "em_producao",
+      "progresso": 68,
+      "pedido": "PV-31880",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "544 motores montados e ensaiados"
+        }
+      ]
+    },
+    {
+      "id": "OP-60418",
+      "sku": "CM-M080-2P",
+      "quantidade": 400,
+      "linha": "L-MOT",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-18",
+      "status": "em_producao",
+      "progresso": 50,
+      "pedido": "PV-31884",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Placas de identificação reimpressas com rendimento 82,8% (NC-2026-206)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60425",
+      "sku": "CE-INV-220",
+      "quantidade": 150,
+      "linha": "L-SMT",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-21",
+      "status": "em_producao",
+      "progresso": 25,
+      "pedido": "PV-31893",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "OP liberada já com capacitor C-4471A (ECN-118)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60426",
+      "sku": "CP-CCM-04",
+      "quantidade": 2,
+      "linha": "L-PAI",
+      "inicio": "2026-11-04",
+      "prazo": "2026-12-11",
+      "status": "em_producao",
+      "progresso": 30,
+      "pedido": "PV-31870",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "Projeto elétrico aprovado pelo cliente; estrutura em montagem"
+        }
+      ]
+    },
+    {
+      "id": "OP-60433",
+      "sku": "CM-M090-4P",
+      "quantidade": 300,
+      "linha": "L-MOT",
+      "inicio": "2026-11-16",
+      "prazo": "2026-11-27",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-31905",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-60436",
+      "sku": "CP-QDL-24",
+      "quantidade": 60,
+      "linha": "L-PAI",
+      "inicio": "2026-11-17",
+      "prazo": "2026-11-28",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-31908",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Início depende da volta da puncionadeira (OS-5506)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60438",
+      "sku": "CE-REL-TM",
+      "quantidade": 1000,
+      "linha": "L-SMT",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-26",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-60440",
+      "sku": "CM-M100-4P",
+      "quantidade": 360,
+      "linha": "L-BOB",
+      "inicio": "2026-11-19",
+      "prazo": "2026-12-02",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Reposição de estoque: CM-M100-4P abaixo do mínimo (38 de 120)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60429",
+      "sku": "CM-M071-4P",
+      "quantidade": 600,
+      "linha": "L-MOT",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-25",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-60395",
+      "sku": "CM-MM071C",
+      "quantidade": 1500,
+      "linha": "L-MOT",
+      "inicio": "2026-10-20",
+      "prazo": "2026-11-04",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-31830",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "Concluída com dispositivo de encaixe com pino de código (ação do 8D da NC-2026-187)"
+        }
+      ]
+    },
+    {
+      "id": "OP-60405",
+      "sku": "CE-INV-075",
+      "quantidade": 400,
+      "linha": "L-SMT",
+      "inicio": "2026-10-21",
+      "prazo": "2026-11-05",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-31835",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "Concluída; 400 séries com firmware 3.8.2"
+        }
+      ]
+    },
+    {
+      "id": "OP-60409",
+      "sku": "CM-M090-4P",
+      "quantidade": 250,
+      "linha": "L-MOT",
+      "inicio": "2026-10-29",
+      "prazo": "2026-11-10",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Concluída para estoque"
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-BOB",
+      "produzido": 335,
+      "refugo": 11,
+      "paradas_min": 70,
+      "resumo": "335 estatores bobinados, abaixo da média de 420. A BOB-02 rodou com velocidade reduzida após vibração de 6,4 mm/s no tensionador.",
+      "ocorrencias": [
+        "BOB-02: vibração de 6,4 mm/s no tensionador",
+        "BOB-02: 2 rompimentos de fio 0,45 mm (70 min de parada no total)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-BOB",
+      "produzido": 310,
+      "refugo": 14,
+      "paradas_min": 95,
+      "resumo": "310 estatores bobinados. A BOB-02 parou três vezes por rompimento de fio e a troca de lote de fio esmaltado para o F-8840 tomou 40 min.",
+      "ocorrencias": [
+        "BOB-02 parou 3 vezes por rompimento de fio (55 min no total)",
+        "Troca de lote de fio esmaltado para o F-8840: 40 min de setup"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "3º",
+      "linha": "L-SMT",
+      "produzido": 1840,
+      "refugo": 46,
+      "paradas_min": 50,
+      "resumo": "1.840 placas processadas. A zona 5 do forno de refusão oscilou fora da tolerância e a esteira rodou 10% mais lenta por 50 min; a AOI barrou 46 placas com solda fria.",
+      "ocorrencias": [
+        "SMT-03: zona 5 oscilou entre 238 e 254 °C (setpoint 250 °C)",
+        "Esteira reduzida para 0,85 m/min por 50 min",
+        "AOI: 46 placas CE-PLC-SP com solda fria (NC-2026-204)"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "3º",
+      "linha": "L-SMT",
+      "produzido": 2010,
+      "refugo": 22,
+      "paradas_min": 15,
+      "resumo": "2.010 placas processadas dentro do perfil. Parada curta para troca de bico no pick-and-place.",
+      "ocorrencias": [
+        "SMT-02: troca de bico 0603 (15 min)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-PAI",
+      "produzido": 6,
+      "refugo": 0,
+      "paradas_min": 210,
+      "resumo": "Puncionadeira CNC parada o turno inteiro. A montagem seguiu com 6 quadros de comando de chapas já cortadas e a equipe adiantou fiação.",
+      "ocorrencias": [
+        "PAI-01 parada (vazamento hidráulico, OS-5506)",
+        "210 min sem chapa para montagem estrutural"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-ENS",
+      "produzido": 420,
+      "refugo": 9,
+      "paradas_min": 20,
+      "resumo": "420 unidades ensaiadas e 9 reprovadas. As reprovações de inversor seguem ligadas ao lote de reguladores R-2291.",
+      "ocorrencias": [
+        "7 inversores CE-INV-075 com regulador de 15 V acima da faixa",
+        "2 motores CM-MM071C reprovados no surto (lote de fio F-8812)",
+        "Testador ENS-02 reiniciado uma vez (20 min)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-MOT",
+      "produzido": 520,
+      "refugo": 4,
+      "paradas_min": 35,
+      "resumo": "520 motores montados. Os rotores foram balanceados com antecedência por causa da preventiva da balanceadora marcada para 13/11.",
+      "ocorrencias": [
+        "Falta de tampa traseira carcaça 71 por 35 min (abastecimento interno)"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "1º",
+      "linha": "L-MOT",
+      "produzido": 560,
+      "refugo": 3,
+      "paradas_min": 20,
+      "resumo": "560 motores montados, turno estável. Todos os encaixes de rolamento feitos com o dispositivo de pino de código.",
+      "ocorrencias": [
+        "Setup de carcaça 71 para 80 (20 min)"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-201",
+      "data": "2026-11-10",
+      "sku": "CE-INV-075",
+      "linha": "L-ENS",
+      "origem": "interna",
+      "severidade": "alta",
+      "descricao": "12 inversores do lote de série 26B-0412 reprovados no teste final: tensão do regulador de 15 V medida entre 15,6 e 15,9 V (faixa 15,0 ± 0,5 V).",
+      "causa": "Em análise: as 12 séries usam reguladores do lote R-2291 do fornecedor de semicondutores; nenhuma reprovação com outros lotes.",
+      "acao": "Contenção: 100% dos reguladores do lote R-2291 testados em bancada. 9 placas retrabalhadas e aprovadas no reteste, 3 aguardando regulador de outro lote.",
+      "status": "em_analise",
+      "responsavel": "Fernanda Rocha",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-198",
+      "data": "2026-11-09",
+      "sku": "CM-MM071C",
+      "linha": "L-BOB",
+      "origem": "fornecedor",
+      "severidade": "alta",
+      "descricao": "38 estatores reprovados no ensaio de surto (EAR acima de 10%) com fio esmaltado 0,45 mm do lote F-8812.",
+      "causa": "Espessura de esmalte abaixo do especificado em amostras do lote F-8812 (laudo interno); aguardando resposta do fornecedor de fio esmaltado.",
+      "acao": "Lote F-8812 bloqueado e devolvido; bobinagem refeita com o lote F-8840; inspeção de recebimento com ensaio de ruptura dielétrica por bobina.",
+      "status": "aberta",
+      "responsavel": "Rodrigo Hoffmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-204",
+      "data": "2026-11-12",
+      "sku": "CE-PLC-SP",
+      "linha": "L-SMT",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "AOI barrou 46 placas CE-PLC-SP com solda fria em conectores no 3º turno de 12/11.",
+      "causa": "Zona 5 do forno de refusão oscilando entre 238 e 254 °C; suspeita de termopar com folga no conector.",
+      "acao": "Placas retrabalhadas em estação de solda; perfil medido com placa instrumentada a cada 2 h até a OS-5515 ser concluída.",
+      "status": "aberta",
+      "responsavel": "Bruna Carvalho",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-190",
+      "data": "2026-10-21",
+      "sku": "CE-INV-220",
+      "linha": "L-ENS",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Elétrica Bandeirante Atacado relatou 2 inversores CE-INV-220 desarmando por subtensão em rede rural. As séries saíram com firmware 3.7.9 e a revisão F exige 3.8.2.",
+      "causa": "Tabela de versões do testador funcional não atualizada após a revisão F; o bloqueio de versão não atuou entre 2025-11-20 e 2025-12-12.",
+      "acao": "Levantamento por série: 146 inversores CE-INV-220 expedidos com firmware 3.7.9. Atualização em campo pela assistência e tabela do testador ligada ao PLM.",
+      "status": "em_analise",
+      "responsavel": "Fernanda Rocha",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-206",
+      "data": "2026-11-06",
+      "sku": "CM-M080-2P",
+      "linha": "L-MOT",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Placa de identificação do CM-M080-2P informando rendimento de 81,5%, enquanto o certificado vigente registra 82,8%.",
+      "causa": "Arquivo de impressão das placas não atualizado após a renovação do certificado de eficiência.",
+      "acao": "Placas reimpressas para a OP-60418; 410 motores em estoque reetiquetados; arquivo de placa passou a ser gerado a partir da ficha do PLM.",
+      "status": "aberta",
+      "responsavel": "Leandro Wiese",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-187",
+      "data": "2026-10-02",
+      "sku": "CM-MM071C",
+      "linha": "L-MOT",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Compressores Litoral reclamou de ruído de rolamento em 3 motores CM-MM071C após duas semanas de uso, todos do lote de série 26M-0918.",
+      "causa": "Rolamento encaixado com força pela pista externa: dispositivo da prensa MOT-01 de carcaça 80 usado em carcaça 71 após troca de ferramenta, marcando as pistas.",
+      "acao": "Dispositivos com pino de código por carcaça; instrução de montagem e FMEA de processo revisados; sem reincidência em 3.200 motores.",
+      "status": "encerrada",
+      "responsavel": "Rodrigo Hoffmann",
+      "oito_d": {
+        "D1": "Equipe: Rodrigo Hoffmann (qualidade, líder), Cleusa Martins (montagem), Fábio Nunes (manutenção), Tiago Fernandes (assistência técnica) e Leandro Wiese (engenharia de processo).",
+        "D2": "Cliente Compressores Litoral recebeu 620 motores CM-MM071C do lote de série 26M-0918; 3 apresentaram ruído de rolamento (zumbido metálico acima de 58 dB(A)) após cerca de 2 semanas em compressores de pistão.",
+        "D3": "Contenção em 48 h: 410 motores do lote em estoque testados em ruído e 620 no cliente inspecionados por amostragem; 11 com ruído trocados. Embarques do lote suspensos até a inspeção 100%.",
+        "D4": "Causa raiz: em 18/09, após troca de ferramenta, a prensa MOT-01 rodou com o dispositivo de carcaça 80, que apoia na pista externa do rolamento 6202. A força de encaixe passou pelas esferas e marcou as pistas (brinelamento). Não detecção: o ensaio de linha mede ruído só em amostra de 1 a cada 50.",
+        "D5": "Ações corretivas escolhidas: dispositivos com pino de código que só encaixam na carcaça correta; medição de ruído em 100% dos motores CM-MM071C por 60 dias.",
+        "D6": "Implementado em 08/10. Verificação: 3.200 motores montados sem reincidência e nenhuma nova reclamação de campo até 05/11.",
+        "D7": "Prevenção: FMEA de processo da montagem revisado (modo de falha \"dispositivo trocado\"); instrução de montagem atualizada; mesma solução estendida às carcaças 63, 80 e 90.",
+        "D8": "Encerrado em 05/11/2026 com aceite do cliente. Equipe reconhecida na reunião mensal; a sugestão do pino de código veio da montadora Cleusa Martins."
+      }
+    },
+    {
+      "id": "NC-2026-195",
+      "data": "2026-10-16",
+      "sku": "CP-QDC-12",
+      "linha": "L-PAI",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "2 quadros CP-QDC-12 com ruptura no ensaio de tensão aplicada de 2.500 V no circuito de força.",
+      "causa": "Distância de isolação de 6 mm entre barramento e porta, abaixo dos 8 mm da ficha, por suporte montado invertido.",
+      "acao": "Suporte com furação assimétrica (só monta de um jeito) e verificação de distância no checklist de montagem.",
+      "status": "encerrada",
+      "responsavel": "Bruna Carvalho",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-182",
+      "data": "2026-09-24",
+      "sku": "CM-M090-4P",
+      "linha": "L-MOT",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "14 rotores CM-M090-4P com desbalanceamento residual de 2,1 g·mm/kg (limite 1,5).",
+      "causa": "Calibração da balanceadora MOT-02 vencida havia 3 semanas.",
+      "acao": "Rotores rebalanceados; calibração incluída no plano de preventiva com bloqueio no MES.",
+      "status": "encerrada",
+      "responsavel": "Leandro Wiese",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-179",
+      "data": "2026-09-12",
+      "sku": "CM-M071-4P",
+      "linha": "L-BOB",
+      "origem": "fornecedor",
+      "severidade": "baixa",
+      "descricao": "Chapas de aço silício estampadas com rebarba acima de 0,05 mm em 3 caixas do fornecedor de estampados.",
+      "causa": "Desgaste da ferramenta de estampagem no fornecedor.",
+      "acao": "Lote devolvido; fornecedor passou a enviar relatório de altura de rebarba por lote.",
+      "status": "encerrada",
+      "responsavel": "Rodrigo Hoffmann",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-5512",
+      "maquina": "BOB-02",
+      "tipo": "preditiva",
+      "data": "2026-11-06",
+      "status": "aberta",
+      "tecnico": "Fábio Nunes",
+      "duracao_h": 3.5,
+      "descricao": "Vibração de 6,4 mm/s no mancal do tensionador (limite de alerta 4,5 mm/s) e rompimentos de fio. Trocar mola e rolamento do tensionador; intervenção marcada para 14/11, 1º turno.",
+      "pecas": [
+        "Mola do tensionador MT-18",
+        "Rolamento 608 ZZ do tensionador"
+      ],
+      "procedimento": "DOC-PRO-021"
+    },
+    {
+      "id": "OS-5515",
+      "maquina": "SMT-03",
+      "tipo": "corretiva",
+      "data": "2026-11-12",
+      "status": "aberta",
+      "tecnico": "Diego Pacheco",
+      "duracao_h": 2,
+      "descricao": "Zona 5 oscilando entre 238 e 254 °C (tolerância ±5 °C). Verificar termopar tipo K e conector; trocar se houver folga.",
+      "pecas": [
+        "Termopar tipo K da zona 5",
+        "Conector cerâmico"
+      ],
+      "procedimento": "DOC-INS-034"
+    },
+    {
+      "id": "OS-5506",
+      "maquina": "PAI-01",
+      "tipo": "corretiva",
+      "data": "2026-11-11",
+      "status": "em_execucao",
+      "tecnico": "Fábio Nunes",
+      "duracao_h": 16,
+      "descricao": "Vazamento na unidade hidráulica com óleo a 61 °C. Vedações do cilindro principal trocadas parcialmente; kit completo chega em 14/11 e a previsão de volta é o 2º turno de 14/11.",
+      "pecas": [
+        "Kit de vedação do cilindro principal",
+        "Óleo hidráulico 68 (60 L)"
+      ],
+      "procedimento": "DOC-MAN-PAI"
+    },
+    {
+      "id": "OS-5501",
+      "maquina": "MOT-02",
+      "tipo": "preventiva",
+      "data": "2026-11-13",
+      "status": "em_execucao",
+      "tecnico": "Diego Pacheco",
+      "duracao_h": 6,
+      "descricao": "Preventiva semestral da balanceadora com calibração por rotor-padrão.",
+      "pecas": [
+        "Correia de acionamento"
+      ],
+      "procedimento": "DOC-MAN-MOT"
+    },
+    {
+      "id": "OS-5520",
+      "maquina": "ENS-02",
+      "tipo": "preventiva",
+      "data": "2026-11-18",
+      "status": "aberta",
+      "tecnico": "Marcelo Duarte",
+      "duracao_h": 4,
+      "descricao": "Preventiva e verificação metrológica do testador funcional; atualizar tabela de versões de firmware a partir do PLM (ação da NC-2026-190).",
+      "pecas": [],
+      "procedimento": "DOC-MAN-ENS"
+    },
+    {
+      "id": "OS-5498",
+      "maquina": "BOB-01",
+      "tipo": "preventiva",
+      "data": "2026-11-04",
+      "status": "concluida",
+      "tecnico": "Fábio Nunes",
+      "duracao_h": 4,
+      "descricao": "Preventiva trimestral: mola do tensionador trocada, guias de fio limpas, tensão ajustada para 1,8 N.",
+      "pecas": [
+        "Mola do tensionador MT-18"
+      ],
+      "procedimento": "DOC-PRO-021"
+    },
+    {
+      "id": "OS-5495",
+      "maquina": "SMT-02",
+      "tipo": "preventiva",
+      "data": "2026-11-01",
+      "status": "concluida",
+      "tecnico": "Diego Pacheco",
+      "duracao_h": 3,
+      "descricao": "Limpeza e troca de bicos, calibração de visão.",
+      "pecas": [
+        "Bicos 0603 (4 un.)"
+      ],
+      "procedimento": "DOC-MAN-SMT"
+    },
+    {
+      "id": "OS-5490",
+      "maquina": "ENS-01",
+      "tipo": "preventiva",
+      "data": "2026-10-28",
+      "status": "concluida",
+      "tecnico": "Marcelo Duarte",
+      "duracao_h": 5,
+      "descricao": "Calibração anual de megôhmetro, fonte de tensão aplicada e gerador de surto com padrões rastreados.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-ENS"
+    },
+    {
+      "id": "OS-5485",
+      "maquina": "SMT-04",
+      "tipo": "corretiva",
+      "data": "2026-10-22",
+      "status": "concluida",
+      "tecnico": "Diego Pacheco",
+      "duracao_h": 1.5,
+      "descricao": "Iluminação lateral da AOI com falha intermitente; módulo de LED substituído.",
+      "pecas": [
+        "Módulo de LED lateral"
+      ],
+      "procedimento": "DOC-MAN-SMT"
+    },
+    {
+      "id": "OS-5470",
+      "maquina": "IMP-01",
+      "tipo": "preditiva",
+      "data": "2026-10-09",
+      "status": "concluida",
+      "tecnico": "Fábio Nunes",
+      "duracao_h": 2,
+      "descricao": "Termografia das resistências da estufa: 1 resistência com 30 °C abaixo das demais, substituída.",
+      "pecas": [
+        "Resistência tubular 3 kW"
+      ],
+      "procedimento": "DOC-MAN-BOB"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-01",
+      "nome": "Marcos Vieira",
+      "regiao": "SC e PR",
+      "telefone": "(47) 9••••-3318",
+      "meta_mes": 1450000,
+      "realizado_mes": 1012000
+    },
+    {
+      "id": "REP-02",
+      "nome": "Juliana Kraus",
+      "regiao": "RS",
+      "telefone": "(54) 9••••-7702",
+      "meta_mes": 980000,
+      "realizado_mes": 731500
+    },
+    {
+      "id": "REP-03",
+      "nome": "Rafael Monteiro",
+      "regiao": "SP capital e interior",
+      "telefone": "(19) 9••••-4120",
+      "meta_mes": 1600000,
+      "realizado_mes": 1388000
+    },
+    {
+      "id": "REP-04",
+      "nome": "Patrícia Lemos",
+      "regiao": "MG e ES",
+      "telefone": "(31) 9••••-5561",
+      "meta_mes": 820000,
+      "realizado_mes": 498000
+    },
+    {
+      "id": "REP-05",
+      "nome": "André Siqueira",
+      "regiao": "GO, MT e MS",
+      "telefone": "(62) 9••••-9034",
+      "meta_mes": 760000,
+      "realizado_mes": 590400
+    },
+    {
+      "id": "REP-06",
+      "nome": "Cláudio Bernardi",
+      "regiao": "Contas de fabricantes (OEM), nacional",
+      "telefone": "(47) 9••••-2287",
+      "meta_mes": 2100000,
+      "realizado_mes": 1764000
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-3101",
+      "nome": "Bombas Serra Azul Indústria Ltda.",
+      "cidade": "Blumenau",
+      "uf": "SC",
+      "segmento": "fabricante de bombas (OEM)",
+      "representante": "REP-06",
+      "condicao_pagamento": "28/42/56",
+      "limite_credito": 450000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-3102",
+      "nome": "Distribuidora Elétrica Planalto",
+      "cidade": "Curitiba",
+      "uf": "PR",
+      "segmento": "distribuidor de material elétrico",
+      "representante": "REP-01",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 300000,
+      "tabela_preco": "Tabela Distribuidor A",
+      "ultimo_pedido": "2026-10-24"
+    },
+    {
+      "id": "CLI-3103",
+      "nome": "Compressores Litoral Ltda.",
+      "cidade": "Itajaí",
+      "uf": "SC",
+      "segmento": "fabricante de compressores (OEM)",
+      "representante": "REP-06",
+      "condicao_pagamento": "28/56",
+      "limite_credito": 380000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-10-14"
+    },
+    {
+      "id": "CLI-3104",
+      "nome": "Irriga Campo Equipamentos",
+      "cidade": "Passo Fundo",
+      "uf": "RS",
+      "segmento": "fabricante de irrigação (OEM)",
+      "representante": "REP-02",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 220000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-10-27"
+    },
+    {
+      "id": "CLI-3105",
+      "nome": "Integra Automação Industrial",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "segmento": "integrador de automação",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 260000,
+      "tabela_preco": "Tabela Integrador",
+      "ultimo_pedido": "2026-11-07"
+    },
+    {
+      "id": "CLI-3106",
+      "nome": "Elétrica Bandeirante Atacado",
+      "cidade": "Ribeirão Preto",
+      "uf": "SP",
+      "segmento": "distribuidor de material elétrico",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 340000,
+      "tabela_preco": "Tabela Distribuidor A",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-3107",
+      "nome": "Máquinas Lavar Sul Indústria",
+      "cidade": "Caxias do Sul",
+      "uf": "RS",
+      "segmento": "fabricante de lavadoras industriais (OEM)",
+      "representante": "REP-02",
+      "condicao_pagamento": "28/56",
+      "limite_credito": 180000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-11-01"
+    },
+    {
+      "id": "CLI-3108",
+      "nome": "Agro Secadores Vale Verde",
+      "cidade": "Rio Verde",
+      "uf": "GO",
+      "segmento": "fabricante de secadores de grãos (OEM)",
+      "representante": "REP-05",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 200000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-3109",
+      "nome": "Mineração Pedra Alta S.A.",
+      "cidade": "Itabira",
+      "uf": "MG",
+      "segmento": "usuário final (mineração)",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 500000,
+      "tabela_preco": "Tabela Projetos",
+      "ultimo_pedido": "2026-10-15"
+    },
+    {
+      "id": "CLI-3110",
+      "nome": "Ventiladores Mantiqueira Indústria",
+      "cidade": "Pouso Alegre",
+      "uf": "MG",
+      "segmento": "fabricante de ventilação (OEM)",
+      "representante": "REP-04",
+      "condicao_pagamento": "28/42",
+      "limite_credito": 150000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-3111",
+      "nome": "Casa do Eletricista Joinvilense",
+      "cidade": "Joinville",
+      "uf": "SC",
+      "segmento": "revenda de material elétrico",
+      "representante": "REP-01",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 90000,
+      "tabela_preco": "Tabela Distribuidor B",
+      "ultimo_pedido": "2026-11-11"
+    },
+    {
+      "id": "CLI-3112",
+      "nome": "Frigotec Refrigeração Comercial",
+      "cidade": "Chapecó",
+      "uf": "SC",
+      "segmento": "fabricante de refrigeração (OEM)",
+      "representante": "REP-01",
+      "condicao_pagamento": "28/56",
+      "limite_credito": 160000,
+      "tabela_preco": "Tabela OEM",
+      "ultimo_pedido": "2026-11-12"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-31877",
+      "cliente": "CLI-3104",
+      "representante": "REP-02",
+      "data": "2026-10-27",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-19",
+      "ordem": "OP-60412",
+      "itens": [
+        {
+          "sku": "CM-M100-4P",
+          "quantidade": 120,
+          "preco_unit": 1691
+        }
+      ],
+      "observacao": "Entrega original 12/11. Cliente avisado em 11/11 da nova previsão."
+    },
+    {
+      "id": "PV-31852",
+      "cliente": "CLI-3102",
+      "representante": "REP-01",
+      "data": "2026-10-24",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-60398",
+      "itens": [
+        {
+          "sku": "CE-INV-075",
+          "quantidade": 250,
+          "preco_unit": 1121
+        }
+      ],
+      "observacao": "Entrega original 11/11. Atraso por falta de capacitor e reprovações no teste final."
+    },
+    {
+      "id": "PV-31840",
+      "cliente": "CLI-3101",
+      "representante": "REP-06",
+      "data": "2026-10-22",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-21",
+      "ordem": "OP-60377",
+      "itens": [
+        {
+          "sku": "CP-QDC-12",
+          "quantidade": 40,
+          "preco_unit": 4645.5
+        }
+      ],
+      "observacao": "Entrega original 13/11. Depende da volta da puncionadeira."
+    },
+    {
+      "id": "PV-31890",
+      "cliente": "CLI-3107",
+      "representante": "REP-02",
+      "data": "2026-11-01",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-17",
+      "ordem": "OP-60420",
+      "itens": [
+        {
+          "sku": "CM-MM071C",
+          "quantidade": 1200,
+          "preco_unit": 511.1
+        }
+      ],
+      "observacao": "Entrega original 14/11. Lote de fio esmaltado bloqueado."
+    },
+    {
+      "id": "PV-31901",
+      "cliente": "CLI-3101",
+      "representante": "REP-06",
+      "data": "2026-11-06",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-19",
+      "ordem": "OP-60431",
+      "itens": [
+        {
+          "sku": "CE-PLC-SP",
+          "quantidade": 3000,
+          "preco_unit": 176.7
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31845",
+      "cliente": "CLI-3101",
+      "representante": "REP-06",
+      "data": "2026-10-25",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": "OP-60402",
+      "itens": [
+        {
+          "sku": "CM-MM063",
+          "quantidade": 2500,
+          "preco_unit": 391.4
+        }
+      ],
+      "observacao": "Faturado em 12/11."
+    },
+    {
+      "id": "PV-31880",
+      "cliente": "CLI-3110",
+      "representante": "REP-04",
+      "data": "2026-11-03",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-19",
+      "ordem": "OP-60415",
+      "itens": [
+        {
+          "sku": "CM-M071-4P",
+          "quantidade": 800,
+          "preco_unit": 654.55
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31884",
+      "cliente": "CLI-3106",
+      "representante": "REP-03",
+      "data": "2026-11-04",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-60418",
+      "itens": [
+        {
+          "sku": "CM-M080-2P",
+          "quantidade": 400,
+          "preco_unit": 811.2
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31893",
+      "cliente": "CLI-3105",
+      "representante": "REP-03",
+      "data": "2026-11-07",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-60425",
+      "itens": [
+        {
+          "sku": "CE-INV-220",
+          "quantidade": 150,
+          "preco_unit": 2232.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31870",
+      "cliente": "CLI-3109",
+      "representante": "REP-04",
+      "data": "2026-10-15",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-15",
+      "ordem": "OP-60426",
+      "itens": [
+        {
+          "sku": "CP-CCM-04",
+          "quantidade": 2,
+          "preco_unit": 36575
+        }
+      ],
+      "observacao": "Entrada de 30% recebida (RC-06). Desconto de 5% aprovado pelo gerente regional."
+    },
+    {
+      "id": "PV-31905",
+      "cliente": "CLI-3108",
+      "representante": "REP-05",
+      "data": "2026-11-10",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-30",
+      "ordem": "OP-60433",
+      "itens": [
+        {
+          "sku": "CM-M090-4P",
+          "quantidade": 300,
+          "preco_unit": 1225.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31908",
+      "cliente": "CLI-3111",
+      "representante": "REP-01",
+      "data": "2026-11-11",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-01",
+      "ordem": "OP-60436",
+      "itens": [
+        {
+          "sku": "CP-QDL-24",
+          "quantidade": 60,
+          "preco_unit": 1600.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31830",
+      "cliente": "CLI-3103",
+      "representante": "REP-06",
+      "data": "2026-10-14",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-06",
+      "ordem": "OP-60395",
+      "itens": [
+        {
+          "sku": "CM-MM071C",
+          "quantidade": 1500,
+          "preco_unit": 511.1
+        }
+      ],
+      "observacao": "Primeiro lote após as ações do 8D (NC-2026-187)."
+    },
+    {
+      "id": "PV-31835",
+      "cliente": "CLI-3106",
+      "representante": "REP-03",
+      "data": "2026-10-16",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-07",
+      "ordem": "OP-60405",
+      "itens": [
+        {
+          "sku": "CE-INV-075",
+          "quantidade": 400,
+          "preco_unit": 1132.8
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-31912",
+      "cliente": "CLI-3112",
+      "representante": "REP-01",
+      "data": "2026-11-12",
+      "status": "em_analise",
+      "previsao_entrega": "2026-11-28",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "CE-INV-075",
+          "quantidade": 60,
+          "preco_unit": 1062
+        }
+      ],
+      "observacao": "Representante pediu 10% de desconto: acima de 8% exige aprovação da diretoria (RC-01)."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Desconto máximo do representante",
+      "texto": "Até 5% sobre a tabela sem aprovação; de 5% a 8% com aprovação do gerente regional; acima de 8% só com a diretoria comercial."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Prazo de entrega informado ao cliente",
+      "texto": "Para item com estoque acima do mínimo, prazo de faturamento de até 2 dias úteis. Abaixo do mínimo ou sem estoque, só informar prazo a partir da OP no ERP; nunca prometer data antes do PCP confirmar."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Pedido mínimo e frete",
+      "texto": "Pedido mínimo de R$ 3.000 para distribuidores. Frete CIF para pedidos acima de R$ 15.000 nas regiões Sul e Sudeste; abaixo disso, FOB."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Garantia",
+      "texto": "Motores: 24 meses a partir da nota fiscal. Inversores e painéis: 18 meses. Chamado de garantia só é aberto com número de série."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Preço de fabricante (OEM)",
+      "texto": "Tabela OEM vale para contratos com volume anual acima de 1.000 unidades; reajuste trimestral pela variação do cobre e do aço silício."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Painéis sob encomenda",
+      "texto": "Centros de controle de motores e painéis sob projeto exigem entrada de 30% e aprovação do projeto elétrico pelo cliente antes da liberação da OP."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "oee_bob",
+      "nome": "OEE da bobinagem",
+      "valor": 72.8,
+      "unidade": "%",
+      "meta": 80,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        79.1,
+        78.6,
+        80.2,
+        79.4,
+        78.8,
+        77.9,
+        78.5,
+        77.2,
+        76.4,
+        75.9,
+        74.1,
+        72.8
+      ],
+      "explicacao": "O OEE caiu de 75,9% para 72,8% em dois meses por causa da disponibilidade da Bobinadeira 2. Vibração no tensionador e rompimentos de fio somaram 70 min de parada em 11/11 e 95 min em 12/11 (2º turno), e a troca de lote de fio esmaltado tomou mais 40 min.",
+      "caminho": [
+        "MES › apontamentos de parada da L-BOB",
+        "Coletor de vibração da BOB-02",
+        "Cálculo: disponibilidade × desempenho × qualidade"
+      ],
+      "fontes": [
+        "maq:BOB-02",
+        "os:OS-5512",
+        "turno:2026-11-11|2º|L-BOB",
+        "turno:2026-11-12|2º|L-BOB"
+      ]
+    },
+    {
+      "id": "fpy_teste",
+      "nome": "Aprovação de primeira no teste final (FPY)",
+      "valor": 96.1,
+      "unidade": "%",
+      "meta": 98.5,
+      "direcao": "maior_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        98.4,
+        98.6,
+        98.2,
+        98.7,
+        98.5,
+        98.1,
+        98.3,
+        97.9,
+        98,
+        97.6,
+        97.2,
+        96.1
+      ],
+      "explicacao": "O FPY caiu para 96,1% com dois problemas de componente: reguladores do lote R-2291 (12 inversores reprovados, NC-2026-201) e o fio esmaltado do lote F-8812 (38 estatores reprovados no surto, NC-2026-198). Só no 1º turno de 12/11 foram 9 reprovações em 420 unidades.",
+      "caminho": [
+        "Sistema de testes finais › resultados por número de série",
+        "ERP › lotes de componente por série",
+        "Cálculo: aprovadas na 1ª tentativa ÷ testadas"
+      ],
+      "fontes": [
+        "nc:NC-2026-201",
+        "nc:NC-2026-198",
+        "turno:2026-11-12|1º|L-ENS"
+      ]
+    },
+    {
+      "id": "otif",
+      "nome": "Entregas no prazo e completas (OTIF)",
+      "valor": 87.5,
+      "unidade": "%",
+      "meta": 95,
+      "direcao": "maior_melhor",
+      "area": "comercial",
+      "tendencia": [
+        94.2,
+        95.1,
+        93.8,
+        94.6,
+        95.3,
+        94,
+        93.1,
+        92.4,
+        91.8,
+        90.6,
+        89.9,
+        87.5
+      ],
+      "explicacao": "Quatro pedidos estão atrasados ao mesmo tempo, cada um por uma OP atrasada: PV-31877 (bobinadeira 2), PV-31852 (capacitor e teste final), PV-31840 (puncionadeira parada) e PV-31890 (lote de fio bloqueado).",
+      "caminho": [
+        "ERP › pedidos com previsão vencida",
+        "ERP › OPs vinculadas",
+        "Cálculo: pedidos entregues no prazo e completos ÷ pedidos com entrega no mês"
+      ],
+      "fontes": [
+        "pedido:PV-31877",
+        "pedido:PV-31852",
+        "pedido:PV-31840",
+        "pedido:PV-31890"
+      ]
+    },
+    {
+      "id": "ppm_garantia",
+      "nome": "Falhas em garantia (PPM de campo)",
+      "valor": 410,
+      "unidade": "ppm",
+      "meta": 300,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        290,
+        275,
+        310,
+        285,
+        300,
+        295,
+        320,
+        330,
+        365,
+        430,
+        445,
+        410
+      ],
+      "explicacao": "O PPM subiu em setembro e outubro com o ruído de rolamento do CM-MM071C (8D da NC-2026-187, já encerrado) e os inversores CE-INV-220 com firmware 3.7.9 (NC-2026-190). Em novembro começou a cair com as ações do 8D.",
+      "caminho": [
+        "Sistema de chamados › chamados procedentes por número de série",
+        "ERP › unidades faturadas nos últimos 12 meses",
+        "Cálculo: falhas procedentes ÷ unidades em garantia × 1.000.000"
+      ],
+      "fontes": [
+        "nc:NC-2026-187",
+        "nc:NC-2026-190",
+        "doc:DOC-CHA-7781#t2"
+      ]
+    },
+    {
+      "id": "mttr",
+      "nome": "Tempo médio de reparo (MTTR)",
+      "valor": 3.4,
+      "unidade": "h",
+      "meta": 2.5,
+      "direcao": "menor_melhor",
+      "area": "manutencao",
+      "tendencia": [
+        2.6,
+        2.4,
+        2.7,
+        2.5,
+        2.3,
+        2.6,
+        2.8,
+        2.7,
+        2.9,
+        3,
+        3.1,
+        3.4
+      ],
+      "explicacao": "O MTTR subiu com a parada longa da puncionadeira CNC (OS-5506), que depende de kit de vedação que chega em 14/11. Sem ela, o MTTR do mês seria de 2,6 h.",
+      "caminho": [
+        "Sistema de manutenção › OS corretivas encerradas e em execução",
+        "Cálculo: horas de reparo ÷ número de corretivas"
+      ],
+      "fontes": [
+        "os:OS-5506",
+        "maq:PAI-01",
+        "turno:2026-11-12|1º|L-PAI"
+      ]
+    },
+    {
+      "id": "diag_campo",
+      "nome": "Tempo até o diagnóstico de chamado de campo",
+      "valor": 26,
+      "unidade": "h",
+      "meta": 8,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        31,
+        30,
+        29,
+        32,
+        30,
+        28,
+        29,
+        27,
+        28,
+        26,
+        27,
+        26
+      ],
+      "explicacao": "A assistência leva 26 h em média para diagnosticar porque firmware, teste final e lote de componente de cada série ficam em sistemas separados. A política de garantia promete o histórico da série em 1 dia útil.",
+      "caminho": [
+        "Sistema de chamados › abertura até diagnóstico",
+        "Sistema de testes finais e ERP consultados à mão"
+      ],
+      "fontes": [
+        "doc:DOC-GAR-003#t2",
+        "doc:DOC-CHA-7781#t2"
+      ]
+    },
+    {
+      "id": "horas_eng",
+      "nome": "Horas da engenharia respondendo outras áreas",
+      "valor": 31,
+      "unidade": "h/semana",
+      "meta": 12,
+      "direcao": "menor_melhor",
+      "area": "gestao",
+      "tendencia": [
+        24,
+        25,
+        23,
+        26,
+        27,
+        25,
+        28,
+        29,
+        27,
+        30,
+        33,
+        31
+      ],
+      "explicacao": "A engenharia de produto gasta 31 h por semana com perguntas de comercial, assistência e qualidade, sobretudo sobre a nova edição da norma de ensaio de motores, a alternativa ao capacitor C-4471 e versões de firmware.",
+      "caminho": [
+        "Planilha de registro de consultas da engenharia",
+        "Cálculo: soma semanal das horas registradas"
+      ],
+      "fontes": [
+        "doc:DOC-NOR-005#t2",
+        "doc:DOC-ECN-118#t1",
+        "doc:DOC-FT-INV075#t2"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-MAN-BOB",
+      "titulo": "Manual da bobinadeira automática, inseridora e estufa de impregnação (Fabricante A)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2023-05-10",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "6.3 Tensionador de fio",
+          "texto": "A tensão do fio deve ficar entre 1,6 e 2,0 N para fios de 0,40 a 0,56 mm. A mola do tensionador é item de desgaste: substituir a cada 4.000 h ou quando a tensão medida cair abaixo de 1,5 N."
+        },
+        {
+          "id": "t2",
+          "secao": "8.1 Vibração admissível",
+          "texto": "Vibração no mancal do tensionador acima de 4,5 mm/s RMS indica desgaste de rolamento ou desalinhamento: programar intervenção. Acima de 7,0 mm/s, parar a máquina."
+        },
+        {
+          "id": "t3",
+          "secao": "11.2 Estufa de impregnação",
+          "texto": "Pré-aquecer os estatores a 120 °C por 40 min antes do banho de verniz; cura a 150 °C por 3 h."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-MOT",
+      "titulo": "Manual da prensa de encaixe de rolamentos e da balanceadora (Fabricante F)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-02-19",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.2 Dispositivos de encaixe",
+          "texto": "A força de encaixe deve ser aplicada somente no anel que recebe a interferência. Para rolamento no eixo, apoiar na pista interna."
+        },
+        {
+          "id": "t2",
+          "secao": "7.1 Calibração da balanceadora",
+          "texto": "Verificar com rotor-padrão a cada 6 meses ou após qualquer troca de sensor; desvio acima de 10% bloqueia a liberação."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-SMT",
+      "titulo": "Manual da linha SMT: impressora, pick-and-place, forno de refusão e AOI (Fabricante B)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-08-30",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.4 Zonas de aquecimento",
+          "texto": "Desvio da temperatura de zona acima de ±5 °C em relação ao setpoint dispara alarme amarelo. Verificar termopar e resistência antes de alterar o perfil."
+        },
+        {
+          "id": "t2",
+          "secao": "7.2 Termopares",
+          "texto": "Termopares tipo K das zonas devem ser verificados a cada 6 meses. Folga no conector causa leitura oscilante e correção indevida do controlador."
+        },
+        {
+          "id": "t3",
+          "secao": "9.1 Bicos do pick-and-place",
+          "texto": "Trocar bicos 0603 a cada 1,5 milhão de ciclos ou quando a taxa de rejeição de pega passar de 0,3%."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PAI",
+      "titulo": "Manual da puncionadeira CNC (Fabricante C)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2021-11-03",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "10.1 Unidade hidráulica",
+          "texto": "Temperatura do óleo de trabalho até 55 °C. Acima disso, verificar trocador de calor e vedações; trocar o óleo a cada 4.000 h."
+        },
+        {
+          "id": "t2",
+          "secao": "10.4 Vedações do cilindro",
+          "texto": "Substituir o kit de vedação completo; troca parcial reduz a vida útil das vedações novas."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-ENS",
+      "titulo": "Manual das bancadas de ensaio de motores e do testador funcional (Fabricante D)",
+      "tipo": "manual",
+      "area": "qualidade",
+      "origem": "SharePoint",
+      "atualizado": "2025-03-12",
+      "acesso": [
+        "qualidade",
+        "manutencao",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.1 Calibração",
+          "texto": "Megôhmetro, fonte de tensão aplicada e gerador de surto devem ser calibrados a cada 12 meses com padrões rastreados."
+        },
+        {
+          "id": "t2",
+          "secao": "6.4 Tabela de versões",
+          "texto": "O testador compara a versão de firmware lida com a tabela de versões carregada; a tabela deve ser atualizada a cada revisão de produto."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-021",
+      "titulo": "Procedimento de troca de mola e rolamento do tensionador da bobinadeira",
+      "tipo": "procedimento",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-07-22",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3. Bloqueio",
+          "texto": "Desligar e bloquear a chave geral, liberar a tensão do fio e retirar o carretel antes de abrir a tampa do tensionador."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Troca",
+          "texto": "Trocar a mola MT-18 e o rolamento 608 ZZ juntos. Ajustar a tensão para 1,8 N com dinamômetro para fio de 0,45 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "5. Liberação",
+          "texto": "Rodar 30 min com fio de 0,45 mm. Liberar só com vibração até 2,8 mm/s e nenhum rompimento."
+        }
+      ]
+    },
+    {
+      "id": "DOC-INS-034",
+      "titulo": "Instrução de trabalho: perfil de refusão para placas sem chumbo",
+      "tipo": "instrucao",
+      "area": "producao",
+      "origem": "MES",
+      "atualizado": "2026-03-05",
+      "acesso": [
+        "producao",
+        "operadores",
+        "qualidade",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Perfil",
+          "texto": "Pico na placa entre 240 e 250 °C e tempo acima de 217 °C entre 60 e 90 s."
+        },
+        {
+          "id": "t2",
+          "secao": "3. Zona 5",
+          "texto": "Setpoint de 250 °C com tolerância de ±5 °C. Fora dela, reduzir a esteira para 0,85 m/min, registrar no MES e chamar a manutenção; não alterar o setpoint."
+        },
+        {
+          "id": "t3",
+          "secao": "4. Verificação",
+          "texto": "Medir o perfil com placa instrumentada no início de cada turno e após qualquer alarme de zona."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ENS-001",
+      "titulo": "Procedimento de teste final de inversores CE-INV (rev. H)",
+      "tipo": "procedimento",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-06-18",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.1 Sequência",
+          "texto": "Cada unidade passa por gravação e verificação do firmware, teste de isolação, teste funcional em carga a 100% por 120 s e registro do número de série no sistema de testes."
+        },
+        {
+          "id": "t2",
+          "secao": "4.2 Critérios",
+          "texto": "Tensão do regulador de 15 V: 15,0 V ± 0,5 V. Corrente de saída em carga nominal dentro de ±3% do valor de placa. Fora da faixa, a unidade vai para a gaiola de reprovados com etiqueta vermelha."
+        },
+        {
+          "id": "t3",
+          "secao": "5.1 Firmware",
+          "texto": "A versão gravada deve ser a da revisão vigente da ficha técnica; o testador bloqueia a aprovação se a versão lida for diferente."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ENS-002",
+      "titulo": "Plano de ensaio elétrico de rotina de motores (rev. D)",
+      "tipo": "procedimento",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2025-09-02",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2.1 Resistência de isolamento",
+          "texto": "Medir a 500 Vcc entre enrolamento e carcaça; aprovar com no mínimo 100 MΩ a frio."
+        },
+        {
+          "id": "t2",
+          "secao": "2.2 Tensão aplicada",
+          "texto": "Na linha, o ensaio é feito por 1 s com tensão 20% acima da de referência, alternativa que a norma de ensaio de motores admite para produção em série. Corrente de fuga máxima de 5 mA."
+        },
+        {
+          "id": "t3",
+          "secao": "2.4 Ensaio de surto",
+          "texto": "Comparar a forma de onda entre fases. Diferença de área (EAR) acima de 10% reprova o estator."
+        }
+      ]
+    },
+    {
+      "id": "DOC-NOR-005",
+      "titulo": "Resumo interno: nova edição da norma de ensaios de motores de indução (2025 × 2019)",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-09-15",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "comercial",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "1. O que mudou",
+          "texto": "Resumo interno, não é o texto da norma: a edição nova pede registro da temperatura do enrolamento por sensor embutido no ensaio de elevação de temperatura das carcaças 90 e maiores."
+        },
+        {
+          "id": "t2",
+          "secao": "3. Produtos afetados",
+          "texto": "Levantamento preliminar: CM-M090-4P e CM-M100-4P precisam repetir o ensaio de tipo. Carcaças 63 a 80 seguem válidas até a renovação dos certificados em 2027."
+        },
+        {
+          "id": "t3",
+          "secao": "4. Prazo",
+          "texto": "Certificados emitidos pela edição anterior valem até o vencimento. Ensaios de tipo novos a partir de 01/03/2027 já seguem a edição nova."
+        }
+      ]
+    },
+    {
+      "id": "DOC-NOR-009",
+      "titulo": "Regulamento de eficiência energética de motores: resumo interno e etiquetagem",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-10-30",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "marketing",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Nível mínimo",
+          "texto": "Resumo interno: motores trifásicos de indução vendidos no país precisam atingir rendimento mínimo equivalente ao nível IE3, comprovado por certificado."
+        },
+        {
+          "id": "t2",
+          "secao": "3.2 Placa de identificação",
+          "texto": "A placa deve informar o rendimento nominal a 100% da carga igual ao registrado no certificado. Divergência entre placa e certificado é não conformidade de rotulagem."
+        },
+        {
+          "id": "t3",
+          "secao": "4. Situação por produto",
+          "texto": "CM-M080-2P: rendimento certificado de 82,8%; placa em uso até nov/2026 informava 81,5% (arquivo da revisão anterior)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-FT-INV075",
+      "titulo": "Ficha técnica do inversor CE-INV-075 (rev. F)",
+      "tipo": "ficha_tecnica",
+      "area": "producao",
+      "origem": "PLM",
+      "atualizado": "2026-11-08",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "comercial",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "1. Dados nominais",
+          "texto": "Entrada 220 V monofásica, saída trifásica de 0 a 220 V, 0,75 kW e corrente nominal de 4,2 A."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Firmware",
+          "texto": "Revisão F: firmware 3.8.2 obrigatório para toda a linha CE-INV. A versão 3.8.2 corrige o desarme indevido por subtensão da 3.7.9 em redes com queda de tensão."
+        },
+        {
+          "id": "t3",
+          "secao": "5. Componentes críticos",
+          "texto": "Regulador de 15 V de fornecedores homologados; capacitor do barramento C-4471 ou alternativa C-4471A (ECN-118)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ECN-118",
+      "titulo": "Mudança de engenharia ECN-118: alternativa ao capacitor C-4471",
+      "tipo": "ficha_tecnica",
+      "area": "producao",
+      "origem": "PLM",
+      "atualizado": "2026-11-08",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Descrição",
+          "texto": "Capacitor eletrolítico C-4471 (470 µF / 400 V) em falta no fornecedor até jan/2027. Aprovado o C-4471A de outro fabricante: mesma capacitância, 105 °C, diâmetro 1 mm menor."
+        },
+        {
+          "id": "t2",
+          "secao": "Produtos afetados",
+          "texto": "Placas de potência dos inversores CE-INV-075 e CE-INV-220. A placa CE-PLC-SP não usa o C-4471."
+        },
+        {
+          "id": "t3",
+          "secao": "Validação",
+          "texto": "Ensaio de vida acelerada de 1.000 h a 105 °C aprovado. Liberado para produção em 2026-11-08."
+        }
+      ]
+    },
+    {
+      "id": "DOC-GAR-003",
+      "titulo": "Política de garantia e assistência técnica",
+      "tipo": "contrato",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-01-20",
+      "acesso": [
+        "comercial",
+        "qualidade",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Prazos",
+          "texto": "Motores: 24 meses a partir da nota fiscal. Inversores e painéis: 18 meses."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Diagnóstico",
+          "texto": "A assistência abre o chamado com o número de série; a fábrica responde com o histórico de teste final, firmware e lote de componentes em até 1 dia útil."
+        },
+        {
+          "id": "t3",
+          "secao": "5. Exclusões",
+          "texto": "Não cobre motor instalado sem proteção contra sobrecarga ou inversor ligado fora da faixa de tensão de entrada."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CHA-7781",
+      "titulo": "Chamado de assistência 7781: inversor CE-INV-220 série 25B-01877",
+      "tipo": "chamado",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-10-21",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Abertura",
+          "texto": "Elétrica Bandeirante Atacado relata inversor CE-INV-220 série 25B-01877 desarmando por subtensão em instalação rural desde set/2026."
+        },
+        {
+          "id": "t2",
+          "secao": "Histórico da série",
+          "texto": "Teste final aprovado em 2025-12-04; firmware gravado 3.7.9; nenhum chamado anterior para esta série."
+        },
+        {
+          "id": "t3",
+          "secao": "Ação",
+          "texto": "Atualizar o firmware para 3.8.2 em campo. Série incluída na NC-2026-190 para levantar quantas unidades saíram com 3.7.9."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CAT-2026",
+      "titulo": "Catálogo técnico 2026: motores, quadros e inversores",
+      "tipo": "catalogo",
+      "area": "marketing",
+      "origem": "SharePoint",
+      "atualizado": "2026-04-01",
+      "acesso": [
+        "marketing",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Motores trifásicos",
+          "texto": "Linha IE3 de 0,5 a 3 cv, carcaças 71 a 100L, IP55, tensão 220/380 V e opção de sensor térmico no enrolamento."
+        },
+        {
+          "id": "t2",
+          "secao": "Inversores",
+          "texto": "Inversores de 0,75 e 2,2 kW com teclado frontal, entrada para PTC do motor e rastreio por número de série."
+        },
+        {
+          "id": "t3",
+          "secao": "Quadros de comando",
+          "texto": "Quadros para bombas de até 12 cv com soft-starter, ensaiados na fábrica com relatório por número de série."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-101",
+      "autor": "Valdir Schmitt",
+      "funcao": "Bobinador líder",
+      "tempo_casa_anos": 24,
+      "area": "operadores",
+      "maquina": "BOB-02",
+      "titulo": "Rompimento de fio na bobinadeira 2: olhar a mola antes do lote",
+      "dica": "Quando a BOB-02 começa a romper fio fino depois de umas duas horas, quase sempre é a mola do tensionador que perdeu carga, não o fio. Meça com o dinamômetro: para fio de 0,45 mm tem que dar 1,8 N. Abaixo de 1,5 N, peça a troca da mola antes de mexer no lote.",
+      "validado_por": "Rogério Antunes (supervisor de bobinagem)",
+      "data": "2026-08-14",
+      "tags": [
+        "tensionador",
+        "rompimento de fio",
+        "fio fino"
+      ]
+    },
+    {
+      "id": "SB-102",
+      "autor": "Marlene Gonçalves",
+      "funcao": "Operadora de SMT",
+      "tempo_casa_anos": 15,
+      "area": "operadores",
+      "maquina": "SMT-03",
+      "titulo": "Zona do forno oscilando: suspeite do termopar",
+      "dica": "Se uma zona do forno começa a subir e descer mais de 5 graus, quase sempre é o termopar com folga no conector. Baixe a esteira para 0,85 m/min, avise a manutenção e não mexa no setpoint, porque o controlador corrige em cima de uma leitura errada e a solda sai fria.",
+      "validado_por": "Bruna Carvalho (engenheira de processos SMT)",
+      "data": "2026-06-03",
+      "tags": [
+        "refusão",
+        "solda fria",
+        "termopar"
+      ]
+    },
+    {
+      "id": "SB-103",
+      "autor": "Joel Batista",
+      "funcao": "Técnico de ensaio",
+      "tempo_casa_anos": 19,
+      "area": "operadores",
+      "maquina": "ENS-01",
+      "titulo": "Reprovação no surto por pouco",
+      "dica": "Estator que reprova no surto com EAR entre 10 e 12% logo depois da estufa pode estar quente. Espere 10 minutos e repita. Se reprovar de novo, ou se aparecerem três no mesmo lote de fio, separe o lote e chame a qualidade.",
+      "validado_por": "Rodrigo Hoffmann (qualidade)",
+      "data": "2026-09-22",
+      "tags": [
+        "ensaio de surto",
+        "fio esmaltado"
+      ]
+    },
+    {
+      "id": "SB-104",
+      "autor": "Sérgio Lopes",
+      "funcao": "Operador de puncionadeira",
+      "tempo_casa_anos": 12,
+      "area": "operadores",
+      "maquina": "PAI-01",
+      "titulo": "Puncionadeira avisa antes de vazar",
+      "dica": "A unidade hidráulica muda de ruído uns dias antes de vazar. Se o termômetro passar de 55 °C no meio do turno, abra chamado na hora. Esperar o fim de semana costuma virar troca de vedação completa.",
+      "validado_por": "Fábio Nunes (manutenção)",
+      "data": "2026-05-11",
+      "tags": [
+        "hidráulica",
+        "vedação"
+      ]
+    },
+    {
+      "id": "SB-105",
+      "autor": "Cleusa Martins",
+      "funcao": "Montadora de motores",
+      "tempo_casa_anos": 17,
+      "area": "operadores",
+      "maquina": "MOT-01",
+      "titulo": "Encaixe de rolamento sempre pela pista interna",
+      "dica": "Rolamento no eixo se empurra pela pista interna. O dispositivo azul é para carcaça 63 e 71, o verde para 80 e 90; o pino de código só deixa montar o certo. Se o rolamento entrar duro, pare e confira o dispositivo antes de forçar.",
+      "validado_por": "Leandro Wiese (engenharia de processo)",
+      "data": "2026-10-09",
+      "tags": [
+        "rolamento",
+        "ruído",
+        "8D"
+      ]
+    },
+    {
+      "id": "SB-106",
+      "autor": "Adilson Pereira",
+      "funcao": "Operador de impregnação",
+      "tempo_casa_anos": 21,
+      "area": "operadores",
+      "maquina": "IMP-01",
+      "titulo": "Dia úmido pede pré-aquecimento mais longo",
+      "dica": "Em dia de chuva, com umidade acima de 80%, deixo os estatores 10 minutos a mais no pré-aquecimento. Senão o verniz não penetra bem e a isolação sai no limite no ensaio.",
+      "validado_por": "Rogério Antunes (supervisor de bobinagem)",
+      "data": "2026-07-30",
+      "tags": [
+        "verniz",
+        "umidade",
+        "isolação"
+      ]
+    },
+    {
+      "id": "SB-107",
+      "autor": "Tiago Fernandes",
+      "funcao": "Técnico de assistência",
+      "tempo_casa_anos": 9,
+      "area": "operadores",
+      "maquina": "ENS-02",
+      "titulo": "Inversor desarmando por subtensão: veja o firmware primeiro",
+      "dica": "Antes de trocar placa de inversor que desarma por subtensão em rede fraca, leia a versão no parâmetro P0.01. Se for 3.7.9, atualize para 3.8.2; resolve a maioria dos casos sem troca de peça.",
+      "validado_por": "Fernanda Rocha (qualidade)",
+      "data": "2026-10-24",
+      "tags": [
+        "firmware",
+        "subtensão",
+        "assistência"
+      ]
+    },
+    {
+      "id": "SB-108",
+      "autor": "Rosana Klein",
+      "funcao": "Operadora de pick-and-place",
+      "tempo_casa_anos": 11,
+      "area": "operadores",
+      "maquina": "SMT-02",
+      "titulo": "Rejeição de pega em componente 0603",
+      "dica": "Quando a máquina começa a rejeitar capacitor 0603, limpe o bico com álcool isopropílico antes de trocar o alimentador. Se a rejeição continuar acima de 0,3%, aí é troca de bico.",
+      "validado_por": "Bruna Carvalho (engenheira de processos SMT)",
+      "data": "2026-04-17",
+      "tags": [
+        "pick-and-place",
+        "bico"
+      ]
+    },
+    {
+      "id": "SB-109",
+      "autor": "Luiz Carlos Rosa",
+      "funcao": "Operador de inseridora",
+      "tempo_casa_anos": 26,
+      "area": "operadores",
+      "maquina": "BOB-03",
+      "titulo": "Isolação de ranhura rasgada na inserção",
+      "dica": "Se o papel de ranhura rasgar na inseridora, confira a altura da lâmina antes de reduzir velocidade. Papel rasgado passa no visual mas reprova no ensaio de tensão aplicada.",
+      "validado_por": "Rogério Antunes (supervisor de bobinagem)",
+      "data": "2026-03-08",
+      "tags": [
+        "inserção",
+        "papel de ranhura"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:40",
+      "registros": 212480,
+      "observacao": "Pedidos, estoque, OPs, lotes de componente por série e faturamento"
+    },
+    {
+      "id": "mes",
+      "nome": "MES da fábrica",
+      "tipo": "MES",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:05",
+      "registros": 96310,
+      "observacao": "Apontamentos de produção e paradas por linha"
+    },
+    {
+      "id": "plm",
+      "nome": "PLM (ex.: Aras Innovator)",
+      "tipo": "PLM",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T06:30",
+      "registros": 18420,
+      "observacao": "Fichas técnicas, listas de materiais e mudanças de engenharia (ECN)"
+    },
+    {
+      "id": "testes",
+      "nome": "Sistema de testes finais por número de série",
+      "tipo": "Banco de testes",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:00",
+      "registros": 1284000,
+      "observacao": "Resultados de ensaio de motores e teste funcional de inversores, com firmware gravado"
+    },
+    {
+      "id": "sharepoint",
+      "nome": "SharePoint da engenharia e manutenção",
+      "tipo": "Documentos",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T05:00",
+      "registros": 6120,
+      "observacao": "Manuais, procedimentos, normas e política de garantia"
+    },
+    {
+      "id": "chamados",
+      "nome": "Sistema de chamados de assistência (ex.: GLPI)",
+      "tipo": "Chamados",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T22:10",
+      "registros": 9340,
+      "observacao": "Token expirado na última sincronização; chamados de 13/11 ainda não importados"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail da qualidade e do comercial",
+      "tipo": "E-mail",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:55",
+      "registros": 41200,
+      "observacao": "Reclamações de clientes e respostas da assistência"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business dos representantes",
+      "tipo": "Mensageria",
+      "status": "planejado",
+      "ultima_sync": null,
+      "registros": 0,
+      "observacao": "Piloto com 2 representantes previsto para dez/2026"
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 6
+    },
+    {
+      "id": "pcp",
+      "nome": "PCP e supervisão de produção",
+      "areas": [
+        "producao",
+        "operadores",
+        "manutencao"
+      ],
+      "usuarios": 18
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e ensaios",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 12
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção industrial",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 22
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial e representantes",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 26
+    },
+    {
+      "id": "assistencia",
+      "nome": "Assistência técnica",
+      "areas": [
+        "qualidade",
+        "comercial"
+      ],
+      "usuarios": 9
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing técnico",
+      "areas": [
+        "marketing",
+        "comercial"
+      ],
+      "usuarios": 4
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T07:52",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Quais OPs estão atrasadas e por quê?",
+      "fontes": [
+        "op:OP-60412",
+        "op:OP-60398",
+        "op:OP-60377",
+        "op:OP-60420"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:04",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Qual o procedimento para trocar a mola do tensionador da BOB-02?",
+      "fontes": [
+        "doc:DOC-PRO-021#t2",
+        "saber:SB-101"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:15",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Quais séries reprovaram no teste final com regulador do lote R-2291?",
+      "fontes": [
+        "nc:NC-2026-201"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:31",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Tem motor de 3 cv em estoque?",
+      "fontes": [
+        "sku:CM-M100-4P",
+        "op:OP-60412"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:47",
+      "perfil": "assistencia",
+      "area": "qualidade",
+      "pergunta": "O inversor 25B-01877 saiu com qual firmware?",
+      "fontes": [
+        "doc:DOC-CHA-7781#t2",
+        "doc:DOC-FT-INV075#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:02",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o OTIF caiu para 87,5%?",
+      "fontes": [
+        "kpi:otif"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:10",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Posso dar 10% para a Frigotec no inversor 0,75 kW?",
+      "fontes": [
+        "regra:RC-01",
+        "pedido:PV-31912"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:24",
+      "perfil": "marketing",
+      "area": "marketing",
+      "pergunta": "Qual rendimento posso divulgar para o motor de 1 cv?",
+      "fontes": [
+        "doc:DOC-NOR-009#t3",
+        "nc:NC-2026-206"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:38",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Que alternativa ao capacitor C-4471 foi aprovada?",
+      "fontes": [
+        "doc:DOC-ECN-118#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:51",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Que produtos precisam repetir ensaio de tipo com a norma nova?",
+      "fontes": [
+        "doc:DOC-NOR-005#t2"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o OEE da bobinagem está abaixo da meta?",
+      "resposta": "O OEE da bobinagem está em 72,8%, contra meta de 80%. A perda vem da Bobinadeira 2 (BOB-02): vibração de 6,4 mm/s no tensionador e rompimentos de fio somaram 70 min de parada no 2º turno de 11/11 e 95 min no 2º turno de 12/11. A OS-5512 está aberta para trocar mola e rolamento do tensionador em 14/11.",
+      "fontes": [
+        "kpi:oee_bob",
+        "maq:BOB-02",
+        "turno:2026-11-11|2º|L-BOB",
+        "turno:2026-11-12|2º|L-BOB",
+        "os:OS-5512"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quais entregas estão em risco e por quê?",
+      "resposta": "Quatro pedidos estão atrasados, cada um preso a uma OP atrasada: PV-31877 da Irriga Campo (OP-60412, bobinadeira 2), PV-31852 da Distribuidora Elétrica Planalto (OP-60398, capacitor e teste final), PV-31840 da Bombas Serra Azul (OP-60377, puncionadeira parada) e PV-31890 da Máquinas Lavar Sul (OP-60420, lote de fio bloqueado). Por isso o OTIF do mês está em 87,5%, meta de 95%.",
+      "fontes": [
+        "kpi:otif",
+        "pedido:PV-31877",
+        "pedido:PV-31852",
+        "pedido:PV-31840",
+        "pedido:PV-31890"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "O que derrubou o FPY do teste final?",
+      "resposta": "O FPY caiu para 96,1% (meta 98,5%) por dois lotes de componente: reguladores R-2291, com 12 inversores CE-INV-075 reprovados (NC-2026-201), e fio esmaltado F-8812, com 38 estatores reprovados no surto (NC-2026-198). No 1º turno de 12/11 foram 9 reprovações em 420 unidades.",
+      "fontes": [
+        "kpi:fpy_teste",
+        "nc:NC-2026-201",
+        "nc:NC-2026-198",
+        "turno:2026-11-12|1º|L-ENS"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Quais produtos usam o capacitor C-4471 e que alternativa foi aprovada?",
+      "resposta": "O C-4471 (470 µF / 400 V) está nas placas de potência dos inversores CE-INV-075 e CE-INV-220; a placa CE-PLC-SP não usa. A alternativa C-4471A foi aprovada pela ECN-118 depois de ensaio de vida acelerada de 1.000 h a 105 °C e liberada para produção em 2026-11-08.",
+      "fontes": [
+        "doc:DOC-ECN-118#t1",
+        "doc:DOC-ECN-118#t2",
+        "doc:DOC-ECN-118#t3"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "O que muda para nós com a nova edição da norma de ensaio de motores?",
+      "resposta": "Pelo resumo interno da qualidade, a edição nova pede registro da temperatura do enrolamento por sensor embutido no ensaio de elevação de temperatura das carcaças 90 e maiores. CM-M090-4P e CM-M100-4P precisam repetir o ensaio de tipo; as carcaças 63 a 80 seguem válidas até 2027. Ensaios de tipo novos a partir de 01/03/2027 já seguem a edição nova.",
+      "fontes": [
+        "doc:DOC-NOR-005#t1",
+        "doc:DOC-NOR-005#t2",
+        "doc:DOC-NOR-005#t3"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "O inversor 25B-01877 saiu com qual firmware e já teve chamado?",
+      "resposta": "A série 25B-01877 (CE-INV-220) foi aprovada no teste final em 2025-12-04 com firmware 3.7.9 e não tinha chamado anterior. O chamado 7781 relata desarme por subtensão; a revisão F exige firmware 3.8.2, que corrige esse desarme. A série entrou na NC-2026-190.",
+      "fontes": [
+        "doc:DOC-CHA-7781#t2",
+        "doc:DOC-FT-INV075#t2",
+        "nc:NC-2026-190"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Por que a OP-60398 está atrasada?",
+      "resposta": "A OP-60398 (600 inversores CE-INV-075, prazo 10/11) está com 70% de progresso. Faltou o capacitor C-4471 até a ECN-118 aprovar o C-4471A em 08/11, e 12 unidades reprovaram no teste final por tensão do regulador (NC-2026-201). Ela segura o PV-31852 da Distribuidora Elétrica Planalto, com nova previsão em 18/11.",
+      "fontes": [
+        "op:OP-60398",
+        "doc:DOC-ECN-118#t3",
+        "nc:NC-2026-201",
+        "pedido:PV-31852"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Como foi o 2º turno de ontem na bobinagem?",
+      "resposta": "No 2º turno de 12/11 a bobinagem fez 310 estatores, com 14 de refugo e 95 min de parada. A BOB-02 parou três vezes por rompimento de fio (55 min) e a troca para o lote de fio F-8840 tomou 40 min de setup.",
+      "fontes": [
+        "turno:2026-11-12|2º|L-BOB",
+        "maq:BOB-02",
+        "op:OP-60420"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "O que fazer se a zona 5 do forno sair da faixa?",
+      "resposta": "A instrução DOC-INS-034 fixa o setpoint da zona 5 em 250 °C com tolerância de ±5 °C. Fora dela: reduzir a esteira para 0,85 m/min, registrar no MES e chamar a manutenção, sem alterar o setpoint. No 3º turno de 12/11 a zona oscilou entre 238 e 254 °C e a OS-5515 está aberta.",
+      "fontes": [
+        "doc:DOC-INS-034#t2",
+        "turno:2026-11-12|3º|L-SMT",
+        "os:OS-5515"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "As reprovações do teste final desta semana vieram de qual lote de componente?",
+      "resposta": "As 12 reprovações de inversores CE-INV-075 (lote de série 26B-0412) usam reguladores do lote R-2291: a tensão de 15 V saiu entre 15,6 e 15,9 V, acima da faixa de 15,0 ± 0,5 V. Nove placas já foram retrabalhadas e aprovadas no reteste e três aguardam regulador de outro lote.",
+      "fontes": [
+        "nc:NC-2026-201",
+        "doc:DOC-ENS-001#t2"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Quantos inversores saíram com o firmware errado?",
+      "resposta": "O levantamento por número de série da NC-2026-190 achou 146 inversores CE-INV-220 expedidos com firmware 3.7.9 entre 2025-11-20 e 2025-12-12. A tabela de versões do testador não foi atualizada após a revisão F, que exige 3.8.2; a atualização da tabela está na OS-5520 de 18/11.",
+      "fontes": [
+        "nc:NC-2026-190",
+        "doc:DOC-FT-INV075#t2",
+        "doc:DOC-MAN-ENS#t2",
+        "os:OS-5520"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "O 8D da Compressores Litoral foi fechado? Qual foi a causa?",
+      "resposta": "Sim, a NC-2026-187 foi encerrada em 05/11. A causa raiz foi o dispositivo de carcaça 80 usado na prensa MOT-01 em motores de carcaça 71, empurrando o rolamento pela pista externa. Os dispositivos ganharam pino de código e não houve reincidência em 3.200 motores.",
+      "fontes": [
+        "nc:NC-2026-187",
+        "maq:MOT-01",
+        "saber:SB-105"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quais equipamentos estão em alerta e o que já foi feito?",
+      "resposta": "Dois equipamentos estão em alerta. A BOB-02 tem vibração de 6,4 mm/s no tensionador, acima do limite de 4,5 mm/s do manual; a OS-5512 troca mola e rolamento em 14/11. O forno SMT-03 tem a zona 5 oscilando entre 238 e 254 °C; a OS-5515 verifica o termopar tipo K. A puncionadeira PAI-01 está parada com a OS-5506 em execução.",
+      "fontes": [
+        "maq:BOB-02",
+        "os:OS-5512",
+        "doc:DOC-MAN-BOB#t2",
+        "maq:SMT-03",
+        "os:OS-5515",
+        "os:OS-5506"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Como trocar a mola do tensionador da bobinadeira 2?",
+      "resposta": "Bloqueie a chave geral, libere a tensão do fio e retire o carretel. Troque a mola MT-18 e o rolamento 608 ZZ juntos e ajuste a tensão para 1,8 N com dinamômetro (fio de 0,45 mm). Libere após 30 min de teste com vibração até 2,8 mm/s. O bobinador Valdir Schmitt lembra: abaixo de 1,5 N, o problema é a mola, não o lote de fio.",
+      "fontes": [
+        "doc:DOC-PRO-021#t1",
+        "doc:DOC-PRO-021#t2",
+        "doc:DOC-PRO-021#t3",
+        "saber:SB-101"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quando a puncionadeira volta a operar?",
+      "resposta": "A OS-5506 está em execução: o óleo chegou a 61 °C, acima dos 55 °C do manual, e houve vazamento no cilindro principal. O manual pede o kit de vedação completo, que chega em 14/11; a previsão de volta é o 2º turno de 14/11. A OP-60377 e o pedido PV-31840 dependem dela.",
+      "fontes": [
+        "os:OS-5506",
+        "doc:DOC-MAN-PAI#t1",
+        "doc:DOC-MAN-PAI#t2",
+        "op:OP-60377"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Tenho motor de 3 cv para atender mais 60 da Irriga Campo?",
+      "resposta": "Não de pronta entrega. O CM-M100-4P tem 38 unidades em estoque, abaixo do mínimo de 120. A OP-60412 (480 motores) está atrasada e atende primeiro o PV-31877 de 120 motores, com previsão em 19/11. A OP-60440, de 360 motores para reposição, termina em 02/12; pela regra RC-02, confirme a data com o PCP antes de prometer.",
+      "fontes": [
+        "sku:CM-M100-4P",
+        "op:OP-60412",
+        "pedido:PV-31877",
+        "op:OP-60440",
+        "regra:RC-02"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "A Frigotec pediu 10% no inversor 0,75 kW. Posso dar?",
+      "resposta": "Não sem a diretoria. Pela RC-01, até 5% o representante aprova (R$ 1.121,00), até 8% precisa do gerente regional (R$ 1.085,60) e acima de 8% vai para a diretoria. O PV-31912, com 60 unidades a R$ 1.062,00 (10%), está em análise por isso.",
+      "fontes": [
+        "regra:RC-01",
+        "pedido:PV-31912",
+        "sku:CE-INV-075",
+        "cliente:CLI-3112"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Como está a carteira do Marcos Vieira no mês?",
+      "resposta": "Marcos Vieira (SC e PR) realizou R$ 1.012.000 de uma meta de R$ 1.450.000, 69,8%. Na carteira dele há o PV-31852 da Distribuidora Elétrica Planalto atrasado, o PV-31908 da Casa do Eletricista Joinvilense aprovado e o PV-31912 da Frigotec em análise de desconto.",
+      "fontes": [
+        "rep:REP-01",
+        "pedido:PV-31852",
+        "pedido:PV-31908",
+        "pedido:PV-31912"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Que conteúdos estão esperando aprovação?",
+      "resposta": "Dois estão em revisão: o artigo técnico sobre motor IE3 para bombas (MK-02) e a resposta à Elétrica Bandeirante sobre o firmware 3.7.9 (MK-03). O post do quadro de comando CP-QDC-12 (MK-04) ainda é rascunho. As fichas do inversor 0,75 kW (MK-01) e do motor 3 cv (MK-05) estão aprovadas.",
+      "fontes": [
+        "sku:CP-QDC-12",
+        "nc:NC-2026-190",
+        "doc:DOC-NOR-009#t1"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Que rendimento posso divulgar para o motor de 1 cv?",
+      "resposta": "Use 82,8%, o rendimento a 100% da carga registrado no certificado do CM-M080-2P. As placas antigas informavam 81,5% e estão sendo trocadas pela NC-2026-206, então não reaproveite fotos de placa anteriores a nov/2026.",
+      "fontes": [
+        "sku:CM-M080-2P",
+        "doc:DOC-NOR-009#t3",
+        "nc:NC-2026-206"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que os bobinadores mais antigos sabem sobre rompimento de fio?",
+      "resposta": "Valdir Schmitt, bobinador líder com 24 anos de casa, registrou que o rompimento de fio fino na BOB-02 depois de umas duas horas costuma ser a mola do tensionador. A tensão para fio de 0,45 mm é 1,8 N; abaixo de 1,5 N, a mola deve ser trocada antes de mexer no lote. O saber foi validado pelo supervisor Rogério Antunes.",
+      "fontes": [
+        "saber:SB-101",
+        "doc:DOC-MAN-BOB#t1"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que um operador novo de SMT precisa saber do forno?",
+      "resposta": "Marlene Gonçalves (15 anos de casa) ensina: zona oscilando mais de 5 °C costuma ser termopar com folga. Baixe a esteira para 0,85 m/min, chame a manutenção e não mexa no setpoint. A instrução DOC-INS-034 pede o mesmo e a medição do perfil com placa instrumentada a cada turno.",
+      "fontes": [
+        "saber:SB-102",
+        "doc:DOC-INS-034#t2",
+        "doc:DOC-INS-034#t3"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Onde está o meu pedido de quadros de comando?",
+      "resposta": "O PV-31840, de 40 quadros CP-QDC-12, está atrasado: a OP-60377 está com 45% de progresso porque a puncionadeira de chapas parou em 11/11. A nova previsão de entrega é 21/11.",
+      "fontes": [
+        "pedido:PV-31840",
+        "op:OP-60377"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Quero repetir o pedido de motores monofásicos de 0,33 cv.",
+      "resposta": "O último pedido (PV-31845) foi de 2.500 motores CM-MM063 a R$ 391,40 e já foi faturado. Há 1.320 unidades em estoque, acima do mínimo de 800, e o prazo padrão é de 10 dias. O preço final do novo pedido sai da tabela OEM vigente, confirmado pelo representante.",
+      "fontes": [
+        "pedido:PV-31845",
+        "sku:CM-MM063",
+        "regra:RC-05"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "09:12",
+      "texto": "Bom dia! A Frigotec quer 60 inversores de 0,75 kW. Tem pra pronta entrega?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:12",
+      "texto": "Bom dia, Marcos. O CE-INV-075 tem 140 unidades em estoque, abaixo do mínimo de 200, e a OP-60398 está atrasada atendendo a Planalto. Dá para separar 60 do estoque, mas pela regra de prazo o PCP precisa confirmar a reserva antes de você prometer data.",
+      "fontes": [
+        "sku:CE-INV-075",
+        "op:OP-60398",
+        "regra:RC-02"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:14",
+      "texto": "Eles pediram 10% de desconto. Consigo?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:14",
+      "texto": "Com 10% o preço fica R$ 1.062,00 e precisa de aprovação da diretoria (acima de 8%). Você aprova sozinho até 5% (R$ 1.121,00); até 8% (R$ 1.085,60) o gerente regional aprova. O PV-31912 já está em análise com os 10%.",
+      "fontes": [
+        "regra:RC-01",
+        "pedido:PV-31912"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:16",
+      "texto": "E motor de 3 cv? Eles também querem 20 pro mês que vem.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:16",
+      "texto": "O CM-M100-4P tem só 38 em estoque (mínimo 120), e a OP-60412 está atrasada atendendo a Irriga Campo. A próxima reposição é a OP-60440, com 360 motores e término em 02/12. Para dezembro dá, mas peça confirmação ao PCP antes de fechar.",
+      "fontes": [
+        "sku:CM-M100-4P",
+        "op:OP-60412",
+        "op:OP-60440"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:17",
+      "texto": "Fechado. Vou oferecer 8% no inversor e pedir a aprovação do gerente.",
+      "fontes": []
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha comercial: inversor CE-INV-075",
+      "texto": "Inversor compacto de 0,75 kW com entrada monofásica 220 V, saída trifásica e corrente nominal de 4,2 A. Sai de fábrica com firmware 3.8.2 e teste final registrado por número de série.",
+      "status": "aprovado",
+      "sku": "CE-INV-075",
+      "fontes": [
+        "sku:CE-INV-075",
+        "doc:DOC-FT-INV075#t1",
+        "doc:DOC-FT-INV075#t2"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Como escolher motor IE3 para bombas e ventiladores",
+      "texto": "Motores trifásicos vendidos no país precisam atingir rendimento equivalente ao nível IE3, comprovado por certificado. Este guia mostra como ler a placa de identificação e escolher a carcaça certa de 0,5 a 3 cv.",
+      "status": "em_revisao",
+      "sku": "CM-M071-4P",
+      "fontes": [
+        "doc:DOC-NOR-009#t1",
+        "doc:DOC-CAT-2026#t1"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta à Elétrica Bandeirante sobre firmware 3.7.9",
+      "texto": "Identificamos pelo número de série os inversores CE-INV-220 que saíram com firmware 3.7.9. A versão 3.8.2 corrige o desarme por subtensão e nossa assistência fará a atualização em campo sem custo.",
+      "status": "em_revisao",
+      "sku": "CE-INV-220",
+      "fontes": [
+        "nc:NC-2026-190",
+        "doc:DOC-FT-INV075#t2",
+        "doc:DOC-GAR-003#t2"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "post",
+      "titulo": "Quadro de comando para bomba pronto para instalar",
+      "texto": "Quadro para bombas de até 12 cv com soft-starter, relé de falta de fase e chave de nível. Cada quadro sai ensaiado de fábrica com relatório por número de série.",
+      "status": "rascunho",
+      "sku": "CP-QDC-12",
+      "fontes": [
+        "sku:CP-QDC-12",
+        "doc:DOC-CAT-2026#t3"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha comercial: motor CM-M100-4P 3 cv",
+      "texto": "Motor trifásico IE3 de 3 cv, 4 polos, carcaça 100L, para pivôs de irrigação, bombas e ventiladores industriais. Pintura epóxi para ambiente agrícola e proteção IP55.",
+      "status": "aprovado",
+      "sku": "CM-M100-4P",
+      "fontes": [
+        "sku:CM-M100-4P",
+        "doc:DOC-CAT-2026#t1"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do distribuidor e do fabricante",
+    "boas_vindas": "Consulte estoque, prazo e status dos seus pedidos, e o histórico de cada equipamento pelo número de série.",
+    "destaques": [
+      "CE-INV-075",
+      "CM-M071-4P",
+      "CP-QDC-12",
+      "CM-MM063"
+    ],
+    "avisos": [
+      {
+        "titulo": "Firmware 3.8.2 para inversores CE-INV",
+        "texto": "Inversores com firmware 3.7.9 podem desarmar por subtensão em rede fraca. Informe o número de série à assistência para atualização sem custo."
+      },
+      {
+        "titulo": "Motor 3 cv com estoque baixo",
+        "texto": "O CM-M100-4P está com estoque reduzido até 02/12. Consulte o representante antes de fechar volumes acima de 20 unidades."
+      }
+    ]
+  }
+}

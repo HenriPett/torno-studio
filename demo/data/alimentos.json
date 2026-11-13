@@ -1,0 +1,3564 @@
+{
+  "id": "alimentos",
+  "setor": "Alimentos e bebidas",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Lácteos Tribeira S.A.",
+    "cidade": "Chapecó",
+    "uf": "SC",
+    "funcionarios": 1840,
+    "descricao": "Laticínio do oeste catarinense que capta leite de cerca de 2.300 produtores e fabrica leite UHT, bebidas lácteas, queijos, manteiga e leite em pó para redes varejistas, distribuidores e indústrias."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "produto",
+    "produtos": "produtos",
+    "cliente": "cliente",
+    "clientes": "clientes",
+    "representante": "representante",
+    "representantes": "representantes",
+    "maquina": "equipamento",
+    "maquinas": "equipamentos",
+    "linha": "linha",
+    "linhas": "linhas",
+    "unidade": "caixas",
+    "lote": "lote"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP e programação de linhas"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Garantia da qualidade e segurança dos alimentos"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção e utilidades"
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial, redes e distribuidores"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing e trade"
+    },
+    {
+      "id": "operadores",
+      "nome": "Chão de fábrica (envase, queijaria e secagem)"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria industrial"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Unidade Chapecó (UHT e bebidas)",
+      "cidade": "Chapecó"
+    },
+    {
+      "id": "P2",
+      "nome": "Unidade Concórdia (queijos e pó)",
+      "cidade": "Concórdia"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-REC",
+      "nome": "Recepção e padronização de leite",
+      "planta": "P1",
+      "tipo": "recebimento e tratamento térmico"
+    },
+    {
+      "id": "L-UHT",
+      "nome": "Envase UHT",
+      "planta": "P1",
+      "tipo": "envase asséptico"
+    },
+    {
+      "id": "L-BEB",
+      "nome": "Bebidas lácteas",
+      "planta": "P1",
+      "tipo": "fermentação e envase em garrafa"
+    },
+    {
+      "id": "L-QUE",
+      "nome": "Queijaria e manteiga",
+      "planta": "P2",
+      "tipo": "processamento"
+    },
+    {
+      "id": "L-PO",
+      "nome": "Leite em pó",
+      "planta": "P2",
+      "tipo": "evaporação, secagem e envase"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "PAS-01",
+      "nome": "Pasteurizador de placas 1",
+      "linha": "L-REC",
+      "tipo": "pasteurizador",
+      "fabricante": "Fabricante D",
+      "ano": 2012,
+      "status": "operando",
+      "horimetro": 61840,
+      "mtbf_h": 920,
+      "proxima_preventiva": "2026-12-02",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "UHT-02",
+      "nome": "Esterilizador UHT tubular 2",
+      "linha": "L-UHT",
+      "tipo": "esterilizador UHT",
+      "fabricante": "Fabricante D",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 38420,
+      "mtbf_h": 640,
+      "proxima_preventiva": "2026-11-28",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "ENV-03",
+      "nome": "Envasadora asséptica 3",
+      "linha": "L-UHT",
+      "tipo": "envasadora asséptica",
+      "fabricante": "Fabricante A",
+      "ano": 2015,
+      "status": "alerta",
+      "horimetro": 47960,
+      "mtbf_h": 210,
+      "proxima_preventiva": "2026-11-14",
+      "manual": "DOC-MAN-ENV"
+    },
+    {
+      "id": "ENV-04",
+      "nome": "Envasadora asséptica 4",
+      "linha": "L-UHT",
+      "tipo": "envasadora asséptica",
+      "fabricante": "Fabricante A",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 29310,
+      "mtbf_h": 380,
+      "proxima_preventiva": "2026-11-14",
+      "manual": "DOC-MAN-ENV"
+    },
+    {
+      "id": "HOM-01",
+      "nome": "Homogeneizador de bebidas 1",
+      "linha": "L-BEB",
+      "tipo": "homogeneizador",
+      "fabricante": "Fabricante E",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 33150,
+      "mtbf_h": 710,
+      "proxima_preventiva": "2026-12-08",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "FER-02",
+      "nome": "Tanque de fermentação 2 (12.000 L)",
+      "linha": "L-BEB",
+      "tipo": "tanque de fermentação",
+      "fabricante": "Fabricante F",
+      "ano": 2011,
+      "status": "operando",
+      "horimetro": 70210,
+      "mtbf_h": 2100,
+      "proxima_preventiva": "2027-01-15",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "ENG-01",
+      "nome": "Envasadora de garrafas e lacradora por indução 1",
+      "linha": "L-BEB",
+      "tipo": "envasadora de garrafas",
+      "fabricante": "Fabricante B",
+      "ano": 2013,
+      "status": "manutencao",
+      "horimetro": 52680,
+      "mtbf_h": 260,
+      "proxima_preventiva": "2026-11-25",
+      "manual": "DOC-MAN-ENG"
+    },
+    {
+      "id": "FIL-01",
+      "nome": "Filadeira de mussarela 1",
+      "linha": "L-QUE",
+      "tipo": "filadeira",
+      "fabricante": "Fabricante G",
+      "ano": 2014,
+      "status": "operando",
+      "horimetro": 44730,
+      "mtbf_h": 540,
+      "proxima_preventiva": "2026-11-30",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "VAC-01",
+      "nome": "Embaladora a vácuo (termoformadora) 1",
+      "linha": "L-QUE",
+      "tipo": "embaladora a vácuo",
+      "fabricante": "Fabricante C",
+      "ano": 2016,
+      "status": "parada",
+      "horimetro": 36980,
+      "mtbf_h": 300,
+      "proxima_preventiva": "2026-11-21",
+      "manual": "DOC-MAN-VAC"
+    },
+    {
+      "id": "EVA-01",
+      "nome": "Evaporador de múltiplo efeito 1",
+      "linha": "L-PO",
+      "tipo": "evaporador",
+      "fabricante": "Fabricante D",
+      "ano": 2010,
+      "status": "operando",
+      "horimetro": 81260,
+      "mtbf_h": 1150,
+      "proxima_preventiva": "2026-12-12",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "SEC-01",
+      "nome": "Torre de secagem spray 1",
+      "linha": "L-PO",
+      "tipo": "secador spray",
+      "fabricante": "Fabricante D",
+      "ano": 2010,
+      "status": "operando",
+      "horimetro": 79940,
+      "mtbf_h": 860,
+      "proxima_preventiva": "2026-12-04",
+      "manual": "DOC-MAN-PROC"
+    },
+    {
+      "id": "ENS-01",
+      "nome": "Envasadora de sachês de pó 1",
+      "linha": "L-PO",
+      "tipo": "envasadora de sachês",
+      "fabricante": "Fabricante H",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 24410,
+      "mtbf_h": 450,
+      "proxima_preventiva": "2026-11-19",
+      "manual": "DOC-MAN-ENG"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "LT-1001",
+      "nome": "Leite UHT integral 1 L",
+      "familia": "Leites UHT",
+      "unidade": "caixas",
+      "preco": 61.8,
+      "prazo_dias": 3,
+      "estoque": 18400,
+      "estoque_minimo": 15000,
+      "descricao_comercial": "Leite UHT integral em embalagem cartonada de 1 L com tampa, caixa com 12 unidades. Validade de 120 dias, leite captado no oeste catarinense e padronizado a 3,0% de gordura.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Cartonada asséptica 1 L com tampa",
+          "Embalagem secundária": "Caixa com 12 unidades",
+          "Validade": "120 dias",
+          "Conservação": "Temperatura ambiente; após aberto, refrigerar e consumir em até 3 dias",
+          "Palete": "84 caixas (7 camadas de 12)"
+        },
+        "roteiro": [
+          "Recepção e análise do leite cru",
+          "Padronização e pasteurização (PAS-01)",
+          "Esterilização UHT (UHT-02)",
+          "Envase asséptico (ENV-03 / ENV-04)",
+          "Quarentena e incubação de amostras",
+          "Liberação pela qualidade",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Gordura",
+            "nominal": "3,0",
+            "tolerancia": "±0,1",
+            "unidade": "g/100 mL"
+          },
+          {
+            "caracteristica": "Temperatura de esterilização",
+            "nominal": "140",
+            "tolerancia": "+2 / −1",
+            "unidade": "°C"
+          },
+          {
+            "caracteristica": "Tempo de retenção",
+            "nominal": "4",
+            "tolerancia": "mínimo 4",
+            "unidade": "s"
+          },
+          {
+            "caracteristica": "Estabilidade no alizarol",
+            "nominal": "estável a 78% v/v",
+            "tolerancia": "sem coagulação",
+            "unidade": ""
+          }
+        ]
+      }
+    },
+    {
+      "sku": "LT-1002",
+      "nome": "Leite UHT desnatado 1 L",
+      "familia": "Leites UHT",
+      "unidade": "caixas",
+      "preco": 59.4,
+      "prazo_dias": 3,
+      "estoque": 6200,
+      "estoque_minimo": 5000,
+      "descricao_comercial": "Leite UHT desnatado 1 L, caixa com 12 unidades. Até 0,5% de gordura, validade de 120 dias e o mesmo padrão de captação do integral.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Cartonada asséptica 1 L com tampa",
+          "Embalagem secundária": "Caixa com 12 unidades",
+          "Validade": "120 dias",
+          "Palete": "84 caixas"
+        },
+        "roteiro": [
+          "Recepção",
+          "Desnate e pasteurização (PAS-01)",
+          "Esterilização UHT (UHT-02)",
+          "Envase asséptico (ENV-04)",
+          "Quarentena",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Gordura",
+            "nominal": "≤ 0,5",
+            "tolerancia": "máximo",
+            "unidade": "g/100 mL"
+          },
+          {
+            "caracteristica": "Temperatura de esterilização",
+            "nominal": "140",
+            "tolerancia": "+2 / −1",
+            "unidade": "°C"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "LT-1005",
+      "nome": "Leite UHT semidesnatado zero lactose 1 L",
+      "familia": "Leites UHT",
+      "unidade": "caixas",
+      "preco": 79.2,
+      "prazo_dias": 4,
+      "estoque": 1900,
+      "estoque_minimo": 4000,
+      "descricao_comercial": "Leite UHT semidesnatado zero lactose 1 L, caixa com 12. Lactose hidrolisada com enzima lactase, teor residual abaixo de 0,1 g/100 mL, validade de 120 dias.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Cartonada asséptica 1 L com tampa",
+          "Embalagem secundária": "Caixa com 12 unidades",
+          "Validade": "120 dias",
+          "Insumo crítico": "Enzima lactase (fornecedor de enzimas homologado)"
+        },
+        "roteiro": [
+          "Recepção",
+          "Padronização e pasteurização (PAS-01)",
+          "Hidrólise com lactase (tanque de espera, 4 °C, 18 h)",
+          "Esterilização UHT (UHT-02)",
+          "Envase asséptico (ENV-04)",
+          "Quarentena e análise de lactose residual",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Lactose residual",
+            "nominal": "< 0,1",
+            "tolerancia": "máximo",
+            "unidade": "g/100 mL"
+          },
+          {
+            "caracteristica": "Gordura",
+            "nominal": "1,0",
+            "tolerancia": "±0,1",
+            "unidade": "g/100 mL"
+          },
+          {
+            "caracteristica": "Tempo de hidrólise",
+            "nominal": "18",
+            "tolerancia": "±2",
+            "unidade": "h"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "CR-5001",
+      "nome": "Creme de leite UHT 200 g",
+      "familia": "Cremes e manteiga",
+      "unidade": "caixas",
+      "preco": 75.6,
+      "prazo_dias": 3,
+      "estoque": 7300,
+      "estoque_minimo": 4000,
+      "descricao_comercial": "Creme de leite UHT 200 g com 17% de gordura, caixa com 27 unidades. Validade de 180 dias, ideal para receitas quentes e frias.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Cartonada asséptica 200 g",
+          "Embalagem secundária": "Caixa com 27 unidades",
+          "Validade": "180 dias"
+        },
+        "roteiro": [
+          "Padronização do creme",
+          "Esterilização UHT (UHT-02)",
+          "Envase asséptico (ENV-04)",
+          "Quarentena",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Gordura",
+            "nominal": "17",
+            "tolerancia": "±0,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Viscosidade a 20 °C",
+            "nominal": "180",
+            "tolerancia": "±30",
+            "unidade": "mPa·s"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "BL-2010",
+      "nome": "Bebida láctea fermentada morango 900 g",
+      "familia": "Bebidas lácteas",
+      "unidade": "fardos",
+      "preco": 41.4,
+      "prazo_dias": 5,
+      "estoque": 820,
+      "estoque_minimo": 3000,
+      "descricao_comercial": "Bebida láctea fermentada sabor morango em garrafa de 900 g, fardo com 6 unidades. Validade de 45 dias sob refrigeração de 1 a 10 °C. Campeã de giro nas redes do Sul.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Garrafa PEAD 900 g com lacre por indução e tampa",
+          "Embalagem secundária": "Fardo com 6 garrafas",
+          "Validade": "45 dias",
+          "Conservação": "Refrigerado, 1 a 10 °C",
+          "Formulação": "Restrita (ficha DOC-FT-BL2010)"
+        },
+        "roteiro": [
+          "Padronização da base",
+          "Pasteurização e homogeneização (HOM-01)",
+          "Fermentação (FER-02, 42 °C até pH 4,55)",
+          "Quebra e resfriamento a 4 °C",
+          "Adição de preparado de morango",
+          "Envase e lacre por indução (ENG-01)",
+          "Câmara fria",
+          "Expedição refrigerada"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "pH final",
+            "nominal": "4,4",
+            "tolerancia": "±0,1",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Temperatura de envase",
+            "nominal": "≤ 8",
+            "tolerancia": "máximo",
+            "unidade": "°C"
+          },
+          {
+            "caracteristica": "Torque de abertura da tampa",
+            "nominal": "1,4",
+            "tolerancia": "±0,3",
+            "unidade": "N·m"
+          },
+          {
+            "caracteristica": "Integridade do lacre",
+            "nominal": "100% selado",
+            "tolerancia": "0 falhas em 315 garrafas",
+            "unidade": ""
+          }
+        ]
+      }
+    },
+    {
+      "sku": "BL-2012",
+      "nome": "Bebida láctea fermentada chocolate 900 g",
+      "familia": "Bebidas lácteas",
+      "unidade": "fardos",
+      "preco": 42.6,
+      "prazo_dias": 5,
+      "estoque": 3400,
+      "estoque_minimo": 2500,
+      "descricao_comercial": "Bebida láctea fermentada sabor chocolate em garrafa de 900 g, fardo com 6. Validade de 45 dias sob refrigeração.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Garrafa PEAD 900 g com lacre por indução",
+          "Embalagem secundária": "Fardo com 6 garrafas",
+          "Validade": "45 dias",
+          "Conservação": "Refrigerado, 1 a 10 °C"
+        },
+        "roteiro": [
+          "Padronização",
+          "Pasteurização e homogeneização (HOM-01)",
+          "Fermentação (FER-02)",
+          "Adição de preparado de cacau",
+          "Envase e lacre por indução (ENG-01)",
+          "Câmara fria",
+          "Expedição refrigerada"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "pH final",
+            "nominal": "4,5",
+            "tolerancia": "±0,1",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Temperatura de envase",
+            "nominal": "≤ 8",
+            "tolerancia": "máximo",
+            "unidade": "°C"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "QJ-3001",
+      "nome": "Queijo mussarela peça 4 kg",
+      "familia": "Queijos",
+      "unidade": "kg",
+      "preco": 32.9,
+      "prazo_dias": 4,
+      "estoque": 41200,
+      "estoque_minimo": 30000,
+      "descricao_comercial": "Mussarela em peça de cerca de 4 kg, embalada a vácuo. Fatia sem esfarelar e derrete por igual: a preferida de pizzarias e fatiadores. Validade de 90 dias refrigerada.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Peça de 4 kg a vácuo, caixa com 4 peças",
+          "Validade": "90 dias",
+          "Conservação": "Refrigerado, 0 a 8 °C"
+        },
+        "roteiro": [
+          "Recepção e pasteurização",
+          "Coagulação",
+          "Corte e dessoragem",
+          "Fermentação da massa",
+          "Filagem (FIL-01)",
+          "Moldagem e salmoura",
+          "Embalagem a vácuo (VAC-01)",
+          "Câmara fria",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Umidade",
+            "nominal": "45,0",
+            "tolerancia": "máximo 46,0",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Gordura no extrato seco",
+            "nominal": "40",
+            "tolerancia": "±2",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Temperatura da água de filagem",
+            "nominal": "78",
+            "tolerancia": "±3",
+            "unidade": "°C"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "QJ-3005",
+      "nome": "Mussarela fatiada 150 g",
+      "familia": "Queijos",
+      "unidade": "caixas",
+      "preco": 118,
+      "prazo_dias": 6,
+      "estoque": 380,
+      "estoque_minimo": 1200,
+      "descricao_comercial": "Mussarela fatiada interfolhada em bandeja de 150 g a vácuo, caixa com 20 pacotes. Validade de 60 dias, pronta para a gôndola de frios.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Bandeja termoformada 150 g a vácuo",
+          "Embalagem secundária": "Caixa com 20 pacotes",
+          "Validade": "60 dias",
+          "Conservação": "Refrigerado, 0 a 8 °C"
+        },
+        "roteiro": [
+          "Mussarela em bloco (QJ-3001)",
+          "Fatiamento e interfolhamento",
+          "Termoformagem e vácuo (VAC-01)",
+          "Detector de metais",
+          "Câmara fria",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Peso líquido",
+            "nominal": "150",
+            "tolerancia": "−0 / +6",
+            "unidade": "g"
+          },
+          {
+            "caracteristica": "Vácuo residual",
+            "nominal": "≤ 10",
+            "tolerancia": "máximo",
+            "unidade": "mbar"
+          },
+          {
+            "caracteristica": "Espessura da fatia",
+            "nominal": "2,0",
+            "tolerancia": "±0,2",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "QJ-3010",
+      "nome": "Queijo prato peça 3 kg",
+      "familia": "Queijos",
+      "unidade": "kg",
+      "preco": 36.4,
+      "prazo_dias": 4,
+      "estoque": 12600,
+      "estoque_minimo": 10000,
+      "descricao_comercial": "Queijo prato em peça de cerca de 3 kg, maturado por 25 dias e embalado a vácuo. Validade de 90 dias refrigerado.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Peça de 3 kg a vácuo",
+          "Validade": "90 dias",
+          "Maturação": "25 dias a 12 °C"
+        },
+        "roteiro": [
+          "Pasteurização",
+          "Coagulação",
+          "Prensagem",
+          "Salmoura",
+          "Maturação (25 dias)",
+          "Embalagem a vácuo (VAC-01)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Umidade",
+            "nominal": "42",
+            "tolerancia": "±1,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Tempo de maturação",
+            "nominal": "25",
+            "tolerancia": "mínimo 25",
+            "unidade": "dias"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PO-4001",
+      "nome": "Leite em pó integral 400 g",
+      "familia": "Leite em pó",
+      "unidade": "caixas",
+      "preco": 446.4,
+      "prazo_dias": 7,
+      "estoque": 2100,
+      "estoque_minimo": 1500,
+      "descricao_comercial": "Leite em pó integral instantâneo em sachê metalizado de 400 g, caixa com 24. Dissolve sem grumos em água morna; validade de 12 meses.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Sachê metalizado 400 g",
+          "Embalagem secundária": "Caixa com 24 sachês",
+          "Validade": "12 meses",
+          "Conservação": "Local seco e fresco"
+        },
+        "roteiro": [
+          "Padronização e pasteurização",
+          "Evaporação (EVA-01)",
+          "Secagem spray (SEC-01)",
+          "Instantaneização",
+          "Envase em sachê com nitrogênio (ENS-01)",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Umidade",
+            "nominal": "3,0",
+            "tolerancia": "máximo 3,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Índice de solubilidade",
+            "nominal": "≤ 1,0",
+            "tolerancia": "máximo",
+            "unidade": "mL"
+          },
+          {
+            "caracteristica": "Oxigênio residual no sachê",
+            "nominal": "≤ 2",
+            "tolerancia": "máximo",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PO-4005",
+      "nome": "Leite em pó integral saco 25 kg (uso industrial)",
+      "familia": "Leite em pó",
+      "unidade": "sacos",
+      "preco": 742.5,
+      "prazo_dias": 10,
+      "estoque": 960,
+      "estoque_minimo": 600,
+      "descricao_comercial": "Leite em pó integral em saco multifolhado de 25 kg com liner, para indústrias de chocolate, panificação e sorvetes. Laudo por lote enviado com a nota fiscal.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Saco multifolhado 25 kg com liner de PE",
+          "Palete": "40 sacos (1.000 kg)",
+          "Validade": "12 meses",
+          "Documentos": "Laudo de análise por lote"
+        },
+        "roteiro": [
+          "Padronização e pasteurização",
+          "Evaporação (EVA-01)",
+          "Secagem spray (SEC-01)",
+          "Ensaque 25 kg",
+          "Laudo do laboratório",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Umidade",
+            "nominal": "3,0",
+            "tolerancia": "máximo 3,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Gordura",
+            "nominal": "26",
+            "tolerancia": "mínimo 26",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Partículas queimadas",
+            "nominal": "disco A",
+            "tolerancia": "até disco B",
+            "unidade": ""
+          }
+        ]
+      }
+    },
+    {
+      "sku": "MT-5010",
+      "nome": "Manteiga com sal 200 g",
+      "familia": "Cremes e manteiga",
+      "unidade": "caixas",
+      "preco": 254,
+      "prazo_dias": 5,
+      "estoque": 1450,
+      "estoque_minimo": 1000,
+      "descricao_comercial": "Manteiga extra com sal em pote de 200 g, caixa com 20. Feita com creme da própria captação, validade de 120 dias refrigerada.",
+      "ficha": {
+        "atributos": {
+          "Embalagem": "Pote PP 200 g com selo de alumínio",
+          "Embalagem secundária": "Caixa com 20 potes",
+          "Validade": "120 dias",
+          "Conservação": "Refrigerado, até 10 °C"
+        },
+        "roteiro": [
+          "Padronização do creme",
+          "Pasteurização do creme",
+          "Maturação física",
+          "Batedura",
+          "Salga e malaxagem",
+          "Envase de potes",
+          "Câmara fria",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Gordura",
+            "nominal": "82",
+            "tolerancia": "mínimo 82",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Sal",
+            "nominal": "1,8",
+            "tolerancia": "±0,2",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Umidade",
+            "nominal": "15,5",
+            "tolerancia": "máximo 16",
+            "unidade": "%"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-7420",
+      "sku": "BL-2010",
+      "quantidade": 4200,
+      "linha": "L-BEB",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-10",
+      "status": "atrasada",
+      "progresso": 38,
+      "pedido": "PV-61240",
+      "motivo_atraso": "Envasadora de garrafas ENG-01 em manutenção desde 09/11 (cabeçote de indução do lacre); envase parado com 1.600 de 4.200 fardos prontos.",
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "Fermentação do lote 2611-06A liberada (pH 4,55 em 6 h 40 min no FER-02)."
+        },
+        {
+          "data": "2026-11-08",
+          "evento": "Envasados 1.600 fardos, lote 2611-08B, validade 23/12/2026; destinados ao PV-61236 (Rede Paiol), já faturado."
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "ENG-01 parou: falha de selagem do lacre por indução em 2,1% da amostragem (NC-2026-089). Aberta a OS-5518."
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Base fermentada do lote 2611-11A (8.400 L) em espera no FER-02 a 4 °C; limite de estocagem de 72 h vence em 14/11 às 18:00."
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Fabricante B confirmou entrega do cabeçote de indução para 14/11 pela manhã. PCP reprograma término para 16/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-7415",
+      "sku": "LT-1005",
+      "quantidade": 6000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 0,
+      "pedido": "PV-61228",
+      "motivo_atraso": "Lote ENZ-2610-33 de enzima lactase retido no recebimento: laudo do fornecedor sem atividade enzimática declarada (NC-2026-091).",
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "OP liberada pelo PCP; hidrólise programada para 06/11."
+        },
+        {
+          "data": "2026-11-06",
+          "evento": "Qualidade reteve o lote ENZ-2610-33 de lactase (laudo incompleto). Hidrólise cancelada."
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Fornecedor de enzimas enviou laudo corrigido; laboratório externo confirma atividade em 14/11."
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "PCP reprogramou hidrólise para 15/11 e envase na ENV-04 em 16/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-7431",
+      "sku": "QJ-3005",
+      "quantidade": 1500,
+      "linha": "L-QUE",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 45,
+      "pedido": "PV-61251",
+      "motivo_atraso": "Embaladora a vácuo VAC-01 parada desde 11/11 às 22:40 (bomba de vácuo); 675 de 1.500 caixas embaladas.",
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Fatiamento iniciado com blocos do lote 2610-29B; lote do fatiado 2611-10C, validade 09/01/2027."
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "VAC-01 perdeu vácuo às 22:40; 210 pacotes sem vácuo segregados (NC-2026-092). OS-5521 aberta."
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Blocos restantes mantidos inteiros na câmara 3 (0 a 4 °C) para não perder validade do fatiado."
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Bomba reserva sendo transferida da Unidade Chapecó; retorno previsto da VAC-01 em 14/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-7426",
+      "sku": "LT-1001",
+      "quantidade": 24000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-13",
+      "status": "atrasada",
+      "progresso": 71,
+      "pedido": "PV-61233",
+      "motivo_atraso": "ENV-03 com selagem transversal instável: velocidade reduzida para 6.000 emb/h e duas paradas por turno para teste de integridade.",
+      "historico": [
+        {
+          "data": "2026-11-09",
+          "evento": "Início na ENV-03 e ENV-04, lote 2611-09A."
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Turno B: 3 embalagens reprovadas no teste de integridade na ENV-03; velocidade reduzida (OS-5512)."
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Lote 2611-12B envasado, validade 12/03/2027. Acumulado: 17.040 de 24.000 caixas."
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Previsão de término revista para 15/11, após troca do indutor na parada de higienização de 14/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-7405",
+      "sku": "LT-1001",
+      "quantidade": 20000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-03",
+      "prazo": "2026-11-06",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-61220",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "Início, lote 2611-03A."
+        },
+        {
+          "data": "2026-11-05",
+          "evento": "Lote 2611-05B envasado (validade 05/03/2027) — lote depois citado no SAC (NC-2026-087)."
+        },
+        {
+          "data": "2026-11-06",
+          "evento": "Concluída: 20.000 caixas; quarentena liberada em 08/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-7409",
+      "sku": "PO-4005",
+      "quantidade": 1200,
+      "linha": "L-PO",
+      "inicio": "2026-11-04",
+      "prazo": "2026-11-09",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-61224",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "Secagem do lote 2611-04P iniciada na SEC-01."
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "Concluída: 1.200 sacos; laudo do laboratório emitido (umidade 2,9%)."
+        }
+      ]
+    },
+    {
+      "id": "OP-7412",
+      "sku": "QJ-3001",
+      "quantidade": 38000,
+      "linha": "L-QUE",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-10",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "Produção para estoque, lotes 2611-05A a 2611-09C."
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Concluída: 38.000 kg; rendimento médio 9,9 L/kg."
+        }
+      ]
+    },
+    {
+      "id": "OP-7418",
+      "sku": "CR-5001",
+      "quantidade": 8000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-07",
+      "prazo": "2026-11-10",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Concluída na ENV-04: 8.000 caixas, lote 2611-07A, validade 06/05/2027."
+        }
+      ]
+    },
+    {
+      "id": "OP-7419",
+      "sku": "LT-1001",
+      "quantidade": 22000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-09",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-61230",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-09",
+          "evento": "Concluída: 22.000 caixas, lotes 2611-06C a 2611-08A."
+        }
+      ]
+    },
+    {
+      "id": "OP-7422",
+      "sku": "LT-1002",
+      "quantidade": 9000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-12",
+      "prazo": "2026-11-14",
+      "status": "em_producao",
+      "progresso": 40,
+      "pedido": "PV-61238",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Início na ENV-04, lote 2611-12C, validade 12/03/2027."
+        }
+      ]
+    },
+    {
+      "id": "OP-7424",
+      "sku": "QJ-3010",
+      "quantidade": 15000,
+      "linha": "L-QUE",
+      "inicio": "2026-11-11",
+      "prazo": "2026-11-18",
+      "status": "em_producao",
+      "progresso": 30,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Massa prensada; peças em salmoura. Maturação termina em 06/12 (lote 2611-11Q)."
+        }
+      ]
+    },
+    {
+      "id": "OP-7428",
+      "sku": "PO-4001",
+      "quantidade": 2400,
+      "linha": "L-PO",
+      "inicio": "2026-11-12",
+      "prazo": "2026-11-16",
+      "status": "em_producao",
+      "progresso": 25,
+      "pedido": "PV-61245",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Secagem do lote 2611-12P; envase na ENS-01 a partir de 13/11."
+        }
+      ]
+    },
+    {
+      "id": "OP-7429",
+      "sku": "MT-5010",
+      "quantidade": 1800,
+      "linha": "L-QUE",
+      "inicio": "2026-11-13",
+      "prazo": "2026-11-15",
+      "status": "em_producao",
+      "progresso": 10,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-13",
+          "evento": "Batedura do primeiro lote (2611-13M)."
+        }
+      ]
+    },
+    {
+      "id": "OP-7433",
+      "sku": "BL-2012",
+      "quantidade": 3000,
+      "linha": "L-BEB",
+      "inicio": "2026-11-16",
+      "prazo": "2026-11-18",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Programada após o término da OP-7420; depende do retorno da ENG-01."
+        }
+      ]
+    },
+    {
+      "id": "OP-7435",
+      "sku": "PO-4005",
+      "quantidade": 1600,
+      "linha": "L-PO",
+      "inicio": "2026-11-17",
+      "prazo": "2026-11-21",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-61255",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Programada para o PV-61255 (Doces Finos Araucária)."
+        }
+      ]
+    },
+    {
+      "id": "OP-7437",
+      "sku": "QJ-3001",
+      "quantidade": 42000,
+      "linha": "L-QUE",
+      "inicio": "2026-11-16",
+      "prazo": "2026-11-21",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-61249",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Programada; 18.000 kg reservados ao PV-61249 (Brasa Viva)."
+        }
+      ]
+    },
+    {
+      "id": "OP-7441",
+      "sku": "BL-2010",
+      "quantidade": 4000,
+      "linha": "L-BEB",
+      "inicio": "2026-11-19",
+      "prazo": "2026-11-21",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-61253",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-13",
+          "evento": "Programada para repor estoque de BL-2010 e atender o PV-61253 (Litoral Norte); depende da ENG-01."
+        }
+      ]
+    },
+    {
+      "id": "OP-7439",
+      "sku": "LT-1005",
+      "quantidade": 6000,
+      "linha": "L-UHT",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-20",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Reposição de estoque; usa a lactase liberada após a NC-2026-091."
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-12",
+      "turno": "B",
+      "linha": "L-UHT",
+      "produzido": 7140,
+      "refugo": 312,
+      "paradas_min": 95,
+      "resumo": "Turno abaixo da meta de 9.600 caixas. A ENV-03 rodou a 6.000 emb/h e parou duas vezes para teste de integridade; a ENV-04 rodou normal. Lote 2611-12B, validade 12/03/2027.",
+      "ocorrencias": [
+        "ENV-03 parou 40 min às 16:20: teste de integridade após 2 embalagens com selagem transversal fraca",
+        "ENV-03 parou 35 min às 20:05: temperatura do indutor oscilando ±6 °C",
+        "ENV-04 parou 20 min: emenda de bobina de material de embalagem"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "A",
+      "linha": "L-UHT",
+      "produzido": 8950,
+      "refugo": 140,
+      "paradas_min": 35,
+      "resumo": "Turno perto da meta. ENV-03 já com velocidade reduzida desde o turno B de 11/11, mas sem reprovações no teste de integridade.",
+      "ocorrencias": [
+        "Troca de bobina na ENV-03 levou 15 min a mais que o padrão",
+        "CIP intermediário da ENV-04 sem desvio"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "B",
+      "linha": "L-UHT",
+      "produzido": 7420,
+      "refugo": 280,
+      "paradas_min": 80,
+      "resumo": "Primeiro turno com reprovação na ENV-03: 3 embalagens com selagem transversal fraca no teste de integridade. Supervisor reduziu a velocidade e abriu a OS-5512.",
+      "ocorrencias": [
+        "ENV-03 parou 50 min: teste de integridade com 3 reprovações",
+        "ENV-03 parou 30 min: ajuste do alinhamento da bobina"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "A",
+      "linha": "L-BEB",
+      "produzido": 0,
+      "refugo": 0,
+      "paradas_min": 480,
+      "resumo": "Envase de garrafas parado o turno todo (ENG-01 em manutenção). Equipe fez fermentação de base e higienização; base do lote 2611-11A em espera no FER-02 a 4 °C.",
+      "ocorrencias": [
+        "ENG-01 aguardando cabeçote de indução (OS-5518)",
+        "Base fermentada 2611-11A agitada às 06:00 e 14:00, pH 4,42"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "B",
+      "linha": "L-QUE",
+      "produzido": 7400,
+      "refugo": 96,
+      "paradas_min": 30,
+      "resumo": "Mussarela em bloco dentro do previsto em volume, mas com rendimento de 9,9 litros por kg contra meta de 9,6. Leite recebido com proteína mais baixa (média 3,02%).",
+      "ocorrencias": [
+        "FIL-01: água de filagem a 75 °C por 20 min (abaixo de 78 ± 3 °C) até ajuste do termostato",
+        "Fatiamento suspenso: VAC-01 parada"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "C",
+      "linha": "L-QUE",
+      "produzido": 3100,
+      "refugo": 210,
+      "paradas_min": 80,
+      "resumo": "VAC-01 perdeu vácuo às 22:40 e parou a linha de fatiados. 210 pacotes sem vácuo do lote 2611-10C foram segregados.",
+      "ocorrencias": [
+        "VAC-01: bomba de vácuo com ruído e óleo turvo, vácuo residual subiu para 60 mbar",
+        "210 pacotes segregados (NC-2026-092)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "A",
+      "linha": "L-PO",
+      "produzido": 18200,
+      "refugo": 140,
+      "paradas_min": 20,
+      "resumo": "Secagem estável do lote 2611-12P; umidade média 3,0%. Uma parada curta para limpeza de bico do atomizador.",
+      "ocorrencias": [
+        "SEC-01: limpeza de bico do atomizador, 20 min"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-087",
+      "data": "2026-11-07",
+      "sku": "LT-1001",
+      "linha": "L-UHT",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "SAC recebeu 3 reclamações de caixa estufada de leite UHT integral, lote 2611-05B (validade 05/03/2027), em lojas da Rede Ipê Dourado (Joinville) e do Atacarejo Tropeiro (Lages).",
+      "causa": "Em análise. Hipótese principal: selagem transversal fraca na ENV-03, que envasou o lote 2611-05B; temperatura do indutor oscilando desde o início de novembro. Verificação do PCC 2 (esterilização) do lote dentro do limite.",
+      "acao": "Retidas 4.800 caixas do lote 2611-05B no CD; 120 amostras em incubação a 35 °C por 7 dias (resultado em 15/11); rastreabilidade do lote concluída: 4 clientes receberam o lote.",
+      "status": "em_analise",
+      "responsavel": "Patrícia Hoffmann",
+      "oito_d": {
+        "D1": "Equipe: Patrícia Hoffmann (qualidade, líder), Gilmar Rossetto (manutenção), Valdir Schmitt (operador ENV-03), Cláudio Ferrari (PCP), Débora Lins (SAC).",
+        "D2": "3 caixas estufadas de LT-1001, lote 2611-05B, envasadas na ENV-03 no turno B de 05/11; reclamações de Joinville (2) e Lages (1) entre 07 e 09/11.",
+        "D3": "Contenção: 4.800 caixas do lote retidas no CD; clientes avisados para segregar o lote na loja; 120 amostras em incubação a 35 °C.",
+        "D4": "Em andamento: PCC 2 dentro do limite (140–141 °C, 4 s) nas 6 verificações do turno; foco na selagem transversal da ENV-03 (indutor oscilando ±6 °C, ver OS-5512).",
+        "D5": "Proposta: trocar o conjunto indutor e o sensor PT100 da ENV-03 e incluir teste de integridade a cada troca de bobina (DOC-PRO-INT, seção 3.2).",
+        "D6": "Previsto para 14/11, na parada de higienização da linha UHT.",
+        "D7": "Previsto: revisar o plano de inspeção da ENV-03 e o limite de alarme de temperatura do indutor (de ±8 °C para ±4 °C).",
+        "D8": "Pendente: reconhecer a equipe e encerrar após resultado da incubação e 2 semanas sem reprovação."
+      }
+    },
+    {
+      "id": "NC-2026-091",
+      "data": "2026-11-06",
+      "sku": "LT-1005",
+      "linha": "L-UHT",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "Laudo do lote ENZ-2610-33 de enzima lactase chegou sem a atividade enzimática declarada (campo em branco). Lote retido no recebimento; OP-7415 sem insumo.",
+      "causa": "Fornecedor de enzimas emitiu laudo em modelo novo, sem o campo de atividade; falha no controle documental do fornecedor.",
+      "acao": "Solicitado laudo corrigido (recebido em 10/11) e contraprova em laboratório externo, resultado em 14/11. Fornecedor notificado no programa de qualificação.",
+      "status": "aberta",
+      "responsavel": "Carla Menegatti",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-089",
+      "data": "2026-11-09",
+      "sku": "BL-2010",
+      "linha": "L-BEB",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Lacre por indução mal selado em 2,1% das garrafas da amostragem de 315 unidades do lote 2611-08B (bebida láctea morango, validade 23/12/2026).",
+      "causa": "Cabeçote de indução da ENG-01 com bobina desgastada; potência efetiva caiu cerca de 15% (OS-5518).",
+      "acao": "Inspeção 100% do lote 2611-08B antes da expedição (34 garrafas descartadas); envase suspenso até a troca do cabeçote.",
+      "status": "em_analise",
+      "responsavel": "Patrícia Hoffmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-092",
+      "data": "2026-11-11",
+      "sku": "QJ-3005",
+      "linha": "L-QUE",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "210 pacotes de mussarela fatiada do lote 2611-10C (validade 09/01/2027) saíram sem vácuo após a falha da VAC-01 às 22:40.",
+      "causa": "Bomba de vácuo da VAC-01 com óleo contaminado e palhetas gastas; troca de óleo estava atrasada 3 semanas.",
+      "acao": "Pacotes segregados e destinados a reprocesso como mussarela para fundir; OS-5521 aberta; troca de óleo passa a ter alerta no plano de preventiva.",
+      "status": "aberta",
+      "responsavel": "Rafael Tonello",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-090",
+      "data": "2026-11-09",
+      "sku": "MT-5010",
+      "linha": "L-QUE",
+      "origem": "cliente",
+      "severidade": "baixa",
+      "descricao": "Auditoria de fornecedor da Rede Ipê Dourado apontou 2 registros de higienização CIP da linha de manteiga sem assinatura do conferente (semana de 26/10).",
+      "causa": "Conferente do turno C cobriu férias e não assinou a planilha em papel; não houve desvio de parâmetro do CIP.",
+      "acao": "Registros complementados com dados do CLP; treinamento do conferente; planilha de CIP passa a ser digital (DOC-BPF-CIP, seção 6).",
+      "status": "aberta",
+      "responsavel": "Carla Menegatti",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-080",
+      "data": "2026-10-24",
+      "sku": "PO-4001",
+      "linha": "L-PO",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Distribuidora Paulista Lácteos Reunidos relatou grumos e sabor de ranço em sachês do lote 2610-14A (validade 14/10/2027).",
+      "causa": "Microfuro na solda vertical de sachês da ENS-01 após troca de mordente; oxigênio residual de até 6% (especificação ≤ 2%).",
+      "acao": "Recolhidas 310 caixas do lote; mordente substituído; teste de oxigênio residual a cada 30 min nas primeiras 2 h após troca de mordente.",
+      "status": "encerrada",
+      "responsavel": "Rafael Tonello",
+      "oito_d": {
+        "D1": "Equipe: Rafael Tonello (qualidade P2, líder), Elton Weber (secagem), Ademir Bortolini (manutenção), Juliana Kremer (comercial).",
+        "D2": "Sachês de PO-4001 do lote 2610-14A com grumos e ranço relatados pelo cliente em 24/10; 3 de 40 sachês da contraprova com oxigênio residual acima de 2%.",
+        "D3": "Contenção: 310 caixas recolhidas no cliente e no CD; lotes 2610-13A e 2610-15A testados e liberados.",
+        "D4": "Causa raiz: mordente de solda vertical trocado em 13/10 sem teste de estanqueidade; microfuros na solda permitiram entrada de ar.",
+        "D5": "Ação corretiva: incluir teste de estanqueidade e oxigênio residual no checklist de troca de mordente.",
+        "D6": "Implantado em 28/10; 9 lotes seguintes com oxigênio residual entre 0,8% e 1,6%.",
+        "D7": "Prevenção: instrução de troca de mordente revisada (DOC-MAN-ENG, seção 7.4) e aplicada também à ENG-01.",
+        "D8": "Encerrada em 07/11; equipe reconhecida na reunião mensal da qualidade."
+      }
+    },
+    {
+      "id": "NC-2026-084",
+      "data": "2026-10-30",
+      "sku": "QJ-3001",
+      "linha": "L-QUE",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Umidade de 46,8% no lote 2610-29A de mussarela (especificação: máximo 46,0%); validade 27/01/2027.",
+      "causa": "Tempo de dessoragem 6 min menor que o padrão por pressa no fim do turno.",
+      "acao": "Lote destinado ao fatiamento interno; dessoragem com tempo mínimo travado no CLP.",
+      "status": "encerrada",
+      "responsavel": "Rafael Tonello",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-078",
+      "data": "2026-10-18",
+      "sku": "LT-1002",
+      "linha": "L-REC",
+      "origem": "fornecedor",
+      "severidade": "baixa",
+      "descricao": "Leite cru da rota 14 com contagem bacteriana acima do limite interno de aceite em 2 coletas seguidas.",
+      "causa": "Resfriador de expansão de um produtor da rota com termostato defeituoso.",
+      "acao": "Produtor visitado pela assistência técnica; leite da rota segregado até 2 análises conformes.",
+      "status": "encerrada",
+      "responsavel": "Luciane Brustolin",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-086",
+      "data": "2026-11-04",
+      "sku": "CR-5001",
+      "linha": "L-UHT",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Impressão de validade falhada em 40 caixas do lote 2611-04A de creme de leite (validade 03/05/2027).",
+      "causa": "Cabeça de impressão do codificador a jato de tinta entupida.",
+      "acao": "Caixas reetiquetadas com conferência dupla; limpeza da cabeça incluída no início de cada turno.",
+      "status": "encerrada",
+      "responsavel": "Patrícia Hoffmann",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-5512",
+      "maquina": "ENV-03",
+      "tipo": "corretiva",
+      "data": "2026-11-11",
+      "status": "aberta",
+      "tecnico": "Gilmar Rossetto",
+      "duracao_h": 3.5,
+      "descricao": "Temperatura do indutor de selagem transversal oscilando ±6 °C; 3 embalagens reprovadas no teste de integridade (turno B de 11/11). Troca do conjunto indutor e do sensor PT100 programada para a parada de higienização de 14/11.",
+      "pecas": [
+        "Conjunto indutor de selagem transversal",
+        "Sensor de temperatura PT100",
+        "Mangueira de água de resfriamento do indutor"
+      ],
+      "procedimento": "DOC-MAN-ENV"
+    },
+    {
+      "id": "OS-5518",
+      "maquina": "ENG-01",
+      "tipo": "corretiva",
+      "data": "2026-11-09",
+      "status": "em_execucao",
+      "tecnico": "Ademir Bortolini",
+      "duracao_h": 6,
+      "descricao": "Lacre por indução com falha de selagem; bobina do cabeçote desgastada, potência efetiva 15% abaixo. Cabeçote novo do Fabricante B chega em 14/11 pela manhã; teste de torque e de selagem antes de liberar.",
+      "pecas": [
+        "Cabeçote de indução completo",
+        "Placa de controle de potência"
+      ],
+      "procedimento": "DOC-MAN-ENG"
+    },
+    {
+      "id": "OS-5521",
+      "maquina": "VAC-01",
+      "tipo": "corretiva",
+      "data": "2026-11-11",
+      "status": "aberta",
+      "tecnico": "Ademir Bortolini",
+      "duracao_h": 4,
+      "descricao": "Bomba de vácuo com óleo turvo e palhetas gastas; vácuo residual subiu para 60 mbar. Bomba reserva vindo da Unidade Chapecó; troca de óleo do conjunto e teste de vácuo (≤ 10 mbar) antes de liberar.",
+      "pecas": [
+        "Bomba de vácuo de palhetas (reserva)",
+        "Óleo para bomba de vácuo 5 L",
+        "Kit de palhetas"
+      ],
+      "procedimento": "DOC-MAN-VAC"
+    },
+    {
+      "id": "OS-5524",
+      "maquina": "ENV-04",
+      "tipo": "preventiva",
+      "data": "2026-11-14",
+      "status": "aberta",
+      "tecnico": "Gilmar Rossetto",
+      "duracao_h": 5,
+      "descricao": "Preventiva de 2.000 h na parada de higienização: mordentes, facas de corte, verificação do banho de peróxido e calibração do sensor de nível.",
+      "pecas": [
+        "Jogo de facas de corte",
+        "Kit de vedações do banho de peróxido"
+      ],
+      "procedimento": "DOC-MAN-ENV"
+    },
+    {
+      "id": "OS-5490",
+      "maquina": "UHT-02",
+      "tipo": "preventiva",
+      "data": "2026-11-03",
+      "status": "concluida",
+      "tecnico": "Jonas Pegoraro",
+      "duracao_h": 7,
+      "descricao": "Inspeção do trocador tubular e calibração do sensor de temperatura do tubo de retenção; desvio de 0,3 °C corrigido.",
+      "pecas": [
+        "Gaxetas do trocador tubular"
+      ],
+      "procedimento": "DOC-MAN-PROC"
+    },
+    {
+      "id": "OS-5502",
+      "maquina": "SEC-01",
+      "tipo": "preventiva",
+      "data": "2026-11-06",
+      "status": "concluida",
+      "tecnico": "Jonas Pegoraro",
+      "duracao_h": 4.5,
+      "descricao": "Limpeza dos bicos do atomizador e inspeção das mangas do filtro.",
+      "pecas": [
+        "2 mangas de filtro"
+      ],
+      "procedimento": "DOC-MAN-PROC"
+    },
+    {
+      "id": "OS-5506",
+      "maquina": "PAS-01",
+      "tipo": "preditiva",
+      "data": "2026-11-07",
+      "status": "concluida",
+      "tecnico": "Marcelo Zanin",
+      "duracao_h": 1.5,
+      "descricao": "Análise de vibração da bomba de leite cru: 3,1 mm/s, dentro do limite de 4,5 mm/s. Próxima medição em 30 dias.",
+      "pecas": [],
+      "procedimento": null
+    },
+    {
+      "id": "OS-5509",
+      "maquina": "HOM-01",
+      "tipo": "preventiva",
+      "data": "2026-11-08",
+      "status": "concluida",
+      "tecnico": "Marcelo Zanin",
+      "duracao_h": 5,
+      "descricao": "Troca das vedações dos pistões e das válvulas de homogeneização (2.500 h).",
+      "pecas": [
+        "Kit de vedações de pistão",
+        "Sede de válvula"
+      ],
+      "procedimento": "DOC-MAN-PROC"
+    },
+    {
+      "id": "OS-5515",
+      "maquina": "FIL-01",
+      "tipo": "corretiva",
+      "data": "2026-11-12",
+      "status": "concluida",
+      "tecnico": "Marcelo Zanin",
+      "duracao_h": 1,
+      "descricao": "Água de filagem caiu para 75 °C; termostato da válvula de vapor recalibrado para 78 °C.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-PROC"
+    },
+    {
+      "id": "OS-5526",
+      "maquina": "EVA-01",
+      "tipo": "preditiva",
+      "data": "2026-11-13",
+      "status": "em_execucao",
+      "tecnico": "Jonas Pegoraro",
+      "duracao_h": 2,
+      "descricao": "Termografia dos painéis e do redutor do ventilador do condensador.",
+      "pecas": [],
+      "procedimento": null
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-01",
+      "nome": "Marcos Antônio Zanella",
+      "regiao": "Oeste e Serra de SC, sudoeste do PR",
+      "telefone": "(49) 9••••-3108",
+      "meta_mes": 2400000,
+      "realizado_mes": 1310000
+    },
+    {
+      "id": "REP-02",
+      "nome": "Fernanda Lazzari Pires",
+      "regiao": "Litoral e Norte de SC",
+      "telefone": "(47) 9••••-5521",
+      "meta_mes": 3100000,
+      "realizado_mes": 1580000
+    },
+    {
+      "id": "REP-03",
+      "nome": "Rogério Bastos",
+      "regiao": "RS (Serra e Norte)",
+      "telefone": "(54) 9••••-7740",
+      "meta_mes": 2200000,
+      "realizado_mes": 1240000
+    },
+    {
+      "id": "REP-04",
+      "nome": "Juliana Kremer",
+      "regiao": "PR e interior de SP",
+      "telefone": "(41) 9••••-2219",
+      "meta_mes": 2600000,
+      "realizado_mes": 1490000
+    },
+    {
+      "id": "REP-05",
+      "nome": "Anderson Vieira Lopes",
+      "regiao": "Contas industriais e food service",
+      "telefone": "(49) 9••••-6603",
+      "meta_mes": 1800000,
+      "realizado_mes": 1350000
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-2001",
+      "nome": "Rede Supermercados Ipê Dourado",
+      "cidade": "Joinville",
+      "uf": "SC",
+      "segmento": "rede varejista (38 lojas)",
+      "representante": "REP-02",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 900000,
+      "tabela_preco": "Tabela Redes",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-2002",
+      "nome": "Atacarejo Tropeiro",
+      "cidade": "Lages",
+      "uf": "SC",
+      "segmento": "atacarejo",
+      "representante": "REP-01",
+      "condicao_pagamento": "21/28 dias",
+      "limite_credito": 650000,
+      "tabela_preco": "Tabela Atacado",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-2003",
+      "nome": "Distribuidora Frios Coxilha",
+      "cidade": "Passo Fundo",
+      "uf": "RS",
+      "segmento": "distribuidor refrigerado",
+      "representante": "REP-03",
+      "condicao_pagamento": "28/35 dias",
+      "limite_credito": 420000,
+      "tabela_preco": "Tabela Distribuidor",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-2004",
+      "nome": "Rede Mercados Kühl",
+      "cidade": "Blumenau",
+      "uf": "SC",
+      "segmento": "rede varejista (14 lojas)",
+      "representante": "REP-02",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 480000,
+      "tabela_preco": "Tabela Redes",
+      "ultimo_pedido": "2026-11-02"
+    },
+    {
+      "id": "CLI-2005",
+      "nome": "Doces Finos Araucária Indústria",
+      "cidade": "Curitiba",
+      "uf": "PR",
+      "segmento": "indústria de chocolates (insumo)",
+      "representante": "REP-05",
+      "condicao_pagamento": "28/42 dias",
+      "limite_credito": 750000,
+      "tabela_preco": "Tabela Industrial",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-2006",
+      "nome": "Distribuidora Litoral Norte Alimentos",
+      "cidade": "Itajaí",
+      "uf": "SC",
+      "segmento": "distribuidor refrigerado",
+      "representante": "REP-02",
+      "condicao_pagamento": "28/35 dias",
+      "limite_credito": 380000,
+      "tabela_preco": "Tabela Distribuidor",
+      "ultimo_pedido": "2026-11-13"
+    },
+    {
+      "id": "CLI-2007",
+      "nome": "Rede Supermercados Paiol",
+      "cidade": "Londrina",
+      "uf": "PR",
+      "segmento": "rede varejista (22 lojas)",
+      "representante": "REP-04",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 560000,
+      "tabela_preco": "Tabela Redes",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-2008",
+      "nome": "Brasa Viva Distribuição Food Service",
+      "cidade": "Porto Alegre",
+      "uf": "RS",
+      "segmento": "food service (pizzarias e restaurantes)",
+      "representante": "REP-05",
+      "condicao_pagamento": "21 dias",
+      "limite_credito": 620000,
+      "tabela_preco": "Tabela Food Service",
+      "ultimo_pedido": "2026-11-09"
+    },
+    {
+      "id": "CLI-2009",
+      "nome": "Mercados Vô Albino",
+      "cidade": "Chapecó",
+      "uf": "SC",
+      "segmento": "rede regional (6 lojas)",
+      "representante": "REP-01",
+      "condicao_pagamento": "21 dias",
+      "limite_credito": 180000,
+      "tabela_preco": "Tabela Varejo",
+      "ultimo_pedido": "2026-11-12"
+    },
+    {
+      "id": "CLI-2010",
+      "nome": "Atacado Serra Geral",
+      "cidade": "Caxias do Sul",
+      "uf": "RS",
+      "segmento": "atacadista",
+      "representante": "REP-03",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 340000,
+      "tabela_preco": "Tabela Atacado",
+      "ultimo_pedido": "2026-11-07"
+    },
+    {
+      "id": "CLI-2011",
+      "nome": "Distribuidora Paulista Lácteos Reunidos",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "segmento": "distribuidor",
+      "representante": "REP-04",
+      "condicao_pagamento": "28/35 dias",
+      "limite_credito": 450000,
+      "tabela_preco": "Tabela Distribuidor",
+      "ultimo_pedido": "2026-11-08"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-61220",
+      "cliente": "CLI-2001",
+      "representante": "REP-02",
+      "data": "2026-10-30",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-07",
+      "ordem": "OP-7405",
+      "itens": [
+        {
+          "sku": "LT-1001",
+          "quantidade": 6000,
+          "preco_unit": 61.8
+        },
+        {
+          "sku": "LT-1002",
+          "quantidade": 1500,
+          "preco_unit": 59.4
+        }
+      ],
+      "observacao": "Entregue com lotes 2611-03A e 2611-05B (lote 2611-05B depois retido no CD, NC-2026-087)."
+    },
+    {
+      "id": "PV-61224",
+      "cliente": "CLI-2005",
+      "representante": "REP-05",
+      "data": "2026-10-29",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": "OP-7409",
+      "itens": [
+        {
+          "sku": "PO-4005",
+          "quantidade": 1100,
+          "preco_unit": 742.5
+        }
+      ],
+      "observacao": "Laudo do lote 2611-04P anexado à nota fiscal."
+    },
+    {
+      "id": "PV-61228",
+      "cliente": "CLI-2004",
+      "representante": "REP-02",
+      "data": "2026-11-02",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-7415",
+      "itens": [
+        {
+          "sku": "LT-1005",
+          "quantidade": 2200,
+          "preco_unit": 79.2
+        },
+        {
+          "sku": "LT-1001",
+          "quantidade": 3000,
+          "preco_unit": 61.8
+        }
+      ],
+      "observacao": "Previsão original 12/11. LT-1001 já separado; LT-1005 aguarda a OP-7415 (lactase retida, NC-2026-091). Cliente aceitou entrega em duas partes."
+    },
+    {
+      "id": "PV-61230",
+      "cliente": "CLI-2009",
+      "representante": "REP-01",
+      "data": "2026-11-04",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-10",
+      "ordem": "OP-7419",
+      "itens": [
+        {
+          "sku": "LT-1001",
+          "quantidade": 2800,
+          "preco_unit": 61.8
+        },
+        {
+          "sku": "QJ-3001",
+          "quantidade": 1200,
+          "preco_unit": 32.9
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-61233",
+      "cliente": "CLI-2002",
+      "representante": "REP-01",
+      "data": "2026-11-04",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-16",
+      "ordem": "OP-7426",
+      "itens": [
+        {
+          "sku": "LT-1001",
+          "quantidade": 9600,
+          "preco_unit": 59.95
+        }
+      ],
+      "observacao": "Previsão original 14/11. Preço da Tabela Atacado (3% abaixo da lista). Depende do término da OP-7426 após troca do indutor da ENV-03."
+    },
+    {
+      "id": "PV-61236",
+      "cliente": "CLI-2007",
+      "representante": "REP-04",
+      "data": "2026-11-05",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "BL-2010",
+          "quantidade": 1600,
+          "preco_unit": 41.4
+        }
+      ],
+      "observacao": "Atendido com os 1.600 fardos do lote 2611-08B (OP-7420), após inspeção 100% do lacre."
+    },
+    {
+      "id": "PV-61238",
+      "cliente": "CLI-2003",
+      "representante": "REP-03",
+      "data": "2026-11-06",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-17",
+      "ordem": "OP-7422",
+      "itens": [
+        {
+          "sku": "LT-1002",
+          "quantidade": 3200,
+          "preco_unit": 59.4
+        },
+        {
+          "sku": "CR-5001",
+          "quantidade": 900,
+          "preco_unit": 75.6
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-61240",
+      "cliente": "CLI-2001",
+      "representante": "REP-02",
+      "data": "2026-11-03",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-7420",
+      "itens": [
+        {
+          "sku": "BL-2010",
+          "quantidade": 2400,
+          "preco_unit": 41.4
+        },
+        {
+          "sku": "BL-2012",
+          "quantidade": 900,
+          "preco_unit": 42.6
+        }
+      ],
+      "observacao": "Previsão original 11/11. BL-2012 separado; BL-2010 depende da OP-7420 (ENG-01 em manutenção). Contrato exige validade remanescente mínima de 2/3 (30 dias) e prevê multa por ruptura."
+    },
+    {
+      "id": "PV-61242",
+      "cliente": "CLI-2010",
+      "representante": "REP-03",
+      "data": "2026-11-07",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-19",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "QJ-3010",
+          "quantidade": 2400,
+          "preco_unit": 36.4
+        },
+        {
+          "sku": "MT-5010",
+          "quantidade": 300,
+          "preco_unit": 254
+        }
+      ],
+      "observacao": "Atendido do estoque."
+    },
+    {
+      "id": "PV-61245",
+      "cliente": "CLI-2011",
+      "representante": "REP-04",
+      "data": "2026-11-08",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-7428",
+      "itens": [
+        {
+          "sku": "PO-4001",
+          "quantidade": 1600,
+          "preco_unit": 446.4
+        }
+      ],
+      "observacao": "Cliente pediu laudo de oxigênio residual por lote (histórico da NC-2026-080)."
+    },
+    {
+      "id": "PV-61249",
+      "cliente": "CLI-2008",
+      "representante": "REP-05",
+      "data": "2026-11-09",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-23",
+      "ordem": "OP-7437",
+      "itens": [
+        {
+          "sku": "QJ-3001",
+          "quantidade": 18000,
+          "preco_unit": 31.58
+        }
+      ],
+      "observacao": "Desconto de 4% aprovado pelo representante, dentro da alçada da RC-01."
+    },
+    {
+      "id": "PV-61251",
+      "cliente": "CLI-2007",
+      "representante": "REP-04",
+      "data": "2026-11-10",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": "OP-7431",
+      "itens": [
+        {
+          "sku": "QJ-3005",
+          "quantidade": 1100,
+          "preco_unit": 118
+        },
+        {
+          "sku": "BL-2012",
+          "quantidade": 600,
+          "preco_unit": 42.6
+        }
+      ],
+      "observacao": "Previsão original 14/11. Mussarela fatiada depende da VAC-01 (parada)."
+    },
+    {
+      "id": "PV-61253",
+      "cliente": "CLI-2006",
+      "representante": "REP-02",
+      "data": "2026-11-13",
+      "status": "em_analise",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-7441",
+      "itens": [
+        {
+          "sku": "LT-1001",
+          "quantidade": 4000,
+          "preco_unit": 61.8
+        },
+        {
+          "sku": "BL-2010",
+          "quantidade": 1200,
+          "preco_unit": 41.4
+        }
+      ],
+      "observacao": "Entrega em duas partes: LT-1001 em 18/11 e BL-2010 em 24/11 (OP-7441). Cliente pediu 7% de desconto em BL-2010; acima de 5% aguarda o gerente regional (RC-01)."
+    },
+    {
+      "id": "PV-61255",
+      "cliente": "CLI-2005",
+      "representante": "REP-05",
+      "data": "2026-11-10",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-25",
+      "ordem": "OP-7435",
+      "itens": [
+        {
+          "sku": "PO-4005",
+          "quantidade": 1500,
+          "preco_unit": 742.5
+        }
+      ],
+      "observacao": "Cotação válida por 7 dias (RC-06), fechada em 10/11."
+    },
+    {
+      "id": "PV-61257",
+      "cliente": "CLI-2009",
+      "representante": "REP-01",
+      "data": "2026-11-12",
+      "status": "em_analise",
+      "previsao_entrega": "2026-11-19",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "LT-1005",
+          "quantidade": 600,
+          "preco_unit": 79.2
+        },
+        {
+          "sku": "MT-5010",
+          "quantidade": 120,
+          "preco_unit": 254
+        }
+      ],
+      "observacao": "LT-1005 abaixo do mínimo; depende da liberação da lactase (OP-7415 antes)."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Alçada de desconto",
+      "texto": "Até 5% sobre a tabela do cliente o representante aprova sozinho. De 5% a 8%, precisa do gerente regional. Acima de 8%, só a diretoria comercial. Desconto não se acumula com bonificação no mesmo pedido."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Validade mínima na entrega",
+      "texto": "Redes varejistas recebem com no mínimo 2/3 da vida útil (30 dias para bebidas lácteas, 80 dias para UHT). Distribuidores e atacados, no mínimo 1/2. Produto fora dessa regra só sai com aceite por escrito do comprador."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Frete e pedido mínimo",
+      "texto": "Frete CIF para entregas acima de R$ 25.000 em SC, PR e RS e acima de R$ 40.000 em SP. Abaixo disso, frete FOB ou taxa de R$ 380 por entrega refrigerada."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Alocação em caso de ruptura",
+      "texto": "Quando o estoque não atende a carteira, a ordem é: 1) contratos com multa por ruptura (redes), 2) pedidos por data de entrada, 3) pedidos novos. O comercial não promete prazo de item em ruptura sem consultar o PCP."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Trocas e avarias",
+      "texto": "Troca de avaria só com foto e lote em até 5 dias da entrega. Não há devolução por vencimento de produto entregue dentro da RC-02. Reclamação de qualidade vai para o SAC, que abre a NC."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Preço industrial de leite em pó",
+      "texto": "Leite em pó 25 kg tem preço revisto todo mês conforme o custo do leite captado. Cotação vale por 7 dias corridos; depois, nova cotação."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "oee-uht",
+      "nome": "OEE do envase UHT",
+      "valor": 68.9,
+      "unidade": "%",
+      "meta": 78,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        76.1,
+        77.4,
+        75.8,
+        76.9,
+        78.2,
+        77.5,
+        76,
+        75.2,
+        74.8,
+        73.1,
+        71.6,
+        68.9
+      ],
+      "explicacao": "O OEE caiu de 73,1% em setembro para 68,9% em novembro por causa da ENV-03: a selagem transversal instável obrigou a reduzir a velocidade para 6.000 emb/h e a parar para teste de integridade (95 min no turno B de 12/11). A ENV-04 segue perto de 80%.",
+      "caminho": [
+        "MES › apontamentos de parada e velocidade (L-UHT)",
+        "Planilha de paradas do envase › aba Nov",
+        "Cálculo: disponibilidade × desempenho × qualidade, por envasadora"
+      ],
+      "fontes": [
+        "maq:ENV-03",
+        "turno:2026-11-12|B|L-UHT",
+        "turno:2026-11-11|B|L-UHT",
+        "os:OS-5512"
+      ]
+    },
+    {
+      "id": "otif",
+      "nome": "OTIF para redes e distribuidores",
+      "valor": 88.6,
+      "unidade": "%",
+      "meta": 95,
+      "direcao": "maior_melhor",
+      "area": "comercial",
+      "tendencia": [
+        94.2,
+        95.1,
+        93.8,
+        94.6,
+        95.4,
+        94.9,
+        93.7,
+        94.1,
+        92.8,
+        92.3,
+        91,
+        88.6
+      ],
+      "explicacao": "Quatro pedidos estão atrasados em novembro (PV-61228, PV-61233, PV-61240 e PV-61251), todos ligados a uma OP atrasada: lactase retida, ENV-03 lenta, ENG-01 e VAC-01 em manutenção.",
+      "caminho": [
+        "ERP › pedidos com data prometida × data de entrega",
+        "Cálculo: pedidos completos e no prazo ÷ pedidos do mês"
+      ],
+      "fontes": [
+        "pedido:PV-61240",
+        "pedido:PV-61233",
+        "pedido:PV-61228",
+        "pedido:PV-61251"
+      ]
+    },
+    {
+      "id": "rendimento-mussarela",
+      "nome": "Rendimento da mussarela (litros de leite por kg)",
+      "valor": 9.9,
+      "unidade": "L/kg",
+      "meta": 9.6,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        9.6,
+        9.5,
+        9.5,
+        9.6,
+        9.6,
+        9.7,
+        9.6,
+        9.6,
+        9.7,
+        9.8,
+        9.8,
+        9.9
+      ],
+      "explicacao": "O leite de primavera chegou com proteína média de 3,02%, contra 3,18% no inverno, e a água de filagem ficou 20 min abaixo do padrão no turno B de 12/11. Cada 0,1 L/kg a mais custa cerca de 4.200 L de leite por semana.",
+      "caminho": [
+        "LIMS › proteína do leite recebido por rota",
+        "MES › kg produzidos por OP (L-QUE)",
+        "Cálculo: litros processados ÷ kg embalados"
+      ],
+      "fontes": [
+        "turno:2026-11-12|B|L-QUE",
+        "op:OP-7412",
+        "os:OS-5515"
+      ]
+    },
+    {
+      "id": "perdas-validade",
+      "nome": "Perdas por validade (produto e matéria-prima descartados)",
+      "valor": 186400,
+      "unidade": "R$",
+      "meta": 120000,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        112000,
+        98500,
+        121300,
+        104800,
+        96200,
+        118700,
+        109400,
+        127900,
+        131500,
+        142200,
+        158900,
+        186400
+      ],
+      "explicacao": "Novembro acumula perdas de base fermentada e de fatiados sem vácuo, e há risco de mais: a base do lote 2611-11A (8.400 L) vence o limite de 72 h em 14/11 às 18:00 se a ENG-01 não voltar.",
+      "caminho": [
+        "ERP › baixas de estoque por vencimento e descarte",
+        "Planilha de estoque por validade",
+        "Cálculo: custo-padrão × quantidade descartada"
+      ],
+      "fontes": [
+        "doc:DOC-PLAN-VAL#t2",
+        "op:OP-7420",
+        "nc:NC-2026-092"
+      ]
+    },
+    {
+      "id": "tempo-rastreabilidade",
+      "nome": "Tempo para fechar a rastreabilidade de um lote",
+      "valor": 3.6,
+      "unidade": "h",
+      "meta": 1,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        6.5,
+        6.2,
+        6.8,
+        5.9,
+        6.1,
+        5.4,
+        5,
+        4.6,
+        4.4,
+        4.1,
+        3.9,
+        3.6
+      ],
+      "explicacao": "A rastreabilidade do lote 2611-05B (NC-2026-087) levou 3,6 h: 1 h no ERP, 1,5 h nas planilhas de recebimento e PCC e 1,1 h nas notas de expedição. O procedimento de recall pede no máximo 4 h; a meta do piloto é 1 h.",
+      "caminho": [
+        "Cronometragem da qualidade nas simulações de recall",
+        "Procedimento de rastreabilidade e recall, seção 5"
+      ],
+      "fontes": [
+        "nc:NC-2026-087",
+        "doc:DOC-RECALL#t3"
+      ]
+    },
+    {
+      "id": "sac-ppm",
+      "nome": "Reclamações do SAC por milhão de embalagens",
+      "valor": 6.8,
+      "unidade": "ppm",
+      "meta": 4,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        3.9,
+        4.2,
+        3.6,
+        3.8,
+        4.4,
+        3.7,
+        3.5,
+        4,
+        4.3,
+        4.1,
+        4.9,
+        6.8
+      ],
+      "explicacao": "O pico de novembro vem das caixas estufadas do lote 2611-05B e de reclamações de lacre da bebida láctea. Sem esses dois eventos, o índice estaria em 3,9.",
+      "caminho": [
+        "Sistema de chamados do SAC › reclamações por lote",
+        "ERP › embalagens expedidas no mês"
+      ],
+      "fontes": [
+        "nc:NC-2026-087",
+        "nc:NC-2026-089",
+        "doc:DOC-SAC-0412#t1"
+      ]
+    },
+    {
+      "id": "pcc-conformidade",
+      "nome": "Verificações de PCC dentro do limite",
+      "valor": 99.7,
+      "unidade": "%",
+      "meta": 100,
+      "direcao": "maior_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        99.9,
+        100,
+        99.8,
+        100,
+        99.9,
+        99.9,
+        100,
+        99.8,
+        99.9,
+        99.8,
+        99.9,
+        99.7
+      ],
+      "explicacao": "Duas verificações do PCC 1 (pasteurização) na PAS-01 ficaram 0,5 °C abaixo do limite e a válvula de desvio de fluxo atuou como previsto; o leite voltou para reprocesso. O PCC 2 (esterilização UHT) está 100% conforme.",
+      "caminho": [
+        "Planilhas de monitoramento de PCC (SharePoint)",
+        "CLP da PAS-01 › registros da válvula de desvio",
+        "Cálculo: verificações conformes ÷ verificações do mês"
+      ],
+      "fontes": [
+        "doc:DOC-APPCC-UHT#t1",
+        "doc:DOC-APPCC-UHT#t2",
+        "maq:PAS-01"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-APPCC-UHT",
+      "titulo": "Plano APPCC — leite UHT e creme de leite (rev. 9)",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-06-18",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "PCC 1 — Pasteurização",
+          "texto": "Limite crítico: 72 a 75 °C por 15 s no leite padronizado. Abaixo de 72 °C, a válvula de desvio de fluxo retorna o leite ao tanque de equilíbrio e o operador registra o desvio na planilha do PCC 1."
+        },
+        {
+          "id": "t2",
+          "secao": "PCC 2 — Esterilização UHT",
+          "texto": "Limite crítico: mínimo 139 °C por 4 s no tubo de retenção da UHT-02. Monitoramento contínuo pelo registrador e verificação manual a cada 2 h, assinada pelo operador e conferida pelo supervisor."
+        },
+        {
+          "id": "t3",
+          "secao": "7.3 Ação corretiva do PCC 2",
+          "texto": "Produto envasado durante desvio do PCC 2 é bloqueado no ERP pelo número do lote e só é liberado após incubação de amostras a 35 °C por 7 dias sem estufamento."
+        }
+      ]
+    },
+    {
+      "id": "DOC-BPF-CIP",
+      "titulo": "POP 04 — Higienização CIP de linhas e tanques",
+      "tipo": "procedimento",
+      "area": "qualidade",
+      "origem": "SharePoint",
+      "atualizado": "2026-09-02",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4. Sequência do CIP",
+          "texto": "Pré-enxágue com água a 45 °C por 5 min; soda cáustica 1,5% a 75 °C por 20 min; enxágue intermediário; ácido nítrico 0,8% a 65 °C por 15 min; enxágue final até pH neutro."
+        },
+        {
+          "id": "t2",
+          "secao": "5. Verificação",
+          "texto": "A concentração da soda é conferida por titulação a cada ciclo. Condutividade do enxágue final abaixo de 50 µS/cm libera a linha."
+        },
+        {
+          "id": "t3",
+          "secao": "6. Registros",
+          "texto": "Cada ciclo tem registro do operador e assinatura do conferente no mesmo turno. A partir de dez/2026 o registro passa a ser digital, com dados lidos do CLP."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-INT",
+      "titulo": "IT-UHT-07 — Teste de integridade de embalagem asséptica",
+      "tipo": "instrucao",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-05-10",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.1 Frequência",
+          "texto": "Coletar 4 embalagens por envasadora a cada 2 h e após qualquer parada maior que 10 min. Abrir pelo teste de tinta penetrante e conferir as soldas longitudinal e transversal."
+        },
+        {
+          "id": "t2",
+          "secao": "3.2 Troca de bobina",
+          "texto": "Após emenda ou troca de bobina de material de embalagem, testar as 10 primeiras embalagens. Uma reprovação para a envasadora até ajuste e novo teste com 10 aprovações seguidas."
+        },
+        {
+          "id": "t3",
+          "secao": "5. Critério de bloqueio",
+          "texto": "Duas ou mais reprovações no mesmo turno bloqueiam no ERP a produção desde o último teste aprovado, até avaliação da qualidade."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-ENV",
+      "titulo": "Manual da envasadora asséptica — Fabricante A (cap. 6 a 9)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-03-21",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "6.4 Selagem transversal",
+          "texto": "A temperatura de trabalho do indutor de selagem transversal é 280 °C ± 4 °C. Oscilação acima de ± 4 °C indica desgaste do indutor ou falha no resfriamento a água; verificar vazão mínima de 2,5 L/min."
+        },
+        {
+          "id": "t2",
+          "secao": "8.2 Troca do conjunto indutor",
+          "texto": "Bloquear e etiquetar a máquina, esvaziar o circuito de água, soltar os 4 parafusos M6 do suporte. Após a troca, ajustar a folga das mandíbulas em 0,15 mm e validar com 10 embalagens no teste de integridade."
+        },
+        {
+          "id": "t3",
+          "secao": "9.1 Preventiva de 2.000 h",
+          "texto": "Trocar facas de corte, inspecionar mordentes e vedações do banho de peróxido e calibrar o sensor de nível do produto."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-ENG",
+      "titulo": "Manual de envasadoras de garrafa e sachê — Fabricantes B e H",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-11-04",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.3 Lacre por indução",
+          "texto": "Potência nominal do cabeçote de 2,0 kW a 100 garrafas/min. Selagem correta exige a tampa a 1 a 3 mm do cabeçote; perda de potência acima de 10% causa lacre parcial."
+        },
+        {
+          "id": "t2",
+          "secao": "5.6 Teste de lacre",
+          "texto": "A cada troca de bobina de lacre e a cada 2 h, apertar 5 garrafas invertidas por 10 s: nenhum vazamento. Medir o torque de abertura (1,4 ± 0,3 N·m) em 3 garrafas."
+        },
+        {
+          "id": "t3",
+          "secao": "7.4 Troca de mordente (sachês)",
+          "texto": "Após trocar mordente de solda vertical, fazer teste de estanqueidade em 20 sachês e medir oxigênio residual a cada 30 min nas primeiras 2 h (máximo 2%)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-VAC",
+      "titulo": "Manual da embaladora a vácuo termoformadora — Fabricante C",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2023-08-30",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.1 Bomba de vácuo",
+          "texto": "Trocar o óleo da bomba de palhetas a cada 500 h ou quando o visor mostrar óleo turvo. Vácuo residual de trabalho: até 10 mbar na câmara de selagem."
+        },
+        {
+          "id": "t2",
+          "secao": "4.5 Diagnóstico",
+          "texto": "Vácuo residual acima de 30 mbar com ruído metálico indica palhetas gastas; parar a máquina para evitar dano ao rotor."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PROC",
+      "titulo": "Caderno técnico de equipamentos de processo (pasteurizador, UHT, homogeneizador, evaporador e secador)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-04-15",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2.3 UHT-02",
+          "texto": "Calibrar o sensor de temperatura do tubo de retenção a cada 6 meses contra termômetro padrão; desvio máximo aceito de 0,5 °C."
+        },
+        {
+          "id": "t2",
+          "secao": "3.2 Homogeneizador",
+          "texto": "Pressão de homogeneização de 180 bar no primeiro estágio e 40 bar no segundo. Trocar vedações dos pistões a cada 2.500 h."
+        },
+        {
+          "id": "t3",
+          "secao": "5.1 Filadeira",
+          "texto": "Água de filagem entre 75 e 81 °C; abaixo de 75 °C a massa não estica e o rendimento cai."
+        }
+      ]
+    },
+    {
+      "id": "DOC-FT-BL2010",
+      "titulo": "Ficha técnica e de processo — bebida láctea morango 900 g (rev. 4)",
+      "tipo": "ficha_tecnica",
+      "area": "qualidade",
+      "origem": "PLM",
+      "atualizado": "2026-03-12",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3. Processo",
+          "texto": "Fermentar a 42 °C até pH 4,55; quebrar o coágulo e resfriar a 4 °C em até 2 h. A base fermentada pode aguardar o envase por no máximo 72 h a 4 °C, com agitação a cada 8 h."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Envase",
+          "texto": "Temperatura do produto no envase até 8 °C. Lacre por indução obrigatório; tampa com torque de abertura de 1,4 ± 0,3 N·m."
+        },
+        {
+          "id": "t3",
+          "secao": "6. Histórico de mudanças",
+          "texto": "Rev. 4 (mar/2026): troca do estabilizante por amido modificado de outro fornecedor para reduzir sinérese no fim da validade. Aprovado pela P&D após 3 testes de prateleira de 45 dias."
+        }
+      ]
+    },
+    {
+      "id": "DOC-FT-QJ3001",
+      "titulo": "Especificação de produto — mussarela peça e fatiada",
+      "tipo": "ficha_tecnica",
+      "area": "qualidade",
+      "origem": "PLM",
+      "atualizado": "2026-01-20",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "comercial",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2. Físico-químico",
+          "texto": "Umidade máxima de 46,0%; gordura no extrato seco de 40 ± 2%. Lote fora de umidade não vai para fatiamento externo sem aprovação da qualidade."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Fatiada",
+          "texto": "Fatia de 2,0 ± 0,2 mm, peso líquido de 150 g (−0/+6 g) e vácuo residual até 10 mbar. Validade de 60 dias de 0 a 8 °C."
+        }
+      ]
+    },
+    {
+      "id": "DOC-LAU-ENZ",
+      "titulo": "E-mail do fornecedor de enzimas — laudo do lote ENZ-2610-33",
+      "tipo": "email",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-10",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Mensagem de 10/11, 16:42",
+          "texto": "Segue o laudo corrigido do lote ENZ-2610-33. A atividade não constava no modelo novo; o valor medido é 5.200 NLU/g, acima do mínimo de 5.000 NLU/g da especificação."
+        },
+        {
+          "id": "t2",
+          "secao": "Resposta da qualidade, 11/11",
+          "texto": "Recebido. Pela nossa regra de qualificação, a liberação depende da contraprova no laboratório externo, prevista para 14/11."
+        }
+      ]
+    },
+    {
+      "id": "DOC-RECALL",
+      "titulo": "PQ-12 — Rastreabilidade e recolhimento de produto",
+      "tipo": "procedimento",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-02-27",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3. Código de lote",
+          "texto": "O lote segue o formato AAMM-DD + turno (ex.: 2611-12B = 12/11/2026, turno B). Pó e manteiga usam sufixo P e M; queijo prato, sufixo Q."
+        },
+        {
+          "id": "t2",
+          "secao": "4. Rastreabilidade ascendente e descendente",
+          "texto": "Para cada lote, levantar os recebimentos de leite e insumos (ERP e planilha de recebimento), os registros de PCC do turno e as notas de expedição por cliente."
+        },
+        {
+          "id": "t3",
+          "secao": "5. Prazo",
+          "texto": "A rastreabilidade completa de um lote deve ficar pronta em até 4 h após o acionamento, e uma simulação de recall é feita a cada semestre."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CTR-IPE",
+      "titulo": "Contrato de fornecimento — Rede Supermercados Ipê Dourado (2026)",
+      "tipo": "contrato",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-01-08",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Cláusula 5 — Validade",
+          "texto": "O fornecedor entrega produtos com no mínimo 2/3 da vida útil remanescente. Produto fora dessa condição pode ser recusado no recebimento do CD."
+        },
+        {
+          "id": "t2",
+          "secao": "Cláusula 8 — Ruptura",
+          "texto": "Atraso superior a 3 dias úteis na entrega de itens de linha gera multa de 2% sobre o valor do item atrasado, salvo aviso prévio com nova data aceita pelo comprador."
+        },
+        {
+          "id": "t3",
+          "secao": "Cláusula 11 — Auditoria",
+          "texto": "A rede pode auditar a planta uma vez por ano, com aviso de 15 dias, e solicitar registros de BPF e APPCC dos últimos 12 meses."
+        }
+      ]
+    },
+    {
+      "id": "DOC-SAC-0412",
+      "titulo": "Chamado SAC 0412 — caixas estufadas de leite UHT integral",
+      "tipo": "chamado",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-09",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Registro",
+          "texto": "Consumidora de Joinville relata 2 caixas estufadas de leite integral 1 L, lote 2611-05B, compradas na Rede Ipê Dourado em 07/11. Mais 1 reclamação do mesmo lote em Lages, em 09/11."
+        },
+        {
+          "id": "t2",
+          "secao": "Resposta enviada",
+          "texto": "Agradecemos o contato. O lote foi bloqueado preventivamente e as amostras estão em análise; faremos a troca do produto e retornaremos com o resultado em até 10 dias."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLAN-VAL",
+      "titulo": "Planilha de estoque por validade — PCP (semana 46)",
+      "tipo": "planilha",
+      "area": "producao",
+      "origem": "Planilha",
+      "atualizado": "2026-11-13",
+      "acesso": [
+        "producao",
+        "comercial",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Aba Insumos",
+          "texto": "Preparado de morango, lote PM-1018: 2.600 kg com validade em 22/11 e só uma OP programada (OP-7441, a partir de 19/11). Cultura láctica liofilizada: 46 envelopes com validade em 30/11."
+        },
+        {
+          "id": "t2",
+          "secao": "Aba Perdas Nov",
+          "texto": "Perdas por validade acumuladas em novembro: R$ 186.400. Maior risco aberto: base fermentada do lote 2611-11A (8.400 L, custo de R$ 27.700), limite de 72 h em 14/11 às 18:00."
+        },
+        {
+          "id": "t3",
+          "secao": "Aba Produto acabado",
+          "texto": "BL-2010: 820 fardos (mínimo 3.000), lote 2611-08B, validade 23/12/2026. QJ-3005: 380 caixas (mínimo 1.200). LT-1005: 1.900 caixas (mínimo 4.000)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CAT-2026",
+      "titulo": "Catálogo comercial 2026 — linha varejo e food service",
+      "tipo": "catalogo",
+      "area": "marketing",
+      "origem": "SharePoint",
+      "atualizado": "2026-07-01",
+      "acesso": [
+        "marketing",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Bebidas lácteas",
+          "texto": "Garrafa de 900 g com lacre por indução, fardo com 6. Validade de 45 dias. Sabores morango e chocolate."
+        },
+        {
+          "id": "t2",
+          "secao": "Food service",
+          "texto": "Mussarela em peça de 4 kg, embalada a vácuo, com laudo de umidade por lote mediante pedido. Entrega refrigerada própria em SC, PR e RS."
+        },
+        {
+          "id": "t3",
+          "secao": "Claims aprovados",
+          "texto": "Usar apenas: \"leite do oeste catarinense\", \"zero lactose (lactose < 0,1 g/100 mL)\", \"sem conservantes\" (exceto bebidas lácteas). Não usar \"artesanal\" nem citar o número de registro no SIF em peças publicitárias; o selo de inspeção federal aparece só no rótulo."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-11",
+      "autor": "Valdir Schmitt",
+      "funcao": "Operador de envase asséptico",
+      "tempo_casa_anos": 19,
+      "area": "operadores",
+      "maquina": "ENV-03",
+      "titulo": "Selagem transversal fraca começa no papel",
+      "dica": "Antes de culpar o indutor, olhe a emenda e o alinhamento da bobina: papel desalinhado 1 mm já enfraquece a solda transversal. Se a temperatura do indutor oscilar mais de 4 °C, pare e faça o teste de integridade antes de seguir. Na ENV-03, a mangueira de água do indutor dobra atrás do painel e reduz a vazão.",
+      "validado_por": "Sandra Martello (supervisora do envase UHT)",
+      "data": "2026-08-21",
+      "tags": [
+        "selagem",
+        "teste de integridade",
+        "ENV-03"
+      ]
+    },
+    {
+      "id": "SB-12",
+      "autor": "Neusa Fontana",
+      "funcao": "Queijeira — filagem",
+      "tempo_casa_anos": 24,
+      "area": "operadores",
+      "maquina": "FIL-01",
+      "titulo": "Ponto de filagem pela elasticidade, não pelo relógio",
+      "dica": "Na primavera a massa chega mais ácida e com menos proteína. Faça o teste do fio: pegue 50 g de massa na água a 78 °C e estique; se esticar mais de 1 m sem romper, está no ponto. Se romper, espere mais 10 a 15 min, em vez de subir a temperatura da água.",
+      "validado_por": "Rafael Tonello (qualidade P2)",
+      "data": "2026-09-15",
+      "tags": [
+        "filagem",
+        "rendimento",
+        "mussarela"
+      ]
+    },
+    {
+      "id": "SB-13",
+      "autor": "Ademir Bortolini",
+      "funcao": "Técnico de manutenção",
+      "tempo_casa_anos": 15,
+      "area": "manutencao",
+      "maquina": "VAC-01",
+      "titulo": "Óleo turvo na bomba de vácuo avisa com duas semanas",
+      "dica": "O visor da bomba da VAC-01 fica atrás da proteção lateral e ninguém olha. Óleo esbranquiçado é umidade do queijo: troque na hora, mesmo antes das 500 h. Com óleo turvo, as palhetas gastam em cerca de duas semanas e o vácuo cai de uma vez.",
+      "validado_por": "Marcelo Zanin (líder de manutenção P2)",
+      "data": "2026-07-04",
+      "tags": [
+        "vácuo",
+        "preventiva",
+        "fatiados"
+      ]
+    },
+    {
+      "id": "SB-14",
+      "autor": "Rosângela Dall'Agnol",
+      "funcao": "Operadora de fermentação",
+      "tempo_casa_anos": 17,
+      "area": "operadores",
+      "maquina": "FER-02",
+      "titulo": "Base fermentada esperando envase",
+      "dica": "Se o envase parar, mantenha a base a 4 °C e agite 5 minutos a cada 8 horas, anotando o pH. Se o pH cair abaixo de 4,30, avise a qualidade: a bebida fica ácida demais e não passa na sensorial. Na prática, com 48 h de espera a viscosidade já cai; programe o envase dessa base primeiro.",
+      "validado_por": "Patrícia Hoffmann (qualidade)",
+      "data": "2026-06-11",
+      "tags": [
+        "bebida láctea",
+        "validade",
+        "fermentação"
+      ]
+    },
+    {
+      "id": "SB-15",
+      "autor": "Elton Weber",
+      "funcao": "Operador de secagem spray",
+      "tempo_casa_anos": 12,
+      "area": "operadores",
+      "maquina": "SEC-01",
+      "titulo": "Temperatura de saída do ar e grumos",
+      "dica": "Mantenha a saída do ar entre 88 e 92 °C. Acima de 92 °C aparecem partículas queimadas; abaixo de 88 °C a umidade passa de 3,5% e o pó empedra no sachê. Em dia úmido, suba 2 °C na entrada antes de mexer na vazão.",
+      "validado_por": "Rafael Tonello (qualidade P2)",
+      "data": "2026-05-28",
+      "tags": [
+        "leite em pó",
+        "umidade",
+        "secagem"
+      ]
+    },
+    {
+      "id": "SB-16",
+      "autor": "Luciane Brustolin",
+      "funcao": "Analista de recebimento de leite",
+      "tempo_casa_anos": 21,
+      "area": "qualidade",
+      "maquina": "PAS-01",
+      "titulo": "Rota com alizarol duvidoso no calor",
+      "dica": "Nas rotas mais longas, em dias acima de 30 °C, refaça o alizarol na segunda amostra antes de recusar o caminhão: muitas vezes é só a temperatura da amostra. Se a segunda der instável, segregue o compartimento e não misture no silo.",
+      "validado_por": "Carla Menegatti (coordenadora da qualidade)",
+      "data": "2026-02-10",
+      "tags": [
+        "recebimento",
+        "leite cru",
+        "alizarol"
+      ]
+    },
+    {
+      "id": "SB-17",
+      "autor": "Jair Comin",
+      "funcao": "Operador de envase de garrafas",
+      "tempo_casa_anos": 9,
+      "area": "operadores",
+      "maquina": "ENG-01",
+      "titulo": "Lacre por indução: aperte a garrafa, não só olhe",
+      "dica": "O lacre parece selado por cima e está solto na borda. A cada troca de bobina de lacre, inverta 5 garrafas e aperte por 10 s. Quando o cabeçote começa a falhar, a falha aparece primeiro nas garrafas da pista da esquerda.",
+      "validado_por": "Sandra Martello (supervisora do envase)",
+      "data": "2026-10-02",
+      "tags": [
+        "lacre",
+        "bebida láctea",
+        "ENG-01"
+      ]
+    },
+    {
+      "id": "SB-18",
+      "autor": "Odair Lunardi",
+      "funcao": "Operador de UHT",
+      "tempo_casa_anos": 14,
+      "area": "operadores",
+      "maquina": "UHT-02",
+      "titulo": "Pressão diferencial avisa depósito no tubular",
+      "dica": "Quando a pressão diferencial do trocador sobe 0,8 bar em relação ao início da produção, é depósito de proteína. Não espere o alarme de temperatura: programe o CIP intermediário. Leite com alizarol no limite deposita mais rápido.",
+      "validado_por": "Sandra Martello (supervisora do envase UHT)",
+      "data": "2026-04-19",
+      "tags": [
+        "UHT",
+        "CIP",
+        "depósito"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:40",
+      "registros": 212480,
+      "observacao": "Pedidos, estoque por lote e validade, OPs, recebimento e notas de expedição."
+    },
+    {
+      "id": "mes",
+      "nome": "MES de apontamento das linhas",
+      "tipo": "MES",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T07:55",
+      "registros": 96310,
+      "observacao": "Paradas, velocidade e produção por envasadora e por turno."
+    },
+    {
+      "id": "lims",
+      "nome": "LIMS do laboratório",
+      "tipo": "LIMS",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:30",
+      "registros": 54820,
+      "observacao": "Análises de leite cru por rota, laudos de produto e incubação."
+    },
+    {
+      "id": "appcc",
+      "nome": "Planilhas de APPCC e BPF (SharePoint)",
+      "tipo": "Planilhas",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:10",
+      "registros": 18640,
+      "observacao": "Monitoramento de PCC, higienização CIP e registros de BPF."
+    },
+    {
+      "id": "email",
+      "nome": "E-mail da qualidade e do SAC",
+      "tipo": "E-mail",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T07:50",
+      "registros": 7215,
+      "observacao": "Laudos de fornecedores e respostas a clientes."
+    },
+    {
+      "id": "chamados",
+      "nome": "Sistema de chamados do SAC",
+      "tipo": "Chamados",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T18:00",
+      "registros": 3980,
+      "observacao": "Token de acesso expirou às 18:00 de 12/11; TI já renovando."
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business dos representantes",
+      "tipo": "Mensageria",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T09:20",
+      "registros": 1240,
+      "observacao": "Consultas de estoque, prazo e preço pelos 5 representantes."
+    },
+    {
+      "id": "cmms",
+      "nome": "Sistema de manutenção (CMMS)",
+      "tipo": "Manutenção",
+      "status": "planejado",
+      "ultima_sync": null,
+      "registros": 0,
+      "observacao": "Hoje as OS estão no ERP e em planilha; integração prevista para a fase 2."
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "qualidade",
+      "nome": "Garantia da qualidade",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 18
+    },
+    {
+      "id": "pcp",
+      "nome": "Analista de PCP",
+      "areas": [
+        "producao",
+        "qualidade",
+        "comercial"
+      ],
+      "usuarios": 9
+    },
+    {
+      "id": "manutencao",
+      "nome": "Técnico de manutenção",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 26
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial e representantes",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 14
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing e trade",
+      "areas": [
+        "marketing",
+        "comercial"
+      ],
+      "usuarios": 5
+    },
+    {
+      "id": "supervisor",
+      "nome": "Supervisor de linha",
+      "areas": [
+        "producao",
+        "operadores",
+        "manutencao",
+        "qualidade"
+      ],
+      "usuarios": 22
+    },
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 6
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T06:42",
+      "perfil": "supervisor",
+      "area": "producao",
+      "pergunta": "Quanto tempo a base do lote 2611-11A ainda pode esperar no FER-02?",
+      "fontes": [
+        "op:OP-7420",
+        "doc:DOC-FT-BL2010#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:15",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Como trocar o conjunto indutor da ENV-03?",
+      "fontes": [
+        "doc:DOC-MAN-ENV#t2",
+        "os:OS-5512"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:48",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Quais clientes receberam o lote 2611-05B?",
+      "fontes": [
+        "nc:NC-2026-087",
+        "pedido:PV-61220",
+        "doc:DOC-RECALL#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:05",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Que insumos vencem em dez dias sem OP programada?",
+      "fontes": [
+        "doc:DOC-PLAN-VAL#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:22",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Quando chega a bebida láctea de morango da Ipê Dourado?",
+      "fontes": [
+        "pedido:PV-61240",
+        "op:OP-7420"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:40",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o OEE do envase UHT caiu em novembro?",
+      "fontes": [
+        "kpi:oee-uht",
+        "maq:ENV-03"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:12",
+      "perfil": "comercial",
+      "area": "comercial",
+      "pergunta": "Estoque e prazo de BL-2010 para a Litoral Norte (via WhatsApp)",
+      "fontes": [
+        "sku:BL-2010",
+        "op:OP-7441",
+        "regra:RC-01"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:31",
+      "perfil": "marketing",
+      "area": "marketing",
+      "pergunta": "Quais claims posso usar no leite zero lactose?",
+      "fontes": [
+        "doc:DOC-CAT-2026#t3",
+        "sku:LT-1005"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:50",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Rascunho do 8D da NC-2026-087",
+      "fontes": [
+        "nc:NC-2026-087",
+        "doc:DOC-PRO-INT#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T10:04",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "O que fazer com óleo turvo na bomba da VAC-01?",
+      "fontes": [
+        "saber:SB-13",
+        "doc:DOC-MAN-VAC#t1"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "O que mais preocupa na operação hoje?",
+      "resposta": "Três equipamentos travam a carteira: a ENV-03 em alerta (selagem transversal), a ENG-01 em manutenção e a VAC-01 parada. Eles explicam as 4 OPs atrasadas (OP-7420, OP-7415, OP-7431 e OP-7426) e os 4 pedidos atrasados, que derrubaram o OTIF para 88,6% contra meta de 95%. O risco mais urgente é a base fermentada do lote 2611-11A, que vence o limite de 72 h em 14/11 às 18:00.",
+      "fontes": [
+        "kpi:otif",
+        "maq:ENV-03",
+        "op:OP-7420",
+        "op:OP-7431",
+        "doc:DOC-PLAN-VAL#t2"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o OEE do envase UHT está em 68,9%?",
+      "resposta": "A queda vem da ENV-03: com a temperatura do indutor oscilando ±6 °C, a velocidade foi reduzida para 6.000 emb/h e o turno B de 12/11 teve 95 min de paradas, produzindo 7.140 caixas contra 8.950 no turno A. A troca do indutor (OS-5512) está programada para 14/11.",
+      "fontes": [
+        "kpi:oee-uht",
+        "turno:2026-11-12|B|L-UHT",
+        "turno:2026-11-12|A|L-UHT",
+        "os:OS-5512"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quanto estamos perdendo com validade este mês?",
+      "resposta": "R$ 186.400 em novembro, contra meta de R$ 120.000. O maior risco aberto é a base fermentada do lote 2611-11A, de 8.400 L e custo de R$ 27.700, que precisa ser envasada até 14/11 às 18:00.",
+      "fontes": [
+        "kpi:perdas-validade",
+        "doc:DOC-PLAN-VAL#t2"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Quais clientes receberam o lote 2611-05B e o PCC 2 ficou dentro do limite?",
+      "resposta": "O lote 2611-05B saiu da OP-7405 e foi entregue a 4 clientes, entre eles a Rede Ipê Dourado no PV-61220. O PCC 2 ficou dentro do limite (140 a 141 °C por 4 s) nas 6 verificações do turno; a suspeita está na selagem transversal da ENV-03. Restam 4.800 caixas retidas no CD.",
+      "fontes": [
+        "nc:NC-2026-087",
+        "op:OP-7405",
+        "pedido:PV-61220",
+        "doc:DOC-APPCC-UHT#t2"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Por que trocamos o estabilizante da bebida láctea de morango?",
+      "resposta": "Na rev. 4 da ficha (março de 2026), o estabilizante foi trocado por amido modificado de outro fornecedor para reduzir a sinérese no fim da validade. A mudança foi aprovada pela P&D depois de 3 testes de prateleira de 45 dias. Essa ficha só aparece para qualidade, produção e diretoria.",
+      "fontes": [
+        "doc:DOC-FT-BL2010#t3"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Quanto tempo leva hoje uma rastreabilidade de lote?",
+      "resposta": "A última, do lote 2611-05B, levou 3,6 h: 1 h no ERP, 1,5 h nas planilhas de recebimento e PCC e 1,1 h nas notas de expedição. O procedimento PQ-12 pede no máximo 4 h, e a meta do piloto é 1 h.",
+      "fontes": [
+        "kpi:tempo-rastreabilidade",
+        "doc:DOC-RECALL#t3"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quais OPs estão atrasadas e o que trava cada uma?",
+      "resposta": "São 4. A OP-7420 (bebida láctea morango) depende da ENG-01, com cabeçote chegando em 14/11. A OP-7415 (zero lactose) aguarda a contraprova da lactase em 14/11. A OP-7431 (mussarela fatiada) espera a VAC-01, que volta em 14/11. A OP-7426 (UHT integral) está em 71% e termina em 15/11 após a troca do indutor da ENV-03.",
+      "fontes": [
+        "op:OP-7420",
+        "op:OP-7415",
+        "op:OP-7431",
+        "op:OP-7426"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Que insumos vencem em dez dias sem OP programada?",
+      "resposta": "O preparado de morango do lote PM-1018 (2.600 kg) vence em 22/11 e só tem a OP-7441, que começa em 19/11 e depende da ENG-01. A cultura láctica liofilizada (46 envelopes) vence em 30/11. Vale antecipar a OP-7441 se a ENG-01 voltar em 14/11.",
+      "fontes": [
+        "doc:DOC-PLAN-VAL#t1",
+        "op:OP-7441"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Até quando a base fermentada pode esperar a ENG-01?",
+      "resposta": "A ficha permite no máximo 72 h a 4 °C, com agitação a cada 8 h. A base do lote 2611-11A (8.400 L) vence esse limite em 14/11 às 18:00. A Rosângela registrou que com 48 h a viscosidade já cai, então essa base deve ser a primeira a envasar.",
+      "fontes": [
+        "doc:DOC-FT-BL2010#t1",
+        "op:OP-7420",
+        "saber:SB-14"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Como está a investigação das caixas estufadas?",
+      "resposta": "A NC-2026-087 está em análise com 8D até o D4: o PCC 2 ficou conforme e o foco é a selagem transversal da ENV-03. As 120 amostras em incubação a 35 °C saem em 15/11. Pela IT-UHT-07, duas reprovações no mesmo turno bloqueiam a produção desde o último teste aprovado.",
+      "fontes": [
+        "nc:NC-2026-087",
+        "doc:DOC-PRO-INT#t3",
+        "os:OS-5512"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Que evidências reunir para a auditoria da Rede Ipê Dourado?",
+      "resposta": "O contrato permite pedir registros de BPF e APPCC dos últimos 12 meses. A NC-2026-090 está aberta por 2 registros de CIP da manteiga sem assinatura; os dados foram complementados pelo CLP. Separe o POP 04 (seção 6) e as planilhas de PCC 1 e PCC 2.",
+      "fontes": [
+        "doc:DOC-CTR-IPE#t3",
+        "nc:NC-2026-090",
+        "doc:DOC-BPF-CIP#t3",
+        "doc:DOC-APPCC-UHT#t1"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "A lactase do lote ENZ-2610-33 pode ser liberada?",
+      "resposta": "Ainda não. O laudo corrigido informa 5.200 NLU/g, acima do mínimo de 5.000, mas a regra de qualificação exige a contraprova do laboratório externo, prevista para 14/11. A NC-2026-091 segue aberta e trava a OP-7415.",
+      "fontes": [
+        "nc:NC-2026-091",
+        "doc:DOC-LAU-ENZ#t1",
+        "doc:DOC-LAU-ENZ#t2",
+        "op:OP-7415"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "O que fazer na ENV-03 na parada de 14/11?",
+      "resposta": "Trocar o conjunto indutor e o sensor PT100 (OS-5512), seguindo o manual: bloquear, esvaziar o circuito de água, ajustar a folga das mandíbulas em 0,15 mm e validar com 10 embalagens no teste de integridade. O Valdir recomenda conferir a mangueira de água atrás do painel, que costuma dobrar e reduzir a vazão abaixo de 2,5 L/min.",
+      "fontes": [
+        "os:OS-5512",
+        "doc:DOC-MAN-ENV#t2",
+        "doc:DOC-MAN-ENV#t1",
+        "saber:SB-11"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Por que a VAC-01 parou e como evitar de novo?",
+      "resposta": "A bomba de vácuo trabalhou com óleo turvo e as palhetas gastaram; o vácuo residual subiu para 60 mbar, contra limite de 10. A troca de óleo estava 3 semanas atrasada. O Ademir registrou que o óleo turvo avisa cerca de duas semanas antes; a OS-5521 inclui a bomba reserva e um alerta de troca de óleo no plano.",
+      "fontes": [
+        "os:OS-5521",
+        "maq:VAC-01",
+        "saber:SB-13",
+        "doc:DOC-MAN-VAC#t1"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Quais produtos estão abaixo do estoque mínimo e quem é afetado?",
+      "resposta": "Três: BL-2010 (820 fardos, mínimo 3.000), QJ-3005 (380 caixas, mínimo 1.200) e LT-1005 (1.900 caixas, mínimo 4.000). A bebida de morango afeta o PV-61240 da Rede Ipê Dourado (2.400 fardos) e o novo PV-61253 da Litoral Norte; a fatiada afeta o PV-61251 da Rede Paiol; o zero lactose, o PV-61228 da Rede Kühl.",
+      "fontes": [
+        "sku:BL-2010",
+        "sku:QJ-3005",
+        "sku:LT-1005",
+        "pedido:PV-61240",
+        "pedido:PV-61253",
+        "pedido:PV-61251",
+        "pedido:PV-61228"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "O atraso da Ipê Dourado gera multa?",
+      "resposta": "Pode gerar. O contrato prevê multa de 2% sobre o item atrasado mais de 3 dias úteis, salvo aviso prévio com nova data aceita. O PV-61240 tinha previsão de 11/11 e agora está em 18/11; vale formalizar a nova data com o comprador hoje. A RC-04 dá prioridade a esse pedido na alocação.",
+      "fontes": [
+        "pedido:PV-61240",
+        "doc:DOC-CTR-IPE#t2",
+        "regra:RC-04",
+        "cliente:CLI-2001"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Como está a carteira da Fernanda neste mês?",
+      "resposta": "Realizado de R$ 1.580.000 sobre meta de R$ 3.100.000 (51%) na metade do mês. Dois pedidos dela estão atrasados (PV-61240 da Ipê Dourado e PV-61228 da Kühl) e o PV-61253 da Litoral Norte está em análise, com pedido de 7% de desconto que precisa do gerente regional.",
+      "fontes": [
+        "rep:REP-02",
+        "pedido:PV-61240",
+        "pedido:PV-61228",
+        "pedido:PV-61253",
+        "regra:RC-01"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Quais claims posso usar no leite zero lactose?",
+      "resposta": "Pelo catálogo, os claims aprovados são \"leite do oeste catarinense\" e \"zero lactose (lactose < 0,1 g/100 mL)\". \"Sem conservantes\" vale para o UHT. Não use \"artesanal\" nem cite o número de registro no SIF em peças publicitárias.",
+      "fontes": [
+        "doc:DOC-CAT-2026#t3",
+        "sku:LT-1005"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Rascunhe uma ficha da mussarela para pizzarias.",
+      "resposta": "Mussarela em peça de cerca de 4 kg, embalada a vácuo, que fatia sem esfarelar e derrete por igual. Umidade máxima de 46%, validade de 90 dias refrigerada e laudo de umidade por lote mediante pedido. Entrega refrigerada própria em SC, PR e RS.",
+      "fontes": [
+        "sku:QJ-3001",
+        "doc:DOC-FT-QJ3001#t1",
+        "doc:DOC-CAT-2026#t2"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como saber o ponto da filagem com o leite de primavera?",
+      "resposta": "A Neusa, com 24 anos de casa, usa o teste do fio: 50 g de massa na água a 78 °C, e se esticar mais de 1 m sem romper está no ponto. Se romper, espere 10 a 15 min em vez de subir a temperatura da água. Isso ajuda no rendimento, hoje em 9,9 L/kg contra meta de 9,6.",
+      "fontes": [
+        "saber:SB-12",
+        "kpi:rendimento-mussarela"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que um operador novo da ENG-01 precisa saber sobre o lacre?",
+      "resposta": "O Jair ensina a apertar, não só olhar: a cada troca de bobina de lacre, inverter 5 garrafas e apertar por 10 s. Quando o cabeçote começa a falhar, a falha aparece primeiro na pista da esquerda. O manual pede também medir o torque de abertura (1,4 ± 0,3 N·m) em 3 garrafas.",
+      "fontes": [
+        "saber:SB-17",
+        "doc:DOC-MAN-ENG#t2"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Onde está meu pedido de bebida láctea? (Rede Ipê Dourado)",
+      "resposta": "O PV-61240 tem 900 fardos de bebida láctea de chocolate já separados. Os 2.400 fardos de morango dependem da OP-7420, com entrega prevista para 18/11. A entrega chega com no mínimo 30 dias de validade, como prevê o contrato.",
+      "fontes": [
+        "pedido:PV-61240",
+        "op:OP-7420",
+        "regra:RC-02"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Posso recomprar 18.000 kg de mussarela peça?",
+      "resposta": "Sim. Há 41.200 kg de QJ-3001 em estoque, com prazo padrão de 4 dias, e a OP-7437 produz mais 42.000 kg até 21/11. O preço de tabela é R$ 32,90/kg; descontos seguem a alçada do seu representante.",
+      "fontes": [
+        "sku:QJ-3001",
+        "op:OP-7437",
+        "regra:RC-01"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "09:12",
+      "texto": "Bom dia! A Litoral Norte quer 1.200 fardos de bebida láctea de morango e 4.000 caixas de UHT integral. Tem estoque? Consigo entregar até dia 21?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:12",
+      "texto": "Bom dia, Fernanda. UHT integral (LT-1001): 18.400 caixas em estoque, acima do mínimo, prazo de 3 dias. As 4.000 caixas saem até 18/11. Bebida láctea de morango (BL-2010): só 820 fardos, abaixo do mínimo de 3.000. A OP-7420 está atrasada com a ENG-01 em manutenção e atende primeiro a Rede Ipê Dourado (PV-61240), que tem prioridade pela RC-04.",
+      "fontes": [
+        "sku:LT-1001",
+        "sku:BL-2010",
+        "op:OP-7420",
+        "pedido:PV-61240",
+        "regra:RC-04"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:15",
+      "texto": "Entendi. Então quando dá pra prometer os 1.200 de morango? E o comprador pediu 7% de desconto no morango pra compensar a espera.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:16",
+      "texto": "O PCP programou a OP-7441 (4.000 fardos) de 19 a 21/11, com entrega para a Litoral Norte em 24/11, desde que a ENG-01 volte em 14/11. Sobre o desconto: até 5% você aprova; 7% precisa do gerente regional (RC-01). Na tabela, o fardo sai a R$ 41,40; com 5%, a R$ 39,33.",
+      "fontes": [
+        "op:OP-7441",
+        "os:OS-5518",
+        "regra:RC-01",
+        "cliente:CLI-2006"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:18",
+      "texto": "Beleza, vou pedir os 7% pro gerente. Me manda um resumo pra eu repassar ao comprador?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:18",
+      "texto": "Resumo do PV-61253: 4.000 cx de leite UHT integral 1 L a R$ 61,80, entrega em 18/11; 1.200 fardos de bebida láctea morango 900 g a R$ 41,40 (desconto em aprovação), entrega em 24/11 com no mínimo metade da validade, conforme a RC-02. Pagamento em 28/35 dias, frete CIF (pedido acima de R$ 25.000).",
+      "fontes": [
+        "pedido:PV-61253",
+        "regra:RC-02",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:20",
+      "texto": "Perfeito, obrigada! Já mando pra ele.",
+      "fontes": []
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha para pizzarias — mussarela peça 4 kg",
+      "texto": "Mussarela em peça de cerca de 4 kg, embalada a vácuo, que fatia sem esfarelar e derrete por igual no forno. Umidade máxima de 46% e validade de 90 dias refrigerada. Laudo de umidade por lote mediante pedido e entrega refrigerada própria em SC, PR e RS.",
+      "status": "aprovado",
+      "sku": "QJ-3001",
+      "fontes": [
+        "sku:QJ-3001",
+        "doc:DOC-FT-QJ3001#t1",
+        "doc:DOC-CAT-2026#t2"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "post",
+      "titulo": "Post — zero lactose para o café da manhã",
+      "texto": "Leite do oeste catarinense, agora zero lactose: menos de 0,1 g de lactose a cada 100 mL e o mesmo sabor do leite que você conhece. Caixa de 1 L, validade de 120 dias.",
+      "status": "em_revisao",
+      "sku": "LT-1005",
+      "fontes": [
+        "sku:LT-1005",
+        "doc:DOC-CAT-2026#t3"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta ao SAC — caixa estufada (lote 2611-05B)",
+      "texto": "Agradecemos o contato. O lote 2611-05B foi bloqueado preventivamente e as amostras estão em análise no nosso laboratório. Vamos trocar o seu produto e retornar com o resultado em até 10 dias.",
+      "status": "aprovado",
+      "sku": "LT-1001",
+      "fontes": [
+        "doc:DOC-SAC-0412#t2",
+        "nc:NC-2026-087"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Leite em pó industrial: por que o oxigênio residual importa",
+      "texto": "Para indústrias de chocolate e panificação, o leite em pó precisa chegar sem sabor de ranço. Medimos o oxigênio residual de cada lote de sachês (máximo 2%) e enviamos o laudo do lote de 25 kg com a nota fiscal.",
+      "status": "rascunho",
+      "sku": "PO-4005",
+      "fontes": [
+        "sku:PO-4005",
+        "doc:DOC-MAN-ENG#t3"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha — bebida láctea morango 900 g",
+      "texto": "Bebida láctea fermentada sabor morango, garrafa de 900 g com lacre por indução, fardo com 6. Validade de 45 dias sob refrigeração de 1 a 10 °C.",
+      "status": "aprovado",
+      "sku": "BL-2010",
+      "fontes": [
+        "sku:BL-2010",
+        "doc:DOC-CAT-2026#t1"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do cliente Tribeira",
+    "boas_vindas": "Consulte preços da sua tabela, prazos, validade na entrega e o andamento dos seus pedidos.",
+    "destaques": [
+      "LT-1001",
+      "QJ-3001",
+      "BL-2012",
+      "PO-4005"
+    ],
+    "avisos": [
+      {
+        "titulo": "Bebida láctea de morango com prazo maior",
+        "texto": "Por manutenção na envasadora de garrafas, novos pedidos de bebida láctea de morango têm entrega a partir de 24/11. O sabor chocolate segue com prazo normal."
+      },
+      {
+        "titulo": "Lote 2611-05B bloqueado",
+        "texto": "Se você recebeu leite UHT integral do lote 2611-05B, mantenha-o segregado. Nosso SAC vai combinar a troca sem custo."
+      },
+      {
+        "titulo": "Feriado de 20/11",
+        "texto": "Não haverá expedição em 20/11 nas unidades de Chapecó e Concórdia; entregas desse dia passam para 21/11."
+      }
+    ]
+  }
+}

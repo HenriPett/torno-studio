@@ -1,0 +1,3627 @@
+{
+  "id": "textil",
+  "setor": "Têxtil e confecção",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Malharia Serra do Itajuí S.A.",
+    "cidade": "Brusque",
+    "uf": "SC",
+    "funcionarios": 1680,
+    "descricao": "Malharia verticalizada que tece, tinge e confecciona malha de algodão e moletom para lojistas multimarcas e redes regionais, com costura própria e uma rede de facções."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "artigo",
+    "produtos": "artigos",
+    "cliente": "lojista",
+    "clientes": "lojistas",
+    "representante": "representante",
+    "representantes": "representantes",
+    "maquina": "máquina",
+    "maquinas": "máquinas",
+    "linha": "setor produtivo",
+    "linhas": "setores produtivos",
+    "unidade": "peças",
+    "lote": "lote"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP de coleção e facções"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e laboratório"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção"
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial e representantes"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing e catálogo"
+    },
+    {
+      "id": "operadores",
+      "nome": "Tinturaria e chão de fábrica"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Planta Brusque (malharia e beneficiamento)",
+      "cidade": "Brusque"
+    },
+    {
+      "id": "P2",
+      "nome": "Planta Guabiruba (corte e costura)",
+      "cidade": "Guabiruba"
+    },
+    {
+      "id": "P3",
+      "nome": "Centro de distribuição Gaspar",
+      "cidade": "Gaspar"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-MAL",
+      "nome": "Malharia (teares circulares)",
+      "planta": "P1",
+      "tipo": "tecelagem"
+    },
+    {
+      "id": "L-TIN",
+      "nome": "Tinturaria",
+      "planta": "P1",
+      "tipo": "beneficiamento"
+    },
+    {
+      "id": "L-ACA",
+      "nome": "Acabamento (rama e compactadeira)",
+      "planta": "P1",
+      "tipo": "beneficiamento"
+    },
+    {
+      "id": "L-COR",
+      "nome": "Corte",
+      "planta": "P2",
+      "tipo": "confecção"
+    },
+    {
+      "id": "L-COS",
+      "nome": "Costura própria e facções",
+      "planta": "P2",
+      "tipo": "confecção"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "TEA-07",
+      "nome": "Tear circular 7 (malha 30.1)",
+      "linha": "L-MAL",
+      "tipo": "tear circular monofrontura",
+      "fabricante": "Fabricante A",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 58200,
+      "mtbf_h": 420,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-TEA"
+    },
+    {
+      "id": "TEA-12",
+      "nome": "Tear circular 12 (piquet)",
+      "linha": "L-MAL",
+      "tipo": "tear circular monofrontura",
+      "fabricante": "Fabricante A",
+      "ano": 2012,
+      "status": "parada",
+      "horimetro": 71400,
+      "mtbf_h": 260,
+      "proxima_preventiva": "2026-11-20",
+      "manual": "DOC-MAN-TEA"
+    },
+    {
+      "id": "TEA-15",
+      "nome": "Tear circular 15 (moletom e ribana)",
+      "linha": "L-MAL",
+      "tipo": "tear circular dupla frontura",
+      "fabricante": "Fabricante B",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 36800,
+      "mtbf_h": 510,
+      "proxima_preventiva": "2026-12-05",
+      "manual": "DOC-MAN-TEA"
+    },
+    {
+      "id": "TIN-01",
+      "nome": "Jet de tingimento 1 (600 kg)",
+      "linha": "L-TIN",
+      "tipo": "jet atmosférico",
+      "fabricante": "Fabricante C",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 47300,
+      "mtbf_h": 380,
+      "proxima_preventiva": "2026-11-27",
+      "manual": "DOC-MAN-TIN"
+    },
+    {
+      "id": "TIN-03",
+      "nome": "Jet HT de tingimento 3 (400 kg)",
+      "linha": "L-TIN",
+      "tipo": "jet alta temperatura",
+      "fabricante": "Fabricante C",
+      "ano": 2014,
+      "status": "alerta",
+      "horimetro": 41250,
+      "mtbf_h": 310,
+      "proxima_preventiva": "2026-11-20",
+      "manual": "DOC-MAN-TIN"
+    },
+    {
+      "id": "TIN-05",
+      "nome": "Jet HT de tingimento 5 (300 kg)",
+      "linha": "L-TIN",
+      "tipo": "jet alta temperatura",
+      "fabricante": "Fabricante C",
+      "ano": 2020,
+      "status": "manutencao",
+      "horimetro": 22900,
+      "mtbf_h": 450,
+      "proxima_preventiva": "2027-02-12",
+      "manual": "DOC-MAN-TIN"
+    },
+    {
+      "id": "RAM-01",
+      "nome": "Rama de secagem e fixação 1",
+      "linha": "L-ACA",
+      "tipo": "rama",
+      "fabricante": "Fabricante D",
+      "ano": 2015,
+      "status": "operando",
+      "horimetro": 50100,
+      "mtbf_h": 600,
+      "proxima_preventiva": "2026-12-04",
+      "manual": "DOC-MAN-ACA"
+    },
+    {
+      "id": "COM-01",
+      "nome": "Compactadeira de malha tubular 1",
+      "linha": "L-ACA",
+      "tipo": "compactadeira",
+      "fabricante": "Fabricante D",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 31500,
+      "mtbf_h": 540,
+      "proxima_preventiva": "2026-12-10",
+      "manual": "DOC-MAN-ACA"
+    },
+    {
+      "id": "COR-01",
+      "nome": "Enfestadeira automática 1",
+      "linha": "L-COR",
+      "tipo": "enfestadeira",
+      "fabricante": "Fabricante E",
+      "ano": 2021,
+      "status": "operando",
+      "horimetro": 14800,
+      "mtbf_h": 700,
+      "proxima_preventiva": "2026-12-15",
+      "manual": "DOC-MAN-COR"
+    },
+    {
+      "id": "COR-02",
+      "nome": "Cortadeira automática CNC 2",
+      "linha": "L-COR",
+      "tipo": "corte automático",
+      "fabricante": "Fabricante E",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 19650,
+      "mtbf_h": 620,
+      "proxima_preventiva": "2026-12-03",
+      "manual": "DOC-MAN-COR"
+    },
+    {
+      "id": "COS-OV1",
+      "nome": "Overloque 4 fios — célula 1",
+      "linha": "L-COS",
+      "tipo": "overloque",
+      "fabricante": "Fabricante F",
+      "ano": 2022,
+      "status": "operando",
+      "horimetro": 9100,
+      "mtbf_h": 900,
+      "proxima_preventiva": "2026-11-14",
+      "manual": "DOC-MAN-COR"
+    },
+    {
+      "id": "COS-GA2",
+      "nome": "Galoneira — célula 2",
+      "linha": "L-COS",
+      "tipo": "galoneira",
+      "fabricante": "Fabricante F",
+      "ano": 2021,
+      "status": "operando",
+      "horimetro": 11200,
+      "mtbf_h": 850,
+      "proxima_preventiva": "2026-12-02",
+      "manual": "DOC-MAN-COR"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "SI-2381",
+      "nome": "Camiseta básica malha 30.1 penteada",
+      "familia": "Básicos",
+      "unidade": "peças",
+      "preco": 18.9,
+      "prazo_dias": 21,
+      "estoque": 4200,
+      "estoque_minimo": 3000,
+      "descricao_comercial": "A camiseta que gira o ano todo na loja. Malha 30.1 penteada de 160 g/m², compactada para encolher no máximo 3% e manter o caimento depois de muitas lavagens.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% algodão",
+          "Gramatura": "160 g/m²",
+          "Malha": "Meia malha 30.1 penteada",
+          "Grade": "P-M-G-GG-XG",
+          "Cores": "Branco, preto, marinho, mescla, areia"
+        },
+        "roteiro": [
+          "Malharia (TEA-07)",
+          "Tinturaria",
+          "Compactação",
+          "Corte",
+          "Costura própria",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 3",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Torção (espiralidade)",
+            "nominal": "≤ 5",
+            "tolerancia": "0",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Gramatura",
+            "nominal": "160",
+            "tolerancia": "±5",
+            "unidade": "g/m²"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-2390",
+      "nome": "Camiseta básica gola V 30.1",
+      "familia": "Básicos",
+      "unidade": "peças",
+      "preco": 19.9,
+      "prazo_dias": 21,
+      "estoque": 2600,
+      "estoque_minimo": 2000,
+      "descricao_comercial": "A versão gola V da nossa básica, na mesma malha 30.1 penteada. Gola em ribana 1x1 com pesponto duplo, que não deforma na lavagem.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% algodão",
+          "Gramatura": "160 g/m²",
+          "Gola": "Ribana 1x1, 2 cm",
+          "Grade": "P-M-G-GG",
+          "Cores": "Branco, preto, mescla"
+        },
+        "roteiro": [
+          "Malharia (TEA-07)",
+          "Tinturaria",
+          "Compactação",
+          "Corte",
+          "Costura própria",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 3",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Profundidade do decote V (M)",
+            "nominal": "11",
+            "tolerancia": "±0,5",
+            "unidade": "cm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-4471",
+      "nome": "Camisa polo piquet masculina",
+      "familia": "Polos",
+      "unidade": "peças",
+      "preco": 42.9,
+      "prazo_dias": 28,
+      "estoque": 1150,
+      "estoque_minimo": 2500,
+      "descricao_comercial": "Polo em piquet de algodão com toque seco e gola em ribana retilínea. Vista com dois botões e fenda lateral na barra: a peça de entrada do lojista para o público masculino.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% algodão",
+          "Gramatura": "210 g/m²",
+          "Malha": "Piquet (TEA-12)",
+          "Consumo (G)": "1,38 m/peça — rev. C",
+          "Grade": "P-M-G-GG-XG",
+          "Cores": "Marinho, branco, verde-musgo, vinho"
+        },
+        "roteiro": [
+          "Malharia (TEA-12)",
+          "Tinturaria",
+          "Rama",
+          "Corte",
+          "Facção (gola e vista)",
+          "Revisão",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 3",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Ondulação da gola após lavagem",
+            "nominal": "0",
+            "tolerancia": "≤ 2 mm",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Largura do tórax (G)",
+            "nominal": "56",
+            "tolerancia": "±1",
+            "unidade": "cm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-2318",
+      "nome": "Regata canelada feminina",
+      "familia": "Verão 27",
+      "unidade": "peças",
+      "preco": 24.5,
+      "prazo_dias": 21,
+      "estoque": 1900,
+      "estoque_minimo": 1200,
+      "descricao_comercial": "Regata justa em canelado 2x1 com elastano, que veste bem do P ao GG. Alça de 3 cm e acabamento em viés da própria malha.",
+      "ficha": {
+        "atributos": {
+          "Composição": "94% algodão, 6% elastano",
+          "Gramatura": "200 g/m²",
+          "Malha": "Canelado 2x1",
+          "Grade": "P-M-G-GG",
+          "Cores": "Off-white, preto, terracota, verde-água"
+        },
+        "roteiro": [
+          "Malharia (TEA-15)",
+          "Tinturaria",
+          "Rama",
+          "Corte",
+          "Facção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Gramatura",
+            "nominal": "200",
+            "tolerancia": "±8",
+            "unidade": "g/m²"
+          },
+          {
+            "caracteristica": "Recuperação do elastano",
+            "nominal": "≥ 92",
+            "tolerancia": "0",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-3302",
+      "nome": "Vestido midi viscose estampada",
+      "familia": "Verão 27",
+      "unidade": "peças",
+      "preco": 59.9,
+      "prazo_dias": 30,
+      "estoque": 640,
+      "estoque_minimo": 500,
+      "descricao_comercial": "Vestido midi de alcinha em viscose leve com estampa floral exclusiva da coleção Verão 27. Cintura com elástico embutido e forro na parte de cima.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% viscose",
+          "Gramatura": "120 g/m²",
+          "Estampa": "Floral V27-04 (estamparia terceirizada)",
+          "Grade": "P-M-G",
+          "Cores": "Estampa azul, estampa terracota"
+        },
+        "roteiro": [
+          "Recebimento de tecido estampado",
+          "Corte",
+          "Facção",
+          "Revisão",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Deslocamento de rapport da estampa",
+            "nominal": "0",
+            "tolerancia": "≤ 3",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Comprimento (M)",
+            "nominal": "118",
+            "tolerancia": "±1,5",
+            "unidade": "cm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-3315",
+      "nome": "Blusa manga longa viscolycra",
+      "familia": "Inverno 27",
+      "unidade": "peças",
+      "preco": 36.9,
+      "prazo_dias": 25,
+      "estoque": 1400,
+      "estoque_minimo": 800,
+      "descricao_comercial": "Blusa de manga longa em viscolycra, macia e com bom caimento para sobreposição. Gola canoa e barra reta.",
+      "ficha": {
+        "atributos": {
+          "Composição": "92% viscose, 8% elastano",
+          "Gramatura": "180 g/m²",
+          "Grade": "P-M-G-GG",
+          "Cores": "Preto, café, vinho, mescla"
+        },
+        "roteiro": [
+          "Malharia (TEA-15)",
+          "Tinturaria",
+          "Rama",
+          "Corte",
+          "Costura própria",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 4",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Pilling (escala 1-5)",
+            "nominal": "≥ 4",
+            "tolerancia": "0",
+            "unidade": "nota"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-5120",
+      "nome": "Moletom careca flanelado",
+      "familia": "Inverno 27",
+      "unidade": "peças",
+      "preco": 69.9,
+      "prazo_dias": 30,
+      "estoque": 380,
+      "estoque_minimo": 1500,
+      "descricao_comercial": "Moletom careca flanelado por dentro, em algodão com poliéster, que não faz bolinha. Punho e barra em ribana com elastano. Carro-chefe do Inverno 27 no marinho.",
+      "ficha": {
+        "atributos": {
+          "Composição": "50% algodão, 50% poliéster",
+          "Gramatura": "300 g/m²",
+          "Malha": "Moletom 3 cabos flanelado (TEA-15)",
+          "Padrão de cor": "Marinho MAR-07",
+          "Grade": "P-M-G-GG-XG",
+          "Cores": "Marinho, mescla, preto, verde-musgo"
+        },
+        "roteiro": [
+          "Malharia (TEA-15)",
+          "Tinturaria em 2 banhos (TIN-03 ou TIN-05)",
+          "Flanelagem e rama",
+          "Corte",
+          "Facção",
+          "Revisão",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diferença de cor contra o padrão (ΔE CMC 2:1)",
+            "nominal": "≤ 1,0",
+            "tolerancia": "0",
+            "unidade": "ΔE"
+          },
+          {
+            "caracteristica": "Pilling (escala 1-5)",
+            "nominal": "≥ 4",
+            "tolerancia": "0",
+            "unidade": "nota"
+          },
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 4",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-6010",
+      "nome": "Calça jogger moletinho",
+      "familia": "Inverno 27",
+      "unidade": "peças",
+      "preco": 54.9,
+      "prazo_dias": 28,
+      "estoque": 1250,
+      "estoque_minimo": 900,
+      "descricao_comercial": "Jogger em moletinho sem flanelar, com cós de elástico e cordão, bolso faca e punho na barra. Combina com o moletom 5120.",
+      "ficha": {
+        "atributos": {
+          "Composição": "70% algodão, 30% poliéster",
+          "Gramatura": "260 g/m²",
+          "Grade": "P-M-G-GG",
+          "Cores": "Marinho, mescla, preto"
+        },
+        "roteiro": [
+          "Malharia (TEA-15)",
+          "Tinturaria em 2 banhos",
+          "Rama",
+          "Corte",
+          "Facção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diferença de cor contra o padrão (ΔE CMC 2:1)",
+            "nominal": "≤ 1,0",
+            "tolerancia": "0",
+            "unidade": "ΔE"
+          },
+          {
+            "caracteristica": "Comprimento da entreperna (M)",
+            "nominal": "74",
+            "tolerancia": "±1",
+            "unidade": "cm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-6022",
+      "nome": "Bermuda moletinho masculina",
+      "familia": "Verão 27",
+      "unidade": "peças",
+      "preco": 39.9,
+      "prazo_dias": 21,
+      "estoque": 2100,
+      "estoque_minimo": 1000,
+      "descricao_comercial": "Bermuda em moletinho leve com cós de elástico, cordão e bolsos laterais. Comprimento acima do joelho.",
+      "ficha": {
+        "atributos": {
+          "Composição": "70% algodão, 30% poliéster",
+          "Gramatura": "240 g/m²",
+          "Grade": "P-M-G-GG-XG",
+          "Cores": "Mescla, marinho, areia"
+        },
+        "roteiro": [
+          "Malharia (TEA-15)",
+          "Tinturaria",
+          "Rama",
+          "Corte",
+          "Facção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Comprimento lateral (M)",
+            "nominal": "48",
+            "tolerancia": "±1",
+            "unidade": "cm"
+          },
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 4",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-7105",
+      "nome": "Pijama infantil malha penteada",
+      "familia": "Infantil",
+      "unidade": "peças",
+      "preco": 32.9,
+      "prazo_dias": 25,
+      "estoque": 1700,
+      "estoque_minimo": 1000,
+      "descricao_comercial": "Pijama de manga curta com shorts em malha penteada macia, estampa localizada e etiqueta de composição em tecido para não irritar a pele.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% algodão",
+          "Gramatura": "150 g/m²",
+          "Grade": "2-4-6-8-10",
+          "Cores": "Estampas Dino, Estrelas, Arco-íris"
+        },
+        "roteiro": [
+          "Malharia (TEA-07)",
+          "Tinturaria",
+          "Compactação",
+          "Corte",
+          "Estampa localizada",
+          "Facção",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Etiqueta de composição costurada",
+            "nominal": "1 por peça",
+            "tolerancia": "0",
+            "unidade": ""
+          },
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 3",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-7120",
+      "nome": "Conjunto bebê suedine",
+      "familia": "Infantil",
+      "unidade": "peças",
+      "preco": 29.9,
+      "prazo_dias": 25,
+      "estoque": 980,
+      "estoque_minimo": 600,
+      "descricao_comercial": "Conjunto de body e calça em suedine, com pressão na entreperna e pé reversível. Toque aveludado e tingimento sem metais pesados.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% algodão",
+          "Gramatura": "170 g/m²",
+          "Grade": "RN-P-M-G",
+          "Cores": "Off-white, azul-bebê, rosa-chá"
+        },
+        "roteiro": [
+          "Malharia (TEA-07)",
+          "Tinturaria",
+          "Rama",
+          "Corte",
+          "Facção",
+          "Revisão",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Força de tração do botão de pressão",
+            "nominal": "≥ 90",
+            "tolerancia": "0",
+            "unidade": "N"
+          },
+          {
+            "caracteristica": "Encolhimento após 3 lavagens",
+            "nominal": "≤ 3",
+            "tolerancia": "+0,5",
+            "unidade": "%"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "SI-8800",
+      "nome": "Malha 30.1 penteada em rolo",
+      "familia": "Tecidos",
+      "unidade": "kg",
+      "preco": 38.5,
+      "prazo_dias": 15,
+      "estoque": 5400,
+      "estoque_minimo": 3000,
+      "descricao_comercial": "A mesma malha 30.1 penteada das nossas básicas, vendida em rolo tubular para confecções parceiras. Compactada e com laudo de encolhimento por lote.",
+      "ficha": {
+        "atributos": {
+          "Composição": "100% algodão",
+          "Gramatura": "160 g/m²",
+          "Largura tubular": "92 cm",
+          "Rolo": "20 a 25 kg",
+          "Cores": "Cru, branco, preto, marinho"
+        },
+        "roteiro": [
+          "Malharia (TEA-07 / TEA-12)",
+          "Tinturaria",
+          "Compactação",
+          "Revisão de rolo",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Furos por rolo",
+            "nominal": "0",
+            "tolerancia": "≤ 2",
+            "unidade": "furos"
+          },
+          {
+            "caracteristica": "Largura tubular",
+            "nominal": "92",
+            "tolerancia": "±2",
+            "unidade": "cm"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-24518",
+      "sku": "SI-5120",
+      "quantidade": 3600,
+      "linha": "L-TIN",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 48,
+      "pedido": "PV-88213",
+      "motivo_atraso": "Lote 3 do moletom marinho (620 kg) reprovado com ΔE 1,8 e mandado para reprocesso; a TIN-03 não segura o patamar de 130 °C (OS-7731).",
+      "historico": [
+        {
+          "data": "2026-10-27",
+          "evento": "OP liberada: 1.900 kg de moletom flanelado para tingir em marinho MAR-07"
+        },
+        {
+          "data": "2026-11-06",
+          "evento": "Lotes 1 e 2 aprovados no laboratório (ΔE 0,6 e 0,8)"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Lote 3 (620 kg) reprovado com ΔE 1,8; aberta a NC-2026-121"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Reprocesso do lote 3 programado na TIN-01; TIN-03 com OS-7731 aberta"
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Nova previsão de conclusão: 19/11; corte e facção replanejados"
+        }
+      ]
+    },
+    {
+      "id": "OP-24522",
+      "sku": "SI-4471",
+      "quantidade": 4000,
+      "linha": "L-COS",
+      "inicio": "2026-10-20",
+      "prazo": "2026-11-10",
+      "status": "atrasada",
+      "progresso": 71,
+      "pedido": "PV-88227",
+      "motivo_atraso": "Facção Costura Bela Vista devolveu a remessa R-1182 com 4,2% de defeito de gola (contrato admite 2,5%); 84 peças em retrabalho.",
+      "historico": [
+        {
+          "data": "2026-10-20",
+          "evento": "Corte concluído: 4.000 polos em 2 remessas para facção"
+        },
+        {
+          "data": "2026-10-29",
+          "evento": "Remessa R-1182 (2.000 peças) enviada à Costura Bela Vista"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Retorno da R-1182 com 84 peças com defeito de gola (4,2%); NC-2026-125"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Retrabalho combinado com a facção em 3 dias úteis (contrato, cláusula 5.3)"
+        }
+      ]
+    },
+    {
+      "id": "OP-24530",
+      "sku": "SI-3302",
+      "quantidade": 2400,
+      "linha": "L-COR",
+      "inicio": "2026-10-29",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 35,
+      "pedido": "PV-88240",
+      "motivo_atraso": "Tecido estampado chegou 6 dias atrasado e com rapport deslocado em parte dos rolos (NC-2026-122); corte refeito com novo encaixe.",
+      "historico": [
+        {
+          "data": "2026-10-29",
+          "evento": "OP liberada aguardando tecido estampado do fornecedor de estamparia"
+        },
+        {
+          "data": "2026-11-04",
+          "evento": "Tecido recebido com 6 dias de atraso; 3 de 14 rolos com estampa deslocada 8 mm"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Corte iniciado com os 11 rolos aprovados"
+        }
+      ]
+    },
+    {
+      "id": "OP-24535",
+      "sku": "SI-8800",
+      "quantidade": 2800,
+      "linha": "L-MAL",
+      "inicio": "2026-11-03",
+      "prazo": "2026-11-13",
+      "status": "atrasada",
+      "progresso": 60,
+      "pedido": null,
+      "motivo_atraso": "Tear TEA-12 parado desde 08/11 aguardando platinas e came (OS-7728); carga redistribuída para TEA-07.",
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "OP de reposição de estoque de malha em rolo liberada"
+        },
+        {
+          "data": "2026-11-08",
+          "evento": "TEA-12 parado com furos em sequência; OS-7728 aberta"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "PCP move 900 kg para o TEA-07; nova previsão 18/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-24540",
+      "sku": "SI-2381",
+      "quantidade": 12000,
+      "linha": "L-COR",
+      "inicio": "2026-11-04",
+      "prazo": "2026-11-18",
+      "status": "em_producao",
+      "progresso": 62,
+      "pedido": "PV-88245",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "OP liberada; malha 30.1 já tingida em estoque"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Retorno da facção Linha Fina com 1,1% de defeito"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "7.440 peças cortadas; enfesto em 2 turnos"
+        }
+      ]
+    },
+    {
+      "id": "OP-24541",
+      "sku": "SI-2318",
+      "quantidade": 5000,
+      "linha": "L-COS",
+      "inicio": "2026-11-02",
+      "prazo": "2026-11-19",
+      "status": "em_producao",
+      "progresso": 55,
+      "pedido": "PV-88219",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-02",
+          "evento": "OP liberada"
+        },
+        {
+          "data": "2026-11-09",
+          "evento": "Remessa R-1188 enviada à facção Ateliê Dois Irmãos"
+        }
+      ]
+    },
+    {
+      "id": "OP-24544",
+      "sku": "SI-6010",
+      "quantidade": 3000,
+      "linha": "L-TIN",
+      "inicio": "2026-11-06",
+      "prazo": "2026-11-24",
+      "status": "em_producao",
+      "progresso": 30,
+      "pedido": "PV-88250",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-06",
+          "evento": "OP liberada"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Primeiro lote de moletinho marinho tingido na TIN-01 e aprovado (ΔE 0,7)"
+        }
+      ]
+    },
+    {
+      "id": "OP-24547",
+      "sku": "SI-7105",
+      "quantidade": 2600,
+      "linha": "L-COS",
+      "inicio": "2026-11-05",
+      "prazo": "2026-11-21",
+      "status": "em_producao",
+      "progresso": 66,
+      "pedido": "PV-88236",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-05",
+          "evento": "OP liberada"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Estampa localizada concluída; peças na costura própria"
+        }
+      ]
+    },
+    {
+      "id": "OP-24549",
+      "sku": "SI-3315",
+      "quantidade": 3200,
+      "linha": "L-ACA",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-26",
+      "status": "em_producao",
+      "progresso": 22,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-09",
+          "evento": "OP de estoque para o Inverno 27 liberada"
+        }
+      ]
+    },
+    {
+      "id": "OP-24551",
+      "sku": "SI-2390",
+      "quantidade": 6000,
+      "linha": "L-MAL",
+      "inicio": "2026-11-10",
+      "prazo": "2026-11-28",
+      "status": "em_producao",
+      "progresso": 12,
+      "pedido": "PV-88252",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "OP liberada; malha no TEA-07"
+        }
+      ]
+    },
+    {
+      "id": "OP-24560",
+      "sku": "SI-5120",
+      "quantidade": 4800,
+      "linha": "L-MAL",
+      "inicio": "2026-11-17",
+      "prazo": "2026-12-08",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-88258",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "OP planejada para repor o moletom marinho abaixo do mínimo"
+        }
+      ]
+    },
+    {
+      "id": "OP-24562",
+      "sku": "SI-6022",
+      "quantidade": 2400,
+      "linha": "L-MAL",
+      "inicio": "2026-11-18",
+      "prazo": "2026-12-05",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "OP de estoque planejada"
+        }
+      ]
+    },
+    {
+      "id": "OP-24565",
+      "sku": "SI-7120",
+      "quantidade": 3000,
+      "linha": "L-MAL",
+      "inicio": "2026-11-19",
+      "prazo": "2026-12-10",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-88261",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "OP planejada a partir do pedido da Estação Malha Store"
+        }
+      ]
+    },
+    {
+      "id": "OP-24568",
+      "sku": "SI-4471",
+      "quantidade": 2500,
+      "linha": "L-MAL",
+      "inicio": "2026-11-23",
+      "prazo": "2026-12-14",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-88266",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "OP planejada com o consumo da ficha rev. C (1,38 m no G); depende do TEA-12 voltar"
+        }
+      ]
+    },
+    {
+      "id": "OP-24570",
+      "sku": "SI-3302",
+      "quantidade": 1800,
+      "linha": "L-COR",
+      "inicio": "2026-11-24",
+      "prazo": "2026-12-12",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": null,
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-13",
+          "evento": "OP de reposição planejada; tecido estampado pedido ao fornecedor"
+        }
+      ]
+    },
+    {
+      "id": "OP-24490",
+      "sku": "SI-2381",
+      "quantidade": 10000,
+      "linha": "L-COS",
+      "inicio": "2026-10-14",
+      "prazo": "2026-11-05",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-88190",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "OP encerrada e enviada ao CD Gaspar"
+        }
+      ]
+    },
+    {
+      "id": "OP-24495",
+      "sku": "SI-6022",
+      "quantidade": 3000,
+      "linha": "L-COS",
+      "inicio": "2026-10-16",
+      "prazo": "2026-11-07",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-88201",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-07",
+          "evento": "OP encerrada"
+        }
+      ]
+    },
+    {
+      "id": "OP-24502",
+      "sku": "SI-7105",
+      "quantidade": 2000,
+      "linha": "L-COS",
+      "inicio": "2026-10-20",
+      "prazo": "2026-11-09",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-88205",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-08",
+          "evento": "OP encerrada; 12 peças sem etiqueta de composição (NC-2026-124) corrigidas antes do envio"
+        }
+      ]
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-11",
+      "turno": "3º",
+      "linha": "L-TIN",
+      "produzido": 7650,
+      "refugo": 620,
+      "paradas_min": 70,
+      "resumo": "Turno marcado pelo lote 3 do moletom marinho (OP-24518), reprovado no laboratório com ΔE 1,8. A TIN-03 oscilou ±3 °C no patamar de 130 °C e o tintureiro segurou a rampa na mão. Produção em kg de malha tingida.",
+      "ocorrencias": [
+        "Lote 3 da OP-24518 (620 kg) reprovado: ΔE 1,8, tolerância 1,0",
+        "TIN-03 com oscilação de temperatura no patamar de 130 °C",
+        "Fio de poliéster de lote novo do fornecedor de fios no moletom"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-TIN",
+      "produzido": 9100,
+      "refugo": 95,
+      "paradas_min": 20,
+      "resumo": "Turno estável na TIN-01 e na TIN-03, com a TIN-05 em preventiva. Primeiro lote do moletinho da OP-24544 aprovado com ΔE 0,7.",
+      "ocorrencias": [
+        "TIN-05 parada para preventiva (OS-7735)",
+        "Lote de moletinho marinho aprovado com ΔE 0,7"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-TIN",
+      "produzido": 8400,
+      "refugo": 210,
+      "paradas_min": 45,
+      "resumo": "A TIN-03 parou 25 minutos com a válvula de vapor travada e a manutenção abriu a OS-7731. O reprocesso do lote 3 foi passado para a TIN-01.",
+      "ocorrencias": [
+        "Barca 3 (TIN-03) parou 25 min: válvula de vapor travada",
+        "Reprocesso do lote 3 da OP-24518 programado na TIN-01",
+        "20 min de espera de produtos químicos"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-MAL",
+      "produzido": 6200,
+      "refugo": 85,
+      "paradas_min": 495,
+      "resumo": "O TEA-12 seguiu parado o turno inteiro aguardando platinas e came (OS-7728). TEA-07 e TEA-15 rodaram normalmente; parte da malha em rolo foi passada para o TEA-07.",
+      "ocorrencias": [
+        "TEA-12 parado 480 min aguardando peças",
+        "Troca de fio no TEA-15: 15 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-COR",
+      "produzido": 5200,
+      "refugo": 58,
+      "paradas_min": 15,
+      "resumo": "Corte da camiseta básica (OP-24540) e início do vestido 3302 com os rolos aprovados. Aproveitamento de 84,0% no encaixe do vestido.",
+      "ocorrencias": [
+        "Encaixe do vestido 3302 refeito sem os 3 rolos com estampa deslocada"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-COS",
+      "produzido": 4100,
+      "refugo": 175,
+      "paradas_min": 35,
+      "resumo": "Costura própria da regata e do pijama infantil. Retorno da remessa R-1182 da Costura Bela Vista com defeito de gola acima do contrato.",
+      "ocorrencias": [
+        "R-1182 (2.000 polos 4471): 84 peças com defeito de gola (4,2%)",
+        "Overloque da célula 1 com troca de agulha: 10 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-COS",
+      "produzido": 3900,
+      "refugo": 140,
+      "paradas_min": 30,
+      "resumo": "Revisão das 84 polos com defeito de gola e devolução à facção para retrabalho. Costura própria seguiu no pijama 7105.",
+      "ocorrencias": [
+        "84 polos devolvidas à Costura Bela Vista para retrabalho",
+        "Falta de linha 120 marinho por 20 min"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "3º",
+      "linha": "L-ACA",
+      "produzido": 5800,
+      "refugo": 60,
+      "paradas_min": 25,
+      "resumo": "Rama e compactadeira sem ocorrências relevantes. Viscolycra da OP-24549 fixada a 165 °C com sobre-alimentação de 6%.",
+      "ocorrencias": [
+        "Ajuste de largura na rama: 25 min"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-117",
+      "data": "2026-10-22",
+      "sku": "SI-2381",
+      "linha": "L-MAL",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Lojista Estação Malha Store reclamou de torção na camiseta básica branca: costura lateral girando para a frente depois da lavagem. Medido 7% de torção (limite 5%).",
+      "causa": "Fio 30.1 de um lote com torção acima do padrão combinado com tensão alta de alimentação no TEA-07; a compactação não corrigiu.",
+      "acao": "Lote de fio segregado, tensão do TEA-07 reajustada para 4 cN e teste de torção incluído na liberação de cada rolo.",
+      "status": "encerrada",
+      "responsavel": "Marli Schaefer",
+      "oito_d": {
+        "D1": "Equipe: Marli Schaefer (qualidade), Carla Moritz (PCP), Lauro Moser (manutenção de teares), Tereza Hoffmann (revisão).",
+        "D2": "Camiseta 2381 branca, OP-24402, 7% de torção após 3 lavagens contra limite de 5% (NI-Q-04, item 4.3). 1 lojista, 320 peças.",
+        "D3": "Peças em estoque do mesmo lote bloqueadas no CD Gaspar; troca das 320 peças oferecida ao lojista.",
+        "D4": "Causa raiz: lote de fio com torção 8% acima do padrão do fornecedor de fios, somado a tensão de alimentação de 6 cN no TEA-07.",
+        "D5": "Segregar o lote de fio e reduzir a tensão de alimentação para 4 cN.",
+        "D6": "Implantado em 25/10; 3 rolos de teste com torção entre 2,8% e 3,6%.",
+        "D7": "Teste de torção no primeiro rolo de cada lote de fio, registrado no MES; tolerância revisada na ficha.",
+        "D8": "Encerrada em 04/11 com o lojista atendido e reconhecimento à revisora Tereza Hoffmann, que identificou o padrão no cru."
+      }
+    },
+    {
+      "id": "NC-2026-118",
+      "data": "2026-10-28",
+      "sku": "SI-2381",
+      "linha": "L-ACA",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Laudo de laboratório com encolhimento de 3,8% no comprimento após 3 lavagens (limite 3,5% com tolerância).",
+      "causa": "Sobre-alimentação da compactadeira COM-01 abaixo do especificado (4% em vez de 8%) depois de troca de feltro.",
+      "acao": "Compactadeira reajustada (OS-7726) e lote recompactado; checklist de partida após troca de feltro.",
+      "status": "encerrada",
+      "responsavel": "Marli Schaefer",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-119",
+      "data": "2026-10-30",
+      "sku": "SI-4471",
+      "linha": "L-COS",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Magazine Horizonte Sul (Porto Alegre) reclamou de gola ondulada no polo 4471 depois da primeira lavagem em 46 peças de 1.200.",
+      "causa": "Em análise: suspeita de ribana da gola costurada com tensão diferente na facção e entretela sem pré-encolhimento.",
+      "acao": "Peças substituídas; teste de lavagem na gola de amostras das 3 facções em andamento.",
+      "status": "em_analise",
+      "responsavel": "Fábio Reinert",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-120",
+      "data": "2026-11-03",
+      "sku": "SI-8800",
+      "linha": "L-MAL",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Furos em sequência a cada 1,2 m em 2 rolos de malha do TEA-12.",
+      "causa": "Platinas gastas e came com desgaste no TEA-12, com histórico de ruído metálico desde outubro.",
+      "acao": "Rolos rebaixados para segunda qualidade; tear parado em 08/11 para troca de platinas e came (OS-7728).",
+      "status": "em_analise",
+      "responsavel": "Lauro Moser",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-121",
+      "data": "2026-11-11",
+      "sku": "SI-5120",
+      "linha": "L-TIN",
+      "origem": "interna",
+      "severidade": "alta",
+      "descricao": "Lote 3 do moletom marinho da OP-24518 (620 kg) reprovado com ΔE 1,8 contra o padrão MAR-07, puxando para o roxo. Tolerância: ΔE ≤ 1,0.",
+      "causa": "A TIN-03 oscilou ±3 °C no patamar de 130 °C (válvula de vapor com resposta lenta) e o fio de poliéster veio de lote novo; a receita não foi ajustada.",
+      "acao": "Reprocesso na TIN-01 com correção de receita; OS-7731 na válvula de vapor da TIN-03; ajuste do tintureiro registrado (SB-031) a ser incorporado à instrução de tingimento.",
+      "status": "aberta",
+      "responsavel": "Edson Kreutzfeld",
+      "oito_d": {
+        "D1": "Equipe: Edson Kreutzfeld (tinturaria), Marli Schaefer (qualidade), Valdir Schmitt (manutenção), Osmar Bittencourt (tintureiro).",
+        "D2": "Lote 3 da OP-24518, 620 kg de moletom 50/50 marinho, ΔE 1,8 contra limite de 1,0 (instrução de tingimento, item 5.2).",
+        "D3": "Lote segregado; reprocesso na TIN-01 programado no 2º turno de 12/11; pedido PV-88213 reprogramado para 21/11.",
+        "D4": "Duas causas: instabilidade de temperatura na TIN-03 (válvula de vapor) e fio de poliéster de lote novo, que absorve mais corante disperso.",
+        "D5": "Trocar a válvula de vapor (procedimento DOC-PRO-012) e incluir na instrução o ajuste de +4% de disperso azul para lote novo de poliéster.",
+        "D6": "Em andamento: OS-7731 aberta; ajuste de receita aplicado no reprocesso.",
+        "D7": "Pendente: teste de tingimento de 5 kg sempre que o fio de poliéster mudar de lote.",
+        "D8": "Pendente."
+      }
+    },
+    {
+      "id": "NC-2026-122",
+      "data": "2026-11-04",
+      "sku": "SI-3302",
+      "linha": "L-COR",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "3 de 14 rolos de viscose estampada com rapport deslocado em 8 mm (limite 3 mm), entregues com 6 dias de atraso.",
+      "causa": "Fornecedor de estamparia informou desalinhamento do cilindro na troca de turno.",
+      "acao": "Rolos devolvidos para crédito; corte seguiu com 11 rolos; fornecedor notificado com base na cláusula de qualidade.",
+      "status": "aberta",
+      "responsavel": "Fábio Reinert",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-123",
+      "data": "2026-11-06",
+      "sku": "SI-2318",
+      "linha": "L-MAL",
+      "origem": "fornecedor",
+      "severidade": "baixa",
+      "descricao": "Canelado com elastano saiu com 186 g/m² (especificado 200 ± 8 g/m²).",
+      "causa": "Fio de elastano com título fora do especificado no lote recebido do fornecedor de fios.",
+      "acao": "Lote de fio devolvido; regulagem do TEA-15 conferida.",
+      "status": "em_analise",
+      "responsavel": "Fábio Reinert",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-124",
+      "data": "2026-11-08",
+      "sku": "SI-7105",
+      "linha": "L-COS",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "12 pijamas da OP-24502 sem etiqueta de composição, encontrados na revisão final.",
+      "causa": "Falta de etiqueta na bancada da facção no fim do turno.",
+      "acao": "Etiquetas aplicadas antes do envio; conferência de etiqueta incluída no checklist da revisão.",
+      "status": "encerrada",
+      "responsavel": "Tereza Hoffmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-125",
+      "data": "2026-11-11",
+      "sku": "SI-4471",
+      "linha": "L-COS",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "Remessa R-1182 da facção Costura Bela Vista voltou com 84 de 2.000 polos (4,2%) com pesponto de gola torto. O contrato admite 2,5% por remessa.",
+      "causa": "Facção trocou a costureira do posto de gola e não aplicou o gabarito de pesponto.",
+      "acao": "Retrabalho por conta da facção em 3 dias úteis (cláusula 5.3); visita técnica agendada para 17/11.",
+      "status": "aberta",
+      "responsavel": "Carla Moritz",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-7731",
+      "maquina": "TIN-03",
+      "tipo": "corretiva",
+      "data": "2026-11-12",
+      "status": "aberta",
+      "tecnico": "Valdir Schmitt",
+      "duracao_h": 1.5,
+      "descricao": "Válvula de vapor com resposta lenta: a curva de aquecimento oscila ±3 °C no patamar de 130 °C e travou por 25 min no 2º turno. Troca da válvula e do diafragma do posicionador programada para 14/11.",
+      "pecas": [
+        "Válvula de vapor 1\" com posicionador",
+        "Diafragma do posicionador",
+        "Junta de grafite 1\""
+      ],
+      "procedimento": "DOC-PRO-012"
+    },
+    {
+      "id": "OS-7728",
+      "maquina": "TEA-12",
+      "tipo": "corretiva",
+      "data": "2026-11-08",
+      "status": "em_execucao",
+      "tecnico": "Lauro Moser",
+      "duracao_h": 6,
+      "descricao": "Furos em sequência e ruído metálico. Platinas gastas e came de malha com desgaste. Peças pedidas ao representante do Fabricante A, previsão de chegada em 18/11.",
+      "pecas": [
+        "Jogo de platinas (96 un.)",
+        "Came de malha",
+        "Agulhas (lote de 200)"
+      ],
+      "procedimento": "DOC-MAN-TEA"
+    },
+    {
+      "id": "OS-7735",
+      "maquina": "TIN-05",
+      "tipo": "preventiva",
+      "data": "2026-11-13",
+      "status": "em_execucao",
+      "tecnico": "Rodrigo Valle",
+      "duracao_h": 8,
+      "descricao": "Preventiva trimestral: troca da vedação da porta, limpeza do trocador de calor e calibração dos sensores de temperatura.",
+      "pecas": [
+        "Vedação da porta",
+        "Sensor PT100 reserva"
+      ],
+      "procedimento": "DOC-PRO-015"
+    },
+    {
+      "id": "OS-7712",
+      "maquina": "TIN-03",
+      "tipo": "corretiva",
+      "data": "2026-10-19",
+      "status": "concluida",
+      "tecnico": "Valdir Schmitt",
+      "duracao_h": 2,
+      "descricao": "Oscilação de temperatura no patamar. Limpeza da válvula de vapor e do filtro Y; problema voltou em novembro.",
+      "pecas": [
+        "Tela do filtro Y"
+      ],
+      "procedimento": "DOC-PRO-012"
+    },
+    {
+      "id": "OS-7726",
+      "maquina": "COM-01",
+      "tipo": "corretiva",
+      "data": "2026-10-29",
+      "status": "concluida",
+      "tecnico": "Rodrigo Valle",
+      "duracao_h": 3,
+      "descricao": "Sobre-alimentação abaixo do especificado depois da troca de feltro (NC-2026-118). Reajuste e checklist de partida.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-ACA"
+    },
+    {
+      "id": "OS-7720",
+      "maquina": "RAM-01",
+      "tipo": "preventiva",
+      "data": "2026-11-04",
+      "status": "concluida",
+      "tecnico": "Rodrigo Valle",
+      "duracao_h": 6,
+      "descricao": "Limpeza dos queimadores e dos filtros de ar dos campos, troca de correntes das pinças.",
+      "pecas": [
+        "Correntes de pinça (2 m)",
+        "Filtros de ar (8 un.)"
+      ],
+      "procedimento": "DOC-MAN-ACA"
+    },
+    {
+      "id": "OS-7724",
+      "maquina": "COR-02",
+      "tipo": "preditiva",
+      "data": "2026-11-06",
+      "status": "concluida",
+      "tecnico": "Gilmar Bauer",
+      "duracao_h": 1,
+      "descricao": "Análise de vibração do cabeçote de corte: desgaste da faca em 70%, troca programada para a preventiva de 03/12.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-COR"
+    },
+    {
+      "id": "OS-7718",
+      "maquina": "TEA-07",
+      "tipo": "preventiva",
+      "data": "2026-11-01",
+      "status": "concluida",
+      "tecnico": "Lauro Moser",
+      "duracao_h": 4,
+      "descricao": "Limpeza geral, lubrificação de agulhas e troca de 40 agulhas do cilindro.",
+      "pecas": [
+        "Agulhas (40 un.)"
+      ],
+      "procedimento": "DOC-MAN-TEA"
+    },
+    {
+      "id": "OS-7736",
+      "maquina": "COR-01",
+      "tipo": "preditiva",
+      "data": "2026-11-11",
+      "status": "concluida",
+      "tecnico": "Gilmar Bauer",
+      "duracao_h": 0.5,
+      "descricao": "Inspeção termográfica do painel e dos motores do carro de enfesto: sem pontos quentes.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-COR"
+    },
+    {
+      "id": "OS-7738",
+      "maquina": "COS-OV1",
+      "tipo": "preventiva",
+      "data": "2026-11-14",
+      "status": "aberta",
+      "tecnico": "Gilmar Bauer",
+      "duracao_h": 1,
+      "descricao": "Preventiva mensal: limpeza, troca de óleo e ajuste do diferencial.",
+      "pecas": [
+        "Óleo de máquina de costura (1 L)"
+      ],
+      "procedimento": "DOC-MAN-COR"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-01",
+      "nome": "Marcos Antônio Pereira",
+      "regiao": "SC Vale do Itajaí e Norte",
+      "telefone": "(47) 9••••-3381",
+      "meta_mes": 920000,
+      "realizado_mes": 498300
+    },
+    {
+      "id": "REP-02",
+      "nome": "Juliana Ferraz",
+      "regiao": "RS Serra e Grande Porto Alegre",
+      "telefone": "(54) 9••••-1207",
+      "meta_mes": 780000,
+      "realizado_mes": 512600
+    },
+    {
+      "id": "REP-03",
+      "nome": "Rafael Monteiro",
+      "regiao": "SP interior",
+      "telefone": "(19) 9••••-4415",
+      "meta_mes": 1100000,
+      "realizado_mes": 541800
+    },
+    {
+      "id": "REP-04",
+      "nome": "Cláudio Roberto Silveira",
+      "regiao": "PR e SC litoral",
+      "telefone": "(41) 9••••-2210",
+      "meta_mes": 850000,
+      "realizado_mes": 312400
+    },
+    {
+      "id": "REP-05",
+      "nome": "Patrícia Lemos",
+      "regiao": "MG e GO",
+      "telefone": "(31) 9••••-7790",
+      "meta_mes": 690000,
+      "realizado_mes": 301900
+    },
+    {
+      "id": "REP-06",
+      "nome": "André Luiz Kowalski",
+      "regiao": "Nordeste (BA, PE, CE)",
+      "telefone": "(71) 9••••-5528",
+      "meta_mes": 640000,
+      "realizado_mes": 287500
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-1042",
+      "nome": "Moda Ponto Certo — Curitiba",
+      "cidade": "Curitiba",
+      "uf": "PR",
+      "segmento": "multimarcas",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 120000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-11-10"
+    },
+    {
+      "id": "CLI-1043",
+      "nome": "Vitrine da Serra Modas",
+      "cidade": "Caxias do Sul",
+      "uf": "RS",
+      "segmento": "multimarcas",
+      "representante": "REP-02",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 90000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-10-24"
+    },
+    {
+      "id": "CLI-1044",
+      "nome": "Estação Malha Store",
+      "cidade": "Joinville",
+      "uf": "SC",
+      "segmento": "rede regional (8 lojas)",
+      "representante": "REP-01",
+      "condicao_pagamento": "28/42/56",
+      "limite_credito": 350000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-11-11"
+    },
+    {
+      "id": "CLI-1045",
+      "nome": "Casa Alecrim Moda",
+      "cidade": "Florianópolis",
+      "uf": "SC",
+      "segmento": "multimarcas",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 60000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-11-05"
+    },
+    {
+      "id": "CLI-1046",
+      "nome": "Boutique Laço de Fita",
+      "cidade": "Londrina",
+      "uf": "PR",
+      "segmento": "multimarcas",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 70000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-10-25"
+    },
+    {
+      "id": "CLI-1047",
+      "nome": "Rede Bom Vestir",
+      "cidade": "Campinas",
+      "uf": "SP",
+      "segmento": "rede regional (14 lojas)",
+      "representante": "REP-03",
+      "condicao_pagamento": "28/56/84",
+      "limite_credito": 480000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-11-12"
+    },
+    {
+      "id": "CLI-1048",
+      "nome": "Pequenos Passos Kids",
+      "cidade": "Ribeirão Preto",
+      "uf": "SP",
+      "segmento": "infantil",
+      "representante": "REP-03",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 85000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-1049",
+      "nome": "Atacado Têxtil Central",
+      "cidade": "Belo Horizonte",
+      "uf": "MG",
+      "segmento": "atacado",
+      "representante": "REP-05",
+      "condicao_pagamento": "21/35/49",
+      "limite_credito": 400000,
+      "tabela_preco": "Tabela Atacado",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-1050",
+      "nome": "Magazine Horizonte Sul",
+      "cidade": "Porto Alegre",
+      "uf": "RS",
+      "segmento": "rede regional (6 lojas)",
+      "representante": "REP-02",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 260000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-10-08"
+    },
+    {
+      "id": "CLI-1051",
+      "nome": "Empório Fio & Trama",
+      "cidade": "Goiânia",
+      "uf": "GO",
+      "segmento": "multimarcas",
+      "representante": "REP-05",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 75000,
+      "tabela_preco": "Tabela B",
+      "ultimo_pedido": "2026-10-15"
+    },
+    {
+      "id": "CLI-1052",
+      "nome": "Moda Brisa do Mar",
+      "cidade": "Salvador",
+      "uf": "BA",
+      "segmento": "multimarcas",
+      "representante": "REP-06",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 95000,
+      "tabela_preco": "Tabela C (Nordeste)",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-1053",
+      "nome": "Loja Ponto Jovem",
+      "cidade": "Recife",
+      "uf": "PE",
+      "segmento": "multimarcas",
+      "representante": "REP-06",
+      "condicao_pagamento": "30/60/90",
+      "limite_credito": 80000,
+      "tabela_preco": "Tabela C (Nordeste)",
+      "ultimo_pedido": "2026-11-09"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-88190",
+      "cliente": "CLI-1044",
+      "representante": "REP-01",
+      "data": "2026-10-10",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-07",
+      "ordem": "OP-24490",
+      "itens": [
+        {
+          "sku": "SI-2381",
+          "quantidade": 4000,
+          "preco_unit": 17.77
+        },
+        {
+          "sku": "SI-2390",
+          "quantidade": 1500,
+          "preco_unit": 18.71
+        }
+      ],
+      "observacao": "Entregue em 07/11 nas 8 lojas."
+    },
+    {
+      "id": "PV-88201",
+      "cliente": "CLI-1047",
+      "representante": "REP-03",
+      "data": "2026-10-12",
+      "status": "faturado",
+      "previsao_entrega": "2026-11-14",
+      "ordem": "OP-24495",
+      "itens": [
+        {
+          "sku": "SI-6022",
+          "quantidade": 1800,
+          "preco_unit": 37.51
+        }
+      ],
+      "observacao": "NF emitida em 10/11; em trânsito."
+    },
+    {
+      "id": "PV-88205",
+      "cliente": "CLI-1051",
+      "representante": "REP-05",
+      "data": "2026-10-15",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-12",
+      "ordem": "OP-24502",
+      "itens": [
+        {
+          "sku": "SI-7105",
+          "quantidade": 600,
+          "preco_unit": 32.9
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-88213",
+      "cliente": "CLI-1042",
+      "representante": "REP-04",
+      "data": "2026-10-20",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-21",
+      "ordem": "OP-24518",
+      "itens": [
+        {
+          "sku": "SI-5120",
+          "quantidade": 600,
+          "preco_unit": 69.9
+        },
+        {
+          "sku": "SI-6010",
+          "quantidade": 300,
+          "preco_unit": 54.9
+        }
+      ],
+      "observacao": "Previsão original 14/11, reprogramada para 21/11 por reprocesso de tingimento do moletom marinho (OP-24518). As 300 joggers saem do estoque junto com o moletom. Total R$ 58.410,00."
+    },
+    {
+      "id": "PV-88219",
+      "cliente": "CLI-1043",
+      "representante": "REP-02",
+      "data": "2026-10-24",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-24541",
+      "itens": [
+        {
+          "sku": "SI-2318",
+          "quantidade": 900,
+          "preco_unit": 24.5
+        },
+        {
+          "sku": "SI-3315",
+          "quantidade": 400,
+          "preco_unit": 36.9
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-88227",
+      "cliente": "CLI-1050",
+      "representante": "REP-02",
+      "data": "2026-10-08",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-19",
+      "ordem": "OP-24522",
+      "itens": [
+        {
+          "sku": "SI-4471",
+          "quantidade": 1500,
+          "preco_unit": 40.33
+        }
+      ],
+      "observacao": "Previsão original 12/11. Retrabalho de gola na facção (NC-2026-125). Lojista sensível: já teve reclamação de gola (NC-2026-119)."
+    },
+    {
+      "id": "PV-88231",
+      "cliente": "CLI-1045",
+      "representante": "REP-04",
+      "data": "2026-11-05",
+      "status": "aprovado",
+      "previsao_entrega": "2026-11-18",
+      "ordem": null,
+      "itens": [
+        {
+          "sku": "SI-2381",
+          "quantidade": 500,
+          "preco_unit": 18.9
+        },
+        {
+          "sku": "SI-6022",
+          "quantidade": 300,
+          "preco_unit": 39.9
+        }
+      ],
+      "observacao": "Pronta entrega do estoque do CD Gaspar."
+    },
+    {
+      "id": "PV-88236",
+      "cliente": "CLI-1048",
+      "representante": "REP-03",
+      "data": "2026-11-04",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-25",
+      "ordem": "OP-24547",
+      "itens": [
+        {
+          "sku": "SI-7105",
+          "quantidade": 800,
+          "preco_unit": 32.9
+        },
+        {
+          "sku": "SI-7120",
+          "quantidade": 400,
+          "preco_unit": 29.9
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-88240",
+      "cliente": "CLI-1046",
+      "representante": "REP-04",
+      "data": "2026-10-25",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-24530",
+      "itens": [
+        {
+          "sku": "SI-3302",
+          "quantidade": 360,
+          "preco_unit": 59.9
+        }
+      ],
+      "observacao": "Previsão original 13/11. Tecido estampado atrasado e com rapport deslocado (NC-2026-122)."
+    },
+    {
+      "id": "PV-88245",
+      "cliente": "CLI-1049",
+      "representante": "REP-05",
+      "data": "2026-11-03",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-24540",
+      "itens": [
+        {
+          "sku": "SI-2381",
+          "quantidade": 6000,
+          "preco_unit": 16.63
+        }
+      ],
+      "observacao": "Tabela Atacado (mínimo de 1.200 peças)."
+    },
+    {
+      "id": "PV-88250",
+      "cliente": "CLI-1052",
+      "representante": "REP-06",
+      "data": "2026-11-06",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-27",
+      "ordem": "OP-24544",
+      "itens": [
+        {
+          "sku": "SI-6010",
+          "quantidade": 500,
+          "preco_unit": 56.55
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-88252",
+      "cliente": "CLI-1053",
+      "representante": "REP-06",
+      "data": "2026-11-09",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-01",
+      "ordem": "OP-24551",
+      "itens": [
+        {
+          "sku": "SI-2390",
+          "quantidade": 1200,
+          "preco_unit": 20.5
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-88258",
+      "cliente": "CLI-1042",
+      "representante": "REP-04",
+      "data": "2026-11-10",
+      "status": "em_analise",
+      "previsao_entrega": "2026-12-10",
+      "ordem": "OP-24560",
+      "itens": [
+        {
+          "sku": "SI-5120",
+          "quantidade": 800,
+          "preco_unit": 69.9
+        }
+      ],
+      "observacao": "Moletom marinho abaixo do estoque mínimo (380 de 1.500): prazo pela OP-24560 (08/12), conforme RC-03. Total R$ 55.920,00."
+    },
+    {
+      "id": "PV-88261",
+      "cliente": "CLI-1044",
+      "representante": "REP-01",
+      "data": "2026-11-11",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-14",
+      "ordem": "OP-24565",
+      "itens": [
+        {
+          "sku": "SI-7120",
+          "quantidade": 1200,
+          "preco_unit": 28.11
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-88266",
+      "cliente": "CLI-1047",
+      "representante": "REP-03",
+      "data": "2026-11-12",
+      "status": "em_analise",
+      "previsao_entrega": "2026-12-16",
+      "ordem": "OP-24568",
+      "itens": [
+        {
+          "sku": "SI-4471",
+          "quantidade": 1800,
+          "preco_unit": 40.33
+        }
+      ],
+      "observacao": "Polo 4471 com 1.150 peças em estoque, abaixo do mínimo de 2.500: prazo pela OP-24568 (14/12), conforme RC-03."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Desconto máximo do representante",
+      "texto": "Até 5% sem aprovação; de 5% a 8% com o gerente regional (Sandra Hoffmann); acima de 8%, só com a diretoria comercial."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Pedido mínimo e grade",
+      "texto": "Pedido mínimo de R$ 3.000,00 por lojista e grade mínima de 6 peças por cor. Tamanhos avulsos fora da grade custam 4% a mais."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Prazo de entrega",
+      "texto": "Artigo com estoque acima do mínimo: faturamento em até 3 dias úteis após a aprovação de crédito. Artigo abaixo do mínimo: o estoque fica reservado para pedidos já aprovados e o pedido novo entra com o prazo da próxima OP mais 2 dias de expedição."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Tabelas de preço",
+      "texto": "Tabela B é a de referência (multimarcas). Tabela A (redes) tem 6% a menos; Tabela C (Nordeste) tem 3% a mais, com frete incluso; Tabela Atacado tem 12% a menos, com mínimo de 1.200 peças por pedido."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Crédito",
+      "texto": "Pedido que, somado aos pedidos em aberto, passa do limite de crédito do lojista vai para análise do financeiro. Não confirmar prazo ao lojista antes da aprovação."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Trocas por defeito",
+      "texto": "O lojista pode trocar até 10% do pedido por defeito de fabricação em até 30 dias da entrega, com foto e etiqueta da peça."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "otif_colecao",
+      "nome": "OPs entregues na data da coleção",
+      "valor": 82.4,
+      "unidade": "%",
+      "meta": 92,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        90.1,
+        91.4,
+        89.8,
+        92.3,
+        90.6,
+        88.7,
+        87.9,
+        89.2,
+        88.1,
+        86.5,
+        84,
+        82.4
+      ],
+      "explicacao": "Nos últimos 30 dias, 28 de 34 OPs saíram na data da coleção. Hoje há 4 OPs atrasadas: reprocesso do moletom marinho na tinturaria, retrabalho de gola numa facção, tecido estampado atrasado e o tear 12 parado.",
+      "caminho": [
+        "ERP › OPs encerradas nos últimos 30 dias (data de encerramento × data da coleção)",
+        "Planilha de PCP › aba Coleção Inverno 27",
+        "Cálculo: OPs no prazo ÷ OPs encerradas"
+      ],
+      "fontes": [
+        "op:OP-24518",
+        "op:OP-24522",
+        "op:OP-24530",
+        "op:OP-24535"
+      ]
+    },
+    {
+      "id": "reprocesso_tingimento",
+      "nome": "Reprocesso de tingimento por lote",
+      "valor": 6.8,
+      "unidade": "%",
+      "meta": 4,
+      "direcao": "menor_melhor",
+      "area": "operadores",
+      "tendencia": [
+        4.2,
+        3.9,
+        4.4,
+        3.8,
+        4.1,
+        4.6,
+        4.3,
+        4.9,
+        5.2,
+        5.6,
+        6.1,
+        6.8
+      ],
+      "explicacao": "Em novembro, 11 de 162 lotes tingidos voltaram para reprocesso. A maior parte é marinho em fio misto na TIN-03, que não segura o patamar de 130 °C, e fio de poliéster de lote novo sem ajuste de receita.",
+      "caminho": [
+        "MES › lotes de tingimento com status \"reprocesso\"",
+        "Laboratório › laudos de ΔE por lote",
+        "Cálculo: lotes reprocessados ÷ lotes tingidos no mês"
+      ],
+      "fontes": [
+        "maq:TIN-03",
+        "nc:NC-2026-121",
+        "turno:2026-11-11|3º|L-TIN",
+        "saber:SB-031"
+      ]
+    },
+    {
+      "id": "oee_tinturaria",
+      "nome": "OEE da tinturaria",
+      "valor": 71.4,
+      "unidade": "%",
+      "meta": 78,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        75.2,
+        76,
+        74.8,
+        75.9,
+        76.1,
+        75.4,
+        76.1,
+        74.9,
+        73.8,
+        73,
+        72.2,
+        71.4
+      ],
+      "explicacao": "O OEE caiu de 76,1% em julho para 71,4%. A TIN-03 perde disponibilidade com a válvula de vapor (parou 25 min no 2º turno de 12/11), a TIN-05 está em preventiva e o reprocesso de 620 kg no 3º turno de 11/11 derrubou a qualidade.",
+      "caminho": [
+        "MES › apontamentos de parada (L-TIN)",
+        "Planilha de paradas › aba Nov",
+        "Cálculo: disponibilidade × desempenho × qualidade"
+      ],
+      "fontes": [
+        "maq:TIN-03",
+        "os:OS-7731",
+        "turno:2026-11-12|2º|L-TIN",
+        "turno:2026-11-11|3º|L-TIN"
+      ]
+    },
+    {
+      "id": "defeito_faccoes",
+      "nome": "Defeito no retorno das facções",
+      "valor": 3.6,
+      "unidade": "%",
+      "meta": 2,
+      "direcao": "menor_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        2.1,
+        1.9,
+        2.3,
+        2,
+        1.8,
+        2.2,
+        2.4,
+        2.1,
+        2.6,
+        2.9,
+        3.1,
+        3.6
+      ],
+      "explicacao": "Em novembro voltaram 8.920 peças das facções, 321 com defeito. A Costura Bela Vista puxa o número para cima: 84 polos com gola torta na remessa R-1182 (4,2%, acima dos 2,5% do contrato).",
+      "caminho": [
+        "ERP › retornos de remessa de facção",
+        "Planilha de acompanhamento de facções › aba Nov",
+        "Cálculo: peças com defeito ÷ peças retornadas"
+      ],
+      "fontes": [
+        "nc:NC-2026-125",
+        "doc:DOC-PLA-FAC#t1",
+        "doc:DOC-CTR-FAC#t1"
+      ]
+    },
+    {
+      "id": "retorno_faccao",
+      "nome": "Prazo médio de retorno das facções",
+      "valor": 9.8,
+      "unidade": "dias",
+      "meta": 8,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        8.1,
+        7.9,
+        8.4,
+        8,
+        7.6,
+        8.2,
+        8.5,
+        8.3,
+        8.9,
+        9.2,
+        9.5,
+        9.8
+      ],
+      "explicacao": "O prazo médio entre remessa e retorno subiu para 9,8 dias, perto do limite de 10 dias do contrato. Retrabalho na Costura Bela Vista e falta de costureiras na Ateliê Dois Irmãos explicam a alta.",
+      "caminho": [
+        "ERP › notas de remessa e retorno de industrialização",
+        "Planilha de acompanhamento de facções",
+        "Cálculo: média de dias corridos entre remessa e retorno"
+      ],
+      "fontes": [
+        "doc:DOC-PLA-FAC#t2",
+        "doc:DOC-CTR-FAC#t3",
+        "op:OP-24522"
+      ]
+    },
+    {
+      "id": "tempo_resposta_rep",
+      "nome": "Tempo para responder ao representante",
+      "valor": 3.4,
+      "unidade": "h",
+      "meta": 1,
+      "direcao": "menor_melhor",
+      "area": "comercial",
+      "tendencia": [
+        4.1,
+        4.3,
+        3.9,
+        4,
+        4.4,
+        4.2,
+        4.6,
+        4.1,
+        3.8,
+        3.9,
+        3.7,
+        3.4
+      ],
+      "explicacao": "Chegam em média 46 consultas de representantes por dia no WhatsApp do comercial, sobre grade, prazo e status de pedido. Cada uma tira alguém do trabalho para consultar o ERP. A queda recente vem do piloto do assistente com 10 representantes.",
+      "caminho": [
+        "WhatsApp Business › horário da pergunta e da resposta",
+        "Amostra de 300 conversas de outubro e novembro",
+        "Cálculo: mediana do tempo até a primeira resposta útil"
+      ],
+      "fontes": [
+        "integ:whatsapp",
+        "rep:REP-04",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "id": "aproveitamento_corte",
+      "nome": "Aproveitamento de tecido no corte",
+      "valor": 84.2,
+      "unidade": "%",
+      "meta": 86,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        85.6,
+        85.9,
+        86.2,
+        85.4,
+        86,
+        85.8,
+        85.1,
+        85.5,
+        85,
+        84.7,
+        84.9,
+        84.2
+      ],
+      "explicacao": "O aproveitamento caiu com o vestido 3302: o encaixe precisou ser refeito sem os 3 rolos com estampa deslocada. A ficha rev. C do polo 4471 (1,38 m no G, antes 1,42 m) deve recuperar parte disso a partir da OP-24568.",
+      "caminho": [
+        "Software de encaixe › relatório de consumo por OP",
+        "ERP › baixa de tecido por OP",
+        "Cálculo: área das peças ÷ área enfestada"
+      ],
+      "fontes": [
+        "turno:2026-11-12|1º|L-COR",
+        "nc:NC-2026-122",
+        "doc:DOC-FT-4471#t1"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-MAN-TEA",
+      "titulo": "Manual dos teares circulares (Fabricantes A e B)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-03-10",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "6.3 Regulagem de platinas",
+          "texto": "A folga entre platina e agulha deve ficar entre 0,05 e 0,08 mm. Ruído metálico rítmico no cilindro indica came de malha gasto e precede furos em sequência."
+        },
+        {
+          "id": "t2",
+          "secao": "8.1 Lubrificação",
+          "texto": "Óleo de agulha a cada 8 horas de operação, 0,8 ml por alimentador. Falta de lubrificação aumenta a quebra de agulhas em até 3 vezes."
+        },
+        {
+          "id": "t3",
+          "secao": "9.2 Diagnóstico de furos",
+          "texto": "Furos em intervalo regular (ex.: a cada 1,2 m) apontam para uma agulha ou platina específica; furos aleatórios apontam para o fio ou a tensão de alimentação."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-TIN",
+      "titulo": "Manual dos jets de tingimento atmosféricos e HT",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2024-11-22",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.4 Rampa de aquecimento",
+          "texto": "Acima de 80 °C, gradiente máximo de 2,0 °C/min. No patamar, o desvio admissível é de ±1 °C; desvios maiores causam tingimento desigual em poliéster."
+        },
+        {
+          "id": "t2",
+          "secao": "7.2 Válvula de vapor",
+          "texto": "O tempo de resposta do posicionador deve ser de no máximo 4 s. Resposta acima disso ou oscilação no patamar indica diafragma gasto ou sujeira na sede da válvula."
+        },
+        {
+          "id": "t3",
+          "secao": "11.1 Carga",
+          "texto": "Relação de banho de 1:6 a 1:8. Para a TIN-03, carga máxima de 400 kg; para malha flanelada, reduzir em 10% para evitar marcas de corda."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-ACA",
+      "titulo": "Manual da rama e da compactadeira",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-06-02",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.1 Sobre-alimentação",
+          "texto": "Faixa de 0 a 15%. Para malha 30.1 de 160 g/m², usar 8% para garantir encolhimento residual de até 3%."
+        },
+        {
+          "id": "t2",
+          "secao": "6.2 Temperatura dos campos",
+          "texto": "Fixação de malha com elastano entre 160 e 170 °C, tempo de permanência de 30 a 40 s."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-COR",
+      "titulo": "Manual de enfesto, corte automático e máquinas de costura",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2025-09-18",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.2 Enfesto de malha",
+          "texto": "Malha deve descansar 12 horas após a abertura do rolo antes do enfesto. Tensão do carro em zero para viscose e malhas com elastano."
+        },
+        {
+          "id": "t2",
+          "secao": "7.5 Faca do corte automático",
+          "texto": "Trocar a faca quando a análise de vibração indicar desgaste acima de 80% ou a cada 1.200 horas de corte."
+        },
+        {
+          "id": "t3",
+          "secao": "12.1 Overloque e galoneira",
+          "texto": "Diferencial entre 1,0 e 1,3 para ribana em malha, para evitar barra ondulada. Óleo trocado mensalmente."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-012",
+      "titulo": "Procedimento de troca da válvula de vapor dos jets",
+      "tipo": "procedimento",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-08-14",
+      "acesso": [
+        "manutencao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3 Pré-requisitos",
+          "texto": "Máquina vazia e fria (abaixo de 60 °C), com o banho drenado. Separar válvula 1\" com posicionador, diafragma e junta de grafite antes de iniciar."
+        },
+        {
+          "id": "t2",
+          "secao": "4.2 Bloqueio",
+          "texto": "Fechar a válvula geral de vapor da linha, aplicar cadeado e etiqueta, abrir o dreno de condensado e confirmar pressão zero no manômetro antes de soltar os flanges."
+        },
+        {
+          "id": "t3",
+          "secao": "6 Teste",
+          "texto": "Após a troca, rodar rampa de teste a 1,5 °C/min até 130 °C sem carga. Aceitar se o desvio no patamar ficar em ±1 °C por 20 minutos e o posicionador responder em até 4 s."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-015",
+      "titulo": "Plano de manutenção preventiva da tinturaria",
+      "tipo": "planilha",
+      "area": "manutencao",
+      "origem": "Planilha",
+      "atualizado": "2026-10-30",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Aba Jets — trimestral",
+          "texto": "Troca da vedação da porta, limpeza do trocador de calor e calibração dos sensores PT100 a cada 2.000 horas ou 3 meses."
+        },
+        {
+          "id": "t2",
+          "secao": "Aba Calendário",
+          "texto": "Próximas preventivas: TIN-03 em 20/11, TIN-01 em 27/11; TIN-05 em execução em 13/11 (OS-7735)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-REC-TIN",
+      "titulo": "Instrução de tingimento — algodão, poliéster e misturas",
+      "tipo": "instrucao",
+      "area": "operadores",
+      "origem": "PLM",
+      "atualizado": "2026-05-06",
+      "acesso": [
+        "operadores",
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3.1 Marinho MAR-07 em 50/50",
+          "texto": "Tingimento em 2 banhos: disperso a 130 °C por 30 min para o poliéster, redução, e reativo a 60 °C para o algodão. Rampa de 1,5 °C/min entre 80 e 130 °C."
+        },
+        {
+          "id": "t2",
+          "secao": "5.2 Tolerância de cor",
+          "texto": "ΔE CMC (2:1) até 1,0 contra o padrão aprovado: liberar. Entre 1,0 e 1,5: só com aprovação da qualidade. Acima de 1,5: reprocesso."
+        },
+        {
+          "id": "t3",
+          "secao": "6 Reprocesso",
+          "texto": "Antes de reprocessar, registrar lote do fio, curva real da máquina e laudo do laboratório. Reprocesso de marinho em fio misto: preferir jet com patamar estável."
+        }
+      ]
+    },
+    {
+      "id": "DOC-NOR-QUA",
+      "titulo": "NI-Q-04 Norma interna de inspeção de malha e peça pronta",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-02-20",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.2 Encolhimento",
+          "texto": "Encolhimento após 3 lavagens domésticas de até 3% para malha 30.1 e de até 4% para moletom e viscose, com tolerância de +0,5 ponto. Acima disso, recompactar o lote."
+        },
+        {
+          "id": "t2",
+          "secao": "4.3 Torção",
+          "texto": "Torção (espiralidade) máxima de 5% em meia malha. Medir na peça pronta após 3 lavagens, na costura lateral."
+        },
+        {
+          "id": "t3",
+          "secao": "7.1 Amostragem",
+          "texto": "Inspeção de peça pronta por amostragem com NQA 2,5 para defeitos maiores e 4,0 para defeitos menores, por remessa de facção."
+        }
+      ]
+    },
+    {
+      "id": "DOC-FT-4471",
+      "titulo": "Ficha técnica 4471 — polo piquet masculina, rev. C",
+      "tipo": "ficha_tecnica",
+      "area": "producao",
+      "origem": "PLM",
+      "atualizado": "2026-09-15",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "operadores",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Consumo",
+          "texto": "Consumo de 1,38 m de malha piquet por peça no tamanho G (rev. C). Na rev. B, da coleção passada, eram 1,42 m."
+        },
+        {
+          "id": "t2",
+          "secao": "Gola e vista",
+          "texto": "Gola em ribana retilínea 1x1 de 7 cm, costurada com overloque e pesponto a 0,5 cm. Ondulação admissível após lavagem: até 2 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "Revisões",
+          "texto": "Rev. C (15/09/2026): novo encaixe aprovado na peça piloto 2; consumo reduzido de 1,42 para 1,38 m no G."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ATA-PP2",
+      "titulo": "Ata de aprovação da peça piloto 2 — polo 4471",
+      "tipo": "email",
+      "area": "producao",
+      "origem": "E-mail",
+      "atualizado": "2026-09-12",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Decisão",
+          "texto": "Aprovada a peça piloto 2 com o encaixe novo (mangas giradas 3°), sem diferença de caimento. Consumo no G passa de 1,42 m para 1,38 m."
+        },
+        {
+          "id": "t2",
+          "secao": "Pendências",
+          "texto": "Modelagem atualiza a ficha para rev. C até 15/09. PCP aplica o consumo novo nas OPs liberadas depois dessa data."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CTR-FAC",
+      "titulo": "Contrato-padrão de prestação de serviço de facção",
+      "tipo": "contrato",
+      "area": "producao",
+      "origem": "SharePoint",
+      "atualizado": "2026-01-08",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Cláusula 5.1 Defeito máximo",
+          "texto": "A facção admite até 2,5% de peças com defeito por remessa, medidas na inspeção de retorno conforme a NI-Q-04."
+        },
+        {
+          "id": "t2",
+          "secao": "Cláusula 5.3 Retrabalho",
+          "texto": "Peças acima do limite de defeito são retrabalhadas pela facção, sem custo, em até 3 dias úteis a partir da devolução."
+        },
+        {
+          "id": "t3",
+          "secao": "Cláusula 7.2 Prazo de retorno",
+          "texto": "O prazo de retorno de cada remessa é de 10 dias corridos, salvo combinado diferente na nota de remessa."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLA-FAC",
+      "titulo": "Planilha de acompanhamento de facções — novembro/2026",
+      "tipo": "planilha",
+      "area": "producao",
+      "origem": "Planilha",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Aba Nov — Costura Bela Vista",
+          "texto": "Remessa R-1182: 2.000 polos 4471, enviada em 29/10, retorno em 11/11 (13 dias), 84 peças com defeito de gola (4,2%)."
+        },
+        {
+          "id": "t2",
+          "secao": "Aba Nov — Resumo",
+          "texto": "8.920 peças retornadas no mês, 321 com defeito (3,6%). Prazo médio de retorno: 9,8 dias. Linha Fina: 1,1% de defeito; Ateliê Dois Irmãos: 2,0%."
+        }
+      ]
+    },
+    {
+      "id": "DOC-POL-COM",
+      "titulo": "Política comercial 2026/2",
+      "tipo": "norma",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-07-01",
+      "acesso": [
+        "comercial",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2 Descontos",
+          "texto": "Desconto de até 5% a critério do representante; de 5% a 8% com aprovação do gerente regional; acima de 8%, só com a diretoria comercial."
+        },
+        {
+          "id": "t2",
+          "secao": "3 Prazos",
+          "texto": "Artigo abaixo do estoque mínimo não é vendido do estoque: o prazo é o da próxima OP mais 2 dias de expedição."
+        },
+        {
+          "id": "t3",
+          "secao": "5 Crédito",
+          "texto": "Pedidos que, somados aos pedidos em aberto, passem do limite de crédito vão para o financeiro antes de qualquer confirmação de prazo."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CAT-V27",
+      "titulo": "Catálogo Verão 2027 e prévia do Inverno 2027",
+      "tipo": "catalogo",
+      "area": "marketing",
+      "origem": "SharePoint",
+      "atualizado": "2026-08-20",
+      "acesso": [
+        "marketing",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Básicos",
+          "texto": "Camiseta 2381 em 5 cores e gola V 2390 em 3 cores, malha 30.1 penteada, encolhimento máximo de 3%."
+        },
+        {
+          "id": "t2",
+          "secao": "Inverno 27 — prévia",
+          "texto": "Moletom careca 5120 flanelado em 4 cores, com o marinho como cor principal, e jogger 6010 combinando."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CHM-0412",
+      "titulo": "Chamado SAC 0412 — torção na camiseta básica (Estação Malha Store)",
+      "tipo": "chamado",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-04",
+      "acesso": [
+        "qualidade",
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Relato do lojista",
+          "texto": "Clientes devolveram camisetas brancas 2381 com a costura lateral girando para a frente depois da primeira lavagem. 320 peças do mesmo lote na loja."
+        },
+        {
+          "id": "t2",
+          "secao": "Resposta enviada",
+          "texto": "Troca das 320 peças aprovada; causa identificada no lote de fio e na tensão do tear; teste de torção incluído na liberação de cada rolo (NC-2026-117)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ATA-QUA",
+      "titulo": "Ata da reunião semanal de qualidade — 10/11",
+      "tipo": "email",
+      "area": "qualidade",
+      "origem": "E-mail",
+      "atualizado": "2026-11-10",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Tinturaria",
+          "texto": "Reprocesso em 6,1% dos lotes em outubro, acima da meta de 4%. Concentrado em marinho e preto em fio misto na TIN-03."
+        },
+        {
+          "id": "t2",
+          "secao": "Encaminhamentos",
+          "texto": "Manutenção avalia a válvula de vapor da TIN-03; tinturaria registra o ajuste de receita para fio de lote novo com o Osmar."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-031",
+      "autor": "Osmar Luiz Bittencourt",
+      "funcao": "Tintureiro",
+      "tempo_casa_anos": 22,
+      "area": "operadores",
+      "maquina": "TIN-03",
+      "titulo": "Marinho em fio misto quando o poliéster muda de lote",
+      "dica": "Quando o fio de poliéster vem de lote novo, o marinho puxa para o roxo. Subo 4% o disperso azul e faço o patamar de 130 °C por 35 minutos em vez de 30. Na TIN-03, abro a válvula de vapor em duas etapas, porque ela não segura a rampa de 1,5 °C/min sozinha.",
+      "validado_por": "Edson Kreutzfeld (supervisor da tinturaria)",
+      "data": "2026-09-02",
+      "tags": [
+        "fio misto",
+        "marinho",
+        "receita",
+        "TIN-03"
+      ]
+    },
+    {
+      "id": "SB-032",
+      "autor": "Tereza Hoffmann",
+      "funcao": "Revisora de malha",
+      "tempo_casa_anos": 18,
+      "area": "qualidade",
+      "maquina": "TEA-07",
+      "titulo": "Como enxergar torção ainda no cru",
+      "dica": "Dobro a malha crua ao meio pela coluna e olho a fileira contra a luz: se a coluna faz diagonal de mais de 2 dedos num palmo, a peça vai torcer depois da lavagem. Aviso o mecânico antes de terminar o rolo.",
+      "validado_por": "Marli Schaefer (coordenadora da qualidade)",
+      "data": "2026-10-27",
+      "tags": [
+        "torção",
+        "revisão",
+        "malha 30.1"
+      ]
+    },
+    {
+      "id": "SB-033",
+      "autor": "Lauro Moser",
+      "funcao": "Mecânico de teares",
+      "tempo_casa_anos": 25,
+      "area": "manutencao",
+      "maquina": "TEA-12",
+      "titulo": "O barulho que vem antes do furo no tear 12",
+      "dica": "O TEA-12 avisa uns dez dias antes: um tique metálico a cada volta do cilindro. É o came gasto pegando nas platinas. Se trocar só as platinas, o furo volta em duas semanas; tem que trocar o came junto.",
+      "validado_por": "Gilmar Bauer (supervisor de manutenção)",
+      "data": "2026-10-05",
+      "tags": [
+        "tear circular",
+        "platinas",
+        "came",
+        "furos"
+      ]
+    },
+    {
+      "id": "SB-034",
+      "autor": "Jair Correia",
+      "funcao": "Operador de rama",
+      "tempo_casa_anos": 15,
+      "area": "operadores",
+      "maquina": "RAM-01",
+      "titulo": "Largura do piquet na rama",
+      "dica": "Piquet encolhe mais na largura que meia malha. Uso sobre-alimentação de 8% e 165 °C e abro 2 cm a mais na largura de entrada; senão o polo 4471 sai apertado no tórax.",
+      "validado_por": "Edson Kreutzfeld (supervisor da tinturaria)",
+      "data": "2026-08-19",
+      "tags": [
+        "rama",
+        "piquet",
+        "largura"
+      ]
+    },
+    {
+      "id": "SB-035",
+      "autor": "Simone Kaestner",
+      "funcao": "Enfestadora",
+      "tempo_casa_anos": 12,
+      "area": "operadores",
+      "maquina": "COR-01",
+      "titulo": "Enfesto de viscose estampada sem deslocar a estampa",
+      "dica": "Viscose estampada vai com tensão zero e eu deixo 2 cm de folga em cada ponta. Antes de enfestar, confiro o rapport com a régua em três pontos do rolo; se passar de 3 mm, separo o rolo e aviso a qualidade.",
+      "validado_por": "Carla Moritz (coordenadora de PCP)",
+      "data": "2026-11-05",
+      "tags": [
+        "enfesto",
+        "viscose",
+        "estampa"
+      ]
+    },
+    {
+      "id": "SB-036",
+      "autor": "Neusa Werner",
+      "funcao": "Modelista",
+      "tempo_casa_anos": 20,
+      "area": "producao",
+      "maquina": null,
+      "titulo": "Encaixe do polo 4471 com mangas giradas",
+      "dica": "No piquet dá para girar a manga 3° sem mudar o caimento, porque a malha não tem fio direcional forte. Foi isso que baixou o consumo de 1,42 para 1,38 m no G. Em listrado não pode girar.",
+      "validado_por": "Carla Moritz (coordenadora de PCP)",
+      "data": "2026-09-16",
+      "tags": [
+        "encaixe",
+        "consumo",
+        "modelagem",
+        "polo 4471"
+      ]
+    },
+    {
+      "id": "SB-037",
+      "autor": "Ivone Maria Krieger",
+      "funcao": "Costureira-líder",
+      "tempo_casa_anos": 16,
+      "area": "operadores",
+      "maquina": "COS-GA2",
+      "titulo": "Barra de ribana sem ondular na galoneira",
+      "dica": "Para ribana com elastano, diferencial em 1,2 e ponto 3,0 mm. Se a barra ondular, o problema quase sempre é o diferencial, não a linha.",
+      "validado_por": "Carla Moritz (coordenadora de PCP)",
+      "data": "2026-07-22",
+      "tags": [
+        "galoneira",
+        "ribana",
+        "barra"
+      ]
+    },
+    {
+      "id": "SB-038",
+      "autor": "Adilson Pereira",
+      "funcao": "Tintureiro (turno da noite)",
+      "tempo_casa_anos": 9,
+      "area": "operadores",
+      "maquina": "TIN-01",
+      "titulo": "Viscose no jet 1 sem marca de corda",
+      "dica": "Na TIN-01, viscose vai no máximo com 480 kg e velocidade de giro 20% abaixo do algodão. Com carga cheia, a viscose marca e o lote volta da revisão.",
+      "validado_por": "Edson Kreutzfeld (supervisor da tinturaria)",
+      "data": "2026-06-30",
+      "tags": [
+        "viscose",
+        "carga",
+        "TIN-01"
+      ]
+    },
+    {
+      "id": "SB-039",
+      "autor": "Valdir Schmitt",
+      "funcao": "Técnico de manutenção",
+      "tempo_casa_anos": 14,
+      "area": "manutencao",
+      "maquina": "TIN-03",
+      "titulo": "Sinal de diafragma gasto na válvula de vapor",
+      "dica": "Quando o posicionador demora mais de 4 segundos para responder e a temperatura faz serrote no patamar, é diafragma. Limpar a sede resolve por umas três semanas; a solução é trocar válvula e diafragma juntos.",
+      "validado_por": "Gilmar Bauer (supervisor de manutenção)",
+      "data": "2026-10-21",
+      "tags": [
+        "válvula de vapor",
+        "TIN-03",
+        "jet HT"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:40",
+      "registros": 184220,
+      "observacao": "Pedidos, estoque, OPs, notas de remessa e retorno de facção"
+    },
+    {
+      "id": "mes",
+      "nome": "MES / apontamento de produção",
+      "tipo": "MES",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:55",
+      "registros": 96410,
+      "observacao": "Paradas, lotes de tingimento e produção por turno"
+    },
+    {
+      "id": "plm",
+      "nome": "PLM de coleção (fichas técnicas)",
+      "tipo": "PLM",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T06:10",
+      "registros": 3870,
+      "observacao": "Fichas técnicas, revisões de modelagem e instruções de tingimento"
+    },
+    {
+      "id": "planilhas",
+      "nome": "Planilhas de PCP e de facções",
+      "tipo": "Planilha",
+      "status": "conectado",
+      "ultima_sync": "2026-11-12T18:30",
+      "registros": 1240,
+      "observacao": "Acompanhamento de facções, paradas e plano de preventiva"
+    },
+    {
+      "id": "sharepoint",
+      "nome": "SharePoint e pasta da qualidade",
+      "tipo": "Documentos",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T05:00",
+      "registros": 6920,
+      "observacao": "Manuais, procedimentos, normas internas e catálogo"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail da qualidade e do comercial",
+      "tipo": "E-mail",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:30",
+      "registros": 22150,
+      "observacao": "Atas, aprovações de peça piloto e reclamações de lojistas"
+    },
+    {
+      "id": "chamados",
+      "nome": "SAC / chamados de lojistas",
+      "tipo": "Chamados",
+      "status": "erro",
+      "ultima_sync": "2026-11-11T22:00",
+      "registros": 1876,
+      "observacao": "Token de acesso expirado; TI renovando"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business dos representantes",
+      "tipo": "Mensageria",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:05",
+      "registros": 14380,
+      "observacao": "Piloto com 10 representantes; o assistente responde com fonte"
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 6
+    },
+    {
+      "id": "pcp",
+      "nome": "Analista de PCP de coleção",
+      "areas": [
+        "producao",
+        "qualidade",
+        "operadores"
+      ],
+      "usuarios": 14
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e laboratório",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 9
+    },
+    {
+      "id": "manutencao",
+      "nome": "Técnico de manutenção",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 11
+    },
+    {
+      "id": "tinturaria",
+      "nome": "Tintureiro / líder de turno",
+      "areas": [
+        "operadores",
+        "manutencao",
+        "qualidade"
+      ],
+      "usuarios": 22
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial interno e marketing",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 9
+    },
+    {
+      "id": "representante",
+      "nome": "Representante (só a própria carteira)",
+      "areas": [
+        "comercial"
+      ],
+      "usuarios": 38
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T07:12",
+      "perfil": "tinturaria",
+      "area": "operadores",
+      "pergunta": "Como ajustar a receita do marinho com fio de poliéster de lote novo?",
+      "fontes": [
+        "saber:SB-031",
+        "doc:DOC-REC-TIN#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T07:48",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Procedimento de troca da válvula de vapor da TIN-03",
+      "fontes": [
+        "doc:DOC-PRO-012#t2",
+        "os:OS-7731"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:05",
+      "perfil": "representante",
+      "area": "comercial",
+      "pergunta": "Status do pedido 88213 da Moda Ponto Certo",
+      "fontes": [
+        "pedido:PV-88213",
+        "op:OP-24518"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:12",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Quais OPs do Inverno 27 dependem da tinturaria?",
+      "fontes": [
+        "op:OP-24518",
+        "op:OP-24544",
+        "op:OP-24560"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:31",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Tolerância de ΔE para liberar lote de marinho",
+      "fontes": [
+        "doc:DOC-REC-TIN#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:44",
+      "perfil": "representante",
+      "area": "comercial",
+      "pergunta": "Tem polo 4471 marinho para pronta entrega?",
+      "fontes": [
+        "sku:SI-4471",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:02",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o OEE da tinturaria caiu?",
+      "fontes": [
+        "kpi:oee_tinturaria",
+        "maq:TIN-03"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:20",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Defeito da Costura Bela Vista nesta remessa",
+      "fontes": [
+        "doc:DOC-PLA-FAC#t1",
+        "nc:NC-2026-125"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:37",
+      "perfil": "comercial",
+      "area": "marketing",
+      "pergunta": "Texto aprovado do polo 4471 para o catálogo",
+      "fontes": [
+        "sku:SI-4471",
+        "doc:DOC-FT-4471#t2"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:55",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Quando chegam as platinas do TEA-12?",
+      "fontes": [
+        "os:OS-7728",
+        "saber:SB-033"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o OEE da tinturaria está abaixo da meta?",
+      "resposta": "O OEE da tinturaria está em 71,4%, contra meta de 78%. A maior perda vem da TIN-03, em alerta: a válvula de vapor não segura o patamar de 130 °C e parou 25 minutos no 2º turno de 12/11 (OS-7731 aberta). No 3º turno de 11/11, o lote 3 do moletom marinho foi reprovado com ΔE 1,8 e 620 kg voltaram para reprocesso.",
+      "fontes": [
+        "kpi:oee_tinturaria",
+        "maq:TIN-03",
+        "os:OS-7731",
+        "turno:2026-11-12|2º|L-TIN",
+        "turno:2026-11-11|3º|L-TIN"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "O que eu preciso ver hoje?",
+      "resposta": "Há 4 OPs atrasadas (OP-24518, OP-24522, OP-24530 e OP-24535) e 3 pedidos de lojistas atrasados (PV-88213, PV-88227 e PV-88240). A TIN-03 está em alerta e o TEA-12 está parado aguardando platinas. São 3 NCs abertas e 3 em análise; as duas de severidade alta são a NC-2026-121 (tom do moletom marinho) e a NC-2026-119 (gola do polo, reclamação da Magazine Horizonte Sul).",
+      "fontes": [
+        "op:OP-24518",
+        "op:OP-24522",
+        "op:OP-24530",
+        "op:OP-24535",
+        "pedido:PV-88213",
+        "maq:TIN-03",
+        "maq:TEA-12",
+        "nc:NC-2026-121",
+        "nc:NC-2026-119"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que as OPs estão saindo fora da data da coleção?",
+      "resposta": "Nos últimos 30 dias, 28 de 34 OPs saíram na data da coleção (82,4%, meta de 92%). As 4 atrasadas de hoje têm causas diferentes: reprocesso de tingimento do moletom marinho (OP-24518), retrabalho de gola na facção Costura Bela Vista (OP-24522), tecido estampado atrasado (OP-24530) e o tear TEA-12 parado (OP-24535).",
+      "fontes": [
+        "kpi:otif_colecao",
+        "op:OP-24518",
+        "op:OP-24522",
+        "op:OP-24530",
+        "op:OP-24535"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Qual o consumo de tecido da referência 4471 no tamanho G e o que mudou desde a coleção passada?",
+      "resposta": "Pela ficha vigente (rev. C), são 1,38 m de malha piquet por peça no tamanho G. Na coleção passada eram 1,42 m. A redução veio do encaixe novo, com as mangas giradas 3°, aprovado na peça piloto 2. A OP-24568, planejada para 23/11, já usa o consumo novo.",
+      "fontes": [
+        "doc:DOC-FT-4471#t1",
+        "doc:DOC-ATA-PP2#t1",
+        "saber:SB-036",
+        "op:OP-24568"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Já tivemos reclamação de torção nesta malha? O que mudamos?",
+      "resposta": "Sim. Em 22/10 a Estação Malha Store reclamou de torção na camiseta 2381 branca: 7% medidos, contra limite de 5% da NI-Q-04. A causa foi um lote de fio com torção alta e tensão de 6 cN no TEA-07. O lote foi segregado, a tensão baixou para 4 cN e o teste de torção entrou na liberação de cada rolo (NC-2026-117, encerrada).",
+      "fontes": [
+        "nc:NC-2026-117",
+        "doc:DOC-NOR-QUA#t2",
+        "doc:DOC-CHM-0412#t1",
+        "saber:SB-032"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Qual a tolerância de cor para liberar um lote tingido?",
+      "resposta": "Pela instrução de tingimento, item 5.2: ΔE CMC (2:1) até 1,0 contra o padrão aprovado libera o lote; entre 1,0 e 1,5, só com aprovação da qualidade; acima de 1,5, reprocesso. Por isso o lote 3 do moletom marinho, com ΔE 1,8, foi para reprocesso.",
+      "fontes": [
+        "doc:DOC-REC-TIN#t2",
+        "nc:NC-2026-121"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quais OPs da coleção de inverno ainda dependem de tecido da tinturaria?",
+      "resposta": "Três. A OP-24518 (moletom 5120, 3.600 peças) está atrasada, com 48%, esperando o reprocesso do lote 3 do marinho. A OP-24544 (jogger 6010, 3.000 peças) está com 30%, no prazo de 24/11. A OP-24560 (moletom 5120, 4.800 peças) está planejada para começar na malharia em 17/11.",
+      "fontes": [
+        "op:OP-24518",
+        "op:OP-24544",
+        "op:OP-24560"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quais OPs estão atrasadas e por quê?",
+      "resposta": "São 4. OP-24518 (moletom 5120): reprocesso do lote 3 marinho, nova previsão 19/11. OP-24522 (polo 4471): 84 peças com defeito de gola na facção, retrabalho em 3 dias úteis. OP-24530 (vestido 3302): tecido estampado chegou 6 dias atrasado e 3 rolos com estampa deslocada. OP-24535 (malha em rolo): TEA-12 parado desde 08/11, previsão 18/11.",
+      "fontes": [
+        "op:OP-24518",
+        "op:OP-24522",
+        "op:OP-24530",
+        "op:OP-24535"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Como estão as facções neste mês?",
+      "resposta": "Em novembro voltaram 8.920 peças das facções, 321 com defeito (3,6%), e o prazo médio de retorno está em 9,8 dias, perto do limite de 10 dias do contrato. A Costura Bela Vista devolveu a remessa R-1182 com 4,2% de defeito de gola, acima dos 2,5% contratados. Linha Fina está em 1,1% e Ateliê Dois Irmãos em 2,0%.",
+      "fontes": [
+        "doc:DOC-PLA-FAC#t2",
+        "doc:DOC-PLA-FAC#t1",
+        "doc:DOC-CTR-FAC#t1",
+        "kpi:defeito_faccoes"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Quais NCs estão abertas e o que falta para fechar?",
+      "resposta": "Três abertas. NC-2026-121 (alta): moletom marinho com ΔE 1,8; falta trocar a válvula da TIN-03 (OS-7731) e incluir o ajuste de receita na instrução. NC-2026-122 (média): rapport deslocado na viscose estampada; falta o crédito do fornecedor. NC-2026-125 (média): gola torta na facção; falta o retrabalho e a visita técnica de 17/11. Outras 3 estão em análise, entre elas a NC-2026-119, de severidade alta.",
+      "fontes": [
+        "nc:NC-2026-121",
+        "nc:NC-2026-122",
+        "nc:NC-2026-125",
+        "nc:NC-2026-119",
+        "os:OS-7731"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Gera o rascunho de 8D da NC do moletom marinho.",
+      "resposta": "D2: lote 3 da OP-24518, 620 kg, ΔE 1,8 contra limite de 1,0. D3: lote segregado e reprocessado na TIN-01; pedido PV-88213 reprogramado para 21/11. D4: instabilidade de temperatura na TIN-03 e fio de poliéster de lote novo. D5: trocar a válvula de vapor e incluir +4% de disperso azul para lote novo. D7 proposto: teste de 5 kg a cada troca de lote de fio.",
+      "fontes": [
+        "nc:NC-2026-121",
+        "doc:DOC-REC-TIN#t2",
+        "doc:DOC-PRO-012#t3",
+        "saber:SB-031",
+        "pedido:PV-88213"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "O laboratório mediu 3,4% de encolhimento na camiseta 2381. Passa?",
+      "resposta": "Passa, no limite. A ficha da 2381 pede encolhimento de até 3% com tolerância de +0,5 ponto, ou seja, até 3,5%, igual à NI-Q-04 item 4.2. Em outubro o lote com 3,8% foi recompactado (NC-2026-118), por isso vale conferir a sobre-alimentação da COM-01, que deve estar em 8%.",
+      "fontes": [
+        "sku:SI-2381",
+        "doc:DOC-NOR-QUA#t1",
+        "nc:NC-2026-118",
+        "doc:DOC-MAN-ACA#t1"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "O que está acontecendo com a TIN-03?",
+      "resposta": "A TIN-03 está em alerta: a válvula de vapor responde devagar e a temperatura oscila ±3 °C no patamar de 130 °C, quando o manual admite ±1 °C. Parou 25 minutos em 12/11. A OS-7731 está aberta, com troca de válvula e diafragma programada para 14/11. É a segunda vez: em 19/10 a OS-7712 só limpou a válvula, e o Valdir já registrou que limpar resolve por umas três semanas.",
+      "fontes": [
+        "maq:TIN-03",
+        "os:OS-7731",
+        "os:OS-7712",
+        "doc:DOC-MAN-TIN#t2",
+        "saber:SB-039"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quais preventivas vencem nos próximos 7 dias?",
+      "resposta": "Três: o overloque COS-OV1 em 14/11 (OS-7738), o TEA-12 e a TIN-03 em 20/11. O TEA-12 já está parado na OS-7728, então vale juntar a preventiva com a troca de platinas. A TIN-05 está em preventiva hoje (OS-7735).",
+      "fontes": [
+        "maq:COS-OV1",
+        "os:OS-7738",
+        "maq:TEA-12",
+        "maq:TIN-03",
+        "os:OS-7735",
+        "doc:DOC-PRO-015#t2"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Como troco a válvula de vapor da barca 3?",
+      "resposta": "Pelo procedimento DOC-PRO-012: máquina vazia e abaixo de 60 °C; feche a válvula geral de vapor, aplique cadeado e etiqueta, abra o dreno de condensado e confirme pressão zero antes de soltar os flanges. Depois da troca, rode a rampa de teste a 1,5 °C/min até 130 °C: aceite com desvio de ±1 °C por 20 minutos e posicionador respondendo em até 4 s.",
+      "fontes": [
+        "doc:DOC-PRO-012#t1",
+        "doc:DOC-PRO-012#t2",
+        "doc:DOC-PRO-012#t3",
+        "os:OS-7731"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Quais artigos estão abaixo do estoque mínimo e quais pedidos dependem deles?",
+      "resposta": "Dois. Moletom 5120: 380 peças contra mínimo de 1.500; dependem dele o PV-88213 da Moda Ponto Certo (atrasado, previsão 21/11) e o PV-88258 (800 peças, prazo pela OP-24560, que termina em 08/12). Polo 4471: 1.150 peças contra mínimo de 2.500; dependem dele o PV-88227 da Magazine Horizonte Sul (atrasado) e o PV-88266 da Rede Bom Vestir (prazo pela OP-24568, 14/12).",
+      "fontes": [
+        "sku:SI-5120",
+        "sku:SI-4471",
+        "pedido:PV-88213",
+        "pedido:PV-88258",
+        "pedido:PV-88227",
+        "pedido:PV-88266",
+        "regra:RC-03"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Como está a carteira do Cláudio Roberto Silveira este mês?",
+      "resposta": "O Cláudio (PR e SC litoral) realizou R$ 312.400,00 de uma meta de R$ 850.000,00 (36,8%). Na carteira dele, dois pedidos estão atrasados: o PV-88213 da Moda Ponto Certo (moletom, reprocesso de tingimento) e o PV-88240 da Boutique Laço de Fita (vestido 3302, tecido estampado atrasado).",
+      "fontes": [
+        "rep:REP-04",
+        "pedido:PV-88213",
+        "pedido:PV-88240",
+        "cliente:CLI-1042",
+        "cliente:CLI-1046"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Prepara a visita à Moda Ponto Certo em Curitiba.",
+      "resposta": "Multimarcas atendida pelo Cláudio, Tabela B, 30/60/90, limite de crédito de R$ 120.000,00. Tem em aberto o PV-88213 (R$ 58.410,00, atrasado, nova previsão 21/11) e o PV-88258 (R$ 55.920,00, moletom marinho, em análise com prazo pela OP-24560). Juntos somam R$ 114.330,00: qualquer pedido acima de R$ 5.670,00 vai para o financeiro (RC-05). Leve a explicação do atraso e a jogger 6010 como reposição.",
+      "fontes": [
+        "cliente:CLI-1042",
+        "pedido:PV-88213",
+        "pedido:PV-88258",
+        "regra:RC-05",
+        "sku:SI-6010"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Escreve a descrição do polo 4471 para o catálogo do lojista.",
+      "resposta": "Rascunho a partir da ficha aprovada: \"Polo em piquet 100% algodão, 210 g/m², com gola em ribana retilínea e vista de dois botões. Encolhimento máximo de 3% e grade do P ao XG, em marinho, branco, verde-musgo e vinho.\" Não usei \"não deforma\" na gola porque há uma reclamação em análise (NC-2026-119).",
+      "fontes": [
+        "sku:SI-4471",
+        "doc:DOC-FT-4471#t2",
+        "nc:NC-2026-119"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Responde à Magazine Horizonte Sul sobre a gola do polo.",
+      "resposta": "Proposta de resposta: as 46 peças com gola ondulada foram trocadas em 05/11, o estoque do lote foi revisado e o teste de lavagem nas facções sai em 18/11. Avisamos o resultado e a ação definitiva. O texto está como rascunho (MK-03) aguardando a qualidade.",
+      "fontes": [
+        "nc:NC-2026-119",
+        "cliente:CLI-1050",
+        "pedido:PV-88227"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como o tintureiro ajusta a receita do marinho quando o fio de poliéster muda de lote?",
+      "resposta": "Pelo saber registrado pelo Osmar Bittencourt (22 anos de casa, validado pelo supervisor Edson Kreutzfeld): sobe 4% o disperso azul e estende o patamar de 130 °C de 30 para 35 minutos. Na TIN-03 ele abre a válvula de vapor em duas etapas, porque ela não segura sozinha a rampa de 1,5 °C/min.",
+      "fontes": [
+        "saber:SB-031",
+        "doc:DOC-REC-TIN#t1",
+        "maq:TIN-03"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que um tintureiro novo precisa aprender na primeira semana?",
+      "resposta": "Trilha sugerida: a receita do marinho em 50/50 e a tolerância de cor (instrução de tingimento, itens 3.1 e 5.2); o ajuste para fio de lote novo (Osmar, SB-031); a carga máxima de viscose na TIN-01 (Adilson, SB-038); e como reconhecer a válvula de vapor da TIN-03 com problema (Valdir, SB-039).",
+      "fontes": [
+        "doc:DOC-REC-TIN#t1",
+        "doc:DOC-REC-TIN#t2",
+        "saber:SB-031",
+        "saber:SB-038",
+        "saber:SB-039"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Quem sabe resolver os furos do tear 12?",
+      "resposta": "O Lauro Moser, mecânico de teares com 25 anos de casa. Pelo registro dele, o TEA-12 dá um tique metálico uns dez dias antes do furo, e é preciso trocar came e platinas juntos; trocar só as platinas faz o furo voltar em duas semanas. A OS-7728 já inclui as duas peças.",
+      "fontes": [
+        "saber:SB-033",
+        "os:OS-7728",
+        "doc:DOC-MAN-TEA#t1"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Onde está o meu pedido PV-88213?",
+      "resposta": "O pedido PV-88213 (600 moletons 5120 marinho e 300 joggers 6010) está atrasado: um lote do moletom precisou ser tingido de novo para ficar no tom certo. A nova previsão de entrega é 21/11. As joggers saem junto com os moletons.",
+      "fontes": [
+        "pedido:PV-88213",
+        "sku:SI-5120",
+        "sku:SI-6010"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Quero recomprar a camiseta básica 2381. Tem pronta entrega?",
+      "resposta": "Tem: 4.200 peças em estoque, acima do mínimo, então o faturamento sai em até 3 dias úteis após a aprovação de crédito. Pela Tabela B, R$ 18,90 a peça. O pedido mínimo é de R$ 3.000,00, com grade mínima de 6 peças por cor.",
+      "fontes": [
+        "sku:SI-2381",
+        "regra:RC-03",
+        "regra:RC-02"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "09:12",
+      "texto": "Bom dia! A Simone da Moda Ponto Certo quer saber do pedido 88213. Ela já vendeu metade dos moletons na pré-venda. Quando chega?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:12",
+      "texto": "Bom dia, Cláudio. O PV-88213 (600 moletons 5120 marinho e 300 joggers 6010) está atrasado: o lote 3 do marinho foi reprovado no laboratório e está em reprocesso. A nova previsão de entrega é 21/11, e as joggers vão junto.",
+      "fontes": [
+        "pedido:PV-88213",
+        "op:OP-24518"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:14",
+      "texto": "Ela quer mais 200 moletons marinho. Consigo pelo estoque? E posso dar 10% pra compensar o atraso?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:14",
+      "texto": "O 5120 tem 380 peças em estoque, abaixo do mínimo de 1.500. Pela política comercial, esse estoque fica reservado para pedidos já aprovados, e um pedido novo entra com o prazo da próxima OP: a OP-24560 termina em 08/12, então a entrega seria por volta de 10/12.",
+      "fontes": [
+        "sku:SI-5120",
+        "regra:RC-03",
+        "op:OP-24560"
+      ]
+    },
+    {
+      "de": "assistente",
+      "hora": "09:15",
+      "texto": "Sobre o desconto: até 5% você aprova sozinho; de 5% a 8% precisa da Sandra Hoffmann; 10% só com a diretoria comercial. Com 5%, a peça sai a R$ 66,41 (Tabela B: R$ 69,90), R$ 13.281,00 pelos 200.",
+      "fontes": [
+        "regra:RC-01",
+        "doc:DOC-POL-COM#t1",
+        "cliente:CLI-1042"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:17",
+      "texto": "Fechado com 5%. Já posso confirmar 10/12 pra ela?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:17",
+      "texto": "Ainda não. Ela tem em aberto o PV-88213 (R$ 58.410,00) e o PV-88258 (R$ 55.920,00), que somam R$ 114.330,00 de um limite de R$ 120.000,00. Com mais R$ 13.281,00, o pedido passa do limite e vai para análise do financeiro antes de confirmar prazo. Quer que eu deixe o rascunho pronto para você enviar?",
+      "fontes": [
+        "regra:RC-05",
+        "pedido:PV-88258",
+        "cliente:CLI-1042"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:18",
+      "texto": "Quero sim. Manda que eu aviso ela que depende do crédito.",
+      "fontes": []
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Polo piquet 4471 — ficha para o catálogo do lojista",
+      "status": "aprovado",
+      "sku": "SI-4471",
+      "texto": "Polo em piquet 100% algodão, 210 g/m², com toque seco e gola em ribana retilínea. Vista de dois botões e fenda lateral na barra. Grade do P ao XG em marinho, branco, verde-musgo e vinho. Encolhimento máximo de 3% após 3 lavagens.",
+      "fontes": [
+        "sku:SI-4471",
+        "doc:DOC-FT-4471#t2",
+        "doc:DOC-NOR-QUA#t1"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Por que o moletom 5120 não faz bolinha",
+      "status": "em_revisao",
+      "sku": "SI-5120",
+      "texto": "O 5120 usa moletom 3 cabos com 50% de poliéster e é flanelado por dentro com controle de pilling: nota mínima 4 na escala de 1 a 5. Para o lojista, isso quer dizer menos troca por \"bolinha\" depois das primeiras lavagens.",
+      "fontes": [
+        "sku:SI-5120",
+        "doc:DOC-CAT-V27#t2"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta à Magazine Horizonte Sul sobre a gola do polo",
+      "status": "rascunho",
+      "sku": "SI-4471",
+      "texto": "Olá, equipe da Magazine Horizonte Sul. As 46 peças com gola ondulada foram trocadas em 05/11 e revisamos todo o estoque do mesmo lote. Estamos testando a gola nas nossas facções e teremos o resultado em 18/11; avisaremos a ação definitiva. O pedido PV-88227 tem nova previsão de 19/11.",
+      "fontes": [
+        "nc:NC-2026-119",
+        "pedido:PV-88227",
+        "cliente:CLI-1050"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "post",
+      "titulo": "Verão 27: vestido midi 3302 em viscose estampada",
+      "status": "aprovado",
+      "sku": "SI-3302",
+      "texto": "Floral exclusivo, viscose leve e cintura com elástico embutido: o vestido midi 3302 chega às lojas no Verão 27, nas estampas azul e terracota. Peça para o seu representante a grade P-M-G.",
+      "fontes": [
+        "sku:SI-3302",
+        "doc:DOC-CAT-V27#t1"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Malha 30.1 em rolo para confecções parceiras",
+      "status": "em_revisao",
+      "sku": "SI-8800",
+      "texto": "A mesma malha 30.1 penteada das nossas camisetas, em rolo tubular de 92 cm e 20 a 25 kg, compactada e com laudo de encolhimento por lote. Até 2 furos por rolo; acima disso, o rolo é trocado.",
+      "fontes": [
+        "sku:SI-8800",
+        "doc:DOC-NOR-QUA#t1"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do lojista",
+    "boas_vindas": "Olá! Aqui você vê o catálogo com o seu preço, o status dos seus pedidos e faz a recompra dos básicos sem esperar o representante.",
+    "destaques": [
+      "SI-2381",
+      "SI-5120",
+      "SI-4471",
+      "SI-3302"
+    ],
+    "avisos": [
+      {
+        "titulo": "Moletom 5120 marinho",
+        "texto": "Novos pedidos do moletom marinho entram com entrega a partir de 10/12. Pedidos já aprovados seguem com a data informada."
+      },
+      {
+        "titulo": "Catálogo Verão 27",
+        "texto": "O catálogo completo do Verão 27 já está disponível, com a prévia do Inverno 27."
+      },
+      {
+        "titulo": "Trocas por defeito",
+        "texto": "Trocas de até 10% do pedido em 30 dias da entrega, com foto e etiqueta da peça."
+      }
+    ]
+  }
+}

@@ -1,0 +1,3446 @@
+{
+  "id": "maquinas",
+  "setor": "Máquinas e equipamentos",
+  "data_referencia": "2026-11-13",
+  "empresa": {
+    "nome": "Cambucá Equipamentos Industriais S.A.",
+    "cidade": "Timbó",
+    "uf": "SC",
+    "funcionarios": 1180,
+    "descricao": "Projeta e fabrica sob encomenda transportadores, elevadores de canecas, peneiras vibratórias e misturadores para ração, fertilizantes e mineração, com assistência técnica e peças de reposição."
+  },
+  "vocabulario": {
+    "ordem": "OP",
+    "ordens": "OPs",
+    "produto": "equipamento",
+    "produtos": "equipamentos",
+    "cliente": "cliente",
+    "clientes": "clientes",
+    "representante": "representante",
+    "representantes": "representantes",
+    "maquina": "máquina",
+    "maquinas": "máquinas",
+    "linha": "célula",
+    "linhas": "células",
+    "unidade": "unidades",
+    "lote": "pedido"
+  },
+  "areas": [
+    {
+      "id": "producao",
+      "nome": "PCP e montagem"
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e testes de aceitação"
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção industrial"
+    },
+    {
+      "id": "comercial",
+      "nome": "Orçamentação, vendas e pós-venda"
+    },
+    {
+      "id": "marketing",
+      "nome": "Marketing técnico e catálogo"
+    },
+    {
+      "id": "operadores",
+      "nome": "Montagem, caldeiraria e usinagem"
+    },
+    {
+      "id": "gestao",
+      "nome": "Diretoria"
+    }
+  ],
+  "plantas": [
+    {
+      "id": "P1",
+      "nome": "Planta Timbó (caldeiraria e montagem)",
+      "cidade": "Timbó"
+    },
+    {
+      "id": "P2",
+      "nome": "Planta Indaial (usinagem e peças de reposição)",
+      "cidade": "Indaial"
+    }
+  ],
+  "linhas": [
+    {
+      "id": "L-COR",
+      "nome": "Corte e conformação de chapas",
+      "planta": "P1",
+      "tipo": "caldeiraria"
+    },
+    {
+      "id": "L-SOL",
+      "nome": "Solda e caldeiraria pesada",
+      "planta": "P1",
+      "tipo": "soldagem"
+    },
+    {
+      "id": "L-USI",
+      "nome": "Usinagem",
+      "planta": "P2",
+      "tipo": "usinagem"
+    },
+    {
+      "id": "L-PIN",
+      "nome": "Jateamento e pintura",
+      "planta": "P1",
+      "tipo": "acabamento"
+    },
+    {
+      "id": "L-MON",
+      "nome": "Montagem final e FAT",
+      "planta": "P1",
+      "tipo": "montagem"
+    },
+    {
+      "id": "L-PEC",
+      "nome": "Peças de reposição",
+      "planta": "P2",
+      "tipo": "reposição"
+    }
+  ],
+  "maquinas": [
+    {
+      "id": "LAS-01",
+      "nome": "Corte a laser fibra 6 kW",
+      "linha": "L-COR",
+      "tipo": "corte a laser",
+      "fabricante": "Fabricante A",
+      "ano": 2019,
+      "status": "operando",
+      "horimetro": 18240,
+      "mtbf_h": 520,
+      "proxima_preventiva": "2026-12-01",
+      "manual": "DOC-MAN-COR"
+    },
+    {
+      "id": "GUI-01",
+      "nome": "Guilhotina hidráulica 13 mm",
+      "linha": "L-COR",
+      "tipo": "guilhotina",
+      "fabricante": "Fabricante C",
+      "ano": 2008,
+      "status": "operando",
+      "horimetro": 52310,
+      "mtbf_h": 610,
+      "proxima_preventiva": "2026-11-27",
+      "manual": "DOC-MAN-COR"
+    },
+    {
+      "id": "DOB-02",
+      "nome": "Dobradeira CNC 320 t",
+      "linha": "L-COR",
+      "tipo": "dobradeira",
+      "fabricante": "Fabricante B",
+      "ano": 2012,
+      "status": "alerta",
+      "horimetro": 39870,
+      "mtbf_h": 280,
+      "proxima_preventiva": "2026-11-21",
+      "manual": "DOC-MAN-COR"
+    },
+    {
+      "id": "ROB-01",
+      "nome": "Célula robotizada de solda 1",
+      "linha": "L-SOL",
+      "tipo": "robô de solda MIG",
+      "fabricante": "Fabricante D",
+      "ano": 2017,
+      "status": "operando",
+      "horimetro": 27650,
+      "mtbf_h": 450,
+      "proxima_preventiva": "2026-11-25",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "ROB-02",
+      "nome": "Célula robotizada de solda 2",
+      "linha": "L-SOL",
+      "tipo": "robô de solda MIG",
+      "fabricante": "Fabricante D",
+      "ano": 2021,
+      "status": "parada",
+      "horimetro": 11420,
+      "mtbf_h": 390,
+      "proxima_preventiva": "2026-12-04",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "CAL-03",
+      "nome": "Calandra de 4 rolos 3 m",
+      "linha": "L-SOL",
+      "tipo": "calandra",
+      "fabricante": "Fabricante E",
+      "ano": 2010,
+      "status": "operando",
+      "horimetro": 31980,
+      "mtbf_h": 700,
+      "proxima_preventiva": "2026-11-18",
+      "manual": "DOC-MAN-SOL"
+    },
+    {
+      "id": "CUH-04",
+      "nome": "Centro de usinagem horizontal 4",
+      "linha": "L-USI",
+      "tipo": "centro de usinagem horizontal",
+      "fabricante": "Fabricante F",
+      "ano": 2015,
+      "status": "alerta",
+      "horimetro": 44120,
+      "mtbf_h": 240,
+      "proxima_preventiva": "2026-11-19",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "TOR-02",
+      "nome": "Torno CNC 2 (Ø 600 mm)",
+      "linha": "L-USI",
+      "tipo": "torno CNC",
+      "fabricante": "Fabricante G",
+      "ano": 2018,
+      "status": "operando",
+      "horimetro": 25430,
+      "mtbf_h": 560,
+      "proxima_preventiva": "2026-12-02",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "MAN-01",
+      "nome": "Mandrilhadora CNC",
+      "linha": "L-USI",
+      "tipo": "mandrilhadora",
+      "fabricante": "Fabricante F",
+      "ano": 2006,
+      "status": "manutencao",
+      "horimetro": 61870,
+      "mtbf_h": 190,
+      "proxima_preventiva": "2026-12-10",
+      "manual": "DOC-MAN-USI"
+    },
+    {
+      "id": "JAT-01",
+      "nome": "Cabine de jateamento com granalha",
+      "linha": "L-PIN",
+      "tipo": "jateamento",
+      "fabricante": "Fabricante H",
+      "ano": 2013,
+      "status": "operando",
+      "horimetro": 29760,
+      "mtbf_h": 480,
+      "proxima_preventiva": "2026-11-24",
+      "manual": "DOC-MAN-PMF"
+    },
+    {
+      "id": "PIN-01",
+      "nome": "Cabine de pintura com estufa",
+      "linha": "L-PIN",
+      "tipo": "pintura líquida",
+      "fabricante": "Fabricante H",
+      "ano": 2016,
+      "status": "operando",
+      "horimetro": 26310,
+      "mtbf_h": 650,
+      "proxima_preventiva": "2026-12-06",
+      "manual": "DOC-MAN-PMF"
+    },
+    {
+      "id": "BAN-01",
+      "nome": "Bancada de teste de aceitação (FAT)",
+      "linha": "L-MON",
+      "tipo": "bancada de teste",
+      "fabricante": "Fabricação própria",
+      "ano": 2020,
+      "status": "operando",
+      "horimetro": 6820,
+      "mtbf_h": 900,
+      "proxima_preventiva": "2026-12-15",
+      "manual": "DOC-MAN-PMF"
+    },
+    {
+      "id": "PON-01",
+      "nome": "Ponte rolante 20 t da montagem",
+      "linha": "L-MON",
+      "tipo": "ponte rolante",
+      "fabricante": "Fabricante I",
+      "ano": 2011,
+      "status": "operando",
+      "horimetro": 33540,
+      "mtbf_h": 820,
+      "proxima_preventiva": "2026-12-03",
+      "manual": "DOC-MAN-PMF"
+    }
+  ],
+  "produtos": [
+    {
+      "sku": "TC-1200",
+      "nome": "Transportador de correia TC-1200 (12 m)",
+      "familia": "Transportadores",
+      "unidade": "unidades",
+      "preco": 186000,
+      "prazo_dias": 75,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Transportador de correia de 1.200 mm para grãos, farelo e fertilizante, com capacidade de até 300 t/h. Chassi modular de 12 m, ampliável em módulos de 3 m, e rolos com rolamento blindado.",
+      "ficha": {
+        "atributos": {
+          "Largura da correia": "1.200 mm",
+          "Comprimento": "12 m (módulos de 3 m)",
+          "Capacidade": "até 300 t/h (soja, 0,75 t/m³)",
+          "Acionamento": "motorredutor 15 kW",
+          "Correia": "EP400/3, 8+3 mm"
+        },
+        "roteiro": [
+          "Engenharia de aplicação (BOM base TC-1200 rev. F)",
+          "Corte e dobra",
+          "Solda do chassi",
+          "Jateamento e pintura",
+          "Montagem",
+          "FAT sem carga",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Alinhamento lateral da correia",
+            "nominal": "0",
+            "tolerancia": "±10",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Velocidade da correia",
+            "nominal": "2,5",
+            "tolerancia": "±0,1",
+            "unidade": "m/s"
+          },
+          {
+            "caracteristica": "Espessura de pintura",
+            "nominal": "140",
+            "tolerancia": "±20",
+            "unidade": "µm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "ER-450",
+      "nome": "Elevador de canecas EC-450 (30 m)",
+      "familia": "Elevadores",
+      "unidade": "unidades",
+      "preco": 412000,
+      "prazo_dias": 95,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Elevador de canecas com correia para até 250 t/h e 30 m de altura entre centros. Cabeça com redutor de eixos paralelos e contra-recuo, e pé com esticador por fuso.",
+      "ficha": {
+        "atributos": {
+          "Capacidade": "até 250 t/h (soja)",
+          "Altura entre centros": "30 m",
+          "Caneca": "aço 450 mm, passo 280 mm",
+          "Eixo da cabeça": "Ø 100 mm h6, SAE 4140",
+          "Acionamento": "motorredutor 45 kW com contra-recuo"
+        },
+        "roteiro": [
+          "Engenharia de aplicação (BOM base EC-450 rev. H)",
+          "Corte e dobra",
+          "Calandra e solda dos tubos",
+          "Usinagem do eixo da cabeça",
+          "Jateamento e pintura",
+          "Montagem da cabeça e do pé",
+          "FAT da cabeça",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do eixo da cabeça (assento do rolamento)",
+            "nominal": "100",
+            "tolerancia": "h6 (0 / −0,022)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Temperatura do mancal no FAT (2 h)",
+            "nominal": "≤ 70",
+            "tolerancia": "—",
+            "unidade": "°C"
+          },
+          {
+            "caracteristica": "Velocidade da correia",
+            "nominal": "3,2",
+            "tolerancia": "±0,1",
+            "unidade": "m/s"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PV-2D",
+      "nome": "Peneira vibratória de dois decks PV-2D (1,5 × 4,0 m)",
+      "familia": "Peneiras",
+      "unidade": "unidades",
+      "preco": 248000,
+      "prazo_dias": 80,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Peneira vibratória de dois decks para classificação de calcário, fertilizante e minério fino. Telas de poliuretano modulares e dois motovibradores com regulagem de amplitude por contrapeso.",
+      "ficha": {
+        "atributos": {
+          "Área por deck": "1,5 × 4,0 m",
+          "Decks": "2",
+          "Acionamento": "2 motovibradores de 7,5 kW",
+          "Telas": "poliuretano modular 1,5 × 1,0 m",
+          "Inclinação": "20°"
+        },
+        "roteiro": [
+          "Engenharia de aplicação (desenho base PV-2D rev. D)",
+          "Corte e dobra",
+          "Solda do chassi (sequência alternada)",
+          "Alívio de tensões",
+          "Jateamento e pintura",
+          "Montagem",
+          "FAT com medição de amplitude",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Amplitude (curso)",
+            "nominal": "8,0",
+            "tolerancia": "±0,5",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Rotação dos motovibradores",
+            "nominal": "960",
+            "tolerancia": "±20",
+            "unidade": "rpm"
+          },
+          {
+            "caracteristica": "Diferença de amplitude entre lados",
+            "nominal": "≤ 0,3",
+            "tolerancia": "—",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "MH-6000",
+      "nome": "Misturador horizontal de pás MH-6000 (6 m³)",
+      "familia": "Misturadores",
+      "unidade": "unidades",
+      "preco": 365000,
+      "prazo_dias": 90,
+      "estoque": 0,
+      "estoque_minimo": 0,
+      "descricao_comercial": "Misturador horizontal de pás para fábricas de ração, com 6 m³ úteis e coeficiente de variação abaixo de 5% em 180 segundos. Descarga total por comporta pneumática.",
+      "ficha": {
+        "atributos": {
+          "Volume útil": "6 m³",
+          "Tempo de mistura": "180 s",
+          "Coeficiente de variação": "≤ 5%",
+          "Acionamento": "motorredutor 55 kW",
+          "Óleo do redutor": "ISO VG 320, troca a cada 2.500 h"
+        },
+        "roteiro": [
+          "Engenharia de aplicação (BOM base MH-6000 rev. C)",
+          "Corte e calandra da cuba",
+          "Solda da cuba e do rotor",
+          "Usinagem do eixo do rotor",
+          "Jateamento e pintura",
+          "Montagem do redutor e da comporta",
+          "FAT com teste de estanqueidade",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Folga pá × cuba",
+            "nominal": "5",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Coeficiente de variação da mistura",
+            "nominal": "≤ 5",
+            "tolerancia": "—",
+            "unidade": "%"
+          },
+          {
+            "caracteristica": "Vazamento no redutor no FAT (4 h)",
+            "nominal": "0",
+            "tolerancia": "—",
+            "unidade": "gotas"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "RT-800",
+      "nome": "Rosca transportadora RT-800 (6 m)",
+      "familia": "Transportadores",
+      "unidade": "unidades",
+      "preco": 64000,
+      "prazo_dias": 45,
+      "estoque": 2,
+      "estoque_minimo": 1,
+      "descricao_comercial": "Rosca transportadora tubular de 300 mm e 6 m para dosagem de farelo e premix. Modelo padronizado com pronta entrega de duas unidades.",
+      "ficha": {
+        "atributos": {
+          "Diâmetro da hélice": "300 mm",
+          "Comprimento": "6 m",
+          "Capacidade": "até 40 m³/h",
+          "Acionamento": "motorredutor 7,5 kW"
+        },
+        "roteiro": [
+          "Corte",
+          "Calandra do tubo",
+          "Solda da hélice",
+          "Pintura",
+          "Montagem",
+          "Teste em vazio",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Folga hélice × tubo",
+            "nominal": "8",
+            "tolerancia": "±2",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-ENG-Z42",
+      "nome": "Engrenagem Z42 módulo 6 (redutor da cabeça do EC-450), rev. D",
+      "familia": "Peças de reposição",
+      "unidade": "unidades",
+      "preco": 4380,
+      "prazo_dias": 12,
+      "estoque": 3,
+      "estoque_minimo": 6,
+      "descricao_comercial": "Engrenagem de dentes retos Z42, módulo 6, em aço SAE 4340 temperado. A rev. D substitui a rev. B em todos os EC-450; nas séries anteriores a 2021-018 vai com anel espaçador de 5 mm.",
+      "ficha": {
+        "atributos": {
+          "Dentes": "42",
+          "Módulo": "6",
+          "Material": "SAE 4340 temperado e revenido",
+          "Dureza": "48–52 HRC",
+          "Substitui": "ENG-Z42 rev. B (código antigo 210-4471)"
+        },
+        "roteiro": [
+          "Corte de blank",
+          "Torneamento (TOR-02)",
+          "Mandrilhamento do cubo (MAN-01)",
+          "Fresamento dos dentes (terceiro)",
+          "Têmpera (terceiro)",
+          "Inspeção",
+          "Estoque de reposição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Diâmetro do furo do cubo",
+            "nominal": "75",
+            "tolerancia": "H7 (+0,030 / 0)",
+            "unidade": "mm"
+          },
+          {
+            "caracteristica": "Dureza",
+            "nominal": "50",
+            "tolerancia": "±2",
+            "unidade": "HRC"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-TEL-PV2",
+      "nome": "Tela de poliuretano 1,5 × 1,0 m, malha 4 mm (PV-2D)",
+      "familia": "Peças de reposição",
+      "unidade": "unidades",
+      "preco": 2950,
+      "prazo_dias": 10,
+      "estoque": 38,
+      "estoque_minimo": 24,
+      "descricao_comercial": "Módulo de tela em poliuretano para a PV-2D, com malha quadrada de 4 mm e encaixe rápido. Dura em média três vezes mais que a tela metálica em calcário.",
+      "ficha": {
+        "atributos": {
+          "Dimensão": "1,5 × 1,0 m",
+          "Malha": "4 mm quadrada",
+          "Espessura": "30 mm",
+          "Material": "poliuretano 85 Shore A"
+        },
+        "roteiro": [
+          "Compra do módulo (fornecedor de poliuretano)",
+          "Inspeção de recebimento",
+          "Estoque de reposição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Abertura da malha",
+            "nominal": "4,0",
+            "tolerancia": "±0,2",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-MOL-PV2",
+      "nome": "Kit de molas de borracha da PV-2D (8 unidades)",
+      "familia": "Peças de reposição",
+      "unidade": "kits",
+      "preco": 1840,
+      "prazo_dias": 7,
+      "estoque": 14,
+      "estoque_minimo": 10,
+      "descricao_comercial": "Kit com as 8 molas de borracha de apoio da PV-2D. Trocar sempre o jogo completo para manter a amplitude igual dos dois lados.",
+      "ficha": {
+        "atributos": {
+          "Quantidade": "8 molas",
+          "Dureza": "60 Shore A",
+          "Carga por mola": "650 kg"
+        },
+        "roteiro": [
+          "Compra (fornecedor de borracha técnica)",
+          "Inspeção de dureza",
+          "Estoque de reposição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Dureza",
+            "nominal": "60",
+            "tolerancia": "±5",
+            "unidade": "Shore A"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-CAN-450",
+      "nome": "Caneca de aço 450 mm (EC-450)",
+      "familia": "Peças de reposição",
+      "unidade": "unidades",
+      "preco": 186,
+      "prazo_dias": 8,
+      "estoque": 640,
+      "estoque_minimo": 400,
+      "descricao_comercial": "Caneca estampada em aço de 3 mm para o elevador EC-450, com furação padrão para parafuso M10 de cabeça chata.",
+      "ficha": {
+        "atributos": {
+          "Largura": "450 mm",
+          "Espessura": "3 mm",
+          "Furação": "4 × M10"
+        },
+        "roteiro": [
+          "Corte a laser",
+          "Dobra",
+          "Solda das laterais",
+          "Pintura",
+          "Estoque de reposição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Distância entre furos",
+            "nominal": "120",
+            "tolerancia": "±0,5",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-ROL-CR",
+      "nome": "Rolo de carga Ø 102 × 465 mm (TC-1200)",
+      "familia": "Peças de reposição",
+      "unidade": "unidades",
+      "preco": 238,
+      "prazo_dias": 10,
+      "estoque": 210,
+      "estoque_minimo": 150,
+      "descricao_comercial": "Rolo de carga com rolamento 6204 blindado e vedação labirinto, para o transportador TC-1200 e modelos anteriores de 1.200 mm.",
+      "ficha": {
+        "atributos": {
+          "Diâmetro": "102 mm",
+          "Comprimento": "465 mm",
+          "Rolamento": "6204 2RS",
+          "Eixo": "Ø 20 mm"
+        },
+        "roteiro": [
+          "Corte do tubo",
+          "Usinagem das pontas",
+          "Montagem dos rolamentos",
+          "Teste de batimento",
+          "Estoque de reposição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Batimento radial",
+            "nominal": "≤ 0,5",
+            "tolerancia": "—",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-ROL-22220",
+      "nome": "Rolamento autocompensador 22220 com mancal (eixo do MH-6000)",
+      "familia": "Peças de reposição",
+      "unidade": "unidades",
+      "preco": 2680,
+      "prazo_dias": 15,
+      "estoque": 4,
+      "estoque_minimo": 4,
+      "descricao_comercial": "Conjunto de rolamento autocompensador de rolos 22220 com mancal bipartido e vedação tripla, para o eixo do rotor do MH-6000.",
+      "ficha": {
+        "atributos": {
+          "Rolamento": "22220 E",
+          "Mancal": "bipartido SNL",
+          "Vedação": "labirinto + retentor duplo"
+        },
+        "roteiro": [
+          "Compra (fornecedor de rolamentos)",
+          "Inspeção",
+          "Estoque de reposição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Folga radial após montagem",
+            "nominal": "0,06",
+            "tolerancia": "±0,02",
+            "unidade": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "sku": "PR-COR-1200",
+      "nome": "Correia transportadora 1.200 mm EP400/3 (por metro)",
+      "familia": "Peças de reposição",
+      "unidade": "metros",
+      "preco": 690,
+      "prazo_dias": 5,
+      "estoque": 180,
+      "estoque_minimo": 120,
+      "descricao_comercial": "Correia de lonas EP400/3 com cobertura 8+3 mm, resistente à abrasão, vendida por metro com emenda vulcanizada opcional.",
+      "ficha": {
+        "atributos": {
+          "Largura": "1.200 mm",
+          "Lonas": "EP400/3",
+          "Cobertura": "8 + 3 mm"
+        },
+        "roteiro": [
+          "Compra (fornecedor de correias)",
+          "Corte no comprimento",
+          "Expedição"
+        ],
+        "especificacoes": [
+          {
+            "caracteristica": "Espessura total",
+            "nominal": "15",
+            "tolerancia": "±1",
+            "unidade": "mm"
+          }
+        ]
+      }
+    }
+  ],
+  "ordens": [
+    {
+      "id": "OP-31180",
+      "sku": "PV-2D",
+      "quantidade": 1,
+      "linha": "L-MON",
+      "inicio": "2026-08-25",
+      "prazo": "2026-10-17",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-4064",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-10-09",
+          "evento": "FAT aprovado: amplitude 8,1 mm e 958 rpm"
+        },
+        {
+          "data": "2026-10-15",
+          "evento": "Expedida para Arcos (MG)"
+        }
+      ]
+    },
+    {
+      "id": "OP-31188",
+      "sku": "TC-1200",
+      "quantidade": 2,
+      "linha": "L-MON",
+      "inicio": "2026-09-22",
+      "prazo": "2026-11-06",
+      "status": "concluida",
+      "progresso": 100,
+      "pedido": "PV-4071",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "FAT sem carga aprovado nos dois transportadores"
+        },
+        {
+          "data": "2026-11-05",
+          "evento": "Faturada e expedida"
+        }
+      ]
+    },
+    {
+      "id": "OP-31195",
+      "sku": "ER-450",
+      "quantidade": 1,
+      "linha": "L-MON",
+      "inicio": "2026-09-29",
+      "prazo": "2026-11-27",
+      "status": "em_producao",
+      "progresso": 70,
+      "pedido": "PV-4079",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-10-30",
+          "evento": "Tubos calandrados e soldados"
+        },
+        {
+          "data": "2026-11-11",
+          "evento": "Cabeça em montagem; redutor recebido"
+        }
+      ]
+    },
+    {
+      "id": "OP-31207",
+      "sku": "MH-6000",
+      "quantidade": 1,
+      "linha": "L-MON",
+      "inicio": "2026-09-15",
+      "prazo": "2026-11-07",
+      "status": "atrasada",
+      "progresso": 82,
+      "pedido": "PV-4088",
+      "motivo_atraso": "Redutor de 55 kW do fornecedor de transmissões chegou em 10/11, 12 dias depois do combinado; montagem retomada com previsão de FAT em 19/11.",
+      "historico": [
+        {
+          "data": "2026-10-29",
+          "evento": "Fornecedor de transmissões adia a entrega do redutor para 10/11"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Redutor recebido; montagem retomada"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Montagem parada 95 min aguardando o flange de acoplamento"
+        }
+      ]
+    },
+    {
+      "id": "OP-31215",
+      "sku": "ER-450",
+      "quantidade": 1,
+      "linha": "L-USI",
+      "inicio": "2026-10-01",
+      "prazo": "2026-11-10",
+      "status": "atrasada",
+      "progresso": 58,
+      "pedido": "PV-4096",
+      "motivo_atraso": "Eixo da cabeça reprovado no dimensional (NC-2026-087) e reusinado; o CUH-04 opera com rotação limitada por vibração no eixo-árvore. Nova previsão de expedição: 28/11.",
+      "historico": [
+        {
+          "data": "2026-11-04",
+          "evento": "Eixo da cabeça medido com Ø 99,962 mm no assento do rolamento (h6 pede 99,978 a 100,000)"
+        },
+        {
+          "data": "2026-11-07",
+          "evento": "Decisão: usinar eixo novo a partir de barra SAE 4140"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Eixo novo em acabamento; aguardando liberação dimensional (95 min parado no 1º turno)"
+        }
+      ]
+    },
+    {
+      "id": "OP-31231",
+      "sku": "PV-2D",
+      "quantidade": 1,
+      "linha": "L-MON",
+      "inicio": "2026-10-06",
+      "prazo": "2026-11-12",
+      "status": "atrasada",
+      "progresso": 91,
+      "pedido": "PV-4103",
+      "motivo_atraso": "FAT reprovado na 1ª tentativa em 11/11: amplitude de 6,2 mm contra 8,0 ± 0,5 mm (NC-2026-091). Contrapesos reposicionados; novo FAT em 13/11.",
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "FAT reprovado: amplitude 6,2 mm no lado de alimentação e 6,6 mm no lado de descarga"
+        },
+        {
+          "data": "2026-11-12",
+          "evento": "Contrapesos dos motovibradores encontrados a 30°; ajustados para 45°"
+        },
+        {
+          "data": "2026-11-13",
+          "evento": "Novo FAT agendado para o 1º turno"
+        }
+      ]
+    },
+    {
+      "id": "OP-31238",
+      "sku": "PR-ROL-CR",
+      "quantidade": 300,
+      "linha": "L-PEC",
+      "inicio": "2026-10-30",
+      "prazo": "2026-11-20",
+      "status": "em_producao",
+      "progresso": 72,
+      "pedido": "PV-4108",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-09",
+          "evento": "216 rolos montados e testados"
+        }
+      ]
+    },
+    {
+      "id": "OP-31242",
+      "sku": "PR-ENG-Z42",
+      "quantidade": 12,
+      "linha": "L-USI",
+      "inicio": "2026-10-27",
+      "prazo": "2026-11-11",
+      "status": "atrasada",
+      "progresso": 40,
+      "pedido": "PV-4119",
+      "motivo_atraso": "Mandrilhamento do cubo parado: a MAN-01 está em manutenção desde 05/11 (OS-5512). Cubos enviados para usinagem terceirizada; nova previsão de término em 24/11.",
+      "historico": [
+        {
+          "data": "2026-11-03",
+          "evento": "12 blanks torneados no TOR-02"
+        },
+        {
+          "data": "2026-11-05",
+          "evento": "MAN-01 para com falha no encoder do eixo W"
+        },
+        {
+          "data": "2026-11-10",
+          "evento": "Cubos enviados para usinagem terceirizada; retorno previsto para 18/11"
+        }
+      ]
+    },
+    {
+      "id": "OP-31250",
+      "sku": "PV-2D",
+      "quantidade": 2,
+      "linha": "L-SOL",
+      "inicio": "2026-10-20",
+      "prazo": "2026-12-18",
+      "status": "em_producao",
+      "progresso": 35,
+      "pedido": "PV-4110",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-11",
+          "evento": "Chassi 1 soldado à mão: ROB-02 parado"
+        }
+      ]
+    },
+    {
+      "id": "OP-31256",
+      "sku": "TC-1200",
+      "quantidade": 3,
+      "linha": "L-COR",
+      "inicio": "2026-11-03",
+      "prazo": "2026-12-22",
+      "status": "em_producao",
+      "progresso": 18,
+      "pedido": "PV-4114",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Longarinas cortadas; dobra com 40 min de parada na DOB-02"
+        }
+      ]
+    },
+    {
+      "id": "OP-31261",
+      "sku": "RT-800",
+      "quantidade": 4,
+      "linha": "L-SOL",
+      "inicio": "2026-11-04",
+      "prazo": "2026-11-28",
+      "status": "em_producao",
+      "progresso": 45,
+      "pedido": "PV-4116",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "Hélices soldadas nas 4 roscas (2 para o pedido, 2 para estoque)"
+        }
+      ]
+    },
+    {
+      "id": "OP-31266",
+      "sku": "PR-TEL-PV2",
+      "quantidade": 40,
+      "linha": "L-PEC",
+      "inicio": "2026-11-09",
+      "prazo": "2026-11-19",
+      "status": "em_producao",
+      "progresso": 60,
+      "pedido": "PV-4121",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "24 telas inspecionadas e separadas para a Calcário Pedra Branca"
+        }
+      ]
+    },
+    {
+      "id": "OP-31270",
+      "sku": "MH-6000",
+      "quantidade": 1,
+      "linha": "L-COR",
+      "inicio": "2026-11-10",
+      "prazo": "2027-01-29",
+      "status": "planejada",
+      "progresso": 5,
+      "pedido": "PV-4124",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-10",
+          "evento": "BOM liberada pela engenharia (MH-6000 rev. C com comporta ampliada)"
+        }
+      ]
+    },
+    {
+      "id": "OP-31274",
+      "sku": "PR-CAN-450",
+      "quantidade": 600,
+      "linha": "L-COR",
+      "inicio": "2026-11-16",
+      "prazo": "2026-11-27",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-4127",
+      "motivo_atraso": null,
+      "historico": []
+    },
+    {
+      "id": "OP-31278",
+      "sku": "ER-450",
+      "quantidade": 1,
+      "linha": "L-COR",
+      "inicio": "2026-11-17",
+      "prazo": "2027-02-19",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-4129",
+      "motivo_atraso": null,
+      "historico": [
+        {
+          "data": "2026-11-12",
+          "evento": "Aguardando aprovação de crédito do pedido para liberar compra de chapa"
+        }
+      ]
+    },
+    {
+      "id": "OP-31283",
+      "sku": "PR-MOL-PV2",
+      "quantidade": 20,
+      "linha": "L-PEC",
+      "inicio": "2026-11-18",
+      "prazo": "2026-11-25",
+      "status": "planejada",
+      "progresso": 0,
+      "pedido": "PV-4121",
+      "motivo_atraso": null,
+      "historico": []
+    }
+  ],
+  "turnos": [
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-USI",
+      "produzido": 86,
+      "refugo": 3,
+      "paradas_min": 145,
+      "resumo": "Turno com 145 min de parada na usinagem. O CUH-04 trabalhou com rotação limitada a 80% e a MAN-01 seguiu parada aguardando encoder. O eixo novo do EC-450 da OP-31215 ficou parado esperando liberação dimensional.",
+      "ocorrencias": [
+        "CUH-04 parou 50 min para medição de vibração (7,1 mm/s no eixo-árvore) e limpeza do cone (OS-5518)",
+        "Eixo da cabeça do EC-450 (OP-31215) aguardou 95 min a liberação dimensional",
+        "MAN-01 fora do turno inteiro, aguardando encoder do eixo W (OS-5512)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-USI",
+      "produzido": 74,
+      "refugo": 2,
+      "paradas_min": 60,
+      "resumo": "CUH-04 seguiu com rotação limitada e o setup das flanges do MH-6000 levou 60 min a mais que o padrão. Sem refugo relevante.",
+      "ocorrencias": [
+        "Setup das flanges do MH-6000 no CUH-04 levou 60 min além do padrão",
+        "Rogério Silva usinou o acabamento do eixo do EC-450 a 2.200 rpm (SB-015)"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "2º",
+      "linha": "L-MON",
+      "produzido": 9,
+      "refugo": 0,
+      "paradas_min": 95,
+      "resumo": "Montagem de 9 conjuntos (cabeças, pés e módulos de transportador). O MH-6000 da OP-31207 ficou 95 min parado esperando o flange de acoplamento do redutor que chegou atrasado.",
+      "ocorrencias": [
+        "MH-6000 (OP-31207) parado 95 min aguardando flange de acoplamento do redutor",
+        "Cabeça do EC-450 da OP-31195 montada e alinhada"
+      ]
+    },
+    {
+      "data": "2026-11-12",
+      "turno": "1º",
+      "linha": "L-COR",
+      "produzido": 1840,
+      "refugo": 22,
+      "paradas_min": 70,
+      "resumo": "Corte e dobra de 1.840 peças. A DOB-02 parou 40 min por vazamento no cilindro Y1 e voltou com variação de ângulo de 0,8° no fim da mesa; 22 peças refugadas foram longarinas do TC-1200.",
+      "ocorrencias": [
+        "DOB-02 parou 40 min: vazamento no cilindro Y1 e ângulo variando 0,8° (OS-5521)",
+        "Troca do cilindro de nitrogênio do LAS-01: 30 min"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "2º",
+      "linha": "L-SOL",
+      "produzido": 64,
+      "refugo": 4,
+      "paradas_min": 180,
+      "resumo": "ROB-02 parado o turno todo após colisão da tocha; o chassi da PV-2D (OP-31250) foi soldado à mão pelo Osmar Klein com sequência alternada.",
+      "ocorrencias": [
+        "ROB-02 parado 180 min: colisão da tocha e falha no alimentador de arame (OS-5524)",
+        "4 conjuntos com porosidade em retrabalho"
+      ]
+    },
+    {
+      "data": "2026-11-11",
+      "turno": "1º",
+      "linha": "L-PIN",
+      "produzido": 38,
+      "refugo": 2,
+      "paradas_min": 25,
+      "resumo": "Pintura de 38 conjuntos. Dois conjuntos voltaram por camada abaixo de 120 µm na medição; umidade de 88% no início do turno atrasou a liberação da cabine.",
+      "ocorrencias": [
+        "Umidade relativa de 88% às 6h: cabine liberada às 6h25",
+        "2 conjuntos com camada de 104 e 109 µm (repintura)"
+      ]
+    },
+    {
+      "data": "2026-11-13",
+      "turno": "1º",
+      "linha": "L-MON",
+      "produzido": 7,
+      "refugo": 0,
+      "paradas_min": 40,
+      "resumo": "Novo FAT da PV-2D da OP-31231 com contrapesos a 45°: amplitude de 8,1 e 7,9 mm. Parada de 40 min para recalibrar o sensor de vibração da bancada.",
+      "ocorrencias": [
+        "FAT da PV-2D (OP-31231): 8,1 mm lado de alimentação e 7,9 mm lado de descarga",
+        "Sensor de vibração da BAN-01 recalibrado: 40 min"
+      ]
+    }
+  ],
+  "nao_conformidades": [
+    {
+      "id": "NC-2026-087",
+      "data": "2026-11-04",
+      "sku": "ER-450",
+      "linha": "L-USI",
+      "origem": "interna",
+      "severidade": "alta",
+      "descricao": "Eixo da cabeça do EC-450 (OP-31215) com Ø 99,962 mm no assento do rolamento; o desenho pede Ø 100 h6 (99,978 a 100,000 mm).",
+      "causa": "Vibração no eixo-árvore do CUH-04 durante o acabamento e compensação de ferramenta não atualizada após a troca do inserto.",
+      "acao": "Eixo novo usinado em barra SAE 4140; acabamento a 2.200 rpm em passe único de 0,3 mm; medição 100% do assento até a OS-5518 ser concluída.",
+      "status": "em_analise",
+      "responsavel": "Luciana Moraes",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-091",
+      "data": "2026-11-11",
+      "sku": "PV-2D",
+      "linha": "L-MON",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "FAT da PV-2D (OP-31231) reprovado: amplitude de 6,2 mm no lado de alimentação e 6,6 mm no de descarga, contra 8,0 ± 0,5 mm.",
+      "causa": "Contrapesos dos dois motovibradores montados a 30° em vez de 45°; a instrução de montagem não tinha foto da posição.",
+      "acao": "Contrapesos ajustados para 45°; foto e marcação de posição incluídas na instrução de montagem; checagem no checklist do FAT.",
+      "status": "aberta",
+      "responsavel": "Luciana Moraes",
+      "oito_d": {
+        "D1": "Equipe: Luciana Moraes (qualidade), Ademir Zimmermann (montagem), Thiago Becker (engenharia), Márcio Stein (líder de montagem).",
+        "D2": "PV-2D da OP-31231 reprovou no FAT de 11/11 com amplitude de 6,2/6,6 mm, abaixo do especificado de 8,0 ± 0,5 mm (DOC-PRO-FAT, seção 5.3).",
+        "D3": "Contenção: equipamento retido; as duas PV-2D da OP-31250 terão conferência de contrapeso antes do FAT.",
+        "D4": "Causa raiz: contrapesos montados a 30°. O manual (DOC-MAN-PV2D, 6.1) pede 45°, mas a instrução de montagem não tinha foto nem marcação.",
+        "D5": "Ação corretiva: marcação a punção da posição de 45° no flange do motovibrador e foto na instrução de montagem.",
+        "D6": "Validação: novo FAT em 13/11 com 8,1 mm e 7,9 mm, dentro da tolerância.",
+        "D7": "Prevenção: item \"posição do contrapeso\" incluído no checklist do FAT de todas as peneiras.",
+        "D8": "Encerramento previsto após o FAT das duas PV-2D da OP-31250."
+      }
+    },
+    {
+      "id": "NC-2026-079",
+      "data": "2026-10-14",
+      "sku": "MH-6000",
+      "linha": "L-MON",
+      "origem": "cliente",
+      "severidade": "alta",
+      "descricao": "Cliente Cooperativa Terra Roxa relatou vazamento de óleo no redutor do MH-6000 série 2024-031, com 1.900 h de uso (chamado CH-1187).",
+      "causa": "Retentor do eixo de saída montado sem bucha de proteção e com o eixo sem chanfro de entrada; óleo ISO VG 220 abastecido no comissionamento em vez de VG 320.",
+      "acao": "Troca do retentor e do óleo em campo; chanfro de 15° incluído no desenho do eixo; checklist de comissionamento com conferência do óleo.",
+      "status": "encerrada",
+      "responsavel": "Fábio Teixeira",
+      "oito_d": {
+        "D1": "Equipe: Fábio Teixeira (assistência técnica), Luciana Moraes (qualidade), Thiago Becker (engenharia), Sérgio Lopes (técnico de campo).",
+        "D2": "Vazamento no retentor do eixo de saída do redutor do MH-6000 série 2024-031 com 1.900 h, abaixo da vida esperada de 10.000 h.",
+        "D3": "Contenção: visita em 17/10, troca do retentor e do óleo; inspeção dos outros 3 MH-6000 entregues em 2024.",
+        "D4": "Causas: retentor montado sem bucha e eixo sem chanfro; óleo VG 220 no comissionamento (o manual pede VG 320).",
+        "D5": "Ações: chanfro de 15° no eixo (desenho rev. C) e bucha de montagem obrigatória.",
+        "D6": "Implementado na OP-31207 e na BOM do MH-6000 rev. C.",
+        "D7": "Checklist de comissionamento (DOC-PRO-COM, 3.4) passou a exigir foto da etiqueta do óleo.",
+        "D8": "Encerrada em 08/11 com a concordância do cliente."
+      }
+    },
+    {
+      "id": "NC-2026-089",
+      "data": "2026-11-06",
+      "sku": "PR-ENG-Z42",
+      "linha": "L-PEC",
+      "origem": "cliente",
+      "severidade": "media",
+      "descricao": "Cerealista Três Coxilhas recebeu engrenagem Z42 rev. D sem o anel espaçador de 5 mm exigido para o EC-450 série 2019-044.",
+      "causa": "A identificação da peça foi feita pelo código antigo (210-4471) e a lista de peças usada não tinha a nota de substituição da rev. B pela rev. D.",
+      "acao": "Anel espaçador enviado por transportadora; nota de substituição incluída no cadastro do ERP e na seção 9 do manual do EC-450.",
+      "status": "aberta",
+      "responsavel": "Sandra Machado",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-094",
+      "data": "2026-11-09",
+      "sku": "TC-1200",
+      "linha": "L-COR",
+      "origem": "fornecedor",
+      "severidade": "media",
+      "descricao": "Lote de chapa ASTM A36 de 6,35 mm do fornecedor de aço com espessura medida de 5,95 a 6,05 mm, abaixo da tolerância de −0,30 mm.",
+      "causa": "Em análise pelo fornecedor de aço; certificado do lote indica 6,30 mm.",
+      "acao": "Lote segregado (4,2 t); longarinas do TC-1200 cortadas com chapa de outro lote; pedido de devolução aberto.",
+      "status": "em_analise",
+      "responsavel": "Luciana Moraes",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-095",
+      "data": "2026-11-11",
+      "sku": "PV-2D",
+      "linha": "L-PIN",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Dois conjuntos com espessura de pintura de 104 e 109 µm, abaixo do mínimo de 120 µm da especificação de pintura.",
+      "causa": "Umidade de 88% no início do turno e pistola com bico desgastado.",
+      "acao": "Repintura dos dois conjuntos; troca do bico; liberação da cabine só com umidade abaixo de 85%.",
+      "status": "aberta",
+      "responsavel": "Nelson Bauer",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-083",
+      "data": "2026-10-22",
+      "sku": "PV-2D",
+      "linha": "L-SOL",
+      "origem": "interna",
+      "severidade": "media",
+      "descricao": "Porosidade na solda de filete das travessas do chassi da PV-2D feita no ROB-02 (6 de 40 cordões).",
+      "causa": "Vazão de gás de proteção em 9 L/min por bico entupido; a EPS-014 pede 15 a 18 L/min.",
+      "acao": "Limpeza do bico a cada 2 h e conferência de vazão no início do turno.",
+      "status": "encerrada",
+      "responsavel": "Osmar Klein",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-076",
+      "data": "2026-10-08",
+      "sku": "TC-1200",
+      "linha": "L-COR",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "Longarinas do TC-1200 com ângulo de dobra de 91,2° no fim da mesa da DOB-02 (especificado 90 ± 0,5°).",
+      "causa": "Compensação de bombeamento (crowning) não ajustada para chapa de 6,35 mm acima de 2,5 m.",
+      "acao": "Crowning ajustado conforme o saber SB-012; medição de ângulo na 1ª e na última peça.",
+      "status": "encerrada",
+      "responsavel": "Valdir Hoffmann",
+      "oito_d": null
+    },
+    {
+      "id": "NC-2026-092",
+      "data": "2026-11-07",
+      "sku": "PR-ROL-CR",
+      "linha": "L-PEC",
+      "origem": "interna",
+      "severidade": "baixa",
+      "descricao": "9 rolos de carga com batimento radial de 0,7 a 0,9 mm (máximo 0,5 mm).",
+      "causa": "Tubo do fornecedor de tubos com ovalização acima do padrão.",
+      "acao": "Rolos refeitos; inspeção de ovalização no recebimento do tubo.",
+      "status": "encerrada",
+      "responsavel": "Luciana Moraes",
+      "oito_d": null
+    }
+  ],
+  "manutencao": [
+    {
+      "id": "OS-5521",
+      "maquina": "DOB-02",
+      "tipo": "corretiva",
+      "data": "2026-11-12",
+      "status": "aberta",
+      "tecnico": "Jefferson Ramos",
+      "duracao_h": 6,
+      "descricao": "Vazamento no cilindro Y1 e variação de 0,8° no ângulo de dobra no fim da mesa. Trocar o kit de vedação e refazer o paralelismo Y1/Y2. Programada para o sábado, 14/11.",
+      "pecas": [
+        "Kit de vedação do cilindro Y1",
+        "Óleo hidráulico ISO VG 46 (40 L)"
+      ],
+      "procedimento": "DOC-MAN-COR"
+    },
+    {
+      "id": "OS-5518",
+      "maquina": "CUH-04",
+      "tipo": "preditiva",
+      "data": "2026-11-10",
+      "status": "aberta",
+      "tecnico": "Cleiton Vieira",
+      "duracao_h": 2,
+      "descricao": "Vibração de 7,1 mm/s no rolamento dianteiro do eixo-árvore (alerta em 4,5 mm/s). Rotação limitada a 80% até a troca dos rolamentos, prevista para 19/11 junto com a preventiva.",
+      "pecas": [
+        "Par de rolamentos de contato angular do eixo-árvore",
+        "Graxa para eixo-árvore"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-5512",
+      "maquina": "MAN-01",
+      "tipo": "corretiva",
+      "data": "2026-11-05",
+      "status": "em_execucao",
+      "tecnico": "Gilmar Koch",
+      "duracao_h": 31,
+      "descricao": "Falha no encoder do eixo W (alarme de erro de seguimento). Encoder importado do Fabricante F com chegada prevista em 17/11 e volta da máquina em 18/11.",
+      "pecas": [
+        "Encoder absoluto do eixo W",
+        "Cabo de sinal do encoder"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-5524",
+      "maquina": "ROB-02",
+      "tipo": "corretiva",
+      "data": "2026-11-11",
+      "status": "aberta",
+      "tecnico": "Jefferson Ramos",
+      "duracao_h": 3.5,
+      "descricao": "Colisão da tocha com o gabarito do chassi da PV-2D e falha no alimentador de arame. Pescoço da tocha empenado; recalibrar o TCP.",
+      "pecas": [
+        "Pescoço de tocha 22°",
+        "Roldana do alimentador 1,2 mm"
+      ],
+      "procedimento": "DOC-MAN-SOL"
+    },
+    {
+      "id": "OS-5497",
+      "maquina": "CUH-04",
+      "tipo": "corretiva",
+      "data": "2026-10-21",
+      "status": "concluida",
+      "tecnico": "Cleiton Vieira",
+      "duracao_h": 4.5,
+      "descricao": "Limpeza do cone do eixo-árvore e troca do pino de fixação da ferramenta. Vibração caiu de 5,2 para 3,9 mm/s.",
+      "pecas": [
+        "Pino de fixação da ferramenta (pull stud)"
+      ],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-5502",
+      "maquina": "LAS-01",
+      "tipo": "preventiva",
+      "data": "2026-11-03",
+      "status": "concluida",
+      "tecnico": "Cleiton Vieira",
+      "duracao_h": 2.5,
+      "descricao": "Limpeza da lente de proteção, centragem do bocal e troca do filtro do chiller.",
+      "pecas": [
+        "Lente de proteção",
+        "Filtro do chiller"
+      ],
+      "procedimento": "DOC-MAN-COR"
+    },
+    {
+      "id": "OS-5505",
+      "maquina": "PIN-01",
+      "tipo": "preventiva",
+      "data": "2026-11-06",
+      "status": "concluida",
+      "tecnico": "Gilmar Koch",
+      "duracao_h": 4,
+      "descricao": "Troca dos filtros de piso e de teto da cabine e verificação do queimador da estufa.",
+      "pecas": [
+        "Filtro de piso (12 un)",
+        "Filtro de teto (6 un)"
+      ],
+      "procedimento": "DOC-MAN-PMF"
+    },
+    {
+      "id": "OS-5508",
+      "maquina": "PON-01",
+      "tipo": "preventiva",
+      "data": "2026-11-07",
+      "status": "concluida",
+      "tecnico": "Jefferson Ramos",
+      "duracao_h": 3,
+      "descricao": "Inspeção do cabo de aço, do freio e dos fins de curso. Desgaste do cabo dentro do limite.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-PMF"
+    },
+    {
+      "id": "OS-5515",
+      "maquina": "TOR-02",
+      "tipo": "preditiva",
+      "data": "2026-11-09",
+      "status": "concluida",
+      "tecnico": "Cleiton Vieira",
+      "duracao_h": 1,
+      "descricao": "Coleta de óleo do cabeçote para análise: contaminação dentro do limite.",
+      "pecas": [],
+      "procedimento": "DOC-MAN-USI"
+    },
+    {
+      "id": "OS-5526",
+      "maquina": "BAN-01",
+      "tipo": "corretiva",
+      "data": "2026-11-13",
+      "status": "concluida",
+      "tecnico": "Gilmar Koch",
+      "duracao_h": 0.7,
+      "descricao": "Recalibração do sensor de vibração da bancada de FAT antes do novo teste da PV-2D (OP-31231).",
+      "pecas": [],
+      "procedimento": "DOC-PRO-FAT"
+    },
+    {
+      "id": "OS-5530",
+      "maquina": "CAL-03",
+      "tipo": "preventiva",
+      "data": "2026-11-18",
+      "status": "aberta",
+      "tecnico": "Gilmar Koch",
+      "duracao_h": 5,
+      "descricao": "Preventiva semestral: troca do óleo do redutor dos rolos e inspeção dos mancais.",
+      "pecas": [
+        "Óleo ISO VG 220 (60 L)"
+      ],
+      "procedimento": "DOC-MAN-SOL"
+    }
+  ],
+  "representantes": [
+    {
+      "id": "REP-01",
+      "nome": "Marcos Pereira",
+      "regiao": "SC e RS",
+      "telefone": "(47) 9••••-3318",
+      "meta_mes": 1400000,
+      "realizado_mes": 962000
+    },
+    {
+      "id": "REP-02",
+      "nome": "Juliana Costa",
+      "regiao": "PR",
+      "telefone": "(41) 9••••-7720",
+      "meta_mes": 1100000,
+      "realizado_mes": 1184000
+    },
+    {
+      "id": "REP-03",
+      "nome": "Rodrigo Almeida",
+      "regiao": "MG e GO",
+      "telefone": "(31) 9••••-4056",
+      "meta_mes": 1200000,
+      "realizado_mes": 571000
+    },
+    {
+      "id": "REP-04",
+      "nome": "Fernanda Lima",
+      "regiao": "SP",
+      "telefone": "(16) 9••••-2291",
+      "meta_mes": 900000,
+      "realizado_mes": 412000
+    },
+    {
+      "id": "REP-05",
+      "nome": "Anderson Souza",
+      "regiao": "MT, MS e RO",
+      "telefone": "(66) 9••••-8143",
+      "meta_mes": 1000000,
+      "realizado_mes": 1236000
+    },
+    {
+      "id": "REP-06",
+      "nome": "Patrícia Rocha",
+      "regiao": "Peças e pós-venda (todas as regiões)",
+      "telefone": "(47) 9••••-5602",
+      "meta_mes": 320000,
+      "realizado_mes": 241000
+    }
+  ],
+  "clientes": [
+    {
+      "id": "CLI-01",
+      "nome": "Cooperativa Agroindustrial Campo Alto",
+      "cidade": "Chapecó",
+      "uf": "SC",
+      "segmento": "ração e grãos",
+      "representante": "REP-01",
+      "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
+      "limite_credito": 900000,
+      "tabela_preco": "Tabela Cooperativas",
+      "ultimo_pedido": "2026-11-05"
+    },
+    {
+      "id": "CLI-02",
+      "nome": "Rações Bom Trato Ltda.",
+      "cidade": "Concórdia",
+      "uf": "SC",
+      "segmento": "fábrica de ração",
+      "representante": "REP-01",
+      "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
+      "limite_credito": 500000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-09-02"
+    },
+    {
+      "id": "CLI-03",
+      "nome": "Fertilizantes Planalto Sul S.A.",
+      "cidade": "Ponta Grossa",
+      "uf": "PR",
+      "segmento": "fertilizantes",
+      "representante": "REP-02",
+      "condicao_pagamento": "30% sinal, 70% na FAT",
+      "limite_credito": 650000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-09-18"
+    },
+    {
+      "id": "CLI-04",
+      "nome": "Mineração Serra Azul Ltda.",
+      "cidade": "Congonhas",
+      "uf": "MG",
+      "segmento": "mineração",
+      "representante": "REP-03",
+      "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
+      "limite_credito": 1200000,
+      "tabela_preco": "Tabela Mineração",
+      "ultimo_pedido": "2026-10-20"
+    },
+    {
+      "id": "CLI-05",
+      "nome": "Granja Integrada Vale Verde",
+      "cidade": "Videira",
+      "uf": "SC",
+      "segmento": "ração e integração avícola",
+      "representante": "REP-01",
+      "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
+      "limite_credito": 800000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-11-06"
+    },
+    {
+      "id": "CLI-06",
+      "nome": "Cerealista Três Coxilhas",
+      "cidade": "Passo Fundo",
+      "uf": "RS",
+      "segmento": "armazenagem de grãos",
+      "representante": "REP-01",
+      "condicao_pagamento": "28 dias",
+      "limite_credito": 90000,
+      "tabela_preco": "Tabela Peças",
+      "ultimo_pedido": "2026-11-04"
+    },
+    {
+      "id": "CLI-07",
+      "nome": "Cooperativa Terra Roxa",
+      "cidade": "Cascavel",
+      "uf": "PR",
+      "segmento": "ração e grãos",
+      "representante": "REP-02",
+      "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
+      "limite_credito": 1000000,
+      "tabela_preco": "Tabela Cooperativas",
+      "ultimo_pedido": "2026-08-28"
+    },
+    {
+      "id": "CLI-08",
+      "nome": "Calcário Pedra Branca Ltda.",
+      "cidade": "Arcos",
+      "uf": "MG",
+      "segmento": "calcário agrícola",
+      "representante": "REP-03",
+      "condicao_pagamento": "28/56 dias",
+      "limite_credito": 400000,
+      "tabela_preco": "Tabela Mineração",
+      "ultimo_pedido": "2026-11-03"
+    },
+    {
+      "id": "CLI-09",
+      "nome": "Açúcar e Energia Rio Pardo",
+      "cidade": "Ribeirão Preto",
+      "uf": "SP",
+      "segmento": "sucroenergético",
+      "representante": "REP-04",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 300000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-07-14"
+    },
+    {
+      "id": "CLI-10",
+      "nome": "Moinho Sul Pampa",
+      "cidade": "Pelotas",
+      "uf": "RS",
+      "segmento": "moagem e premix",
+      "representante": "REP-01",
+      "condicao_pagamento": "30/60",
+      "limite_credito": 250000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-10-29"
+    },
+    {
+      "id": "CLI-11",
+      "nome": "Pellets Cerrado Nutrição Animal",
+      "cidade": "Rondonópolis",
+      "uf": "MT",
+      "segmento": "fábrica de ração",
+      "representante": "REP-05",
+      "condicao_pagamento": "30% sinal, 60% na FAT, 10% no comissionamento",
+      "limite_credito": 700000,
+      "tabela_preco": "Tabela A",
+      "ultimo_pedido": "2026-11-09"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "PV-4064",
+      "cliente": "CLI-08",
+      "representante": "REP-03",
+      "data": "2026-08-20",
+      "status": "entregue",
+      "previsao_entrega": "2026-10-20",
+      "ordem": "OP-31180",
+      "itens": [
+        {
+          "sku": "PV-2D",
+          "quantidade": 1,
+          "preco_unit": 241800
+        }
+      ],
+      "observacao": "Entregue em 19/10. Custo realizado 7,8% acima do orçado (planilha de orçamentos)."
+    },
+    {
+      "id": "PV-4071",
+      "cliente": "CLI-05",
+      "representante": "REP-01",
+      "data": "2026-09-10",
+      "status": "entregue",
+      "previsao_entrega": "2026-11-10",
+      "ordem": "OP-31188",
+      "itens": [
+        {
+          "sku": "TC-1200",
+          "quantidade": 2,
+          "preco_unit": 181350
+        }
+      ],
+      "observacao": "Entregue em 09/11, um dia antes da previsão."
+    },
+    {
+      "id": "PV-4079",
+      "cliente": "CLI-07",
+      "representante": "REP-02",
+      "data": "2026-09-22",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-04",
+      "ordem": "OP-31195",
+      "itens": [
+        {
+          "sku": "ER-450",
+          "quantidade": 1,
+          "preco_unit": 404000
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-4088",
+      "cliente": "CLI-02",
+      "representante": "REP-01",
+      "data": "2026-09-02",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-26",
+      "ordem": "OP-31207",
+      "itens": [
+        {
+          "sku": "MH-6000",
+          "quantidade": 1,
+          "preco_unit": 358700
+        }
+      ],
+      "observacao": "Previsão original 14/11. Atraso do redutor comunicado ao cliente em 30/10."
+    },
+    {
+      "id": "PV-4096",
+      "cliente": "CLI-01",
+      "representante": "REP-01",
+      "data": "2026-09-25",
+      "status": "atrasado",
+      "previsao_entrega": "2026-12-02",
+      "ordem": "OP-31215",
+      "itens": [
+        {
+          "sku": "ER-450",
+          "quantidade": 1,
+          "preco_unit": 400000
+        }
+      ],
+      "observacao": "Previsão original 17/11. Cliente cobrou nova data por e-mail em 11/11."
+    },
+    {
+      "id": "PV-4103",
+      "cliente": "CLI-03",
+      "representante": "REP-02",
+      "data": "2026-09-18",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-20",
+      "ordem": "OP-31231",
+      "itens": [
+        {
+          "sku": "PV-2D",
+          "quantidade": 1,
+          "preco_unit": 243000
+        }
+      ],
+      "observacao": "Previsão original 16/11. Depende do novo FAT de 13/11."
+    },
+    {
+      "id": "PV-4108",
+      "cliente": "CLI-04",
+      "representante": "REP-03",
+      "data": "2026-10-20",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-24",
+      "ordem": "OP-31238",
+      "itens": [
+        {
+          "sku": "PR-ROL-CR",
+          "quantidade": 300,
+          "preco_unit": 231
+        }
+      ],
+      "observacao": "Troca programada de rolos na parada de dezembro."
+    },
+    {
+      "id": "PV-4110",
+      "cliente": "CLI-04",
+      "representante": "REP-03",
+      "data": "2026-10-14",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-22",
+      "ordem": "OP-31250",
+      "itens": [
+        {
+          "sku": "PV-2D",
+          "quantidade": 2,
+          "preco_unit": 235600
+        }
+      ],
+      "observacao": "Desconto de 5% aprovado pelo gerente regional."
+    },
+    {
+      "id": "PV-4114",
+      "cliente": "CLI-11",
+      "representante": "REP-05",
+      "data": "2026-10-28",
+      "status": "em_producao",
+      "previsao_entrega": "2027-01-08",
+      "ordem": "OP-31256",
+      "itens": [
+        {
+          "sku": "TC-1200",
+          "quantidade": 3,
+          "preco_unit": 186000
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-4116",
+      "cliente": "CLI-10",
+      "representante": "REP-01",
+      "data": "2026-10-29",
+      "status": "em_producao",
+      "previsao_entrega": "2026-12-01",
+      "ordem": "OP-31261",
+      "itens": [
+        {
+          "sku": "RT-800",
+          "quantidade": 2,
+          "preco_unit": 62100
+        }
+      ],
+      "observacao": ""
+    },
+    {
+      "id": "PV-4119",
+      "cliente": "CLI-06",
+      "representante": "REP-01",
+      "data": "2026-11-04",
+      "status": "atrasado",
+      "previsao_entrega": "2026-11-25",
+      "ordem": "OP-31242",
+      "itens": [
+        {
+          "sku": "PR-ENG-Z42",
+          "quantidade": 4,
+          "preco_unit": 4380
+        }
+      ],
+      "observacao": "Previsão original 13/11. Estoque de 3 unidades não atende as 4; aguarda a OP-31242. Série do elevador do cliente: 2019-044 (exige anel espaçador de 5 mm)."
+    },
+    {
+      "id": "PV-4121",
+      "cliente": "CLI-08",
+      "representante": "REP-03",
+      "data": "2026-11-03",
+      "status": "em_producao",
+      "previsao_entrega": "2026-11-21",
+      "ordem": "OP-31266",
+      "itens": [
+        {
+          "sku": "PR-TEL-PV2",
+          "quantidade": 24,
+          "preco_unit": 2950
+        },
+        {
+          "sku": "PR-MOL-PV2",
+          "quantidade": 2,
+          "preco_unit": 1840
+        }
+      ],
+      "observacao": "Telas para a PV-2D série 2026-019 (PV-4064)."
+    },
+    {
+      "id": "PV-4124",
+      "cliente": "CLI-05",
+      "representante": "REP-01",
+      "data": "2026-11-06",
+      "status": "aprovado",
+      "previsao_entrega": "2027-02-05",
+      "ordem": "OP-31270",
+      "itens": [
+        {
+          "sku": "MH-6000",
+          "quantidade": 1,
+          "preco_unit": 365000
+        }
+      ],
+      "observacao": "Comporta de descarga ampliada (BOM MH-6000 rev. C)."
+    },
+    {
+      "id": "PV-4127",
+      "cliente": "CLI-01",
+      "representante": "REP-01",
+      "data": "2026-11-05",
+      "status": "aprovado",
+      "previsao_entrega": "2026-12-01",
+      "ordem": "OP-31274",
+      "itens": [
+        {
+          "sku": "PR-CAN-450",
+          "quantidade": 600,
+          "preco_unit": 181
+        }
+      ],
+      "observacao": "Retrofit das canecas do elevador série 2018-022."
+    },
+    {
+      "id": "PV-4129",
+      "cliente": "CLI-11",
+      "representante": "REP-05",
+      "data": "2026-11-09",
+      "status": "em_analise",
+      "previsao_entrega": "2027-02-26",
+      "ordem": "OP-31278",
+      "itens": [
+        {
+          "sku": "ER-450",
+          "quantidade": 1,
+          "preco_unit": 412000
+        }
+      ],
+      "observacao": "Somado ao PV-4114, passa do limite de crédito de R$ 700.000; em análise no financeiro."
+    }
+  ],
+  "regras_comerciais": [
+    {
+      "id": "RC-01",
+      "titulo": "Desconto máximo do representante",
+      "texto": "Até 5% sem aprovação; de 5% a 8% com o gerente regional; acima de 8%, só com a diretoria. Em peças de reposição o limite do representante é 3%."
+    },
+    {
+      "id": "RC-02",
+      "titulo": "Validade da proposta de equipamento",
+      "texto": "Propostas de equipamento valem 30 dias. Depois disso, o preço é revisto pelo índice do aço do mês, porque chapa e perfis são 38% do custo de um transportador."
+    },
+    {
+      "id": "RC-03",
+      "titulo": "Condição de pagamento de equipamentos",
+      "texto": "Padrão de 30% de sinal, 60% na aprovação do FAT e 10% após o comissionamento. Outras condições só com aprovação do financeiro."
+    },
+    {
+      "id": "RC-04",
+      "titulo": "Reserva de peça abaixo do estoque mínimo",
+      "texto": "Peça com estoque abaixo do mínimo só é reservada com aprovação da gerente de pós-venda (Sandra Machado). Prioridade para cliente com máquina parada e depois pela data do pedido."
+    },
+    {
+      "id": "RC-05",
+      "titulo": "Garantia",
+      "texto": "Garantia de 12 meses a partir do comissionamento ou 18 meses da entrega, o que vencer primeiro. Peças de desgaste (telas, canecas, correias e molas) não têm garantia por tempo."
+    },
+    {
+      "id": "RC-06",
+      "titulo": "Limite de crédito",
+      "texto": "Pedido que leve o saldo em aberto do cliente acima do limite de crédito fica em análise no financeiro e não libera compra de material."
+    }
+  ],
+  "kpis": [
+    {
+      "id": "oee_usinagem",
+      "nome": "OEE da usinagem",
+      "valor": 63.8,
+      "unidade": "%",
+      "meta": 72,
+      "direcao": "maior_melhor",
+      "area": "producao",
+      "tendencia": [
+        70.1,
+        71.4,
+        69.8,
+        70.6,
+        72,
+        71.2,
+        69.5,
+        68.9,
+        67.4,
+        66.1,
+        65,
+        63.8
+      ],
+      "explicacao": "O OEE da usinagem caiu de 72,0% em maio para 63,8% agora. O CUH-04 roda com rotação limitada a 80% por vibração no eixo-árvore e a MAN-01 está parada desde 05/11 esperando encoder. Só no 1º turno de 12/11 foram 145 min de parada.",
+      "caminho": [
+        "MES › apontamento de paradas (L-USI)",
+        "Coletor de vibração › CUH-04 (rolamento dianteiro)",
+        "Cálculo: disponibilidade × desempenho × qualidade"
+      ],
+      "fontes": [
+        "maq:CUH-04",
+        "maq:MAN-01",
+        "os:OS-5518",
+        "os:OS-5512",
+        "turno:2026-11-12|1º|L-USI"
+      ]
+    },
+    {
+      "id": "horas_montagem",
+      "nome": "Horas de montagem por máquina",
+      "valor": 412,
+      "unidade": "h",
+      "meta": 360,
+      "direcao": "menor_melhor",
+      "area": "producao",
+      "tendencia": [
+        372,
+        365,
+        380,
+        358,
+        361,
+        370,
+        368,
+        377,
+        384,
+        392,
+        401,
+        412
+      ],
+      "explicacao": "Média de horas apontadas por equipamento montado, em equivalente EC-450. Subiu para 412 h porque a montagem esperou peça: o MH-6000 da OP-31207 ficou 95 min parado no 2º turno de 12/11 aguardando o flange do redutor, e o EC-450 da OP-31215 espera o eixo reusinado.",
+      "caminho": [
+        "MES › apontamento de horas por OP (L-MON)",
+        "ERP › OPs concluídas no mês",
+        "Cálculo: horas apontadas ÷ equipamentos equivalentes"
+      ],
+      "fontes": [
+        "op:OP-31207",
+        "op:OP-31215",
+        "turno:2026-11-12|2º|L-MON"
+      ]
+    },
+    {
+      "id": "prazo_orcamento",
+      "nome": "Prazo de orçamento técnico",
+      "valor": 14.5,
+      "unidade": "dias",
+      "meta": 7,
+      "direcao": "menor_melhor",
+      "area": "comercial",
+      "tendencia": [
+        16.2,
+        15.8,
+        17.1,
+        16.4,
+        15,
+        14.2,
+        13.9,
+        14.8,
+        15.3,
+        14.1,
+        13.8,
+        14.5
+      ],
+      "explicacao": "Cada cotação espera a engenharia achar a máquina parecida, a BOM e o custo realizado. Em novembro há 23 cotações abertas, 9 delas paradas na engenharia. Os orçamentos de PV-2D saíram em 6 dias quando a base PV-4064 foi usada.",
+      "caminho": [
+        "Planilha de orçamentos 2026 › aba Nov",
+        "PLM › BOMs de referência",
+        "Cálculo: data de envio − data de entrada da cotação"
+      ],
+      "fontes": [
+        "doc:DOC-PLA-ORC#t1",
+        "doc:DOC-PRO-ORC#t1"
+      ]
+    },
+    {
+      "id": "otif",
+      "nome": "OTIF de equipamentos",
+      "valor": 68,
+      "unidade": "%",
+      "meta": 90,
+      "direcao": "maior_melhor",
+      "area": "comercial",
+      "tendencia": [
+        82,
+        85,
+        80,
+        78,
+        84,
+        81,
+        79,
+        76,
+        74,
+        71,
+        70,
+        68
+      ],
+      "explicacao": "Entregas no prazo e completas nos últimos 3 meses. Três pedidos de equipamento estão atrasados agora: PV-4088 (redutor do fornecedor), PV-4096 (eixo reusinado) e PV-4103 (FAT reprovado).",
+      "caminho": [
+        "ERP › pedidos de venda com data prometida",
+        "ERP › notas fiscais de saída",
+        "Cálculo: pedidos no prazo e completos ÷ pedidos com entrega no período"
+      ],
+      "fontes": [
+        "pedido:PV-4088",
+        "pedido:PV-4096",
+        "pedido:PV-4103"
+      ]
+    },
+    {
+      "id": "mttr",
+      "nome": "MTTR da manutenção",
+      "valor": 5.8,
+      "unidade": "h",
+      "meta": 4,
+      "direcao": "menor_melhor",
+      "area": "manutencao",
+      "tendencia": [
+        4.2,
+        4,
+        4.5,
+        3.9,
+        4.1,
+        4.4,
+        4.6,
+        4.9,
+        5.1,
+        5.4,
+        5.5,
+        5.8
+      ],
+      "explicacao": "O tempo médio de reparo subiu para 5,8 h, puxado pela MAN-01: a OS-5512 já soma 31 h esperando encoder importado. A DOB-02 tem OS aberta para o sábado.",
+      "caminho": [
+        "Sistema de manutenção › OS corretivas",
+        "Cálculo: horas de reparo ÷ número de corretivas (12 meses móveis)"
+      ],
+      "fontes": [
+        "os:OS-5512",
+        "os:OS-5521",
+        "maq:MAN-01"
+      ]
+    },
+    {
+      "id": "fat_primeira",
+      "nome": "FAT aprovado de primeira",
+      "valor": 78,
+      "unidade": "%",
+      "meta": 92,
+      "direcao": "maior_melhor",
+      "area": "qualidade",
+      "tendencia": [
+        90,
+        88,
+        91,
+        89,
+        87,
+        88,
+        86,
+        85,
+        83,
+        81,
+        80,
+        78
+      ],
+      "explicacao": "Proporção de equipamentos aprovados no primeiro teste de aceitação. Caiu para 78% com a PV-2D da OP-31231, reprovada com amplitude de 6,2 mm por contrapeso fora de posição (NC-2026-091).",
+      "caminho": [
+        "Pasta da qualidade › relatórios de FAT",
+        "Cálculo: FAT aprovados na 1ª tentativa ÷ FAT realizados (12 meses móveis)"
+      ],
+      "fontes": [
+        "nc:NC-2026-091",
+        "doc:DOC-PRO-FAT#t2"
+      ]
+    },
+    {
+      "id": "resposta_peca",
+      "nome": "Tempo de resposta a pedido de peça",
+      "valor": 26,
+      "unidade": "h",
+      "meta": 8,
+      "direcao": "menor_melhor",
+      "area": "comercial",
+      "tendencia": [
+        31,
+        30,
+        29,
+        28,
+        30,
+        27,
+        26,
+        25,
+        27,
+        28,
+        27,
+        26
+      ],
+      "explicacao": "Identificar peça, revisão e estoque a partir de uma foto ou código antigo passa por pós-venda, engenharia e almoxarifado. A NC-2026-089 (Z42 enviada sem anel espaçador) nasceu de uma identificação pelo código antigo.",
+      "caminho": [
+        "E-mail e chamados da assistência › data de entrada",
+        "ERP › data da cotação de peça",
+        "Cálculo: mediana das horas entre entrada e resposta"
+      ],
+      "fontes": [
+        "nc:NC-2026-089",
+        "doc:DOC-MAN-EC450#t3",
+        "sku:PR-ENG-Z42"
+      ]
+    }
+  ],
+  "documentos": [
+    {
+      "id": "DOC-MAN-EC450",
+      "titulo": "Manual de operação e manutenção do elevador de canecas EC-450 (rev. 7)",
+      "tipo": "manual",
+      "area": "comercial",
+      "origem": "PLM",
+      "atualizado": "2026-11-08",
+      "acesso": [
+        "comercial",
+        "manutencao",
+        "qualidade",
+        "producao",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "5.2 Fixação das canecas",
+          "texto": "Parafusos M10 de cabeça chata, classe 8.8, com torque de 45 N·m. Reapertar após as primeiras 50 horas de operação."
+        },
+        {
+          "id": "t2",
+          "secao": "5.4 Tensão da correia",
+          "texto": "Ajustar o esticador do pé até a correia ceder 15 a 20 mm a cada metro de vão livre. Fuso de cada lado com a mesma quantidade de voltas."
+        },
+        {
+          "id": "t3",
+          "secao": "9.1 Lista de peças do redutor da cabeça",
+          "texto": "Engrenagem Z42 módulo 6: código atual PR-ENG-Z42 rev. D, que substitui a rev. B (código antigo 210-4471). Nas séries anteriores a 2021-018, montar com o anel espaçador de 5 mm que vai no kit."
+        },
+        {
+          "id": "t4",
+          "secao": "7.3 Lubrificação",
+          "texto": "Redutor da cabeça com óleo ISO VG 320, 22 litros, troca a cada 5.000 horas ou 12 meses."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PV2D",
+      "titulo": "Manual da peneira vibratória PV-2D (rev. D)",
+      "tipo": "manual",
+      "area": "comercial",
+      "origem": "PLM",
+      "atualizado": "2026-06-22",
+      "acesso": [
+        "comercial",
+        "manutencao",
+        "qualidade",
+        "producao",
+        "marketing",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "6.1 Regulagem da amplitude",
+          "texto": "Contrapesos dos dois motovibradores a 45° para amplitude de 8,0 mm. Os dois motores precisam ter a mesma posição; diferença de 15° derruba a amplitude para cerca de 6 mm."
+        },
+        {
+          "id": "t2",
+          "secao": "6.3 Molas de apoio",
+          "texto": "Trocar sempre o jogo completo de 8 molas (kit PR-MOL-PV2). Diferença de altura entre molas acima de 3 mm causa amplitude desigual entre os lados."
+        },
+        {
+          "id": "t3",
+          "secao": "8.2 Troca de telas",
+          "texto": "Telas de poliuretano PR-TEL-PV2 com encaixe por pino. Verificar abertura a cada 500 horas; trocar quando a malha passar de 4,4 mm."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-MH6000",
+      "titulo": "Manual do misturador horizontal MH-6000 (rev. C)",
+      "tipo": "manual",
+      "area": "comercial",
+      "origem": "PLM",
+      "atualizado": "2026-10-30",
+      "acesso": [
+        "comercial",
+        "manutencao",
+        "qualidade",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "7.1 Óleo do redutor",
+          "texto": "Óleo ISO VG 320, 38 litros. Primeira troca com 500 horas e depois a cada 2.500 horas."
+        },
+        {
+          "id": "t2",
+          "secao": "4.5 Folga das pás",
+          "texto": "Folga entre pá e cuba de 5 ± 1 mm, medida em 4 pontos com o rotor girado à mão."
+        },
+        {
+          "id": "t3",
+          "secao": "7.4 Rolamentos do rotor",
+          "texto": "Rolamento 22220 com mancal bipartido (PR-ROL-22220). Relubrificar com 60 g de graxa a cada 500 horas."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-FAT",
+      "titulo": "Procedimento de teste de aceitação em fábrica (FAT)",
+      "tipo": "procedimento",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-11-12",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "4.1 Condições do teste",
+          "texto": "O FAT roda por no mínimo 2 horas com o equipamento na bancada BAN-01, com registro de corrente, temperatura dos mancais e vibração a cada 15 minutos."
+        },
+        {
+          "id": "t2",
+          "secao": "5.3 Critério para peneiras",
+          "texto": "Amplitude de 8,0 ± 0,5 mm nos dois lados, com diferença máxima de 0,3 mm entre eles, e rotação de 960 ± 20 rpm. Fora disso, o FAT é reprovado e abre-se NC."
+        },
+        {
+          "id": "t3",
+          "secao": "5.5 Critério para elevadores",
+          "texto": "Temperatura dos mancais da cabeça até 70 °C após 2 horas e nenhum ruído de engrenamento no redutor."
+        },
+        {
+          "id": "t4",
+          "secao": "6.2 Checklist (incluído em 12/11)",
+          "texto": "Antes de ligar uma peneira, conferir a marcação de 45° dos contrapesos nos dois motovibradores e anexar foto ao relatório."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-COM",
+      "titulo": "Procedimento de comissionamento em campo",
+      "tipo": "procedimento",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-11-08",
+      "acesso": [
+        "comercial",
+        "qualidade",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2.1 Pré-requisitos",
+          "texto": "O cliente precisa entregar base nivelada, energia e intertravamentos prontos. O técnico confere com o checklist antes de energizar."
+        },
+        {
+          "id": "t2",
+          "secao": "3.4 Lubrificantes",
+          "texto": "Fotografar a etiqueta do óleo de cada redutor e conferir a viscosidade com o manual do equipamento. Óleo errado reprova o comissionamento."
+        },
+        {
+          "id": "t3",
+          "secao": "4.2 Operação assistida",
+          "texto": "Duas horas com carga junto ao operador do cliente, com o registro das correntes. O termo de comissionamento libera os 10% finais do pagamento."
+        }
+      ]
+    },
+    {
+      "id": "DOC-EPS-014",
+      "titulo": "Especificação de procedimento de soldagem EPS-014 (MIG, aço carbono)",
+      "tipo": "norma",
+      "area": "producao",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-03-17",
+      "acesso": [
+        "producao",
+        "qualidade",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3 Parâmetros",
+          "texto": "Arame ER70S-6 de 1,2 mm, corrente de 240 a 280 A, tensão de 26 a 29 V e gás Ar + 18% CO₂ com vazão de 15 a 18 L/min."
+        },
+        {
+          "id": "t2",
+          "secao": "5 Sequência no chassi de peneira",
+          "texto": "Ponteamento a cada 150 mm e solda alternada entre lados opostos, em trechos de no máximo 300 mm, para limitar o empeno a 2 mm em 4 m."
+        },
+        {
+          "id": "t3",
+          "secao": "7 Inspeção",
+          "texto": "Inspeção visual de 100% dos cordões e líquido penetrante em 10% das soldas das travessas."
+        }
+      ]
+    },
+    {
+      "id": "DOC-ESP-PIN",
+      "titulo": "Especificação de pintura de equipamentos",
+      "tipo": "norma",
+      "area": "qualidade",
+      "origem": "Pasta da qualidade",
+      "atualizado": "2026-05-04",
+      "acesso": [
+        "qualidade",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "2 Preparação",
+          "texto": "Jateamento ao metal quase branco com perfil de rugosidade de 50 a 75 µm. Pintar em até 4 horas após o jateamento."
+        },
+        {
+          "id": "t2",
+          "secao": "3 Sistema de pintura",
+          "texto": "Primer epóxi de 60 µm e acabamento poliuretano de 80 µm, total de 120 a 160 µm de película seca."
+        },
+        {
+          "id": "t3",
+          "secao": "4 Condições",
+          "texto": "Umidade relativa máxima de 85% e temperatura da peça pelo menos 3 °C acima do ponto de orvalho."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PRO-ORC",
+      "titulo": "Procedimento de orçamento técnico de equipamentos",
+      "tipo": "procedimento",
+      "area": "comercial",
+      "origem": "SharePoint",
+      "atualizado": "2026-07-01",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "3 Prazo",
+          "texto": "O orçamento técnico deve voltar ao cliente em até 7 dias corridos. Quando a engenharia não acha projeto semelhante em 2 dias, o gerente comercial é avisado."
+        },
+        {
+          "id": "t2",
+          "secao": "4 Base de custo",
+          "texto": "Partir do projeto semelhante mais recente com custo realizado no ERP e corrigir chapa pelo índice do aço do mês. Horas de engenharia vêm do apontamento do pedido de referência."
+        },
+        {
+          "id": "t3",
+          "secao": "6 Margem",
+          "texto": "Margem e custo realizado ficam visíveis só para orçamentação e diretoria; o representante recebe apenas o preço de venda."
+        }
+      ]
+    },
+    {
+      "id": "DOC-BOM-PV2D",
+      "titulo": "BOM e memorial da PV-2D rev. D (pedido de referência PV-4064)",
+      "tipo": "ficha_tecnica",
+      "area": "producao",
+      "origem": "PLM",
+      "atualizado": "2026-10-21",
+      "acesso": [
+        "producao",
+        "comercial",
+        "qualidade",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Resumo de custo",
+          "texto": "Pedido PV-4064: custo realizado 7,8% acima do orçado, puxado por chapa (+11%) e por 46 horas extras de engenharia no chassi."
+        },
+        {
+          "id": "t2",
+          "secao": "Estrutura",
+          "texto": "Chassi em ASTM A36 de 8 mm, travessas em tubo 150 × 100 × 6,35 mm, 2 motovibradores de 7,5 kW e 8 molas de borracha de 60 Shore A."
+        },
+        {
+          "id": "t3",
+          "secao": "Revisões",
+          "texto": "Rev. D (mar/2026): travessa central reforçada após trinca em campo na série 2024-007. Revisões anteriores não devem ser usadas como base de orçamento."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-COR",
+      "titulo": "Manuais e planos de manutenção da conformação (laser, guilhotina, dobradeira)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-09-12",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "DOB-02 · 6.4 Cilindros Y1/Y2",
+          "texto": "Vazamento nos cilindros Y1/Y2 provoca diferença de paralelismo e variação de ângulo. Trocar o kit de vedação e refazer o paralelismo com tolerância de 0,02 mm."
+        },
+        {
+          "id": "t2",
+          "secao": "DOB-02 · 4.2 Bombeamento",
+          "texto": "Compensação de bombeamento ajustada por espessura e comprimento; acima de 2,5 m em chapa de 6 a 8 mm, partir da tabela e corrigir pela 1ª peça."
+        },
+        {
+          "id": "t3",
+          "secao": "LAS-01 · 3.1 Óptica",
+          "texto": "Limpar a lente de proteção a cada 40 horas de corte e centrar o bocal a cada troca."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-SOL",
+      "titulo": "Manuais e planos de manutenção da solda (células robotizadas e calandra)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-08-05",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "ROB · 5.2 Colisão",
+          "texto": "Após colisão, trocar o pescoço da tocha se empenado e recalibrar o TCP com a ponteira de referência antes de liberar o programa."
+        },
+        {
+          "id": "t2",
+          "secao": "ROB · 3.3 Gás",
+          "texto": "Conferir a vazão de gás no bico no início de cada turno; limpar o bocal a cada 2 horas de arco."
+        },
+        {
+          "id": "t3",
+          "secao": "CAL-03 · 6.1 Redutor dos rolos",
+          "texto": "Óleo ISO VG 220, troca semestral; inspecionar folga dos mancais dos rolos superiores."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-USI",
+      "titulo": "Manuais e planos de manutenção da usinagem (CUH-04, TOR-02, MAN-01)",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-10-02",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "operadores",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "CUH-04 · 7.2 Eixo-árvore",
+          "texto": "Vibração acima de 4,5 mm/s no rolamento dianteiro exige limitar a rotação a 80% e programar a troca dos rolamentos em até 15 dias."
+        },
+        {
+          "id": "t2",
+          "secao": "MAN-01 · 9.4 Encoder",
+          "texto": "Alarme de erro de seguimento no eixo W: conferir cabo e conector antes de trocar o encoder. Após a troca, refazer a referência de máquina."
+        },
+        {
+          "id": "t3",
+          "secao": "TOR-02 · 5.1 Óleo do cabeçote",
+          "texto": "Análise de óleo trimestral; trocar se a contaminação passar de 18/16/13 (ISO 4406)."
+        }
+      ]
+    },
+    {
+      "id": "DOC-MAN-PMF",
+      "titulo": "Manuais da pintura, bancada de FAT e ponte rolante",
+      "tipo": "manual",
+      "area": "manutencao",
+      "origem": "SharePoint",
+      "atualizado": "2026-07-20",
+      "acesso": [
+        "manutencao",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "PIN-01 · 4.1 Filtros",
+          "texto": "Trocar filtros de piso quando a pressão diferencial passar de 250 Pa; filtros de teto a cada 600 horas."
+        },
+        {
+          "id": "t2",
+          "secao": "BAN-01 · 2.3 Sensores",
+          "texto": "Calibrar o sensor de vibração da bancada antes de cada FAT de peneira, com o padrão de 8,0 mm."
+        },
+        {
+          "id": "t3",
+          "secao": "PON-01 · 3.2 Cabo de aço",
+          "texto": "Inspeção mensal do cabo; descartar com 6 fios rompidos em um passo ou redução de 7% no diâmetro."
+        }
+      ]
+    },
+    {
+      "id": "DOC-CHM-1187",
+      "titulo": "Chamado CH-1187: vazamento no redutor do MH-6000 série 2024-031",
+      "tipo": "chamado",
+      "area": "comercial",
+      "origem": "E-mail",
+      "atualizado": "2026-11-08",
+      "acesso": [
+        "comercial",
+        "qualidade",
+        "manutencao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Abertura (14/10)",
+          "texto": "Cooperativa Terra Roxa relata gotejamento no eixo de saída do redutor do misturador, com 1.900 horas de uso."
+        },
+        {
+          "id": "t2",
+          "secao": "Relatório de visita (17/10)",
+          "texto": "Sérgio Lopes trocou o retentor e o óleo. Encontrado óleo VG 220 no redutor; o manual pede VG 320."
+        }
+      ]
+    },
+    {
+      "id": "DOC-EML-4096",
+      "titulo": "E-mail da Cooperativa Campo Alto sobre o prazo do PV-4096",
+      "tipo": "email",
+      "area": "comercial",
+      "origem": "E-mail",
+      "atualizado": "2026-11-11",
+      "acesso": [
+        "comercial",
+        "producao",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Mensagem do cliente",
+          "texto": "Precisamos do elevador montado antes da safra de soja. Pedimos nova data de entrega firme até sexta-feira, 14/11."
+        },
+        {
+          "id": "t2",
+          "secao": "Resposta do comercial",
+          "texto": "Marcos Pereira informa que o eixo da cabeça está sendo refeito e que a nova data será confirmada pelo PCP até 14/11."
+        }
+      ]
+    },
+    {
+      "id": "DOC-PLA-ORC",
+      "titulo": "Planilha de orçamentos técnicos 2026",
+      "tipo": "planilha",
+      "area": "comercial",
+      "origem": "Planilha",
+      "atualizado": "2026-11-13",
+      "acesso": [
+        "comercial",
+        "gestao"
+      ],
+      "trechos": [
+        {
+          "id": "t1",
+          "secao": "Aba Nov",
+          "texto": "23 cotações abertas, 9 aguardando a engenharia indicar projeto semelhante. Prazo médio de resposta em novembro: 14,5 dias."
+        },
+        {
+          "id": "t2",
+          "secao": "Aba Ganhos e perdidos",
+          "texto": "De janeiro a outubro, 11 cotações perdidas tiveram o prazo de resposta como motivo declarado pelo cliente."
+        }
+      ]
+    }
+  ],
+  "saberes": [
+    {
+      "id": "SB-012",
+      "autor": "Valdir Hoffmann",
+      "funcao": "Operador de dobradeira",
+      "tempo_casa_anos": 27,
+      "area": "operadores",
+      "maquina": "DOB-02",
+      "titulo": "Ângulo abrindo no fim da mesa da DOB-02",
+      "dica": "Quando o ângulo passa de 90,5° no lado esquerdo, é o cilindro Y1 começando a vazar, antes de aparecer óleo no chão. Enquanto não troca a vedação, aumento o bombeamento em 0,15 mm para chapa de 6,35 mm acima de 2,5 m e meço a primeira e a última peça.",
+      "validado_por": "Everton Schmitt (supervisor de manutenção)",
+      "data": "2026-09-02",
+      "tags": [
+        "dobra",
+        "ângulo",
+        "hidráulico"
+      ]
+    },
+    {
+      "id": "SB-015",
+      "autor": "Rogério Silva",
+      "funcao": "Operador de centro de usinagem",
+      "tempo_casa_anos": 19,
+      "area": "operadores",
+      "maquina": "CUH-04",
+      "titulo": "Acabamento do eixo do EC-450 com o CUH-04 vibrando",
+      "dica": "Com chiado agudo acima de 2.800 rpm é o rolamento dianteiro. Para segurar o h6 no assento do eixo de Ø 100, faço o acabamento a 2.200 rpm, avanço de 0,18 mm/rot e passe único de 0,3 mm, e atualizo a compensação depois de cada troca de inserto.",
+      "validado_por": "Ivo Bernardes (programador CNC)",
+      "data": "2026-11-08",
+      "tags": [
+        "eixo",
+        "tolerância h6",
+        "vibração"
+      ]
+    },
+    {
+      "id": "SB-018",
+      "autor": "Ademir Zimmermann",
+      "funcao": "Montador líder",
+      "tempo_casa_anos": 24,
+      "area": "operadores",
+      "maquina": "BAN-01",
+      "titulo": "Amplitude baixa no FAT da peneira",
+      "dica": "Amplitude baixa na PV-2D quase sempre é contrapeso fora de posição, não mola. Antes de mexer em qualquer coisa, confiro se os dois motovibradores estão a 45° e na mesma posição. Depois meço a altura das 8 molas: diferença acima de 3 mm deixa um lado mais baixo.",
+      "validado_por": "Luciana Moraes (qualidade)",
+      "data": "2026-11-12",
+      "tags": [
+        "FAT",
+        "peneira",
+        "amplitude"
+      ]
+    },
+    {
+      "id": "SB-021",
+      "autor": "Osmar Klein",
+      "funcao": "Soldador",
+      "tempo_casa_anos": 21,
+      "area": "operadores",
+      "maquina": "ROB-01",
+      "titulo": "Sequência de solda do chassi da PV-2D sem empeno",
+      "dica": "Ponteio a cada 150 mm e soldo alternando lados opostos, em trechos de 300 mm no máximo. Começo pelas travessas do centro e vou para as pontas. Assim o chassi de 4 m fica com menos de 2 mm de empeno, mesmo soldado à mão.",
+      "validado_por": "Thiago Becker (engenharia)",
+      "data": "2026-08-19",
+      "tags": [
+        "solda",
+        "empeno",
+        "chassi"
+      ]
+    },
+    {
+      "id": "SB-024",
+      "autor": "Sérgio Lopes",
+      "funcao": "Técnico de assistência em campo",
+      "tempo_casa_anos": 16,
+      "area": "manutencao",
+      "maquina": null,
+      "titulo": "Engrenagem Z42 em elevadores antigos",
+      "dica": "Em EC-450 com série anterior a 2021-018, a Z42 rev. D só assenta com o anel espaçador de 5 mm. Sem ele o engrenamento fica deslocado e faz ruído em poucas horas. Sempre peço a foto da plaqueta com a série antes de mandar a peça.",
+      "validado_por": "Sandra Machado (gerente de pós-venda)",
+      "data": "2026-11-07",
+      "tags": [
+        "reposição",
+        "elevador",
+        "série"
+      ]
+    },
+    {
+      "id": "SB-027",
+      "autor": "Nelson Bauer",
+      "funcao": "Pintor industrial",
+      "tempo_casa_anos": 14,
+      "area": "operadores",
+      "maquina": "PIN-01",
+      "titulo": "Pintura em manhã úmida",
+      "dica": "Com umidade acima de 85% não adianta pintar: a camada fecha fina e fica opaca. Ligo a estufa 30 min antes para aquecer a cabine e meço a camada nos cantos internos primeiro, que é onde fica abaixo de 120 µm.",
+      "validado_por": "Luciana Moraes (qualidade)",
+      "data": "2026-10-14",
+      "tags": [
+        "pintura",
+        "umidade",
+        "camada"
+      ]
+    },
+    {
+      "id": "SB-030",
+      "autor": "Ivo Bernardes",
+      "funcao": "Programador CNC",
+      "tempo_casa_anos": 18,
+      "area": "operadores",
+      "maquina": "LAS-01",
+      "titulo": "Furação de chapa grossa no laser",
+      "dica": "Em chapa de 12,5 mm, furo menor que a espessura sai cônico. Para furos de M10 nas flanges, programo o furo com 8 mm no laser e passo a broca depois. Economiza retrabalho na montagem.",
+      "validado_por": "Thiago Becker (engenharia)",
+      "data": "2026-07-30",
+      "tags": [
+        "laser",
+        "furação",
+        "chapa grossa"
+      ]
+    },
+    {
+      "id": "SB-033",
+      "autor": "Márcio Stein",
+      "funcao": "Líder de montagem",
+      "tempo_casa_anos": 20,
+      "area": "operadores",
+      "maquina": "PON-01",
+      "titulo": "Içamento da cabeça do EC-450",
+      "dica": "A cabeça do EC-450 tem o centro de gravidade deslocado para o lado do redutor. Uso a balança de içamento com o gancho 180 mm para o lado do motor e giro a cabeça devagar na ponte para não bater no tubo.",
+      "validado_por": "Everton Schmitt (supervisor de manutenção)",
+      "data": "2026-06-11",
+      "tags": [
+        "içamento",
+        "segurança",
+        "elevador"
+      ]
+    },
+    {
+      "id": "SB-036",
+      "autor": "Gilmar Koch",
+      "funcao": "Técnico de manutenção",
+      "tempo_casa_anos": 23,
+      "area": "manutencao",
+      "maquina": "MAN-01",
+      "titulo": "Alarme de seguimento no eixo W da MAN-01",
+      "dica": "Antes de condenar o encoder, mexo no conector com a máquina ligada: se o alarme vem e vai, é cabo. Desta vez não era cabo, por isso o encoder foi pedido. Depois da troca, a referência do eixo W tem que ser feita com o relógio no padrão, não pelo sensor.",
+      "validado_por": "Everton Schmitt (supervisor de manutenção)",
+      "data": "2026-11-06",
+      "tags": [
+        "encoder",
+        "mandrilhadora",
+        "diagnóstico"
+      ]
+    }
+  ],
+  "integracoes": [
+    {
+      "id": "erp",
+      "nome": "ERP (ex.: TOTVS Protheus)",
+      "tipo": "ERP",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:40",
+      "registros": 214380,
+      "observacao": "Pedidos, OPs, estoque, custos realizados e notas fiscais"
+    },
+    {
+      "id": "mes",
+      "nome": "MES / apontamento de horas",
+      "tipo": "MES",
+      "status": "sincronizando",
+      "ultima_sync": "2026-11-13T08:05",
+      "registros": 96410,
+      "observacao": "Horas por OP, paradas e turnos"
+    },
+    {
+      "id": "plm",
+      "nome": "PLM/CAD (PDM da engenharia)",
+      "tipo": "PLM",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:30",
+      "registros": 48720,
+      "observacao": "Desenhos, BOMs, revisões e manuais de equipamento"
+    },
+    {
+      "id": "planilhas",
+      "nome": "Planilhas (orçamentos, paradas)",
+      "tipo": "Planilhas",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T07:15",
+      "registros": 3120,
+      "observacao": "Planilha de orçamentos técnicos e controles da manutenção"
+    },
+    {
+      "id": "email",
+      "nome": "E-mail comercial e da assistência (ex.: Microsoft 365)",
+      "tipo": "E-mail",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T08:10",
+      "registros": 18450,
+      "observacao": "Caixas de cotações e de assistência técnica"
+    },
+    {
+      "id": "sharepoint",
+      "nome": "SharePoint / pasta da qualidade",
+      "tipo": "Documentos",
+      "status": "conectado",
+      "ultima_sync": "2026-11-13T06:45",
+      "registros": 7340,
+      "observacao": "Procedimentos, FAT, EPS, especificações e manuais da fábrica"
+    },
+    {
+      "id": "chamados",
+      "nome": "Sistema de chamados da assistência técnica",
+      "tipo": "Chamados",
+      "status": "erro",
+      "ultima_sync": "2026-11-12T18:20",
+      "registros": 2210,
+      "observacao": "Credencial expirou em 12/11; última carga parcial. TI avisada."
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business (representantes)",
+      "tipo": "Mensagens",
+      "status": "planejado",
+      "ultima_sync": null,
+      "registros": 0,
+      "observacao": "Piloto com 6 representantes previsto para dezembro"
+    }
+  ],
+  "perfis_acesso": [
+    {
+      "id": "diretoria",
+      "nome": "Diretoria",
+      "areas": [
+        "producao",
+        "qualidade",
+        "manutencao",
+        "comercial",
+        "marketing",
+        "operadores",
+        "gestao"
+      ],
+      "usuarios": 5
+    },
+    {
+      "id": "pcp",
+      "nome": "PCP e montagem",
+      "areas": [
+        "producao",
+        "qualidade",
+        "operadores"
+      ],
+      "usuarios": 12
+    },
+    {
+      "id": "qualidade",
+      "nome": "Qualidade e FAT",
+      "areas": [
+        "qualidade",
+        "producao",
+        "operadores"
+      ],
+      "usuarios": 8
+    },
+    {
+      "id": "manutencao",
+      "nome": "Manutenção industrial",
+      "areas": [
+        "manutencao",
+        "operadores"
+      ],
+      "usuarios": 15
+    },
+    {
+      "id": "orcamentos",
+      "nome": "Orçamentação e vendas",
+      "areas": [
+        "comercial",
+        "marketing"
+      ],
+      "usuarios": 9
+    },
+    {
+      "id": "posvenda",
+      "nome": "Assistência técnica e pós-venda",
+      "areas": [
+        "comercial",
+        "manutencao",
+        "qualidade"
+      ],
+      "usuarios": 11
+    },
+    {
+      "id": "representante",
+      "nome": "Representante externo",
+      "areas": [
+        "comercial"
+      ],
+      "usuarios": 6
+    }
+  ],
+  "registro_uso": [
+    {
+      "data": "2026-11-13T07:52",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "O que falta para fechar a OP-31207 do misturador?",
+      "fontes": [
+        "op:OP-31207",
+        "turno:2026-11-12|2º|L-MON"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:05",
+      "perfil": "posvenda",
+      "area": "comercial",
+      "pergunta": "Z42 para elevador série 2019-044: qual revisão e tem estoque?",
+      "fontes": [
+        "sku:PR-ENG-Z42",
+        "doc:DOC-MAN-EC450#t3",
+        "saber:SB-024"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:12",
+      "perfil": "qualidade",
+      "area": "qualidade",
+      "pergunta": "Critério de amplitude do FAT da PV-2D",
+      "fontes": [
+        "doc:DOC-PRO-FAT#t2",
+        "nc:NC-2026-091"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:20",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Até quando posso rodar o CUH-04 com 7,1 mm/s?",
+      "fontes": [
+        "os:OS-5518",
+        "doc:DOC-MAN-USI#t1"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:34",
+      "perfil": "orcamentos",
+      "area": "comercial",
+      "pergunta": "Custo realizado da última PV-2D e horas de engenharia",
+      "fontes": [
+        "doc:DOC-BOM-PV2D#t1",
+        "pedido:PV-4064"
+      ]
+    },
+    {
+      "data": "2026-11-13T08:41",
+      "perfil": "representante",
+      "area": "comercial",
+      "pergunta": "Prazo do elevador da Campo Alto",
+      "fontes": [
+        "pedido:PV-4096",
+        "op:OP-31215"
+      ]
+    },
+    {
+      "data": "2026-11-13T09:02",
+      "perfil": "diretoria",
+      "area": "gestao",
+      "pergunta": "Por que o OTIF caiu para 68%?",
+      "fontes": [
+        "kpi:otif",
+        "pedido:PV-4088",
+        "pedido:PV-4096",
+        "pedido:PV-4103"
+      ]
+    },
+    {
+      "data": "2026-11-12T16:10",
+      "perfil": "manutencao",
+      "area": "manutencao",
+      "pergunta": "Procedimento de troca de vedação do cilindro Y1 da dobradeira",
+      "fontes": [
+        "doc:DOC-MAN-COR#t1",
+        "saber:SB-012"
+      ]
+    },
+    {
+      "data": "2026-11-12T14:22",
+      "perfil": "pcp",
+      "area": "producao",
+      "pergunta": "Sequência de solda do chassi da PV-2D sem robô",
+      "fontes": [
+        "saber:SB-021",
+        "doc:DOC-EPS-014#t2"
+      ]
+    },
+    {
+      "data": "2026-11-12T10:47",
+      "perfil": "posvenda",
+      "area": "comercial",
+      "pergunta": "Qual óleo vai no redutor do MH-6000?",
+      "fontes": [
+        "doc:DOC-MAN-MH6000#t1",
+        "nc:NC-2026-079"
+      ]
+    }
+  ],
+  "perguntas_sugeridas": [
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Por que o OEE da usinagem caiu para 63,8%?",
+      "resposta": "O OEE da usinagem está em 63,8%, contra meta de 72%. O CUH-04 roda com rotação limitada a 80% por vibração de 7,1 mm/s no eixo-árvore (OS-5518) e a MAN-01 está parada desde 05/11 esperando encoder (OS-5512). Só no 1º turno de 12/11 a usinagem teve 145 min de parada.",
+      "fontes": [
+        "kpi:oee_usinagem",
+        "maq:CUH-04",
+        "os:OS-5518",
+        "os:OS-5512",
+        "turno:2026-11-12|1º|L-USI"
+      ]
+    },
+    {
+      "modulo": "visao-geral",
+      "pergunta": "Quais pedidos de equipamento estão atrasados e por quê?",
+      "resposta": "Três pedidos de equipamento estão atrasados e derrubam o OTIF para 68%: PV-4088 (MH-6000 da Rações Bom Trato), porque o redutor chegou 12 dias depois do combinado; PV-4096 (EC-450 da Cooperativa Campo Alto), porque o eixo da cabeça foi reprovado no dimensional; e PV-4103 (PV-2D da Fertilizantes Planalto Sul), porque o FAT reprovou com amplitude de 6,2 mm. Há ainda o pedido de peças PV-4119, que espera a OP-31242.",
+      "fontes": [
+        "kpi:otif",
+        "pedido:PV-4088",
+        "pedido:PV-4096",
+        "pedido:PV-4103",
+        "pedido:PV-4119"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Qual foi o custo realizado da última PV-2D e quanto de engenharia ela consumiu?",
+      "resposta": "A última PV-2D entregue foi o pedido PV-4064, da Calcário Pedra Branca, com custo realizado 7,8% acima do orçado, puxado por chapa (+11%) e por 46 horas extras de engenharia no chassi. A base para orçar é a PV-2D rev. D; revisões anteriores não devem ser usadas.",
+      "fontes": [
+        "doc:DOC-BOM-PV2D#t1",
+        "doc:DOC-BOM-PV2D#t3",
+        "pedido:PV-4064"
+      ]
+    },
+    {
+      "modulo": "cerebro",
+      "pergunta": "Qual o torque dos parafusos das canecas do EC-450?",
+      "resposta": "Parafusos M10 de cabeça chata, classe 8.8, com torque de 45 N·m, e reaperto depois das primeiras 50 horas de operação, conforme a seção 5.2 do manual do EC-450.",
+      "fontes": [
+        "doc:DOC-MAN-EC450#t1"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "Quando sai o misturador da Rações Bom Trato?",
+      "resposta": "A OP-31207 do MH-6000 está com 82% de progresso e prazo vencido em 07/11. O redutor chegou em 10/11, 12 dias depois do combinado, e a montagem ainda ficou 95 min parada no 2º turno de 12/11 esperando o flange. O FAT está previsto para 19/11 e a nova previsão de entrega do PV-4088 é 26/11.",
+      "fontes": [
+        "op:OP-31207",
+        "pedido:PV-4088",
+        "turno:2026-11-12|2º|L-MON"
+      ]
+    },
+    {
+      "modulo": "producao",
+      "pergunta": "O que está segurando a OP-31215 do elevador da Campo Alto?",
+      "resposta": "O eixo da cabeça foi medido com Ø 99,962 mm no assento do rolamento, fora do h6 (99,978 a 100,000 mm), e está sendo refeito (NC-2026-087). O CUH-04 opera com rotação limitada por vibração. A OP-31215 está com 58% e nova previsão de expedição em 28/11; o cliente pediu data firme até 14/11.",
+      "fontes": [
+        "op:OP-31215",
+        "nc:NC-2026-087",
+        "maq:CUH-04",
+        "doc:DOC-EML-4096#t1"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Por que a PV-2D reprovou no FAT?",
+      "resposta": "Na OP-31231 a amplitude deu 6,2 mm no lado de alimentação e 6,6 mm no de descarga, contra 8,0 ± 0,5 mm. A causa foi contrapeso dos motovibradores a 30° em vez de 45° (NC-2026-091). Com o ajuste, o novo FAT de 13/11 deu 8,1 e 7,9 mm. O checklist do FAT passou a exigir foto da marcação de 45°.",
+      "fontes": [
+        "nc:NC-2026-091",
+        "op:OP-31231",
+        "doc:DOC-PRO-FAT#t2",
+        "doc:DOC-PRO-FAT#t4",
+        "doc:DOC-MAN-PV2D#t1"
+      ]
+    },
+    {
+      "modulo": "qualidade",
+      "pergunta": "Quais não conformidades de cliente estão abertas?",
+      "resposta": "Uma: a NC-2026-089, da Cerealista Três Coxilhas, que recebeu a engrenagem Z42 rev. D sem o anel espaçador de 5 mm exigido para o EC-450 série 2019-044. O anel foi enviado e a nota de substituição entrou na seção 9.1 do manual. A NC-2026-079 (vazamento no MH-6000 da Cooperativa Terra Roxa) foi encerrada em 08/11.",
+      "fontes": [
+        "nc:NC-2026-089",
+        "doc:DOC-MAN-EC450#t3",
+        "nc:NC-2026-079"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "O que está acontecendo com a DOB-02?",
+      "resposta": "A DOB-02 está em alerta: parou 40 min no 1º turno de 12/11 por vazamento no cilindro Y1 e voltou com variação de 0,8° no ângulo. A OS-5521 troca o kit de vedação e refaz o paralelismo no sábado, 14/11. Até lá, o Valdir Hoffmann recomenda aumentar o bombeamento em 0,15 mm em chapa de 6,35 mm acima de 2,5 m e medir a primeira e a última peça.",
+      "fontes": [
+        "maq:DOB-02",
+        "os:OS-5521",
+        "turno:2026-11-12|1º|L-COR",
+        "saber:SB-012",
+        "doc:DOC-MAN-COR#t1"
+      ]
+    },
+    {
+      "modulo": "manutencao",
+      "pergunta": "Quando a MAN-01 volta a operar?",
+      "resposta": "A MAN-01 está parada desde 05/11 com falha no encoder do eixo W (OS-5512, 31 h até agora). O encoder do Fabricante F chega em 17/11 e a volta está prevista para 18/11. Depois da troca, a referência do eixo W deve ser feita com relógio no padrão, como orienta o Gilmar Koch.",
+      "fontes": [
+        "maq:MAN-01",
+        "os:OS-5512",
+        "saber:SB-036",
+        "doc:DOC-MAN-USI#t2"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Temos engrenagem Z42 para atender a Cerealista Três Coxilhas?",
+      "resposta": "Não por completo. O estoque da PR-ENG-Z42 é de 3 unidades, abaixo do mínimo de 6, e o PV-4119 pede 4. A OP-31242 de 12 unidades atrasou porque a MAN-01 está em manutenção; a nova previsão é 24/11 e a entrega ao cliente, 25/11. Pela RC-04, reservar peça abaixo do mínimo exige aprovação da Sandra Machado.",
+      "fontes": [
+        "sku:PR-ENG-Z42",
+        "pedido:PV-4119",
+        "op:OP-31242",
+        "regra:RC-04"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Como está a carteira do Marcos Pereira no mês?",
+      "resposta": "O Marcos Pereira (SC e RS) realizou R$ 962.000 de uma meta de R$ 1.400.000. Dois pedidos dele estão atrasados: o PV-4088 da Rações Bom Trato e o PV-4096 da Cooperativa Campo Alto, que cobrou nova data por e-mail em 11/11. O PV-4124 da Granja Vale Verde (MH-6000, R$ 365.000) foi aprovado em 06/11.",
+      "fontes": [
+        "rep:REP-01",
+        "pedido:PV-4088",
+        "pedido:PV-4096",
+        "pedido:PV-4124",
+        "doc:DOC-EML-4096#t1"
+      ]
+    },
+    {
+      "modulo": "comercial",
+      "pergunta": "Posso dar 7% de desconto em duas PV-2D?",
+      "resposta": "Pela RC-01, de 5% a 8% precisa de aprovação do gerente regional. O preço de tabela da PV-2D é R$ 248.000; com 7%, fica R$ 230.640 por unidade. A proposta vale 30 dias e depois é revista pelo índice do aço (RC-02).",
+      "fontes": [
+        "regra:RC-01",
+        "regra:RC-02",
+        "sku:PV-2D"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Monte uma ficha comercial da PV-2D só com dados aprovados.",
+      "resposta": "A ficha MK-01 já está aprovada: peneira de dois decks de 1,5 × 4,0 m, dois motovibradores de 7,5 kW, amplitude de 8,0 mm e telas de poliuretano modulares de 4 mm. O texto usa a descrição comercial aprovada e os dados do manual rev. D.",
+      "fontes": [
+        "sku:PV-2D",
+        "doc:DOC-MAN-PV2D#t1"
+      ]
+    },
+    {
+      "modulo": "marketing",
+      "pergunta": "Que conteúdos estão esperando revisão?",
+      "resposta": "O artigo técnico MK-02, sobre quando trocar a tela de poliuretano da PV-2D (troca quando a malha passa de 4,4 mm), está em revisão com a engenharia. A resposta MK-03, sobre a capacidade do EC-450 para farelo, ainda é rascunho.",
+      "fontes": [
+        "sku:PR-TEL-PV2",
+        "doc:DOC-MAN-PV2D#t3",
+        "sku:ER-450"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "Como soldar o chassi da PV-2D à mão sem empenar, com o ROB-02 parado?",
+      "resposta": "O Osmar Klein, soldador com 21 anos de casa, ponteia a cada 150 mm e solda alternando lados opostos, em trechos de até 300 mm, começando pelas travessas do centro. A EPS-014 limita o empeno a 2 mm em 4 m. Foi assim que o chassi da OP-31250 saiu no 2º turno de 11/11.",
+      "fontes": [
+        "saber:SB-021",
+        "doc:DOC-EPS-014#t2",
+        "turno:2026-11-11|2º|L-SOL",
+        "op:OP-31250"
+      ]
+    },
+    {
+      "modulo": "operadores",
+      "pergunta": "O que um montador novo precisa saber sobre o FAT de peneira?",
+      "resposta": "O Ademir Zimmermann, montador líder com 24 anos de casa, ensina a conferir primeiro se os dois contrapesos estão a 45° e na mesma posição, e depois medir a altura das 8 molas (diferença máxima de 3 mm). Esse cuidado teria evitado a reprovação da OP-31231.",
+      "fontes": [
+        "saber:SB-018",
+        "doc:DOC-MAN-PV2D#t2",
+        "nc:NC-2026-091"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Meu elevador é da série 2019-044. Qual engrenagem Z42 serve e quando chega?",
+      "resposta": "Serve a PR-ENG-Z42 rev. D, que substituiu a rev. B (código antigo 210-4471). Como a série é anterior a 2021-018, ela vai com o anel espaçador de 5 mm. O seu pedido PV-4119 tem previsão de entrega em 25/11.",
+      "fontes": [
+        "sku:PR-ENG-Z42",
+        "doc:DOC-MAN-EC450#t3",
+        "pedido:PV-4119"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Quando trocar as telas da minha peneira PV-2D e quanto custa?",
+      "resposta": "Pelo manual, verifique a abertura a cada 500 horas e troque quando a malha passar de 4,4 mm. A tela PR-TEL-PV2 custa R$ 2.950 por módulo, com 38 em estoque e prazo de 10 dias. O pedido PV-4121, de 24 telas, está em produção com previsão de entrega em 21/11.",
+      "fontes": [
+        "doc:DOC-MAN-PV2D#t3",
+        "sku:PR-TEL-PV2",
+        "pedido:PV-4121"
+      ]
+    },
+    {
+      "modulo": "portal",
+      "pergunta": "Que óleo vai no redutor do misturador MH-6000?",
+      "resposta": "Óleo ISO VG 320, 38 litros, com a primeira troca em 500 horas e depois a cada 2.500 horas. Óleo de viscosidade menor causou vazamento num MH-6000 em 2026 (NC-2026-079).",
+      "fontes": [
+        "doc:DOC-MAN-MH6000#t1",
+        "nc:NC-2026-079"
+      ]
+    }
+  ],
+  "conversa_whatsapp": [
+    {
+      "de": "representante",
+      "hora": "09:12",
+      "texto": "Bom dia! Tô na Cooperativa Campo Alto. O elevador antigo deles (série 2018-022) tá fazendo barulho no redutor e querem 2 engrenagens Z42. Tem em estoque?",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:12",
+      "texto": "Bom dia, Marcos. A PR-ENG-Z42 rev. D tem 3 unidades em estoque, abaixo do mínimo de 6, e o PV-4119 da Cerealista Três Coxilhas espera 4. A OP-31242, de 12 unidades, tem nova previsão em 24/11.",
+      "fontes": [
+        "sku:PR-ENG-Z42",
+        "pedido:PV-4119",
+        "op:OP-31242"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:14",
+      "texto": "Dá pra segurar 2 dessas 3 pra eles? Pode ser máquina parada logo.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:14",
+      "texto": "Pela RC-04, reservar peça abaixo do mínimo precisa da aprovação da Sandra Machado, com prioridade para cliente com máquina parada. Atenção: a série 2018-022 é anterior a 2021-018, então a rev. D vai com o anel espaçador de 5 mm (manual do EC-450, seção 9.1).",
+      "fontes": [
+        "regra:RC-04",
+        "doc:DOC-MAN-EC450#t3",
+        "saber:SB-024"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:17",
+      "texto": "Beleza. E o preço? Eles pediram 10% de desconto porque já fecharam as 600 canecas.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:17",
+      "texto": "A Z42 custa R$ 4.380 a unidade. Em peça de reposição o seu limite é 3% (R$ 4.248,60); acima de 8% só com a diretoria, então 10% não dá para fechar daqui. O pedido de canecas é o PV-4127, de 600 unidades, já aprovado.",
+      "fontes": [
+        "regra:RC-01",
+        "sku:PR-ENG-Z42",
+        "pedido:PV-4127"
+      ]
+    },
+    {
+      "de": "representante",
+      "hora": "09:19",
+      "texto": "E o elevador novo deles, o PV-4096? Vão me perguntar.",
+      "fontes": []
+    },
+    {
+      "de": "assistente",
+      "hora": "09:19",
+      "texto": "O PV-4096 está atrasado: o eixo da cabeça foi refeito (NC-2026-087) e a OP-31215 está com 58%, com nova previsão de expedição em 28/11 e entrega em 02/12. O PCP confirma a data firme até 14/11, como você respondeu ao cliente.",
+      "fontes": [
+        "pedido:PV-4096",
+        "op:OP-31215",
+        "nc:NC-2026-087",
+        "doc:DOC-EML-4096#t2"
+      ]
+    }
+  ],
+  "marketing": [
+    {
+      "id": "MK-01",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha comercial: peneira vibratória PV-2D",
+      "status": "aprovado",
+      "sku": "PV-2D",
+      "texto": "A PV-2D classifica calcário, fertilizante e minério fino em dois decks de 1,5 × 4,0 m. Dois motovibradores de 7,5 kW garantem amplitude de 8,0 mm, conferida no teste de aceitação antes da entrega. As telas de poliuretano modulares de 4 mm trocam por encaixe, sem solda.",
+      "fontes": [
+        "sku:PV-2D",
+        "doc:DOC-MAN-PV2D#t1",
+        "doc:DOC-PRO-FAT#t2"
+      ]
+    },
+    {
+      "id": "MK-02",
+      "tipo": "conteudo_tecnico",
+      "titulo": "Quando trocar a tela de poliuretano da sua peneira",
+      "status": "em_revisao",
+      "sku": "PR-TEL-PV2",
+      "texto": "Meça a abertura da malha a cada 500 horas. Quando a malha de 4 mm passar de 4,4 mm, a classificação sai do especificado e o produto fino carrega grosso. Trocar o módulo leva minutos, com encaixe por pino.",
+      "fontes": [
+        "doc:DOC-MAN-PV2D#t3",
+        "sku:PR-TEL-PV2"
+      ]
+    },
+    {
+      "id": "MK-03",
+      "tipo": "resposta_cliente",
+      "titulo": "Resposta sobre capacidade do EC-450 para farelo",
+      "status": "rascunho",
+      "sku": "ER-450",
+      "texto": "O EC-450 é especificado para até 250 t/h de soja. Para farelo, com densidade menor, a capacidade em toneladas cai; a engenharia de aplicação confirma o número com a densidade do seu produto antes da proposta.",
+      "fontes": [
+        "sku:ER-450"
+      ]
+    },
+    {
+      "id": "MK-04",
+      "tipo": "post",
+      "titulo": "Post: toda máquina passa pelo teste de aceitação",
+      "status": "aprovado",
+      "sku": "MH-6000",
+      "texto": "Antes de sair de Timbó, cada misturador MH-6000 roda 4 horas na bancada de teste, com medição de temperatura, corrente e vazamento. O relatório do teste vai junto com a máquina.",
+      "fontes": [
+        "sku:MH-6000",
+        "doc:DOC-PRO-FAT#t1"
+      ]
+    },
+    {
+      "id": "MK-05",
+      "tipo": "ficha_produto",
+      "titulo": "Ficha comercial: transportador de correia TC-1200",
+      "status": "em_revisao",
+      "sku": "TC-1200",
+      "texto": "Transportador de correia de 1.200 mm para até 300 t/h, em módulos de 3 m. Rolos com rolamento blindado e reposição a pronta entrega.",
+      "fontes": [
+        "sku:TC-1200",
+        "sku:PR-ROL-CR"
+      ]
+    }
+  ],
+  "portal": {
+    "titulo": "Portal do cliente Cambucá",
+    "boas_vindas": "Acompanhe seus pedidos, consulte o manual da sua máquina pelo número de série e compre peças de reposição.",
+    "destaques": [
+      "PR-TEL-PV2",
+      "PR-CAN-450",
+      "PR-ENG-Z42",
+      "RT-800"
+    ],
+    "avisos": [
+      {
+        "titulo": "Engrenagem Z42: confira a série",
+        "texto": "Para elevadores EC-450 com série anterior a 2021-018, a engrenagem Z42 rev. D vai com anel espaçador de 5 mm. Informe a série da plaqueta no pedido."
+      },
+      {
+        "titulo": "Parada de fim de ano",
+        "texto": "Pedidos de peças para a parada de manutenção de dezembro devem entrar até 27/11 para entrega antes de 18/12."
+      }
+    ]
+  }
+}
