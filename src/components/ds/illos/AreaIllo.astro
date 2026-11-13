@@ -1,0 +1,396 @@
+---
+/**
+ * AreaIllo (DESIGN-2026-11 §6.13): mini-ilustração do RESULTADO de uma área (painel de PCP, 8D da
+ * qualidade, OS no celular da manutenção, proposta do comercial…). SVG próprio, traço simples, só tokens
+ * (claro, escuro e inverso). Decorativa: aria-hidden (o texto do card diz o que é). Abstrata de propósito:
+ * sem números nem textos fictícios, por isso dispensa o selo "Ilustração".
+ *
+ * <AreaIllo name="Qualidade" />   → escolhe o desenho pelo nome da área (kinds.ts)
+ * <AreaIllo kind="maint" />
+ *
+ * Motion: anima quando um ancestral ganha .is-anim (src/scripts/motion.ts). Sem JS/movimento reduzido: estático.
+ */
+import { areaKind, type AreaKind } from './kinds';
+
+interface Props {
+  name?: string;
+  kind?: AreaKind;
+  class?: string;
+}
+
+const { name = '', class: className } = Astro.props;
+const kind: AreaKind = Astro.props.kind ?? areaKind(name);
+---
+
+<div class:list={['ai', className]} aria-hidden="true" data-kind={kind}>
+  <svg viewBox="0 0 160 100" focusable="false">
+    {
+      kind === 'plan' && (
+        <g>
+          <path class="ai-grid" d="M10 30H150M10 50H150M10 70H150" />
+          <rect class="ai-bar ai-m" x="14" y="16" width="62" height="10" rx="5" style="--d:0" />
+          <rect class="ai-bar ai-a" x="46" y="36" width="72" height="10" rx="5" style="--d:1" />
+          <rect class="ai-bar ai-m" x="28" y="56" width="50" height="10" rx="5" style="--d:2" />
+          <rect class="ai-bar ai-w" x="84" y="76" width="60" height="10" rx="5" style="--d:3" />
+          <path class="ai-today" d="M104 8V94" />
+          <circle class="ai-pop ai-a" cx="104" cy="8" r="4" style="--d:4" />
+        </g>
+      )
+    }
+    {
+      kind === 'quality' && (
+        <g>
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((k) => {
+            const x = 22 + (k % 4) * 31;
+            const y = k < 4 ? 20 : 56;
+            const done = k < 5;
+            return (
+              <g class="ai-pop" style={`--d:${k}`}>
+                <rect class={done ? 'ai-okbox' : 'ai-todo'} x={x} y={y} width="24" height="24" rx="6" />
+                {done && <path class="ai-check" d={`M${x + 6} ${y + 12.5}l4.5 4.5 8-9`} />}
+              </g>
+            );
+          })}
+        </g>
+      )
+    }
+    {
+      kind === 'maint' && (
+        <g>
+          <path class="ai-s" d="M18 70a14 14 0 1 1 20 0M28 56v14" />
+          <circle class="ai-s" cx="28" cy="50" r="5" />
+          <rect class="ai-f ai-s" x="56" y="6" width="58" height="90" rx="11" />
+          <path class="ai-s" d="M78 12h14" />
+          <g class="ai-up" style="--d:1">
+            <rect class="ai-sub" x="62" y="26" width="46" height="36" rx="6" />
+            <path class="ai-accent-s" d="M69 36l5 5m0-5-5 5" />
+            <path class="ai-line" d="M80 36h20M80 43h14M69 53h32" />
+          </g>
+          <rect class="ai-bar ai-a" x="62" y="70" width="46" height="10" rx="5" style="--d:2" />
+          <circle class="ai-pop ai-w" cx="112" cy="9" r="5" style="--d:3" />
+        </g>
+      )
+    }
+    {
+      kind === 'sales' && (
+        <g>
+          <rect class="ai-f ai-s" x="38" y="6" width="84" height="88" rx="7" />
+          <rect class="ai-bar ai-a" x="48" y="16" width="36" height="7" rx="3.5" style="--d:0" />
+          <path class="ai-bar ai-line" d="M48 34h40M98 34h14" style="--d:1" />
+          <path class="ai-bar ai-line" d="M48 44h32M98 44h14" style="--d:2" />
+          <path class="ai-bar ai-line" d="M48 54h44M98 54h14" style="--d:3" />
+          <path class="ai-grid" d="M48 64h64" />
+          <rect class="ai-bar ai-m" x="48" y="70" width="30" height="8" rx="4" style="--d:4" />
+          <g class="ai-pop" style="--d:6">
+            <circle class="ai-okbox" cx="112" cy="80" r="13" />
+            <path class="ai-check" d="M105.5 80.5l4.5 4.5 8-9" />
+          </g>
+        </g>
+      )
+    }
+    {
+      kind === 'catalog' && (
+        <g>
+          <rect class="ai-m" x="30" y="14" width="74" height="80" rx="7" opacity="0.6" />
+          <g class="ai-up" style="--d:1">
+            <rect class="ai-f ai-s" x="52" y="6" width="78" height="86" rx="7" />
+            <rect class="ai-sub" x="60" y="14" width="62" height="38" rx="5" />
+            <path class="ai-accent-s" d="M91 22l12 6v13l-12 6-12-6V28zM79 28l12 6 12-6M91 34v13" />
+            <path class="ai-line" d="M60 62h44M60 71h56M60 80h34" />
+          </g>
+        </g>
+      )
+    }
+    {
+      kind === 'supply' && (
+        <g>
+          <path class="ai-grid" d="M16 86H148M16 12V86" />
+          <path class="ai-limit" d="M16 62H148" />
+          <path class="ai-draw" pathLength="1" d="M18 22C40 24 52 30 66 40S96 66 112 70 136 74 146 76" />
+          <circle class="ai-pop ai-w" cx="100" cy="63" r="5" style="--d:6" />
+          <rect class="ai-bar ai-m" x="24" y="76" width="8" height="10" rx="2" style="--d:1" />
+          <rect class="ai-bar ai-m" x="38" y="72" width="8" height="14" rx="2" style="--d:2" />
+          <rect class="ai-bar ai-a" x="52" y="68" width="8" height="18" rx="2" style="--d:3" />
+        </g>
+      )
+    }
+    {
+      kind === 'eng' && (
+        <g>
+          <rect class="ai-f ai-s" x="34" y="24" width="72" height="52" rx="4" />
+          <circle class="ai-accent-s ai-pop" cx="70" cy="50" r="13" style="--d:2" />
+          <path class="ai-grid" d="M70 32v36M52 50h36" />
+          <path class="ai-dim ai-up" d="M34 88h72M34 84v8M106 84v8M118 24v52M114 24h8M114 76h8" style="--d:3" />
+          <path class="ai-bar ai-line" d="M126 32h16M126 40h10" style="--d:4" />
+        </g>
+      )
+    }
+    {
+      kind === 'knowledge' && (
+        <g>
+          {[10, 22, 34, 18, 28, 14, 24].map((h, k) => (
+            <rect class="ai-wave ai-a" x={14 + k * 8} y={50 - h / 2} width="4" height={h} rx="2" style={`--d:${k}`} />
+          ))}
+          <path class="ai-s" d="M76 50h14m-5-5 5 5-5 5" />
+          <g class="ai-up" style="--d:4">
+            <rect class="ai-f ai-s" x="98" y="16" width="50" height="68" rx="6" />
+            <path class="ai-line" d="M106 30h34M106 40h28M106 50h34M106 60h20" />
+            <circle class="ai-okbox" cx="136" cy="72" r="6" />
+          </g>
+        </g>
+      )
+    }
+    {
+      kind === 'mgmt' && (
+        <g>
+          <path class="ai-grid" d="M14 88H96" />
+          {[30, 38, 34, 54, 44].map((h, k) => (
+            <rect class={`ai-bar-y ${k === 3 ? 'ai-w' : 'ai-m'}`} x={18 + k * 15} y={88 - h} width="10" height={h} rx="3" style={`--d:${k}`} />
+          ))}
+          <g class="ai-pop" style="--d:6">
+            <path class="ai-f ai-s" d="M98 14h48a6 6 0 0 1 6 6v30a6 6 0 0 1-6 6h-30l-12 10v-10h-6a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z" />
+            <path class="ai-line" d="M104 26h36M104 35h28M104 44h32" />
+          </g>
+        </g>
+      )
+    }
+    {
+      kind === 'brain' && (
+        <g>
+          <path class="ai-grid" d="M80 50 40 22M80 50 40 78M80 50 120 22M80 50 120 78M80 50 30 50M80 50 130 50" />
+          {[
+            [40, 22],
+            [40, 78],
+            [120, 22],
+            [120, 78],
+            [30, 50],
+            [130, 50],
+          ].map(([cx, cy], k) => (
+            <circle class="ai-pop ai-node" cx={cx} cy={cy} r="7" style={`--d:${k}`} />
+          ))}
+          <circle class="ai-a" cx="80" cy="50" r="14" />
+          <circle class="ai-ring" cx="80" cy="50" r="20" />
+        </g>
+      )
+    }
+  </svg>
+</div>
+
+<style>
+  .ai {
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg);
+    border: var(--border-width) solid var(--color-border-subtle);
+    padding: var(--space-3) var(--space-4);
+    color: var(--color-text-muted);
+  }
+
+  .ai svg {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    max-block-size: 7.5rem;
+    overflow: visible;
+  }
+
+  .ai :is(path, rect, circle) {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .ai-s,
+  .ai-line,
+  .ai-grid,
+  .ai-today,
+  .ai-limit,
+  .ai-dim,
+  .ai-draw,
+  .ai-accent-s,
+  .ai-check,
+  .ai-todo,
+  .ai-ring {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ai-s {
+    stroke: var(--color-text-muted);
+    stroke-width: 1.5;
+  }
+
+  .ai-f {
+    fill: var(--color-surface-raised);
+  }
+
+  .ai-line {
+    stroke: var(--color-border-strong);
+    stroke-width: 2.5;
+  }
+
+  .ai-grid {
+    stroke: var(--color-border);
+    stroke-width: 1;
+  }
+
+  .ai-today {
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 4;
+  }
+
+  .ai-limit {
+    stroke: var(--color-warn-text);
+    stroke-width: 1.25;
+    stroke-dasharray: 4 4;
+  }
+
+  .ai-dim {
+    fill: none;
+    stroke: var(--color-text-muted);
+    stroke-width: 1;
+  }
+
+  .ai-draw {
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+  }
+
+  .ai-accent-s {
+    stroke: var(--color-accent);
+    stroke-width: 2;
+  }
+
+  .ai-check {
+    stroke: var(--color-ok-text);
+    stroke-width: 2.25;
+  }
+
+  .ai-todo {
+    stroke: var(--color-border-strong);
+    stroke-width: 1.25;
+    stroke-dasharray: 3 3;
+  }
+
+  .ai-ring {
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    opacity: 0.4;
+  }
+
+  .ai-a {
+    fill: var(--color-accent);
+  }
+
+  .ai-m {
+    fill: var(--color-border);
+  }
+
+  .ai-w {
+    fill: var(--color-warn-text);
+  }
+
+  .ai-sub {
+    fill: var(--color-accent-subtle);
+  }
+
+  .ai-okbox {
+    fill: var(--color-ok-subtle);
+    stroke: var(--color-ok-text);
+    stroke-width: 1.25;
+  }
+
+  .ai-node {
+    fill: var(--color-surface-raised);
+    stroke: var(--color-text-muted);
+    stroke-width: 1.5;
+  }
+
+  .ai-bar,
+  .ai-bar-y,
+  .ai-pop,
+  .ai-up,
+  .ai-wave {
+    transform-box: fill-box;
+  }
+
+  .ai-bar {
+    transform-origin: 0 50%;
+  }
+
+  .ai-bar-y,
+  .ai-wave {
+    transform-origin: 50% 100%;
+  }
+
+  .ai-wave {
+    transform-origin: 50% 50%;
+  }
+
+  .ai-pop {
+    transform-origin: 50% 50%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.is-anim) .ai-bar {
+      animation: ai-x var(--motion-long) var(--motion-ease-out) backwards;
+      animation-delay: calc(300ms + var(--d, 0) * 90ms);
+    }
+
+    :global(.is-anim) .ai-bar-y {
+      animation: ai-y var(--motion-long) var(--motion-ease-out) backwards;
+      animation-delay: calc(300ms + var(--d, 0) * 90ms);
+    }
+
+    :global(.is-anim) .ai-pop {
+      animation: ai-pop 0.6s var(--motion-ease-out) backwards;
+      animation-delay: calc(400ms + var(--d, 0) * 90ms);
+    }
+
+    :global(.is-anim) .ai-up {
+      animation: ai-up var(--motion-reveal) var(--motion-ease) backwards;
+      animation-delay: calc(250ms + var(--d, 0) * 90ms);
+    }
+
+    :global(.is-anim) .ai-wave {
+      animation: ai-y var(--motion-reveal) var(--motion-ease-out) backwards;
+      animation-delay: calc(250ms + var(--d, 0) * 60ms);
+    }
+
+    :global(.is-anim) .ai-draw {
+      stroke-dasharray: 1;
+      animation: ai-draw var(--motion-long) var(--motion-ease-out) 300ms backwards;
+    }
+  }
+
+  @keyframes ai-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes ai-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes ai-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+  }
+
+  @keyframes ai-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  @keyframes ai-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+  }
+</style>

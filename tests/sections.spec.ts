@@ -27,7 +27,12 @@ for (const { path, locale } of homes) {
     test('seções na ordem, cada uma rotulada pelo seu H2; um H1 com a manchete', async ({ page }) => {
       await page.goto(path);
       const order = await page.locator('main > section[id]').evaluateAll((els) => els.map((el) => el.id));
-      expect(order).toEqual([ids.hero, ids.brain, ids.solutions, ids.custom, ids.process, ids.structure, ids.proof, ids.fit, ids.faq, 'agendar']);
+      // Seções novas (adoção de IA e resultados medidos) entram quando o conteúdo existe (HomePage.astro).
+      const adoptionId = locale === 'en' ? 'ai-in-manufacturing' : 'ia-na-industria';
+      const impactId = locale === 'en' ? 'results' : 'resultados';
+      expect(order).toEqual(
+        [ids.hero, ids.brain, c.adoption && adoptionId, ids.solutions, c.impact && impactId, ids.custom, ids.process, ids.structure, ids.proof, ids.fit, ids.faq, 'agendar'].filter(Boolean),
+      );
       for (const id of order) {
         const labelledBy = await page.locator(`section#${id}`).getAttribute('aria-labelledby');
         expect(labelledBy, id).toBeTruthy();

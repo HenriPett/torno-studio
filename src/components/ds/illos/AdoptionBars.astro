@@ -1,0 +1,147 @@
+---
+/**
+ * AdoptionBars (DESIGN-2026-11 §6.13): série curta (ex.: 2022 → 2024) em barras verticais que crescem
+ * da base, com o valor contando ([data-count]) e a fonte embaixo. Eixo começa em zero. Os valores e
+ * rótulos são texto (lista); a barra é decorativa.
+ *
+ * <AdoptionBars locale="pt-BR" series={[{ label: '2022', value: 16.9, display: '16,9%' }, …]} caption="…" source={{ label, href }} />
+ */
+import { getChrome } from '../../../content/chrome';
+import type { Locale } from '../../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  series: { label: string; value: number; display: string }[];
+  caption?: string | undefined;
+  source?: { label: string; href?: string | undefined } | undefined;
+  class?: string;
+}
+
+const { locale, series, caption, source, class: className } = Astro.props;
+const max = Math.max(...series.map((s) => s.value), 1);
+const sourceLabel = getChrome(locale).common.source;
+---
+
+<figure class:list={['ab', className]} data-reveal="rise">
+  <ol class="ab__bars" role="list" style={`--n:${series.length}`}>
+    {
+      series.map((s, k) => (
+        <li class:list={['ab__item', k === series.length - 1 && 'ab__item--last']} style={`--h:${(s.value / max).toFixed(3)};--k:${k}`}>
+          <span class="ab__label">{s.label}</span>
+          <span class="ab__value tnum" data-count>{s.display}</span>
+          <span class="ab__track" aria-hidden="true">
+            <span class="ab__bar" />
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  {
+    (caption || source) && (
+      <figcaption class="caption ab__caption">
+        {caption}
+        {caption && source && ' '}
+        {source && (
+          <>
+            {sourceLabel}:{' '}
+            {source.href ? (
+              <a class="link" href={source.href} target="_blank" rel="noopener">
+                {source.label}
+              </a>
+            ) : (
+              source.label
+            )}
+          </>
+        )}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .ab {
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-6) var(--space-5) var(--space-5);
+    border-radius: var(--radius-xl);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border-subtle);
+    min-inline-size: 0;
+  }
+
+  .ab__bars {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: var(--space-5);
+    align-items: end;
+    margin: 0;
+    padding: 0 0 0;
+    list-style: none;
+    border-block-end: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .ab__item {
+    display: grid;
+    grid-template-areas: 'value' 'track';
+    justify-items: center;
+    gap: var(--space-2);
+    position: relative;
+  }
+
+  .ab__label {
+    position: absolute;
+    inset-block-start: calc(100% + var(--space-3));
+    inset-inline: 0;
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+  }
+
+  .ab__value {
+    grid-area: value;
+    font-size: var(--text-title-lg);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-tight);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .ab__track {
+    grid-area: track;
+    display: block;
+    inline-size: min(100%, 6rem);
+    block-size: calc(var(--h) * clamp(9rem, 22vw, 15rem));
+  }
+
+  .ab__bar {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background-color: var(--color-border-strong);
+    transform-origin: 50% 100%;
+  }
+
+  .ab__item--last .ab__bar {
+    background-color: var(--color-accent);
+  }
+
+  .ab__caption {
+    margin-block-start: var(--space-6);
+    color: var(--color-text-muted);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.ab.is-anim) .ab__bar {
+      animation: ab-grow var(--motion-long) var(--motion-ease-out) backwards;
+      animation-delay: calc(300ms + var(--k, 0) * 200ms);
+    }
+  }
+
+  @keyframes ab-grow {
+    from {
+      transform: scaleY(0);
+    }
+  }
+</style>

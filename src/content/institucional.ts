@@ -18,12 +18,12 @@ export const etapas: Record<Locale, StepEntry[]> = {
     {
       meta: '2 a 4 semanas',
       title: 'Diagnóstico',
-      body: 'Entrevistas por área, inventário de dados e sistemas e um mapa de oportunidades com esforço e risco.',
+      body: 'Entrevistas por área, inventário de dados e mapa de oportunidades com esforço e risco.',
     },
     {
       meta: 'Uma área, um problema',
       title: 'Piloto',
-      body: 'Critério de sucesso combinado antes e medido depois, com dados reais da operação.',
+      body: 'Critério de sucesso combinado antes e medido depois, com dados reais.',
     },
     {
       meta: 'Área por área',
@@ -33,7 +33,7 @@ export const etapas: Record<Locale, StepEntry[]> = {
     {
       meta: 'Mensal',
       title: 'Operação assistida',
-      body: 'Monitoramento, ajustes, novos casos de uso, treinamento e relatório mensal.',
+      body: 'Monitoramento, ajustes, novos casos de uso e relatório mensal.',
     },
   ],
   en: [
@@ -41,7 +41,7 @@ export const etapas: Record<Locale, StepEntry[]> = {
     {
       meta: '2 to 4 weeks',
       title: 'Assessment',
-      body: 'Interviews in each area, an inventory of data and systems and a map of opportunities with effort and risk.',
+      body: 'Interviews in each area, a data inventory and an opportunity map with effort and risk.',
     },
     { meta: 'One area, one problem', title: 'Pilot', body: 'A success criterion agreed up front and measured afterwards, on real plant data.' },
     { meta: 'Area by area', title: 'Staged rollout', body: 'Other areas follow in the order the pilot suggests, on the same foundation.' },
@@ -60,22 +60,22 @@ export const estrutura: Record<Locale, FeatureEntry[]> = {
     {
       eyebrow: 'Especialistas',
       title: 'Rede sob demanda',
-      body: 'Dados, segurança, UX, infraestrutura e especialistas do setor entram conforme o escopo, nomeados na proposta.',
+      body: 'Dados, segurança, UX e infraestrutura conforme o escopo, nomeados na proposta.',
     },
     {
       eyebrow: 'Governança',
       title: 'Ritos e registro',
-      body: 'Patrocinador e ponto focal na empresa, reunião quinzenal, critério de sucesso por etapa e relatório mensal.',
+      body: 'Patrocinador e ponto focal, reunião quinzenal, critério por etapa e relatório mensal.',
     },
     {
       eyebrow: 'Segurança e LGPD',
       title: 'Dados sob as regras da TI',
-      body: 'Infraestrutura da empresa ou nuvem aprovada pela TI, acesso por perfil e uso registrado. Os dados não treinam modelos de terceiros.',
+      body: 'Infraestrutura da empresa ou nuvem aprovada, acesso por perfil e uso registrado.',
     },
     {
       eyebrow: 'Continuidade',
       title: 'Tudo em nome da empresa',
-      body: 'Código, documentação, acessos e contas são da empresa desde o primeiro dia, com manual de operação para a TI assumir quando quiser.',
+      body: 'Código, documentação e contas da empresa desde o primeiro dia, com manual de operação.',
     },
   ],
   en: [
@@ -87,22 +87,22 @@ export const estrutura: Record<Locale, FeatureEntry[]> = {
     {
       eyebrow: 'Specialists',
       title: 'On-demand network',
-      body: 'Data, security, UX, infrastructure and industry specialists join by scope and are named in the proposal.',
+      body: 'Data, security, UX and infrastructure by scope, named in the proposal.',
     },
     {
       eyebrow: 'Governance',
       title: 'Cadence and records',
-      body: 'A sponsor and a point of contact on your side, biweekly reviews, a success criterion per stage and a monthly report.',
+      body: 'Sponsor and point of contact, biweekly reviews, a criterion per stage and a monthly report.',
     },
     {
       eyebrow: 'Security and privacy',
       title: 'Data under your IT rules',
-      body: 'Your infrastructure or a cloud your IT approves, role-based access and usage logs. Your data never trains third-party models.',
+      body: 'Your infrastructure or an approved cloud, role-based access and usage logs.',
     },
     {
       eyebrow: 'Continuity',
       title: 'Everything in your name',
-      body: 'Code, documentation, access and accounts belong to you from day one, with a runbook so your IT can take over when it wants.',
+      body: 'Code, documentation and accounts are yours from day one, with a runbook.',
     },
   ],
 };
@@ -144,111 +144,105 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
     hero: {
       eyebrow: 'Como trabalhamos',
       title: 'Por etapas, com o critério de sucesso combinado antes.',
-      lead: 'Cada etapa tem proposta fechada, um entregável definido e termina com uma decisão da empresa. A próxima só começa quando a anterior foi medida.',
+      lead: 'Cada etapa tem proposta fechada e termina com uma decisão da empresa. A próxima só começa depois que a anterior foi medida.',
       secondary: 'Ver as etapas',
     },
     stages: {
       eyebrow: 'Etapas',
       title: 'Da primeira conversa à operação.',
-      lead: 'A empresa pode parar ao fim de qualquer etapa e fica com o que foi entregue até ali.',
+      lead: 'A empresa pode parar ao fim de qualquer etapa e fica com o que foi entregue.',
       workLabel: 'O que fazemos',
       deliverableLabel: 'O que a empresa recebe',
       items: [
         {
           title: 'Conversa inicial',
           meta: '45 minutos, sem custo',
-          body: 'Uma conversa com quem conhece a operação e com quem decide.',
+          body: 'Com quem conhece a operação e com quem decide.',
           work: [
-            'Entendemos a operação, os sistemas em uso e o problema que mais pesa.',
-            'Verificamos se há encaixe e quem patrocina o projeto.',
+            'Entendemos a operação, os sistemas e o problema que mais pesa.',
+            'Verificamos o encaixe e quem patrocina o projeto.',
           ],
           deliverable: 'Proposta fechada do diagnóstico, ou a indicação de que não há encaixe.',
         },
         {
           title: 'Diagnóstico',
           meta: 'Planejado para 2 a 4 semanas',
-          body: 'Um retrato das áreas, dos dados e de onde a IA paga o esforço.',
+          body: 'Onde a IA paga o esforço, área por área.',
           work: [
             'Entrevistas com uma ou duas pessoas por área.',
-            'Inventário de dados e sistemas com a TI: ERP, MES, planilhas, documentos e históricos.',
-            'Estimativa de esforço e risco de cada oportunidade.',
+            'Inventário de dados e sistemas, com esforço e risco de cada oportunidade.',
           ],
           deliverable:
-            'Relatório com o mapa de oportunidades, a recomendação de um piloto e o critério de sucesso. O relatório é da empresa, contrate ou não o restante.',
+            'Mapa de oportunidades, piloto recomendado e critério de sucesso. O relatório é da empresa, contrate ou não o restante.',
         },
         {
           title: 'Piloto',
           meta: 'Uma área, um problema',
           body: 'O primeiro uso real, pequeno o bastante para medir.',
           work: [
-            'Montamos a parte do cérebro da operação que o piloto precisa.',
-            'Construímos o agente ou a tela e treinamos quem vai usar.',
+            'Montamos a base e o agente ou a tela, e treinamos quem usa.',
             'Medimos o critério de sucesso antes e depois.',
           ],
-          deliverable: 'Piloto em uso, com a medição combinada e a recomendação do que expandir.',
+          deliverable: 'Piloto em uso, medido, com a recomendação do que expandir.',
         },
         {
           title: 'Implantação por etapas',
           meta: 'Área por área',
           body: 'As outras áreas entram na ordem que o piloto indicar.',
-          work: [
-            'Cada área nova tem escopo, responsável e critério próprios.',
-            'Integrações com os sistemas da empresa feitas com a TI.',
-          ],
-          deliverable: 'Cada área em uso, documentada e com o critério da etapa medido.',
+          work: ['Cada área nova tem escopo, responsável e critério próprios, e as integrações são feitas com a TI.'],
+          deliverable: 'Cada área em uso, documentada e medida.',
         },
         {
           title: 'Operação assistida',
           meta: 'Mensalidade',
-          body: 'Acompanhamento depois que os agentes entram no dia a dia.',
+          body: 'Acompanhamento com os agentes no dia a dia.',
           work: [
-            'Monitoramento de uso e de qualidade das respostas.',
-            'Ajustes, novos casos de uso e treinamento de quem chega.',
+            'Monitoramento de uso e de qualidade, ajustes e novos casos de uso.',
           ],
-          deliverable: 'Relatório mensal com uso, problemas resolvidos e próximos passos.',
+          deliverable: 'Relatório mensal de uso, problemas resolvidos e próximos passos.',
         },
       ],
     },
     delivery: {
       eyebrow: 'Estrutura de entrega',
       title: 'Uma liderança técnica e especialistas quando o escopo pede.',
-      lead: 'A empresa sabe desde o início quem responde pelo projeto e quem mais vai trabalhar nele.',
+      lead: 'Desde o início, a empresa sabe quem responde pelo projeto.',
       items: [
         {
           eyebrow: 'Liderança técnica única',
           title: 'Uma pessoa responde do diagnóstico à operação',
-          body: 'Hoje é Henrique Pett, fundador da Torno. Ele conduz as entrevistas, desenha a solução, escreve código e responde pelos resultados de cada etapa.',
+          body: 'Hoje é Henrique Pett, fundador da Torno. Ele conduz as entrevistas, desenha a solução e escreve código.',
         },
         {
           eyebrow: 'Rede de especialistas sob demanda',
           title: 'Especialistas nomeados na proposta',
-          body: 'Dados, segurança, UX, infraestrutura e especialistas do setor entram quando o escopo pede. Cada um aparece com nome e papel na proposta antes de começar.',
+          body: 'Dados, segurança, UX, infraestrutura e especialistas do setor entram quando o escopo pede, com nome e papel na proposta.',
         },
       ],
     },
     governance: {
       eyebrow: 'Governança',
       title: 'Ritos simples, decisões por escrito.',
-      lead: 'A diretoria acompanha o projeto sem precisar entrar no detalhe técnico.',
+      lead: 'A diretoria acompanha sem entrar no detalhe técnico.',
       items: [
-        { title: 'Patrocinador e ponto focal', body: 'Um patrocinador na diretoria e um ponto focal na operação, definidos na proposta.' },
-        { title: 'Reunião quinzenal', body: 'Andamento, bloqueios e decisões pendentes, com pauta enviada antes.' },
-        { title: 'Critério por etapa', body: 'Cada etapa tem um critério de sucesso combinado antes de começar e medido no fim.' },
-        { title: 'Relatório mensal', body: 'O que foi feito, o que foi medido, o que mudou e o que vem a seguir.' },
-        { title: 'Registro de decisões', body: 'Decisões técnicas e de escopo registradas com data, motivo e quem aprovou.' },
+        { title: 'Patrocinador e ponto focal', body: 'Um na diretoria e outro na operação, definidos na proposta.' },
+        { title: 'Reunião quinzenal', body: 'Andamento, bloqueios e decisões, com pauta enviada antes.' },
+        { title: 'Critério por etapa', body: 'Combinado antes de começar e medido no fim.' },
+        { title: 'Relatório mensal', body: 'O que foi feito e medido e o que vem a seguir.' },
+        { title: 'Registro de decisões', body: 'Com data, motivo e quem aprovou.' },
       ],
     },
     security: {
       eyebrow: 'Segurança e LGPD',
       title: 'Os dados seguem as regras da sua TI.',
-      lead: 'A arquitetura é aprovada pela TI antes de qualquer dado sair de onde está.',
+      lead: 'A TI aprova a arquitetura antes de qualquer dado sair de onde está.',
       items: [
-        { title: 'Onde os dados ficam', body: 'Na infraestrutura da empresa ou numa nuvem aprovada pela TI.' },
-        { title: 'Acesso por perfil', body: 'Cada pessoa consulta só o que o perfil dela permite nos sistemas de origem.' },
-        { title: 'Uso registrado', body: 'Perguntas, respostas e ações dos agentes ficam registradas para auditoria.' },
-        { title: 'Modelos de terceiros', body: 'Os dados da empresa não são usados para treinar modelos de terceiros.' },
-        { title: 'Confidencialidade', body: 'Acordo de confidencialidade assinado antes do diagnóstico, quando a empresa pedir.' },
-        { title: 'LGPD', body: 'Dados pessoais tratados só para a finalidade combinada, com o papel de cada parte definido em contrato.' },
+        { title: 'Onde os dados ficam', body: 'Na infraestrutura da empresa ou em nuvem aprovada pela TI.' },
+        { title: 'Acesso por perfil', body: 'Cada pessoa vê só o que o perfil dela permite.' },
+        { title: 'Uso registrado', body: 'Perguntas, respostas e ações ficam registradas para auditoria.' },
+        { title: 'Modelos de terceiros', body: 'Os dados da empresa não treinam modelos de terceiros.' },
+        { title: 'Confidencialidade', body: 'Acordo assinado antes do diagnóstico, se a empresa pedir.' },
+        { title: 'LGPD', body: 'Dados pessoais só para a finalidade combinada, com o papel de cada parte em contrato.' },
       ],
     },
     continuity: {
@@ -256,20 +250,20 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
       title: 'A empresa não fica presa à Torno.',
       lead: 'O que construímos continua funcionando com ou sem a gente.',
       items: [
-        { title: 'Em nome da empresa', body: 'Código, documentação, acessos e contas de nuvem ficam em nome da empresa desde o primeiro dia.' },
-        { title: 'Manual de operação', body: 'Como funciona, como monitorar, o que fazer quando algo falha e como incluir um caso novo.' },
-        { title: 'Transição para a TI', body: 'Quando a TI quiser assumir, fazemos a passagem com sessões de trabalho e acompanhamento.' },
+        { title: 'Em nome da empresa', body: 'Código, documentação e contas de nuvem, desde o primeiro dia.' },
+        { title: 'Manual de operação', body: 'Como funciona, como monitorar e o que fazer quando algo falha.' },
+        { title: 'Transição para a TI', body: 'Quando a TI quiser assumir, fazemos a passagem com sessões de trabalho.' },
       ],
     },
     client: {
       eyebrow: 'Da sua parte',
       title: 'O que precisamos da empresa.',
-      lead: 'O esforço da equipe interna é pequeno, mas precisa estar reservado na agenda.',
+      lead: 'O esforço interno é pequeno, mas precisa estar na agenda.',
       items: [
         { title: 'Um patrocinador', body: 'Alguém da diretoria que decide ao fim de cada etapa.' },
-        { title: 'Um ponto focal', body: 'Uma pessoa da operação que agenda entrevistas e destrava acessos.' },
-        { title: 'Tempo das áreas', body: 'Cerca de uma hora por pessoa entrevistada no diagnóstico e o usuário-chave no piloto.' },
-        { title: 'A TI junto', body: 'Acesso aos sistemas combinado com a TI, de preferência com perfil de leitura.' },
+        { title: 'Um ponto focal', body: 'Alguém da operação que agenda entrevistas e destrava acessos.' },
+        { title: 'Tempo das áreas', body: 'Cerca de uma hora por entrevistado e um usuário-chave no piloto.' },
+        { title: 'A TI junto', body: 'Acesso combinado com a TI, de preferência só leitura.' },
       ],
     },
     faq: {
@@ -277,19 +271,19 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
       items: [
         {
           q: 'Quanto custa?',
-          a: 'Cada etapa tem proposta fechada. O diagnóstico é orçado depois da conversa inicial; o piloto e a implantação, depois do diagnóstico, porque o valor depende das áreas, dos sistemas e do volume de dados. A operação assistida é mensal.',
+          a: 'Cada etapa tem proposta fechada, orçada depois da etapa anterior, porque o valor depende das áreas e dos sistemas. A operação assistida é mensal.',
         },
         {
           q: 'A Torno é uma pessoa só?',
-          a: 'A Torno tem uma liderança técnica única, Henrique Pett, que responde pelo projeto inteiro. Especialistas em dados, segurança, UX, infraestrutura ou do setor entram conforme o escopo e são nomeados na proposta.\n\nA governança, a documentação e as contas em nome da empresa existem para que o projeto não dependa da memória de ninguém.',
+          a: 'A Torno tem uma liderança técnica única, Henrique Pett. Especialistas entram conforme o escopo, nomeados na proposta, e a documentação evita que o projeto dependa da memória de alguém.',
         },
         {
           q: 'Precisa trocar o ERP?',
-          a: 'Não. Trabalhamos sobre o que a empresa já usa, seja TOTVS, SAP, Senior ou outro, com os acessos que a TI liberar.',
+          a: 'Não. Trabalhamos sobre o ERP atual, seja TOTVS, SAP, Senior ou outro, com os acessos que a TI liberar.',
         },
         {
           q: 'A IA pode errar?',
-          a: 'Pode. Por isso cada resposta cita a fonte, cada agente tem um responsável na área e ações que alteram dados nos sistemas passam pela aprovação de uma pessoa.',
+          a: 'Pode. Por isso cada resposta cita a fonte, e ações que alteram dados nos sistemas passam pela aprovação de uma pessoa.',
         },
         {
           q: 'Podemos parar no meio?',
@@ -299,7 +293,7 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
     },
     cta: {
       title: 'Comece pela conversa inicial.',
-      text: '45 minutos, sem custo, para entender a operação e ver se o diagnóstico faz sentido.',
+      text: '45 minutos, sem custo, para ver se o diagnóstico faz sentido.',
     },
   },
   en: {
@@ -311,57 +305,55 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
     hero: {
       eyebrow: 'How we work',
       title: 'In stages, with success defined up front.',
-      lead: 'Every stage has a fixed proposal and a defined deliverable, and ends with your decision. The next one starts only after the last one was measured.',
+      lead: 'Every stage has a fixed proposal and ends with your decision. The next one starts only after the last one was measured.',
       secondary: 'See the stages',
     },
     stages: {
       eyebrow: 'Stages',
       title: 'From the first call to operation.',
-      lead: 'You can stop at the end of any stage and keep everything delivered so far.',
+      lead: 'You can stop at the end of any stage and keep what was delivered.',
       workLabel: 'What we do',
       deliverableLabel: 'What you get',
       items: [
         {
           title: 'Intro call',
           meta: '45 minutes, free',
-          body: 'A conversation with people who know the operation and people who decide.',
-          work: ['We learn how the plant runs, which systems it uses and which problem hurts most.', 'We check fit and who sponsors the project.'],
+          body: 'With people who know the operation and people who decide.',
+          work: ['We learn the operation, its systems and the problem that hurts most.', 'We check fit and who sponsors the project.'],
           deliverable: 'A fixed proposal for the assessment, or a clear note that it is not a fit.',
         },
         {
           title: 'Assessment',
           meta: 'Planned for 2 to 4 weeks',
-          body: 'A picture of the areas, the data and where AI is worth the effort.',
+          body: 'Where AI is worth the effort, area by area.',
           work: [
             'Interviews with one or two people per area.',
-            'An inventory of data and systems with IT: ERP, MES, spreadsheets, documents and records.',
-            'Effort and risk estimates for each opportunity.',
+            'An inventory of data and systems, with effort and risk for each opportunity.',
           ],
-          deliverable: 'A report with the opportunity map, a recommended pilot and its success criterion. The report is yours either way.',
+          deliverable: 'Opportunity map, recommended pilot and success criterion. The report is yours either way.',
         },
         {
           title: 'Pilot',
           meta: 'One area, one problem',
           body: 'The first real use, small enough to measure.',
           work: [
-            'We build the part of the operations brain the pilot needs.',
-            'We build the agent or screen and train the people who will use it.',
+            'We build the base and the agent or screen, and train the users.',
             'We measure the success criterion before and after.',
           ],
-          deliverable: 'A pilot in use, with the agreed measurement and a recommendation on what to expand.',
+          deliverable: 'A pilot in use, measured, with a recommendation on what to expand.',
         },
         {
           title: 'Staged rollout',
           meta: 'Area by area',
           body: 'Other areas follow in the order the pilot suggests.',
-          work: ['Each new area has its own scope, owner and criterion.', 'Integrations with your systems are built together with IT.'],
-          deliverable: 'Each area in use, documented, with its criterion measured.',
+          work: ['Each new area has its own scope, owner and criterion, with integrations built with IT.'],
+          deliverable: 'Each area in use, documented and measured.',
         },
         {
           title: 'Managed operation',
           meta: 'Monthly fee',
           body: 'Support once the agents are part of daily work.',
-          work: ['Monitoring of usage and answer quality.', 'Tuning, new use cases and training for new staff.'],
+          work: ['Monitoring of usage and quality, tuning and new use cases.'],
           deliverable: 'A monthly report on usage, issues solved and next steps.',
         },
       ],
@@ -369,30 +361,30 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
     delivery: {
       eyebrow: 'Delivery structure',
       title: 'One technical lead, plus specialists when the scope calls for them.',
-      lead: 'From day one you know who is accountable and who else will work on the project.',
+      lead: 'From day one you know who is accountable.',
       items: [
         {
           eyebrow: 'One technical lead',
           title: 'One person answers from assessment to operation',
-          body: 'Today that is Henrique Pett, founder of Torno. He runs the interviews, designs the solution, writes code and answers for each stage.',
+          body: 'Today that is Henrique Pett, founder of Torno. He runs the interviews, designs the solution and writes code.',
         },
         {
           eyebrow: 'On-demand specialist network',
           title: 'Specialists named in the proposal',
-          body: 'Data, security, UX, infrastructure and industry specialists join when the scope calls for them, each named with a role in the proposal.',
+          body: 'Data, security, UX, infrastructure and industry specialists join by scope, named with a role in the proposal.',
         },
       ],
     },
     governance: {
       eyebrow: 'Governance',
       title: 'Simple cadence, decisions in writing.',
-      lead: 'Leadership can follow the project without diving into technical detail.',
+      lead: 'Leadership follows along without diving into technical detail.',
       items: [
-        { title: 'Sponsor and point of contact', body: 'A sponsor in leadership and a point of contact in operations, named in the proposal.' },
-        { title: 'Biweekly review', body: 'Progress, blockers and pending decisions, with an agenda sent ahead.' },
-        { title: 'Criterion per stage', body: 'Each stage has a success criterion agreed before it starts and measured at the end.' },
-        { title: 'Monthly report', body: 'What was done, what was measured, what changed and what comes next.' },
-        { title: 'Decision log', body: 'Technical and scope decisions recorded with date, reason and approver.' },
+        { title: 'Sponsor and point of contact', body: 'One in leadership and one in operations, named in the proposal.' },
+        { title: 'Biweekly review', body: 'Progress, blockers and decisions, with an agenda sent ahead.' },
+        { title: 'Criterion per stage', body: 'Agreed before it starts and measured at the end.' },
+        { title: 'Monthly report', body: 'What was done and measured, and what comes next.' },
+        { title: 'Decision log', body: 'With date, reason and approver.' },
       ],
     },
     security: {
@@ -401,11 +393,11 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
       lead: 'IT approves the architecture before any data moves.',
       items: [
         { title: 'Where data lives', body: 'In your infrastructure or a cloud your IT approves.' },
-        { title: 'Role-based access', body: 'Each person sees only what their role allows in the source systems.' },
+        { title: 'Role-based access', body: 'Each person sees only what their role allows.' },
         { title: 'Usage logs', body: 'Questions, answers and agent actions are logged for audit.' },
         { title: 'Third-party models', body: 'Your data is never used to train third-party models.' },
-        { title: 'Confidentiality', body: 'An NDA signed before the assessment, when you ask for one.' },
-        { title: 'Data protection', body: 'Personal data used only for the agreed purpose, with each party’s role set in the contract.' },
+        { title: 'Confidentiality', body: 'An NDA before the assessment, if you ask.' },
+        { title: 'Data protection', body: 'Personal data only for the agreed purpose, with each party’s role in the contract.' },
       ],
     },
     continuity: {
@@ -413,9 +405,9 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
       title: 'You are never locked in.',
       lead: 'What we build keeps running with or without us.',
       items: [
-        { title: 'In your name', body: 'Code, documentation, access and cloud accounts are yours from day one.' },
-        { title: 'Runbook', body: 'How it works, how to monitor it, what to do when something fails and how to add a use case.' },
-        { title: 'Handover to IT', body: 'When IT wants to take over, we hand over with working sessions and follow-up.' },
+        { title: 'In your name', body: 'Code, documentation and cloud accounts, from day one.' },
+        { title: 'Runbook', body: 'How it works, how to monitor it and what to do when something fails.' },
+        { title: 'Handover to IT', body: 'When IT wants to take over, we hand over in working sessions.' },
       ],
     },
     client: {
@@ -425,7 +417,7 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
       items: [
         { title: 'A sponsor', body: 'Someone in leadership who decides at the end of each stage.' },
         { title: 'A point of contact', body: 'Someone in operations who books interviews and unblocks access.' },
-        { title: 'Time from each area', body: 'About an hour per person interviewed, and a key user during the pilot.' },
+        { title: 'Time from each area', body: 'About an hour per interviewee and a key user in the pilot.' },
         { title: 'IT on board', body: 'System access agreed with IT, read-only where possible.' },
       ],
     },
@@ -434,20 +426,20 @@ export const howWeWork: Record<Locale, HowWeWorkContent> = {
       items: [
         {
           q: 'How much does it cost?',
-          a: 'Each stage has a fixed proposal. The assessment is quoted after the intro call; the pilot and rollout after the assessment, because the price depends on areas, systems and data volume. Managed operation is a monthly fee.',
+          a: 'Each stage has a fixed proposal, quoted after the previous stage, because the price depends on areas and systems. Managed operation is a monthly fee.',
         },
         {
           q: 'Is Torno just one person?',
-          a: 'Torno has one technical lead, Henrique Pett, who is accountable for the whole project. Data, security, UX, infrastructure or industry specialists join by scope and are named in the proposal.',
+          a: 'Torno has one technical lead, Henrique Pett, accountable for the whole project. Specialists join by scope and are named in the proposal.',
         },
-        { q: 'Do we need to replace our ERP?', a: 'No. We work on top of what you already use, whether TOTVS, SAP or another system, with the access your IT grants.' },
+        { q: 'Do we need to replace our ERP?', a: 'No. We work on top of your current ERP, with the access your IT grants.' },
         {
           q: 'Can we stop halfway?',
           a: 'Yes, at the end of any stage. You keep everything delivered so far, including code and documentation.',
         },
       ],
     },
-    cta: { title: 'Start with an intro call.', text: '45 minutes, free, to understand your operation and see whether an assessment makes sense.' },
+    cta: { title: 'Start with an intro call.', text: '45 minutes, free, to see whether an assessment makes sense.' },
   },
 };
 
@@ -476,33 +468,32 @@ export const about: Record<Locale, AboutContent> = {
     hero: {
       eyebrow: 'Sobre a Torno',
       title: 'Engenharia de IA e software para quem fabrica.',
-      lead: 'A Torno implanta IA na operação de indústrias médias e grandes, área por área, junto com a TI e com responsabilidade clara do diagnóstico à operação.',
+      lead: 'A Torno implanta IA na operação de indústrias médias e grandes, área por área, junto com a TI.',
     },
     why: {
       eyebrow: 'Por que existimos',
       title: 'Ferramenta de IA sobra. Falta quem implante na fábrica.',
       paragraphs: [
-        'Há muito produto de IA horizontal e pouco adaptado à rotina de uma indústria. Ficha técnica, setup, refugo, carteira de pedidos e o saber de quem opera a máquina há décadas raramente estão no mesmo lugar, e nenhuma ferramenta pronta resolve isso sozinha.',
-        'A Torno começa pela operação. Entrevistamos as áreas, entendemos os sistemas e os documentos, e só então propomos o que construir. O primeiro passo é um piloto curto, com critério de sucesso combinado antes. A expansão segue o que o piloto mostrar.',
+        'Há muito produto de IA horizontal e pouco adaptado à rotina de uma indústria. Ficha técnica, setup, refugo e o saber de quem opera a máquina há décadas raramente estão no mesmo lugar.',
+        'Por isso começamos pela operação. Entrevistamos as áreas, entendemos os sistemas e só então propomos um piloto curto, com critério de sucesso combinado antes.',
       ],
     },
     focus: {
       eyebrow: 'Foco',
       title: 'Só indústria, a partir de Jaraguá do Sul.',
       paragraphs: [
-        'A Torno fica em Jaraguá do Sul, no norte de Santa Catarina, cidade de forte presença industrial. Atendemos indústrias de médio e grande porte no Brasil, com prioridade para o Sul.',
-        'O trabalho é remoto, com idas à planta quando a etapa pede, combinadas na proposta.',
+        'A Torno fica em Jaraguá do Sul, polo industrial do norte de Santa Catarina. O trabalho é remoto, com idas à planta combinadas na proposta.',
       ],
       facts: [
-        { title: 'Indústrias de médio e grande porte', body: 'Com ERP implantado e informação espalhada em planilhas, documentos e pessoas.' },
-        { title: 'Jaraguá do Sul, SC', body: 'Atendimento a todo o Brasil, com prioridade para Santa Catarina e o Sul.' },
-        { title: 'Proposta fechada por etapa', body: 'Diagnóstico, piloto e implantação orçados separadamente, depois de cada decisão.' },
+        { title: 'Indústrias de médio e grande porte', body: 'Com ERP implantado e informação espalhada em planilhas e pessoas.' },
+        { title: 'Jaraguá do Sul, SC', body: 'Todo o Brasil, com prioridade para o Sul.' },
+        { title: 'Proposta fechada por etapa', body: 'Cada etapa orçada depois da decisão anterior.' },
       ],
     },
     process: {
       eyebrow: 'Como trabalhamos',
       title: 'Cinco etapas, cada uma com uma decisão no fim.',
-      lead: 'Da conversa inicial à operação assistida, com governança, segurança e continuidade descritas antes de começar.',
+      lead: 'Da conversa inicial à operação assistida, com governança e segurança descritas antes de começar.',
       link: 'Ver como trabalhamos',
     },
     lead: {
@@ -512,9 +503,9 @@ export const about: Record<Locale, AboutContent> = {
       role: 'Fundador e líder técnico',
       photoAlt: 'Henrique Pett',
       bio: [
-        'Desde 2021, Henrique passou pelas funções de um produto de dados e IA: pesquisa em machine learning, desenvolvimento full stack, ciência de dados, engenharia de ML e gestão de produto. Leva modelos e aplicações até a infraestrutura de produção e continua escrevendo código.',
-        'Num produto de IA para terminais de contêineres, construiu o modelo como engenheiro de ML e depois passou a liderar o produto. Antes, foi o primeiro profissional de dados de uma fintech de crédito e trabalhou remotamente, em inglês, numa consultoria que atendia empresas europeias.',
-        'Na Torno, conduz cada projeto do diagnóstico à operação e aciona especialistas em dados, segurança, UX, infraestrutura ou do setor quando o escopo pede.',
+        'Desde 2021, Henrique passou por pesquisa em machine learning, desenvolvimento full stack, ciência de dados, engenharia de ML e gestão de produto. Leva modelos até a produção e continua escrevendo código.',
+        'Num produto de IA para terminais de contêineres, construiu o modelo como engenheiro de ML e depois liderou o produto. Antes, foi o primeiro profissional de dados de uma fintech de crédito e trabalhou, em inglês, numa consultoria para empresas europeias.',
+        'Na Torno, conduz cada projeto do diagnóstico à operação e aciona especialistas quando o escopo pede.',
       ],
       authorLink: 'Artigos e perfil de Henrique Pett',
     },
@@ -540,33 +531,32 @@ export const about: Record<Locale, AboutContent> = {
     hero: {
       eyebrow: 'About Torno',
       title: 'AI and software engineering for manufacturers.',
-      lead: 'Torno rolls out AI in the operations of mid-size and large manufacturers, one area at a time, together with IT and with clear accountability from assessment to operation.',
+      lead: 'Torno rolls out AI in the operations of mid-size and large manufacturers, one area at a time, together with IT.',
     },
     why: {
       eyebrow: 'Why we exist',
       title: 'AI tools are everywhere. Few people put them to work on the plant floor.',
       paragraphs: [
-        'Most AI products are horizontal and few fit the routine of a plant. Technical sheets, setups, scrap, the order book and the know-how of people who have run a machine for decades rarely sit in one place, and no off-the-shelf tool fixes that alone.',
-        'Torno starts with the operation. We interview each area, learn the systems and documents, and only then propose what to build. The first step is a short pilot with a success criterion agreed up front. Expansion follows what the pilot shows.',
+        'Most AI products are horizontal and few fit the routine of a plant. Technical sheets, setups, scrap and the know-how of people who have run a machine for decades rarely sit in one place.',
+        'So we start with the operation. We interview each area, learn the systems and only then propose a short pilot with a success criterion agreed up front.',
       ],
     },
     focus: {
       eyebrow: 'Focus',
       title: 'Manufacturing only, from Jaraguá do Sul, Brazil.',
       paragraphs: [
-        'Torno is based in Jaraguá do Sul, an industrial city in the north of Santa Catarina, Brazil. We work with mid-size and large manufacturers, with priority for southern Brazil.',
-        'Work is remote, with plant visits when a stage calls for them, agreed in the proposal.',
+        'Torno is based in Jaraguá do Sul, an industrial city in the north of Santa Catarina, Brazil. Work is remote, with plant visits agreed in the proposal.',
       ],
       facts: [
-        { title: 'Mid-size and large manufacturers', body: 'With an ERP in place and information spread across spreadsheets, documents and people.' },
-        { title: 'Jaraguá do Sul, Brazil', body: 'Serving all of Brazil, with priority for Santa Catarina and the South.' },
-        { title: 'Fixed proposal per stage', body: 'Assessment, pilot and rollout quoted separately, after each decision.' },
+        { title: 'Mid-size and large manufacturers', body: 'With an ERP in place and information spread across spreadsheets and people.' },
+        { title: 'Jaraguá do Sul, Brazil', body: 'All of Brazil, with priority for the South.' },
+        { title: 'Fixed proposal per stage', body: 'Each stage quoted after the previous decision.' },
       ],
     },
     process: {
       eyebrow: 'How we work',
       title: 'Five stages, each ending with a decision.',
-      lead: 'From the intro call to managed operation, with governance, security and continuity set out before we start.',
+      lead: 'From the intro call to managed operation, with governance and security set out before we start.',
       link: 'See how we work',
     },
     lead: {
@@ -576,9 +566,9 @@ export const about: Record<Locale, AboutContent> = {
       role: 'Founder and technical lead',
       photoAlt: 'Henrique Pett',
       bio: [
-        'Since 2021, Henrique has worked across the roles of a data and AI product: machine learning research, full stack development, data science, ML engineering and product management. He takes models and applications all the way to production infrastructure and still writes code.',
-        'On an AI product for container terminals, he built the model as an ML engineer and then led the product. Before that, he was the first data hire at a credit fintech and worked remotely, in English, for a consultancy serving European companies.',
-        'At Torno, he runs each project from assessment to operation and brings in data, security, UX, infrastructure or industry specialists when the scope calls for them.',
+        'Since 2021, Henrique has worked in machine learning research, full stack development, data science, ML engineering and product management. He takes models to production and still writes code.',
+        'On an AI product for container terminals, he built the model as an ML engineer and then led the product. Before that, he was the first data hire at a credit fintech and worked for European companies through a consultancy.',
+        'At Torno, he runs each project from assessment to operation and brings in specialists when the scope calls for them.',
       ],
       authorLink: 'Articles and profile of Henrique Pett',
     },

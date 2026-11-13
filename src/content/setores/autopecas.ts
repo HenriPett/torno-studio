@@ -11,170 +11,189 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para fabricantes de autopeças e implementos',
     title: 'PPAP, 8D e programação da montadora sem caça a documento',
-    lead: 'A Torno junta ERP, programação de clientes via EDI, documentação de APQP e PPAP, FMEA, planos de controle e registros de 8D num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, engenharia, manutenção e comercial. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno junta ERP, programação EDI, PPAP, FMEA, planos de controle e 8D num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, engenharia e manutenção.',
     cta: 'Agendar diagnóstico',
   },
   context: {
-    title: 'Venda concentrada nas montadoras e capacidade sobrando',
+    title: 'Venda concentrada nas montadoras',
     body: [
-      'Santa Catarina tem 23 unidades locais com 250 ou mais pessoas ocupadas na divisão do IBGE de veículos automotores, reboques e carrocerias, que inclui as autopeças. Treze delas têm 500 ou mais (IBGE, CEMPRE 2024).',
-      'No Brasil, segundo relatório do Sindipeças noticiado pela AutoData em fevereiro de 2026, o faturamento das autopeças cresceu 5,6% em 2025, as montadoras responderam por 64,5% das vendas e a ociosidade chegou a 26,6%. Fornecer para montadora significa viver da programação dela e das exigências do sistema de qualidade automotivo, com documentação em dia para cada peça.',
+      'As montadoras ficaram com 64,5% das vendas de autopeças no Brasil em 2025, segundo o Sindipeças. Quem fornece vive da programação do cliente e da documentação de cada peça em dia.',
     ],
-    refs: [[1], [2]],
+    refs: [[1]],
   },
-  stats: [
-    { value: '23', label: 'unidades de veículos, reboques e carrocerias, autopeças incluídas, com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
-    { value: '64,5%', label: 'das vendas de autopeças no Brasil em 2025 foram para montadoras', source: 2 },
-    { value: '26,6%', label: 'de ociosidade na indústria brasileira de autopeças em 2025', source: 2 },
+  adoption: {
+    useAI: 'cerca de 4 em 10',
+    inProduction: 'cerca de 2 em 10',
+    reading: 'Cerca de 8 em 10 fabricantes ainda não usam IA na produção, onde ficam a qualidade, a manutenção e o PCP.',
+    source: 1,
+  },
+  proofPoints: [
+    {
+      value: '−29%',
+      label: 'de falhas recorrentes de equipamento com monitoramento apoiado por IA',
+      context: 'Fabricante de autopeças em Curitiba, segundo o fornecedor da tecnologia',
+      area: 'Manutenção',
+      source: 2,
+      scope: 'setor',
+    },
+    {
+      value: '16 dias',
+      label: 'de prazo de cotação com IA, antes entre 29 e 51 dias',
+      context: 'Indústria de outro setor, segundo a empresa',
+      area: 'Cotação',
+      source: 3,
+      scope: 'vizinho',
+    },
   ],
+  help: {
+    title: 'Onde entramos e o que medimos',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    items: [
+      {
+        area: 'Qualidade',
+        problem: 'O 8D tem prazo de montadora, e o tempo vai em procurar ocorrências parecidas.',
+        whatWeDo: 'Um agente reúne o histórico da peça e prepara o rascunho do 8D para o engenheiro revisar.',
+        measure: 'Dias até a contenção e até o fechamento do 8D',
+      },
+      {
+        area: 'PCP',
+        problem: 'A programação EDI muda toda semana, e o cruzamento com estoque sai de planilha.',
+        whatWeDo: 'O agente compara a programação nova com a anterior e aponta o item sem cobertura.',
+        measure: 'Horas por semana para replanejar',
+      },
+      {
+        area: 'Engenharia',
+        problem: 'Saber que documentos do PPAP revisar numa mudança depende de memória.',
+        whatWeDo: 'O agente lista os documentos afetados, do FMEA ao pacote de PPAP.',
+        measure: 'Tempo para fechar uma mudança de engenharia',
+      },
+      {
+        area: 'Sistema da qualidade',
+        problem: 'Evidências da IATF 16949 ficam em pastas diferentes, e cada auditoria vira mutirão.',
+        whatWeDo: 'O agente encontra calibração, MSA e treinamento por requisito, com a fonte.',
+        measure: 'Horas da equipe para preparar uma auditoria',
+      },
+    ],
+  },
   pains: {
     title: 'O que consome a qualidade e o PCP de uma fornecedora',
     items: [
       {
         title: 'A programação muda toda semana',
-        body: 'A programação chega por EDI, mexe no firme e no previsto e precisa virar ordem de produção e de compra sem erro. O cruzamento com estoque e capacidade costuma sair de planilha.',
+        body: 'Ela mexe no firme e no previsto e precisa virar ordem de produção e de compra sem erro.',
       },
       {
         title: '8D aberto com prazo de cliente',
-        body: 'Uma reclamação de montadora pede contenção em horas e 8D em dias. Achar ocorrências parecidas, o FMEA e o plano de controle da peça toma o tempo que a equipe não tem.',
+        body: 'A montadora pede contenção em horas e 8D em dias.',
       },
       {
         title: 'Mudança que mexe no PPAP',
-        body: 'Trocar processo, ferramenta ou fornecedor exige revisar FMEA, plano de controle e instruções e, muitas vezes, submeter PPAP de novo. Saber o que precisa ser revisado depende de memória.',
-      },
-      {
-        title: 'Auditoria IATF 16949 sempre em preparação',
-        body: 'Evidências de treinamento, calibração, análise do sistema de medição e registros de processo ficam em pastas diferentes, e cada auditoria vira mutirão.',
+        body: 'Trocar processo, ferramenta ou fornecedor pede revisar FMEA, plano de controle e instruções.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa fabricante de autopeças',
-    intro:
-      'Os exemplos abaixo são ilustrativos. Tudo o que o agente produz é rascunho revisado por um responsável da área, dentro do sistema da qualidade da empresa.',
+    intro: 'Exemplos ilustrativos. O agente produz rascunho, revisado por um responsável dentro do sistema da qualidade.',
     items: [
       {
         area: 'Qualidade',
         title: '8D com histórico e FMEA à mão',
-        body: 'O agente encontra ocorrências parecidas, ações tomadas, FMEA e plano de controle da peça, e prepara o rascunho do 8D para o engenheiro da qualidade revisar.',
-        example: '“Já tivemos reclamação de rebarba no furo deste suporte? Qual foi a causa raiz no 8D?”',
+        body: 'Encontra ocorrências parecidas, ações tomadas, FMEA e plano de controle.',
+        example: '“Já tivemos rebarba no furo deste suporte? Qual foi a causa raiz?”',
       },
       {
         area: 'PCP e logística',
         title: 'Programação EDI virando plano',
-        body: 'Compara a programação nova com a anterior, com o estoque e com a capacidade, e aponta o que muda na produção e nas compras.',
-        example: '“O que mudou na programação desta semana e qual item fica sem cobertura?”',
+        body: 'Aponta o que muda na produção e nas compras a cada programação.',
+        example: '“Qual item fica sem cobertura com a programação desta semana?”',
       },
       {
         area: 'Engenharia e APQP',
         title: 'Gestão de mudança com rastreio',
-        body: 'Indica os documentos que precisam de revisão quando muda um processo, uma ferramenta ou um fornecedor, do FMEA ao pacote de PPAP.',
-        example: '“Se trocarmos o fornecedor da bucha, que documentos do PPAP desta peça precisam ser revisados?”',
-      },
-      {
-        area: 'Sistema da qualidade',
-        title: 'Evidências reunidas antes do auditor pedir',
-        body: 'Encontra registros de treinamento, calibração, MSA e processo por requisito, com a fonte de cada evidência.',
-        example: '“Mostre as evidências de calibração dos instrumentos usados no plano de controle desta peça.”',
+        body: 'Indica os documentos a revisar quando muda processo, ferramenta ou fornecedor.',
+        example: '“Se trocarmos o fornecedor da bucha, o que do PPAP precisa ser revisado?”',
       },
       {
         area: 'Manutenção e ferramentaria',
         title: 'Histórico de prensa e ferramenta',
-        body: 'Plano preventivo, ordens de serviço, golpes de ferramenta e falhas anteriores no celular do técnico.',
-        example: '“Quantos golpes a ferramenta 88-14 tem desde a última afiação e qual é o limite?”',
-      },
-      {
-        area: 'Comercial',
-        title: 'Resposta ao cliente com a fonte',
-        body: 'Status de pedido, previsão de entrega, situação de PPAP e base para cotação de peça nova, a partir das regras da empresa.',
-        example: '“Em que situação está a submissão do PPAP da nova peça para este cliente?”',
+        body: 'Preventiva, ordens de serviço e golpes de ferramenta no celular do técnico.',
+        example: '“Quantos golpes a ferramenta 88-14 tem desde a última afiação?”',
       },
     ],
   },
   mock: {
     question: 'Já tivemos rebarba no furo do suporte 4471-B? O que foi feito?',
     answer:
-      'Sim, duas vezes. Na primeira, a causa raiz no 8D foi desgaste do punção da ferramenta 88-14, e a ação foi reduzir o intervalo de afiação para 40 mil golpes [1]. Na segunda, a ocorrência voltou após a troca do fornecedor de chapa [2], e o plano de controle ganhou verificação de rebarba a cada 2 horas [3]. O FMEA foi revisado nas duas vezes.',
+      'Sim, duas vezes. Na primeira, a causa foi desgaste do punção da ferramenta 88-14, e a afiação passou para cada 40 mil golpes [1]. Na segunda, a rebarba voltou após a troca do fornecedor de chapa [2], e o plano de controle ganhou verificação a cada 2 horas [3].',
     citations: ['8D 017', '8D 052', 'Plano de controle 4471-B, rev. G'],
   },
   brain: {
     title: 'Como o cérebro da operação se monta numa fabricante de autopeças',
     body: [
-      'O ERP traz a programação dos clientes, ordens, estoque e expedição. A engenharia tem desenhos, FMEA, planos de controle e pacotes de PPAP. A qualidade tem 8D, reclamações, MSA e calibração. A manutenção tem o histórico de prensas, máquinas e ferramentas.',
-      'Ligamos tudo pelo código da peça e pelo cliente, que é como a montadora cobra. As respostas citam o documento e a revisão, o acesso segue o perfil de cada área e os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI.',
+      'Programação, ordens, FMEA, PPAP, 8D e manutenção entram ligados pelo código da peça e pelo cliente, que é como a montadora cobra. Cada resposta cita documento e revisão.',
     ],
     inputs: [
       'Programação EDI, ordens e estoque do ERP',
       'Desenhos, FMEA, planos de controle e PPAP',
       'Relatórios 8D e reclamações de clientes',
-      'Registros de MSA, calibração e treinamento',
-      'Histórico de manutenção de prensas e ferramentas',
-      'Instruções de trabalho e de inspeção',
-      'Requisitos específicos de cada cliente',
+      'MSA, calibração e treinamento',
+      'Manutenção de prensas e ferramentas',
     ],
   },
   scenario: {
     title: 'Um cenário possível numa fornecedora de montadoras',
-    intro:
-      'Uma fabricante de autopeças com cerca de 900 funcionários recebe reclamações de montadora com prazo curto, e a qualidade gasta a maior parte do tempo de cada 8D procurando histórico.',
+    intro: 'A qualidade gasta a maior parte de cada 8D procurando histórico. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Com qualidade, engenharia e TI, medimos o tempo dos últimos 8D até a contenção e até o fechamento, e combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Base da qualidade',
-        body: '8D anteriores, FMEA, planos de controle e reclamações organizados por peça e por cliente.',
-      },
-      {
-        title: 'Piloto na qualidade',
-        body: 'Os engenheiros da qualidade usam o assistente nos 8D novos. Cada rascunho é revisado e assinado por eles.',
-      },
-      {
-        title: 'Expansão',
-        body: 'Com o critério atingido, a mesma base passa a apoiar a gestão de mudança e a preparação de auditoria.',
-      },
+      { title: 'Diagnóstico', body: 'Medimos o tempo dos últimos 8D até a contenção e o fechamento.' },
+      { title: 'Base da qualidade', body: '8D anteriores, FMEA, planos de controle e reclamações organizados por peça e cliente.' },
+      { title: 'Piloto na qualidade', body: 'Os engenheiros usam o assistente nos 8D novos e assinam cada rascunho.' },
+      { title: 'Expansão', body: 'Com o critério atingido, a mesma base apoia a gestão de mudança e a auditoria.' },
     ],
-    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real. Os números de porte servem só para dar escala ao exemplo.',
+    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
   proof: {
     title: 'De onde vem a nossa experiência',
-    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA usado na operação de terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado em autopeças. No setor, o primeiro passo é o diagnóstico.',
+    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA usado em terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado em autopeças.',
   },
   faq: [
     {
       q: 'Os dados das montadoras ficam protegidos?',
-      a: 'Desenhos e programações de cliente costumam ter cláusula de confidencialidade, e tratamos assim. Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI, com acesso por perfil e registro de uso, e não são usados para treinar modelos de terceiros. Assinamos acordo de confidencialidade antes do diagnóstico quando a empresa pede.',
+      a: 'Desenhos e programações ficam na sua infraestrutura ou numa nuvem aprovada pela TI, com acesso por perfil. Eles não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP e com o EDI?',
-      a: 'Lemos o ERP já implantado e as programações que chegam por EDI, pelo caminho que a TI aprovar. O diagnóstico confirma onde cada informação está antes da proposta do piloto.',
+      a: 'Lemos o ERP e as programações que chegam por EDI, pelo caminho que a TI aprovar.',
     },
     {
       q: 'A Torno é certificada IATF 16949?',
-      a: 'Não. A IATF 16949 certifica o sistema da qualidade da fábrica. Trabalhamos dentro dele. O que o assistente produz é rascunho, revisado e aprovado por quem a empresa designar, e a mudança no processo segue o controle de documentos que vocês já têm.',
+      a: 'Não. A IATF 16949 certifica o sistema da qualidade da fábrica, e trabalhamos dentro dele. O assistente produz rascunho, aprovado por quem a empresa designar.',
     },
     {
-      q: 'Quanto tempo até ter algo funcionando?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. O piloto vem em seguida, numa área e num problema, com prazo e critério de sucesso definidos na proposta.',
-    },
-    {
-      q: 'Quanto custa?',
-      a: 'A conversa inicial não tem custo. O diagnóstico tem proposta fechada, e cada etapa seguinte também, montada a partir do que o diagnóstico encontrar.',
+      q: 'Quanto tempo leva e quanto custa?',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quantos 8D a qualidade abriu no último trimestre e onde o tempo foi gasto. Saímos da conversa com uma ideia de onde o diagnóstico começaria.',
+    body: 'Conte quantos 8D a qualidade abriu no último trimestre. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {
-      label: 'IBGE, CEMPRE 2024 (SIDRA, tabela 9529)',
-      url: 'https://apisidra.ibge.gov.br/values/t/9529/n3/42/v/all/p/last/c319/all/c12762/all',
-    },
-    {
       label: 'Sindipeças, via AutoData (26/02/2026)',
       url: 'https://www.autodata.com.br/noticias/2026/02/26/faturamento-da-industria-de-autopecas-cresceu-5-6-/100089/',
+    },
+    {
+      label: 'IBGE, PINTEC Semestral 2024, indicadores por atividade (tab. 1.3.3)',
+      url: 'https://ftp.ibge.gov.br/Industrias_Extrativas_e_de_Transformacao/Pesquisa_de_Inovacao_Semestral/2024/Indicadores_tematicos/PINTEC_Semestral_2024_Indicadores_Tematicos_CNAE.xlsx',
+    },
+    {
+      label: 'Case publicado pelo fornecedor da tecnologia (material de marketing)',
+      url: 'https://tractian.com/casos-de-estudo/bosch',
+    },
+    {
+      label: 'Baguete, mai/2025 (resultado segundo a empresa)',
+      url: 'https://www.baguete.com.br/noticias/gerdau-otimiza-cotacoes-com-ia-da-azure',
     },
     {
       label: 'MundoLogística, 13/01/2026 (resultados segundo a Loopt)',

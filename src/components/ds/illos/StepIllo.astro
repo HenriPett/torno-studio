@@ -1,0 +1,266 @@
+---
+/**
+ * StepIllo (DESIGN-2026-11 §6.13): ícone ilustrado de uma etapa (conversa, diagnóstico com mapa, base de
+ * dados, piloto com antes/depois, expansão, operação mensal). SVG próprio, traço simples, só tokens.
+ * Decorativo (aria-hidden): o título da etapa diz o que é. Anima quando um ancestral ganha .is-anim
+ *.
+ *
+ * <StepIllo title="Diagnóstico" index={1} />  → escolhe pelo título (kinds.ts), com a posição como reserva
+ */
+import { stepKind, type StepKind } from './kinds';
+
+interface Props {
+  title?: string;
+  index?: number;
+  kind?: StepKind;
+  class?: string;
+}
+
+const { title = '', index = 0, class: className } = Astro.props;
+const kind: StepKind = Astro.props.kind ?? stepKind(title, index);
+---
+
+<span class:list={['si', className]} aria-hidden="true" data-kind={kind}>
+  <svg viewBox="0 0 64 64" focusable="false">
+    {
+      kind === 'talk' && (
+        <g>
+          <path class="si-s" d="M8 12h30a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5H20l-8 6v-6H8a5 5 0 0 1-5-5V17a5 5 0 0 1 5-5z" />
+          <path class="si-l" d="M11 21h22M11 27h14" />
+          <g class="si-pop" style="--d:1">
+            <path class="si-a" d="M30 34h24a5 5 0 0 1 5 5v9a5 5 0 0 1-5 5h-2v6l-8-6H30a5 5 0 0 1-5-5v-9a5 5 0 0 1 5-5z" />
+            <circle class="si-dot" cx="35" cy="44" r="1.8" />
+            <circle class="si-dot" cx="42" cy="44" r="1.8" />
+            <circle class="si-dot" cx="49" cy="44" r="1.8" />
+          </g>
+        </g>
+      )
+    }
+    {
+      kind === 'map' && (
+        <g>
+          <path class="si-s" d="M6 14 22 8l20 6 16-6v42l-16 6-20-6-16 6z" />
+          <path class="si-g" d="M22 8v42M42 14v42" />
+          <path class="si-route" d="M12 46c6-2 8-10 14-12s10 4 16-2" />
+          <g class="si-drop" style="--d:1">
+            <path class="si-a" d="M44 12a8 8 0 0 1 8 8c0 6-8 14-8 14s-8-8-8-14a8 8 0 0 1 8-8z" />
+            <circle class="si-dot" cx="44" cy="20" r="3" />
+          </g>
+        </g>
+      )
+    }
+    {
+      kind === 'data' && (
+        <g>
+          <ellipse class="si-s" cx="26" cy="14" rx="16" ry="6" />
+          <path class="si-s" d="M10 14v30c0 3.3 7.2 6 16 6s16-2.7 16-6V14M10 29c0 3.3 7.2 6 16 6s16-2.7 16-6" />
+          <g class="si-pop" style="--d:1">
+            <rect class="si-a" x="40" y="34" width="20" height="24" rx="4" />
+            <path class="si-on" d="M45 42h10M45 48h7" />
+          </g>
+          <path class="si-route" d="M42 22c8 0 12 4 12 10" />
+        </g>
+      )
+    }
+    {
+      kind === 'pilot' && (
+        <g>
+          <path class="si-g" d="M8 56h50M8 8v48" />
+          <rect class="si-m si-grow" x="14" y="36" width="14" height="20" rx="3" style="--d:0" />
+          <rect class="si-a si-grow" x="36" y="16" width="14" height="40" rx="3" style="--d:1" />
+          <path class="si-up si-pop" d="M22 26 34 12M34 12h-7M34 12v7" style="--d:2" />
+        </g>
+      )
+    }
+    {
+      kind === 'expand' && (
+        <g>
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((k) => (
+            <rect
+              class:list={['si-pop', k === 0 ? 'si-a' : k < 4 ? 'si-sub' : 'si-box']}
+              x={8 + (k % 3) * 17}
+              y={8 + Math.floor(k / 3) * 17}
+              width="14"
+              height="14"
+              rx="3.5"
+              style={`--d:${[0, 1, 3, 2, 4, 6, 5, 7, 8][k]}`}
+            />
+          ))}
+        </g>
+      )
+    }
+    {
+      kind === 'ops' && (
+        <g>
+          <rect class="si-s" x="6" y="10" width="40" height="40" rx="6" />
+          <path class="si-s" d="M6 20h40M16 6v8M36 6v8" />
+          <path class="si-g" d="M14 28h4M24 28h4M34 28h4M14 38h4M24 38h4" />
+          <g class="si-spin">
+            <circle class="si-ring" cx="46" cy="46" r="12" />
+            <path class="si-check" d="M40.5 46.5l4 4 7-8" />
+          </g>
+        </g>
+      )
+    }
+  </svg>
+</span>
+
+<style>
+  .si {
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--si-size, 3.5rem);
+    block-size: var(--si-size, 3.5rem);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-raised);
+    border: var(--border-width) solid var(--color-border-subtle);
+    flex: none;
+  }
+
+  .si svg {
+    inline-size: 72%;
+    block-size: 72%;
+    overflow: visible;
+  }
+
+  .si :is(path, rect, circle, ellipse) {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .si-s,
+  .si-g,
+  .si-l,
+  .si-route,
+  .si-on,
+  .si-up,
+  .si-ring,
+  .si-check {
+    fill: none;
+  }
+
+  .si-s {
+    stroke: var(--color-text-muted);
+    stroke-width: 2;
+  }
+
+  .si-g {
+    stroke: var(--color-border-strong);
+    stroke-width: 1.25;
+  }
+
+  .si-l {
+    stroke: var(--color-border-strong);
+    stroke-width: 2.5;
+  }
+
+  .si-route {
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    stroke-dasharray: 3 4;
+  }
+
+  .si-a {
+    fill: var(--color-accent);
+  }
+
+  .si-sub {
+    fill: var(--color-accent-subtle);
+    stroke: var(--color-accent);
+    stroke-width: 1;
+  }
+
+  .si-box {
+    fill: none;
+    stroke: var(--color-border-strong);
+    stroke-width: 1.25;
+    stroke-dasharray: 3 3;
+  }
+
+  .si-m {
+    fill: var(--color-border-strong);
+  }
+
+  .si-dot {
+    fill: var(--color-on-accent);
+  }
+
+  .si-on {
+    stroke: var(--color-on-accent);
+    stroke-width: 2;
+  }
+
+  .si-up {
+    stroke: var(--color-ok-text);
+    stroke-width: 2.25;
+  }
+
+  .si-ring {
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    fill: var(--color-surface-raised);
+  }
+
+  .si-check {
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+  }
+
+  .si-pop,
+  .si-grow,
+  .si-drop,
+  .si-spin {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  .si-grow {
+    transform-origin: 50% 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.is-anim) .si-pop {
+      animation: si-pop 0.6s var(--motion-ease-out) backwards;
+      animation-delay: calc(350ms + var(--d, 0) * 80ms);
+    }
+
+    :global(.is-anim) .si-grow {
+      animation: si-grow var(--motion-long) var(--motion-ease-out) backwards;
+      animation-delay: calc(300ms + var(--d, 0) * 120ms);
+    }
+
+    :global(.is-anim) .si-drop {
+      animation: si-drop 0.8s var(--motion-ease-out) 400ms backwards;
+    }
+
+    :global(.is-anim) .si-spin {
+      animation: si-spin 0.9s var(--motion-ease-out) 300ms backwards;
+    }
+  }
+
+  @keyframes si-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  @keyframes si-grow {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes si-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes si-spin {
+    from {
+      transform: rotate(-120deg) scale(0.7);
+    }
+  }
+</style>

@@ -11,90 +11,121 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias de alimentos e bebidas',
     title: 'Do lote à reclamação do SAC, a resposta com a fonte',
-    lead: 'A Torno reúne ERP, registros de BPF e APPCC, laudos, fichas de formulação e o histórico do SAC num cérebro da operação, com a fonte citada em cada resposta. Em cima dele, agentes de IA ajudam qualidade, PCP, manutenção e comercial. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno reúne ERP, registros de BPF e APPCC, laudos, fórmulas e o histórico do SAC num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, manutenção e comercial.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Plantas grandes, com muito registro para cruzar',
     body: [
-      'Santa Catarina tem 70 unidades locais de fabricação de alimentos com 250 ou mais pessoas ocupadas, 49 delas com 500 ou mais, e 161.349 pessoas ocupadas no setor (IBGE, CEMPRE 2024). Nenhuma outra divisão da indústria de transformação do estado tem tantas unidades desse porte.',
-      'No Brasil, a indústria de alimentos e bebidas faturou R$ 1,39 trilhão em 2025 e empregava 2,12 milhões de pessoas de forma direta, segundo a Abia. Numa planta desse tamanho, um recall ou uma auditoria de cliente pede o caminho completo de um lote, da matéria-prima à expedição, montado em horas com registros que estão em sistemas e pastas diferentes.',
+      'Santa Catarina tem mais unidades de alimentos com 250 ou mais pessoas ocupadas do que qualquer outra divisão da sua indústria (IBGE). Nelas, um recall pede o caminho de um lote em horas.',
     ],
-    refs: [[1], [2]],
+    refs: [[1]],
   },
-  stats: [
-    { value: '70', label: 'unidades de fabricação de alimentos com 250 ou mais pessoas ocupadas em Santa Catarina, 49 delas com 500 ou mais', source: 1 },
-    { value: '161.349', label: 'pessoas ocupadas na fabricação de alimentos em Santa Catarina', source: 1 },
-    { value: 'R$ 1,39 tri', label: 'faturamento da indústria de alimentos e bebidas no Brasil em 2025', source: 2 },
+  adoption: {
+    useAI: 'cerca de 4 em 10',
+    inProduction: 'cerca de 2 em 10',
+    reading: 'Cerca de 8 em 10 plantas ainda não usam IA na produção. Na linha, na qualidade e na manutenção, há espaço para sair na frente.',
+    source: 1,
+  },
+  proofPoints: [
+    {
+      value: '5 mil h/mês',
+      label: 'de trabalho que a empresa estima poupar com um assistente que acompanha 2.000 veículos de entrega',
+      context: 'Processadora de proteínas, segundo a empresa',
+      area: 'Logística',
+      source: 2,
+      scope: 'setor',
+    },
+    {
+      value: '−4%',
+      label: 'de energia nas plantas, com IA ajustando 76 equipamentos',
+      context: 'Cervejaria, segundo a empresa',
+      area: 'Utilidades e manutenção',
+      source: 3,
+      scope: 'setor',
+    },
   ],
+  help: {
+    title: 'Onde entramos e o que medimos',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    items: [
+      {
+        area: 'Qualidade',
+        problem: 'Rastrear um lote cruza ERP, planilhas de recebimento, produção e expedição.',
+        whatWeDo: 'Um agente monta a árvore do lote, da matéria-prima ao cliente, com o registro de cada etapa.',
+        measure: 'Tempo para fechar uma rastreabilidade de lote',
+      },
+      {
+        area: 'Auditoria e BPF',
+        problem: 'Registros de higienização e de PCC ficam entre papel e planilha.',
+        whatWeDo: 'Os registros entram numa base consultável e o agente reúne as evidências pedidas.',
+        measure: 'Horas da equipe para preparar uma auditoria',
+      },
+      {
+        area: 'SAC',
+        problem: 'A reclamação chega com o lote, e o que houve na linha está em vários lugares.',
+        whatWeDo: 'O agente liga a reclamação a lote, linha, turno e não conformidades da época.',
+        measure: 'Tempo de resposta ao consumidor',
+      },
+      {
+        area: 'PCP',
+        problem: 'Validade, carteira e capacidade de linha vivem em planilhas separadas.',
+        whatWeDo: 'O agente aponta o que vai vencer sem ordem de produção programada.',
+        measure: 'Matéria-prima vencida ou descartada por mês',
+      },
+    ],
+  },
   pains: {
     title: 'O que toma o tempo da qualidade e do PCP',
     items: [
       {
         title: 'Rastrear um lote leva o dia todo',
-        body: 'Para dizer de onde veio a matéria-prima de um lote e para onde ele foi, a qualidade cruza ERP, planilhas de recebimento, registros de produção e notas de expedição.',
+        body: 'Dizer de onde veio a matéria-prima e para onde o lote foi exige cruzar quatro fontes.',
       },
       {
         title: 'Auditoria preparada à mão',
-        body: 'Registros de higienização, monitoramento dos pontos críticos de controle e verificações de BPF ficam espalhados entre papel e planilha. Preparar a auditoria de um cliente ocupa a equipe por dias.',
+        body: 'A auditoria de um cliente ocupa a equipe de qualidade por dias.',
       },
       {
         title: 'Reclamação do SAC longe da produção',
-        body: 'A reclamação de corpo estranho ou de sabor alterado chega com número de lote. Descobrir o que aconteceu naquela linha e naquele turno depende de procurar em vários lugares.',
-      },
-      {
-        title: 'Programação com validade apertada',
-        body: 'Programar produção com matéria-prima perecível e pedidos de redes exige ver estoque, validade e capacidade ao mesmo tempo. Esse cruzamento costuma ser feito em planilha.',
+        body: 'Saber o que aconteceu naquela linha e naquele turno exige procurar em vários lugares.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa indústria de alimentos',
-    intro:
-      'Escolhemos a primeira área junto com a diretoria, pelo tempo que ela perde hoje. Os exemplos são ilustrativos.',
+    intro: 'Exemplos ilustrativos. O diagnóstico define por onde começar.',
     items: [
       {
         area: 'Qualidade e segurança dos alimentos',
         title: 'Rastreabilidade de lote numa pergunta',
-        body: 'O agente monta a árvore do lote, da matéria-prima ao cliente, com os registros de cada etapa, e prepara o rascunho do relatório de investigação.',
-        example: '“Quais clientes receberam o lote 2411-B e quais lotes de matéria-prima entraram nele?”',
+        body: 'Monta a árvore do lote e o rascunho do relatório de investigação.',
+        example: '“Quais clientes receberam o lote 2411-B e que matérias-primas entraram nele?”',
       },
       {
         area: 'SAC',
         title: 'Reclamação ligada à linha e ao turno',
-        body: 'Cruza a reclamação com lote, linha, turno e não conformidades da época, e sugere a resposta ao consumidor a partir de textos aprovados pela qualidade.',
-        example: '“Houve outra reclamação de embalagem estufada do mesmo lote ou da mesma semana?”',
+        body: 'Sugere a resposta a partir de textos aprovados pela qualidade.',
+        example: '“Houve outra reclamação de embalagem estufada na mesma semana?”',
       },
       {
         area: 'PCP',
         title: 'Programação que enxerga a validade',
-        body: 'Consulta estoque por validade, carteira de pedidos e capacidade de linha, e aponta o que vai vencer antes de ser usado.',
-        example: '“Que matérias-primas vencem nos próximos dez dias sem ordem de produção programada?”',
+        body: 'Cruza estoque por validade, carteira e capacidade de linha.',
+        example: '“Que matérias-primas vencem em dez dias sem ordem programada?”',
       },
       {
         area: 'P&D e formulação',
         title: 'Histórico de formulação consultável',
-        body: 'Fichas de formulação, testes de bancada e o motivo de cada mudança de fórmula ficam consultáveis, com controle de quem pode ver cada receita.',
-        example: '“Por que trocamos o estabilizante da bebida láctea sabor morango e quando?”',
-      },
-      {
-        area: 'Manutenção',
-        title: 'Histórico do equipamento na linha',
-        body: 'Manual, plano preventivo, ordens de serviço anteriores e o procedimento de higienização depois da intervenção, consultados no celular do técnico.',
-        example: '“Quando foi a última troca de rolamento da envasadora 3 e qual higienização vem depois?”',
-      },
-      {
-        area: 'Comercial',
-        title: 'Documentos para redes e distribuidores',
-        body: 'Prazo, disponibilidade, especificação técnica e laudos para o cliente, a partir dos dados que a qualidade já aprovou.',
-        example: '“Envie a ficha técnica e o laudo microbiológico do lote faturado na nota 55120.”',
+        body: 'Fórmulas, testes e o motivo de cada mudança, com controle de quem vê cada receita.',
+        example: '“Por que trocamos o estabilizante da bebida láctea de morango?”',
       },
     ],
   },
   mock: {
     question: 'De onde veio o leite em pó usado no lote 2411-B e o lote passou pela verificação do PCC 2?',
     answer:
-      'O lote 2411-B usou leite em pó do recebimento 7782, com laudo do fornecedor aprovado na inspeção de entrada [1]. O registro do PCC 2, tratamento térmico, mostra temperatura dentro do limite nas cinco verificações do turno A [2]. O lote foi expedido para quatro clientes, listados no relatório de expedição [3].',
+      'Do recebimento 7782, com laudo do fornecedor aprovado na entrada [1]. O PCC 2, tratamento térmico, ficou dentro do limite nas cinco verificações do turno A [2]. O lote foi expedido para quatro clientes [3].',
     citations: [
       'Registro de recebimento 7782',
       'Planilha de monitoramento do PCC 2, turno A',
@@ -104,72 +135,48 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa indústria de alimentos',
     body: [
-      'O ERP traz recebimento, ordens de produção, estoque por lote e validade, e expedição. A qualidade tem o plano APPCC, os registros de BPF, laudos e não conformidades. P&D tem fichas de formulação e especificações. O SAC tem o histórico de reclamações.',
-      'Ligamos essas fontes pelo número do lote, que é o que todas têm em comum. As respostas citam o registro de origem e o acesso segue o perfil de cada pessoa. Fórmulas ficam visíveis só para quem a empresa autorizar.',
+      'ERP, APPCC, BPF, laudos, fórmulas e SAC entram ligados pelo número do lote. Cada resposta cita o registro de origem, e fórmulas ficam visíveis só para quem a empresa autorizar.',
     ],
     inputs: [
-      'Recebimento, OPs, estoque por lote e expedição do ERP',
-      'Plano APPCC e registros de monitoramento',
-      'Registros de BPF e de higienização',
+      'Recebimento, OPs, lotes e expedição do ERP',
+      'APPCC, BPF e registros de higienização',
       'Laudos de fornecedores e do laboratório',
-      'Fichas de formulação e especificações de produto',
-      'Histórico de reclamações do SAC',
-      'Planos de manutenção e manuais dos equipamentos',
+      'Fórmulas e especificações de produto',
+      'Reclamações do SAC',
     ],
   },
   scenario: {
     title: 'Um cenário possível numa planta com rastreabilidade manual',
-    intro:
-      'Uma indústria de alimentos com cerca de 1.200 funcionários leva horas para responder a uma consulta de rastreabilidade de lote. Veja como um piloto na qualidade poderia correr.',
+    intro: 'Uma consulta de rastreabilidade leva horas. Um piloto na qualidade poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Entrevistas com qualidade, PCP, SAC e TI. Cronometramos uma simulação de rastreabilidade com a equipe e definimos o critério de sucesso.',
-      },
-      {
-        title: 'Base ligada pelo lote',
-        body: 'Leitura do ERP e das planilhas de recebimento e expedição, ligadas pelo número do lote. Os registros de APPCC entram numa segunda leva.',
-      },
-      {
-        title: 'Piloto na qualidade',
-        body: 'A equipe usa o assistente nas consultas do dia e numa nova simulação de recall. Respostas sem fonte suficiente vão para revisão humana.',
-      },
-      {
-        title: 'Próxima etapa',
-        body: 'Com o critério atingido, o SAC passa a usar a mesma base para ligar cada reclamação a lote, linha e turno.',
-      },
+      { title: 'Diagnóstico', body: 'Cronometramos uma simulação de rastreabilidade e combinamos o critério de sucesso.' },
+      { title: 'Base ligada pelo lote', body: 'Leitura do ERP e das planilhas de recebimento e expedição. O APPCC entra depois.' },
+      { title: 'Piloto na qualidade', body: 'A equipe usa o assistente numa nova simulação de recall. Respostas sem fonte vão para revisão.' },
+      { title: 'Próxima etapa', body: 'Com o critério atingido, o SAC passa a usar a mesma base.' },
     ],
-    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real. Os números de porte servem só para dar escala ao exemplo.',
+    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
   proof: {
     title: 'De onde vem a nossa experiência',
-    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA que apoia a operação de terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Em alimentos e bebidas ainda não temos case publicado, e por isso começamos pelo diagnóstico, com um critério de sucesso medido antes e depois do piloto.',
+    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA usado em terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado em alimentos e bebidas.',
   },
   faq: [
     {
       q: 'Nossas fórmulas ficam seguras?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela sua TI. Fórmulas e custos ficam restritos aos perfis que a empresa definir, o uso fica registrado e os dados não são usados para treinar modelos de terceiros. Assinamos acordo de confidencialidade antes do diagnóstico quando a empresa pede.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI. Fórmulas ficam restritas aos perfis que a empresa definir, e os dados não treinam modelos de terceiros.',
     },
     {
       q: 'Precisamos trocar de ERP ou de sistema de qualidade?',
-      a: 'Não. Lemos o que já existe, seja TOTVS, SAP, Senior ou outro sistema, e as planilhas da qualidade. A ligação é de leitura, pelo caminho que a TI aprovar. O diagnóstico mapeia cada fonte antes da proposta do piloto.',
+      a: 'Não. Lemos o que já existe, seja TOTVS, SAP, Senior ou planilhas, pelo caminho que a TI aprovar.',
     },
     {
-      q: 'Quem da nossa equipe precisa participar?',
-      a: 'Um patrocinador na diretoria, um ponto focal da área do piloto, em geral a qualidade, e alguém da TI para os acessos. No diagnóstico entrevistamos também PCP, SAC e manutenção.',
-    },
-    {
-      q: 'Quanto tempo até ter algo funcionando?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. O piloto vem em seguida, numa área e num problema, com prazo e critério de sucesso definidos na proposta.',
-    },
-    {
-      q: 'Quanto custa?',
-      a: 'A conversa inicial não tem custo. O diagnóstico e cada etapa seguinte têm proposta fechada, montada a partir do que encontrarmos na sua operação.',
+      q: 'Quanto tempo leva e quanto custa?',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quanto tempo a sua equipe leva hoje para rastrear um lote ou responder a uma auditoria. Saímos da conversa sabendo se faz sentido um diagnóstico e quem precisa estar nele.',
+    body: 'Conte quanto tempo a equipe leva hoje para rastrear um lote. Saímos sabendo se o diagnóstico faz sentido.',
   },
   sources: [
     {
@@ -177,8 +184,16 @@ export const setor: SectorLanding = {
       url: 'https://apisidra.ibge.gov.br/values/t/9529/n3/42/v/all/p/last/c319/all/c12762/all',
     },
     {
-      label: 'Abia, balanço 2025 (Agência Brasil via O Povo, 10/03/2026)',
-      url: 'https://www.opovo.com.br/noticias/economia/2026/03/10/industria-de-alimentos-e-bebidas-cresceu-8-em-2025-diz-abia.html',
+      label: 'IBGE, PINTEC Semestral 2024, indicadores por atividade (tab. 1.3.3)',
+      url: 'https://ftp.ibge.gov.br/Industrias_Extrativas_e_de_Transformacao/Pesquisa_de_Inovacao_Semestral/2024/Indicadores_tematicos/PINTEC_Semestral_2024_Indicadores_Tematicos_CNAE.xlsx',
+    },
+    {
+      label: 'SuperVarejo, set/2026 (estimativa segundo a empresa)',
+      url: 'https://supervarejo.com.br/industria/seara-adota-inteligencia-artificial-para-ampliar-eficiencia-logistica-na-rota-de-entregas',
+    },
+    {
+      label: 'Mercado&Consumo, 27/09/2023 (resultado segundo a empresa)',
+      url: 'https://mercadoeconsumo.com.br/27/09/2023/economia/ambev-aumenta-eficiencia-com-a-implantacao-de-ia-em-suas-operacoes/',
     },
     {
       label: 'MundoLogística, 13/01/2026 (resultados segundo a Loopt)',

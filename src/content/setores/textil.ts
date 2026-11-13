@@ -11,172 +11,193 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias têxteis e de confecção',
     title: 'A ficha técnica certa na mão de quem corta e de quem vende',
-    lead: 'A Torno junta ERP, fichas técnicas, receitas de tinturaria e o saber de quem tem anos de casa num cérebro da operação. Em cima dele, colocamos agentes de IA para o PCP de coleção, a qualidade, as facções e os representantes. Implantamos por etapas, dentro das regras da sua TI.',
+    lead: 'A Torno junta ERP, fichas técnicas, receitas de tinturaria e o saber de quem tem anos de casa num cérebro da operação. Em cima dele, agentes de IA ajudam PCP, facções e representantes.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'O setor que mais emprega na indústria catarinense',
     body: [
-      'Em Santa Catarina, as divisões de produtos têxteis e de confecção somam 177.518 pessoas ocupadas, o maior contingente da indústria de transformação do estado, e 84 unidades locais com 250 ou mais pessoas ocupadas (IBGE, CEMPRE 2024). No Brasil, a cadeia faturou R$ 221 bilhões em 2024 e tem 1,34 milhão de empregados formais, segundo a Abit.',
-      'A pressão de fora aumentou. As importações têxteis e de confecção chegaram a US$ 6,8 bilhões em 2025, com déficit comercial de US$ 5,9 bilhões (Abit). Para quem vende à Europa, a Comissão Europeia planeja adotar no quarto trimestre de 2027 as regras do passaporte digital de produto para têxteis, com composição de fibras, origem e informações de reparo acessíveis por QR code. Atender a isso pede a informação de cada artigo organizada e fácil de achar.',
+      'Têxtil e confecção é o setor com mais gente ocupada na indústria de Santa Catarina. Para vender à Europa, o passaporte digital de produto vai pedir a informação de cada artigo organizada.',
     ],
-    refs: [[1, 2], [2, 3]],
+    refs: [[1, 2]],
   },
-  stats: [
-    { value: '84', label: 'unidades têxteis e de confecção com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
-    { value: '177.518', label: 'pessoas ocupadas no setor em Santa Catarina, o maior contingente da indústria de transformação do estado', source: 1 },
-    { value: 'R$ 221 bi', label: 'faturamento da cadeia têxtil e de confecção no Brasil em 2024', source: 2 },
+  adoption: {
+    useAI: 'cerca de 4 em 10',
+    inProduction: 'cerca de 1 em 10',
+    reading: 'A maior parte do uso de IA no setor está fora da fábrica. Na produção, quem começar agora ainda está entre as primeiras.',
+    source: 2,
+  },
+  proofPoints: [
+    {
+      value: '−4%',
+      label: 'de energia nas plantas, com IA ajustando 76 equipamentos',
+      context: 'Indústria de processo de outro setor, segundo a empresa',
+      area: 'Utilidades e energia',
+      source: 3,
+      scope: 'vizinho',
+    },
+    {
+      value: '1,7 vez',
+      label: 'o crescimento de receita das empresas líderes em IA, comparado ao das demais',
+      context: 'Estudo global e multissetorial da BCG, 2025',
+      area: 'Resultado da empresa',
+      source: 4,
+      scope: 'global',
+    },
   ],
+  help: {
+    title: 'Onde entramos e o que medimos',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    items: [
+      {
+        area: 'Comercial e representantes',
+        problem: 'Grade, prazo e status de pedido chegam por WhatsApp o dia todo.',
+        whatWeDo: 'Um assistente responde ao representante com a fonte, dentro das regras comerciais.',
+        measure: 'Tempo para responder ao representante',
+      },
+      {
+        area: 'PCP de coleção',
+        problem: 'Ficha técnica, peça piloto e consumo de tecido ficam entre PLM, planilhas e e-mails.',
+        whatWeDo: 'O agente junta ordens e fichas e avisa quando uma OP ameaça a data da coleção.',
+        measure: 'Ordens entregues na data da coleção',
+      },
+      {
+        area: 'Facções',
+        problem: 'Saber o que está em cada facção exige ligações e planilhas paralelas.',
+        whatWeDo: 'Remessas, retornos, prazos e defeitos por facção ficam numa consulta.',
+        measure: 'Horas por semana acompanhando facções',
+      },
+      {
+        area: 'Tinturaria e beneficiamento',
+        problem: 'O ajuste de receita para um fio diferente está na cabeça de poucas pessoas.',
+        whatWeDo: 'Registramos esse saber, revisado por quem o tem, no celular do turno da noite.',
+        measure: 'Reprocesso de tingimento por lote',
+      },
+    ],
+  },
   pains: {
     title: 'O que trava uma têxtil grande no dia a dia',
     items: [
       {
         title: 'A coleção depende de quem lembra',
-        body: 'Ficha técnica, peça piloto, ajuste de modelagem e consumo de tecido ficam entre o PLM, planilhas e e-mails. Quando a coleção aperta, a resposta certa está com duas ou três pessoas.',
-      },
-      {
-        title: 'Facção sem visibilidade',
-        body: 'Saber o que está em cada facção, o que voltou com defeito e quem atrasou na coleção passada exige ligações e planilhas paralelas ao ERP.',
+        body: 'A resposta certa sobre ficha, piloto e consumo está com duas ou três pessoas.',
       },
       {
         title: 'Representante pergunta e o comercial para',
-        body: 'Grade disponível, prazo de entrega, preço da tabela e status do pedido chegam por WhatsApp o dia todo. Cada resposta exige consultar o ERP e, às vezes, o PCP.',
+        body: 'Cada pergunta sobre grade ou pedido tira alguém do trabalho para consultar o ERP.',
       },
       {
         title: 'O saber da tinturaria se aposenta',
-        body: 'Ajuste de receita para um lote de fio diferente, regulagem de tear, o que fazer quando o tecido sai da rama fora da largura. Esse conhecimento raramente está escrito e sai da empresa com quem se aposenta.',
+        body: 'Ajuste de receita e regulagem de tear raramente estão escritos e saem com quem se aposenta.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa têxtil',
-    intro:
-      'Começamos pela área que mais perde tempo hoje. Os exemplos abaixo são ilustrativos. O diagnóstico define por onde começar.',
+    intro: 'Exemplos ilustrativos. O diagnóstico define por onde começar.',
     items: [
       {
         area: 'PCP e produção',
         title: 'PCP de coleção com a informação junta',
-        body: 'O agente consulta ordens de produção, roteiros, fichas técnicas e a fila de enfesto e corte, e avisa quando uma OP ameaça a data da coleção.',
-        example:
-          '“Quais OPs da coleção de inverno ainda não passaram pelo corte e quais dependem de tecido da tinturaria?”',
+        body: 'Consulta ordens, roteiros, fichas e a fila de corte.',
+        example: '“Quais OPs da coleção de inverno ainda dependem de tecido da tinturaria?”',
       },
       {
         area: 'Facções',
         title: 'Acompanhamento de terceiros',
-        body: 'Reúne remessas, retornos, prazos combinados e defeitos por facção num só lugar, a partir do ERP e das planilhas que já existem.',
-        example: '“Quais facções têm peças da referência 2318 e como foi o prazo de cada uma na coleção passada?”',
+        body: 'Remessas, retornos e prazos por facção, a partir do ERP e das planilhas.',
+        example: '“Como foi o prazo de cada facção da referência 2318 na coleção passada?”',
       },
       {
         area: 'Qualidade',
         title: 'Defeito, causa e ação anterior',
-        body: 'Busca em não conformidades, laudos de laboratório e reclamações de lojistas, e prepara o rascunho do relatório com o que já foi feito em casos parecidos.',
-        example: '“Já tivemos reclamação de torção nesta malha? O que mudamos no beneficiamento?”',
-      },
-      {
-        area: 'Tinturaria e beneficiamento',
-        title: 'Receitas e procedimentos consultáveis',
-        body: 'O saber dos tintureiros e dos operadores de rama fica registrado, revisado por quem conhece e disponível no celular do turno da noite.',
-        example: '“Que ajuste de receita usamos da última vez que o fio veio com absorção diferente?”',
+        body: 'Busca em não conformidades, laudos e reclamações de lojistas.',
+        example: '“Já tivemos reclamação de torção nesta malha? O que mudamos?”',
       },
       {
         area: 'Comercial e representantes',
-        title: 'Preço, prazo e estoque para o representante, com a fonte',
-        body: 'Um assistente para representantes com grade disponível, prazo, tabela de preço e status de pedido, dentro das regras comerciais e das permissões de cada um.',
-        example: '“Tenho grade completa da 5120 na cor marinho para entrega em março?”',
-      },
-      {
-        area: 'Marketing e catálogo',
-        title: 'Ficha de produto a partir do dado aprovado',
-        body: 'Composição, cuidados de lavagem e descrição de produto gerados a partir da ficha técnica, prontos para o catálogo, a venda B2B e, quando for exigido, o passaporte digital.',
-        example: '“Gere as descrições da coleção de verão para o catálogo dos representantes, com composição e cuidados.”',
+        title: 'Preço, prazo e estoque com a fonte',
+        body: 'Grade, tabela e status de pedido, com as permissões de cada representante.',
+        example: '“Tenho grade completa da 5120 em marinho para março?”',
       },
     ],
   },
   mock: {
     question: 'Qual o consumo de tecido da referência 4471 no tamanho G e o que mudou desde a coleção passada?',
     answer:
-      'Pela ficha técnica vigente, a referência 4471 consome 1,38 m de malha por peça no tamanho G [1]. Na coleção passada eram 1,42 m. A redução veio de um novo encaixe aprovado pela modelagem depois da segunda peça piloto [2]. O enfesto da OP 88213 já usa o consumo novo [3].',
+      'Pela ficha vigente, 1,38 m de malha por peça no tamanho G [1]. Na coleção passada eram 1,42 m. A redução veio de um novo encaixe aprovado depois da segunda peça piloto [2], e o enfesto da OP 88213 já usa o consumo novo [3].',
     citations: ['Ficha técnica 4471, rev. C', 'Ata de aprovação da peça piloto 2', 'OP 88213, ERP'],
   },
   brain: {
     title: 'Como o cérebro da operação se monta numa têxtil',
     body: [
-      'Partimos do que a empresa já tem. O ERP traz pedidos, ordens de produção, estoque de fio e tecido e o movimento das facções. O PLM ou as pastas da modelagem trazem fichas técnicas e revisões. O resto está em planilhas de PCP, laudos de laboratório, receitas de tinturaria e conversas com representantes.',
-      'Cada resposta cita a fonte, e cada pessoa só vê o que o perfil dela permite. O representante consulta grade e prazo e não enxerga custo. A modelagem vê fichas e revisões. Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI.',
+      'Pedidos, OPs, fichas, receitas e laudos entram numa base com a fonte em cada resposta. O representante consulta grade e prazo e não enxerga custo.',
     ],
     inputs: [
       'Pedidos, OPs e estoque do ERP',
       'Fichas técnicas e revisões de modelagem',
-      'Planilhas de PCP e de acompanhamento de facções',
-      'Receitas e procedimentos de tinturaria e beneficiamento',
-      'Laudos de laboratório e não conformidades',
-      'Tabelas de preço e regras comerciais',
-      'Entrevistas gravadas com tintureiros, mecânicos e modelistas experientes',
+      'Planilhas de PCP e de facções',
+      'Receitas de tinturaria e laudos de laboratório',
+      'Entrevistas com tintureiros, mecânicos e modelistas',
     ],
   },
   scenario: {
     title: 'Um cenário possível numa confecção com rede de representantes',
-    intro:
-      'Uma confecção com cerca de 900 funcionários e 60 representantes recebe dezenas de consultas por dia sobre grade, prazo e pedido. Veja como um piloto poderia correr.',
+    intro: 'Dezenas de consultas de representantes por dia sobre grade, prazo e pedido. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Entrevistas com comercial, PCP e TI. Medimos quantas consultas chegam por dia e quanto tempo cada uma leva, e combinamos o critério de sucesso do piloto.',
-      },
-      {
-        title: 'Base do piloto',
-        body: 'Conexão de leitura ao ERP para estoque, carteira e pedidos, mais tabela de preço e regras de desconto. Permissões por representante e por região.',
-      },
-      {
-        title: 'Piloto com um grupo de representantes',
-        body: 'Dez representantes usam o assistente por algumas semanas. O comercial revisa as respostas duvidosas e ajusta as regras.',
-      },
-      {
-        title: 'Decisão de expansão',
-        body: 'Comparamos tempo de resposta e volume de consultas ao comercial antes e depois. Com o critério atingido, a etapa seguinte leva o assistente à rede toda e começa o PCP de coleção.',
-      },
+      { title: 'Diagnóstico', body: 'Medimos quantas consultas chegam por dia e quanto cada uma leva.' },
+      { title: 'Base do piloto', body: 'Leitura do ERP, tabela de preço e regras de desconto, com permissões por região.' },
+      { title: 'Piloto com dez representantes', body: 'O comercial revisa as respostas duvidosas por algumas semanas.' },
+      { title: 'Decisão de expansão', body: 'Com o critério de sucesso atingido, o assistente vai à rede toda.' },
     ],
-    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real. Os números de porte servem só para dar escala ao exemplo.',
+    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
   proof: {
     title: 'De onde vem a nossa experiência',
-    body: 'Quem conduz a Torno trabalhou na Loopt, primeiro na engenharia de machine learning e depois na gestão do produto de IA usado na operação de terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado em têxtil e confecção. Por isso, no setor, o trabalho começa pelo diagnóstico, com critério de sucesso combinado antes do piloto.',
+    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA usado em terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado em têxtil e confecção.',
   },
   faq: [
     {
       q: 'Nossas fichas e coleções ficam protegidas?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela sua TI. O acesso é por perfil, o uso fica registrado e os dados não são usados para treinar modelos de terceiros. Assinamos acordo de confidencialidade antes do diagnóstico quando a empresa pede.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI, com acesso por perfil. Eles não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o ERP que já usamos?',
-      a: 'Trabalhamos com o ERP já implantado, seja um sistema específico de moda ou um ERP geral como TOTVS, SAP ou Senior. A ligação é de leitura, pelo caminho que a TI aprovar: API, réplica do banco ou exportação agendada. O diagnóstico confirma o caminho para o seu sistema antes da proposta do piloto.',
+      a: 'Sim, seja de moda ou geral como TOTVS, SAP ou Senior. A ligação é de leitura, pelo caminho que a TI aprovar.',
     },
     {
-      q: 'O que acontece com o conhecimento dos tintureiros e mecânicos mais antigos?',
-      a: 'Registramos esse conhecimento em entrevistas e acompanhamento no posto de trabalho. A pessoa revisa o que foi escrito antes de entrar na base, e cada procedimento fica com o nome de quem o validou. Quem chega consulta no celular, com a fonte.',
+      q: 'E o conhecimento dos tintureiros mais antigos?',
+      a: 'Registramos em entrevistas e no posto de trabalho. Cada procedimento fica com o nome de quem o validou.',
     },
     {
-      q: 'Quanto tempo até ter algo funcionando?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. O piloto vem em seguida, numa área e num problema, com prazo e critério de sucesso definidos na proposta.',
-    },
-    {
-      q: 'Quanto custa?',
-      a: 'A conversa inicial não tem custo. Depois dela enviamos uma proposta fechada para o diagnóstico. Cada etapa seguinte tem proposta fechada própria, feita a partir do que o diagnóstico encontrar.',
+      q: 'Quanto tempo leva e quanto custa?',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte onde a coleção mais trava hoje, se no PCP, nas facções ou no comercial. Saímos da conversa com uma ideia clara de por onde o diagnóstico começaria e quem precisa participar.',
+    body: 'Conte onde a coleção mais trava hoje. Saímos com uma ideia de por onde o diagnóstico começaria.',
   },
   sources: [
     {
       label: 'IBGE, CEMPRE 2024 (SIDRA, tabela 9529)',
       url: 'https://apisidra.ibge.gov.br/values/t/9529/n3/42/v/all/p/last/c319/all/c12762/all',
     },
-    { label: 'Abit, perfil do setor', url: 'https://www.abit.org.br/cont/perfil-do-setor' },
     {
       label: 'Comissão Europeia, passaporte digital de produto para têxteis',
       url: 'https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/textile-apparel_en',
+    },
+    {
+      label: 'IBGE, PINTEC Semestral 2024, indicadores por atividade (tab. 1.3.3)',
+      url: 'https://ftp.ibge.gov.br/Industrias_Extrativas_e_de_Transformacao/Pesquisa_de_Inovacao_Semestral/2024/Indicadores_tematicos/PINTEC_Semestral_2024_Indicadores_Tematicos_CNAE.xlsx',
+    },
+    {
+      label: 'Mercado&Consumo, 27/09/2023 (resultado segundo a empresa)',
+      url: 'https://mercadoeconsumo.com.br/27/09/2023/economia/ambev-aumenta-eficiencia-com-a-implantacao-de-ia-em-suas-operacoes/',
+    },
+    {
+      label: 'BCG, The Widening AI Value Gap (set/2025), estudo global',
+      url: 'https://www.bcg.com/press/30september2025-ai-leaders-outpace-laggards-revenue-growth-cost-savings',
     },
     {
       label: 'MundoLogística, 13/01/2026 (resultados segundo a Loopt)',
