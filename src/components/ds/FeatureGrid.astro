@@ -7,8 +7,10 @@
  *
  * - card: variante dos cards no modo dados (padrão muted; use surface dentro de Section muted).
  * - headingLevel: nível do título de cada item (padrão h3).
+ * - illos: mini-ilustração da área no topo de cada card (ds/illos/AreaIllo, pelo eyebrow ou título; decorativa).
  */
 import Card from './Card.astro';
+import AreaIllo from './illos/AreaIllo.astro';
 
 export interface FeatureItem {
   title: string;
@@ -23,10 +25,11 @@ interface Props {
   headingLevel?: 'h3' | 'h4';
   /** < 640: faixa horizontal com scroll-snap em vez da pilha (DESIGN §9). */
   carousel?: boolean;
+  illos?: boolean;
   class?: string;
 }
 
-const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', carousel = false, class: className } = Astro.props;
+const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', carousel = false, illos = false, class: className } = Astro.props;
 ---
 
 {
@@ -34,6 +37,7 @@ const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', carousel = f
     <ul class:list={['grid', `grid--${columns}`, 'ds-fg', carousel && 'carousel-sm', className]} role="list" data-reveal-stagger>
       {items.map((item) => (
         <Card as="li" variant={card}>
+          {illos && <AreaIllo name={item.eyebrow ?? item.title} class="ds-fg__illo" />}
           {item.eyebrow && <p class="eyebrow eyebrow--accent">{item.eyebrow}</p>}
           <H class="title">{item.title}</H>
           <p class="muted">{item.body}</p>
@@ -51,5 +55,9 @@ const { columns = 3, items, card = 'muted', headingLevel: H = 'h3', carousel = f
   .ds-fg {
     list-style: none;
     padding: 0;
+  }
+
+  .ds-fg :global(.ds-fg__illo) {
+    margin-block-end: var(--space-2);
   }
 </style>

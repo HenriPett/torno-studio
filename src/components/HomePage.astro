@@ -2,7 +2,8 @@
 /**
  * Home (/ e /en/) para indústrias de médio e grande porte (estratégia 2026-11 §2, §4 e §6; DESIGN-2026-11 §8).
  * Mesma estrutura nos dois idiomas; conteúdo em src/content/home.ts e institucional.ts.
- * Ritmo de fundos: default → muted → default → muted → default → muted → inverse → default → muted → CTA inverse.
+ * Ritmo de fundos: hero (com a demo) → muted (fluxo) → default (adoção) → muted (áreas) → default (resultados) → muted →
+ * default (etapas) → muted → inverse → default → muted → CTA inverse. Uma ilustração por "momento" (DESIGN §6.13).
  * Regras: nenhum setor citado por nome, nenhum link para /para/, sem preço, mocks e exemplos rotulados.
  */
 import Base from '../layouts/Base.astro';
@@ -18,12 +19,17 @@ import CtaBand from './ds/CtaBand.astro';
 import Pill from './ds/Pill.astro';
 import AskMock from './ds/mocks/AskMock.astro';
 import PanelMock from './ds/mocks/PanelMock.astro';
+import SourcesFlow from './ds/illos/SourcesFlow.astro';
+import AdoptionBars from './ds/illos/AdoptionBars.astro';
+import FactoryDots from './ds/illos/FactoryDots.astro';
+import ImpactCards from './ds/illos/ImpactCards.astro';
 import BookingCta from './ui/BookingCta.astro';
 import CaseCards from './institucional/CaseCards.astro';
 import { home, MUNDOLOGISTICA_URL } from '../content/home';
 import { etapas, estrutura } from '../content/institucional';
 import { getChrome } from '../content/chrome';
 import { getCopy, pathFor, type Locale } from '../lib/i18n';
+import { outOfTen } from './ds/illos/kinds';
 
 interface Props {
   locale: Locale;
@@ -35,6 +41,43 @@ const c = home[locale];
 const ids = c.ids;
 const cta = getChrome(locale).common.bookingCta;
 const howWeWork = pathFor('howWeWork', locale);
+// Rótulos de interface das ilustrações (o conteúdo vem de home.ts).
+const ui = {
+  'pt-BR': {
+    core: 'Cérebro da operação',
+    coreNote: 'Com permissões por área e a fonte em cada resposta',
+    outTitle: 'Respostas para cada área',
+    useAI: 'usam IA',
+    scope: { industria: 'Indústria', global: 'Estudo global' },
+    adoptionId: 'ia-na-industria',
+    impactId: 'resultados',
+  },
+  en: {
+    core: 'Operations brain',
+    coreNote: 'With permissions by area and the source in every answer',
+    outTitle: 'Answers for each area',
+    useAI: 'use AI',
+    scope: { industria: 'Manufacturing', global: 'Global study' },
+    adoptionId: 'ai-in-manufacturing',
+    impactId: 'results',
+  },
+}[locale];
+const sourceWord = getChrome(locale).common.source;
+// Áreas do fluxo = abas da demo (genéricas, sem setor).
+const flowAreas = [c.brain.demo.mockLabel, ...c.brain.demo.items.map((item) => item.label)];
+const adoption = c.adoption;
+// Par "usam IA × usam IA na produção" (FactoryDots): o último ponto da série (mesmo universo da nota) contra o fato
+// de produção; os demais fatos viram números com fonte.
+const prodFact = adoption?.facts.find((fact) => /produ[cç]|production|shop floor|plant floor/i.test(fact.label) && outOfTen(fact.value) !== null);
+const lastPoint = adoption?.series.at(-1);
+const dots =
+  prodFact && lastPoint && outOfTen(lastPoint.display) !== null
+    ? { ai: { value: lastPoint.display, label: `${ui.useAI} (${lastPoint.label})` }, prod: prodFact }
+    : null;
+const otherFacts = (adoption?.facts ?? []).filter((fact) => fact !== dots?.prod);
+const seriesSource = (adoption?.facts.find((fact) => /IBGE|PINTEC/i.test(fact.source.label)) ?? adoption?.facts[0])?.source;
+const impact = c.impact;
+const impactItems = (impact?.items ?? []).map((item) => ({ ...item, scope: ui.scope[item.scope] }));
 const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSource, href: MUNDOLOGISTICA_URL } }));
 ---
 
@@ -48,39 +91,45 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
 >
   <Header locale={locale} routeId="home" />
   <main id="conteudo" tabindex="-1">
-    <!-- 1. Hero -->
-    <Section id={ids.hero} labelledby={`${ids.hero}-title`} class="home-hero" reveal={false}>
+    <!-- 1. Hero: texto + demo do cérebro da operação na 1ª dobra (desktop: lado a lado; celular: demo logo abaixo do CTA) -->
+    <Section id={ids.hero} labelledby={`${ids.hero}-title`} class="home-hero" width="wide" reveal={false}>
       <div class="home-hero__stage" data-pointer=".home-hero__field">
         {/* Campo decorativo: grade de pontos e brilho que seguem o ponteiro no desktop (DESIGN §9). */}
         <div class="home-hero__field" aria-hidden="true" data-hero-in="fade"></div>
-        <SectionHeader as="h1" id={`${ids.hero}-title`} eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} align="center" accent>
-          <BookingCta locale={locale} size="lg">{cta}</BookingCta>
-          <a class="link link--arrow link--target" href={howWeWork}>{c.hero.secondary}</a>
-        </SectionHeader>
-        <ul class="home-hero__facts" role="list" data-hero-in>
-          {c.hero.facts.map((fact) => <li>{fact}</li>)}
-        </ul>
+        <div class="home-hero__copy">
+          <SectionHeader as="h1" id={`${ids.hero}-title`} eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} accent>
+            <BookingCta locale={locale} size="lg">{cta}</BookingCta>
+            <a class="link link--arrow link--target" href={howWeWork}>{c.hero.secondary}</a>
+          </SectionHeader>
+          <ul class="home-hero__facts" role="list" data-hero-in>
+            {c.hero.facts.map((fact) => <li>{fact}</li>)}
+          </ul>
+        </div>
+        <div class="home-hero__demo" data-hero-in style="--hero-delay: 240ms">
+          <AskMock
+            locale={locale}
+            stage="muted"
+            id="cerebro-demo"
+            tabsLabel={c.brain.demo.tabsLabel}
+            items={[{ label: c.brain.demo.mockLabel, ...c.brain.mock }, ...c.brain.demo.items]}
+          />
+        </div>
       </div>
     </Section>
 
-    <!-- 2. Cérebro da operação -->
+    <!-- 2. Cérebro da operação: de onde vêm os dados → cérebro → áreas -->
     <Section id={ids.brain} variant="muted" labelledby={`${ids.brain}-title`}>
-      <div class="media-split home-brain">
-        <div class="home-brain__text">
-          <SectionHeader id={`${ids.brain}-title`} eyebrow={c.brain.eyebrow} title={c.brain.title} lead={c.brain.lead} accent />
-          <p class="home-brain__sources-title">{c.brain.sourcesTitle}</p>
-          <ul class="home-pills" role="list">
-            {c.brain.sources.map((source) => <li><Pill tone="outline">{source}</Pill></li>)}
-          </ul>
-        </div>
-        <AskMock
-          locale={locale}
-          stage="surface"
-          id="cerebro-demo"
-          tabsLabel={c.brain.demo.tabsLabel}
-          items={[{ label: c.brain.demo.mockLabel, ...c.brain.mock }, ...c.brain.demo.items]}
-        />
-      </div>
+      <SectionHeader id={`${ids.brain}-title`} eyebrow={c.brain.eyebrow} title={c.brain.title} lead={c.brain.lead} align="center" accent />
+      <SourcesFlow
+        id="home-sf"
+        class="home-flow"
+        inTitle={c.brain.sourcesTitle}
+        inputs={c.brain.sources}
+        core={ui.core}
+        coreNote={ui.coreNote}
+        outTitle={ui.outTitle}
+        outputs={flowAreas}
+      />
       <ul class="grid grid--3 home-points" role="list" data-reveal-stagger>
         {
           c.brain.points.map((point) => (
@@ -93,12 +142,55 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
       </ul>
     </Section>
 
+    {
+      adoption && (
+        <Section id={ui.adoptionId} labelledby={`${ui.adoptionId}-title`}>
+          <div class="media-split home-adoption">
+            <div class="home-adoption__text">
+              <SectionHeader id={`${ui.adoptionId}-title`} eyebrow={adoption.eyebrow} title={adoption.title} lead={adoption.lead} size="md" accent />
+              {otherFacts.length > 0 && (
+                <ul class="home-facts" role="list" data-reveal-stagger>
+                  {otherFacts.map((fact) => (
+                    <li>
+                      <p class="home-facts__value tnum">{fact.value}</p>
+                      <p class="home-facts__label">{fact.label}</p>
+                      <p class="caption home-facts__source">
+                        {sourceWord}:{' '}
+                        <a class="link" href={fact.source.href} target="_blank" rel="noopener">
+                          {fact.source.label}
+                        </a>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div class="home-adoption__visual">
+              {adoption.series.length > 1 && <AdoptionBars locale={locale} series={adoption.series} source={seriesSource} />}
+              {dots && <FactoryDots locale={locale} ai={dots.ai.value} aiLabel={dots.ai.label} prod={dots.prod.value} prodLabel={dots.prod.label} source={dots.prod.source} />}
+            </div>
+          </div>
+          {adoption.note && <p class="caption home-adoption__note">{adoption.note}</p>}
+        </Section>
+      )
+    }
+
     <!-- 3. Soluções por área (âncora do header) -->
-    <Section id={ids.solutions} labelledby={`${ids.solutions}-title`}>
+    <Section id={ids.solutions} variant={adoption ? 'muted' : 'default'} labelledby={`${ids.solutions}-title`}>
       <SectionHeader id={`${ids.solutions}-title`} eyebrow={c.solutions.eyebrow} title={c.solutions.title} lead={c.solutions.lead} accent />
       <p class="home-solutions__label"><Pill tone="accent" size="sm">{c.solutions.exampleLabel}</Pill></p>
-      <FeatureGrid columns={4} items={c.solutions.areas} class="home-areas" carousel />
+      <FeatureGrid columns={4} items={c.solutions.areas} card={adoption ? 'surface' : 'muted'} class="home-areas" carousel illos />
     </Section>
+
+    {
+      impact && (
+        <Section id={ui.impactId} labelledby={`${ui.impactId}-title`}>
+          <SectionHeader id={`${ui.impactId}-title`} eyebrow={impact.eyebrow} title={impact.title} lead={impact.lead} size="md" accent />
+          <ImpactCards locale={locale} card="muted" items={impactItems} class="home-impact" />
+          {impact.note && <p class="caption home-impact__note">{impact.note}</p>}
+        </Section>
+      )
+    }
 
     <!-- 4. Software sob medida -->
     <Section id={ids.custom} variant="muted" labelledby={`${ids.custom}-title`}>
@@ -134,7 +226,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
         </div>
         {/* id legado "precos": artigos do blog (conteúdo intocável) linkam /#precos; as etapas com proposta por etapa substituem a antiga escada de preços. */}
         <div id={locale === 'pt-BR' ? 'precos' : undefined} class="home-steps">
-          <Steps items={etapas[locale]} layout="rows" />
+          <Steps items={etapas[locale]} layout="rows" illos />
         </div>
       </div>
     </Section>
@@ -192,12 +284,29 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
 </Base>
 
 <style>
-  :global(.home-hero) :global(.ds-sh__title) {
+  /* ---------- Hero: texto + demo (a demo na 1ª dobra em 1440×900; no celular logo abaixo do CTA) ---------- */
+  :global(.home-hero.section) {
+    overflow: clip;
+    padding-block: var(--space-7) var(--space-section-tight);
+  }
+
+  .home-hero__stage {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .home-hero__copy :global(.ds-sh__title) {
     max-inline-size: 18ch;
   }
 
-  :global(.home-hero) :global(.ds-sh__lead) {
+  .home-hero__copy :global(.ds-sh__lead) {
     max-inline-size: 44ch;
+  }
+
+  .home-hero__demo {
+    min-inline-size: 0;
   }
 
   /* Celular: o CTA do hero precisa ficar acima da faixa de consentimento na 1ª visita (CS-f, 360×640). */
@@ -206,23 +315,46 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
       padding-block-start: var(--space-5);
     }
 
-    :global(.home-hero) :global(.ds-sh__title) {
+    .home-hero__copy :global(.ds-sh__title) {
       font-size: 2rem;
     }
 
-    :global(.home-hero) :global(.ds-sh__lead) {
+    .home-hero__copy :global(.ds-sh__lead) {
       font-size: var(--text-base);
     }
   }
 
-  /* ---------- Hero vivo ---------- */
-  :global(.home-hero.section) {
-    overflow: clip;
+  /* < 1024: a demo vem logo depois do CTA; os fatos do hero descem para baixo dela. */
+  @media (max-width: 63.99em) {
+    .home-hero__copy {
+      display: contents;
+    }
+
+    .home-hero__demo {
+      order: 1;
+    }
+
+    .home-hero__facts {
+      order: 2;
+      margin-block-start: 0;
+    }
   }
 
-  .home-hero__stage {
-    position: relative;
-    isolation: isolate;
+  @media (min-width: 64em) {
+    .home-hero__stage {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      align-items: center;
+      gap: var(--space-8);
+      min-block-size: min(46rem, calc(100svh - var(--header-height) - var(--space-7) * 2));
+    }
+
+    .home-hero__copy :global(.ds-sh__title) {
+      font-size: clamp(2.75rem, 1rem + 3.2vw, 4.25rem);
+    }
+
+    .home-hero__copy :global(.ds-sh__lead) {
+      font-size: var(--text-lead);
+    }
   }
 
   .home-hero__field {
@@ -232,7 +364,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     inset-inline: calc(50% - 50vw);
     pointer-events: none;
     --hero-delay: 0ms;
-    --at: var(--mx, 50%) var(--my, 38%);
+    --at: var(--mx, 30%) var(--my, 38%);
     background:
       radial-gradient(34rem circle at var(--at), color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%),
       radial-gradient(circle, var(--color-border) 1px, transparent 1.5px) 0 0 / 22px 22px;
@@ -243,9 +375,8 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
   .home-hero__facts {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: var(--space-2) var(--space-5);
-    margin-block-start: var(--space-7);
+    margin-block-start: var(--space-6);
     padding: 0;
     list-style: none;
     font-size: var(--text-sm);
@@ -266,23 +397,9 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     background: var(--color-accent);
   }
 
-  .home-brain {
-    align-items: center;
-  }
-
-  .home-brain__sources-title {
-    margin-block-start: var(--space-6);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-  }
-
-  .home-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-block-start: var(--space-3);
-    padding: 0;
-    list-style: none;
+  /* ---------- Cérebro: fluxo de dados ---------- */
+  :global(div.home-flow) {
+    margin-block-start: var(--space-stack);
   }
 
   .home-points {
@@ -292,11 +409,68 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     --grid-gap: var(--space-6);
   }
 
+  .home-points p {
+    font-size: var(--text-sm);
+  }
+
   .home-points li {
     display: grid;
     gap: var(--space-2);
     padding-block-start: var(--space-5);
     border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  /* ---------- Adoção de IA e resultados medidos ---------- */
+  .home-adoption {
+    align-items: center;
+  }
+
+  .home-adoption__visual {
+    display: grid;
+    gap: var(--space-4);
+    min-inline-size: 0;
+  }
+
+  .home-facts {
+    display: grid;
+    gap: var(--space-5);
+    margin-block-start: var(--space-7);
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-facts li {
+    display: grid;
+    gap: var(--space-1);
+    padding-block-start: var(--space-4);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .home-facts__value {
+    font-size: var(--text-title-lg);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+  }
+
+  .home-facts__label {
+    font-size: var(--text-sm);
+  }
+
+  .home-facts__source,
+  .home-adoption__note,
+  .home-impact__note {
+    color: var(--color-text-muted);
+  }
+
+  .home-adoption__note,
+  .home-impact__note {
+    margin-block-start: var(--space-6);
+    max-inline-size: 72ch;
+  }
+
+  :global(ul.home-impact) {
+    margin-block-start: var(--space-stack);
   }
 
   .home-solutions__label {

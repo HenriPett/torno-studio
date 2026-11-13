@@ -6,8 +6,10 @@
  * setores nem linka /para/. Links internos permitidos: /, /como-trabalhamos/, /cases/, /cases/loopt/,
  * /contact/, /privacidade/. Sem routeId no Base: noindex, nofollow, sem canonical e sem hreflang.
  *
- * Ordem das seções (§7.4): hero → contexto (fatos com nota) → dores → áreas → produto (AskMock) →
- * cérebro da operação → cenário ilustrativo → prova → como trabalhamos → FAQ → CTA → fontes.
+ * Ordem das seções (§7.4, revista em 2026-11-13: a demo sobe para o hero e cada "momento" tem uma ilustração,
+ * DESIGN §6.13): hero + AskMock → contexto e adoção de IA (FactoryDots) → dores → onde entramos (HelpFlow) →
+ * o que empresas já mediram (ImpactCards) → áreas (AreaIllo) → cérebro da operação (SourcesFlow) →
+ * cenário ilustrativo (StepIllo) → prova → como trabalhamos → FAQ → CTA → fontes.
  */
 import Base from '../../layouts/Base.astro';
 import Header from '../Header.astro';
@@ -24,6 +26,11 @@ import Pill from '../ds/Pill.astro';
 import AskMock from '../ds/mocks/AskMock.astro';
 import BookingCta from '../ui/BookingCta.astro';
 import NoteRefs from './NoteRefs.astro';
+import AreaIllo from '../ds/illos/AreaIllo.astro';
+import FactoryDots from '../ds/illos/FactoryDots.astro';
+import HelpFlow from '../ds/illos/HelpFlow.astro';
+import ImpactCards, { type ImpactItem } from '../ds/illos/ImpactCards.astro';
+import SourcesFlow from '../ds/illos/SourcesFlow.astro';
 import type { SectorLanding } from '../../content/setores/types';
 
 interface Props {
@@ -71,6 +78,15 @@ const mockSources = setor.mock.citations.map((citation) => {
   return cut > 0 ? { title: citation.slice(0, cut), detail: citation.slice(cut + 2) } : { title: citation, detail: 'Documento interno' };
 });
 
+/** Fontes de `adoption` e `proofPoints` usam índice a partir de 0 (contrato 2026-11-13). */
+const sourceAt0 = (n: number) => sourceAt(n + 1);
+const adoption = setor.adoption ? { ...setor.adoption, src: sourceAt0(setor.adoption.source) } : null;
+const SCOPE = { setor: 'Mesmo setor', vizinho: 'Setor vizinho', global: 'Estudo global' } as const;
+const impactItems: ImpactItem[] = (setor.proofPoints ?? []).map((point) => {
+  const source = sourceAt0(point.source);
+  return { value: point.value, label: point.label, context: point.context, area: point.area, scope: SCOPE[point.scope], source: { label: source.label, href: source.url } };
+});
+
 // Resumo das etapas (estratégia §4.2). O detalhe fica em /como-trabalhamos/.
 const process = [
   { title: 'Conversa inicial', body: 'Quarenta e cinco minutos, sem custo, para entender a operação, o problema e quem decide.', meta: '45 min' },
@@ -84,25 +100,54 @@ const process = [
 <Base locale={locale} title={setor.meta.title} description={setor.meta.description}>
   <Header locale={locale} routeId="home" variant="lean" />
   <main id="conteudo" tabindex="-1" class="sector" data-sector={setor.slug}>
-    <!-- Hero -->
-    <Section labelledby="setor-hero" class="sector-hero" reveal={false}>
-      <SectionHeader as="h1" id="setor-hero" eyebrow={setor.hero.eyebrow} accent title={setor.hero.title} lead={setor.hero.lead} class="sector-hero__header">
-        <BookingCta locale={locale} size="lg">{setor.hero.cta}</BookingCta>
-        <a class="link link--arrow link--target" href={HOW_WE_WORK}>Ver como trabalhamos</a>
-      </SectionHeader>
+    <!-- Hero: texto + a pergunta do chão de fábrica respondida (demo na 1ª dobra) -->
+    <Section labelledby="setor-hero" class="sector-hero" width="wide" reveal={false}>
+      <div class="sector-hero__grid">
+        <SectionHeader as="h1" id="setor-hero" eyebrow={setor.hero.eyebrow} accent title={setor.hero.title} lead={setor.hero.lead} class="sector-hero__header">
+          <BookingCta locale={locale} size="lg">{setor.hero.cta}</BookingCta>
+          <a class="link link--arrow link--target" href={HOW_WE_WORK}>Ver como trabalhamos</a>
+        </SectionHeader>
+        <div class="sector-hero__demo" data-hero-in style="--hero-delay: 240ms">
+          <AskMock
+            locale={locale}
+            question={setor.mock.question}
+            answer={setor.mock.answer}
+            sources={mockSources}
+            asker="Pergunta de exemplo"
+            caption="Pergunta, resposta e documentos são fictícios. Cada resposta indica a ficha, a ordem ou o registro de onde saiu."
+          />
+        </div>
+      </div>
     </Section>
 
     <!-- Contexto do setor -->
     <Section variant="muted" labelledby="setor-contexto">
-      <SectionHeader id="setor-contexto" eyebrow="O setor em números" title={setor.context.title} size="md" />
-      <div class="sector-context">
+      <div class:list={['sector-context-wrap', adoption && 'media-split']}>
+        <div>
+          <SectionHeader id="setor-contexto" eyebrow="O setor em números" title={setor.context.title} size="md" />
+          <div class="sector-context">
+            {
+              setor.context.body.map((paragraph, index) => (
+                <p class="sector-context__p">
+                  {paragraph}
+                  <NoteRefs refs={contextRefs[index] ?? []} sources={setor.sources} />
+                </p>
+              ))
+            }
+            {adoption && <p class="sector-context__reading">{adoption.reading}</p>}
+          </div>
+        </div>
         {
-          setor.context.body.map((paragraph, index) => (
-            <p class="sector-context__p">
-              {paragraph}
-              <NoteRefs refs={contextRefs[index] ?? []} sources={setor.sources} />
-            </p>
-          ))
+          adoption && (
+            <FactoryDots
+              locale={locale}
+              ai={adoption.useAI}
+              aiLabel="das indústrias do setor com 100 ou mais pessoas usam IA"
+              prod={adoption.inProduction}
+              prodLabel="usam IA na produção"
+              source={{ label: adoption.src.label, href: adoption.src.url }}
+            />
+          )
         }
       </div>
       {stats.length > 0 && <StatGrid locale={locale} items={stats} columns={statColumns} class="sector-stats" />}
@@ -114,6 +159,30 @@ const process = [
       <FeatureGrid columns={setor.pains.items.length === 4 ? 2 : 3} items={setor.pains.items} carousel />
     </Section>
 
+    {
+      setor.help && (
+        <Section variant="muted" labelledby="setor-onde">
+          <SectionHeader id="setor-onde" eyebrow="Onde entramos" title={setor.help.title} lead={setor.help.intro} size="md" />
+          <HelpFlow items={setor.help.items} class="sector-help" />
+        </Section>
+      )
+    }
+
+    {
+      impactItems.length > 0 && (
+        <Section labelledby="setor-medido">
+          <SectionHeader
+            id="setor-medido"
+            eyebrow="Resultados públicos"
+            title="O que empresas já mediram"
+            lead="Números publicados por outras empresas, com a fonte. Não são clientes da Torno."
+            size="md"
+          />
+          <ImpactCards locale={locale} items={impactItems} card="muted" class="sector-impact" />
+        </Section>
+      )
+    }
+
     <!-- Áreas atendidas -->
     <Section variant="muted" labelledby="setor-areas">
       <SectionHeader id="setor-areas" eyebrow="Áreas" title={setor.areas.title} lead={setor.areas.intro} size="md" />
@@ -121,9 +190,10 @@ const process = [
         {
           setor.areas.items.map((item) => (
             <Card as="li" variant="surface" padding="lg" class="sector-area">
+              <AreaIllo name={item.area} />
               <p class="eyebrow eyebrow--accent">{item.area}</p>
               <h3 class="title">{item.title}</h3>
-              <p class="muted">{item.body}</p>
+              <p class="muted sector-area__body">{item.body}</p>
               <div class="sector-area__example">
                 <p class="sector-area__example-label">Exemplo</p>
                 <p class="sector-area__example-text">{item.example}</p>
@@ -134,58 +204,34 @@ const process = [
       </ul>
     </Section>
 
-    <!-- Produto: pergunta e resposta com fonte -->
-    <Section labelledby="setor-produto" width="wide">
-      <div class="media-split">
-        <SectionHeader
-          id="setor-produto"
-          eyebrow="Assistente da operação"
-          title="A pergunta do chão de fábrica, respondida com o documento"
-          lead="Cada resposta indica a ficha, a ordem ou o registro de onde saiu, para quem pergunta conferir antes de agir."
-          size="md"
-        />
-        <AskMock
-          locale={locale}
-          question={setor.mock.question}
-          answer={setor.mock.answer}
-          sources={mockSources}
-          asker="Pergunta de exemplo"
-          caption="Pergunta, resposta e documentos são fictícios."
-        />
-      </div>
-    </Section>
-
-    <!-- Cérebro da operação -->
-    <Section variant="muted" labelledby="setor-cerebro">
-      <div class="sector-brain">
-        <div class="sector-brain__text">
-          <SectionHeader id="setor-cerebro" eyebrow="Cérebro da operação" title={setor.brain.title} size="md" />
-          <div class="stack">
-            {setor.brain.body.map((paragraph) => <p>{paragraph}</p>)}
-          </div>
-        </div>
-        <div class="sector-brain__inputs">
-          <p class="caption sector-brain__inputs-title" id="setor-cerebro-fontes">O que entra na base</p>
-          <ul class="sector-chips" role="list" aria-labelledby="setor-cerebro-fontes" data-reveal-stagger>
-            {
-              setor.brain.inputs.map((input) => (
-                <li>
-                  <Pill tone="outline">{input}</Pill>
-                </li>
-              ))
-            }
-          </ul>
+    <!-- Cérebro da operação: o que entra na base → cérebro → áreas -->
+    <Section labelledby="setor-cerebro">
+      <div class="sector-brain__text">
+        <SectionHeader id="setor-cerebro" eyebrow="Cérebro da operação" title={setor.brain.title} size="md" />
+        <div class="stack">
+          {setor.brain.body.map((paragraph) => <p>{paragraph}</p>)}
         </div>
       </div>
+      <SourcesFlow
+        id="setor-sf"
+        class="sector-flow"
+        tone="muted"
+        inTitle="O que entra na base"
+        inputs={setor.brain.inputs}
+        core="Cérebro da operação"
+        coreNote="Cada pessoa vê o que o perfil permite"
+        outTitle="Para cada área"
+        outputs={setor.areas.items.map((item) => item.area)}
+      />
     </Section>
 
     <!-- Cenário ilustrativo -->
-    <Section labelledby="setor-cenario" class="sector-scenario">
+    <Section variant="muted" labelledby="setor-cenario" class="sector-scenario">
       <div class="sector-scenario__seal">
         <Pill tone="warn">Cenário ilustrativo</Pill>
       </div>
       <SectionHeader id="setor-cenario" eyebrow="Como um piloto poderia correr" title={setor.scenario.title} lead={setor.scenario.intro} size="md" />
-      <Steps items={setor.scenario.steps} />
+      <Steps items={setor.scenario.steps} illos />
       <p class="caption sector-scenario__note">{setor.scenario.note}</p>
     </Section>
 
@@ -210,7 +256,7 @@ const process = [
       <SectionHeader id="setor-etapas" eyebrow="Como trabalhamos" title="Cinco etapas, cada uma com proposta fechada" lead="O diagnóstico define o piloto. O piloto decide a etapa seguinte." size="md">
         <a class="link link--arrow link--target" href={HOW_WE_WORK}>Ver como trabalhamos</a>
       </SectionHeader>
-      <Steps items={process} layout="rows" />
+      <Steps items={process} layout="rows" illos />
     </Section>
 
     <!-- FAQ -->
@@ -244,25 +290,78 @@ const process = [
 </Base>
 
 <style>
-  .sector-hero :global(.sector-hero__header) {
-    padding-block: var(--space-6) var(--space-4);
+  /* Hero: texto + demo. ≥ 1024 lado a lado (demo inteira na 1ª dobra em 1440×900); celular: demo logo abaixo do CTA. */
+  :global(.sector-hero.section) {
+    padding-block: var(--space-6) var(--space-section-tight);
   }
 
-  .sector-hero :global(.sector-hero__header h1) {
+  .sector-hero__grid {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .sector-hero__grid :global(.sector-hero__header .ds-sh__title) {
     max-inline-size: 18ch;
+  }
+
+  .sector-hero__demo {
+    min-inline-size: 0;
+  }
+
+  @media (max-width: 30em) {
+    .sector-hero__grid :global(.sector-hero__header .ds-sh__title) {
+      font-size: 2rem;
+    }
+
+    .sector-hero__grid :global(.sector-hero__header .ds-sh__lead) {
+      font-size: var(--text-base);
+    }
+  }
+
+  @media (min-width: 64em) {
+    .sector-hero__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      align-items: center;
+      gap: var(--space-8);
+      min-block-size: min(44rem, calc(100svh - var(--header-height) - var(--space-7) * 2));
+    }
+
+    .sector-hero__grid :global(.sector-hero__header .ds-sh__title) {
+      font-size: clamp(2.5rem, 1rem + 2.8vw, 3.75rem);
+    }
+  }
+
+  .sector-context-wrap {
+    align-items: center;
   }
 
   .sector-context {
     display: grid;
     gap: var(--space-5);
     max-inline-size: 68ch;
-    margin-block-end: var(--space-8);
+    margin-block-start: var(--space-5);
   }
 
   .sector-context__p {
-    font-size: var(--text-lead);
-    line-height: var(--leading-lead);
     color: var(--color-text);
+    max-inline-size: 60ch;
+  }
+
+  .sector-context__reading {
+    padding-inline-start: var(--space-4);
+    border-inline-start: 3px solid var(--color-accent);
+    font-weight: var(--weight-medium);
+    max-inline-size: 52ch;
+  }
+
+  .sector-context-wrap + :global(.sector-stats) {
+    margin-block-start: var(--space-8);
+  }
+
+  :global(ol.sector-help),
+  :global(ul.sector-impact),
+  :global(div.sector-flow) {
+    margin-block-start: var(--space-stack);
   }
 
   .sector-areas {
@@ -296,42 +395,12 @@ const process = [
     color: var(--color-text);
   }
 
-  .sector-brain {
-    display: grid;
-    gap: var(--space-8);
-  }
-
   .sector-brain__text {
     max-inline-size: 64ch;
   }
 
-  .sector-brain__inputs-title {
-    margin-block-end: var(--space-3);
-    font-weight: var(--weight-semibold);
-  }
-
-  .sector-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    list-style: none;
-    padding: 0;
-  }
-
-  .sector-chips :global(.ds-pill) {
-    white-space: normal;
-    text-align: start;
-  }
-
-  @media (min-width: 1024px) {
-    .sector-brain {
-      grid-template-columns: 7fr 5fr;
-      align-items: start;
-    }
-
-    .sector-brain__inputs {
-      padding-block-start: var(--space-9);
-    }
+  .sector-area__body {
+    font-size: var(--text-sm);
   }
 
   .sector-scenario__seal {
@@ -342,7 +411,7 @@ const process = [
     margin-block-start: var(--space-7);
     padding: var(--space-4) var(--space-5);
     border-radius: var(--radius-md);
-    background-color: var(--color-bg-muted);
+    background-color: var(--color-surface);
     color: var(--color-text);
     max-inline-size: 72ch;
   }

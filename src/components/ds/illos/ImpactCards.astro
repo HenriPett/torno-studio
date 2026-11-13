@@ -33,6 +33,8 @@ interface Props {
 const { locale, items, card = 'surface', class: className } = Astro.props;
 const sourceLabel = getChrome(locale).common.source;
 const cols = items.length >= 4 ? 4 : items.length === 3 ? 3 : 2;
+/** Só conta números que começam pelo número ("−4%", "+21%"); "cerca de 1 em 5" fica parado. */
+const countable = (value: string) => (/^[+−-]?\d/.test(value.trim()) ? '' : undefined);
 const trend = (value: string) => (/^[−-]/.test(value.trim()) ? 'down' : /^\+/.test(value.trim()) ? 'up' : 'flat');
 ---
 
@@ -45,7 +47,7 @@ const trend = (value: string) => (/^[−-]/.test(value.trim()) ? 'down' : /^\+/.
           <p class="ic__scope">{item.scope}</p>
         </div>
         <div class="ic__figure">
-          <p class="ic__value tnum" data-count>{item.value}</p>
+          <p class="ic__value tnum" data-count={countable(item.value)}>{item.value}</p>
           <span class={`ic__trend ic__trend--${trend(item.value)}`} aria-hidden="true">
             <svg viewBox="0 0 24 24" focusable="false">
               <path d="M5 16 10 11l4 3 6-7M14 7h6v6" />

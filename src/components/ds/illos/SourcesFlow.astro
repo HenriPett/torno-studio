@@ -18,13 +18,15 @@ interface Props {
   outTitle: string;
   outputs: string[];
   id?: string;
+  /** Fundo do quadro: surface (em seção muted, padrão) ou muted (em seção branca). */
+  tone?: 'surface' | 'muted';
   class?: string;
 }
 
-const { inTitle, inputs, core, coreNote, outTitle, outputs, id = 'sf', class: className } = Astro.props;
+const { inTitle, inputs, core, coreNote, outTitle, outputs, id = 'sf', tone = 'surface', class: className } = Astro.props;
 ---
 
-<div class:list={['sf', className]} data-reveal="rise" data-loop>
+<div class:list={['sf', `sf--${tone}`, className]} data-reveal="rise" data-loop>
   <div class="sf__col sf__col--in">
     <p class="sf__title" id={`${id}-in`}>{inTitle}</p>
     <ul class="sf__list sf__list--in" role="list" aria-labelledby={`${id}-in`}>
@@ -65,6 +67,14 @@ const { inTitle, inputs, core, coreNote, outTitle, outputs, id = 'sf', class: cl
     background-color: var(--color-surface);
     border: var(--border-width) solid var(--color-border-subtle);
     min-inline-size: 0;
+  }
+
+  .sf--muted {
+    background-color: var(--color-surface-muted);
+  }
+
+  .sf--muted .sf__list--in li {
+    background-color: var(--color-surface);
   }
 
   .sf__col {

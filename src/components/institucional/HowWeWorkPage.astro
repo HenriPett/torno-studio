@@ -14,6 +14,7 @@ import Card from '../ds/Card.astro';
 import Faq from '../ds/Faq.astro';
 import CtaBand from '../ds/CtaBand.astro';
 import BookingCta from '../ui/BookingCta.astro';
+import StepIllo from '../ds/illos/StepIllo.astro';
 import { howWeWork } from '../../content/institucional';
 import { getChrome } from '../../content/chrome';
 import type { Locale } from '../../lib/i18n';
@@ -46,9 +47,12 @@ const id = en
         {
           c.stages.items.map((stage, index) => (
             <li class="stage">
-              <span class="stage__num tnum" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
+              <div class="stage__lead">
+                <span class="stage__num tnum" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <StepIllo title={stage.title} index={index} />
+              </div>
               <div class="stage__head">
                 <p class="stage__meta">{stage.meta}</p>
                 <h3 class="title-lg">{stage.title}</h3>
@@ -145,6 +149,12 @@ const id = en
     line-height: 1;
   }
 
+  .stage__lead {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
   .stage__meta {
     margin-block-end: var(--space-1);
     font-size: var(--text-sm);
@@ -154,6 +164,7 @@ const id = en
 
   .stage__body {
     margin-block-start: var(--space-2);
+    font-size: var(--text-sm);
     max-inline-size: 40ch;
   }
 
@@ -202,8 +213,14 @@ const id = en
 
   @media (min-width: 64em) {
     .stage {
-      grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
+      grid-template-columns: 5rem minmax(0, 5fr) minmax(0, 6fr);
       padding: var(--space-7);
+    }
+
+    .stage__lead {
+      flex-direction: column;
+      align-items: flex-start;
+      --si-size: 4rem;
     }
 
     .stage__num {
