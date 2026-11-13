@@ -108,6 +108,34 @@
   --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.3), 0 24px 64px rgb(0 0 0 / 0.5);
 }
 
+/* Aliases com o prefixo do site (--color-*) e escala de espaço da Torno, usados pelos módulos e
+   pelo chat. Apontam para os tokens acima, então seguem o tema sozinhos. */
+:root {
+  --color-bg: var(--bg);
+  --color-bg-muted: var(--bg-muted);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-text: var(--accent-text);
+  --color-ok-text: var(--ok-text);
+  --color-ok-subtle: var(--ok-subtle);
+  --color-warn-text: var(--warn-text);
+  --color-warn-subtle: var(--warn-subtle);
+  --color-danger-text: var(--danger-text);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-focus: var(--focus);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.5rem;
+  --space-6: 2rem; --space-7: 3rem; --space-8: 4rem; --space-9: 6rem; --space-10: 8rem;
+}
+
 /* ---------- base ---------- */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
