@@ -226,7 +226,11 @@ export const api = {
   /** POST /entrar → {ok}. 401 = "Link ou senha inválidos"; 410 = senha certa, mas o link foi desativado ou expirou. */
   entrar: (id, senha) => req('POST', `${D(id)}/entrar`, { senha }, { escopo: null }),
   sair: (id) => req('POST', `${D(id)}/sair`, {}, { escopo: null }),
-  /** GET /estado → {demo, setor, aprendizado, ia, admin?}. 401 sem cookie. */
+  /**
+   * GET /estado → {demo, setor, aprendizado, ia: 'real'|'local', ia_modelo, admin?}. `ia` é 'real' só com
+   * ANTHROPIC_API_KEY no servidor. 401 sem cookie válido; 410 {erro:'Este link foi desativado ou expirou.'}
+   * com cookie válido desta demo, mas a demo desativada ou expirada.
+   */
   estado: (id, { signal } = {}) => req('GET', `${D(id)}/estado`, undefined, { signal, escopo: null }),
 
   aprendizado: {

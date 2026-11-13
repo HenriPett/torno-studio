@@ -206,7 +206,10 @@ export function render(el, ctx) {
         ? button('Rever a apresentação', { icone: 'undo', onClick: () => ctx.reverApresentacao() })
         : null),
     h('p', { class: 'how-transparencia' }, icon('info', { size: 18 }),
-      h('span', null, 'Empresa, pessoas e números são fictícios. A IA é real e só lê estes dados.')),
+      // C1: só promete "IA real" quando o /estado diz que quem responde é a IA
+      h('span', null, ctx.ia?.modo === 'real'
+        ? 'Empresa, pessoas e números são fictícios. A IA é real e só lê estes dados.'
+        : 'Empresa, pessoas e números são fictícios. As respostas usam só estes dados.')),
     ctx.isEnabled('integracoes') ? deOndeVem(ctx) : null,
     ctx.isEnabled('seguranca') ? quemVe(ctx) : null,
     ondePergunta(ctx),

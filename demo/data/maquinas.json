@@ -1928,7 +1928,8 @@
     {
       "id": "RC-03",
       "titulo": "Condição de pagamento de equipamentos",
-      "texto": "Padrão de 30% de sinal, 60% na aprovação do FAT e 10% após o comissionamento. Outras condições só com aprovação do financeiro."
+      "texto": "Padrão de 30% de sinal, 60% na aprovação do FAT e 10% após o comissionamento. Outras condições só com aprovação do financeiro.",
+      "publica": true
     },
     {
       "id": "RC-04",
@@ -1938,7 +1939,8 @@
     {
       "id": "RC-05",
       "titulo": "Garantia",
-      "texto": "Garantia de 12 meses a partir do comissionamento ou 18 meses da entrega, o que vencer primeiro. Peças de desgaste (telas, canecas, correias e molas) não têm garantia por tempo."
+      "texto": "Garantia de 12 meses a partir do comissionamento ou 18 meses da entrega, o que vencer primeiro. Peças de desgaste (telas, canecas, correias e molas) não têm garantia por tempo.",
+      "publica": true
     },
     {
       "id": "RC-06",
@@ -3161,7 +3163,7 @@
     {
       "modulo": "qualidade",
       "pergunta": "Quais não conformidades de cliente estão abertas?",
-      "resposta": "Uma: a NC-2026-089, da Cerealista Três Coxilhas, que recebeu a engrenagem Z42 rev. D sem o anel espaçador de 5 mm exigido para o EC-450 série 2019-044. O anel foi enviado e a nota de substituição entrou na seção 9.1 do manual. A NC-2026-079 (vazamento no MH-6000 da Cooperativa Terra Roxa) foi encerrada em 08/11.",
+      "resposta": "Uma não conformidade de cliente em aberto: a NC-2026-089, da Cerealista Três Coxilhas, que recebeu a engrenagem Z42 rev. D sem o anel espaçador de 5 mm exigido para o EC-450 série 2019-044. O anel foi enviado e a nota de substituição entrou na seção 9.1 do manual. A NC-2026-079 (vazamento no MH-6000 da Cooperativa Terra Roxa) foi encerrada em 08/11.",
       "fontes": [
         "nc:NC-2026-089",
         "doc:DOC-MAN-EC450#t3",

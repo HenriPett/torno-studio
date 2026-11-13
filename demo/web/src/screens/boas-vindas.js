@@ -4,6 +4,9 @@
 // O Esc é ignorado enquanto `bloqueado()` for verdadeiro (ex.: reautenticação aberta por cima) ou quando
 // o foco está em outro diálogo fora desta tela.
 // Explica o produto em uma frase, só com os sistemas que existem em `integracoes` do pacote.
+// A frase sobre quem responde segue ctx.ia.modo (C1): 'real' = IA; 'local' (ou sem o campo) = respostas
+// montadas a partir dos dados fictícios. Abre no topo, com o foco no título (no celular, focar o botão
+// "Começar" rolava a tela e cortava o título).
 
 import { h, icon } from '../ui.js';
 import { sistemasDoPacote, listaSistemas } from '../origem.js';
@@ -57,7 +60,7 @@ export function renderBoasVindas(alvo, { ctx, onComecar, bloqueado } = {}) {
       onSubmit: (e) => { e.preventDefault(); comecar(); },
     },
     ctx.demo?.nome ? h('p', { class: 'welcome__for' }, `Demonstração preparada para ${ctx.demo.nome}`) : null,
-    h('h1', { class: 'welcome__title', id: 'bv-titulo' }, `Esta é a operação da ${String(ctx.empresa).replace(/\.$/, '')}.`),
+    h('h1', { class: 'welcome__title', id: 'bv-titulo', tabindex: '-1' }, `Esta é a operação da ${String(ctx.empresa).replace(/\.$/, '')}.`),
     h('p', { class: 'welcome__lead' },
       `Uma indústria fictícia ${artigoSetor(d.setor)}${pessoas}. `,
       `${ligou} que responde qualquer pergunta da operação, mostra de onde tirou cada número e aprende com o que a equipe ensina.`),
@@ -66,7 +69,9 @@ export function renderBoasVindas(alvo, { ctx, onComecar, bloqueado } = {}) {
     h('ul', { class: 'welcome__steps' }, passos.map(([ic, forte, resto]) => h('li', null,
       icon(ic, { size: 20 }), h('span', null, h('strong', null, forte), ` ${resto}`)))),
     h('p', { class: 'welcome__ia' }, icon('info', { size: 18 }),
-      h('span', null, 'As respostas são geradas na hora por IA, lendo só os dados fictícios desta empresa.')),
+      h('span', null, ctx.ia?.modo === 'real'
+        ? 'As respostas são geradas na hora por IA, lendo só os dados fictícios desta empresa.'
+        : 'As respostas são montadas na hora a partir só dos dados fictícios desta empresa. Na versão contratada, quem responde é a IA, com as mesmas fontes.')),
     h('div', { class: 'field' },
       h('label', { class: 'field__label', for: nomeId }, 'Como devemos chamar você? (opcional)'),
       nome,
@@ -76,6 +81,17 @@ export function renderBoasVindas(alvo, { ctx, onComecar, bloqueado } = {}) {
 
   alvo.replaceChildren(tela);
   document.addEventListener('keydown', onKey);
-  requestAnimationFrame(() => botao.focus());
+  const titulo = tela.querySelector('#bv-titulo');
+  const topo = () => {
+    // a tela pode estar na página (1º acesso) ou numa camada com rolagem própria ("Rever a apresentação")
+    try { window.scrollTo(0, 0); } catch { /* ok */ }
+    alvo.scrollTop = 0;
+    tela.scrollTop = 0;
+  };
+  topo();
+  requestAnimationFrame(() => {
+    try { titulo?.focus({ preventScroll: true }); } catch { titulo?.focus(); }
+    topo();
+  });
   return () => document.removeEventListener('keydown', onKey);
 }

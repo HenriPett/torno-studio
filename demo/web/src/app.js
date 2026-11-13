@@ -120,6 +120,7 @@ let learning = null;
 let assistant = null;
 const B = { conversa: null, ensinar: null, markdown: null, learningMod: null };
 let drawerMap = {};
+let fontesMod = null; // ui/fontes.js: ctxDoCliente para as gavetas abertas do Portal (C3)
 let shellPronta = false;
 let reautenticando = false;
 
@@ -198,7 +199,11 @@ async function mostrarSenha({ expirada = false } = {}) {
         try {
           const r = await api.estado(demoId);
           if (r && Array.isArray(r.aprendizado) && learning && typeof learning.replace === 'function') learning.replace(r.aprendizado);
-        } catch { /* segue com o que tem */ }
+        } catch (err) {
+          // link desativado com a sessão ainda válida (C2): a tela final, no lugar da demo
+          if (err instanceof ApiError && err.status === 410) linkEncerradoNaDemo();
+          /* outros erros: segue com o que tem */
+        }
       } else {
         await carregar();
       }
@@ -216,6 +221,20 @@ function dicaSenha(telaEl) {
   form.insertBefore(dica, botao);
   const input = form.querySelector('input');
   if (input) input.setAttribute('aria-describedby', `${input.getAttribute('aria-describedby') || ''} ${id}`.trim());
+}
+
+/** 410 com a demo montada: fecha gavetas e overlays e mostra a tela final no lugar do app. */
+function linkEncerradoNaDemo() {
+  shellPronta = false;
+  try { ui.closeAllSheets(); } catch { /* ok */ }
+  reauthEl?.remove();
+  reauthEl = null;
+  apresentacaoEl?.remove();
+  apresentacaoEl = null;
+  window.removeEventListener('hashchange', onHashChange);
+  document.removeEventListener('keydown', atalhos);
+  rodaCleanup();
+  telaLinkEncerrado(root());
 }
 
 /** Tela final quando o servidor diz que o link não vale mais (410/404). */
@@ -347,6 +366,22 @@ async function reverApresentacao() {
   });
 }
 
+/**
+ * C1: o /estado diz `ia: 'real' | 'local'` (quem responde nesta demo). Versões anteriores mandavam
+ * {disponivel, modelo}. → {modo: 'real'|'local', disponivel, modelo}; sem o campo, 'local'.
+ * ctx.ia.modo decide o texto das boas-vindas e de Como funciona; ctx.ia.disponivel segue valendo
+ * para quem já lia o formato antigo (assistente, área).
+ */
+function iaDoEstado(r) {
+  const ia = r?.ia;
+  if (ia === 'real' || ia === 'local') return { modo: ia, disponivel: ia === 'real', modelo: null };
+  if (ia && typeof ia === 'object') {
+    const modo = ia.modo === 'real' || ia.modo === 'local' ? ia.modo : ia.disponivel ? 'real' : 'local';
+    return { ...ia, modo, disponivel: modo === 'real', modelo: ia.modelo ?? null };
+  }
+  return { modo: 'local', disponivel: false, modelo: null };
+}
+
 function empresaNome() {
   return (estado?.demo?.empresa_nome || '').trim() || data?.empresa?.nome || 'a empresa';
 }
@@ -374,8 +409,9 @@ async function carregarB() {
 }
 
 async function carregarDrawers() {
-  const [c, b] = await Promise.all([tryImport('./ui/area-page.js'), tryImport('./modules/cerebro.js')]);
+  const [c, b, fo] = await Promise.all([tryImport('./ui/area-page.js'), tryImport('./modules/cerebro.js'), tryImport('./ui/fontes.js')]);
   drawerMap = { ...((c && c.drawers) || {}), ...((b && b.drawersCerebro) || {}) };
+  fontesMod = fo;
 }
 
 async function carregarAssistente() {
@@ -539,7 +575,7 @@ function buildCtx() {
     assistant,
     // v2
     demo: estado ? { ...estado.demo, modulos } : null,
-    ia: estado?.ia || { disponivel: false, modelo: null },
+    ia: iaDoEstado(estado),
     autor: () => autorSalvo() || 'Você',
     autorSalvo,
     setAutor: (nome) => store.set(`td_autor_${demoId}`, String(nome || '').trim()),
@@ -819,6 +855,9 @@ const ROTA_MODULO = {
 
 let renderToken = 0;
 let cleanup = null;
+// 1º render depois do boot: o foco fica onde o navegador o deixou, para que o 1º Tab caia no
+// "Pular para o conteúdo". Só as navegações seguintes levam o foco ao <main>.
+let primeiroRender = true;
 
 export function navigate(route) {
   const hash = route.startsWith('#') ? route : `#${route}`;
@@ -844,6 +883,8 @@ function onHashChange() {
 async function renderRota(rota, secao) {
   const token = ++renderToken;
   const mudou = rota !== rotaAtual || !el.content.firstChild;
+  const primeiro = primeiroRender;
+  primeiroRender = false;
   if (menuAberto) menuAberto.close();
   if (mudou) ui.closeAllSheets();
   rodaCleanup();
@@ -887,7 +928,7 @@ async function renderRota(rota, secao) {
     });
   } else if (mudou) {
     window.scrollTo(0, 0);
-    if (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected) {
+    if (!primeiro && (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected)) {
       el.content.focus({ preventScroll: true });
     }
   }
@@ -919,8 +960,22 @@ const TIPO_AREA = {
   regra: 'comercial', nc: 'qualidade', os: 'manutencao', maq: 'manutencao', saber: 'operadores', doc: null, kpi: 'gestao',
 };
 
-function openRef(ref) {
-  const ctx = buildCtx();
+/**
+ * openRef(ref, {cliente}) → a folha aberta ou null. Com `cliente` (Portal, C3), o registro e a gaveta
+ * vêm da versão do cliente (ctxDoCliente de fontes.js, sobre visaoDoCliente): sem histórico interno,
+ * sem meta de representante, sem registros da equipe e sem as ações internas. Se essa versão não puder
+ * ser montada, a gaveta não abre (nunca cai nos dados internos).
+ */
+function openRef(ref, { cliente } = {}) {
+  let ctx = buildCtx();
+  if (cliente) {
+    const paraCliente = fontesMod && typeof fontesMod.ctxDoCliente === 'function' ? safe(() => fontesMod.ctxDoCliente(ctx, cliente)) : null;
+    if (!paraCliente) {
+      toast('Esse registro não faz parte desta demonstração.');
+      return null;
+    }
+    ctx = paraCliente;
+  }
   const resolved = ctx.resolveRef(ref);
   if (!resolved) {
     toast('Esse registro não faz parte desta demonstração.');
@@ -961,7 +1016,7 @@ function openRef(ref) {
     }
     s.setCorpo(corpo);
   }
-  if (acoes === 'padrao') s.setAcoes(acoesPadrao(resolved, s));
+  if (acoes === 'padrao') s.setAcoes(acoesPadrao(resolved, s, ctx));
   else s.setAcoes(acoes);
   rodapeOrigem(s, resolved, ctx);
   return s;
@@ -1015,8 +1070,12 @@ function refIcon(tipo) {
   }[tipo] || 'file';
 }
 
-/** [Perguntar sobre isto] [Ensinar algo sobre isto] para qualquer registro. */
-export function acoesPadrao(resolved, s) {
+/**
+ * [Perguntar sobre isto] [Ensinar algo sobre isto] para qualquer registro. Na versão do cliente
+ * (ctx.cliente), a pergunta vai para o assistente do Portal (ctx.perguntar de ctxDoCliente).
+ */
+export function acoesPadrao(resolved, s, ctx = null) {
+  const pergunta = ctx?.cliente && typeof ctx.perguntar === 'function' ? ctx.perguntar : perguntar;
   const d = resolved.detalhe || {};
   const area = resolved.tipo === 'aprendizado' ? d.area
     : resolved.tipo === 'doc' ? d.doc?.area : TIPO_AREA[resolved.tipo] || resolved.modulo;
@@ -1027,7 +1086,7 @@ export function acoesPadrao(resolved, s) {
   return [
     ui.button('Perguntar sobre isto', {
       variant: 'primary', icone: 'search',
-      onClick: () => { s.close(); perguntar(`O que preciso saber sobre ${nome}?`, { modulo }); },
+      onClick: () => { s.close(); pergunta(`O que preciso saber sobre ${nome}?`, { modulo }); },
     }),
     ui.button('Ensinar algo sobre isto', {
       icone: 'lightbulb',

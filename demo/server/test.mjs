@@ -145,7 +145,7 @@ teste('/estado com e sem cookie; conta acesso', async () => {
   assert.equal(j.demo.setor, 'textil');
   assert.equal(j.setor.id, 'textil');
   assert.deepEqual(j.aprendizado, []);
-  assert.equal(j.ia.disponivel, false);
+  assert.equal(j.ia, 'local', 'C1: sem ANTHROPIC_API_KEY o /estado diz ia:"local"');
   const lista = await (await admin.req('GET', '/api/admin/demos')).json();
   assert.equal(lista.find((x) => x.id === demoId).acessos, 1);
 });
@@ -637,6 +637,274 @@ teste('front (assistant.js): pergunta do portal sem cliente usa o cliente padrã
   }
 });
 
+/* ---------------- Rodada 3: regras públicas, representante, conversa do portal, sugestões, prompt ---------------- */
+
+/** Regras internas (sem publica:true) de um pacote e os nomes de gestores citados nelas ("(Sandra Hoffmann)"). */
+function internasDe(d) {
+  const internas = (d.regras_comerciais ?? []).filter((r) => r.publica !== true);
+  const nomes = new Set();
+  for (const r of internas) for (const m of `${r.texto}`.matchAll(/\(([A-ZÁÉÍÓÚÂÊÔ][a-záéíóúâêôãõç]+(?: [A-ZÁÉÍÓÚÂÊÔ][a-záéíóúâêôãõç]+)+)\)/g)) nomes.add(m[1]);
+  return { internas, nomes: [...nomes] };
+}
+const PROIBIDO_NO_PORTAL = /al[çc]ada|gerente|diretor|\bmetas?\b|meta_mes|realizado_mes|não confirmar|nunca prometer/i;
+
+teste('portal: regras comerciais só as públicas; desconto e crédito vão para o representante; nada de alçada, gerente, diretor ou meta (8 setores)', async () => {
+  const perguntas = ['Posso ter desconto?', 'Qual meu limite de crédito?', 'Consigo um preço melhor?', 'Qual o prazo de entrega?', 'Qual o pedido mínimo?',
+    'Como funciona a troca?', 'Quais são as condições de pagamento?', 'Quais são as condições comerciais?', 'Qual a garantia?', 'Tem frete grátis?',
+    'Qual a meta do meu representante?', 'Quem é meu representante?'];
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const { internas, nomes } = internasDe(ctx.data);
+    assert.ok(internas.length && ctx.data.regras_comerciais.some((r) => r.publica === true), `${setor}: há regras públicas e internas`);
+    assert.ok(internas.some((r) => /al[çc]ada|gerente|diretor/i.test(r.texto) || /desconto/i.test(r.titulo)), `${setor}: a alçada de desconto é interna`);
+    const vaza = (txt) => {
+      if (PROIBIDO_NO_PORTAL.test(txt)) return txt.match(PROIBIDO_NO_PORTAL)[0];
+      const nome = nomes.find((n) => txt.includes(n));
+      if (nome) return nome;
+      const regra = internas.find((r) => txt.includes(`regra:${r.id}`) || txt.includes(r.texto.slice(0, 40)));
+      return regra ? `regra interna ${regra.id}` : null;
+    };
+    for (const c of ctx.data.clientes) {
+      const v = motor.visaoDoCliente(ctx, c.id);
+      assert.ok(v.data.regras_comerciais.every((r) => r.publica === true), `${setor}/${c.id}`);
+      assert.ok(v.data.representantes.every((r) => Object.keys(r).sort().join() === 'id,nome,regiao,telefone'), 'representante sem meta nem derivado');
+      const tools = buildTools(v, {});
+      const saidas = tools.map((t) => t.execute(t.name === 'buscar_documentos' ? { consulta: 'desconto alçada crédito gerente prazo' } : {}));
+      saidas.push(tools.find((t) => t.name === 'buscar_documentos').execute({ consulta: 'regra comercial condição' }));
+      for (const s of saidas) { const txt = JSON.stringify(s); assert.equal(vaza(txt), null, `${setor}/${c.id}: ferramenta vazou ${vaza(txt)}: ${txt.slice(0, 300)}`); }
+      for (const t of tools) assert.equal(vaza(t.description), null, `${setor}: descrição de ${t.name}`);
+      for (const q of [...perguntas, ...motor.sugestoesDoPortal(ctx, c.id, 5)]) {
+        const r = motor.responder(ctx, q, { modulo: 'portal', cliente: c.id });
+        assert.equal(vaza(r.texto + r.fontes.join(' ')), null, `${setor}/${c.id}: "${q}" vazou ${vaza(r.texto)}: ${r.texto}`);
+        assert.ok(!/documento da operação/.test(r.texto), r.texto);
+      }
+      const rep = v.data.representantes[0];
+      for (const q of ['Posso ter desconto?', 'Qual meu limite de crédito?']) {
+        const r = motor.responder(ctx, q, { modulo: 'portal', cliente: c.id });
+        assert.ok(r.texto.startsWith(`Condições especiais são tratadas com o seu ${ctx.term('representante')}, **${rep.nome}**`), `${setor}: ${r.texto}`);
+      }
+    }
+    // o preço da tabela do cliente continua certo sem expor a regra de tabelas
+    for (const c of ctx.data.clientes) {
+      const v = motor.visaoDoCliente(ctx, c.id);
+      for (const p of ctx.data.produtos.slice(0, 3)) assert.deepEqual(motor.precoNaTabela(v, p, c), motor.precoNaTabela(ctx, p, c), `${setor}/${c.id}/${p.sku}`);
+    }
+  }
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, []);
+  const r = motor.responder(ctx, 'Qual o pedido mínimo?', { modulo: 'portal', cliente: 'CLI-1043' });
+  assert.match(r.texto, /^Pelas condições comerciais da Malharia/);
+  assert.ok(r.fontes.includes('regra:RC-02'));
+  // fora do portal, a alçada continua lá
+  assert.match(JSON.stringify(buildTools(ctx, {}).find((t) => t.name === 'regras_comerciais').execute({})), /Sandra Hoffmann/);
+});
+
+teste('portal: o representante não leva meta nem realizado (visão, resolveRef, ferramenta, resposta)', async () => {
+  const ctx = criaCtx({ setor: 'metalmecanica', modulos: {} }, []);
+  const c = ctx.data.clientes.find((x) => ctx.data.representantes.find((r) => r.id === x.representante)?.nome === 'Leandro Martins') ?? ctx.data.clientes[0];
+  const v = motor.visaoDoCliente(ctx, c.id);
+  const rep = v.data.representantes[0];
+  assert.deepEqual(Object.keys(rep).sort(), ['id', 'nome', 'regiao', 'telefone']);
+  assert.ok(v.resolveRef(`rep:${rep.id}`));
+  assert.equal(v.resolveRef(`rep:${ctx.data.representantes.find((r) => r.id !== rep.id).id}`), false, 'outro representante não resolve');
+  const t = buildTools(v, {}).find((x) => x.name === 'consultar_clientes_representantes').execute({});
+  assert.ok(!/meta|realizado/.test(JSON.stringify(t)), JSON.stringify(t));
+  const r = motor.responder(ctx, 'Quem é meu representante?', { modulo: 'portal', cliente: c.id });
+  assert.ok(!/meta|realiz|%/.test(r.texto), r.texto);
+});
+
+teste('conversa (front): portal com conversa própria por cliente, separada da interna (fio, chave de sessão, histórico)', async () => {
+  const conv = await import('../web/src/ui/conversa.js');
+  assert.equal(conv.fioDaConversa({}), 'interna');
+  assert.equal(conv.fioDaConversa({ modulo: 'qualidade' }), 'interna');
+  assert.equal(conv.fioDaConversa({ modulo: 'portal', cliente: 'CLI-1042' }), 'portal:CLI-1042');
+  assert.equal(conv.chaveDaConversa('abc', {}), 'td_conv_abc');
+  assert.equal(conv.chaveDaConversa('abc', { modulo: 'comercial', cliente: 'CLI-1042' }), 'td_conv_abc', 'cliente fora do portal não muda a conversa');
+  assert.equal(conv.chaveDaConversa('abc', { modulo: 'portal', cliente: 'CLI-1042' }), 'td_conv_abc:portal:CLI-1042');
+  assert.notEqual(conv.chaveDaConversa('abc', { modulo: 'portal', cliente: 'CLI-1050' }), conv.chaveDaConversa('abc', { modulo: 'portal', cliente: 'CLI-1042' }));
+  assert.equal(conv.chaveDaConversa(null, {}), null);
+
+  // envio de verdade (sem DOM): cada pergunta cai no fio dela e o histórico mandado é só o do fio
+  const data = pacote('textil');
+  const enviados = [];
+  const assistant = {
+    perguntar: async ({ mensagens, modulo, cliente }) => {
+      enviados.push({ mensagens, modulo, cliente });
+      return { texto: `resposta (${cliente ?? 'interna'})`, fontes: [], modo: 'local', aviso: null };
+    },
+  };
+  const ctx = { demo: { id: 'fio-teste' }, data, assistant, learning: null, navigate: () => {} };
+  const c = conv.createConversa(() => ctx);
+  await c.enviar('Quais NCs estão abertas?', { modulo: 'qualidade' });
+  await c.enviar('Onde está o meu pedido?', { modulo: 'portal', cliente: 'CLI-1042' });
+  await c.enviar('E a entrega?', { modulo: 'portal', cliente: 'CLI-1050' });
+  await c.enviar('E as joggers?', { modulo: 'portal', cliente: 'CLI-1042' });
+  const interna = c.mensagensDe({});
+  assert.deepEqual(interna.map((m) => m.texto), ['Quais NCs estão abertas?', 'resposta (interna)']);
+  assert.deepEqual(c.mensagens.map((m) => m.texto), interna.map((m) => m.texto));
+  assert.deepEqual(c.mensagensDe({ modulo: 'portal', cliente: 'CLI-1042' }).map((m) => m.texto),
+    ['Onde está o meu pedido?', 'resposta (CLI-1042)', 'E as joggers?', 'resposta (CLI-1042)']);
+  assert.deepEqual(c.mensagensDe({ modulo: 'portal', cliente: 'CLI-1050' }).map((m) => m.texto), ['E a entrega?', 'resposta (CLI-1050)']);
+  // o histórico da 2ª pergunta do CLI-1042 só leva o turno anterior DELE (nem a interna nem o CLI-1050)
+  assert.deepEqual(enviados.at(-1).mensagens, [
+    { role: 'user', content: 'Onde está o meu pedido?', cliente: 'CLI-1042' }, { role: 'assistant', content: 'resposta (CLI-1042)', cliente: 'CLI-1042' },
+    { role: 'user', content: 'E as joggers?', cliente: 'CLI-1042' },
+  ]);
+  assert.equal(enviados.at(-1).cliente, 'CLI-1042');
+  assert.deepEqual(enviados[2].mensagens, [{ role: 'user', content: 'E a entrega?', cliente: 'CLI-1050' }]);
+  // sugestões do painel do portal saem da visão do cliente
+  assert.ok(conv.sugestoesDoPainel({ data }, 'portal', 'CLI-1043', 3).every((q) => !/PV-88213|OEE/i.test(q)));
+});
+
+teste('portal: sugestões só com o que o cliente vê (sem pedido de outro cliente nem a fábrica por dentro)', async () => {
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, []);
+  const s = motor.sugestoesDoPortal(ctx, 'CLI-1043', 3);
+  assert.ok(s.length >= 2, s.join(' | '));
+  assert.ok(s.every((q) => !/PV-88213|OEE|tinturaria/i.test(q)), s.join(' | '));
+  assert.ok(motor.sugestoesDoPortal(ctx, 'CLI-1042', 3).some((q) => q.includes('PV-88213')), 'a do próprio cliente continua');
+  assert.deepEqual(motor.sugestoesDoPortal(ctx, 'CLI-9999'), []);
+  for (const setor of SETOR_IDS) {
+    const c8 = criaCtx({ setor, modulos: {} }, []);
+    const internos = codigosInternos(c8.data);
+    for (const c of c8.data.clientes) {
+      const v = motor.visaoDoCliente(c8, c.id);
+      const meus = new Set([...v.data.pedidos.map((p) => p.id), ...v.data.ordens.map((o) => o.id), ...v.data.produtos.map((p) => p.sku)]);
+      for (const q of motor.sugestoesDoPortal(c8, c.id, 5)) {
+        for (const cod of q.match(/\b[A-Z]{1,5}-\d[\w-]*/g) ?? []) assert.ok(meus.has(cod), `${setor}/${c.id}: "${q}" cita ${cod}`);
+        assert.equal(achaCodigo(q, internos), null, q);
+        assert.ok(!/\b(OEE|refugo|máquina|turno|não conformidade)/i.test(q), `${setor}: ${q}`);
+      }
+    }
+  }
+});
+
+teste('portal (IA): prompt para o cliente comprador e só os módulos do portal', async () => {
+  const ia = cliente(ENV_IA);
+  ia.pote[`td_${demoId}`] = visitante.pote[`td_${demoId}`];
+  let sys;
+  const ff = fetchFalso([(body) => {
+    sys = body.system.map((b) => b.text).join('\n');
+    return sseAnthropic([['content_block_start', { index: 0, content_block: { type: 'text', text: 'ok' } }], ['content_block_stop', { index: 0 }], ['message_delta', { delta: { stop_reason: 'end_turn' } }]]);
+  }, (body) => {
+    sys = body.system.map((b) => b.text).join('\n');
+    return sseAnthropic([['content_block_start', { index: 0, content_block: { type: 'text', text: 'ok' } }], ['content_block_stop', { index: 0 }], ['message_delta', { delta: { stop_reason: 'end_turn' } }]]);
+  }]);
+  await leSSE(await ia.req('POST', `/api/demo/${demoId}/conversa`, { mensagens: [{ role: 'user', content: 'Posso ter desconto?' }], modulo: 'portal', cliente: 'CLI-1042' }, { fetch: ff }));
+  assert.match(sys, /Quem lê é um cliente \(lojista\/comprador\) da /);
+  assert.ok(!/diretor ou dono da fábrica/.test(sys), 'sem o leitor interno');
+  const modulos = /Módulos que o lojista vê no portal: ([^.]+)\./.exec(sys)?.[1] ?? '';
+  assert.ok(modulos.includes('Portal do cliente') && modulos.includes('Comercial'), modulos);
+  for (const m of ['Qualidade', 'Manutenção', 'Marketing', 'Integrações', 'Segurança', 'Conhecimento de operadores']) assert.ok(!modulos.includes(m), `${m} em ${modulos}`);
+  assert.match(sys, /Condições especiais são tratadas com o seu representante, Cláudio Roberto Silveira/);
+  assert.ok(!/registrar_aprendizado/.test(sys));
+  // fora do portal, o prompt interno continua
+  await leSSE(await ia.req('POST', `/api/demo/${demoId}/conversa`, { mensagens: [{ role: 'user', content: 'oi' }], modulo: 'qualidade' }, { fetch: ff }));
+  assert.match(sys, /Quem lê é diretor ou dono da fábrica/);
+  assert.match(sys, /Módulos ativos nesta demo: .*Qualidade/);
+});
+
+teste('C1: /estado diz ia:"real" com ANTHROPIC_API_KEY e "local" sem', async () => {
+  const ia = cliente(ENV_IA);
+  ia.pote[`td_${demoId}`] = visitante.pote[`td_${demoId}`];
+  const j = await (await ia.req('GET', `/api/demo/${demoId}/estado`)).json();
+  assert.equal(j.ia, 'real');
+  assert.equal((await (await visitante.req('GET', `/api/demo/${demoId}/estado`)).json()).ia, 'local');
+  // o front aceita a string e o objeto da casca
+  assert.equal(createAssistant(() => ({ ia: 'real' })).modo(), 'ia');
+  assert.equal(createAssistant(() => ({ ia: 'local' })).modo(), 'local');
+  assert.equal(createAssistant(() => ({ ia: { modo: 'real', disponivel: true } })).modo(), 'ia');
+  assert.equal(createAssistant(() => ({ ia: { modo: 'local', disponivel: false } })).modo(), 'local');
+});
+
+teste('motor local: não conformidades contadas como na página ("6 em aberto (4 abertas e 2 em análise)"); a mais grave primeiro', async () => {
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const ncs = ctx.data.nao_conformidades.filter((n) => n.status !== 'encerrada');
+    const ab = ncs.filter((n) => n.status === 'aberta').length, an = ncs.filter((n) => n.status === 'em_analise').length;
+    const esperado = `${ncs.length} não conformidades em aberto** (${[ab && `${ab} aberta${ab === 1 ? '' : 's'}`, an && `${an} em análise`].filter(Boolean).join(' e ')})`;
+    const lista = motor.responder(ctx, 'Quais não conformidades estão abertas?', { modulo: 'qualidade' }).texto;
+    assert.ok(lista.startsWith(`**${esperado}`), `${setor}: ${lista.split('\n')[0]}`);
+    assert.ok(!/^Há \*\*/.test(lista));
+    const r = motor.responder(ctx, 'O que mais preocupa na qualidade?', { modulo: 'qualidade' });
+    const [conclusao, ...resto] = r.texto.split('\n').filter(Boolean);
+    const top = /^\*\*A mais grave é a ([^*]+)\*\*\[\[nc:/.exec(conclusao)?.[1];
+    assert.ok(top, `${setor}: ${conclusao}`);
+    const nc = ncs.find((n) => n.id === top);
+    assert.ok(nc && nc.severidade === ncs.reduce((m, n) => (['alta', 'media', 'baixa'].indexOf(n.severidade) < ['alta', 'media', 'baixa'].indexOf(m) ? n.severidade : m), 'baixa'), `${setor}: ${top}`);
+    assert.match(conclusao, /\(severidade \S+, (reclamação|problema de fornecedor|detectada)/);
+    assert.ok(resto[0].startsWith(`**Próximo passo:** confirmar com ${nc.responsavel}, responsável, a ação em curso`), resto[0]);
+    assert.ok(r.texto.indexOf('Próximo passo') < r.texto.indexOf('Ao todo') || ncs.length === 1, 'conclusão, próximo passo, depois a lista');
+    if (ncs.length > 1) assert.ok(r.texto.includes(`Ao todo, **${esperado}`), `${setor}: ${r.texto}`);
+    for (const ref of r.fontes) assert.ok(motor.refOk(ctx, ref), ref);
+    // o resumo do dia conta as graves do mesmo jeito
+    const hoje = motor.responder(ctx, 'O que eu preciso ver hoje?', { modulo: 'visao-geral' }).texto.split('\n')[0];
+    const graves = ncs.filter((n) => n.severidade === 'alta');
+    if (graves.length > 1) assert.match(hoje, new RegExp(`${graves.length} não conformidades graves em aberto \\(`), hoje);
+  }
+  const mm = criaCtx({ setor: 'metalmecanica', modulos: {} }, []);
+  assert.match(motor.responder(mm, 'Quais não conformidades estão abertas?', {}).texto, /^\*\*6 não conformidades em aberto\*\* \(4 abertas e 2 em análise\)/);
+  const r = motor.responder(mm, 'O que mais preocupa na qualidade?', { modulo: 'qualidade' });
+  assert.match(r.texto, /^\*\*A mais grave é a NC-2026-211\*\*\[\[nc:NC-2026-211\]\] \(severidade alta, reclamação da Carrocerias Serra Gaúcha\)/);
+  assert.match(r.texto, /pedido \*\*PV-7731\*\*\[\[pedido:PV-7731\]\] de Carrocerias Serra Gaúcha: 12\.000 /);
+  assert.equal(motor.contaNcs([{ status: 'aberta' }], { adj: 'grave' }), '1 não conformidade grave em aberto (1 aberta)');
+});
+
+teste('motor local: corte não para logo antes de data ou número; tabela com o artigo certo', async () => {
+  const t = 'PRE-400 com embreagem patinando: a cadência caiu de 30 para 18 golpes/min (OS-6612). 6.600 de 12.000 suportes feitos; nova previsão de término em 19/11. Resto sem importância nenhuma aqui para o leitor.';
+  const c = motor.cortaDados(t, 140);
+  assert.ok(c.includes('19/11'), c);
+  assert.ok(!/de…$|em…$/.test(c), c);
+  assert.equal(motor.cortaDados('curto', 140), 'curto');
+  const semNumero = 'palavra '.repeat(60);
+  assert.equal(motor.cortaDados(semNumero, 50), motor.corta(semNumero, 50));
+  // nenhuma resposta do motor deixa "de…", "em…", "para…" antes de um número que estava no texto
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    for (const q of ['O que eu preciso ver hoje?', 'Quais ordens estão atrasadas?', 'Quais pedidos estão atrasados?', 'Quais não conformidades estão abertas?', 'O que mais preocupa na qualidade?', 'Quais máquinas estão paradas?']) {
+      const txt = motor.responder(ctx, q, {}).texto;
+      for (const m of txt.matchAll(/(?<=\s)(de|em|para|até|com|a|o|da|do|e)…/g)) assert.fail(`${setor}: "${q}" corta antes do dado: …${txt.slice(Math.max(0, m.index - 60), m.index + 4)}`);
+    }
+  }
+  assert.equal(motor.daTabela('Contrato anual'), 'do Contrato anual');
+  assert.equal(motor.daTabela('Tabela A'), 'da Tabela A');
+  assert.equal(motor.pelaTabela('Contrato anual'), 'pelo Contrato anual');
+});
+
+teste('acessos: duas listagens concorrentes não sobrescrevem o resumo uma da outra (relê antes de gravar)', async () => {
+  const { demo: dc } = await (await admin.req('POST', '/api/admin/demos', { nome: 'Compacta concorrente', setor: 'textil' })).json();
+  const hora = Date.now() - 3 * 3600e3;
+  const chaves = Array.from({ length: 9 }, (_, i) => `acessos/${dc.id}/${String(hora + i * 60e3).padStart(13, '0')}-conc${i}000`);
+  for (const [i, k] of chaves.entries()) await store.set(k, { em: new Date(hora + i * 60e3).toISOString() });
+  const kResumo = `acessos_resumo/${dc.id}`;
+  // listagem A: viu a lista antes da 9ª chave existir e é lenta para gravar; a B termina antes
+  let fimB;
+  const bTerminou = new Promise((r) => { fimB = r; });
+  let leiturasA = 0;
+  const lenta = Object.create(store);
+  lenta.list = async (p) => (await store.list(p)).filter((k) => k !== chaves[8]);
+  lenta.get = async (k) => { if (k === kResumo && ++leiturasA === 2) await bTerminou; return store.get(k); };
+  lenta.set = async (k, v) => { if (k === kResumo) await bTerminou; return store.set(k, v); };
+  lenta.delete = (k) => store.delete(k);
+  const { listaDemos } = await import('./demos.mjs');
+  const a = listaDemos(lenta);
+  await new Promise((r) => setTimeout(r, 20));
+  const b = await listaDemos(store);
+  assert.equal(b.find((x) => x.id === dc.id).acessos, 9);
+  fimB();
+  const la = await a;
+  assert.equal(la.find((x) => x.id === dc.id).acessos, 9, 'A usa o resumo que leu');
+  const resumo = await store.get(kResumo);
+  assert.equal(resumo.total, 9, 'A não sobrescreveu o resumo da B com um total menor');
+  assert.equal(resumo.ate, chaves[8]);
+  assert.deepEqual(await store.list(`acessos/${dc.id}/`), []);
+  assert.equal((await (await admin.req('GET', '/api/admin/demos')).json()).find((x) => x.id === dc.id).acessos, 9);
+  // duas listagens normais ao mesmo tempo: mesmo total, sem contar duas vezes
+  for (let i = 0; i < 4; i++) await store.set(`acessos/${dc.id}/${String(hora + (20 + i) * 60e3).padStart(13, '0')}-par${i}0000`, { em: new Date(hora).toISOString() });
+  const [x1, x2] = await Promise.all([listaDemos(store), listaDemos(store)]);
+  assert.deepEqual([x1, x2].map((l) => l.find((x) => x.id === dc.id).acessos), [13, 13]);
+  assert.equal((await store.get(kResumo)).total, 13);
+  await admin.req('DELETE', `/api/admin/demos/${dc.id}`, undefined);
+});
+
 /* ---------------- Motor local: resumo do dia e pergunta derivada ---------------- */
 
 teste('motor local: "o que eu preciso ver hoje?" vem com conclusão, 3–4 itens com impacto e próximo passo', async () => {
@@ -704,14 +972,14 @@ teste('motor local: resumo do dia não sequestra pergunta de área, de registro 
   r = motor.responder(ctx, 'O que mais preocupa na qualidade?', { modulo: 'qualidade' });
   assert.ok(!RESUMO.test(r.texto), r.texto);
   assert.match(r.texto, /não conformidades? em aberto/);
-  assert.ok(r.fontes.every((f) => f.startsWith('nc:')), r.fontes.join(' '));
+  assert.ok(r.fontes[0].startsWith('nc:') && r.fontes.every((f) => /^(nc|pedido):/.test(f)), r.fontes.join(' '));
   r = motor.responder(ctx, 'Qual máquina pede atenção na tinturaria?', {});
   assert.ok(!RESUMO.test(r.texto), r.texto);
   assert.match(r.texto, /fora da operação normal no setor produtivo Tinturaria/);
   assert.ok(r.fontes.includes('maq:TIN-03') && !r.fontes.includes('maq:TEA-12'), r.fontes.join(' '));
   // a mesma pergunta geral feita na tela de uma área vai para a área, não para o resumo (nem a resposta pronta da visão geral)
   r = motor.responder(ctx, 'O que eu preciso ver hoje?', { modulo: 'qualidade' });
-  assert.ok(!RESUMO.test(r.texto) && r.fontes.every((f) => f.startsWith('nc:')), r.texto);
+  assert.ok(!RESUMO.test(r.texto) && r.fontes[0].startsWith('nc:') && r.fontes.every((f) => /^(nc|pedido):/.test(f)), r.texto);
   r = motor.responder(ctx, 'O que mais preocupa hoje?', { modulo: 'manutencao' });
   assert.ok(r.fontes.every((f) => /^(maq|os):/.test(f)) && r.fontes.length, r.texto);
 });
@@ -827,7 +1095,23 @@ teste('demo desativada ou expirada: senha certa → 410 "link desativado"; senha
   r = await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha: 'errada' });
   assert.equal(r.status, 401, 'quem só errou a senha não vê a tela de link desativado');
   assert.deepEqual(await r.json(), { erro: 'Link ou senha inválidos' });
-  assert.equal((await visitante.req('GET', `/api/demo/${demoId}/estado`)).status, 401);
+  // C2: com o cookie válido desta demo (a pessoa tinha a senha), o /estado diz que o link foi desativado
+  r = await visitante.req('GET', `/api/demo/${demoId}/estado`);
+  assert.equal(r.status, 410);
+  assert.deepEqual(await r.json(), DESATIVADO);
+  // sem cookie, com cookie de outra demo ou com cookie forjado: 401 (não revela que o link existiu)
+  assert.equal((await cliente().req('GET', `/api/demo/${demoId}/estado`)).status, 401);
+  const outraDemo = cliente();
+  outraDemo.pote[`td_${demoId}`] = visitante.pote[`td_${demoId}`].replace(/^[^.]+/, Buffer.from(JSON.stringify({ t: 'demo', id: 'aaaaaaaaaaaa', sv: 1, exp: Date.now() + 1e6 })).toString('base64url'));
+  assert.equal((await outraDemo.req('GET', `/api/demo/${demoId}/estado`)).status, 401, 'assinatura não confere');
+  const { demo: dOutra, senha: sOutra } = await (await admin.req('POST', '/api/admin/demos', { nome: 'Outra', setor: 'moveis' })).json();
+  const daOutra = cliente();
+  await daOutra.req('POST', `/api/demo/${dOutra.id}/entrar`, { senha: sOutra });
+  daOutra.pote[`td_${demoId}`] = daOutra.pote[`td_${dOutra.id}`];
+  assert.equal((await daOutra.req('GET', `/api/demo/${demoId}/estado`)).status, 401, 'cookie assinado para outra demo');
+  await admin.req('DELETE', `/api/admin/demos/${dOutra.id}`, undefined);
+  // as outras rotas da demo continuam 401
+  assert.equal((await visitante.req('GET', `/api/demo/${demoId}/aprendizado`)).status, 401);
   r = await admin.req('GET', `/api/demo/${demoId}/estado`);
   assert.equal(r.status, 200);
   assert.equal((await r.json()).admin, true);
@@ -836,6 +1120,7 @@ teste('demo desativada ou expirada: senha certa → 410 "link desativado"; senha
   assert.equal(r.status, 410);
   assert.deepEqual(await r.json(), DESATIVADO);
   assert.equal((await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha: 'errada' })).status, 401);
+  assert.equal((await visitante.req('GET', `/api/demo/${demoId}/estado`)).status, 410, 'expirada: 410 no /estado também');
 });
 
 teste('entrar: depois de 20 senhas erradas na hora, até a certa dá a mesma resposta; cookie malformado não derruba', async () => {

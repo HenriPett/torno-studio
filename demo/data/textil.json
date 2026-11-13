@@ -2056,12 +2056,14 @@
     {
       "id": "RC-02",
       "titulo": "Pedido mínimo e grade",
-      "texto": "Pedido mínimo de R$ 3.000,00 por lojista e grade mínima de 6 peças por cor. Tamanhos avulsos fora da grade custam 4% a mais."
+      "texto": "Pedido mínimo de R$ 3.000,00 por lojista e grade mínima de 6 peças por cor. Tamanhos avulsos fora da grade custam 4% a mais.",
+      "publica": true
     },
     {
       "id": "RC-03",
       "titulo": "Prazo de entrega",
-      "texto": "Artigo com estoque acima do mínimo: faturamento em até 3 dias úteis após a aprovação de crédito. Artigo abaixo do mínimo: o estoque fica reservado para pedidos já aprovados e o pedido novo entra com o prazo da próxima OP mais 2 dias de expedição."
+      "texto": "Artigo com estoque acima do mínimo: faturamento em até 3 dias úteis após a aprovação de crédito. Artigo abaixo do mínimo: o estoque fica reservado para pedidos já aprovados e o pedido novo entra com o prazo da próxima OP mais 2 dias de expedição.",
+      "publica": true
     },
     {
       "id": "RC-04",
@@ -2076,7 +2078,8 @@
     {
       "id": "RC-06",
       "titulo": "Trocas por defeito",
-      "texto": "O lojista pode trocar até 10% do pedido por defeito de fabricação em até 30 dias da entrega, com foto e etiqueta da peça."
+      "texto": "O lojista pode trocar até 10% do pedido por defeito de fabricação em até 30 dias da entrega, com foto e etiqueta da peça.",
+      "publica": true
     }
   ],
   "kpis": [
@@ -3201,7 +3204,7 @@
     {
       "modulo": "visao-geral",
       "pergunta": "O que eu preciso ver hoje?",
-      "resposta": "Há 4 OPs atrasadas (OP-24518, OP-24522, OP-24530 e OP-24535) e 3 pedidos de lojistas atrasados (PV-88213, PV-88227 e PV-88240). A TIN-03 está em alerta e o TEA-12 está parado aguardando platinas. São 3 NCs abertas e 3 em análise; as duas de severidade alta são a NC-2026-121 (tom do moletom marinho) e a NC-2026-119 (gola do polo, reclamação da Magazine Horizonte Sul).",
+      "resposta": "Há 4 OPs atrasadas (OP-24518, OP-24522, OP-24530 e OP-24535) e 3 pedidos de lojistas atrasados (PV-88213, PV-88227 e PV-88240). A TIN-03 está em alerta e o TEA-12 está parado aguardando platinas. São 6 não conformidades em aberto (3 abertas e 3 em análise); as duas de severidade alta são a NC-2026-121 (tom do moletom marinho) e a NC-2026-119 (gola do polo, reclamação da Magazine Horizonte Sul).",
       "fontes": [
         "op:OP-24518",
         "op:OP-24522",
@@ -3292,7 +3295,7 @@
     {
       "modulo": "qualidade",
       "pergunta": "Quais NCs estão abertas e o que falta para fechar?",
-      "resposta": "Três abertas. NC-2026-121 (alta): moletom marinho com ΔE 1,8; falta trocar a válvula da TIN-03 (OS-7731) e incluir o ajuste de receita na instrução. NC-2026-122 (média): rapport deslocado na viscose estampada; falta o crédito do fornecedor. NC-2026-125 (média): gola torta na facção; falta o retrabalho e a visita técnica de 17/11. Outras 3 estão em análise, entre elas a NC-2026-119, de severidade alta.",
+      "resposta": "São 6 não conformidades em aberto (3 abertas e 3 em análise). As abertas: NC-2026-121 (alta): moletom marinho com ΔE 1,8; falta trocar a válvula da TIN-03 (OS-7731) e incluir o ajuste de receita na instrução. NC-2026-122 (média): rapport deslocado na viscose estampada; falta o crédito do fornecedor. NC-2026-125 (média): gola torta na facção; falta o retrabalho e a visita técnica de 17/11. Das 3 em análise, a NC-2026-119 é de severidade alta.",
       "fontes": [
         "nc:NC-2026-121",
         "nc:NC-2026-122",

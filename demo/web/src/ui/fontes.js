@@ -1,17 +1,23 @@
 // Fontes da resposta (UX §4.5.4): sobrescritos numerados ligados a cartões com o sistema de origem.
 //
-//   blocoFontes({ctx, refs, citas, learning, max}) → <section> "Fontes" com cartões (aprendido primeiro)
-//   cartaoFonte(ctx, ref, n, {realce}) → <button> cartão de 72 px (ou null se a ref não resolve)
+//   blocoFontes({ctx, refs, citas, learning, max, cliente}) → <section> "Fontes" com cartões (aprendido primeiro)
+//   cartaoFonte(ctx, ref, n, {realce, cliente}) → <button> cartão de 72 px (ou null se a ref não resolve)
 //   cartaoAprendido(item, {ctx, estatico}) → cartão "Registrado por {autor} · agora"
-//   citeNodeLigado(raiz, ctx) → fábrica de sobrescritos: hover/foco destaca o cartão, clique abre a gaveta
-//   sistemaDaRef(resolved, ctx) (origem: origemDoRef de origem.js) · quando(iso) · rotulosParaCopiar(ctx, refs, citas)
-//   abrirFonte(ctx, ref) → abre a gaveta (o rodapé "Origem: …" é do openRef) e dispara o marco 'fonte'
+//   citeNodeLigado(raiz, ctx, {cliente}) → fábrica de sobrescritos: hover/foco destaca o cartão, clique abre a gaveta
+//   sistemaDaRef(resolved, ctx) (origem: origemDoRef de origem.js) · quando(iso) · rotulosParaCopiar(ctx, refs, citas, {cliente})
+//   abrirFonte(ctx, ref, {cliente}) → abre a gaveta (o rodapé "Origem: …" é do openRef) e dispara o marco 'fonte'
+//   ctxDoCliente(ctx, cliente) → ctx na versão do cliente do Portal (visaoDoCliente), ou ctx sem cliente
+//
+// `cliente` (id CLI-… do Portal, opcional): o cartão, o sobrescrito e a gaveta resolvem o registro e a
+// origem a partir de visaoDoCliente (local-engine.js): representante sem "% da meta", ordem sem
+// histórico interno, sem registros da equipe. Cliente que não existe no pacote: nenhuma fonte aparece.
 //   marco(tipo) → window 'torno:marco' {tipo} (roteiro guiado do Início)
 //   partesDoRegistro(item) → {titulo, corpo} sem repetir o título nem mexer na capitalização
 
 import { h, icon } from '../ui.js';
 import { fmt } from '../format.js';
-import { statusLabel } from '../ai/local-engine.js';
+import { statusLabel, severidadeLabel, visaoDoCliente } from '../ai/local-engine.js';
+import { resolveRef as resolveRefData } from '../adapters/data-source.js';
 import { tituloDoTexto } from '../learning.js';
 import { origemDoRef, sistemaDoRef } from '../origem.js';
 
@@ -69,13 +75,50 @@ function linhaOrigem(r, ctx) {
   return `${sist} · ${o.erro ? 'última sincronização' : 'sincronizado'} ${horaSync(o.sync, ctx)}`;
 }
 
+// ctx já na versão de um cliente (não refaz a visão em cima da visão)
+const VISOES = new WeakSet();
+
+/**
+ * ctx na versão do cliente `cliente` do Portal (C3). Sem `cliente`, devolve o próprio ctx.
+ * Os dados vêm de visaoDoCliente (só os registros dele, sem meta do representante, sem histórico
+ * interno da ordem, sem registros da equipe); resolveRef devolve o registro resolvido sobre esses
+ * dados; openRef abre a gaveta também na versão do cliente; perguntar vai para o assistente do Portal.
+ * → ctx | null (cliente que não existe no pacote: nada se mostra, em vez de cair nos dados internos)
+ */
+export function ctxDoCliente(ctx, cliente) {
+  if (!cliente) return ctx;
+  if (VISOES.has(ctx) && ctx.cliente === cliente) return ctx;
+  let v = null;
+  try { v = visaoDoCliente(ctx, cliente); } catch (e) { console.error('[fontes] visaoDoCliente', e); }
+  if (!v) return null;
+  const confere = v.resolveRef;
+  const base = ctx;
+  const out = {
+    ...v,
+    learning: null,
+    aprendizado: [],
+    resolveRef: (ref) => {
+      try { return confere(ref) ? resolveRefData(v.data, ref, v.isEnabled, { aprendizado: [] }) : null; } catch { return null; }
+    },
+    openRef: (ref, o = {}) => base?.openRef?.(ref, { ...o, cliente }) ?? null,
+    perguntar: typeof base?.perguntar === 'function'
+      ? (texto, o = {}) => base.perguntar(texto, { ...o, modulo: 'portal', painel: true })
+      : undefined,
+  };
+  VISOES.add(out);
+  return out;
+}
+
 /**
  * Abre a gaveta de uma fonte (cartão ou sobrescrito) e avisa o roteiro guiado. A linha "Origem: …"
- * fica no rodapé que o próprio openRef põe (app.js). → a folha aberta ou null.
+ * fica no rodapé que o próprio openRef põe (app.js). Com `cliente`, a gaveta abre na versão dele
+ * (app.openRef(ref, {cliente})). → a folha aberta ou null.
  */
-export function abrirFonte(ctx, ref) {
+export function abrirFonte(ctx, ref, { cliente } = {}) {
   let s = null;
-  try { s = ctx?.openRef?.(ref) ?? null; } catch (e) { console.error('[fontes] openRef', e); }
+  try {
+    s = (cliente ? ctx?.openRef?.(ref, { cliente }) : ctx?.openRef?.(ref)) ?? null;
+  } catch (e) { console.error('[fontes] openRef', e); }
   if (!s) return null;
   marco('fonte');
   return s;
@@ -88,14 +131,14 @@ function detalheDaRef(r, ctx) {
   switch (r?.tipo) {
     case 'op': return [statusLabel(d.status), d.progresso != null ? `${d.progresso}%` : null, d.prazo ? `prazo ${dataBr(d.prazo)}` : null].filter(Boolean).join(' · ');
     case 'pedido': return [statusLabel(d.status), d.previsao_entrega ? `${d.status === 'atrasado' ? 'nova previsão' : 'previsão'} ${dataBr(d.previsao_entrega)}` : null].filter(Boolean).join(' · ');
-    case 'nc': return [statusLabel(d.status), d.severidade ? `severidade ${d.severidade}` : null].filter(Boolean).join(' · ');
+    case 'nc': return [statusLabel(d.status), d.severidade ? `severidade ${severidadeLabel(d.severidade)}` : null].filter(Boolean).join(' · ');
     case 'os': return [statusLabel(d.status), d.tecnico].filter(Boolean).join(' · ');
     case 'maq': return [statusLabel(d.status), d.proxima_preventiva ? `preventiva ${dataBr(d.proxima_preventiva)}` : null].filter(Boolean).join(' · ');
     case 'doc': return d.trecho ? curto(d.trecho.texto, 90) : d.doc?.atualizado ? `atualizado ${dataBr(d.doc.atualizado)}` : '';
     case 'turno': return `${d.produzido ?? '—'} produzidas · ${d.paradas_min ?? 0} min de parada`;
     case 'sku': return d.estoque != null ? `estoque ${d.estoque.toLocaleString('pt-BR')} · mínimo ${Number(d.estoque_minimo ?? 0).toLocaleString('pt-BR')}` : '';
     case 'cliente': return [d.cidade && d.uf ? `${d.cidade}/${d.uf}` : null, d.tabela_preco].filter(Boolean).join(' · ');
-    case 'rep': return d.meta_mes ? `${Math.round((d.realizado_mes / d.meta_mes) * 100)}% da meta do mês` : t('representante');
+    case 'rep': return d.meta_mes && d.realizado_mes != null ? `${Math.round((d.realizado_mes / d.meta_mes) * 100)}% da meta do mês` : t('representante');
     case 'regra': return curto(d.texto, 90);
     case 'kpi': return d.valor != null ? `${String(d.valor).replace('.', ',')}${d.unidade === '%' ? '%' : d.unidade ? ` ${d.unidade}` : ''} · meta ${String(d.meta).replace('.', ',')}${d.unidade === '%' ? '%' : ''}` : '';
     case 'saber': return [d.autor, d.funcao, d.tempo_casa_anos ? `${d.tempo_casa_anos} anos de casa` : null].filter(Boolean).join(' · ');
@@ -160,8 +203,20 @@ function vigiaTituloCortado(l2, l3, resto, completo) {
     if (cortado) l2.title = l2.textContent;
     else l2.removeAttribute('title');
   };
-  if (typeof ResizeObserver === 'function') new ResizeObserver(confere).observe(l2);
-  else requestAnimationFrame(confere);
+  if (typeof ResizeObserver !== 'function') { requestAnimationFrame(confere); return; }
+  // o observer vive enquanto o título estiver na página. Ao sair do DOM (conversa limpa, gaveta fechada,
+  // lista refeita) o tamanho vira 0×0 e o observer é chamado: aí ele se desconecta. Cartão criado fora
+  // da página (ex.: os "+ N fontes" ainda escondidos) espera o primeiro encaixe.
+  let montado = false;
+  const ro = new ResizeObserver(() => {
+    if (!l2.isConnected) {
+      if (montado) ro.disconnect();
+      return;
+    }
+    montado = true;
+    confere();
+  });
+  ro.observe(l2);
 }
 
 /** Cartão de um registro aprendido (fonte, confirmação e listas). */
@@ -188,8 +243,12 @@ export function cartaoAprendido(item, { ctx, n, estatico = false, realce = false
   }, ...filhos);
 }
 
-/** Cartão de fonte (botão que abre a gaveta). null quando a ref não resolve. */
-export function cartaoFonte(ctx, ref, n, { realce = false } = {}) {
+/**
+ * Cartão de fonte (botão que abre a gaveta). null quando a ref não resolve. Com `cliente`, o registro,
+ * a origem e a gaveta vêm da versão do cliente (ctxDoCliente).
+ */
+export function cartaoFonte(ctx, ref, n, { realce = false, cliente } = {}) {
+  if (cliente) ctx = ctxDoCliente(ctx, cliente);
   const r = resolve(ctx, ref);
   if (!r) return null;
   if (r.tipo === 'aprendizado') return cartaoAprendido(r.detalhe, { ctx, n, realce });
@@ -213,7 +272,9 @@ export function cartaoFonte(ctx, ref, n, { realce = false } = {}) {
  * Seção "Fontes". `refs` = fontes da resposta; `citas` (criaCitas de markdown.js) já numerou as do
  * texto; as que vieram só em `fontes` ganham os números seguintes. Aprendido primeiro; 4 visíveis.
  */
-export function blocoFontes({ ctx, refs = [], citas, learning, max = 4 } = {}) {
+export function blocoFontes({ ctx, refs = [], citas, learning, max = 4, cliente } = {}, opcoes = {}) {
+  cliente ??= opcoes?.cliente;
+  if (cliente) ctx = ctxDoCliente(ctx, cliente);
   const ordem = citas ? citas.completar(refs) : [...new Set(refs)];
   const numero = (ref) => (citas ? citas.consulta(ref) : ordem.indexOf(ref) + 1);
   const ordenadas = [...ordem].sort((a, b) => {
@@ -224,7 +285,7 @@ export function blocoFontes({ ctx, refs = [], citas, learning, max = 4 } = {}) {
   const cartoes = [];
   for (const ref of ordenadas) {
     let realce = false;
-    if (ref.startsWith('aprendizado:') && learning?.primeiraVez) realce = learning.primeiraVez(ref.slice(12));
+    if (ref.startsWith('aprendizado:') && learning?.primeiraVez && !cliente) realce = learning.primeiraVez(ref.slice(12));
     const c = cartaoFonte(ctx, ref, numero(ref), { realce });
     if (c) cartoes.push(c);
   }
@@ -241,9 +302,10 @@ export function blocoFontes({ ctx, refs = [], citas, learning, max = 4 } = {}) {
 
 /**
  * Sobrescrito de citação ligado aos cartões dentro de `raiz` (hover/foco destaca o cartão com o mesmo
- * data-ref; clique abre a gaveta).
+ * data-ref; clique abre a gaveta; com `cliente`, na versão do cliente).
  */
-export function citeNodeLigado(raiz, ctx) {
+export function citeNodeLigado(raiz, ctx, { cliente } = {}) {
+  if (cliente) ctx = ctxDoCliente(ctx, cliente);
   const marca = (ref, on) => {
     for (const c of raiz.querySelectorAll('.fonte[data-ref]')) if (c.dataset.ref === ref) c.classList.toggle('is-linked', on);
   };
@@ -258,8 +320,9 @@ export function citeNodeLigado(raiz, ctx) {
   };
 }
 
-/** [{n, tipo, rotulo}] para o "Copiar". */
-export function rotulosParaCopiar(ctx, refs, citas) {
+/** [{n, tipo, rotulo}] para o "Copiar" (com `cliente`, só o que a versão do cliente resolve). */
+export function rotulosParaCopiar(ctx, refs, citas, { cliente } = {}) {
+  if (cliente) ctx = ctxDoCliente(ctx, cliente);
   const out = [];
   for (const ref of refs) {
     const r = resolve(ctx, ref);

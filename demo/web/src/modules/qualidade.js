@@ -2,6 +2,7 @@
 // "3 abertas e 3 em análise"); lista de NCs; gaveta `nc`
 // com 8D registrado ou [Gerar rascunho de 8D] transmitido no corpo da gaveta.
 import { h } from '../ui.js';
+import { severidadeLabel } from '../ai/local-engine.js';
 import {
   areaPage, listSection, statusBadge, seloRegistros, notesFor, learnItems, origemDados, cap, T, fmtOf, tag,
 } from '../ui/area-page.js';
@@ -30,7 +31,7 @@ export function render(el, ctx) {
     rotulo: 'Não conformidades',
     filtros: [
       { id: 'abertas', label: 'Em aberto', fn: emAberto },
-      { id: 'graves', label: 'Graves', fn: grave },
+      { id: 'graves', label: 'Graves (alta)', fn: grave },
       { id: 'todas', label: 'Todas', fn: () => true },
     ],
     busca: { placeholder: `Buscar NC ou ${T(ctx, 'produto')}`, texto: (n) => `${n.id} ${n.sku || ''} ${prodBy[n.sku]?.nome || ''} ${n.descricao || ''}` },
@@ -46,7 +47,8 @@ export function render(el, ctx) {
         render: (n) => h('span', { class: 'ar-trunc', title: n.descricao || '' }, prodBy[n.sku]?.nome || n.descricao || n.sku || ''),
       },
       { m: null, largura: 'minmax(84px,110px)', render: (n) => h('span', { class: 'ar-muted' }, ORIGEM[n.origem] || cap(n.origem || '')) },
-      { m: 'sub', largura: 'minmax(72px,96px)', render: (n) => (n.severidade === 'alta' ? tag('Grave', 'danger') : h('span', { class: 'ar-muted' }, `Sev. ${n.severidade === 'media' ? 'média' : n.severidade || '—'}`)) },
+      // a mesma palavra da conversa ("severidade alta"): grave = severidade alta, em destaque
+      { m: 'sub', largura: 'minmax(72px,96px)', render: (n) => (n.severidade === 'alta' ? tag('Sev. alta', 'danger') : h('span', { class: 'ar-muted' }, `Sev. ${n.severidade ? severidadeLabel(n.severidade) : '—'}`)) },
       { m: 'status', largura: 'minmax(150px,auto)', render: (n) => h('span', { class: 'ar-status' }, statusBadge(n.status), seloRegistros(nNotas(n))) },
     ],
   });
@@ -59,7 +61,7 @@ export function render(el, ctx) {
     numeros: [
       { valor: f.num(nAbertas), rotulo: nAbertas === 1 ? 'NC aberta' : 'NCs abertas', tom: nGraves ? 'danger' : nAbertas + nAnalise ? 'warn' : 'ok' },
       { valor: f.num(nAnalise), rotulo: 'em análise' },
-      { valor: f.num(nGraves), rotulo: nGraves === 1 ? 'grave em aberto' : 'graves em aberto' },
+      { valor: f.num(nGraves), rotulo: nGraves === 1 ? 'grave (alta) em aberto' : 'graves (alta) em aberto' },
     ],
     corpo: lista.el,
   });

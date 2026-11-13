@@ -45,6 +45,18 @@ Trocar `DEMO_ADMIN_PASSWORD` derruba as sessões de admin; trocar `DEMO_SESSION_
 
 Só quem sabe a senha vê o 410; quem errou a senha continua vendo o 401.
 
+## Estado da demo (`GET /api/demo/<id>/estado`)
+
+| Resposta | Quando |
+|---|---|
+| `200 {demo, setor, aprendizado, ia, ia_modelo, admin}` | cookie `td_<id>` válido e demo disponível (ou admin logado, que abre qualquer demo) |
+| `401 {erro:"Link ou senha inválidos"}` | sem cookie, cookie forjado, de outra demo ou de uma senha já trocada, ou demo apagada |
+| `410 {erro:"Este link foi desativado ou expirou."}` | cookie válido e assinado para ESTA demo (a pessoa já tinha a senha), mas a demo foi desativada ou passou de `expira_em` |
+
+- `ia`: `'real'` quando há `ANTHROPIC_API_KEY` no ambiente do servidor, senão `'local'` (a conversa responde
+  pelo motor local). O front usa isso para não prometer "IA real" sem chave. `ia_modelo`: o modelo, ou `null`.
+- O 410 vale só para o `/estado` (o front mostra a tela final). As outras rotas da demo continuam 401.
+
 ## Acessos (chaves `acessos/` e `acessos_resumo/`)
 
 - `acessos/<demo>/<janela>-<sid>` → `{em}`: um acesso de visitante (GET `/estado`). `janela` é o início do
@@ -54,8 +66,10 @@ Só quem sabe a senha vê o 410; quem errou a senha continua vendo o 401.
   nunca é regravado por acesso. Chaves antigas `acessos/<demo>/<ts>-<rand>` continuam contando.
 - `acessos_resumo/<demo>` → `{total, ultimo_acesso, ate}`: a listagem do admin (`GET /api/admin/demos`)
   soma ali as chaves com mais de 20 min e as apaga. `ate` é a última chave somada: chave `<= ate` nunca
-  conta de novo (se o apagar falhar no meio, a próxima listagem só limpa). Duas listagens ao mesmo tempo
-  gravam o mesmo resumo. A mesma listagem apaga chaves órfãs de `acessos/` e `aprendizado/` (demo apagada).
+  conta de novo (se o apagar falhar no meio, a próxima listagem só limpa). Duas listagens ao mesmo tempo:
+  antes de gravar, a listagem relê o resumo; se o `ate` lido já é >= ao seu, não sobrescreve (usa o lido);
+  se mudou para um `ate` menor, soma de novo a partir do lido. Só apaga as chaves <= `ate` do resumo que
+  ficou gravado. A mesma listagem apaga chaves órfãs de `acessos/` e `aprendizado/` (demo apagada).
 - Contagem mostrada = `acessos` legado do registro + `total` do resumo + chaves ainda não somadas.
 - `DELETE /api/admin/demos/<id>` apaga `demo/<id>` primeiro (se algo falhar depois, o link já está
   morto) e depois `aprendizado/`, `uso/`, `tentativas/`, `acessos/` e `acessos_resumo/` em lotes de 50.
@@ -81,15 +95,28 @@ Com `continuar:true`, o cliente reenvia `{estado}` (opaco, assinado, vale 15 min
   portal (e na sessão), então "Tentar de novo" e a conversa recarregada mandam o mesmo cliente.
 - Com `cliente`, motor local e ferramentas veem só `visaoDoCliente` (local-engine.js): os pedidos dele, as
   ordens desses pedidos (status, %, previsão do pedido e um motivo genérico de atraso, como "ajuste de
-  qualidade em andamento" ou "atraso de fornecedor", sem código de máquina, OS ou NC), o representante sem
-  meta nem realizado, o catálogo com o preço da tabela dele (lido nas regras comerciais), manuais e
-  catálogos que não citam outro cliente. Módulos visíveis: portal, comercial, visão geral, cérebro (só a
+  qualidade em andamento" ou "atraso de fornecedor", sem código de máquina, OS ou NC), o representante só
+  com id, nome, região e telefone (sem meta, realizado nem nada derivado), o catálogo com o preço da tabela
+  dele, as regras comerciais marcadas `publica: true` no pacote (prazo de entrega padrão, pedido mínimo,
+  frete, condição de pagamento, garantia, trocas; ver `data/schema.md`), manuais e catálogos que não citam
+  outro cliente. Regras internas (alçadas, crédito, nomes de gerente ou diretor, prioridade em ruptura)
+  não chegam ao portal: nem ao motor local, nem às ferramentas, nem à busca. O preço da tabela do cliente
+  continua calculado pelas regras internas, guardadas fora de `ctx.data` (`ctx.regrasDePreco`).
+- Pedido de desconto, crédito ou condição especial no portal: "Condições especiais são tratadas com o seu
+  {representante}, {nome}." (motor local e prompt da IA). Resposta tirada das condições públicas abre com
+  "Pelas condições comerciais da {empresa}" (manuais e catálogos: "Nos manuais e catálogos da {empresa}").
+- Prompt da IA com `cliente`: "Quem lê é um cliente ({cliente}/comprador) da {empresa}", e a lista de
+  módulos traz só os que o cliente vê no portal. Módulos visíveis: portal, comercial, visão geral, cérebro (só a
   busca nesses documentos) e produção, se ligados. Pergunta sobre a fábrica por dentro (máquinas,
   qualidade, indicadores…) recebe: "No portal você vê só os seus pedidos, o catálogo e as condições
   comerciais; isso fica com a equipe da {empresa}." Sem aprendizado da equipe e sem registrar nada.
 - Histórico: só a pergunta atual e, antes dela, a sequência final de mensagens marcadas com o mesmo
   `cliente` (até 6). A primeira mensagem sem a marca, ou de outro cliente, corta dali para trás: as telas
   internas e o "Ver como" de outro cliente não entram. A marca não vai para a API da Anthropic.
+- No front (`web/src/ui/conversa.js`), cada cliente do portal tem a sua conversa, separada da interna:
+  chave `td_conv_<demo>:portal:<cliente>` no sessionStorage (a interna é `td_conv_<demo>`), painel que só
+  mostra os turnos daquele cliente e troca de conversa quando o "Ver como" muda. Sugestões do painel do
+  portal saem de `sugestoesDoPortal(ctx, cliente)` (visão do cliente).
 
 ### Avisos (`fim.aviso`)
 

@@ -7,12 +7,16 @@
 //     drawer(info, ctx) → { titulo, subtitulo, eyebrow, corpo: Node, acoes: Node|null } | null
 //     info = resolveRef(ref) (+ close/sheet, como o app.openRef passa) ou a string "tipo:id".
 //     drawerNode(out) junta corpo + ações num Node só.
+//     ctx.cliente (gaveta aberta do Portal, com ctxDoCliente de fontes.js): os dados já vêm na versão do
+//     cliente; as ações internas (resposta ao cliente, visita, proposta) somem e a gaveta não mostra
+//     sugestão interna, meta de representante, estoque mínimo nem preço de referência.
 //
 // Só usa o contrato do ctx (term, areaName, isEnabled, resolveRef, openRef, navigate, fmt, learning,
 // perguntar, ensinar, renderMarkdown, sheet, api, demo, ia). Qualquer peça ausente: o botão some.
 import * as ui from '../ui.js';
 import * as F from '../format.js';
 import { sistemaDoRef } from '../origem.js';
+import { precoNaTabela } from '../ai/local-engine.js';
 
 const h = (...a) => ui.h(...a);
 const BASE_FMT = F.fmt || F.default;
@@ -685,7 +689,8 @@ function bloco(tom, titulo, texto) {
 function gaveta(ctx, sheetApi, { titulo, subtitulo, eyebrow, topo, secoes, acoes, pergunta, modulo, area, maquina, origem }) {
   const corpo = h('div', { class: 'ar-drawer' });
   const lista = [];
-  for (const a of acoes || []) {
+  // versão do cliente (Portal): só "Perguntar" e "Ensinar"; as ações da equipe ficam de fora
+  for (const a of (ctx?.cliente ? [] : acoes) || []) {
     lista.push(btn(a.label, {
       variant: a.variant || 'secondary', icone: a.icone,
       onClick: () => { fecharFolha(corpo, sheetApi); a.onClick(); },
@@ -807,15 +812,21 @@ function drawerOP(arg, ctx, sheetApi) {
   if (!o) return null;
   const f = fmtOf(ctx);
   const prod = produto(ctx, o.sku);
-  const risco = riscoOP(ctx, o);
+  const doCliente = !!ctx?.cliente;
+  const risco = doCliente ? null : riscoOP(ctx, o);
   const atrasoTxt = o.status !== 'concluida' && BASE_FMT.daysFromToday(o.prazo, today(ctx)) < 0;
   const ncs = list(ctx, 'nao_conformidades').filter((n) => n.sku === o.sku && n.status !== 'encerrada');
   const turnosOp = list(ctx, 'turnos').filter((t) => (t.resumo || '').includes(o.id) || (t.ocorrencias || []).some((x) => String(x).includes(o.id)));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
     titulo: `${o.id} · ${prod?.nome || o.sku}`,
-    eyebrow: `${cap(T(ctx, 'ordem'))} de produção`,
+    // o mesmo nome do cartão de fonte (REF_TYPES.op): "Ordem de produção", não "OP de produção"
+    eyebrow: r?.tipoNome || 'Ordem de produção',
     topo: [
-      topoStatus(statusBadge(o.status), h('span', { class: 'ar-dtop__meta' }, `${o.sku} · ${f.num(o.quantidade)} ${prod?.unidade || T(ctx, 'unidade')} · ${linhaNome(ctx, o.linha)}`)),
+      topoStatus(statusBadge(o.status), h('span', { class: 'ar-dtop__meta' }, [
+        o.sku,
+        o.quantidade != null ? `${f.num(o.quantidade)} ${prod?.unidade || T(ctx, 'unidade')}` : null,
+        doCliente ? null : linhaNome(ctx, o.linha),
+      ].filter(Boolean).join(' · '))),
       h('div', { class: 'ar-prog' },
         h('div', { class: 'ar-prog__nums' },
           h('strong', { class: 'num' }, `${o.progresso ?? 0}%`),
@@ -1225,7 +1236,9 @@ function drawerRep(arg, ctx, sheetApi) {
   const rp = r?.detalhe;
   if (!rp) return null;
   const f = fmtOf(ctx);
-  const pct = rp.meta_mes ? (rp.realizado_mes / rp.meta_mes) * 100 : 0;
+  // versão do cliente: o representante vem sem meta nem realizado (e a gaveta não mostra "% da meta")
+  const temMeta = !ctx?.cliente && rp.meta_mes != null && rp.realizado_mes != null;
+  const pct = temMeta && rp.meta_mes ? (rp.realizado_mes / rp.meta_mes) * 100 : 0;
   const clientes = list(ctx, 'clientes').filter((c) => c.representante === rp.id);
   const abertos = list(ctx, 'pedidos').filter((p) => p.representante === rp.id && !['faturado', 'entregue'].includes(p.status));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
@@ -1233,10 +1246,10 @@ function drawerRep(arg, ctx, sheetApi) {
     eyebrow: cap(T(ctx, 'representante')),
     topo: topoStatus(h('span', { class: 'ar-dtop__meta' }, [rp.regiao, rp.telefone].filter(Boolean).join(' · '))),
     secoes: [
-      h('div', { class: 'ar-prog' },
+      temMeta ? h('div', { class: 'ar-prog' },
         h('div', { class: 'ar-prog__nums' }, h('strong', { class: 'num' }, f.pct(pct, 0)),
           h('span', { class: 'num' }, `${f.money(rp.realizado_mes, { compact: true })} de ${f.money(rp.meta_mes, { compact: true })} da meta do mês`)),
-        barra(pct)),
+        barra(pct)) : null,
       teamNotes(ctx, { ids: [rp.id, rp.nome] }),
       clientes.length ? secao(`${cap(T(ctx, 'clientes'))} (${clientes.length})`, h('div', { class: 'ar-minis' }, clientes.slice(0, 8).map((c) =>
         miniLinha(ctx, `cliente:${c.id}`, curto(c.nome), [c.cidade, c.segmento].filter(Boolean).join(' · '), null)))) : null,
@@ -1259,13 +1272,22 @@ function drawerSku(arg, ctx, sheetApi) {
   const f = fmtOf(ctx);
   const baixo = p.estoque < p.estoque_minimo;
   const ops = list(ctx, 'ordens').filter((o) => o.sku === p.sku && o.status !== 'concluida');
+  // versão do cliente: preço da tabela dele (como no catálogo do Portal) e "pronta entrega" em vez do estoque
+  const cli = ctx?.cliente ? byId(ctx, 'clientes', ctx.cliente) : null;
+  const pronta = p.estoque >= p.estoque_minimo && p.estoque > 0;
+  const situacao = cli
+    ? (pronta ? tag('Pronta entrega', 'ok') : null)
+    : (baixo ? tag('Abaixo do mínimo', 'warn') : tag('Estoque em dia', 'ok'));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
     titulo: p.nome,
     eyebrow: cap(T(ctx, 'produto')),
-    topo: topoStatus(baixo ? tag('Abaixo do mínimo', 'warn') : tag('Estoque em dia', 'ok'), h('span', { class: 'ar-dtop__meta' }, [p.sku, p.familia].filter(Boolean).join(' · '))),
+    topo: topoStatus(situacao, h('span', { class: 'ar-dtop__meta' }, [p.sku, p.familia].filter(Boolean).join(' · '))),
     secoes: [
       p.descricao_comercial ? h('p', { class: 'ar-lead' }, p.descricao_comercial) : null,
-      fatos([
+      fatos(cli ? [
+        ['Preço', f.money(precoNaTabela(ctx, p, cli).preco)],
+        ['Prazo', p.prazo_dias != null ? `${p.prazo_dias} dias` : null],
+      ] : [
         ['Preço', f.money(p.preco)],
         ['Prazo', p.prazo_dias != null ? `${p.prazo_dias} dias` : null],
         ['Estoque', `${f.num(p.estoque)} ${p.unidade || ''}`.trim()],

@@ -30,10 +30,25 @@ import { AVISO_LIMITE, AVISO_FALHA } from '../api.js';
 const MAX_RODADAS = 5;
 
 // Cliente escolhido agora no "Ver como" do Portal do cliente (modules/portal.js). Só um valor padrão no
-// momento do envio: a mensagem guarda o seu próprio cliente.
+// momento do envio: a mensagem guarda o seu próprio cliente. Quem mostra a conversa do portal
+// (ui/conversa.js) ouve a troca com aoTrocarClientePortal e passa a mostrar a conversa daquele cliente.
 let clientePortal = null;
-export function definirClientePortal(id) { clientePortal = typeof id === 'string' && id ? id : null; }
+const ouvintesCliente = new Set();
+export function definirClientePortal(id) {
+  const novo = typeof id === 'string' && id ? id : null;
+  if (novo === clientePortal) return;
+  clientePortal = novo;
+  for (const fn of [...ouvintesCliente]) { try { fn(novo); } catch (e) { console.error('[assistant] cliente do portal', e); } }
+}
 export const clientePortalAtual = () => clientePortal;
+/** fn(clienteId) a cada troca do "Ver como"; → função que para de ouvir. */
+export function aoTrocarClientePortal(fn) {
+  ouvintesCliente.add(fn);
+  return () => ouvintesCliente.delete(fn);
+}
+
+/** A demo tem IA real? ctx.ia vem do /estado (C1): objeto {modo, disponivel, modelo} na casca, ou a string 'real'|'local'. */
+const iaReal = (ia) => ia === 'real' || ia?.modo === 'real' || (ia?.modo == null && !!ia?.disponivel);
 
 /** SSE direto (mesmo contrato de api.conversa), para quando a casca não entrega ctx.api. */
 async function conversaDireta(id, payload, { onTexto, onFerramenta, onAprendizado, signal } = {}) {
@@ -157,9 +172,9 @@ export function createAssistant(getCtx) {
     sugestoes: (modulo, n = 4) => local.sugestoes(ctxMotor(), modulo, n),
     buscar: (termo, o = {}) => local.buscar(ctxMotor(), termo, o),
     responderLocal: (pergunta, o = {}) => local.responder(ctxMotor(), pergunta, o),
-    modo: () => (ctxAtual().ia?.disponivel ? 'ia' : 'local'),
+    modo: () => (iaReal(ctxAtual().ia) ? 'ia' : 'local'),
     setPreferencia: () => {},
-    onModeChange: (cb) => { try { cb?.(ctxAtual().ia?.disponivel ? 'ia' : 'local'); } catch { /* ok */ } return () => {}; },
+    onModeChange: (cb) => { try { cb?.(iaReal(ctxAtual().ia) ? 'ia' : 'local'); } catch { /* ok */ } return () => {}; },
   };
 }
 

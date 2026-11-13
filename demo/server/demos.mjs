@@ -5,6 +5,7 @@
 // demo/<id> (não desfaz uma edição do admin feita ao mesmo tempo). A listagem do admin compacta: soma
 // as chaves com mais de 20 min em acessos_resumo/<id> {total, ultimo_acesso, ate} e apaga as somadas
 // (`ate` = última chave somada; chaves <= ate não contam de novo, mesmo se o apagar falhar no meio).
+// Antes de gravar o resumo, a listagem relê: se outra já gravou um `ate` >= ao seu, não sobrescreve.
 
 import { randomBytes, randomInt } from 'node:crypto';
 import { hashSenha } from './auth.mjs';
@@ -167,24 +168,33 @@ async function comAcessos(store, d, chaves, resumo) {
 
 /**
  * Compacta os acessos de uma demo (só na listagem do admin): soma em acessos_resumo/<id> as chaves com
- * mais de 20 min e as apaga. Idempotente: duas listagens ao mesmo tempo gravam o mesmo resumo, e o
- * `ate` impede somar de novo uma chave que ficou para trás. → {resumo, restantes}
+ * mais de 20 min e as apaga. Duas listagens ao mesmo tempo: antes de gravar, relê o resumo; se o `ate`
+ * lido já é >= ao calculado, não sobrescreve (outra listagem somou até ali ou além); se mudou para um
+ * `ate` menor, soma de novo a partir do lido. Só apaga as chaves <= `ate` do resumo que ficou gravado,
+ * e o `ate` impede somar de novo uma chave que ficou para trás. → {resumo, restantes}
  */
 async function compactaAcessos(store, id, chaves) {
   const k = `acessos_resumo/${id}`;
-  const r = (await store.get(k)) ?? resumoVazio();
-  const ate = r.ate ?? '';
   const limite = Date.now() - COMPACTA_APOS;
-  const jaSomadas = chaves.filter((c) => c <= ate);
-  const velhas = chaves.filter((c) => c > ate && tsDaChave(c) < limite);
-  let resumo = r;
-  if (velhas.length) {
-    resumo = { total: (r.total ?? 0) + velhas.length, ultimo_acesso: isoMax(r.ultimo_acesso ?? null, await ultimoDe(store, velhas)), ate: velhas.at(-1) };
-    await store.set(k, resumo);
+  let base = (await store.get(k)) ?? resumoVazio();
+  let resumo = base;
+  for (let tentativa = 0; tentativa < 3; tentativa++) {
+    const ate = base.ate ?? '';
+    const velhas = chaves.filter((c) => c > ate && tsDaChave(c) < limite);
+    if (!velhas.length) { resumo = base; break; }
+    const novo = { total: (base.total ?? 0) + velhas.length, ultimo_acesso: isoMax(base.ultimo_acesso ?? null, await ultimoDe(store, velhas)), ate: velhas.at(-1) };
+    const atual = (await store.get(k)) ?? resumoVazio();
+    const ateAtual = atual.ate ?? '';
+    if (ateAtual >= novo.ate) { resumo = atual; break; } // outra listagem já somou estas chaves: não sobrescreve
+    if (ateAtual !== ate) { base = atual; resumo = atual; continue; } // mudou no meio: recalcula a partir do lido
+    await store.set(k, novo);
+    resumo = novo;
+    break;
   }
-  if (jaSomadas.length || velhas.length) await apagaEmLotes(store, [...jaSomadas, ...velhas]).catch(() => {});
-  const fora = new Set([...jaSomadas, ...velhas]);
-  return { resumo, restantes: chaves.filter((c) => !fora.has(c)) };
+  const ateFinal = resumo.ate ?? '';
+  const somadas = chaves.filter((c) => c <= ateFinal);
+  if (somadas.length) await apagaEmLotes(store, somadas).catch(() => {});
+  return { resumo, restantes: chaves.filter((c) => c > ateFinal) };
 }
 
 /** Demo com a contagem de acessos agregada (GET /api/admin/demos/<id>). */

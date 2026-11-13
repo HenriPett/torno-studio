@@ -203,12 +203,25 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
     const selArea = h('select', { class: 'ens__select', id: `${idTexto}-a`, 'aria-describedby': `${idTexto}-as` },
       areas.map((a) => h('option', { value: a.value, selected: a.value === areaBase }, a.label)));
     const dicaArea = h('p', { class: 'ens__dica', id: `${idTexto}-as`, 'aria-live': 'polite', hidden: true }, 'Sugerida pelo que você escreveu.');
+    /**
+     * Seleciona `valor` no select de Área: valor, opção selecionada e o atributo `selected` (o que o
+     * leitor de tela e a árvore de acessibilidade leem) passam a dizer a mesma área. Antes só o
+     * `value` mudava e o `<option selected>` da área inicial ("PCP e programação") continuava marcado.
+     */
+    function marcaArea(valor) {
+      for (const o of selArea.options) {
+        const sim = o.value === valor;
+        o.defaultSelected = sim;
+        o.selected = sim;
+      }
+      if (selArea.value !== valor) selArea.value = valor;
+    }
     function sugereArea() {
       if (areaTocada) return;
       const inferida = areaDoTexto(ctx, campo.value, idsAreas);
       const alvo = inferida ?? areaBase;
-      if (selArea.value !== alvo) {
-        selArea.value = alvo;
+      if (selArea.value !== alvo || !selArea.selectedOptions[0]?.defaultSelected) {
+        marcaArea(alvo);
         mostraMaquina();
       }
       dicaArea.hidden = !(inferida && inferida !== areaBase);
@@ -237,7 +250,7 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
       dica.hidden = !(n > 0 && n < MIN);
     }
     campo.addEventListener('input', () => { valida(); sugereArea(); gravaRascunho(ctx, campo.value); avisoRascunho.hidden = true; });
-    selArea.addEventListener('change', () => { areaTocada = true; dicaArea.hidden = true; mostraMaquina(); });
+    selArea.addEventListener('change', () => { areaTocada = true; dicaArea.hidden = true; marcaArea(selArea.value); mostraMaquina(); });
     mostraMaquina();
     sugereArea();
     valida();

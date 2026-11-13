@@ -3,10 +3,12 @@
 // dele, "Repetir último pedido" (rascunho, sem carrinho), catálogo com o preço da tabela e o
 // assistente do {cliente} (a conversa via ctx.perguntar, módulo portal). O cliente escolhido vai no
 // corpo da conversa (definirClientePortal → campo `cliente`, gravado em cada mensagem) e o servidor
-// responde só com os dados dele. Preço do catálogo: o da tabela do cliente (precoNaTabela).
+// responde só com os dados dele. Preço do catálogo: o da tabela do cliente (precoNaTabela). Cada cliente
+// tem a sua conversa (ui/conversa.js): trocar o "Ver como" troca a conversa do painel. As sugestões saem
+// da visão do cliente (sugestoesDoPortal) e as gavetas abrem na versão dele (openRef(ref, {cliente})).
 import { h } from '../ui.js';
 import { definirClientePortal } from '../ai/assistant.js';
-import { clientePadraoDoPortal, precoNaTabela } from '../ai/local-engine.js';
+import { clientePadraoDoPortal, precoNaTabela, sugestoesDoPortal, daTabela } from '../ai/local-engine.js';
 import * as ui from '../ui.js';
 import {
   ensureAreaCss, statusBadge, areaAssistant, T, cap, fmtOf, curto, tag,
@@ -71,7 +73,7 @@ export function render(el, ctx) {
     });
 
     const linhaPedido = (p) => h('li', null, h('button', {
-      type: 'button', class: 'pt-ped', onClick: () => ctx.openRef?.(`pedido:${p.id}`),
+      type: 'button', class: 'pt-ped', onClick: () => ctx.openRef?.(`pedido:${p.id}`, { cliente: cli.id }),
     },
     h('strong', { class: 'ar-id' }, p.id),
     statusBadge(p.status),
@@ -83,21 +85,16 @@ export function render(el, ctx) {
     const tabelaConhecida = !!produtos[0] && precoNaTabela(ctx, produtos[0], cli).conhecida;
     const cartao = (p) => {
       const pronta = p.estoque >= p.estoque_minimo && p.estoque > 0;
-      return h('button', { type: 'button', class: 'pt-prod', onClick: () => ctx.openRef?.(`sku:${p.sku}`) },
+      return h('button', { type: 'button', class: 'pt-prod', onClick: () => ctx.openRef?.(`sku:${p.sku}`, { cliente: cli.id }) },
         h('span', { class: 'pt-prod__sku' }, p.sku),
         h('span', { class: 'pt-prod__nome' }, p.nome),
         h('span', { class: 'pt-prod__preco num' }, f.money(precoNaTabela(ctx, p, cli).preco), h('span', { class: 'pt-prod__un' }, ` / ${singular(p.unidade)}`)),
         pronta ? tag('Pronta entrega', 'ok') : h('span', { class: 'pt-prod__prazo' }, `Prazo ${p.prazo_dias} dias`));
     };
 
-    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas). Só sugestões que falam de
-    // registros deste cliente (a pergunta pronta de outro cliente não teria resposta aqui).
-    const meusIds = new Set([`cliente:${cli.id}`, ...meus.map((p) => `pedido:${p.id}`), ...meus.filter((p) => p.ordem).map((p) => `op:${p.ordem}`)]);
-    const doCliente = (p) => (p.fontes || []).every((r) => !/^(pedido|cliente|op):/.test(r) || meusIds.has(r));
-    const sugestoes = [
-      ...(d.perguntas_sugeridas || []).filter((p) => p.modulo === 'portal' && doCliente(p)).map((p) => p.pergunta),
-      ultimo ? `Quando chega o meu pedido ${ultimo.id}?` : null,
-    ].filter(Boolean).slice(0, 3);
+    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas). Sugestões da visão deste
+    // cliente (a pergunta pronta de outro cliente ou da fábrica por dentro não aparece aqui).
+    const sugestoes = sugestoesDoPortal({ ...ctx, aprendizado: [] }, cli.id, 3);
     const podePerguntar = typeof ctx.perguntar === 'function';
     const enviar = (t) => {
       const q = String(t || '').trim();
@@ -131,8 +128,8 @@ export function render(el, ctx) {
         h('section', { class: 'pt-catalogo', 'aria-label': 'Catálogo' },
           h('h3', { class: 'pt-h3' }, `Catálogo (${catalogo.length})`),
           h('p', { class: 'pt-muted' }, tabelaConhecida || !cli.tabela_preco
-            ? `Preços da ${cli.tabela_preco || 'sua tabela'}, sem impostos.`
-            : `Preços de referência, sem impostos; os da ${cli.tabela_preco} vêm na proposta do ${T(ctx, 'representante')}.`),
+            ? `Preços ${cli.tabela_preco ? daTabela(cli.tabela_preco) : 'da sua tabela'}, sem impostos.`
+            : `Preços de referência, sem impostos; os preços ${daTabela(cli.tabela_preco)} vêm na proposta do ${T(ctx, 'representante')}.`),
           h('div', { class: 'pt-prods' }, catalogo.map(cartao)))));
 
     host.replaceChildren(janela,

@@ -3,7 +3,7 @@
 // devolve dados pequenos, sempre com `ref` para a IA citar. Só entram ferramentas de módulos
 // ligados; com perfil, só o que as áreas dele podem ver. Toda busca inclui o aprendizado.
 
-import { buscarTudo, buscaAprendizado, corta, ligado, perfilAreas, statusLabel, severidadeLabel, precoNaTabela, filtraRefs, norm, tokens, refOk } from "./motor.mjs";
+import { buscarTudo, buscaAprendizado, corta, cortaDados, ligado, perfilAreas, statusLabel, severidadeLabel, precoNaTabela, filtraRefs, norm, tokens, refOk, daTabela } from "./motor.mjs";
 
 const MAX = 8;
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -211,7 +211,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
         previsao_entrega: p.previsao_entrega, ordem: p.ordem,
         itens: (p.itens ?? []).slice(0, 5).map((i) => ({ sku: i.sku, produto: produto(i.sku)?.nome, quantidade: i.quantidade, preco_unit: i.preco_unit })),
         total: Math.round((p.itens ?? []).reduce((s2, i) => s2 + i.quantidade * i.preco_unit, 0) * 100) / 100,
-        observacao: corta(p.observacao, 160) || undefined,
+        observacao: cortaDados(p.observacao, 160) || undefined,
       }, { ordem: "op" })));
     },
   });
@@ -230,7 +230,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
         if (!cli) return { preco: p.preco };
         const t = precoNaTabela(ctx, p, cli);
         return t.conhecida ? { preco: t.preco, tabela: t.tabela }
-          : { preco_referencia: p.preco, tabela: t.tabela, observacao_preco: `O preço da ${t.tabela} sai na proposta do representante.` };
+          : { preco_referencia: p.preco, tabela: t.tabela, observacao_preco: `O preço ${daTabela(t.tabela)} sai na proposta do representante.` };
       };
       return lista(r.map((p) => ({
         ref: `sku:${p.sku}`, sku: p.sku, nome: p.nome, familia: p.familia, unidade: p.unidade, ...preco(p),
@@ -241,7 +241,9 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
 
   add("comercial", {
     name: "consultar_clientes_representantes",
-    description: "Consulta clientes (condição de pagamento, limite de crédito, tabela de preço, último pedido) e representantes (região, meta e realizado do mês). Filtre por id (CLI-… ou REP-…) ou termo no nome/cidade/região. Itens {ref, tipo, ...}.",
+    description: ctx?.cliente
+      ? "Consulta o cadastro do cliente (condição de pagamento, tabela de preço, último pedido) e o representante dele (nome, região, telefone). Itens {ref, tipo, ...}."
+      : "Consulta clientes (condição de pagamento, limite de crédito, tabela de preço, último pedido) e representantes (região, meta e realizado do mês). Filtre por id (CLI-… ou REP-…) ou termo no nome/cidade/região. Itens {ref, tipo, ...}.",
     inputSchema: schema({ id: s("CLI-… ou REP-…"), termo: s("nome, cidade ou região") }),
     execute(input) {
       const cs = (d.clientes ?? []).map((c) => ({
@@ -261,12 +263,19 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     },
   });
 
+  // Portal (ctx.cliente): d.regras_comerciais já vem só com as públicas (visaoDoCliente: publica:true), sem
+  // alçadas, crédito nem nomes de gerente; a descrição também não promete descontos
   add("comercial", {
     name: "regras_comerciais",
-    description: "Lista as regras comerciais aprovadas (descontos, alçadas, prazos, condições). Retorna {ref, id, titulo, texto}.",
+    description: ctx?.cliente
+      ? "Condições comerciais que o cliente pode ler (prazo de entrega padrão, pedido mínimo, frete, condição de pagamento, garantia e trocas). Desconto, crédito e condições especiais não estão aqui: são tratados com o representante. Retorna {ref, id, titulo, texto}."
+      : "Lista as regras comerciais aprovadas (descontos, alçadas, prazos, condições). Retorna {ref, id, titulo, texto, publica}.",
     inputSchema: schema({}),
     execute() {
-      return lista((d.regras_comerciais ?? []).map((r) => ({ ref: `regra:${r.id}`, id: r.id, titulo: r.titulo, texto: corta(r.texto, 300) })));
+      return lista((d.regras_comerciais ?? []).map((r) => ({
+        ref: `regra:${r.id}`, id: r.id, titulo: r.titulo, texto: cortaDados(r.texto, 300),
+        ...(ctx?.cliente ? {} : { publica: r.publica === true }),
+      })));
     },
   });
 

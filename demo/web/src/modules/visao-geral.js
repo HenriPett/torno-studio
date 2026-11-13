@@ -145,13 +145,21 @@ export function kpiNaMeta(k) {
   return k.direcao === 'menor_melhor' ? k.valor <= k.meta : k.valor >= k.meta;
 }
 
-/** Microlinha "ERP · 07:40" (sistema e última sincronização do pacote); null se não der para mapear. */
+/**
+ * Microlinha "ERP · 07:40" (sistema e última sincronização do pacote). Sem sistema (ex.: NC sem
+ * integração de qualidade no pacote), o rótulo que origem.js dá ao registro ("Registros da qualidade"),
+ * sem horário inventado. Tooltip: "sincronizado X" só quando há horário; senão, a nota da integração.
+ * null se não der para mapear.
+ */
 function linhaOrigem(o, cls) {
-  if (!o || !o.sistema) return null;
+  const nome = String(o?.nome ?? '').trim();
+  const rotulo = o?.sistema || (nome ? nome.charAt(0).toUpperCase() + nome.slice(1) : '');
+  if (!rotulo) return null;
+  const detalhe = o.quandoLongo ? `sincronizado ${o.quandoLongo}` : o.nota || null;
   return h('span', {
     class: ['ini-origem', cls],
-    title: `Origem: ${o.sistema}, sincronizado ${o.quandoLongo}. Dado fictício.`,
-  }, h('span', { class: 'sr-only' }, 'Origem: '), [o.sistema, o.quando].filter(Boolean).join(' · '));
+    title: `Origem: ${[rotulo, detalhe].filter(Boolean).join(', ')}. Dado fictício.`,
+  }, h('span', { class: 'sr-only' }, 'Origem: '), [rotulo, o.quando].filter(Boolean).join(' · '));
 }
 
 /** Texto com as siglas do glossário marcadas em <abbr title> (OTIF, OEE, NC…). */
@@ -172,7 +180,7 @@ function tileKpi(ctx, k) {
   return h('button', {
     type: 'button', class: 'ini-kpi', onClick: () => ctx.openRef?.(`kpi:${k.id}`),
     title: glossario ? `${k.nome}. ${glossario}` : k.nome,
-    'aria-label': `${k.nome}: ${valorKpi(k)}, meta ${metaKpi(k)}${ok ? ', dentro da meta' : ', fora da meta'}${origem ? `. Origem: ${origem.sistema}, ${origem.quando}` : ''}`,
+    'aria-label': `${k.nome}: ${valorKpi(k)}, meta ${metaKpi(k)}${ok ? ', dentro da meta' : ', fora da meta'}${origem?.sistema ? `. Origem: ${[origem.sistema, origem.quando].filter(Boolean).join(', ')}` : ''}`,
     'aria-describedby': glossId,
   },
   h('span', { class: 'ini-kpi__nome' }, k.nome),

@@ -83,6 +83,18 @@ async function sessaoDemo(request, env, store, id) {
   return { demo: d, admin: false, sid: typeof p.sid === 'string' && /^[a-f0-9]{12}$/.test(p.sid) ? p.sid : impressao(segredo, leCookies(request)[`td_${id}`]).replace(/[^a-z0-9]/gi, '').slice(0, 12).toLowerCase() };
 }
 
+/**
+ * O cookie td_<id> é válido, assinado para esta demo e da senha atual, mas a demo existe e está
+ * desativada ou expirada? (só aí o /estado responde 410; qualquer outra falha continua 401)
+ */
+async function sessaoDeDemoIndisponivel(request, segredo, store, id) {
+  if (!ID_RE.test(id)) return false;
+  const p = confere(leCookies(request)[`td_${id}`], segredo);
+  if (!p || p.t !== 'demo' || p.id !== id) return false;
+  const d = await getDemo(store, id);
+  return !!d && !disponivel(d) && p.sv === (d.senha_v ?? 1);
+}
+
 /* ------------------------------------------------------------------ */
 /* Rotas                                                               */
 /* ------------------------------------------------------------------ */
@@ -127,7 +139,12 @@ async function rotaDemo(request, env, store, partes, deps) {
   }
 
   const s = await sessaoDemo(request, env, store, id);
-  if (!s) { return erro(401, INVALIDO); }
+  if (!s) {
+    // C2: GET /estado com cookie válido e assinado para ESTA demo (a pessoa já tinha a senha), mas a demo foi
+    // desativada ou expirou → 410, para a tela final dizer isso. Sem cookie válido continua 401 (sem enumeração).
+    if (recurso === 'estado' && m === 'GET' && !sub && await sessaoDeDemoIndisponivel(request, segredo, store, id)) return erro(410, DESATIVADO);
+    return erro(401, INVALIDO);
+  }
   const { demo } = s;
 
   if (recurso === 'estado' && m === 'GET' && !sub) {
@@ -137,7 +154,9 @@ async function rotaDemo(request, env, store, partes, deps) {
       demo: { id: demo.id, nome: demo.nome, setor: demo.setor, empresa_nome: demo.empresa_nome, modulos: demo.modulos },
       setor: pacote(demo.setor),
       aprendizado,
-      ia: iaInfo(env),
+      // C1: 'real' só com ANTHROPIC_API_KEY no servidor; sem ela a conversa é o motor local (o front não promete IA real)
+      ia: iaInfo(env).disponivel ? 'real' : 'local',
+      ia_modelo: iaInfo(env).modelo,
       admin: s.admin,
     });
   }
