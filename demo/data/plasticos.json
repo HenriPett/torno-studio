@@ -1234,7 +1234,7 @@
       "status": "em_analise",
       "responsavel": "Daniela Fuck Hasse",
       "oito_d": {
-        "D1": "Equipe: Daniela Fuck Hasse (qualidade, líder), Osmar Klitzke (preparador), Cleiton Bona (ferramentaria), Jéssica Tomio (PCP), Robson Engel (comercial).",
+        "D1": "Equipe: Daniela Fuck Hasse (qualidade, líder), Osmar Klitzke (preparador), Cleiton Bona (ferramentaria), Jéssica Tomio (PCP), Robson Eggert (comercial).",
         "D2": "Tampas TP-38 do lote 51877-02 com chupagem de 0,18 mm no topo (máximo 0,10 mm); molde 214, INJ-09, 2º e 3º turnos de 07/11.",
         "D3": "Contenção: lotes 51877-02 e 51877-03 retidos; inspeção 100% com relógio comparador; reposição de 12 caixas ao cliente em 10/11.",
         "D4": "Causas prováveis: recalque não ajustado ao PP reciclado (ficha rev. F, seção 4), zona 3 instável e refrigeração do macho com incrustação (OS-8822).",
@@ -1543,7 +1543,7 @@
     },
     {
       "id": "REP-15",
-      "nome": "Robson Engel",
+      "nome": "Robson Eggert",
       "regiao": "Contas-chave (bebidas e saneantes)",
       "telefone": "(47) 9••••-6057",
       "meta_mes": 2000000,
