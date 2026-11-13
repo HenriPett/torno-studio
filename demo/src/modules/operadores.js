@@ -150,7 +150,7 @@ export function render(el, ctx) {
   const abaTrilha = h('div', { class: 'op-stack' },
     toolbar(select({
       id: 'op-trilha-linha', label: cap(T('linha')),
-      options: [...linhasComSaber.map((l) => ({ value: l.id, label: l.nome })), { value: '', label: `Todas as ${T('linhas')}` }],
+      options: [...linhasComSaber.map((l) => ({ value: l.id, label: l.nome })), { value: '', label: `Tudo (${T('linhas')})` }],
       value: trilhaLinha,
       onChange: (v) => { trilhaLinha = v; desenharTrilha(); },
     })),

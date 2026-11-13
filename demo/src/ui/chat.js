@@ -174,8 +174,8 @@ export function chatPanel({ ctx, modulo, titulo, placeholder, variante = "defaul
     const bem = msgAssistente();
     bem.fim(
       whatsapp
-        ? `Oi! Sou o assistente comercial da ${empresa}. Posso consultar estoque, preço, prazo e status de pedidos.`
-        : `Olá! Sou o assistente da ${empresa}. Consulto ordens, pedidos, qualidade, manutenção, documentos e indicadores desta operação — e cito a fonte de cada resposta.`,
+        ? `Oi! Sou o assistente comercial da ${empresa.replace(/\.$/, "")}. Posso consultar estoque, preço, prazo e status de pedidos.`
+        : `Olá! Sou o assistente da ${empresa.replace(/\.$/, "")}. Consulto ordens, pedidos, qualidade, manutenção, documentos e indicadores desta operação, sempre citando a fonte de cada resposta.`,
       [], null
     );
   }

@@ -232,7 +232,7 @@ function shiftPanel(ctx) {
   const linhas = [...new Set(turnos.map((t) => t.linha))];
   const bar = toolbar(select({
     id: 'pcp-shift-linha', label: cap(ctx.term('linha')),
-    options: [{ value: '', label: `Todas as ${ctx.term('linhas')}` }, ...linhas.map((l) => ({ value: l, label: lineBy[l]?.nome || l }))],
+    options: [{ value: '', label: `Tudo (${ctx.term('linhas')})` }, ...linhas.map((l) => ({ value: l, label: lineBy[l]?.nome || l }))],
     value: '', onChange: (v) => { filtro = v?.target ? v.target.value : v; draw(); },
   }));
   draw();

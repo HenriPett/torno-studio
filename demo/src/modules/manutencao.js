@@ -226,7 +226,7 @@ export function render(el, ctx) {
     toolbar(
       select({
         id: 'mnt-linha', label: cap(ctx.term('linha')), value: fLinha,
-        options: [{ value: '', label: `Todas as ${ctx.term('linhas')}` }, ...linhasComMaq.map((l) => ({ value: l, label: lineBy[l]?.nome || l }))],
+        options: [{ value: '', label: `Tudo (${ctx.term('linhas')})` }, ...linhasComMaq.map((l) => ({ value: l, label: lineBy[l]?.nome || l }))],
         onChange: (v) => { fLinha = v?.target ? v.target.value : v; drawGrid(); },
       }),
       searchInput({ id: 'mnt-busca', placeholder: `Buscar ${ctx.term('maquina')} ou ${ctx.term('linha')}`,
