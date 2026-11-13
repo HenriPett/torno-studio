@@ -6,6 +6,8 @@
  * - Títulos display ([data-reveal="lines"]): máscara por linha, desfeita ao terminar.
  * - Contadores ([data-count]): o valor final está no HTML; anima de 0 até ele (leitor de tela ouve o final).
  * - Demo do assistente ([data-ask]): abas ARIA (setas, Home/End), pergunta digitada, resposta e fontes em sequência.
+ *   Toca sozinha uma vez: logo após o hero (demo na 1ª dobra) ou ao entrar na tela.
+ * - Laços decorativos ([data-loop]): .is-on só enquanto visíveis (fluxo de dados, pulsos).
  * - Etapas com rolagem fixa ([data-scrolly], desktop): etapa ativa + barra de progresso.
  * - Header: fundo ao rolar; no celular esconde ao descer e volta ao subir.
  * - Brilho que segue o ponteiro (cards e hero), só com ponteiro fino.
@@ -242,11 +244,15 @@ function initAsk(box: HTMLElement) {
     place();
     new ResizeObserver(() => place()).observe(list!);
   }
-  // Toca uma vez quando a demo entra na tela (se ninguém mexeu e se ela não estava visível na carga).
-  if (reduce || box.getBoundingClientRect().top < innerHeight) return;
-  // Começa "em branco" (fora da tela): a pergunta ainda não foi feita.
+  // Toca uma vez: logo depois da entrada do hero, se a demo já está na tela, ou quando ela entra (se ninguém mexeu).
+  if (reduce) return;
+  // Começa "em branco": a pergunta ainda não foi feita.
   const first = threads[current];
   if (first) first.dataset.state = 'typing';
+  if (box.getBoundingClientRect().top < innerHeight) {
+    setTimeout(() => !touched && play(current), 700);
+    return;
+  }
   const seen = new IntersectionObserver(
     ([e]) => {
       if (!e?.isIntersecting) return;
@@ -257,6 +263,11 @@ function initAsk(box: HTMLElement) {
   );
   seen.observe(box);
 }
+
+/* ---------------- Laços decorativos ([data-loop]) ---------------- */
+
+/** Animações contínuas (fluxo de dados, pulsos) só rodam com o elemento na tela: .is-on. */
+const loops = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-on', e.isIntersecting)));
 
 /* ---------------- Etapas com rolagem fixa ---------------- */
 
@@ -367,6 +378,7 @@ function initCarousels() {
 initReveal();
 $$('[data-ask]').forEach(initAsk);
 $$('[data-scrolly]').forEach(initScrolly);
+if (!reduce) $$('[data-loop]').forEach((el) => loops.observe(el));
 initCarousels();
 if (!reduce && mq('(hover: hover) and (pointer: fine)').matches) initPointer();
 addEventListener('scroll', onScroll, { passive: true });

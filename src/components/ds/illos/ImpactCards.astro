@@ -1,0 +1,201 @@
+---
+/**
+ * ImpactCards (DESIGN-2026-11 §6.13): "o que empresas já mediram". Número grande que conta, área,
+ * rótulo de escopo, contexto ANONIMIZADO e a fonte (obrigatória no tipo). Não são clientes da Torno:
+ * quem usa este componente diz isso no título ou no lead da seção.
+ *
+ * <ImpactCards locale="pt-BR" items={[{ value: '−4%', label, context, area, scope: 'Mesmo setor', source: { label, href } }]} />
+ *
+ * O sinal do número (+/−) escolhe a seta decorativa (aria-hidden). Contador: [data-count] (motion.ts).
+ */
+import { getChrome } from '../../../content/chrome';
+import type { Locale } from '../../../lib/i18n';
+import AreaIllo from './AreaIllo.astro';
+
+export interface ImpactItem {
+  value: string;
+  label: string;
+  context: string;
+  area: string;
+  /** Rótulo visível do escopo ("Mesmo setor", "Setor vizinho", "Estudo global"…). */
+  scope: string;
+  source: { label: string; href?: string | undefined };
+}
+
+interface Props {
+  locale: Locale;
+  items: ImpactItem[];
+  /** Fundo dos cards: surface (em seção muted, padrão) ou muted (em seção branca). */
+  card?: 'surface' | 'muted';
+  class?: string;
+}
+
+const { locale, items, card = 'surface', class: className } = Astro.props;
+const sourceLabel = getChrome(locale).common.source;
+const cols = items.length >= 4 ? 4 : items.length === 3 ? 3 : 2;
+const trend = (value: string) => (/^[−-]/.test(value.trim()) ? 'down' : /^\+/.test(value.trim()) ? 'up' : 'flat');
+---
+
+<ul class:list={['grid', `grid--${cols === 4 ? 2 : cols}`, 'ic', `ic--${card}`, cols === 4 && 'ic--4', className]} role="list" data-reveal-stagger>
+  {
+    items.map((item) => (
+      <li class="ic__card">
+        <div class="ic__top">
+          <p class="ic__area">{item.area}</p>
+          <p class="ic__scope">{item.scope}</p>
+        </div>
+        <div class="ic__figure">
+          <p class="ic__value tnum" data-count>{item.value}</p>
+          <span class={`ic__trend ic__trend--${trend(item.value)}`} aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M5 16 10 11l4 3 6-7M14 7h6v6" />
+            </svg>
+          </span>
+        </div>
+        <p class="ic__label">{item.label}</p>
+        <AreaIllo name={item.area} class="ic__illo" />
+        <p class="ic__context">{item.context}</p>
+        <p class="caption ic__source">
+          {sourceLabel}:{' '}
+          {item.source.href ? (
+            <a class="link" href={item.source.href} target="_blank" rel="noopener">
+              {item.source.label}
+            </a>
+          ) : (
+            item.source.label
+          )}
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .ic {
+    list-style: none;
+    padding: 0;
+    --grid-gap: var(--space-4);
+  }
+
+  @media (min-width: 64em) {
+    .ic--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .ic__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    min-inline-size: 0;
+  }
+
+  .ic--surface .ic__card {
+    background-color: var(--color-surface);
+  }
+
+  .ic--muted .ic__card {
+    background-color: var(--color-surface-muted);
+  }
+
+  .ic__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .ic__area {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-text);
+  }
+
+  .ic__scope {
+    padding: 0.15rem 0.6rem;
+    border-radius: var(--radius-full);
+    border: var(--border-width) solid var(--color-border-strong);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .ic__figure {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-block-start: var(--space-2);
+  }
+
+  .ic__value {
+    font-size: var(--text-display-md);
+    font-weight: var(--weight-display);
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ic__trend {
+    display: grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    flex: none;
+    border-radius: 50%;
+    background-color: var(--color-ok-subtle);
+    color: var(--color-ok-text);
+  }
+
+  .ic__trend svg {
+    inline-size: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ic__trend--down svg {
+    transform: scaleY(-1);
+  }
+
+  .ic__trend--flat {
+    display: none;
+  }
+
+  .ic__label {
+    font-size: var(--text-base);
+    text-wrap: pretty;
+  }
+
+  .ic__card :global(.ic__illo) {
+    margin-block-start: auto;
+  }
+
+  .ic__context {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .ic__source {
+    color: var(--color-text-muted);
+    overflow-wrap: anywhere;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.ic__card.is-anim) .ic__trend {
+      animation: ic-trend 0.8s var(--motion-ease-out) 900ms backwards;
+    }
+  }
+
+  @keyframes ic-trend {
+    from {
+      opacity: 0;
+      transform: translateY(6px) scale(0.6);
+    }
+  }
+</style>

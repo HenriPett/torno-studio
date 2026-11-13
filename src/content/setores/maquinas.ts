@@ -11,52 +11,103 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para fabricantes de máquinas e equipamentos',
     title: 'Orçamento técnico e pós-venda com a história de cada máquina',
-    lead: 'A Torno reúne ERP, BOMs, desenhos, manuais, orçamentos antigos e chamados de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam orçamentação, engenharia, assistência técnica, peças de reposição e comercial. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno reúne ERP, BOMs, desenhos, manuais, orçamentos antigos e chamados de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam orçamentação, engenharia, assistência e peças de reposição. Implantamos por etapas, com a sua TI.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Mais máquina importada na disputa',
     body: [
-      'Santa Catarina tem 34 unidades locais de fabricação de máquinas e equipamentos com 250 ou mais pessoas ocupadas, e o setor ocupa 52.345 pessoas no estado (IBGE, CEMPRE 2024).',
-      'A concorrência de fora cresceu. Segundo a Abimaq, citada pela Agência Brasil em agosto de 2025, os bens importados chegaram a 46% do consumo nacional de máquinas e equipamentos, e a China passou de 16,6% para 32% das máquinas importadas pelo Brasil em dez anos. Para o fabricante nacional, prazo de orçamento, reaproveitamento de projeto e pós-venda bem atendido pesam na hora de fechar um pedido.',
+      'Os importados já atendem 46% do consumo nacional de máquinas e equipamentos, segundo a Abimaq. Para o fabricante nacional, prazo de orçamento, reuso de projeto e pós-venda pesam na hora de fechar o pedido.',
     ],
-    refs: [[1], [2]],
+    refs: [[1]],
   },
-  stats: [
-    { value: '34', label: 'unidades de máquinas e equipamentos com 250 ou mais pessoas ocupadas em Santa Catarina', source: 1 },
-    { value: '52.345', label: 'pessoas ocupadas no setor em Santa Catarina', source: 1 },
-    { value: '46%', label: 'do consumo nacional de máquinas e equipamentos atendido por bens importados', source: 2 },
+  adoption: {
+    useAI: 'cerca de 5 em 10',
+    inProduction: 'cerca de 2 em 10',
+    reading: 'Mais da metade dos fabricantes já usa IA. Na produção, a maioria ainda não começou.',
+    source: 1,
+  },
+  proofPoints: [
+    {
+      value: '+10%',
+      label: 'de disponibilidade dos equipamentos, aproximadamente, em três anos com diagnóstico de falha por IA',
+      context: 'Fabricante de motores elétricos em SC, segundo a empresa',
+      area: 'Manutenção',
+      source: 2,
+      scope: 'vizinho',
+    },
+    {
+      value: '−29%',
+      label: 'de falhas recorrentes de equipamento com monitoramento apoiado por IA',
+      context: 'Indústria de outro setor, segundo o fornecedor da tecnologia',
+      area: 'Manutenção',
+      source: 3,
+      scope: 'vizinho',
+    },
+    {
+      value: '1,7 vez',
+      label: 'o crescimento de receita das empresas líderes em IA, comparado ao das demais',
+      context: 'Estudo global e multissetorial da BCG, 2025',
+      area: 'Resultado da empresa',
+      source: 4,
+      scope: 'global',
+    },
   ],
+  help: {
+    title: 'Onde entramos e o que medimos',
+    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    items: [
+      {
+        area: 'Orçamentação',
+        problem: 'Cada cotação pede engenharia para achar a máquina parecida já feita, a BOM dela e o custo realizado.',
+        whatWeDo: 'Um agente encontra os projetos semelhantes e monta a base do orçamento para o orçamentista revisar.',
+        measure: 'Dias para devolver um orçamento técnico',
+      },
+      {
+        area: 'Engenharia sob encomenda',
+        problem: 'Desenhos e soluções antigas estão no PDM e na rede, e reaproveitar depende de quem lembra.',
+        whatWeDo: 'O agente busca projetos por função, medida ou cliente e indica a revisão vigente.',
+        measure: 'Horas de engenharia procurando projeto por pedido',
+      },
+      {
+        area: 'Assistência técnica',
+        problem: 'O técnico em campo liga para a fábrica para saber a configuração entregue e a última intervenção.',
+        whatWeDo: 'A história da máquina pelo número de série chega ao celular do técnico.',
+        measure: 'Ligações do campo para a engenharia por semana',
+      },
+      {
+        area: 'Peças de reposição',
+        problem: 'O cliente manda foto ou código antigo, e identificar peça, revisão e estoque passa por três pessoas.',
+        whatWeDo: 'O agente cruza número de série, BOM da época e estoque, e indica a alternativa atual.',
+        measure: 'Tempo para responder a um pedido de peça',
+      },
+    ],
+  },
   pains: {
     title: 'O que segura um fabricante de máquinas',
     items: [
       {
         title: 'Orçamento técnico que leva semanas',
-        body: 'Cada cotação pede engenharia para adaptar um projeto parecido. Achar a máquina semelhante já feita, a BOM dela e o custo realizado consome dias.',
-      },
-      {
-        title: 'Projeto sob encomenda que recomeça do zero',
-        body: 'Desenhos, revisões e soluções de projetos antigos estão no PDM e em pastas da rede. Encontrar o que serve depende de quem lembra que aquilo existe.',
+        body: 'Cada cotação pede engenharia para adaptar um projeto parecido. Achar a máquina semelhante, a BOM e o custo realizado consome dias.',
       },
       {
         title: 'Técnico em campo liga para a fábrica',
-        body: 'Para saber a configuração entregue, o manual da versão e a última intervenção numa máquina, o técnico de assistência depende da engenharia atender o telefone.',
+        body: 'Configuração entregue, manual da versão e última intervenção dependem de a engenharia atender o telefone.',
       },
       {
         title: 'Peça de reposição identificada por foto',
-        body: 'O cliente manda uma foto ou um código antigo. Descobrir a peça, a revisão e se há estoque passa por três pessoas.',
+        body: 'O cliente manda uma foto ou um código antigo. Descobrir a peça, a revisão e o estoque passa por três pessoas.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham num fabricante de máquinas',
-    intro:
-      'Os exemplos abaixo são ilustrativos. No diagnóstico, priorizamos pelo impacto em prazo de orçamento e em atendimento ao cliente.',
+    intro: 'Exemplos ilustrativos. No diagnóstico, priorizamos pelo impacto em prazo de orçamento e em atendimento.',
     items: [
       {
         area: 'Orçamentação',
         title: 'Orçamento a partir de projetos parecidos',
-        body: 'O agente encontra máquinas semelhantes já vendidas, com BOM, horas de engenharia e custo realizado, e monta a base do orçamento para o orçamentista revisar.',
+        body: 'Encontra máquinas semelhantes já vendidas, com BOM, horas de engenharia e custo realizado.',
         example: '“Que transportadores de rolos acima de 12 m já fizemos e qual foi o custo realizado de cada um?”',
       },
       {
@@ -68,40 +119,27 @@ export const setor: SectorLanding = {
       {
         area: 'Assistência técnica',
         title: 'A máquina do cliente pelo número de série',
-        body: 'Configuração entregue, manual da versão, diagramas elétricos e histórico de chamados no celular do técnico.',
+        body: 'Configuração entregue, manual da versão, diagramas e chamados anteriores no celular do técnico.',
         example: '“Qual CLP e qual versão de software foram na máquina série 2219-034?”',
       },
       {
         area: 'Peças de reposição',
         title: 'Peça certa e estoque na mesma resposta',
-        body: 'Cruza número de série, BOM da época e estoque para identificar a peça e a alternativa atual quando o item saiu de linha.',
+        body: 'Cruza número de série, BOM da época e estoque, com a alternativa atual quando o item saiu de linha.',
         example: '“Qual o código atual da engrenagem que foi na série 2017-112? Temos em estoque?”',
-      },
-      {
-        area: 'Documentação técnica',
-        title: 'Manual e lista de peças a partir da engenharia',
-        body: 'Rascunho de manual de instruções e lista de peças recomendadas a partir da BOM e dos desenhos aprovados, para revisão da engenharia.',
-        example: '“Gere a lista de peças de reposição recomendadas para a configuração vendida no pedido 4410.”',
-      },
-      {
-        area: 'Comercial',
-        title: 'Proposta coerente com a engenharia',
-        body: 'Propostas com escopo, prazo e condições comerciais a partir das regras da empresa e do que a engenharia confirmou.',
-        example: '“Prepare a proposta com as opções de automação que já fornecemos para este cliente.”',
       },
     ],
   },
   mock: {
     question: 'Qual foi o custo realizado da última peneira vibratória de dois decks e quanto de engenharia ela consumiu?',
     answer:
-      'A última foi o pedido 3982. O custo realizado ficou 8% acima do orçado [1], puxado por chapa e por 46 horas extras de engenharia na adaptação do chassi [2]. A BOM tem 412 itens, 37 deles feitos sob medida. O desenho base é o PV-2D, revisão D [3].',
+      'A última foi o pedido 3982, com custo realizado 8% acima do orçado [1], puxado por chapa e por 46 horas extras de engenharia no chassi [2]. O desenho base é o PV-2D, revisão D [3].',
     citations: ['Pedido 3982, custo realizado, ERP', 'Apontamento de horas da engenharia, pedido 3982', 'BOM PV-2D, rev. D'],
   },
   brain: {
     title: 'Como o cérebro da operação se monta num fabricante de máquinas',
     body: [
-      'O ERP traz pedidos, custos realizados, estoque e compras. O PDM ou as pastas da engenharia guardam desenhos, BOMs e revisões. A assistência técnica tem os chamados e os relatórios de campo. O comercial tem orçamentos ganhos e perdidos.',
-      'Ligamos tudo pelo número de série e pelo número do pedido, para que cada máquina vendida tenha a sua história completa. As respostas citam a fonte e respeitam permissões. Custo e margem ficam com quem a diretoria autorizar.',
+      'Pedidos, custos, desenhos, BOMs, orçamentos e chamados entram ligados pelo número de série e pelo pedido, para que cada máquina vendida tenha a sua história completa. As respostas citam a fonte, e custo e margem ficam com quem a diretoria autorizar.',
     ],
     inputs: [
       'Pedidos, custos realizados e estoque do ERP',
@@ -109,18 +147,15 @@ export const setor: SectorLanding = {
       'Orçamentos ganhos e perdidos',
       'Chamados e relatórios de assistência técnica',
       'Manuais, diagramas e listas de peças',
-      'Apontamento de horas de engenharia',
-      'Condições comerciais e tabelas de preço',
     ],
   },
   scenario: {
     title: 'Um cenário possível num fabricante com muitos pedidos sob encomenda',
-    intro:
-      'Um fabricante de equipamentos com cerca de 500 funcionários leva semanas para devolver orçamentos técnicos e perde cotações por prazo.',
+    intro: 'Um fabricante de equipamentos leva semanas para devolver orçamentos técnicos e perde cotações por prazo.',
     steps: [
       {
         title: 'Diagnóstico',
-        body: 'Entrevistas com orçamentação, engenharia, comercial e TI. Levantamos o tempo de resposta das últimas cotações e combinamos o critério de sucesso.',
+        body: 'Levantamos o tempo de resposta das últimas cotações e combinamos o critério de sucesso.',
       },
       {
         title: 'Base de projetos',
@@ -128,53 +163,61 @@ export const setor: SectorLanding = {
       },
       {
         title: 'Piloto na orçamentação',
-        body: 'Os orçamentistas usam o assistente para achar projetos parecidos e montar a base do orçamento. A engenharia valida cada orçamento antes de ele sair.',
+        body: 'Os orçamentistas usam o assistente para montar a base do orçamento. A engenharia valida cada um antes de sair.',
       },
       {
         title: 'Próxima etapa',
-        body: 'Com o critério atingido, a mesma base passa a atender a assistência técnica e a identificação de peças de reposição.',
+        body: 'Com o critério atingido, a mesma base passa a atender a assistência técnica e as peças de reposição.',
       },
     ],
-    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real. Os números de porte servem só para dar escala ao exemplo.',
+    note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
   proof: {
     title: 'De onde vem a nossa experiência',
-    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA usado na operação de terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado com fabricantes de máquinas. O primeiro passo no setor é o diagnóstico, com critério de sucesso combinado antes do piloto.',
+    body: 'Quem conduz a Torno trabalhou na Loopt, na engenharia de machine learning e depois na gestão do produto de IA usado em terminais de contêineres. Segundo a Loopt (MundoLogística, 13/01/2026), a solução reduziu em 27% os movimentos improdutivos e aumentou a produtividade em 21%. Ainda não temos case publicado com fabricantes de máquinas.',
   },
   faq: [
     {
       q: 'Nossos desenhos e projetos ficam protegidos?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela sua TI. Desenhos, custos e margens ficam restritos por perfil, o uso fica registrado e os dados não são usados para treinar modelos de terceiros. Assinamos acordo de confidencialidade antes do diagnóstico quando a empresa pede.',
+      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI. Desenhos, custos e margens ficam restritos por perfil, o uso fica registrado e os dados não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP e o nosso PDM?',
-      a: 'Lemos o ERP e o PDM já implantados, ou as pastas de rede onde a engenharia guarda os arquivos. A ligação é de leitura e segue o caminho que a TI aprovar. O diagnóstico confirma o que é possível em cada sistema.',
+      a: 'Lemos o ERP e o PDM já implantados, ou as pastas de rede da engenharia, pelo caminho que a TI aprovar.',
     },
     {
-      q: 'Quanto tempo até ter algo funcionando?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. O piloto vem em seguida, numa área e num problema, com prazo e critério de sucesso definidos na proposta.',
+      q: 'Quanto a engenharia precisa participar?',
+      a: 'A engenharia valida o que o assistente produz. Combinamos com ela um tempo semanal que não atrapalhe os projetos em andamento.',
     },
     {
-      q: 'Quem da nossa equipe precisa participar?',
-      a: 'Um patrocinador na diretoria, um ponto focal da área do piloto e alguém da TI. A engenharia participa porque valida o que o assistente produz, e combinamos com ela um tempo semanal que não atrapalhe os projetos em andamento.',
-    },
-    {
-      q: 'Quanto custa?',
-      a: 'A conversa inicial não tem custo. O diagnóstico tem proposta fechada, e cada etapa seguinte também, montada a partir do que o diagnóstico encontrar.',
+      q: 'Quanto tempo leva e quanto custa?',
+      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quanto tempo leva hoje um orçamento técnico ou um atendimento de assistência. Saímos da conversa com uma ideia de onde o diagnóstico começaria e quem da engenharia precisa estar nele.',
+    body: 'Conte quanto tempo leva hoje um orçamento técnico ou um atendimento de assistência. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {
-      label: 'IBGE, CEMPRE 2024 (SIDRA, tabela 9529)',
-      url: 'https://apisidra.ibge.gov.br/values/t/9529/n3/42/v/all/p/last/c319/all/c12762/all',
-    },
-    {
       label: 'Abimaq, via Agência Brasil (agosto de 2025)',
       url: 'https://agenciabrasil.ebc.com.br/economia/noticia/2025-08/vendas-da-industria-de-maquinas-sobem-14-no-ano-ate-julho',
+    },
+    {
+      label: 'IBGE, PINTEC Semestral 2024, indicadores por atividade (tab. 1.3.3)',
+      url: 'https://ftp.ibge.gov.br/Industrias_Extrativas_e_de_Transformacao/Pesquisa_de_Inovacao_Semestral/2024/Indicadores_tematicos/PINTEC_Semestral_2024_Indicadores_Tematicos_CNAE.xlsx',
+    },
+    {
+      label: 'Artigo técnico da empresa, nov/2023 (resultado segundo a empresa)',
+      url: 'https://www.industriaquimica.es/descargar_documento/Weg7.pdf',
+    },
+    {
+      label: 'Case publicado pelo fornecedor da tecnologia (material de marketing)',
+      url: 'https://tractian.com/casos-de-estudo/bosch',
+    },
+    {
+      label: 'BCG, The Widening AI Value Gap (set/2025), estudo global',
+      url: 'https://www.bcg.com/press/30september2025-ai-leaders-outpace-laggards-revenue-growth-cost-savings',
     },
     {
       label: 'MundoLogística, 13/01/2026 (resultados segundo a Loopt)',

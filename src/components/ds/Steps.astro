@@ -7,7 +7,9 @@
  *
  * - layout: columns (lado a lado a partir de 1024, com linha de conexão) | rows (sempre empilhado)
  * - headingLevel: h3 (padrão) | h4
+ * - illos: ícone ilustrado por etapa (ds/illos/StepIllo, escolhido pelo título; decorativo).
  */
+import StepIllo from './illos/StepIllo.astro';
 export interface StepItem {
   title: string;
   body: string;
@@ -19,20 +21,24 @@ interface Props {
   items: StepItem[];
   layout?: 'columns' | 'rows';
   headingLevel?: 'h3' | 'h4';
+  illos?: boolean;
   class?: string;
 }
 
-const { items, layout = 'columns', headingLevel: H = 'h3', class: className } = Astro.props;
+const { items, layout = 'columns', headingLevel: H = 'h3', illos = false, class: className } = Astro.props;
 const cols = Math.min(Math.max(items.length, 2), 4);
 ---
 
-<ol class:list={['ds-steps', `ds-steps--${layout}`, className]} style={`--ds-steps-cols: ${cols}`} data-reveal-stagger>
+<ol class:list={['ds-steps', `ds-steps--${layout}`, illos && 'ds-steps--illos', className]} style={`--ds-steps-cols: ${cols}`} data-reveal-stagger>
   {
     items.map((item, index) => (
       <li class="ds-steps__item">
-        <span class="ds-steps__num tnum" aria-hidden="true">
-          {String(index + 1).padStart(2, '0')}
-        </span>
+        <div class="ds-steps__lead">
+          <span class="ds-steps__num tnum" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          {illos && <StepIllo title={item.title} index={index} class="ds-steps__illo" />}
+        </div>
         <div class="ds-steps__text">
           {item.meta && <p class="ds-steps__meta">{item.meta}</p>}
           <H class="title ds-steps__title">{item.title}</H>
@@ -57,6 +63,31 @@ const cols = Math.min(Math.max(items.length, 2), 4);
     gap: var(--space-4);
     padding-block-start: var(--space-5);
     border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .ds-steps__lead {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: var(--space-3);
+  }
+
+  .ds-steps--illos {
+    --si-size: 2.75rem;
+  }
+
+  .ds-steps--illos.ds-steps--rows .ds-steps__item {
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+  }
+
+  @media (min-width: 40em) {
+    .ds-steps--illos {
+      --si-size: 3.5rem;
+    }
+
+    .ds-steps--illos.ds-steps--rows .ds-steps__item {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
   }
 
   .ds-steps__num {
@@ -92,6 +123,13 @@ const cols = Math.min(Math.max(items.length, 2), 4);
       gap: var(--space-5);
       padding-block-start: var(--space-5);
       border-block-start-width: 2px;
+    }
+
+    .ds-steps--columns .ds-steps__lead {
+      grid-auto-flow: column;
+      align-items: end;
+      justify-content: space-between;
+      inline-size: 100%;
     }
 
     .ds-steps--columns .ds-steps__item:first-child {

@@ -1,0 +1,240 @@
+---
+/**
+ * FactoryDots (DESIGN-2026-11 §6.13): "x em 10" como figura. Dez fábricas: as que usam IA acendem e as que
+ * usam IA na produção ganham o selo de engrenagem. Os ícones são decorativos (aria-hidden); a legenda,
+ * com os mesmos números e a fonte, é texto.
+ *
+ * <FactoryDots locale="pt-BR" ai="cerca de 4 em 10" prod="cerca de 2 em 10" aiLabel="usam IA" prodLabel="usam IA na produção" source={{ label, href }} />
+ *
+ * Motion: ao entrar, as fábricas acendem uma a uma e os selos aparecem depois (.is-anim). Sem JS: estático.
+ */
+import { getChrome } from '../../../content/chrome';
+import type { Locale } from '../../../lib/i18n';
+import { outOfTen } from './kinds';
+
+interface Props {
+  locale: Locale;
+  ai: string;
+  prod: string;
+  aiLabel: string;
+  prodLabel: string;
+  source?: { label: string; href?: string } | undefined;
+  class?: string;
+}
+
+const { locale, ai, prod, aiLabel, prodLabel, source, class: className } = Astro.props;
+const lit = Math.min(Math.max(outOfTen(ai) ?? 0, 0), 10);
+const inProd = Math.min(Math.max(outOfTen(prod) ?? 0, 0), lit);
+const sourceLabel = getChrome(locale).common.source;
+const plants = Array.from({ length: 10 }, (_, k) => (k < inProd ? 'prod' : k < lit ? 'ai' : 'off'));
+---
+
+<figure class:list={['fd', className]} data-reveal="rise">
+  <ol class="fd__row" aria-hidden="true">
+    {
+      plants.map((state, k) => (
+        <li class={`fd__plant fd__plant--${state}`} style={`--k:${k}`}>
+          <svg viewBox="0 0 40 36" focusable="false">
+            <path class="fd__body" d="M3 33V17l9-6v6l9-6v6l9-6V5h6v28z" />
+            <path class="fd__win" d="M9 25h4M18 25h4M27 25h4" />
+          </svg>
+          {state === 'prod' && (
+            <span class="fd__gear">
+              <svg viewBox="0 0 16 16" focusable="false">
+                <path d="M8 2.5v1.6M8 11.9v1.6M2.5 8h1.6M11.9 8h1.6M4.1 4.1l1.1 1.1M10.8 10.8l1.1 1.1M11.9 4.1l-1.1 1.1M5.2 10.8l-1.1 1.1" />
+                <circle cx="8" cy="8" r="2.4" />
+              </svg>
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="fd__legend">
+    <p class="fd__item">
+      <span class="fd__swatch fd__swatch--ai" aria-hidden="true"></span>
+      <span><strong class="fd__value">{ai}</strong> <span class="fd__label">{aiLabel}</span></span>
+    </p>
+    <p class="fd__item">
+      <span class="fd__swatch fd__swatch--prod" aria-hidden="true"></span>
+      <span><strong class="fd__value">{prod}</strong> <span class="fd__label">{prodLabel}</span></span>
+    </p>
+    {
+      source && (
+        <p class="caption fd__source">
+          {sourceLabel}:{' '}
+          {source.href ? (
+            <a class="link" href={source.href} target="_blank" rel="noopener">
+              {source.label}
+            </a>
+          ) : (
+            source.label
+          )}
+        </p>
+      )
+    }
+  </figcaption>
+</figure>
+
+<style>
+  .fd {
+    display: grid;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    background-color: var(--color-surface);
+    border: var(--border-width) solid var(--color-border-subtle);
+    min-inline-size: 0;
+  }
+
+  .fd__row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fd__plant {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-muted);
+  }
+
+  .fd__plant svg {
+    inline-size: 62%;
+    overflow: visible;
+  }
+
+  .fd__body {
+    fill: none;
+    stroke: var(--color-border-strong);
+    stroke-width: 1.75;
+    stroke-linejoin: round;
+    stroke-dasharray: 3 3;
+  }
+
+  .fd__win {
+    fill: none;
+    stroke: var(--color-border-strong);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .fd__plant--ai,
+  .fd__plant--prod {
+    background-color: var(--color-accent-subtle);
+  }
+
+  .fd__plant:is(.fd__plant--ai, .fd__plant--prod) .fd__body {
+    fill: var(--color-accent);
+    stroke: var(--color-accent);
+    stroke-dasharray: none;
+  }
+
+  .fd__plant:is(.fd__plant--ai, .fd__plant--prod) .fd__win {
+    stroke: var(--color-on-accent);
+  }
+
+  .fd__gear {
+    position: absolute;
+    inset-block-start: -0.4rem;
+    inset-inline-end: -0.4rem;
+    display: grid;
+    place-items: center;
+    inline-size: 1.6rem;
+    block-size: 1.6rem;
+    border-radius: 50%;
+    background-color: var(--color-ok-text);
+    color: var(--color-surface);
+    box-shadow: 0 0 0 3px var(--color-surface);
+  }
+
+  .fd__gear svg {
+    inline-size: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+  }
+
+  .fd__legend {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .fd__item {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: baseline;
+  }
+
+  .fd__swatch {
+    inline-size: 0.85rem;
+    block-size: 0.85rem;
+    border-radius: 4px;
+    background-color: var(--color-accent);
+    transform: translateY(0.1em);
+  }
+
+  .fd__swatch--prod {
+    border-radius: 50%;
+    background-color: var(--color-ok-text);
+  }
+
+  .fd__value {
+    font-size: var(--text-title);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-title);
+  }
+
+  .fd__label {
+    color: var(--color-text-muted);
+  }
+
+  .fd__source {
+    margin-block-start: var(--space-2);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 40em) {
+    .fd {
+      padding: var(--space-7);
+    }
+
+    .fd__row {
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.fd.is-anim) .fd__plant:is(.fd__plant--ai, .fd__plant--prod) {
+      animation: fd-lit 0.7s var(--motion-ease-out) backwards;
+      animation-delay: calc(400ms + var(--k, 0) * 140ms);
+    }
+
+    :global(.fd.is-anim) .fd__gear {
+      animation: fd-pop 0.6s var(--motion-ease-out) backwards;
+      animation-delay: calc(1300ms + var(--k, 0) * 140ms);
+    }
+  }
+
+  @keyframes fd-lit {
+    from {
+      opacity: 0.25;
+      transform: scale(0.85);
+    }
+  }
+
+  @keyframes fd-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+  }
+</style>
