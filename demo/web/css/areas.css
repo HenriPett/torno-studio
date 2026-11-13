@@ -33,6 +33,7 @@
 
 /* --- seletor de área em pílulas --------------------------------------------------------- */
 .ar-switch {
+  contain: content;
   display: flex; gap: 4px; margin: 0 0 20px; overflow-x: auto; scrollbar-width: none;
   -webkit-overflow-scrolling: touch; max-width: 100%;
 }
@@ -290,12 +291,13 @@ button.ar-row:hover { background: var(--surface-hover, var(--surface-muted)); }
 
 .ar-minis { display: grid; border-top: 1px solid var(--border-subtle); }
 .ar-mini {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; padding: 10px 4px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; padding: 10px 8px 10px 4px;
   border: 0; border-bottom: 1px solid var(--border-subtle); background: none; color: var(--text); font: inherit; text-align: left;
 }
 button.ar-mini { cursor: pointer; }
 button.ar-mini:hover { background: var(--surface-hover, var(--surface-muted)); }
-.ar-mini__main { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 14px; }
+.ar-mini > .badge, .ar-mini > .ar-badge { flex: none; }
+.ar-mini__main { flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 14px; }
 .ar-mini__main strong { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ar-mini__sub { font-size: var(--fs-sm, 13px); color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
