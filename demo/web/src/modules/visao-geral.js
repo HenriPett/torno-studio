@@ -1,256 +1,256 @@
-// Visão geral (Gestão): saudação, KPIs com explicação e caminho até o dado, pendências do dia e
-// assistente da diretoria. Tudo vem de ctx.data; rótulos usam o vocabulário do setor.
-import { h, icon, pageHeader, card, kpiTile, sparkline, badge, statusBadge, refChip, emptyState } from '../ui.js';
-import { fmt } from '../format.js';
-import { chatPanel } from '../ui/chat.js';
+// Início (#inicio, UX §4.4): a pergunta no centro, "Hoje na operação" (até 3 cartões) e 4 indicadores
+// compactos. Tudo vem do pacote do setor e respeita os módulos ligados.
+import { h, icon } from '../ui.js';
+import { sugestoesInicio, empresaCurta } from '../ui/conversa.js';
+import { feminino, statusLabel } from '../ai/local-engine.js';
 
-const DIAS = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+const DIAS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+const AREA_MODULO = { producao: 'producao', qualidade: 'qualidade', manutencao: 'manutencao', comercial: 'comercial', marketing: 'marketing', operadores: 'operadores', gestao: null };
+const SEV = { alta: 0, media: 1, baixa: 2 };
 
-function ensureCss() {
-  if (typeof document === 'undefined') return;
-  if (document.querySelector('link[data-mod-css="mod-a"]')) return;
-  const href = new URL('../../css/mod-a.css', import.meta.url).href;
-  if ([...document.querySelectorAll('link[rel="stylesheet"]')].some((l) => l.href === href)) return;
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = href;
-  link.dataset.modCss = 'mod-a';
-  document.head.appendChild(link);
-}
+const ligado = (ctx, m) => (!m ? true : typeof ctx?.isEnabled === 'function' ? !!ctx.isEnabled(m) : true);
+const term = (ctx, k) => (typeof ctx?.term === 'function' ? ctx.term(k) : ctx?.data?.vocabulario?.[k] ?? k);
+const dataBr = (iso) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso ?? '')); return m ? `${m[3]}/${m[2]}` : ''; };
+const encurta = (s, n = 70) => {
+  const t = String(s ?? '').replace(/\s+/g, ' ').trim().replace(/[.;:]+$/, '');
+  return t.length > n ? `${t.slice(0, n - 1).replace(/[\s,;:]+\S*$/, '')}…` : t;
+};
+const num = (v) => (typeof v === 'number' ? v.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : String(v ?? '—'));
 
-function weekday(iso) {
-  const m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+/** "Sexta, 13 de novembro" a partir de AAAA-MM-DD (sem fuso). */
+export function dataLonga(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso ?? ''));
   if (!m) return '';
-  return DIAS[new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).getUTCDay()];
+  const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+  return `${DIAS[d.getUTCDay()]}, ${+m[3]} de ${MESES[+m[2] - 1]}`;
 }
 
-function kpiValue(k) {
-  const u = k.unidade || '';
-  if (u === '%') return fmt.pct(k.valor);
-  if (u === 'R$') return fmt.money(k.valor, { compact: true });
-  return `${fmt.num(k.valor)}${u ? ` ${u}` : ''}`;
+export function saudacao(hora = new Date().getHours()) {
+  if (hora >= 5 && hora < 12) return 'Bom dia';
+  if (hora >= 12 && hora < 18) return 'Boa tarde';
+  return 'Boa noite';
 }
 
-function kpiMeta(k) {
-  const u = k.unidade || '';
-  if (u === '%') return fmt.pct(k.meta);
-  if (u === 'R$') return fmt.money(k.meta, { compact: true });
-  return `${fmt.num(k.meta)}${u ? ` ${u}` : ''}`;
+function nomeSalvo(ctx) {
+  try { if (typeof ctx?.autorSalvo === 'function') return ctx.autorSalvo() || ''; } catch { /* ok */ }
+  const a = typeof ctx?.autor === 'function' ? ctx.autor() : '';
+  return a && a !== 'Você' ? a : '';
 }
 
-function onTarget(k) {
-  if (typeof k.valor !== 'number' || typeof k.meta !== 'number') return null;
+/** Artigo do nome da máquina ("o TEA-12" para "Tear…", "a ENV-03" para "Envasadora…"). */
+const artigoDe = (ctx, m) => {
+  const w = String(m?.nome ?? term(ctx, 'maquina')).split(/\s+/)[0];
+  return feminino(w) ? 'a' : 'o';
+};
+
+/** Cartões de "Hoje na operação" (máx. 3), na prioridade do spec. */
+export function cartoesHoje(ctx) {
+  const d = ctx?.data ?? {};
+  const out = [];
+  const ordemTerm = term(ctx, 'ordens');
+  const fem = feminino(term(ctx, 'ordem'));
+
+  if (ligado(ctx, 'producao')) {
+    const ops = (d.ordens ?? []).filter((o) => o.status === 'atrasada')
+      .sort((a, b) => String(a.prazo).localeCompare(String(b.prazo)) || (a.progresso ?? 0) - (b.progresso ?? 0));
+    if (ops.length) {
+      const o = ops[0];
+      const n = ops.length;
+      out.push({
+        modulo: 'producao', tom: 'danger', area: 'Produção',
+        titulo: `${n} ${n === 1 ? term(ctx, 'ordem') : ordemTerm} ${fem ? 'atrasada' : 'atrasado'}${n === 1 ? '' : 's'}`,
+        texto: `A mais crítica: ${o.id}${o.motivo_atraso ? `, ${encurta(o.motivo_atraso, 70)}` : ''}.`,
+        ref: `op:${o.id}`,
+        pergunta: `Por que ${fem ? 'as' : 'os'} ${ordemTerm} estão atrasando?`,
+      });
+    }
+  }
+  if (ligado(ctx, 'manutencao')) {
+    const ms = d.maquinas ?? [];
+    const m = ms.find((x) => x.status === 'parada') ?? ms.find((x) => x.status === 'alerta');
+    if (m) {
+      const os = (d.manutencao ?? []).filter((x) => x.maquina === m.id && x.status !== 'concluida')
+        .sort((a, b) => String(b.data).localeCompare(String(a.data)))[0];
+      const art = artigoDe(ctx, m);
+      out.push({
+        modulo: 'manutencao', tom: m.status === 'parada' ? 'danger' : 'warn', area: 'Manutenção',
+        titulo: m.status === 'parada' ? `${m.id} ${art === 'a' ? 'parada' : 'parado'}` : `${m.id} em alerta`,
+        texto: os ? `${encurta(os.descricao, 80)}${os.id ? ` (${os.id})` : ''}.` : `${m.nome}: ${statusLabel(m.status)}.`,
+        ref: `maq:${m.id}`,
+        pergunta: `O que está acontecendo com ${art} ${m.id}?`,
+      });
+    }
+  }
+  if (ligado(ctx, 'qualidade')) {
+    const ncs = (d.nao_conformidades ?? []).filter((n) => n.status !== 'encerrada' && n.severidade === 'alta')
+      .sort((a, b) => String(b.data).localeCompare(String(a.data)));
+    if (ncs.length) {
+      out.push({
+        modulo: 'qualidade', tom: 'danger', area: 'Qualidade',
+        titulo: ncs.length === 1 ? '1 NC grave' : `${ncs.length} NCs graves`,
+        texto: `${encurta(ncs[0].descricao, 90)}.`,
+        ref: `nc:${ncs[0].id}`,
+        pergunta: 'Quais NCs graves estão abertas e o que já foi feito?',
+      });
+    }
+  }
+  if (out.length < 3 && ligado(ctx, 'comercial')) {
+    const pvs = (d.pedidos ?? []).filter((p) => p.status === 'atrasado')
+      .sort((a, b) => String(a.previsao_entrega).localeCompare(String(b.previsao_entrega)));
+    if (pvs.length) {
+      const p = pvs[0];
+      const cli = (d.clientes ?? []).find((c) => c.id === p.cliente);
+      out.push({
+        modulo: 'comercial', tom: 'danger', area: 'Comercial',
+        titulo: pvs.length === 1 ? '1 pedido atrasado' : `${pvs.length} pedidos atrasados`,
+        texto: `O mais antigo: ${p.id}${cli ? ` · ${cli.nome}` : ''}, previsão ${dataBr(p.previsao_entrega)}.`,
+        ref: `pedido:${p.id}`,
+        pergunta: 'Quais pedidos estão atrasados e por quê?',
+      });
+    }
+  }
+  return out.slice(0, 3);
+}
+
+/** Indicadores cuja área está ligada (ou gestão). */
+export function kpisLigados(ctx) {
+  return (ctx?.data?.kpis ?? []).filter((k) => !k.area || k.area === 'gestao' || ligado(ctx, AREA_MODULO[k.area] ?? k.area));
+}
+
+function valorKpi(k) {
+  if (k.unidade === '%') return `${num(k.valor)}%`;
+  if (k.unidade === 'R$') return `R$ ${num(k.valor)}`;
+  return `${num(k.valor)}${k.unidade ? ` ${k.unidade}` : ''}`;
+}
+function metaKpi(k) {
+  if (k.unidade === '%') return `${num(k.meta)}%`;
+  if (k.unidade === 'R$') return `R$ ${num(k.meta)}`;
+  return `${num(k.meta)}${k.unidade ? ` ${k.unidade}` : ''}`;
+}
+export function kpiNaMeta(k) {
   return k.direcao === 'menor_melhor' ? k.valor <= k.meta : k.valor >= k.meta;
 }
 
-// Distância relativa da meta (positiva = pior que a meta).
-function gap(k) {
-  if (typeof k.valor !== 'number' || typeof k.meta !== 'number' || !k.meta) return 0;
-  const d = (k.valor - k.meta) / Math.abs(k.meta);
-  return k.direcao === 'menor_melhor' ? d : -d;
+function tileKpi(ctx, k) {
+  const ant = (k.tendencia ?? []).at(-2);
+  const subiu = ant != null ? k.valor > ant : null;
+  const ok = kpiNaMeta(k);
+  const seta = subiu == null ? null : icon(subiu ? 'arrow-up' : 'arrow-down', { size: 14 });
+  return h('button', {
+    type: 'button', class: 'ini-kpi', onClick: () => ctx.openRef?.(`kpi:${k.id}`),
+    'aria-label': `${k.nome}: ${valorKpi(k)}, meta ${metaKpi(k)}${ok ? ', dentro da meta' : ', fora da meta'}`,
+  },
+  h('span', { class: 'ini-kpi__nome' }, k.nome),
+  h('span', { class: 'ini-kpi__linha' },
+    h('span', { class: 'ini-kpi__valor num' }, valorKpi(k)),
+    h('span', { class: ['ini-kpi__meta', ok ? 'is-ok' : 'is-warn'] }, seta, `meta ${metaKpi(k)}`)));
 }
 
-function chips(refs, ctx) {
-  const ok = (refs || []).filter((r) => {
-    try { return ctx.resolveRef(r); } catch { return false; }
-  });
-  if (!ok.length) return null;
-  return h('div', { class: 'vg-chips' }, ok.map((r) => refChip(r, ctx)));
+function cartaoHoje(ctx, c) {
+  const abrir = () => ctx.openRef?.(c.ref);
+  return h('article', {
+    class: 'ini-hoje', tabIndex: 0, role: 'button', 'aria-label': `${c.area}: ${c.titulo}. ${c.texto}`,
+    onClick: (e) => { if (!e.target.closest('button')) abrir(); },
+    onKeydown: (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); abrir(); } },
+  },
+  h('span', { class: 'ini-hoje__area' }, h('span', { class: ['ini-ponto', `is-${c.tom}`], 'aria-hidden': 'true' }), c.area),
+  h('h3', { class: 'ini-hoje__titulo' }, c.titulo),
+  h('p', { class: 'ini-hoje__texto' }, c.texto),
+  h('span', { class: 'ini-hoje__acoes' },
+    h('button', { type: 'button', class: 'link-btn', onClick: abrir }, 'Ver ›'),
+    h('button', { type: 'button', class: 'link-btn link-btn--muted', onClick: () => ctx.perguntar?.(c.pergunta, { modulo: c.modulo }) }, 'Perguntar')));
 }
 
-function explainPanel(k, ctx) {
-  if (!k) return emptyState('Selecione um indicador para ver a explicação.');
-  const alvo = onTarget(k);
-  const tend = Array.isArray(k.tendencia) ? k.tendencia.filter((v) => typeof v === 'number') : [];
-  const prev = tend.length > 1 ? tend[tend.length - 2] : null;
-  const delta = prev != null && typeof k.valor === 'number' ? k.valor - prev : null;
-  const caminho = Array.isArray(k.caminho) ? k.caminho : [];
-  return h('div', { class: 'vg-explain' },
-    h('div', { class: 'vg-explain-head' },
-      h('div', { class: 'vg-explain-title' },
-        h('span', { class: 'vg-eyebrow' }, ctx.areaName(k.area) || ''),
-        h('h3', null, k.nome),
-      ),
-      alvo == null ? null : badge(alvo ? 'Na meta' : 'Fora da meta', alvo ? 'ok' : 'warn'),
-    ),
-    h('div', { class: 'vg-explain-figs' },
-      h('div', { class: 'vg-fig' }, h('span', { class: 'vg-fig-label' }, 'Atual'), h('strong', { class: 'vg-num' }, kpiValue(k))),
-      h('div', { class: 'vg-fig' }, h('span', { class: 'vg-fig-label' }, 'Meta'), h('strong', { class: 'vg-num' }, kpiMeta(k))),
-      delta == null ? null : h('div', { class: 'vg-fig' },
-        h('span', { class: 'vg-fig-label' }, 'Vs. mês anterior'),
-        h('strong', { class: 'vg-num' }, `${delta > 0 ? '+' : delta < 0 ? '−' : ''}${fmt.num(Math.abs(Math.round(delta * 10) / 10))}${k.unidade === '%' ? ' p.p.' : ''}`),
-      ),
-      tend.length > 1 ? h('div', { class: 'vg-fig vg-fig-spark', 'aria-hidden': 'true' }, sparkline(tend, { width: 160, height: 40 })) : null,
-    ),
-    k.explicacao ? h('p', { class: 'vg-explain-text' }, k.explicacao) : null,
-    caminho.length ? h('div', { class: 'vg-block' },
-      h('h4', { class: 'vg-subtitle' }, 'Caminho até o dado'),
-      h('ol', { class: 'vg-trail', 'aria-label': 'Caminho até o dado' },
-        caminho.map((passo, i) => h('li', { class: 'vg-trail-step' },
-          h('span', { class: 'vg-trail-text' }, passo),
-          i < caminho.length - 1 ? h('span', { class: 'vg-trail-sep', 'aria-hidden': 'true' }, icon('chevron-right')) : null,
-        )),
-      ),
-    ) : null,
-    (k.fontes || []).length ? h('div', { class: 'vg-block' },
-      h('h4', { class: 'vg-subtitle' }, 'Fontes'),
-      chips(k.fontes, ctx) || h('p', { class: 'vg-muted' }, 'As fontes deste indicador estão em módulos desligados.'),
-    ) : null,
-  );
-}
-
-function attentionItems(ctx) {
-  const d = ctx.data;
-  const groups = [];
-  const prodBy = Object.fromEntries((d.produtos || []).map((p) => [p.sku, p]));
-  const lineBy = Object.fromEntries((d.linhas || []).map((l) => [l.id, l]));
-
-  if (ctx.isEnabled('producao')) {
-    const late = (d.ordens || []).filter((o) => o.status === 'atrasada');
-    groups.push({
-      id: 'ops', titulo: `${ctx.term('ordens')} atrasadas`, icone: 'factory', modulo: 'producao',
-      itens: late.map((o) => ({
-        ref: `op:${o.id}`, titulo: `${o.id} · ${prodBy[o.sku]?.nome || o.sku}`,
-        detalhe: o.motivo_atraso || `Prazo ${fmt.date(o.prazo)} (${fmt.rel(o.prazo, ctx.today)})`,
-        meta: `${o.progresso ?? 0}% concluído`, status: o.status,
-      })),
-    });
+function placeholderInicio(ctx) {
+  if (ligado(ctx, 'producao')) {
+    const o = (ctx.data?.ordens ?? []).filter((x) => x.status === 'atrasada').sort((a, b) => String(a.prazo).localeCompare(String(b.prazo)))[0];
+    if (o) return `Ex.: por que ${feminino(term(ctx, 'ordem')) ? 'a' : 'o'} ${o.id} atrasou?`;
   }
-  if (ctx.isEnabled('qualidade')) {
-    const ncs = (d.nao_conformidades || []).filter((n) => n.status !== 'encerrada' && n.severidade === 'alta');
-    groups.push({
-      id: 'ncs', titulo: 'Não conformidades abertas de severidade alta', icone: 'shield-check', modulo: 'qualidade',
-      itens: ncs.map((n) => ({
-        ref: `nc:${n.id}`, titulo: `${n.id} · ${prodBy[n.sku]?.nome || n.sku || ''}`,
-        detalhe: n.descricao, meta: `${n.origem === 'cliente' ? 'Reclamação de cliente' : n.origem === 'fornecedor' ? 'Fornecedor' : 'Interna'} · ${n.responsavel || ''}`,
-        status: n.status,
-      })),
-    });
-  }
-  if (ctx.isEnabled('manutencao')) {
-    const rank = { parada: 0, alerta: 1 };
-    const ms = (d.maquinas || []).filter((m) => m.status === 'alerta' || m.status === 'parada')
-      .sort((a, b) => rank[a.status] - rank[b.status]);
-    groups.push({
-      id: 'maq', titulo: `${cap(ctx.term('maquinas'))} em alerta ou paradas`, icone: 'wrench', modulo: 'manutencao',
-      itens: ms.map((m) => {
-        const os = (d.manutencao || []).find((o) => o.maquina === m.id && o.status !== 'concluida');
-        return {
-          ref: `maq:${m.id}`, titulo: `${m.id} · ${m.nome}`,
-          detalhe: os ? `${os.id}: ${os.descricao}` : `${lineBy[m.linha]?.nome || m.linha} · sem OS aberta`,
-          meta: `Próxima preventiva ${fmt.date(m.proxima_preventiva)}`, status: m.status,
-        };
-      }),
-    });
-  }
-  if (ctx.isEnabled('comercial')) {
-    const cliBy = Object.fromEntries((d.clientes || []).map((c) => [c.id, c]));
-    const ps = (d.pedidos || []).filter((p) => p.status === 'atrasado');
-    groups.push({
-      id: 'ped', titulo: 'Pedidos atrasados', icone: 'truck', modulo: 'comercial',
-      itens: ps.map((p) => ({
-        ref: `pedido:${p.id}`, titulo: `${p.id} · ${cliBy[p.cliente]?.nome || p.cliente}`,
-        detalhe: p.observacao || `Previsão de entrega ${fmt.date(p.previsao_entrega)}${p.ordem ? ` · ${p.ordem}` : ''}`,
-        meta: fmt.rel(p.previsao_entrega, ctx.today), status: p.status,
-      })),
-    });
-  }
-  return groups;
-}
-
-function cap(s) {
-  s = String(s || '');
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-function attentionPanel(ctx) {
-  const groups = attentionItems(ctx);
-  const total = groups.reduce((s, g) => s + g.itens.length, 0);
-  if (!groups.length) return emptyState('Nenhum módulo operacional ligado para gerar pendências.');
-  return h('div', { class: 'vg-attn' },
-    h('ul', { class: 'vg-attn-summary', 'aria-label': 'Resumo das pendências' },
-      groups.map((g) => h('li', { class: `vg-attn-count${g.itens.length ? ' has-items' : ''}` },
-        h('strong', { class: 'vg-num' }, String(g.itens.length)),
-        h('span', null, g.titulo),
-      )),
-    ),
-    total === 0 ? emptyState('Nada pendente hoje.') : null,
-    groups.filter((g) => g.itens.length).map((g) => h('section', { class: 'vg-attn-group', 'aria-label': g.titulo },
-      h('div', { class: 'vg-attn-group-head' },
-        h('span', { class: 'vg-attn-icon', 'aria-hidden': 'true' }, icon(g.icone)),
-        h('h4', null, g.titulo),
-        ctx.isEnabled(g.modulo) ? h('button', {
-          type: 'button', class: 'vg-link', onclick: () => ctx.navigate(g.modulo),
-        }, 'Abrir módulo', icon('chevron-right')) : null,
-      ),
-      h('ul', { class: 'vg-attn-list' },
-        g.itens.map((it) => h('li', null,
-          h('button', { type: 'button', class: 'vg-attn-item', onclick: () => ctx.openRef(it.ref) },
-            h('span', { class: 'vg-attn-main' },
-              h('span', { class: 'vg-attn-title' }, it.titulo),
-              it.detalhe ? h('span', { class: 'vg-attn-detail' }, it.detalhe) : null,
-            ),
-            h('span', { class: 'vg-attn-side' },
-              statusBadge(it.status),
-              it.meta ? h('span', { class: 'vg-attn-meta' }, it.meta) : null,
-            ),
-          ),
-        )),
-      ),
-    )),
-  );
+  return 'Ex.: o que eu preciso ver hoje?';
 }
 
 export function render(el, ctx) {
-  ensureCss();
-  const d = ctx.data || {};
-  const kpis = d.kpis || [];
-  let selected = kpis.length ? [...kpis].sort((a, b) => gap(b) - gap(a))[0].id : null;
+  const d = ctx.data ?? {};
+  const empresa = empresaCurta(ctx);
+  const areasLigadas = ['producao', 'qualidade', 'manutencao', 'comercial', 'marketing'].some((m) => ligado(ctx, m));
 
-  const explainBody = h('div', { class: 'vg-explain-wrap', 'aria-live': 'polite' });
-  const tileWraps = [];
+  // pergunta -------------------------------------------------------------
+  const campo = h('input', {
+    type: 'text', class: 'ini-campo__input', placeholder: placeholderInicio(ctx), autocomplete: 'off',
+    enterkeyhint: 'send', 'aria-label': `Pergunte à operação da ${empresa}`,
+  });
+  const enviarBtn = h('button', { type: 'submit', class: 'ini-campo__enviar', 'aria-label': 'Enviar pergunta', disabled: true }, icon('arrow-up', { size: 20 }));
+  campo.addEventListener('input', () => { enviarBtn.disabled = !campo.value.trim(); });
+  const form = h('form', {
+    class: 'ini-campo', role: 'search',
+    onSubmit: (e) => {
+      e.preventDefault();
+      const t = campo.value.trim();
+      if (!t) return;
+      el.querySelector('.ini')?.classList.add('is-saindo');
+      ctx.perguntar?.(t, { modulo: 'visao-geral' });
+    },
+  }, campo, enviarBtn);
 
-  function select(id) {
-    selected = id;
-    tileWraps.forEach(({ wrap, kid }) => {
-      wrap.classList.toggle('is-selected', kid === id);
-      const tile = wrap.querySelector('.kpi-tile');
-      if (tile) tile.setAttribute('aria-pressed', String(kid === id));
-    });
-    explainBody.replaceChildren(explainPanel(kpis.find((k) => k.id === id), ctx));
+  const sugBox = h('div', { class: 'ini-sugestoes', role: 'group', 'aria-label': 'Perguntas sugeridas' });
+  function pintaSugestoes() {
+    sugBox.replaceChildren(...sugestoesInicio(ctx).map((s) => h('button', {
+      type: 'button', class: ['pill-sug', s.derivada && 'is-derivada'], title: s.derivada ? 'Usa o que você registrou' : s.texto,
+      onClick: () => ctx.perguntar?.(s.texto, { modulo: 'visao-geral' }),
+    }, s.derivada ? h('span', { class: 'pill-sug__ponto', 'aria-hidden': 'true' }) : null, h('span', null, s.texto))));
+  }
+  pintaSugestoes();
+
+  const nome = nomeSalvo(ctx);
+  const hero = h('div', { class: 'ini-hero' },
+    h('p', { class: 'ini-data' }, `${dataLonga(ctx.today || d.data_referencia)} · ${saudacao()}${nome ? `, ${nome}` : ''}`),
+    h('h1', { class: 'ini-titulo' }, `Pergunte à operação da ${empresa}`),
+    form,
+    sugBox,
+    h('button', { type: 'button', class: 'link-btn ini-ensinar', onClick: () => ctx.ensinar?.({ origem: 'inicio' }) }, 'ou ensine algo ao cérebro ›'));
+
+  // hoje na operação -----------------------------------------------------
+  let hojeSec = null;
+  let kpiSec = null;
+  if (areasLigadas) {
+    let cartoes = [];
+    let falhou = false;
+    try { cartoes = cartoesHoje(ctx); } catch (e) { console.error('[início] destaques', e); falhou = true; }
+    if (falhou || cartoes.length) {
+      hojeSec = h('section', { class: 'ini-sec', 'aria-labelledby': 'ini-hoje-t' },
+        h('h2', { class: 'ini-sec__titulo', id: 'ini-hoje-t' }, 'Hoje na operação'),
+        falhou ? h('p', { class: 'ini-muted' }, 'Não foi possível carregar os destaques.')
+          : h('div', { class: 'ini-hoje-grade' }, cartoes.map((c) => cartaoHoje(ctx, c))));
+    }
+    const ks = kpisLigados(ctx);
+    if (ks.length) {
+      const grade = h('div', { class: 'ini-kpis' }, ks.slice(0, 4).map((k) => tileKpi(ctx, k)));
+      let aberto = false;
+      const verTodos = ks.length > 4 ? h('button', {
+        type: 'button', class: 'link-btn', 'aria-expanded': 'false',
+        onClick: () => {
+          aberto = !aberto;
+          grade.replaceChildren(...(aberto ? ks : ks.slice(0, 4)).map((k) => tileKpi(ctx, k)));
+          grade.classList.toggle('is-todos', aberto);
+          verTodos.textContent = aberto ? 'Ver menos' : `Ver todos (${ks.length}) ›`;
+          verTodos.setAttribute('aria-expanded', String(aberto));
+        },
+      }, `Ver todos (${ks.length}) ›`) : null;
+      kpiSec = h('section', { class: 'ini-sec', 'aria-labelledby': 'ini-kpi-t' },
+        h('div', { class: 'ini-sec__cab' }, h('h2', { class: 'ini-sec__titulo', id: 'ini-kpi-t' }, 'Indicadores'), verTodos),
+        grade);
+    }
   }
 
-  const strip = h('div', { class: 'vg-kpis', role: 'list', 'aria-label': 'Indicadores' },
-    kpis.map((k) => {
-      const wrap = h('div', { class: 'vg-kpi', role: 'listitem' },
-        kpiTile({ kpi: k, onClick: () => select(k.id) }));
-      tileWraps.push({ wrap, kid: k.id });
-      return wrap;
-    }),
-  );
+  const raiz = h('div', { class: ['ini', !hojeSec && !kpiSec && 'ini--so-pergunta'] }, hero, hojeSec, kpiSec);
+  el.replaceChildren(raiz);
 
-  const dia = weekday(ctx.today);
-  el.replaceChildren(
-    h('div', { class: 'vg-page' },
-      pageHeader({
-        titulo: 'Bom dia',
-        subtitulo: `${ctx.empresa} · ${dia ? `${dia}, ` : ''}${fmt.dateLong(ctx.today)}`,
-      }),
-      kpis.length ? strip : emptyState('Sem indicadores neste pacote de dados.'),
-      h('div', { class: 'vg-grid' },
-        h('div', { class: 'vg-col' },
-          card({ titulo: 'Indicador explicado', corpo: explainBody, class: 'vg-card' }),
-          card({ titulo: 'Precisa de atenção hoje', corpo: attentionPanel(ctx), class: 'vg-card' }),
-        ),
-        h('div', { class: 'vg-col' },
-          card({
-            titulo: 'Pergunte à operação',
-            corpo: chatPanel({ ctx, modulo: 'visao-geral', titulo: 'Assistente da diretoria' }),
-            class: 'vg-card vg-chat',
-          }),
-        ),
-      ),
-    ),
-  );
-  if (selected) select(selected);
+  // a 4ª sugestão acompanha o aprendizado
+  const off = ctx.learning?.subscribe?.((_, ev) => { if (ev?.tipo !== 'uso') pintaSugestoes(); });
+
+  if (typeof matchMedia === 'function' && matchMedia('(min-width: 1024px)').matches) {
+    requestAnimationFrame(() => { try { campo.focus({ preventScroll: true }); } catch { /* ok */ } });
+  }
+  return () => { if (typeof off === 'function') off(); };
 }

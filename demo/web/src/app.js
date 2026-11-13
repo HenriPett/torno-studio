@@ -1,832 +1,1133 @@
-// Boot, roteador, casca (barra lateral + topo + faixa) e gaveta de detalhe da demo da Torno.
+// Demo v2 da Torno — boot por location.pathname, senha, boas-vindas, casca, roteador e ctx (UX §3, §4.3, §7.4).
+//   /admin       → painel (admin/admin.js)
+//   /demo/<id>   → GET /api/demo/<id>/estado; 401 → senha; depois a demo (rotas no hash)
+// Pacote A. Telas de B e C são importadas dinamicamente; o que ainda não existir vira um stub de
+// mesma assinatura, para nada quebrar.
+
 import { fmt, TODAY } from './format.js';
 import {
-  FEATURES, FEATURE_BY_ID, OFERTAS, enabledFeatures, isFeatureOn,
+  FEATURES, FEATURE_BY_ID, AREA_IDS, isFeatureOn, normalizeModulos, enabledAreas, navItems, navOf, resolveRoute,
 } from './features.js';
-import { SECTOR_IDS, normalizeConfig } from './config.js';
-import { getState, setState, subscribe, readSectorOverride, writeSectorOverride } from './state.js';
-import { createConfigStore } from './adapters/config-store.js';
-import { FictitiousDataSource, resolveRef as resolveRefData, REF_TYPES } from './adapters/data-source.js';
+import { resolveRef as resolveRefData, REF_TYPES } from './adapters/data-source.js';
+import { api, ApiError, onNaoAutorizado } from './api.js';
 import * as ui from './ui.js';
 
 const { h, icon, toast } = ui;
 
-const dataSource = new FictitiousDataSource();
-let configStore = null;
-let assistant = null;
-const moduleCache = new Map(); // id → módulo importado (ou {erro})
-let currentCleanup = null;
-let mountedContext = null;
-let renderToken = 0; // invalida renders em corrida (um await pode terminar depois de outro render começar)
-let sectorMeta = []; // de sectors.json
-
-const el = {};
+const ID_RE = /^[a-z2-7]{12}$/;
+const root = () => document.getElementById('app') || document.body;
 
 // ---------------------------------------------------------------------------
-// ctx entregue a cada render(el, ctx)
+// localStorage com try/catch (pode faltar em aba privada ou prévia)
 
-function sectorNome(id) {
-  return sectorMeta.find((s) => s.id === id)?.nome || getState().data?.setor || id;
+export const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { if (v == null || v === '') localStorage.removeItem(k); else localStorage.setItem(k, v); } catch { /* sem storage */ } },
+};
+
+// ---------------------------------------------------------------------------
+// Tema (UX §5.1): data-theme no <html>, preferência em localStorage["td_tema"]
+
+export function temaAtual() {
+  const forced = document.documentElement.getAttribute('data-theme');
+  if (forced === 'dark' || forced === 'light') return forced;
+  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
-
-function buildCtx() {
-  const s = getState();
-  const data = s.data;
-  const enabled = enabledFeatures(s.config);
-  const isEnabled = (id) => isFeatureOn(enabledConfigModulos(s.config), id);
-  const term = (key) => (data?.vocabulario && data.vocabulario[key]) || key;
-  const areaName = (areaId) => data?.areas?.find((a) => a.id === areaId)?.nome || areaId;
-  const resolveRef = (ref) => resolveRefData(data, ref, isEnabled);
-  const empresa = (s.config?.empresa_nome || '').trim() || data?.empresa?.nome || sectorNome(s.sectorId);
-
-  return {
-    data,
-    sector: { id: s.sectorId, nome: sectorNome(s.sectorId) },
-    empresa,
-    today: TODAY,
-    features: enabled,
-    isEnabled,
-    term,
-    areaName,
-    resolveRef,
-    openRef: (ref) => openRef(ref),
-    navigate: (route) => navigate(route),
-    assistant,
-    fmt,
-    ui,
+const temaOuvintes = new Set();
+export function alternarTema() {
+  const novo = temaAtual() === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', novo);
+  store.set('td_tema', novo);
+  for (const fn of [...temaOuvintes]) fn(novo);
+}
+/** Botão de alternar tema (ícone sun/moon). */
+export function themeToggle({ class: cls } = {}) {
+  const btn = h('button', { type: 'button', class: ['icon-btn', 'theme-switch', cls], onClick: () => alternarTema() });
+  const pinta = () => {
+    if (btn.dataset.montado && !btn.isConnected) { temaOuvintes.delete(pinta); return; }
+    if (btn.isConnected) btn.dataset.montado = '1';
+    const dark = temaAtual() === 'dark';
+    btn.replaceChildren(icon(dark ? 'sun' : 'moon', { size: 18 }));
+    btn.setAttribute('aria-label', dark ? 'Tema claro' : 'Tema escuro');
+    btn.title = dark ? 'Tema claro' : 'Tema escuro';
   };
-}
-
-function enabledConfigModulos(config) {
-  // objeto { id: bool } já com dependências aplicadas (enabledFeatures faz a cascata)
-  const on = new Set(enabledFeatures(config).map((f) => f.id));
-  return Object.fromEntries(FEATURES.map((f) => [f.id, on.has(f.id)]));
+  pinta();
+  temaOuvintes.add(pinta);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', pinta);
+  return btn;
 }
 
 // ---------------------------------------------------------------------------
 // Boot
 
-async function boot() {
-  buildShell();
-  renderLoading();
+function telaBoot() {
+  const msg = h('p', { class: 'boot__msg' }, 'Preparando a demonstração…');
+  const el = h('div', { class: 'boot', 'aria-busy': 'true', 'aria-live': 'polite' },
+    h('div', { class: 'loadbar', 'aria-hidden': 'true' }),
+    h('span', { class: 'boot__mark' }, 'Torno'),
+    msg);
+  setTimeout(() => msg.classList.add('is-visible'), 600);
+  root().replaceChildren(el);
+}
 
-  // 1. sectors.json (índice) — sem ele a demo não roda
-  try {
-    sectorMeta = await dataSource.listSectors();
-  } catch (err) {
-    console.error('[boot] falha ao carregar sectors.json', err);
-    renderFatal('Não foi possível carregar a lista de setores da demo.', err);
+function telaInvalida() {
+  document.title = 'Torno · Demonstração';
+  root().replaceChildren(h('main', { class: 'auth' },
+    h('div', { class: 'auth__card' },
+      h('div', { class: 'auth__brand' }, h('span', { class: 'wordmark' }, 'Torno')),
+      h('h1', { class: 'auth__title' }, 'Link ou senha inválidos.'),
+      h('p', { class: 'auth__lead' }, 'Confira a mensagem que você recebeu.'))));
+}
+
+function telaErroCarregar(tentar) {
+  root().replaceChildren(h('main', { class: 'boot' },
+    h('div', { class: 'boot-error', role: 'alert' },
+      h('span', { class: 'boot__mark' }, 'Torno'),
+      h('p', null, 'Não conseguimos carregar a demonstração.'),
+      ui.button('Tentar de novo', { variant: 'primary', icone: 'refresh', onClick: tentar }))));
+}
+
+async function boot() {
+  const path = location.pathname.replace(/\/+$/, '') || '/';
+  if (path === '/admin' || path.startsWith('/admin/')) {
+    try {
+      const mod = await import('./admin/admin.js');
+      mod.render(root(), { api, ui, fmt, themeToggle });
+    } catch (err) {
+      console.error('[admin] falha ao abrir o painel', err);
+      telaErroCarregar(() => location.reload());
+    }
     return;
   }
+  const m = path.match(/^\/demo\/([^/]+)$/);
+  if (!m || !ID_RE.test(m[1])) {
+    telaInvalida();
+    return;
+  }
+  demoId = m[1];
+  await carregar();
+}
 
-  // 2. config (db no claude.ai, localStorage fora dele)
+// ---------------------------------------------------------------------------
+// Estado da demo
+
+let demoId = null;
+let estado = null; // resposta de /estado
+let data = null; // pacote do setor
+let modulos = null; // {id: bool} normalizado
+let learning = null;
+let assistant = null;
+const B = { conversa: null, ensinar: null, markdown: null, learningMod: null };
+let drawerMap = {};
+let shellPronta = false;
+let reautenticando = false;
+
+async function carregar({ silencioso = false } = {}) {
+  if (!silencioso) telaBoot();
+  let r;
   try {
-    configStore = await createConfigStore();
-    const config = await configStore.load();
-    setState({ config, canEdit: configStore.canEdit(), storeKind: configStore.kind });
+    r = await api.estado(demoId);
   } catch (err) {
-    console.warn('[boot] config indisponível; seguindo com o padrão', err);
-    setState({ config: normalizeConfig(null), canEdit: false, storeKind: 'local' });
+    if (err instanceof ApiError && err.status === 401) {
+      mostrarSenha();
+      return;
+    }
+    if (err instanceof ApiError && (err.status === 404 || err.status === 403)) {
+      telaInvalida();
+      return;
+    }
+    console.warn('[boot] /estado falhou', err);
+    telaErroCarregar(() => carregar());
+    return;
   }
+  if (!r || !r.demo || !r.setor) {
+    telaInvalida();
+    return;
+  }
+  try {
+    await iniciar(r);
+  } catch (err) {
+    console.error('[boot] falha ao montar a demo', err);
+    telaErroCarregar(() => carregar());
+  }
+}
 
-  // escuta mudanças de config vindas de outro aparelho/aba
-  if (configStore) {
-    configStore.subscribe((config) => {
-      const prev = getState().config;
-      if (JSON.stringify({ ...prev, atualizado_em: null }) === JSON.stringify({ ...config, atualizado_em: null })) return;
-      setState({ config });
-      resolveSector();
-      renderShell();
-      loadSectorThen(renderRoute);
+async function mostrarSenha({ expirada = false } = {}) {
+  const { renderEntrar } = await import('./screens/entrar.js');
+  const alvo = expirada ? overlayReauth() : root();
+  renderEntrar(alvo, {
+    titulo: 'Esta demonstração é privada.',
+    apoio: 'Digite a senha que veio junto com o link.',
+    aviso: expirada ? 'Sua sessão expirou. Digite a senha de novo.' : null,
+    entrar: (senha) => api.entrar(demoId, senha),
+    onSucesso: async () => {
+      if (expirada) {
+        fecharReauth();
+        // atualiza o aprendizado sem perder a conversa em memória
+        try {
+          const r = await api.estado(demoId);
+          if (r && Array.isArray(r.aprendizado) && learning && typeof learning.replace === 'function') learning.replace(r.aprendizado);
+        } catch { /* segue com o que tem */ }
+      } else {
+        await carregar();
+      }
+    },
+  });
+}
+
+let reauthEl = null;
+function overlayReauth() {
+  if (!reauthEl) {
+    reauthEl = h('div', { class: 'reauth', style: { position: 'fixed', inset: '0', zIndex: '200', overflow: 'auto' } });
+    document.body.appendChild(reauthEl);
+  }
+  return reauthEl;
+}
+function fecharReauth() {
+  reauthEl?.remove();
+  reauthEl = null;
+  reautenticando = false;
+}
+
+onNaoAutorizado((escopo) => {
+  if (escopo !== 'demo' || !shellPronta || reautenticando) return;
+  reautenticando = true;
+  ui.closeAllSheets();
+  mostrarSenha({ expirada: true });
+});
+
+async function iniciar(r) {
+  estado = r;
+  data = r.setor;
+  modulos = normalizeModulos(r.demo.modulos);
+  document.title = `${empresaNome()} · Demonstração`;
+
+  // módulos de B (com stubs), drawers de B e C, assistente
+  await Promise.all([carregarB(), carregarDrawers(), carregarAssistente()]);
+  learning = criarLearning(Array.isArray(r.aprendizado) ? r.aprendizado : []);
+
+  if (!store.get(`td_bv_${demoId}`)) {
+    const { renderBoasVindas } = await import('./screens/boas-vindas.js');
+    renderBoasVindas(root(), {
+      ctx: buildCtx(),
+      onComecar: (nome) => {
+        store.set(`td_bv_${demoId}`, '1');
+        if (nome != null) store.set(`td_autor_${demoId}`, nome.trim());
+        montarApp();
+      },
     });
+    return;
   }
+  montarApp();
+}
 
-  // 3. assistente (import dinâmico; stub se falhar)
-  assistant = await loadAssistant();
-  setState({ mode: assistant.modo ? assistant.modo() : 'local' });
+function empresaNome() {
+  return (estado?.demo?.empresa_nome || '').trim() || data?.empresa?.nome || 'a empresa';
+}
+function empresaCurta(nome = empresaNome()) {
+  return nome.replace(/\s*(,\s*)?\b(S\.?\s?A\.?|S\/A|Ltda\.?|LTDA\.?|EIRELI|ME|EPP)\s*$/i, '').trim() || nome;
+}
 
-  // o assistente detecta a IA de forma assíncrona (e pode perdê-la): mantém o selo do topo em dia
-  if (typeof assistant.onModeChange === 'function') {
-    assistant.onModeChange((modo) => {
-      if (getState().mode === modo) return;
-      setState({ mode: modo });
-      if (el.modeTag) updateModeTag();
-    });
+// ---------------------------------------------------------------------------
+// Módulos de B (conversa, ensinar, markdown, learning) com stubs de mesma assinatura
+
+async function tryImport(path) {
+  try {
+    return await import(path);
+  } catch (err) {
+    console.info(`[app] ${path} ainda não disponível; usando o substituto.`, err?.message || err);
+    return null;
   }
+}
 
-  // 4. setor efetivo + dados (sem renderizar a rota aqui: onHashChange faz o primeiro render,
-  //    para não disparar dois renderRoute em corrida no boot)
-  resolveSector();
-  renderShell();
-  await loadSectorThen();
+async function carregarB() {
+  const [conversa, ensinar, markdown, learningMod] = await Promise.all([
+    tryImport('./ui/conversa.js'), tryImport('./ui/ensinar.js'), tryImport('./ui/markdown.js'), tryImport('./learning.js'),
+  ]);
+  Object.assign(B, { conversa, ensinar, markdown, learningMod });
+}
 
+async function carregarDrawers() {
+  const [c, b] = await Promise.all([tryImport('./ui/area-page.js'), tryImport('./modules/cerebro.js')]);
+  drawerMap = { ...((c && c.drawers) || {}), ...((b && b.drawersCerebro) || {}) };
+}
+
+async function carregarAssistente() {
+  const mod = await tryImport('./ai/assistant.js');
+  try {
+    if (mod && typeof mod.createAssistant === 'function') {
+      assistant = mod.createAssistant(() => buildCtx());
+      if (assistant) return;
+    }
+  } catch (err) {
+    console.warn('[app] assistente indisponível', err);
+  }
+  assistant = { ask: async () => ({ texto: '', fontes: [] }), sugestoes: () => [], buscar: () => [], modo: () => 'local', setPreferencia: () => {} };
+}
+
+/** learning (B) instanciado com a lista do /estado; stub com a mesma interface. */
+function criarLearning(lista) {
+  const mod = B.learningMod;
+  const fab = mod && (mod.createLearning || mod.createLearningStore || mod.default);
+  if (typeof fab === 'function') {
+    try {
+      const inst = fab(lista, { api, demoId, getCtx: () => buildCtx() });
+      if (inst && typeof inst.list === 'function' && typeof inst.subscribe === 'function') return inst;
+    } catch (err) {
+      console.warn('[app] learning.js falhou; usando o substituto', err);
+    }
+  }
+  return stubLearning(lista);
+}
+
+function stubLearning(lista) {
+  let itens = [...lista].sort((a, b) => String(b.criado_em).localeCompare(String(a.criado_em)));
+  const ouvintes = new Set();
+  const avisa = () => { for (const fn of ouvintes) { try { fn(itens); } catch (e) { console.error(e); } } };
+  return {
+    list({ area, maquina } = {}) {
+      return itens.filter((i) => (!area || i.area === area) && (!maquina || i.maquina === maquina));
+    },
+    get(id) { return itens.find((i) => i.id === id) || null; },
+    async add(item) {
+      let it = item;
+      if (!it.id) it = (await api.aprendizado.criar(demoId, item)).item;
+      if (!itens.some((x) => x.id === it.id)) itens = [it, ...itens];
+      avisa();
+      return it;
+    },
+    async remove(id) {
+      await api.aprendizado.apagar(demoId, id);
+      itens = itens.filter((i) => i.id !== id);
+      avisa();
+    },
+    replace(novos) { itens = [...novos].sort((a, b) => String(b.criado_em).localeCompare(String(a.criado_em))); avisa(); },
+    subscribe(fn) { ouvintes.add(fn); return () => ouvintes.delete(fn); },
+  };
+}
+
+function renderMarkdown(texto, opts = {}) {
+  const fn = B.markdown && (B.markdown.renderMarkdown || B.markdown.render || B.markdown.default);
+  if (typeof fn === 'function') {
+    try { return fn(texto, { ctx: buildCtx(), ...opts }); } catch (err) { console.error('[markdown]', err); }
+  }
+  // substituto: parágrafos de texto puro, sem marcadores [[…]] nem asteriscos
+  const limpo = String(texto ?? '').replace(/\[\[[^\]]*\]\]/g, '').replace(/\*\*([^*]+)\*\*/g, '$1');
+  return h('div', { class: 'md' }, limpo.split(/\n{2,}/).filter(Boolean).map((p) => h('p', null, p)));
+}
+
+// --- conversa: ctx.perguntar delega a ui/conversa.js (B) ---------------------------------
+
+let conversaInst = null;
+function conversaPort() {
+  const mod = B.conversa;
+  if (!mod) return null;
+  if (!conversaInst && typeof mod.createConversa === 'function') {
+    try { conversaInst = mod.createConversa(() => buildCtx()); } catch (err) { console.error('[conversa]', err); }
+  }
+  return conversaInst || mod;
+}
+
+let perguntaPendente = null; // usada pelo substituto da conversa
+
+function perguntar(texto, opts = {}) {
+  const port = conversaPort();
+  const fn = port && port.perguntar;
+  if (typeof fn === 'function') {
+    try {
+      return port === B.conversa ? fn(buildCtx(), texto, opts) : fn(texto, opts);
+    } catch (err) {
+      console.error('[conversa] perguntar falhou', err);
+    }
+  }
+  perguntaPendente = texto ? { texto, opts } : null;
+  navigate('#conversa');
+  return undefined;
+}
+
+function ensinar(opts = {}) {
+  const mod = B.ensinar;
+  const fn = mod && (mod.abrirEnsinar || mod.ensinar || mod.openEnsinar || mod.open || mod.default);
+  if (typeof fn === 'function') {
+    try { return fn(buildCtx(), opts); } catch (err) { console.error('[ensinar] falhou', err); }
+  }
+  return ensinarSubstituto(opts);
+}
+
+// ---------------------------------------------------------------------------
+// ctx (UX §7.4)
+
+function isEnabled(id) {
+  return isFeatureOn(modulos || {}, id);
+}
+
+function resolveRef(ref) {
+  if (typeof ref !== 'string') return null;
+  if (ref.startsWith('aprendizado:')) {
+    const id = ref.slice('aprendizado:'.length);
+    const viaData = safe(() => resolveRefData(data, ref, isEnabled, { aprendizado: learning?.list() || [] }));
+    if (viaData) return viaData;
+    const item = learning?.get ? learning.get(id) : learning?.list().find((i) => i.id === id);
+    if (!item) return null;
+    return {
+      ref, tipo: 'aprendizado', tipoNome: 'Registro da equipe', id, rotulo: item.titulo || 'Registro da equipe',
+      detalhe: item, modulo: item.area && FEATURE_BY_ID[item.area] ? item.area : 'cerebro',
+    };
+  }
+  return safe(() => resolveRefData(data, ref, isEnabled, { aprendizado: learning?.list() || [] }));
+}
+
+function safe(fn) {
+  try { return fn(); } catch (err) { console.error(err); return null; }
+}
+
+let rotaAtual = 'inicio';
+
+function areaAtual() {
+  if (AREA_IDS.includes(rotaAtual)) return rotaAtual;
+  if (rotaAtual === 'portal') return 'comercial';
+  return null;
+}
+
+function buildCtx() {
+  const term = (key) => (data?.vocabulario && data.vocabulario[key]) || key;
+  const areaName = (areaId) => data?.areas?.find((a) => a.id === areaId)?.nome || FEATURE_BY_ID[areaId]?.nome || areaId;
+  const features = FEATURES.filter((f) => isEnabled(f.id));
+  const autorSalvo = () => (store.get(`td_autor_${demoId}`) || '').trim();
+  return {
+    // v1
+    data,
+    sector: { id: estado?.demo?.setor, nome: data?.setor || estado?.demo?.setor },
+    empresa: empresaNome(),
+    empresaCurta: empresaCurta(),
+    today: data?.data_referencia || TODAY,
+    features,
+    isEnabled,
+    term,
+    areaName,
+    resolveRef,
+    openRef,
+    navigate,
+    fmt,
+    ui,
+    assistant,
+    // v2
+    demo: estado ? { ...estado.demo, modulos } : null,
+    ia: estado?.ia || { disponivel: false, modelo: null },
+    autor: () => autorSalvo() || 'Você',
+    autorSalvo,
+    setAutor: (nome) => store.set(`td_autor_${demoId}`, String(nome || '').trim()),
+    api: {
+      ...api,
+      // atalhos já com o id desta demo
+      demoId,
+    },
+    learning,
+    perguntar,
+    ensinar,
+    renderMarkdown,
+    sheet: ui.sheet,
+    themeToggle,
+    alternarTema,
+    route: rotaAtual,
+    areaAtual,
+    areas: enabledAreas(modulos || {}),
+    REF_TYPES,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Casca
+
+const el = {};
+
+function montarApp() {
+  shellPronta = true;
+  const app = h('div', { class: 'app' });
+  el.app = app;
+  el.empresa = h('span', { class: 'topbar__empresa', title: empresaNome() }, empresaNome());
+  el.nav = h('nav', { class: 'topbar__nav', 'aria-label': 'Principal' });
+  el.bottom = h('ul', { class: 'bottombar__list' });
+  el.content = h('main', { class: 'content', id: 'conteudo', tabindex: '-1' });
+
+  const fict = h('span', {
+    class: 'pill pill--fict', title: 'Empresa, pessoas e números inventados para esta demonstração',
+  }, h('span', { class: 'fict-long' }, 'Dados fictícios'), h('span', { class: 'fict-short' }, 'Fictícia'));
+
+  const ask = ui.button('Perguntar', {
+    icone: 'search', class: 'topbar__ask', title: 'Perguntar (atalho: /)',
+    onClick: () => abrirConversa(),
+  });
+  const teach = ui.button('Ensinar', {
+    icone: 'lightbulb', class: 'btn--teach', title: 'Ensinar o cérebro',
+    onClick: () => ensinar({ area: areaAtual() || undefined, origem: 'topo' }),
+  });
+  teach.setAttribute('aria-label', 'Ensinar o cérebro');
+
+  const topbar = h('header', { class: 'topbar' },
+    h('div', { class: 'topbar__inner' },
+      h('div', { class: 'topbar__brand' },
+        h('a', { class: 'topbar__wordmark', href: '#inicio' }, 'Torno'),
+        h('span', { class: 'topbar__divider', 'aria-hidden': 'true' }),
+        h('div', { class: 'topbar__company' }, el.empresa, fict)),
+      el.nav,
+      h('div', { class: 'topbar__actions' }, ask, teach, themeToggle({ class: 'topbar__theme' }))));
+
+  const bottombar = h('nav', { class: 'bottombar', 'aria-label': 'Principal' }, el.bottom);
+  app.append(h('a', { class: 'sr-only skip', href: '#conteudo' }, 'Pular para o conteúdo'), topbar, el.content, bottombar);
+  root().replaceChildren(app);
+
+  desenharNav();
+  learning.subscribe(() => atualizarContador(true));
+
+  document.addEventListener('keydown', atalhos);
+  document.addEventListener('click', fecharMenusFora);
   window.addEventListener('hashchange', onHashChange);
   onHashChange();
 }
 
-async function loadAssistant() {
-  try {
-    const mod = await import('./ai/assistant.js');
-    if (mod && typeof mod.createAssistant === 'function') {
-      const a = mod.createAssistant(() => mountedContext || buildCtx());
-      if (a && typeof a.ask === 'function') return a;
+function abrirConversa() {
+  if (rotaAtual === 'conversa') {
+    document.querySelector('.content textarea, .content input[type="text"]')?.focus();
+    return;
+  }
+  navigate('#conversa');
+}
+
+function atalhos(e) {
+  if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
+  if (document.documentElement.classList.contains('has-sheet')) return;
+  e.preventDefault();
+  abrirConversa();
+}
+
+function contagemRegistros() {
+  try { return learning.list().length; } catch { return 0; }
+}
+
+let ultimaContagem = null;
+function atualizarContador(animar = false) {
+  const n = contagemRegistros();
+  const subiu = ultimaContagem != null && n > ultimaContagem;
+  ultimaContagem = n;
+  for (const link of document.querySelectorAll('[data-nav="cerebro"]')) {
+    let badge = link.querySelector('.nav-count');
+    if (n > 0) {
+      if (!badge) {
+        badge = h('span', { class: 'nav-count', 'aria-hidden': 'true' });
+        link.appendChild(badge);
+      }
+      badge.textContent = String(n);
+      if (animar && subiu) {
+        badge.classList.remove('is-pulse');
+        void badge.offsetWidth;
+        badge.classList.add('is-pulse');
+      }
+      link.setAttribute('aria-label', `Cérebro, ${n} ${n === 1 ? 'registro seu' : 'registros seus'}`);
+    } else {
+      badge?.remove();
+      link.removeAttribute('aria-label');
     }
-    throw new Error('createAssistant ausente ou inválido');
-  } catch (err) {
-    console.warn('[boot] assistente indisponível; usando stub local', err);
-    return stubAssistant();
   }
 }
 
-function stubAssistant() {
-  return {
-    async ask() {
-      return { texto: 'Assistente indisponível nesta visualização.', fontes: [], modo: 'local', aviso: 'indisponivel' };
-    },
-    sugestoes: () => [],
-    buscar: () => [],
-    modo: () => 'local',
-    setPreferencia: () => {},
-  };
-}
-
-function resolveSector() {
-  const override = readSectorOverride();
-  const s = getState();
-  const want = (override && SECTOR_IDS.includes(override) && override)
-    || (SECTOR_IDS.includes(s.config?.setor) && s.config.setor)
-    || 'textil';
-  setState({ sectorId: want, sectorOverride: override && SECTOR_IDS.includes(override) ? override : null });
-}
-
-async function loadSectorThen(after) {
-  const id = getState().sectorId;
-  setState({ dataError: null });
-  renderLoading();
+/** Frase de estado de cada área (menu Áreas). */
+export function areaHint(id, d = data) {
+  if (!d) return '';
+  const vocab = d.vocabulario || {};
+  const fem = (s) => /a$/.test(String(s || '')) ;
   try {
-    const data = await dataSource.loadSector(id);
-    setState({ data, dataError: null });
-  } catch (err) {
-    console.warn(`[dados] setor ${id} indisponível`, err);
-    setState({ data: null, dataError: err.status === 404 ? 'faltando' : 'erro' });
-  }
-  // o nome da empresa e o vocabulário vêm do pacote recém-carregado: atualiza a casca
-  if (el.shell) renderShell();
-  if (typeof after === 'function') after();
+    if (id === 'producao') {
+      const n = (d.ordens || []).filter((o) => o.status === 'atrasada').length;
+      return n ? `${n} ${vocab.ordens || 'ordens'} atrasad${n === 1 ? 'a' : 'as'}` : 'Tudo no prazo';
+    }
+    if (id === 'manutencao') {
+      const ms = d.maquinas || [];
+      const p = ms.find((m) => m.status === 'parada');
+      if (p) return `${p.id} ${fem(vocab.maquina) ? 'parada' : 'parado'}`;
+      const a = ms.find((m) => m.status === 'alerta');
+      return a ? `${a.id} em alerta` : 'Tudo operando';
+    }
+    if (id === 'qualidade') {
+      const n = (d.nao_conformidades || []).filter((x) => x.severidade === 'alta' && x.status !== 'encerrada').length;
+      return n ? `${n} ${n === 1 ? 'NC grave' : 'NCs graves'}` : 'Sem NC grave aberta';
+    }
+    if (id === 'comercial') {
+      const n = (d.pedidos || []).filter((p) => p.status === 'atrasado').length;
+      return n ? `${n} ${n === 1 ? 'pedido atrasado' : 'pedidos atrasados'}` : 'Pedidos em dia';
+    }
+    if (id === 'marketing') {
+      const itens = Array.isArray(d.marketing) ? d.marketing : (d.marketing?.conteudos || []);
+      const n = itens.filter((x) => x.status === 'em_revisao').length;
+      return n ? `${n} ${n === 1 ? 'conteúdo' : 'conteúdos'} em revisão` : 'Conteúdos em dia';
+    }
+  } catch { /* dados incompletos */ }
+  return '';
 }
 
-// ---------------------------------------------------------------------------
-// Casca (shell)
+const AREA_ICON = { producao: 'factory', qualidade: 'shield-check', manutencao: 'wrench', comercial: 'handshake', marketing: 'megaphone' };
+export { AREA_ICON };
 
-function buildShell() {
-  const root = document.getElementById('app') || document.body;
-  root.replaceChildren();
-
-  el.band = h('div', { class: 'disclaimer', role: 'note' },
-    icon('info', { size: 14 }),
-    h('span', null, 'Dados fictícios para demonstração · empresa, pessoas e números inventados.'));
-
-  el.menuBtn = h('button', {
-    type: 'button', class: 'icon-btn menu-btn', 'aria-label': 'Abrir menu', 'aria-expanded': 'false',
-    onClick: () => toggleDrawerNav(true),
-  }, icon('menu', { size: 20 }));
-
-  el.topTitle = h('h1', { class: 'topbar__title' }, 'Visão geral');
-  el.sectorSelect = h('div', { class: 'topbar__sector' });
-  el.empresaTag = h('span', { class: 'topbar__empresa' });
-  el.modeTag = h('span', { class: 'mode-tag' });
-
-  el.topbar = h('header', { class: 'topbar' },
-    el.menuBtn,
-    h('div', { class: 'topbar__main' }, el.topTitle, el.empresaTag),
-    h('div', { class: 'topbar__right' }, el.sectorSelect, el.modeTag));
-
-  el.nav = h('nav', { class: 'sidebar__nav', 'aria-label': 'Módulos' });
-  el.sidebarFoot = h('div', { class: 'sidebar__foot' });
-  el.brandSub = h('div', { class: 'brand__sub' });
-  el.sidebar = h('aside', { class: 'sidebar', id: 'sidebar' },
-    h('div', { class: 'sidebar__brand' },
-      h('a', {
-        class: 'brand', href: '#visao-geral', onClick: () => toggleDrawerNav(false),
-      },
-      h('span', { class: 'brand__mark' }, 'Torno'),
-      h('span', { class: 'brand__tag' }, 'demo')),
-      el.brandSub),
-    el.nav,
-    el.sidebarFoot);
-
-  el.scrim = h('div', { class: 'scrim', onClick: () => toggleDrawerNav(false) });
-  el.content = h('main', { class: 'content', id: 'conteudo', tabindex: '-1' });
-
-  el.shell = h('div', { class: 'shell' }, el.sidebar, el.scrim,
-    h('div', { class: 'shell__main' }, el.topbar, el.content));
-
-  root.append(el.band, el.shell);
+let menuAberto = null;
+function fecharMenusFora(e) {
+  if (menuAberto && !menuAberto.wrap.contains(e.target)) menuAberto.close();
 }
 
-function toggleDrawerNav(open) {
-  const isOpen = open ?? !el.sidebar.classList.contains('is-open');
-  el.sidebar.classList.toggle('is-open', isOpen);
-  el.scrim.classList.toggle('is-visible', isOpen);
-  el.menuBtn.setAttribute('aria-expanded', String(isOpen));
-  document.body.classList.toggle('nav-open', isOpen);
-}
-
-function renderShell() {
-  const s = getState();
-  const ctx = buildCtx();
-
-  el.brandSub.replaceChildren(
-    h('span', { class: 'brand__company' }, ctx.empresa),
-    h('span', { class: 'brand__sector' }, sectorNome(s.sectorId)));
-
-  // Navegação agrupada por oferta
+function desenharNav() {
+  const areaName = (id) => data?.areas?.find((a) => a.id === id)?.nome || FEATURE_BY_ID[id]?.nome || id;
+  const items = navItems(modulos, areaName);
   el.nav.replaceChildren();
-  const enabled = enabledFeatures(s.config);
-  const enabledIds = new Set(enabled.map((f) => f.id));
-  for (const oferta of OFERTAS) {
-    const items = FEATURES.filter((f) => f.oferta === oferta.id && enabledIds.has(f.id));
-    if (!items.length) continue;
-    const group = h('div', { class: 'nav-group' }, h('p', { class: 'nav-group__label' }, oferta.nome));
-    for (const f of items) {
-      group.appendChild(h('a', {
-        class: ['nav-link', s.route === f.id && 'is-active'],
-        href: f.rota, 'data-route': f.id,
-        'aria-current': s.route === f.id ? 'page' : null,
-        onClick: () => toggleDrawerNav(false),
-      }, icon(f.icone, { size: 18 }), h('span', null, f.nome)));
+  el.bottom.replaceChildren();
+  for (const item of items) {
+    // topo (desktop)
+    if (item.id === 'areas' && !item.unica) {
+      el.nav.appendChild(menuAreas(item));
+    } else {
+      el.nav.appendChild(h('a', {
+        class: 'nav-item', href: item.rotaEfetiva, 'data-nav': item.id,
+      }, h('span', null, item.nomeEfetivo)));
     }
-    el.nav.appendChild(group);
+    // barra inferior (celular)
+    const curto = item.unica ? (item.nomeCurto || 'Áreas') : (item.nomeCurto || item.nomeEfetivo);
+    el.bottom.appendChild(h('li', null, h('a', {
+      class: 'tab', href: item.rotaEfetiva, 'data-nav': item.id,
+    }, icon(item.icone, { size: 20 }), h('span', { class: 'tab__label' }, item.unica ? 'Áreas' : curto))));
   }
-
-  // Rodapé: link Admin só para quem edita
-  el.sidebarFoot.replaceChildren();
-  if (s.canEdit) {
-    el.sidebarFoot.appendChild(h('a', {
-      class: ['nav-link', 'nav-link--admin', s.route === 'admin' && 'is-active'],
-      href: '#admin', onClick: () => toggleDrawerNav(false),
-    }, icon('settings-2', { size: 18 }), h('span', null, 'Admin')));
-  }
-  el.sidebarFoot.appendChild(h('p', { class: 'sidebar__note' }, s.storeKind === 'local' ? 'Modo local' : 'Configuração compartilhada'));
-
-  // Topo: seletor de setor + empresa + modo
-  el.sectorSelect.replaceChildren(ui.select({
-    id: 'seletor-setor', label: 'Setor', hideLabel: false,
-    options: sectorMeta.map((x) => ({ value: x.id, label: x.nome })),
-    value: s.sectorId,
-    onChange: (id) => changeSector(id),
-  }));
-  el.empresaTag.textContent = ctx.empresa;
-  updateModeTag();
+  marcarAtivo();
+  atualizarContador(false);
 }
 
-function updateModeTag() {
-  if (!el.modeTag) return;
-  const ia = (getState().mode || 'local') === 'ia';
-  el.modeTag.replaceChildren(
-    icon(ia ? 'sparkles' : 'cpu', { size: 14 }),
-    h('span', null, ia ? 'IA ativa' : 'Roteiro local'));
-  el.modeTag.className = `mode-tag ${ia ? 'mode-tag--ia' : 'mode-tag--local'}`;
-  el.modeTag.title = ia
-    ? 'As respostas usam o modelo de IA desta visualização.'
-    : 'Sem IA nesta visualização: as respostas vêm de um roteiro determinístico sobre os dados.';
+function menuAreas(item) {
+  const btn = h('button', {
+    type: 'button', class: 'nav-item', 'data-nav': 'areas', 'aria-haspopup': 'true', 'aria-expanded': 'false',
+  }, h('span', null, item.nome), icon('chevron-down', { size: 14 }));
+  const wrap = h('div', { class: 'menu-wrap' }, btn);
+  let menu = null;
+  const close = (foco = false) => {
+    menu?.remove();
+    menu = null;
+    btn.setAttribute('aria-expanded', 'false');
+    if (menuAberto?.wrap === wrap) menuAberto = null;
+    if (foco) btn.focus();
+  };
+  const open = () => {
+    if (menuAberto) menuAberto.close();
+    const areas = enabledAreas(modulos);
+    const links = areas.map((id) => h('a', { class: 'menu__item', href: `#${id}`, role: 'menuitem', onClick: () => close() },
+      icon(AREA_ICON[id] || 'grid', { size: 18 }),
+      h('span', { class: 'menu__item-text' },
+        h('span', null, data?.areas?.find((a) => a.id === id)?.nome || FEATURE_BY_ID[id]?.nome || id),
+        h('span', { class: 'menu__item-hint' }, areaHint(id)))));
+    const todas = h('a', { class: 'menu__item', href: '#areas', role: 'menuitem', onClick: () => close() },
+      icon('grid', { size: 18 }), h('span', { class: 'menu__item-text' }, 'Todas as áreas'));
+    menu = h('div', {
+      class: 'menu', role: 'menu',
+      onKeydown: (e) => {
+        const all = [...menu.querySelectorAll('.menu__item')];
+        const i = all.indexOf(document.activeElement);
+        if (e.key === 'Escape') { e.preventDefault(); close(true); }
+        if (e.key === 'ArrowDown') { e.preventDefault(); all[(i + 1) % all.length].focus(); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); all[(i - 1 + all.length) % all.length].focus(); }
+        if (e.key === 'Tab') close();
+      },
+    }, links, h('div', { class: 'menu__sep', role: 'separator' }), todas);
+    wrap.appendChild(menu);
+    btn.setAttribute('aria-expanded', 'true');
+    menuAberto = { wrap, close };
+    menu.querySelector('.menu__item')?.focus();
+  };
+  btn.addEventListener('click', () => (menu ? close() : open()));
+  btn.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown' && !menu) { e.preventDefault(); open(); } });
+  return wrap;
 }
 
-function changeSector(id) {
-  if (!SECTOR_IDS.includes(id) || id === getState().sectorId) return;
-  // Troca só a sessão (vale para admin e não-admin; a config persistente muda no #admin).
-  writeSectorOverride(id);
-  setState({ sectorId: id, sectorOverride: id });
-  renderShell();
-  loadSectorThen(() => {
-    if (getState().route === 'admin') renderRoute();
-    else renderRoute();
-  });
+function marcarAtivo() {
+  const ativo = navOf(rotaAtual);
+  const unica = enabledAreas(modulos).length === 1;
+  for (const a of document.querySelectorAll('[data-nav]')) {
+    let on = a.dataset.nav === ativo;
+    if (unica && a.dataset.nav === 'areas') on = ativo === 'areas';
+    a.classList.toggle('is-active', on);
+    if (on && a.tagName === 'A') a.setAttribute('aria-current', 'page');
+    else a.removeAttribute('aria-current');
+  }
 }
 
 // ---------------------------------------------------------------------------
-// Roteador
+// Roteador (UX §3.4)
 
-function routeFromHash() {
-  return (location.hash || '').replace(/^#/, '').trim().toLowerCase();
-}
+const ROTA_MODULO = {
+  inicio: './modules/visao-geral.js',
+  conversa: './ui/conversa.js',
+  cerebro: './modules/cerebro.js',
+  areas: './screens/areas.js',
+  producao: './modules/producao.js',
+  qualidade: './modules/qualidade.js',
+  manutencao: './modules/manutencao.js',
+  comercial: './modules/comercial.js',
+  marketing: './modules/marketing.js',
+  portal: './modules/portal.js',
+  'como-funciona': './screens/como-funciona.js',
+};
 
-function onHashChange() {
-  const raw = routeFromHash();
+let renderToken = 0;
+let cleanup = null;
 
-  // #<setor> → override da sessão + visão geral
-  if (SECTOR_IDS.includes(raw)) {
-    writeSectorOverride(raw);
-    setState({ sectorId: raw, sectorOverride: raw });
-    renderShell();
-    loadSectorThen(() => {
-      setRoute('visao-geral');
-      // normaliza o hash para a rota de módulo, sem empilhar histórico
-      if (routeFromHash() !== 'visao-geral') location.replace('#visao-geral');
-      else renderRoute();
-    });
-    return;
-  }
-
-  if (raw === 'admin') {
-    setRoute('admin');
-    renderRoute();
-    return;
-  }
-
-  const feature = FEATURE_BY_ID[raw];
-  const s = getState();
-  if (!raw || raw === 'visao-geral') {
-    setRoute('visao-geral');
-    renderRoute();
-    return;
-  }
-  if (!feature) {
-    toast('Essa tela não existe nesta demo.', { tone: 'neutral' });
-    navigate('#visao-geral');
-    return;
-  }
-  if (!isFeatureOn(enabledConfigModulos(s.config), raw)) {
-    toast(`O módulo “${feature.nome}” está desligado nesta demo.`, { tone: 'neutral' });
-    navigate('#visao-geral');
-    return;
-  }
-  setRoute(raw);
-  renderRoute();
-}
-
-function setRoute(route) {
-  setState({ route });
-  // atualiza "ativo" no menu sem rebuildar tudo
-  for (const link of el.nav.querySelectorAll('.nav-link')) {
-    const on = link.dataset.route === route;
-    link.classList.toggle('is-active', on);
-    if (on) link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
-  }
-  const adminLink = el.sidebarFoot.querySelector('.nav-link--admin');
-  if (adminLink) adminLink.classList.toggle('is-active', route === 'admin');
-}
-
-function navigate(route) {
+export function navigate(route) {
   const hash = route.startsWith('#') ? route : `#${route}`;
   if (location.hash === hash) onHashChange();
   else location.hash = hash;
 }
 
-// ---------------------------------------------------------------------------
-// Render da rota
-
-function runCleanup() {
-  if (typeof currentCleanup === 'function') {
-    try {
-      currentCleanup();
-    } catch (err) {
-      console.error('[app] cleanup falhou', err);
-    }
+function onHashChange() {
+  const raw = (location.hash || '').replace(/^#/, '');
+  const r = resolveRoute(raw, modulos);
+  if (r.bloqueada) {
+    toast('Essa área não faz parte desta demonstração.');
+    history.replaceState(null, '', '#inicio');
+  } else if (r.desconhecida && raw) {
+    history.replaceState(null, '', '#inicio');
+  } else if (raw.split('/')[0].toLowerCase() !== r.rota) {
+    // alias (#visao-geral, #operadores, #integracoes…): normaliza o hash sem empilhar histórico
+    history.replaceState(null, '', `#${r.rota}`);
   }
-  currentCleanup = null;
-  mountedContext = null;
+  renderRota(r.rota, r.secao);
 }
 
-async function renderRoute() {
-  const token = ++renderToken; // este render passa a ser o atual; os anteriores viram obsoletos
-  runCleanup();
-  const s = getState();
-  el.topTitle.textContent = s.route === 'admin' ? 'Administração da demo' : (FEATURE_BY_ID[s.route]?.nome || 'Visão geral');
-  closeDrawer();
+async function renderRota(rota, secao) {
+  const token = ++renderToken;
+  const mudou = rota !== rotaAtual || !el.content.firstChild;
+  if (menuAberto) menuAberto.close();
+  if (mudou) ui.closeAllSheets();
+  rodaCleanup();
+  rotaAtual = rota;
+  marcarAtivo();
+  el.app.classList.toggle('is-fullscreen', rota === 'conversa');
+  el.app.dataset.rota = rota;
 
-  if (s.route === 'admin') {
-    el.content.replaceChildren();
-    try {
-      const mod = await import('./admin.js');
-      if (token !== renderToken) return; // outro render começou enquanto o admin.js carregava
-      const ctx = {
-        ...buildCtx(), store: configStore, config: normalizeConfig(getState().config),
-        applyConfig, reloadSector: () => loadSectorThen(renderRoute),
-      };
-      mountedContext = ctx;
-      const out = mod.render(el.content, ctx);
-      if (typeof out === 'function') currentCleanup = out;
-    } catch (err) {
-      if (token !== renderToken) return;
-      console.error('[admin] falha', err);
-      renderModuleError('admin', err);
-    }
-    focusContent();
-    return;
-  }
+  const host = h('div', { class: `module module--${rota}`, 'data-rota': rota });
+  el.content.replaceChildren(host);
+  const ctx = { ...buildCtx(), secao: secao || null };
 
-  if (!s.data) {
-    el.content.replaceChildren();
-    if (s.dataError === 'faltando') {
-      el.content.appendChild(dataMissingCard());
-    } else if (s.dataError === 'erro') {
-      el.content.appendChild(dataErrorCard());
-    } else {
-      renderLoading();
-    }
-    focusContent();
-    return;
-  }
-
-  el.content.replaceChildren();
-  const ctx = buildCtx();
-  mountedContext = ctx;
   try {
-    const mod = await loadModule(s.route);
-    if (token !== renderToken) return; // import demorou: um render mais novo assumiu
-    if (mod.erro) {
-      renderModuleError(s.route, mod.erro);
-    } else if (typeof mod.render === 'function') {
-      const host = h('div', { class: `module module--${s.route}` });
-      el.content.appendChild(host);
-      const out = mod.render(host, ctx);
-      if (typeof out === 'function') currentCleanup = out;
+    let mod = null;
+    if (rota === 'conversa') {
+      const port = conversaPort();
+      mod = port && typeof port.render === 'function' ? port : null;
     } else {
-      renderModuleError(s.route, new Error('o módulo não exporta render(el, ctx)'));
+      mod = await tryImport(ROTA_MODULE_PATH(rota));
+    }
+    if (token !== renderToken) return;
+    if (mod && typeof mod.render === 'function') {
+      const out = mod.render(host, ctx);
+      if (typeof out === 'function') cleanup = out;
+      else if (out && typeof out.then === 'function') out.then((fn) => { if (typeof fn === 'function' && token === renderToken) cleanup = fn; }).catch((err) => console.error(`[${rota}]`, err));
+    } else if (rota === 'conversa') {
+      cleanup = conversaSubstituta(host, ctx);
+    } else {
+      host.appendChild(emConstrucao());
     }
   } catch (err) {
     if (token !== renderToken) return;
-    console.error(`[módulo ${s.route}] erro ao renderizar`, err);
-    renderModuleError(s.route, err);
+    console.error(`[${rota}] erro ao renderizar`, err);
+    host.replaceChildren(emConstrucao());
   }
-  focusContent();
+
+  if (secao) {
+    requestAnimationFrame(() => {
+      const alvo = host.querySelector(`[data-secao="${CSS.escape(secao)}"]`) || document.getElementById(secao);
+      if (alvo) alvo.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+  } else if (mudou) {
+    window.scrollTo(0, 0);
+    if (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected) {
+      el.content.focus({ preventScroll: true });
+    }
+  }
 }
 
-async function loadModule(id) {
-  if (moduleCache.has(id)) return moduleCache.get(id);
-  let result;
-  try {
-    result = await import(`./modules/${id}.js`);
-  } catch (err) {
-    result = { erro: err };
-  }
-  moduleCache.set(id, result);
-  return result;
+function ROTA_MODULE_PATH(rota) {
+  return ROTA_MODULO[rota] || ROTA_MODULO.inicio;
 }
 
-function focusContent() {
-  // sem roubar o foco de quem já está digitando
-  if (document.activeElement && document.activeElement !== document.body) return;
-  el.content.scrollTop = 0;
+function rodaCleanup() {
+  if (typeof cleanup === 'function') {
+    try { cleanup(); } catch (err) { console.error('[app] cleanup', err); }
+  }
+  cleanup = null;
+}
+
+function emConstrucao() {
+  return h('div', { class: 'empty-state' },
+    icon('layers', { size: 22 }),
+    h('p', null, 'Esta parte da demonstração ainda está sendo preparada.'),
+    ui.button('Voltar ao início', { onClick: () => navigate('#inicio') }));
 }
 
 // ---------------------------------------------------------------------------
-// Estados desenhados
+// openRef: gaveta do registro (drawers de C e B; fallback genérico legível)
 
-function renderLoading() {
-  if (!el.content) return;
-  el.content.replaceChildren(h('div', { class: 'loading', 'aria-busy': 'true', 'aria-live': 'polite' },
-    h('div', { class: 'loading__spinner', 'aria-hidden': 'true' }),
-    h('p', null, 'Carregando os dados da demonstração…')));
-}
-
-function renderFatal(msg, err) {
-  const root = document.getElementById('app') || document.body;
-  root.replaceChildren(h('div', { class: 'fatal' },
-    h('div', { class: 'fatal__card' },
-      icon('alert', { size: 28 }),
-      h('h1', null, 'Não foi possível abrir a demo'),
-      h('p', null, msg),
-      err ? h('p', { class: 'fatal__detail' }, String(err.message || err)) : null)));
-}
-
-function renderModuleError(id, err) {
-  el.content.replaceChildren(ui.card({
-    titulo: 'Módulo indisponível',
-    corpo: h('div', { class: 'module-error' },
-      icon('alert', { size: 22 }),
-      h('p', null, `A tela “${FEATURE_BY_ID[id]?.nome || id}” ainda não está disponível nesta visualização.`),
-      h('p', { class: 'module-error__hint' }, 'Esta parte da demo é montada por outro pacote. O erro técnico ficou registrado no console.')),
-    class: 'card--notice',
-  }));
-  console.error(`[módulo ${id}]`, err);
-}
-
-function dataMissingCard() {
-  return ui.card({
-    titulo: 'Pacote de dados ainda não disponível',
-    corpo: h('div', { class: 'module-error' },
-      icon('database', { size: 22 }),
-      h('p', null, `O conjunto de dados do setor “${sectorNome(getState().sectorId)}” ainda não foi publicado nesta demo.`),
-      h('p', { class: 'module-error__hint' }, 'Escolha outro setor no seletor do topo ou volte em instantes.')),
-    class: 'card--notice',
-  });
-}
-
-function dataErrorCard() {
-  return ui.card({
-    titulo: 'Não foi possível carregar os dados',
-    acoes: ui.button('Tentar de novo', { icone: 'refresh', onClick: () => loadSectorThen(renderRoute) }),
-    corpo: h('div', { class: 'module-error' },
-      icon('alert', { size: 22 }),
-      h('p', null, 'Houve uma falha ao buscar o pacote de dados deste setor.')),
-    class: 'card--notice',
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Gaveta de detalhe (openRef)
-
-let drawerEl = null;
-
-function ensureDrawer() {
-  if (drawerEl) return drawerEl;
-  const panel = h('aside', { class: 'detail', role: 'dialog', 'aria-modal': 'false', 'aria-label': 'Detalhe do registro', tabindex: '-1' });
-  const scrim = h('div', { class: 'detail-scrim', onClick: () => closeDrawer() });
-  drawerEl = { panel, scrim, body: panel };
-  document.body.append(scrim, panel);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.body.classList.contains('detail-open')) closeDrawer();
-  });
-  return drawerEl;
-}
+const TIPO_AREA = {
+  op: 'producao', turno: 'producao', pedido: 'comercial', sku: 'comercial', cliente: 'comercial', rep: 'comercial',
+  regra: 'comercial', nc: 'qualidade', os: 'manutencao', maq: 'manutencao', saber: 'operadores', doc: null, kpi: 'gestao',
+};
 
 function openRef(ref) {
-  const ctx = mountedContext || buildCtx();
+  const ctx = buildCtx();
   const resolved = ctx.resolveRef(ref);
   if (!resolved) {
-    toast('Essa fonte não está disponível (módulo desligado ou registro inexistente).', { tone: 'neutral' });
-    return;
+    toast('Esse registro não faz parte desta demonstração.');
+    return null;
   }
-  const d = ensureDrawer();
-  d.panel.replaceChildren();
-  d.panel.appendChild(h('header', { class: 'detail__head' },
-    h('div', { class: 'detail__eyebrow' }, icon('file', { size: 14 }), resolved.tipoNome),
-    h('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Fechar', onClick: () => closeDrawer() }, icon('x', { size: 18 }))));
-  const content = h('div', { class: 'detail__body' });
-  try {
-    renderDrawer(content, resolved, ctx);
-  } catch (err) {
-    console.error('[gaveta] falha ao desenhar', err);
-    content.appendChild(ui.emptyState('Não foi possível mostrar este registro.', { icone: 'alert' }));
+  const s = ui.sheet({
+    eyebrow: [icon(refIcon(resolved.tipo), { size: 16 }), h('span', null, resolved.tipoNome)],
+    titulo: resolved.rotulo,
+    rotulo: `${resolved.tipoNome}: ${resolved.rotulo}`,
+  });
+  const info = { ...resolved, ref, close: s.close, sheet: s };
+  let out = null;
+  const fn = drawerMap[resolved.tipo];
+  if (typeof fn === 'function') {
+    try {
+      out = fn(info, ctx);
+    } catch (err) {
+      console.error(`[gaveta ${resolved.tipo}] falhou; usando a genérica`, err);
+      out = null;
+    }
   }
-  d.panel.appendChild(content);
-  document.body.classList.add('detail-open');
-  d.scrim.classList.add('is-visible');
-  d.panel.classList.add('is-open');
-  d.panel.focus();
+  let acoes = 'padrao';
+  if (out instanceof Node) {
+    s.setCorpo(out);
+  } else if (out && typeof out === 'object') {
+    if (out.eyebrow) s.setEyebrow(out.eyebrow);
+    if (out.titulo !== undefined) s.setTitulo(out.titulo, out.subtitulo);
+    else if (out.subtitulo !== undefined) s.setTitulo(resolved.rotulo, out.subtitulo);
+    s.setCorpo(out.corpo);
+    if ('acoes' in out) acoes = out.acoes;
+  } else {
+    const corpo = h('div', { class: 'drawer-generic' });
+    try {
+      genericDrawer(corpo, resolved, ctx);
+    } catch (err) {
+      console.error('[gaveta] genérica falhou', err);
+      corpo.replaceChildren(ui.emptyState('Não foi possível mostrar este registro.', { icone: 'alert' }));
+    }
+    s.setCorpo(corpo);
+  }
+  if (acoes === 'padrao') s.setAcoes(acoesPadrao(resolved, s));
+  else s.setAcoes(acoes);
+  return s;
 }
 
-function closeDrawer() {
-  if (!drawerEl) return;
-  document.body.classList.remove('detail-open');
-  drawerEl.scrim.classList.remove('is-visible');
-  drawerEl.panel.classList.remove('is-open');
+function refIcon(tipo) {
+  return {
+    doc: 'file', op: 'factory', turno: 'clock', pedido: 'box', sku: 'box', cliente: 'building', rep: 'user', regra: 'scale',
+    nc: 'shield-check', os: 'wrench', maq: 'cpu', kpi: 'chart', saber: 'users', integ: 'plug', aprendizado: 'lightbulb',
+  }[tipo] || 'file';
 }
 
-// Conteúdo da gaveta por tipo de registro: legível, nunca JSON cru.
-function renderDrawer(root, resolved, ctx) {
-  const { fmt: f } = ctx;
-  const data = ctx.data;
-  const byId = (k, id, key = 'id') => (data[k] || []).find((x) => x && x[key] === id);
+/** [Perguntar sobre isto] [Ensinar algo sobre isto] para qualquer registro. */
+export function acoesPadrao(resolved, s) {
+  const d = resolved.detalhe || {};
+  const area = resolved.tipo === 'aprendizado' ? d.area
+    : resolved.tipo === 'doc' ? d.doc?.area : TIPO_AREA[resolved.tipo] || resolved.modulo;
+  const maquina = resolved.tipo === 'maq' ? d.id : (resolved.tipo === 'os' || resolved.tipo === 'saber' ? d.maquina : null);
+  const modulo = resolved.modulo && FEATURE_BY_ID[resolved.modulo] ? resolved.modulo : undefined;
+  const nome = resolved.tipo === 'maq' || resolved.tipo === 'op' || resolved.tipo === 'os' || resolved.tipo === 'nc' || resolved.tipo === 'pedido'
+    ? resolved.id : resolved.rotulo;
+  return [
+    ui.button('Perguntar sobre isto', {
+      variant: 'primary', icone: 'search',
+      onClick: () => { s.close(); perguntar(`O que preciso saber sobre ${nome}?`, { modulo }); },
+    }),
+    ui.button('Ensinar algo sobre isto', {
+      icone: 'lightbulb',
+      onClick: () => { s.close(); ensinar({ area: area || undefined, maquina: maquina || undefined, origem: resolved.ref }); },
+    }),
+  ];
+}
+
+/** Gaveta genérica legível por tipo (nunca JSON cru). Herdada da v1, em tom calmo. */
+function genericDrawer(rootEl, resolved, ctx) {
+  const f = ctx.fmt;
   const d = resolved.detalhe;
+  const byId = (k, id, key = 'id') => (ctx.data?.[k] || []).find((x) => x && x[key] === id);
   const facts = (pairs) => ui.facts(pairs);
-  const title = (t, sub) => h('div', { class: 'detail__title' }, h('h2', null, t), sub ? h('p', { class: 'detail__sub' }, sub) : null);
   const chips = (refs) => {
     const items = (refs || []).map((r) => ui.refChip(r, ctx)).filter(Boolean);
     return items.length ? h('div', { class: 'ref-chips' }, items) : null;
   };
-  const section = (label, body) => (body ? h('div', { class: 'detail__section' }, h('h3', { class: 'detail__section-title' }, label), body) : null);
+  const section = (label, body) => (body ? h('section', { class: 'drawer-section' }, h('h3', { class: 'drawer-section__title' }, label), body) : null);
+  const linha = (id) => ctx.data?.linhas?.find((l) => l.id === id)?.nome || id;
+  const unidade = ctx.term('unidade') === 'unidade' ? '' : ctx.term('unidade');
 
   switch (resolved.tipo) {
     case 'op': {
       const prod = byId('produtos', d.sku, 'sku');
-      root.append(
-        title(d.id, prod ? prod.nome : d.sku),
-        ui.statusBadge(d.status),
+      rootEl.append(
+        h('div', { class: 'detail__badges' }, ui.statusBadge(d.status), prod ? h('span', { class: 'muted' }, prod.nome) : null),
+        ui.progress(d.progresso, { tone: d.status === 'atrasada' ? 'danger' : 'accent', label: `Progresso ${d.progresso}%` }),
         facts([
-          [ctx.term('produto') || 'Produto', chips([`sku:${d.sku}`]) || (prod?.nome ?? d.sku)],
-          ['Quantidade', `${f.num(d.quantidade)} ${ctx.term('unidade') || ''}`.trim()],
-          ['Linha', ctx.data.linhas?.find((l) => l.id === d.linha)?.nome || d.linha],
-          ['Início', f.date(d.inicio)],
+          ['Quantidade', `${f.num(d.quantidade)} ${unidade}`.trim()],
+          [ctx.term('linha'), linha(d.linha)],
           ['Prazo', `${f.date(d.prazo)} (${f.rel(d.prazo)})`],
           ['Progresso', `${d.progresso}%`],
-          [ctx.term('cliente') ? 'Pedido' : 'Pedido', chips([`pedido:${d.pedido}`]) || d.pedido],
-          ['Motivo do atraso', d.motivo_atraso],
+          ['Pedido', d.pedido ? (chips([`pedido:${d.pedido}`]) || d.pedido) : null],
         ]),
-        ui.progress(d.progresso, { tone: d.status === 'atrasada' ? 'danger' : null }),
+        d.motivo_atraso ? section('Motivo do atraso', h('p', { class: 'detail__lead' }, d.motivo_atraso)) : null,
         section('Histórico', d.historico?.length
-          ? h('ul', { class: 'timeline' }, d.historico.map((ev) => h('li', null,
+          ? h('ul', { class: 'timeline' }, d.historico.slice(-3).map((ev) => h('li', null,
             h('span', { class: 'timeline__date' }, f.date(ev.data)), h('span', null, ev.evento)))) : null));
       break;
     }
     case 'pedido': {
-      const cli = byId('clientes', d.cliente);
-      root.append(
-        title(d.id, cli?.nome),
+      rootEl.append(
         ui.statusBadge(d.status),
         facts([
-          [ctx.term('cliente') || 'Cliente', chips([`cliente:${d.cliente}`]) || d.cliente],
-          [ctx.term('representante') || 'Representante', chips([`rep:${d.representante}`]) || d.representante],
+          [ctx.term('cliente'), chips([`cliente:${d.cliente}`]) || d.cliente],
+          [ctx.term('representante'), chips([`rep:${d.representante}`]) || d.representante],
           ['Data', f.date(d.data)],
           ['Previsão de entrega', `${f.date(d.previsao_entrega)} (${f.rel(d.previsao_entrega)})`],
-          [ctx.term('ordem') || 'Ordem', d.ordem ? (chips([`op:${d.ordem}`]) || d.ordem) : null],
+          [ctx.term('ordem'), d.ordem ? (chips([`op:${d.ordem}`]) || d.ordem) : null],
           ['Observação', d.observacao || null],
         ]),
-        section('Itens', ui.table({
-          columns: [
-            { key: 'sku', label: ctx.term('produto') || 'Produto', render: (r) => chips([`sku:${r.sku}`]) || r.sku },
-            { key: 'quantidade', label: 'Qtde', align: 'right', render: (r) => f.num(r.quantidade) },
-            { key: 'preco_unit', label: 'Preço', align: 'right', render: (r) => f.money(r.preco_unit) },
-            { key: 'total', label: 'Total', align: 'right', render: (r) => f.money(r.quantidade * r.preco_unit) },
-          ],
-          rows: d.itens || [],
-          sticky: false,
-        })));
+        section('Itens', (d.itens || []).length ? h('ul', { class: 'bullets' }, d.itens.map((it) => h('li', null,
+          `${byId('produtos', it.sku, 'sku')?.nome || it.sku} · ${f.num(it.quantidade)} × ${f.money(it.preco_unit)}`))) : null));
       break;
     }
-    case 'sku': {
-      root.append(
-        title(d.nome, `${d.sku} · ${d.familia || ''}`.trim()),
+    case 'sku':
+      rootEl.append(
         d.descricao_comercial ? h('p', { class: 'detail__lead' }, d.descricao_comercial) : null,
         facts([
           ['Preço', f.money(d.preco)],
-          ['Prazo', `${d.prazo_dias} dias`],
+          ['Prazo', d.prazo_dias != null ? `${d.prazo_dias} dias` : null],
           ['Estoque', `${f.num(d.estoque)} ${d.unidade || ''}`.trim()],
           ['Estoque mínimo', f.num(d.estoque_minimo)],
         ]),
-        d.estoque < d.estoque_minimo ? ui.badge('Estoque abaixo do mínimo', 'danger') : null,
-        section('Ficha técnica', d.ficha ? h('div', null,
-          d.ficha.atributos ? facts(Object.entries(d.ficha.atributos)) : null,
-          d.ficha.roteiro ? h('p', { class: 'detail__roteiro' }, d.ficha.roteiro.join(' › ')) : null,
-          d.ficha.especificacoes?.length ? ui.table({
-            columns: [
-              { key: 'caracteristica', label: 'Característica' },
-              { key: 'nominal', label: 'Nominal', align: 'right' },
-              { key: 'tolerancia', label: 'Tolerância', align: 'right' },
-              { key: 'unidade', label: 'Un.' },
-            ],
-            rows: d.ficha.especificacoes, sticky: false,
-          }) : null) : null));
+        d.estoque < d.estoque_minimo ? ui.badge('Estoque abaixo do mínimo', 'warn') : null);
       break;
-    }
-    case 'nc': {
-      root.append(
-        title(d.id, d.descricao),
-        h('div', { class: 'detail__badges' }, ui.statusBadge(d.status), ui.statusBadge(d.severidade), ui.statusBadge(d.origem)),
+    case 'nc':
+      rootEl.append(
+        h('div', { class: 'detail__badges' }, ui.statusBadge(d.status), ui.statusBadge(d.severidade)),
+        h('p', { class: 'detail__lead' }, d.descricao),
         facts([
           ['Data', f.date(d.data)],
-          [ctx.term('produto') || 'Produto', d.sku ? (chips([`sku:${d.sku}`]) || d.sku) : null],
-          ['Linha', ctx.data.linhas?.find((l) => l.id === d.linha)?.nome || d.linha],
+          [ctx.term('produto'), d.sku ? (chips([`sku:${d.sku}`]) || d.sku) : null],
           ['Causa', d.causa],
           ['Ação', d.acao],
           ['Responsável', d.responsavel],
-        ]),
-        section('8D', d.oito_d ? h('ol', { class: 'eightd' }, Object.entries(d.oito_d).map(([k, v]) =>
-          h('li', null, h('b', null, k), ' ', v))) : null));
+        ]));
       break;
-    }
     case 'os': {
-      const maq = byId('maquinas', d.maquina);
-      root.append(
-        title(d.id, maq?.nome),
+      rootEl.append(
         h('div', { class: 'detail__badges' }, ui.statusBadge(d.status), ui.statusBadge(d.tipo)),
+        h('p', { class: 'detail__lead' }, d.descricao),
         facts([
-          [ctx.term('maquina') || 'Máquina', chips([`maq:${d.maquina}`]) || d.maquina],
+          [ctx.term('maquina'), chips([`maq:${d.maquina}`]) || d.maquina],
           ['Data', f.date(d.data)],
           ['Técnico', d.tecnico],
-          ['Duração', typeof d.duracao_h === 'number' ? `${f.num(d.duracao_h)} h` : null],
-          ['Descrição', d.descricao],
           ['Peças', (d.pecas || []).join(', ') || null],
           ['Procedimento', d.procedimento ? (chips([`doc:${d.procedimento}`]) || d.procedimento) : null],
         ]));
       break;
     }
     case 'maq': {
-      const osList = (data.manutencao || []).filter((o) => o.maquina === d.id);
-      root.append(
-        title(`${d.id} · ${d.nome}`, d.tipo),
-        ui.statusBadge(d.status),
+      const osList = (ctx.data.manutencao || []).filter((o) => o.maquina === d.id);
+      const registros = learning ? learning.list({ maquina: d.id }) : [];
+      rootEl.append(
+        h('div', { class: 'detail__badges' }, ui.statusBadge(d.status), h('span', { class: 'muted' }, d.tipo)),
         facts([
-          ['Linha', ctx.data.linhas?.find((l) => l.id === d.linha)?.nome || d.linha],
-          ['Fabricante', d.fabricante],
-          ['Ano', d.ano],
+          [ctx.term('linha'), linha(d.linha)],
           ['Horímetro', typeof d.horimetro === 'number' ? `${f.num(d.horimetro)} h` : null],
           ['MTBF', typeof d.mtbf_h === 'number' ? `${f.num(d.mtbf_h)} h` : null],
           ['Próxima preventiva', d.proxima_preventiva ? `${f.date(d.proxima_preventiva)} (${f.rel(d.proxima_preventiva)})` : null],
-          ['Manual', d.manual ? (chips([`doc:${d.manual}`]) || d.manual) : null],
         ]),
-        section('Ordens de serviço', osList.length ? h('div', { class: 'ref-chips' }, osList.map((o) => ui.refChip(`os:${o.id}`, ctx)).filter(Boolean)) : null));
+        registros.length ? section('Registros da equipe', h('div', { class: 'stack' }, registros.map(learnedCard))) : null,
+        section('Ordens de serviço', chips(osList.map((o) => `os:${o.id}`))));
       break;
     }
-    case 'kpi': {
-      root.append(
-        title(d.nome, ctx.areaName(d.area)),
+    case 'kpi':
+      rootEl.append(
         ui.kpiTile({ kpi: d }),
-        d.explicacao ? h('p', { class: 'detail__lead' }, d.explicacao) : null,
-        section('Caminho até o dado', d.caminho?.length
-          ? h('ol', { class: 'path' }, d.caminho.map((p) => h('li', null, p))) : null),
+        d.explicacao ? section('O que mudou', h('p', { class: 'detail__lead' }, d.explicacao)) : null,
+        section('Caminho até o dado', d.caminho?.length ? h('ol', { class: 'path' }, d.caminho.map((p) => h('li', null, p))) : null),
         section('Fontes', chips(d.fontes)));
       break;
-    }
     case 'doc': {
-      const trechos = resolved.detalhe.doc.trechos || [];
-      const doc = resolved.detalhe.doc;
-      const highlight = resolved.detalhe.trecho?.id;
-      root.append(
-        title(doc.titulo, `${doc.tipo} · ${doc.origem}`),
-        facts([
-          ['Área', ctx.areaName(doc.area)],
-          ['Atualizado', f.date(doc.atualizado)],
-          ['Acesso', (doc.acesso || []).map((a) => ctx.areaName(a)).join(', ')],
-        ]),
-        section('Trechos', trechos.length ? h('div', { class: 'doc-trechos' }, trechos.map((t) =>
-          h('blockquote', { class: ['doc-trecho', t.id === highlight && 'is-highlight'] },
-            h('cite', null, t.secao), h('p', null, t.texto)))) : null));
+      const doc = d.doc;
+      const hl = d.trecho?.id;
+      rootEl.append(
+        h('p', { class: 'muted' }, `${doc.tipo || 'Documento'} · ${doc.origem || ''} · atualizado ${f.date(doc.atualizado)}`),
+        section('Trechos', (doc.trechos || []).length ? h('div', { class: 'doc-trechos' }, doc.trechos.map((t) =>
+          h('blockquote', { class: ['doc-trecho', t.id === hl && 'is-highlight'] }, h('cite', null, t.secao), h('p', null, t.texto)))) : null));
       break;
     }
     case 'cliente': {
-      const pedidos = (data.pedidos || []).filter((p) => p.cliente === d.id);
-      root.append(
-        title(d.nome, `${d.cidade} · ${d.uf}`),
+      const pedidos = (ctx.data.pedidos || []).filter((p) => p.cliente === d.id);
+      rootEl.append(
         facts([
+          ['Cidade', [d.cidade, d.uf].filter(Boolean).join(' · ')],
           ['Segmento', d.segmento],
-          [ctx.term('representante') || 'Representante', chips([`rep:${d.representante}`]) || d.representante],
-          ['Condição de pagamento', d.condicao_pagamento],
-          ['Limite de crédito', f.money(d.limite_credito)],
-          ['Tabela de preço', d.tabela_preco],
+          [ctx.term('representante'), chips([`rep:${d.representante}`]) || d.representante],
+          ['Condição', d.condicao_pagamento],
+          ['Tabela', d.tabela_preco],
           ['Último pedido', f.date(d.ultimo_pedido)],
         ]),
-        section('Pedidos', pedidos.length ? h('div', { class: 'ref-chips' }, pedidos.map((p) => ui.refChip(`pedido:${p.id}`, ctx)).filter(Boolean)) : null));
+        section('Pedidos', chips(pedidos.map((p) => `pedido:${p.id}`))));
       break;
     }
     case 'rep': {
       const pct = d.meta_mes ? (d.realizado_mes / d.meta_mes) * 100 : 0;
-      root.append(
-        title(d.nome, d.regiao),
-        facts([
-          ['Telefone', d.telefone],
-          ['Meta do mês', f.money(d.meta_mes)],
-          ['Realizado', f.money(d.realizado_mes)],
-          ['Atingimento', `${f.num(pct, 0)}%`],
-        ]),
-        ui.progress(pct, { tone: pct >= 100 ? 'ok' : pct >= 70 ? null : 'warn' }));
+      rootEl.append(
+        facts([['Região', d.regiao], ['Meta do mês', f.money(d.meta_mes)], ['Realizado', f.money(d.realizado_mes)], ['Atingimento', `${f.num(pct, 0)}%`]]),
+        ui.progress(pct, { tone: pct >= 100 ? 'ok' : pct >= 70 ? 'accent' : 'warn' }));
       break;
     }
-    case 'regra': {
-      root.append(title(d.titulo, d.id), h('p', { class: 'detail__lead' }, d.texto));
+    case 'regra':
+      rootEl.append(h('p', { class: 'detail__lead' }, d.texto));
       break;
-    }
-    case 'turno': {
-      root.append(
-        title(`Turno ${d.turno}`, `${ctx.data.linhas?.find((l) => l.id === d.linha)?.nome || d.linha} · ${f.dateLong(d.data)}`),
+    case 'turno':
+      rootEl.append(
         facts([
-          ['Produzido', `${f.num(d.produzido)} ${ctx.term('unidade') || ''}`.trim()],
+          ['Produzido', `${f.num(d.produzido)} ${unidade}`.trim()],
           ['Refugo', f.num(d.refugo)],
           ['Paradas', `${f.num(d.paradas_min)} min`],
         ]),
         d.resumo ? h('p', { class: 'detail__lead' }, d.resumo) : null,
         section('Ocorrências', d.ocorrencias?.length ? h('ul', { class: 'bullets' }, d.ocorrencias.map((o) => h('li', null, o))) : null));
       break;
-    }
-    case 'saber': {
-      root.append(
-        title(d.titulo, `${d.autor} · ${d.funcao}`),
-        facts([
-          ['Anos de casa', d.tempo_casa_anos],
-          ['Área', ctx.areaName(d.area)],
-          [ctx.term('maquina') || 'Máquina', d.maquina ? (chips([`maq:${d.maquina}`]) || d.maquina) : null],
-          ['Validado por', d.validado_por],
-          ['Data', f.date(d.data)],
-        ]),
+    case 'saber':
+      rootEl.append(
         h('p', { class: 'detail__lead' }, d.dica),
+        facts([
+          ['Quem', `${d.autor} · ${d.funcao}`],
+          ['Anos de casa', d.tempo_casa_anos],
+          [ctx.term('maquina'), d.maquina ? (chips([`maq:${d.maquina}`]) || d.maquina) : null],
+          ['Validado por', d.validado_por],
+        ]),
         (d.tags || []).length ? h('div', { class: 'tag-row' }, d.tags.map((t) => ui.badge(t, 'neutral'))) : null);
       break;
-    }
-    case 'integ': {
-      root.append(
-        title(d.nome, d.tipo),
-        ui.statusBadge(d.status),
-        facts([
-          ['Última sincronização', d.ultima_sync ? f.datetime(d.ultima_sync) : null],
-          ['Registros', typeof d.registros === 'number' ? f.num(d.registros) : null],
-          ['Observação', d.observacao],
-        ]));
+    case 'integ':
+      rootEl.append(ui.statusBadge(d.status), facts([
+        ['Última sincronização', d.ultima_sync ? f.datetime(d.ultima_sync) : null],
+        ['Registros', typeof d.registros === 'number' ? f.num(d.registros) : null],
+        ['Observação', d.observacao],
+      ]));
       break;
-    }
+    case 'aprendizado':
+      rootEl.append(learnedCard(d));
+      break;
     default:
-      root.append(title(resolved.rotulo), ui.emptyState('Sem visualização para este tipo de registro.'));
+      rootEl.append(ui.emptyState('Sem visualização para este tipo de registro.'));
   }
 }
 
-// aplica uma config vinda do admin (já salva): atualiza setor, menu e tela
-function applyConfig(config) {
-  setState({ config: normalizeConfig(config) });
-  resolveSector();
-  renderShell();
-  loadSectorThen(() => {
-    // se a rota atual ficou desligada, o roteador cuida ao navegar
-    renderRoute();
+function learnedCard(item) {
+  return h('div', { class: 'drawer-learned' },
+    h('span', { class: 'drawer-learned__by' }, icon('lightbulb', { size: 14 }),
+      `Registrado por ${item.autor && item.autor !== 'Você' ? item.autor : 'você'} · ${quando(item.criado_em)}`),
+    item.titulo ? h('strong', null, item.titulo) : null,
+    h('p', null, item.texto));
+}
+
+export function quando(iso) {
+  const t = Date.parse(iso || '');
+  if (!Number.isFinite(t)) return '';
+  const min = Math.round((Date.now() - t) / 60000);
+  if (min < 2) return 'agora';
+  if (min < 60) return `há ${min} min`;
+  const hrs = Math.round(min / 60);
+  if (hrs < 24) return `há ${hrs} h`;
+  const dias = Math.round(hrs / 24);
+  return dias === 1 ? 'ontem' : `há ${dias} dias`;
+}
+
+// ---------------------------------------------------------------------------
+// Substitutos enquanto B não entrega (mesma assinatura; leves)
+
+function conversaSubstituta(host, ctx) {
+  const log = h('div', { class: 'stack', 'aria-live': 'polite' });
+  const input = h('textarea', { class: 'textarea', rows: '2', placeholder: 'Pergunte outra coisa ou diga “anota que…”', 'aria-label': 'Pergunta' });
+  const historico = [];
+  let ac = null;
+  async function enviar(texto) {
+    if (!texto.trim()) return;
+    historico.push({ role: 'user', content: texto });
+    log.append(h('p', { style: { alignSelf: 'flex-end', background: 'var(--surface-muted)', padding: '8px 12px', borderRadius: '16px' } }, texto));
+    const linha = h('p', { class: 'muted' }, 'Pensando…');
+    const corpo = h('div');
+    log.append(linha, corpo);
+    ac = new AbortController();
+    try {
+      const r = await api.conversa(demoId, { mensagens: historico, modulo: 'visao-geral', autor: ctx.autorSalvo() || undefined }, {
+        signal: ac.signal,
+        onFerramenta: (f) => { linha.textContent = f.rotulo || 'Consultando…'; },
+        onTexto: (_d, total) => { linha.textContent = ''; corpo.replaceChildren(renderMarkdown(total)); },
+        onAprendizado: (item) => { learning.add(item).catch(() => {}); },
+      });
+      corpo.replaceChildren(renderMarkdown(r.texto));
+      const fontes = r.fontes.map((ref) => ui.refChip(ref, buildCtx())).filter(Boolean);
+      if (fontes.length) corpo.append(h('div', { class: 'ref-chips' }, fontes));
+      historico.push({ role: 'assistant', content: r.texto });
+      linha.remove();
+    } catch (err) {
+      if (err.abortado) { linha.textContent = 'Resposta interrompida.'; return; }
+      linha.textContent = 'Não consegui responder agora.';
+    }
+  }
+  const form = h('form', {
+    class: 'stack',
+    onSubmit: (e) => { e.preventDefault(); const t = input.value; input.value = ''; enviar(t); },
+  }, input, h('div', { class: 'row' }, ui.button('Enviar', { type: 'submit', variant: 'primary', icone: 'arrow-up' })));
+  host.append(h('div', { class: 'page page--read' },
+    h('div', { class: 'row' }, ui.button('Início', { variant: 'ghost', icone: 'chevron-left', onClick: () => navigate('#inicio') })),
+    log, form));
+  if (perguntaPendente) {
+    const p = perguntaPendente;
+    perguntaPendente = null;
+    enviar(p.texto);
+  } else {
+    input.focus();
+  }
+  return () => ac?.abort();
+}
+
+function ensinarSubstituto({ area, maquina } = {}) {
+  const ctx = buildCtx();
+  const areas = (data?.areas || []).filter((a) => !FEATURE_BY_ID[a.id] || isEnabled(a.id));
+  const texto = h('textarea', { class: 'textarea', rows: '5', maxlength: '2000', autofocus: true, 'aria-label': 'O que o cérebro precisa saber?' });
+  const sel = ui.select({ label: 'Área', options: areas.map((a) => ({ value: a.id, label: a.nome })), value: area || areas[0]?.id });
+  const erro = h('p', { class: 'field__error', role: 'alert' });
+  const s = ui.sheet({
+    titulo: 'Ensinar o cérebro',
+    subtitulo: 'O que você registrar aqui vale para as próximas respostas.',
+    corpo: [h('label', { class: 'field' }, h('span', { class: 'field__label' }, 'O que o cérebro precisa saber?'), texto), sel, erro],
   });
+  const enviar = ui.button('Ensinar ao cérebro', {
+    variant: 'primary',
+    onClick: async () => {
+      const t = texto.value.trim();
+      if (t.length < 12) { erro.textContent = 'Escreva um pouco mais para o cérebro entender.'; return; }
+      enviar.disabled = true;
+      try {
+        const titulo = (t.split(/(?<=[.!?])\s/)[0] || t).slice(0, 80);
+        await learning.add({ tipo: 'saber', titulo, texto: t, area: sel.querySelector('select').value, maquina: maquina || null, autor: ctx.autor() });
+        s.setCorpo(h('div', { class: 'stack' }, h('h3', null, 'O cérebro aprendeu.')));
+        s.setAcoes(ui.button('Fechar', { onClick: () => s.close() }));
+      } catch {
+        erro.textContent = 'Não conseguimos registrar agora. Tente de novo.';
+        enviar.disabled = false;
+      }
+    },
+  });
+  s.setAcoes([enviar, ui.button('Cancelar', { variant: 'ghost', onClick: () => s.close() })]);
+  return s;
 }
 
-// expõe para depuração manual
-window.__tornoDemo = { getState, buildCtx, navigate, openRef, REF_TYPES };
+// depuração manual
+window.__tornoDemo = { buildCtx: () => buildCtx(), navigate, openRef };
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', boot, { once: true });
-} else {
-  boot();
-}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+else boot();

@@ -142,10 +142,28 @@ const ICONS = {
   message: ['M7.9 20A9 9 0 1 0 4 16.1L2 22Z'],
   calendar: ['r:3,4,18,18,2', 'M16 2v4', 'M8 2v4', 'M3 10h18'],
   chart: ['M3 3v18h18', 'm19 9-5 5-4-4-3 3'],
+  // v2 (UX §5.6)
+  lightbulb: ['M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5', 'M9 18h6', 'M10 22h4'],
+  copy: ['r:8,8,14,14,2', 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'],
+  'check-circle': ['c:12,12,10', 'm9 12 2 2 4-4'],
+  stop: ['r:6,6,12,12,2'],
+  sun: ['c:12,12,4', 'M12 2v2', 'M12 20v2', 'm4.93 4.93 1.41 1.41', 'm17.66 17.66 1.41 1.41', 'M2 12h2', 'M20 12h2', 'm6.34 17.66-1.41 1.41', 'm19.07 4.93-1.41 1.41'],
+  moon: ['M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'],
+  undo: ['M9 14 4 9l5-5', 'M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5 5.5 5.5 0 0 1-5.5 5.5H11'],
+  more: ['c:12,12,1', 'c:19,12,1', 'c:5,12,1'],
+  key: ['m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4', 'm21 2-9.6 9.6', 'c:7.5,15.5,5.5'],
+  link: ['M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71', 'M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'],
+  eye: ['M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0', 'c:12,12,3'],
+  'eye-off': ['M10.73 5.08A10.43 10.43 0 0 1 12 5c4.94 0 9.17 3.1 10.83 7.5a10.8 10.8 0 0 1-1.44 2.49', 'M14.08 14.16a3 3 0 0 1-4.24-4.24', 'M17.48 17.5A10.73 10.73 0 0 1 1.17 12.5 10.8 10.8 0 0 1 6.53 6.53', 'm2 2 20 20'],
+  'log-out': ['M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4', 'm16 17 5-5-5-5', 'M21 12H9'],
+  home: ['M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8', 'M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'],
+  grid: ['r:3,3,7,7,1', 'r:14,3,7,7,1', 'r:14,14,7,7,1', 'r:3,14,7,7,1'],
+  pencil: ['M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z', 'm15 5 4 4'],
+  power: ['M12 2v10', 'M18.4 6.6a9 9 0 1 1-12.77.04'],
   building: ['r:4,2,16,20,2', 'M9 22v-4h6v4', 'M8 6h.01', 'M16 6h.01', 'M12 6h.01', 'M12 10h.01', 'M12 14h.01', 'M16 10h.01', 'M16 14h.01', 'M8 10h.01', 'M8 14h.01'],
 };
 
-const ICON_ALIASES = { 'alert-triangle': 'alert', 'external-link': 'external', smartphone: 'phone', sliders: 'settings-2', close: 'x', 'file-text': 'file' };
+const ICON_ALIASES = { ideia: 'lightbulb', ensinar: 'lightbulb', 'more-horizontal': 'more', ellipsis: 'more', square: 'stop', 'alert-triangle': 'alert', 'external-link': 'external', smartphone: 'phone', sliders: 'settings-2', close: 'x', 'file-text': 'file' };
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -280,7 +298,7 @@ export function statusBadge(status) {
 
 const REF_ICON = {
   doc: 'file', op: 'factory', turno: 'clock', pedido: 'box', sku: 'box', cliente: 'building', rep: 'user',
-  regra: 'scale', nc: 'shield-check', os: 'wrench', maq: 'cpu', kpi: 'chart', saber: 'users', integ: 'plug',
+  regra: 'scale', nc: 'shield-check', os: 'wrench', maq: 'cpu', kpi: 'chart', saber: 'users', integ: 'plug', aprendizado: 'lightbulb',
 };
 
 /** Chip clicável de fonte. Some (null) quando a ref não resolve ou o módulo dono está desligado. */
@@ -572,18 +590,35 @@ export function phoneFrame(children) {
     h('div', { class: 'phone-frame__screen' }, children));
 }
 
-export function toast(texto, { tone = 'neutral', duration = 3600 } = {}) {
+/**
+ * toast(texto, {tone, duration, acao:{label, onClick}}) — sem alert(). Com `acao`, o toast ganha
+ * um botão (ex.: "Desfazer") e dura 6 s por padrão.
+ */
+export function toast(texto, { tone = 'neutral', duration, acao } = {}) {
   let region = document.getElementById('toast-region');
   if (!region) {
     region = h('div', { id: 'toast-region', class: 'toast-region', role: 'status', 'aria-live': 'polite' });
     document.body.appendChild(region);
   }
-  const t = h('div', { class: `toast toast--${tone}` }, texto);
-  region.appendChild(t);
-  setTimeout(() => {
+  const dur = duration ?? (acao ? 6000 : 3600);
+  let timer = null;
+  const fechar = () => {
+    clearTimeout(timer);
     t.classList.add('is-leaving');
     setTimeout(() => t.remove(), 250);
-  }, duration);
+  };
+  const t = h('div', { class: `toast toast--${tone}` },
+    h('span', { class: 'toast__text' }, texto),
+    acao ? h('button', {
+      type: 'button', class: 'toast__action',
+      onClick: () => {
+        fechar();
+        try { acao.onClick?.(); } catch (err) { console.error('[toast] ação falhou', err); }
+      },
+    }, acao.label || 'Desfazer') : null);
+  region.appendChild(t);
+  timer = setTimeout(fechar, dur);
+  t.close = fechar;
   return t;
 }
 
@@ -593,7 +628,270 @@ export function facts(pairs = []) {
     h('div', { class: 'facts__row' }, h('dt', null, k), h('dd', null, v))));
 }
 
-export function button(label, { variant = 'secondary', icone, onClick, type = 'button', size, ...rest } = {}) {
-  return h('button', { type, class: ['btn', `btn--${variant}`, size && `btn--${size}`], onClick, ...rest },
-    icone ? icon(icone, { size: 16 }) : null, label);
+export function button(label, { variant = 'secondary', icone, onClick, type = 'button', size, class: cls, ...rest } = {}) {
+  return h('button', { type, class: ['btn', `btn--${variant}`, size && `btn--${size}`, cls], onClick, ...rest },
+    icone ? icon(icone, { size: size === 'sm' ? 16 : 18 }) : null, label != null && label !== '' ? h('span', { class: 'btn__label' }, label) : null);
+}
+
+
+// ---------------------------------------------------------------------------
+// v2: iconButton, segmented, confirmInline, skeleton, spinner, sheet
+
+/** Botão só de ícone (enviar, fechar, tema…). `label` vira aria-label e title. */
+export function iconButton(name, { label, onClick, size = 18, variant = 'ghost', class: cls, title, ...rest } = {}) {
+  return h('button', {
+    type: 'button', class: ['icon-btn', variant && `icon-btn--${variant}`, cls],
+    'aria-label': label || name, title: title ?? label ?? null, onClick, ...rest,
+  }, icon(name, { size }));
+}
+
+export function spinner({ size = 16, label } = {}) {
+  return h('span', {
+    class: 'spinner', style: { width: `${size}px`, height: `${size}px` },
+    role: label ? 'status' : null, 'aria-label': label || null, 'aria-hidden': label ? null : 'true',
+  });
+}
+
+/**
+ * segmented({opcoes:[{value,label,icone?}], value, onChange, label, size}) → grupo de rádio em pílulas.
+ * el.value / el.setValue(v) para ler/escrever.
+ */
+export function segmented({ opcoes = [], options, value, onChange, label, size, class: cls, name } = {}) {
+  const items = opcoes.length ? opcoes : (options || []);
+  let atual = value ?? items[0]?.value;
+  const grupo = h('div', {
+    class: ['segmented', size && `segmented--${size}`, cls], role: 'radiogroup', 'aria-label': label || null,
+    'data-name': name || null,
+  });
+  const botoes = items.map((o) => h('button', {
+    type: 'button', role: 'radio', class: 'segmented__opt', 'data-value': String(o.value),
+    disabled: !!o.disabled,
+    onClick: () => escolhe(o.value, true),
+    onKeydown: (e) => {
+      const i = items.findIndex((x) => x.value === o.value);
+      let n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = items[(i + 1) % items.length];
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = items[(i - 1 + items.length) % items.length];
+      if (n) {
+        e.preventDefault();
+        escolhe(n.value, true);
+        botoes[items.indexOf(n)].focus();
+      }
+    },
+  }, o.icone ? icon(o.icone, { size: 16 }) : null, h('span', null, o.label),
+  o.contagem != null ? h('span', { class: 'segmented__count num' }, String(o.contagem)) : null));
+  function pinta() {
+    botoes.forEach((b, i) => {
+      const on = String(items[i].value) === String(atual);
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+  }
+  function escolhe(v, avisar) {
+    if (String(v) === String(atual) && avisar) return;
+    atual = v;
+    pinta();
+    if (avisar && typeof onChange === 'function') onChange(v);
+  }
+  grupo.append(...botoes);
+  pinta();
+  Object.defineProperty(grupo, 'value', { get: () => atual });
+  grupo.setValue = (v) => escolhe(v, false);
+  return grupo;
+}
+
+/**
+ * confirmInline({label, icone, pergunta, confirmar, cancelar, variant, onConfirm, size})
+ * Botão que, ao clicar, vira "pergunta? [confirmar] [Cancelar]" no próprio lugar (sem modal).
+ * onConfirm pode devolver Promise; enquanto roda, os botões ficam travados. Se lançar, volta ao botão.
+ */
+export function confirmInline({
+  label, icone, pergunta, confirmar = 'Confirmar', cancelar = 'Cancelar', variant = 'secondary',
+  confirmVariant = 'danger', onConfirm, size = 'sm',
+} = {}) {
+  const box = h('span', { class: 'confirm-inline' });
+  const gatilho = button(label, {
+    variant, icone, size,
+    onClick: () => abre(),
+  });
+  function volta(foco = true) {
+    box.replaceChildren(gatilho);
+    if (foco) gatilho.focus();
+  }
+  function abre() {
+    const sim = button(confirmar, {
+      variant: confirmVariant, size,
+      onClick: async () => {
+        sim.disabled = true; nao.disabled = true;
+        sim.replaceChildren(spinner({ size: 14 }), h('span', { class: 'btn__label' }, confirmar));
+        try {
+          await onConfirm?.();
+          if (box.isConnected) volta(false);
+        } catch (err) {
+          console.warn('[confirmInline]', err);
+          if (box.isConnected) volta();
+        }
+      },
+    });
+    const nao = button(cancelar, { variant: 'ghost', size, onClick: () => volta() });
+    box.replaceChildren(
+      h('span', { class: 'confirm-inline__q', role: 'alert' }, pergunta || 'Tem certeza?'),
+      sim, nao);
+    nao.focus();
+    box.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.stopPropagation(); volta(); } }, { once: true });
+  }
+  box.append(gatilho);
+  box.reset = () => volta(false);
+  return box;
+}
+
+/**
+ * skeleton({linhas, altura, largura, tipo}) → bloco cinza de carregamento (sem shimmer com
+ * movimento reduzido). tipo: 'linhas' (padrão) | 'numeros' (3 blocos) | 'bloco'.
+ */
+export function skeleton({ linhas = 3, altura, largura, tipo = 'linhas', class: cls } = {}) {
+  if (tipo === 'numeros') {
+    return h('div', { class: ['skeleton-row', cls], 'aria-hidden': 'true' },
+      [0, 1, 2].map(() => h('div', { class: 'skeleton skeleton--stat' })));
+  }
+  if (tipo === 'bloco') {
+    return h('div', { class: ['skeleton', cls], 'aria-hidden': 'true', style: { height: altura || '120px', width: largura || '100%' } });
+  }
+  return h('div', { class: ['skeleton-lines', cls], 'aria-hidden': 'true' },
+    Array.from({ length: linhas }, (_, i) => h('div', {
+      class: 'skeleton skeleton--line',
+      style: { height: altura || null, width: largura || (i === linhas - 1 && linhas > 1 ? '62%' : null) },
+    })));
+}
+
+// --- sheet (gaveta lateral no desktop, folha inferior no celular) ---------------------------
+
+const sheetStack = [];
+const FOCAVEIS = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function onSheetKey(e) {
+  const top = sheetStack[sheetStack.length - 1];
+  if (!top) return;
+  if (e.key === 'Escape') {
+    if (e.defaultPrevented) return;
+    e.preventDefault();
+    top.close();
+  } else if (e.key === 'Tab') {
+    const f = [...top.el.querySelectorAll(FOCAVEIS)].filter((x) => x.offsetParent !== null || x === document.activeElement);
+    if (!f.length) { e.preventDefault(); top.el.focus(); return; }
+    const first = f[0];
+    const last = f[f.length - 1];
+    if (e.shiftKey && (document.activeElement === first || document.activeElement === top.el)) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+}
+
+function asNodes(x) {
+  if (x == null || x === false) return [];
+  if (Array.isArray(x)) return x.flatMap(asNodes);
+  if (x instanceof Node) return [x];
+  return [document.createTextNode(String(x))];
+}
+
+/**
+ * sheet({titulo, subtitulo, eyebrow, corpo, acoes, lado, largura, rotulo, onClose, classe})
+ *   lado: 'direita' (padrão: gaveta de 480 px no desktop, folha inferior no celular) | 'baixo' (sempre folha)
+ *         | 'cheia' (tela cheia no celular, gaveta no desktop)
+ *   corpo/acoes: Node, array de Nodes ou texto. acoes vai num rodapé fixo.
+ * → { el, body, footer, close(), setCorpo(n), setAcoes(n), setTitulo(t, sub?), onClose(fn) }
+ * Esc fecha; o foco volta para quem abriu; aria-modal="true"; várias folhas empilham.
+ */
+export function sheet({
+  titulo, subtitulo, eyebrow, corpo, acoes, lado = 'direita', largura, rotulo, onClose, classe, class: cls,
+} = {}) {
+  const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const tituloId = uniqueId('sheet-t');
+  const tituloEl = h('h2', { class: 'sheet__title', id: tituloId });
+  const subEl = h('p', { class: 'sheet__sub' });
+  const eyebrowEl = h('div', { class: 'sheet__eyebrow' });
+  const fecharBtn = iconButton('x', { label: 'Fechar', class: 'sheet__close', size: 20, onClick: () => close() });
+  const body = h('div', { class: 'sheet__body' });
+  const footer = h('div', { class: 'sheet__footer' });
+  const panel = h('div', {
+    class: ['sheet', `sheet--${lado}`, classe, cls], role: 'dialog', 'aria-modal': 'true',
+    'aria-labelledby': tituloId, tabindex: '-1', style: largura ? { '--sheet-w': typeof largura === 'number' ? `${largura}px` : largura } : null,
+  },
+  h('div', { class: 'sheet__grip', 'aria-hidden': 'true' }),
+  h('header', { class: 'sheet__head' }, h('div', { class: 'sheet__titles' }, eyebrowEl, tituloEl, subEl), fecharBtn),
+  body, footer);
+  if (rotulo) panel.setAttribute('aria-label', rotulo);
+  const scrim = h('div', { class: 'sheet-scrim', onClick: () => close() });
+  const layer = h('div', { class: 'sheet-layer', style: { zIndex: String(80 + sheetStack.length * 2) } }, scrim, panel);
+
+  const closers = new Set(onClose ? [onClose] : []);
+  let fechada = false;
+  const api = {
+    el: panel, body, footer,
+    close,
+    setTitulo(t, sub) {
+      tituloEl.textContent = t || '';
+      tituloEl.hidden = !t;
+      if (!t) panel.setAttribute('aria-label', rotulo || 'Detalhe');
+      if (sub !== undefined) { subEl.replaceChildren(...asNodes(sub)); subEl.hidden = !sub; }
+    },
+    setEyebrow(n) { eyebrowEl.replaceChildren(...asNodes(n)); eyebrowEl.hidden = !n; },
+    setCorpo(n) { body.replaceChildren(...asNodes(n)); body.scrollTop = 0; },
+    setAcoes(n) { const ns = asNodes(n); footer.replaceChildren(...ns); footer.hidden = !ns.length; },
+    onClose(fn) { closers.add(fn); return () => closers.delete(fn); },
+  };
+  function close() {
+    if (fechada) return;
+    fechada = true;
+    const i = sheetStack.indexOf(api);
+    if (i >= 0) sheetStack.splice(i, 1);
+    if (!sheetStack.length) {
+      document.removeEventListener('keydown', onSheetKey, true);
+      document.documentElement.classList.remove('has-sheet');
+    }
+    layer.classList.remove('is-open');
+    const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => layer.remove(), reduz ? 0 : 320);
+    for (const fn of closers) { try { fn(); } catch (err) { console.error('[sheet] onClose', err); } }
+    if (opener && opener.isConnected) { try { opener.focus({ preventScroll: true }); } catch { /* ok */ } }
+  }
+
+  api.setTitulo(titulo, subtitulo ?? null);
+  api.setEyebrow(eyebrow || null);
+  api.setCorpo(corpo);
+  api.setAcoes(acoes);
+
+  document.body.appendChild(layer);
+  if (!sheetStack.length) document.addEventListener('keydown', onSheetKey, true);
+  sheetStack.push(api);
+  document.documentElement.classList.add('has-sheet');
+  requestAnimationFrame(() => {
+    layer.classList.add('is-open');
+    const auto = panel.querySelector('[autofocus]');
+    (auto || panel).focus({ preventScroll: true });
+  });
+  return api;
+}
+
+/** Fecha todas as folhas abertas (troca de rota). */
+export function closeAllSheets() {
+  for (const s of [...sheetStack].reverse()) s.close();
+}
+
+/** Copia texto: navigator.clipboard com fallback de seleção num textarea. → Promise<boolean> */
+export async function copyText(texto) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(texto);
+      return true;
+    }
+  } catch { /* cai no fallback */ }
+  const ta = h('textarea', { readonly: true, style: { position: 'fixed', top: '-1000px', left: '0', opacity: '0' } });
+  ta.value = texto;
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, texto.length);
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch { ok = false; }
+  ta.remove();
+  return ok;
 }

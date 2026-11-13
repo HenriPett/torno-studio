@@ -1,434 +1,145 @@
-// Portal do cliente (PLANO §4, oferta "software sob medida").
-// Simula a visão de UM cliente da indústria: pedidos dele, catálogo com preço e prazo,
-// recompra num carrinho local (só nesta tela) e o assistente do cliente.
+// Portal do cliente (UX §4.9): prova de "software sob medida", numa moldura de janela para não
+// confundir com a ferramenta interna. Troca de {cliente}, saudação, condições, um aviso, pedidos
+// dele, "Repetir último pedido" (rascunho, sem carrinho), catálogo com o preço da tabela e o
+// assistente do {cliente} (a conversa via ctx.perguntar, módulo portal).
+import { h } from '../ui.js';
+import * as ui from '../ui.js';
+import {
+  ensureAreaCss, statusBadge, areaAssistant, T, cap, fmtOf, curto, tag,
+} from '../ui/area-page.js';
 
-import { h, icon, badge, refChip, emptyState, select, searchInput, toast } from '../ui.js';
-import { fmt, normalize } from '../format.js';
-import { chatPanel } from '../ui/chat.js';
+const escolhido = {}; // cliente escolhido por setor, nesta sessão
 
-const ETAPAS = [
-  { id: 'recebido', label: 'Recebido' },
-  { id: 'aprovado', label: 'Aprovado' },
-  { id: 'em_producao', label: 'Em produção' },
-  { id: 'faturado', label: 'Faturado' },
-  { id: 'entregue', label: 'Entregue' },
-];
-const ETAPA_DO_STATUS = { em_analise: 0, aprovado: 1, em_producao: 2, atrasado: 2, faturado: 3, entregue: 4 };
-
-// Cliente escolhido em "Entrar como", por setor, só nesta sessão da página.
-const escolhido = {};
-
-function ensureCss() {
-  if (document.querySelector('link[href*="mod-c.css"]')) return;
-  const l = document.createElement('link');
-  l.rel = 'stylesheet';
-  l.href = new URL('../../css/mod-c.css', import.meta.url).href;
-  document.head.appendChild(l);
+function slug(nome) {
+  return String(nome || 'empresa').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+    .replace(/\b(s\.?a\.?|ltda\.?|eireli|me|industria|industrias|comercio)\b/g, '')
+    .replace(/[^a-z0-9]+/g, '').slice(0, 24) || 'empresa';
 }
 
-function on(node, ev, fn) {
-  node.addEventListener(ev, fn);
-  return node;
-}
-
-function chip(ref, ctx) {
-  try {
-    return refChip(ref, ctx) || null;
-  } catch {
-    return null;
-  }
-}
-
-function valorDe(v) {
-  return v && typeof v === 'object' && 'target' in v ? v.target.value : v;
-}
+const singular = (u) => ({
+  'peças': 'peça', unidades: 'unidade', caixas: 'caixa', metros: 'metro', rolos: 'rolo', fardos: 'fardo',
+  conjuntos: 'conjunto', jogos: 'jogo', milheiros: 'milheiro',
+}[String(u || '')] || u || 'unidade');
 
 export function render(el, ctx) {
-  ensureCss();
-  const d = ctx.data;
+  ensureAreaCss();
+  const f = fmtOf(ctx);
+  const d = ctx.data || {};
   const clientes = d.clientes || [];
   const pedidos = d.pedidos || [];
   const produtos = d.produtos || [];
   const portal = d.portal || {};
-  const porSku = new Map(produtos.map((p) => [p.sku, p]));
-  const tCliente = ctx.term('cliente');
-  const tProdutos = ctx.term('produtos');
-
-  const pedidosDe = (cliId) =>
-    pedidos.filter((p) => p.cliente === cliId).sort((a, b) => String(b.data).localeCompare(String(a.data)));
-
-  if (!escolhido[ctx.sector.id] || !clientes.some((c) => c.id === escolhido[ctx.sector.id])) {
-    const comAberto = clientes.find((c) => pedidosDe(c.id).some((p) => p.status !== 'entregue'));
-    escolhido[ctx.sector.id] = (comAberto || clientes[0] || {}).id;
-  }
-
-  el.replaceChildren();
-  el.classList.add('pt-root');
+  const empresa = ctx.empresa || d.empresa?.nome || 'a empresa';
+  const setorId = ctx.sector?.id || ctx.demo?.setor || d.id || 'x';
+  const tCli = T(ctx, 'cliente');
+  const pedidosDe = (id) => pedidos.filter((p) => p.cliente === id).sort((a, b) => String(b.data).localeCompare(String(a.data)));
 
   if (!clientes.length) {
-    el.append(emptyState(`Nenhum ${tCliente} nos dados deste setor.`));
-    return;
+    el.replaceChildren(h('div', { class: 'ar-page' }, h('p', { class: 'ar-empty' }, `Nenhum ${tCli} nos dados desta demonstração.`)));
+    return undefined;
+  }
+  if (!clientes.some((c) => c.id === escolhido[setorId])) {
+    escolhido[setorId] = (clientes.find((c) => pedidosDe(c.id).some((p) => p.status !== 'entregue')) || clientes[0]).id;
   }
 
-  // Faixa fixa: deixa claro que é a visão de fora da empresa.
-  const faixa = h('div', { class: 'pt-faixa', role: 'note' },
-    h('span', { class: 'pt-faixa-icone', 'aria-hidden': 'true' }, icon('store')),
-    h('p', { class: 'pt-faixa-texto' },
-      h('strong', {}, 'Visão do cliente: '),
-      `é isto que cada ${tCliente} vê no portal, com a conexão feita pela ${ctx.empresa}.`),
-  );
+  const host = h('div', { class: 'pt-host' });
+  const seletor = h('select', { class: 'pt-select', id: 'pt-cliente', 'aria-label': `Ver como ${tCli}` },
+    clientes.map((c) => h('option', { value: c.id, selected: c.id === escolhido[setorId] || null }, curto(c.nome))));
+  seletor.value = escolhido[setorId];
+  seletor.addEventListener('change', () => { escolhido[setorId] = seletor.value; desenha(); });
 
-  const seletor = select({
-    id: 'pt-entrar-como',
-    label: 'Entrar como',
-    options: clientes.map((c) => ({ value: c.id, label: `${c.nome} (${c.cidade}/${c.uf})` })),
-    value: escolhido[ctx.sector.id],
-    onChange: (v) => {
-      const val = valorDe(v);
-      if (!val || val === escolhido[ctx.sector.id]) return;
-      escolhido[ctx.sector.id] = val;
-      carrinho.clear();
-      confirmacao = null;
-      desenharLoja();
-    },
-  });
-  const barra = h('div', { class: 'pt-barra' }, faixa, h('div', { class: 'pt-entrar' }, seletor));
-
-  const loja = h('div', { class: 'pt-loja' });
-  el.append(barra, loja);
-
-  // Estado local da tela
-  const carrinho = new Map(); // sku → quantidade
-  let confirmacao = null;
-  let busca = '';
-  let familia = '';
-
-  const cartBox = h('section', { class: 'pt-card pt-carrinho', 'aria-labelledby': 'pt-carrinho-titulo' });
-  const catalogoLista = h('div', { class: 'pt-catalogo-grid' });
-
-  function clienteAtual() {
-    return clientes.find((c) => c.id === escolhido[ctx.sector.id]) || clientes[0];
-  }
-
-  function precoDe(sku, fallback) {
-    const p = porSku.get(sku);
-    return p && typeof p.preco === 'number' ? p.preco : fallback ?? 0;
-  }
-
-  function disponibilidade(p) {
-    const ok = (p.estoque ?? 0) >= (p.estoque_minimo ?? 0) && (p.estoque ?? 0) > 0;
-    return ok
-      ? { ok: true, texto: 'Disponível', detalhe: `${fmt.num(p.estoque)} ${p.unidade || ctx.term('unidade')} em estoque` }
-      : { ok: false, texto: `Sob encomenda em ${p.prazo_dias} dias`, detalhe: 'Produzido a partir do pedido' };
-  }
-
-  function adicionar(sku, qtd) {
-    carrinho.set(sku, (carrinho.get(sku) || 0) + qtd);
-    confirmacao = null;
-    desenharCarrinho();
-  }
-
-  function repetirUltimo() {
-    const ultimo = pedidosDe(clienteAtual().id)[0];
-    if (!ultimo) return;
-    carrinho.clear();
-    for (const it of ultimo.itens || []) {
-      if (porSku.has(it.sku)) carrinho.set(it.sku, (carrinho.get(it.sku) || 0) + it.quantidade);
-    }
-    confirmacao = null;
-    desenharCarrinho();
-    toast(`Carrinho montado com os itens do pedido ${ultimo.id}.`);
-    cartBox.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
-  }
-
-  // ---------- Topo da loja ----------
-  function hero(cli) {
+  function desenha() {
+    const cli = clientes.find((c) => c.id === escolhido[setorId]) || clientes[0];
     const rep = (d.representantes || []).find((r) => r.id === cli.representante);
-    const ultimo = pedidosDe(cli.id)[0];
-    const btnRepetir = on(
-      h('button', { type: 'button', class: 'pt-btn pt-btn-primario' }, icon('box'), 'Repetir último pedido'),
-      'click', repetirUltimo,
-    );
-    if (!ultimo) btnRepetir.disabled = true;
+    const meus = pedidosDe(cli.id);
+    const ultimo = meus[0];
+    const nomeCli = curto(cli.nome);
+    const aviso = (portal.avisos || [])[0];
 
-    return h('section', { class: 'pt-hero', 'aria-labelledby': 'pt-hero-titulo' },
-      h('div', { class: 'pt-hero-marca' },
-        h('span', { class: 'pt-hero-loja' }, ctx.empresa),
-        h('span', { class: 'pt-hero-sep', 'aria-hidden': 'true' }, '·'),
-        h('span', {}, portal.titulo || 'Portal do cliente'),
-      ),
-      h('h2', { id: 'pt-hero-titulo', class: 'pt-hero-titulo' }, `Olá, ${cli.nome}`),
-      portal.boas_vindas ? h('p', { class: 'pt-hero-texto' }, portal.boas_vindas) : null,
-      h('dl', { class: 'pt-conta' },
-        h('div', {}, h('dt', {}, 'Sua tabela'), h('dd', {}, cli.tabela_preco || '—')),
-        h('div', {}, h('dt', {}, 'Pagamento'), h('dd', {}, cli.condicao_pagamento || '—')),
-        h('div', {}, h('dt', {}, 'Limite de crédito'), h('dd', { class: 'pt-num' }, fmt.money(cli.limite_credito))),
-        h('div', {}, h('dt', {}, `Seu ${ctx.term('representante')}`),
-          h('dd', {}, rep ? `${rep.nome} · ${rep.telefone}` : '—')),
-      ),
-      h('div', { class: 'pt-hero-acoes' },
-        btnRepetir,
-        ultimo ? h('span', { class: 'pt-muted' }, `Último pedido: ${ultimo.id}, ${fmt.date(ultimo.data)}`) : null,
-      ),
-    );
-  }
-
-  function avisos() {
-    const lista = portal.avisos || [];
-    if (!lista.length) return null;
-    return h('section', { class: 'pt-avisos', 'aria-label': 'Avisos' },
-      ...lista.map((a) => h('div', { class: 'pt-aviso' },
-        h('span', { class: 'pt-aviso-icone', 'aria-hidden': 'true' }, icon('alert')),
-        h('div', {}, h('strong', {}, a.titulo), h('p', {}, a.texto)),
-      )),
-    );
-  }
-
-  // ---------- Meus pedidos ----------
-  function linhaDoTempo(ped) {
-    const atual = ETAPA_DO_STATUS[ped.status] ?? 0;
-    const atrasado = ped.status === 'atrasado';
-    return h('ol', { class: 'pt-tempo', 'aria-label': `Andamento do pedido ${ped.id}` },
-      ...ETAPAS.map((e, i) => {
-        const estado = i < atual || (i === atual && ped.status === 'entregue')
-          ? 'feito'
-          : i === atual ? (atrasado ? 'atrasado' : 'atual') : 'futuro';
-        const sr = { feito: 'concluído', atual: 'etapa atual', atrasado: 'etapa atual, atrasado', futuro: 'pendente' }[estado];
-        return h('li', { class: `pt-etapa pt-etapa-${estado}`, 'aria-current': i === atual ? 'step' : null },
-          h('span', { class: 'pt-etapa-marca', 'aria-hidden': 'true' },
-            estado === 'feito' ? icon('check') : estado === 'atrasado' ? icon('alert') : null),
-          h('span', { class: 'pt-etapa-nome' }, e.label),
-          h('span', { class: 'pt-sr' }, `: ${sr}`),
-        );
-      }),
-    );
-  }
-
-  function cartaoPedido(ped) {
-    const total = (ped.itens || []).reduce((s, it) => s + it.quantidade * it.preco_unit, 0);
-    const ordem = (d.ordens || []).find((o) => o.id === ped.ordem);
-    const atrasado = ped.status === 'atrasado';
-    const itens = (ped.itens || []).map((it) => {
-      const p = porSku.get(it.sku);
-      return h('li', {}, h('span', {}, p ? p.nome : it.sku),
-        h('span', { class: 'pt-num pt-muted' }, `${fmt.num(it.quantidade)} ${p?.unidade || ''}`.trim()));
+    // Repetir último pedido: confirmação inline, sem carrinho
+    const confirma = h('p', { class: 'pt-confirm', role: 'status', hidden: true });
+    const repetir = ui.button('Repetir último pedido', {
+      variant: 'primary', icone: 'refresh', disabled: !ultimo,
+      onClick: () => {
+        confirma.hidden = false;
+        confirma.textContent = 'Pedido de recompra criado como rascunho. O representante confirma o prazo.';
+        repetir.disabled = true;
+      },
     });
-    const abrir = on(h('button', { type: 'button', class: 'pt-link' }, ped.id), 'click', () => ctx.openRef(`pedido:${ped.id}`));
-    return h('article', { class: `pt-pedido${atrasado ? ' pt-pedido-atrasado' : ''}` },
-      h('header', { class: 'pt-pedido-topo' },
-        h('div', {}, h('h4', { class: 'pt-pedido-id' }, abrir),
-          h('span', { class: 'pt-muted' }, `Feito em ${fmt.date(ped.data)}`)),
-        h('div', { class: 'pt-pedido-total' }, h('span', { class: 'pt-muted' }, 'Total'),
-          h('strong', { class: 'pt-num' }, fmt.money(total))),
-      ),
-      linhaDoTempo(ped),
-      atrasado
-        ? h('p', { class: 'pt-atraso', role: 'status' },
-            h('strong', {}, 'Atrasado. '),
-            `Nova previsão de entrega: ${fmt.date(ped.previsao_entrega)}.`,
-            ordem?.motivo_atraso ? ` Motivo: ${ordem.motivo_atraso}` : '')
-        : ped.status !== 'entregue' && ped.previsao_entrega
-          ? h('p', { class: 'pt-muted' }, `Previsão de entrega: ${fmt.date(ped.previsao_entrega)} (${fmt.rel(ped.previsao_entrega, ctx.today)})`)
-          : null,
-      h('ul', { class: 'pt-pedido-itens' }, ...itens),
-      ped.observacao ? h('p', { class: 'pt-muted' }, ped.observacao) : null,
-    );
-  }
 
-  function meusPedidos(cli) {
-    const lista = pedidosDe(cli.id);
-    const abertos = lista.filter((p) => p.status !== 'entregue');
-    const entregues = lista.filter((p) => p.status === 'entregue');
-    return h('section', { class: 'pt-card', 'aria-labelledby': 'pt-pedidos-titulo' },
-      h('div', { class: 'pt-card-topo' },
-        h('h3', { id: 'pt-pedidos-titulo' }, 'Meus pedidos'),
-        h('span', { class: 'pt-muted' }, `${abertos.length} em aberto · ${entregues.length} entregue(s)`),
-      ),
-      lista.length
-        ? h('div', { class: 'pt-pedidos' }, ...abertos.concat(entregues).map(cartaoPedido))
-        : emptyState('Nenhum pedido registrado para esta conta.'),
-    );
-  }
+    const linhaPedido = (p) => h('li', null, h('button', {
+      type: 'button', class: 'pt-ped', onClick: () => ctx.openRef?.(`pedido:${p.id}`),
+    },
+    h('strong', { class: 'ar-id' }, p.id),
+    statusBadge(p.status),
+    h('span', { class: `pt-ped__prev num${p.status === 'atrasado' ? ' ar-late' : ''}` },
+      ['entregue', 'faturado'].includes(p.status) ? f.date(p.data) : `previsão ${f.date(p.previsao_entrega)}`)));
 
-  // ---------- Catálogo ----------
-  function cartaoProduto(p, destaque) {
-    const disp = disponibilidade(p);
-    const qtdId = `pt-qtd-${p.sku}`;
-    const qtd = h('input', { id: qtdId, class: 'pt-qtd', type: 'number', min: '1', step: '1', inputmode: 'numeric' });
-    qtd.value = String(Math.max(1, Math.round((p.estoque_minimo || 100) / 10 / 10) * 10 || 10));
-    const add = on(h('button', { type: 'button', class: 'pt-btn' }, icon('box'), 'Adicionar'), 'click', () => {
-      const n = Math.max(1, Math.round(Number(qtd.value) || 0));
-      adicionar(p.sku, n);
-      toast(`${fmt.num(n)} × ${p.nome} no carrinho.`);
-    });
-    const nome = on(h('button', { type: 'button', class: 'pt-link pt-produto-nome' }, p.nome), 'click', () => ctx.openRef(`sku:${p.sku}`));
-    return h('article', { class: `pt-produto${destaque ? ' pt-produto-destaque' : ''}` },
-      destaque ? h('span', { class: 'pt-selo' }, icon('sparkles'), 'Destaque') : null,
-      h('span', { class: 'pt-muted pt-sku' }, `${p.sku} · ${p.familia || ''}`),
-      h('h4', {}, nome),
-      p.descricao_comercial && destaque ? h('p', { class: 'pt-produto-desc' }, p.descricao_comercial) : null,
-      h('div', { class: 'pt-preco' },
-        h('strong', { class: 'pt-num' }, fmt.money(p.preco)),
-        h('span', { class: 'pt-muted' }, ` por ${singular(p.unidade)}`)),
-      h('div', { class: 'pt-disp' },
-        badge(disp.texto, disp.ok ? 'ok' : 'warn'),
-        h('span', { class: 'pt-muted' }, disp.ok ? disp.detalhe : `Prazo de produção: ${p.prazo_dias} dias`)),
-      h('div', { class: 'pt-add' },
-        h('label', { for: qtdId, class: 'pt-sr' }, `Quantidade de ${p.nome}`),
-        qtd, add),
-    );
-  }
-
-  function desenharCatalogo() {
-    const q = normalize(busca);
     const destaques = new Set(portal.destaques || []);
-    const lista = produtos
-      .filter((p) => !familia || p.familia === familia)
-      .filter((p) => !q || normalize(`${p.nome} ${p.sku} ${p.familia}`).includes(q))
-      .sort((a, b) => Number(destaques.has(b.sku)) - Number(destaques.has(a.sku)));
-    catalogoLista.replaceChildren(
-      ...(lista.length ? lista.map((p) => cartaoProduto(p, destaques.has(p.sku))) : [emptyState('Nada encontrado com esse filtro.')]),
-    );
+    const catalogo = [...produtos].sort((a, b) => Number(destaques.has(b.sku)) - Number(destaques.has(a.sku))).slice(0, 6);
+    const cartao = (p) => {
+      const pronta = p.estoque >= p.estoque_minimo && p.estoque > 0;
+      return h('button', { type: 'button', class: 'pt-prod', onClick: () => ctx.openRef?.(`sku:${p.sku}`) },
+        h('span', { class: 'pt-prod__sku' }, p.sku),
+        h('span', { class: 'pt-prod__nome' }, p.nome),
+        h('span', { class: 'pt-prod__preco num' }, f.money(p.preco), h('span', { class: 'pt-prod__un' }, ` / ${singular(p.unidade)}`)),
+        pronta ? tag('Pronta entrega', 'ok') : h('span', { class: 'pt-prod__prazo' }, `Prazo ${p.prazo_dias} dias`));
+    };
+
+    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas)
+    const sugestoes = [
+      ...(d.perguntas_sugeridas || []).filter((p) => p.modulo === 'portal').map((p) => p.pergunta),
+      ultimo ? `Quando chega o meu pedido ${ultimo.id}?` : null,
+    ].filter(Boolean).slice(0, 3);
+    const comCliente = (t) => (t.toLowerCase().includes(nomeCli.toLowerCase()) ? t : `${t} (sou ${tCli} ${nomeCli})`);
+    const podePerguntar = typeof ctx.perguntar === 'function';
+    const enviar = (t) => {
+      const q = String(t || '').trim();
+      if (q && podePerguntar) ctx.perguntar(comCliente(q), { modulo: 'portal', painel: true });
+    };
+    const campo = h('input', { type: 'text', class: 'pt-ask__input', placeholder: 'Quando chega meu pedido?', 'aria-label': 'Pergunte ao portal', autocomplete: 'off' });
+    const pergunte = podePerguntar ? h('section', { class: 'pt-ask', 'aria-label': 'Pergunte' },
+      h('h3', { class: 'pt-h3' }, 'Pergunte'),
+      h('form', { class: 'pt-ask__form', onSubmit: (e) => { e.preventDefault(); enviar(campo.value); campo.value = ''; } },
+        campo, h('button', { type: 'submit', class: 'pt-ask__send', 'aria-label': 'Enviar pergunta' }, ui.icon('arrow-up', { size: 18 }))),
+      h('div', { class: 'pt-ask__sug' }, sugestoes.map((s) => h('button', { type: 'button', class: 'ar-assist__chip', title: s, onClick: () => enviar(s) }, s)))) : null;
+
+    const janela = h('div', { class: 'pt-window' },
+      h('div', { class: 'pt-window__bar', 'aria-hidden': 'true' },
+        h('span', { class: 'pt-window__dots' }, h('i'), h('i'), h('i')),
+        h('span', { class: 'pt-window__url' }, `portal.${slug(empresa)}.com.br`)),
+      h('p', { class: 'pt-window__mlabel' }, `Visão do ${tCli}`),
+      h('div', { class: 'pt-app' },
+        h('p', { class: 'pt-app__brand' }, `${empresa} · ${portal.titulo || 'Portal do cliente'}`),
+        h('h2', { class: 'pt-app__hello' }, `Olá, ${nomeCli}`),
+        h('p', { class: 'pt-app__cond' }, [cli.tabela_preco, cli.condicao_pagamento, rep ? `${cap(T(ctx, 'representante'))}: ${rep.nome}` : null].filter(Boolean).join(' · ')),
+        aviso ? h('p', { class: 'pt-aviso' }, h('strong', null, `${aviso.titulo}: `), aviso.texto) : null,
+        h('div', { class: 'pt-repetir' }, repetir,
+          ultimo ? h('span', { class: 'pt-muted' }, `Último: ${ultimo.id}, ${f.date(ultimo.data)}`) : null),
+        confirma,
+        h('div', { class: 'pt-cols' },
+          h('section', { class: 'pt-pedidos', 'aria-label': 'Seus pedidos' },
+            h('h3', { class: 'pt-h3' }, 'Seus pedidos'),
+            meus.length ? h('ul', { class: 'pt-peds' }, meus.slice(0, 5).map(linhaPedido)) : h('p', { class: 'pt-muted' }, 'Nenhum pedido ainda.')),
+          pergunte),
+        h('section', { class: 'pt-catalogo', 'aria-label': 'Catálogo' },
+          h('h3', { class: 'pt-h3' }, `Catálogo (${catalogo.length})`),
+          h('p', { class: 'pt-muted' }, `Preços da ${cli.tabela_preco || 'sua tabela'}, sem impostos.`),
+          h('div', { class: 'pt-prods' }, catalogo.map(cartao)))));
+
+    host.replaceChildren(janela,
+      areaAssistant(ctx, { modulo: 'portal', nome: 'pedidos e catálogo', sugestoes, prefixo: comCliente }));
+    const bar = host.querySelector('.ar-assist');
+    if (bar) bar.classList.add('pt-assist-m');
   }
 
-  function catalogo(cli) {
-    const familias = [...new Set(produtos.map((p) => p.familia).filter(Boolean))];
-    const filtros = h('div', { class: 'pt-filtros' },
-      searchInput({ id: 'pt-busca', placeholder: `Buscar ${tProdutos} por nome ou código`, onInput: (v) => { busca = valorDe(v) || ''; desenharCatalogo(); } }),
-      familias.length > 1
-        ? select({
-            id: 'pt-familia', label: 'Família',
-            options: [{ value: '', label: 'Todas' }, ...familias.map((f) => ({ value: f, label: f }))],
-            value: familia,
-            onChange: (v) => { familia = valorDe(v) || ''; desenharCatalogo(); },
-          })
-        : null,
-    );
-    desenharCatalogo();
-    return h('section', { class: 'pt-card', 'aria-labelledby': 'pt-cat-titulo' },
-      h('div', { class: 'pt-card-topo' },
-        h('h3', { id: 'pt-cat-titulo' }, `Catálogo de ${tProdutos}`),
-        h('span', { class: 'pt-muted' }, `Preços da ${cli.tabela_preco || 'sua tabela'}, sem impostos`),
-      ),
-      filtros,
-      catalogoLista,
-    );
-  }
-
-  // ---------- Carrinho ----------
-  function desenharCarrinho() {
-    const cli = clienteAtual();
-    const linhas = [...carrinho.entries()].map(([sku, qtd]) => ({ p: porSku.get(sku), sku, qtd, preco: precoDe(sku) }));
-    const total = linhas.reduce((s, l) => s + l.qtd * l.preco, 0);
-    const titulo = h('h3', { id: 'pt-carrinho-titulo' }, 'Carrinho');
-    const nota = h('p', { class: 'pt-muted pt-pequeno' }, 'Só nesta tela: some ao trocar de conta ou sair.');
-
-    if (confirmacao) {
-      const limpar = on(h('button', { type: 'button', class: 'pt-btn' }, 'Montar outro pedido'), 'click', () => {
-        carrinho.clear(); confirmacao = null; desenharCarrinho();
-      });
-      cartBox.replaceChildren(titulo,
-        h('div', { class: 'pt-confirmacao', role: 'status' },
-          h('span', { class: 'pt-confirmacao-icone', 'aria-hidden': 'true' }, icon('check')),
-          h('div', {},
-            h('strong', {}, 'Pedido de demonstração montado'),
-            h('p', {}, `${confirmacao.itens} item(ns), total ${fmt.money(confirmacao.total)}. Nada foi enviado: esta é uma demonstração.`),
-            h('p', { class: 'pt-muted' }, `Num portal real, o pedido entraria no ERP da ${ctx.empresa} para análise do comercial, e o ${ctx.term('representante')} seria avisado.`),
-          ),
-        ),
-        limpar,
-      );
-      return;
-    }
-
-    if (!linhas.length) {
-      const btn = on(h('button', { type: 'button', class: 'pt-btn' }, 'Repetir último pedido'), 'click', repetirUltimo);
-      if (!pedidosDe(cli.id).length) btn.disabled = true;
-      cartBox.replaceChildren(titulo, emptyState(`Carrinho vazio. Adicione ${tProdutos} do catálogo ou repita o último pedido.`), btn, nota);
-      return;
-    }
-
-    const itens = h('ul', { class: 'pt-carrinho-itens' }, ...linhas.map((l) => {
-      const id = `pt-cq-${l.sku}`;
-      const inp = h('input', { id, class: 'pt-qtd', type: 'number', min: '1', step: '1', inputmode: 'numeric' });
-      inp.value = String(l.qtd);
-      on(inp, 'change', () => {
-        const n = Math.max(1, Math.round(Number(inp.value) || 1));
-        carrinho.set(l.sku, n);
-        desenharCarrinho();
-      });
-      const rem = on(h('button', { type: 'button', class: 'pt-icone-btn', 'aria-label': `Remover ${l.p?.nome || l.sku}` }, icon('x')), 'click', () => {
-        carrinho.delete(l.sku); desenharCarrinho();
-      });
-      return h('li', { class: 'pt-carrinho-item' },
-        h('div', { class: 'pt-carrinho-nome' },
-          h('span', {}, l.p?.nome || l.sku),
-          h('span', { class: 'pt-muted pt-num' }, `${fmt.money(l.preco)} × ${fmt.num(l.qtd)} = ${fmt.money(l.preco * l.qtd)}`)),
-        h('div', { class: 'pt-carrinho-ctrl' },
-          h('label', { for: id, class: 'pt-sr' }, `Quantidade de ${l.p?.nome || l.sku}`), inp, rem),
-      );
-    }));
-
-    const sobEncomenda = linhas.filter((l) => l.p && !disponibilidade(l.p).ok);
-    const prazoMax = sobEncomenda.reduce((m, l) => Math.max(m, l.p.prazo_dias || 0), 0);
-    const limite = cli.limite_credito;
-    const acimaLimite = typeof limite === 'number' && total > limite;
-
-    const enviar = on(h('button', { type: 'button', class: 'pt-btn pt-btn-primario pt-btn-largo' }, icon('send'), 'Enviar pedido'), 'click', () => {
-      confirmacao = { itens: linhas.length, total };
-      desenharCarrinho();
-      toast('Demonstração: nenhum pedido foi enviado.');
-    });
-
-    cartBox.replaceChildren(titulo, itens,
-      h('div', { class: 'pt-total' }, h('span', {}, 'Total'), h('strong', { class: 'pt-num' }, fmt.money(total))),
-      h('p', { class: 'pt-muted pt-pequeno' }, `Pagamento ${cli.condicao_pagamento || 'a combinar'} · ${cli.tabela_preco || ''}`),
-      sobEncomenda.length
-        ? h('p', { class: 'pt-alerta-warn' }, `${sobEncomenda.length} item(ns) sob encomenda: entrega em até ${prazoMax} dias.`)
-        : null,
-      acimaLimite
-        ? h('p', { class: 'pt-alerta-danger' }, `Total acima do seu limite de crédito (${fmt.money(limite)}): o pedido iria para aprovação.`)
-        : null,
-      enviar,
-      nota,
-    );
-  }
-
-  // ---------- Montagem ----------
-  function desenharLoja() {
-    const cli = clienteAtual();
-    busca = '';
-    familia = '';
-    desenharCarrinho();
-    let chat = null;
-    try {
-      chat = chatPanel({
-        ctx,
-        modulo: 'portal',
-        titulo: `Assistente do ${tCliente}`,
-        placeholder: 'Pergunte sobre prazo, estoque ou seus pedidos',
-      });
-    } catch (err) {
-      console.error('portal: chatPanel indisponível', err);
-    }
-    loja.replaceChildren(
-      hero(cli),
-      avisos(),
-      h('div', { class: 'pt-layout' },
-        h('div', { class: 'pt-principal' }, meusPedidos(cli), catalogo(cli)),
-        h('aside', { class: 'pt-lateral', 'aria-label': 'Carrinho e assistente' },
-          cartBox,
-          chat ? h('div', { class: 'pt-chat' }, chat) : null,
-        ),
-      ),
-    );
-  }
-
-  desenharLoja();
-}
-
-function singular(unidade) {
-  const u = String(unidade || 'unidade');
-  const mapa = { 'peças': 'peça', 'unidades': 'unidade', 'caixas': 'caixa', 'metros': 'metro', 'rolos': 'rolo', 'fardos': 'fardo', 'conjuntos': 'conjunto', 'jogos': 'jogo' };
-  return mapa[u] || u;
+  desenha();
+  el.replaceChildren(h('div', { class: 'ar-page pt-page' },
+    h('header', { class: 'ar-head' },
+      h('div', { class: 'ar-head__text' },
+        h('h1', { class: 'ar-title' }, 'Portal do cliente'),
+        h('p', { class: 'ar-sub' }, `Software sob medida: o que cada ${tCli} vê, ligado ao mesmo ERP.`)),
+      h('label', { class: 'pt-vercomo' }, h('span', null, 'Ver como'), seletor)),
+    host));
+  return undefined;
 }

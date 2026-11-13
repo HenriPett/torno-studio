@@ -91,7 +91,30 @@ export const REF_TYPES = {
   kpi: { nome: 'Indicador', modulo: 'visao-geral' },
   saber: { nome: 'Saber de operador', modulo: 'operadores' },
   integ: { nome: 'Integração', modulo: 'integracoes' },
+  // o que a equipe registrou nesta demo (aprendizado): sempre visível, não depende de módulo
+  aprendizado: { nome: 'Registro da equipe', modulo: 'visao-geral' },
 };
+
+// Fonte dos itens do aprendizado no cliente. learning.js registra a store aqui ao ser criada, para que
+// resolveRef(data, 'aprendizado:<id>', isEnabled) funcione mesmo quando quem chama não passa a lista.
+let fonteAprendizado = null;
+/** `fn()` → [{id, tipo, titulo, texto, area, maquina, autor, criado_em}] (ou uma store com list()). */
+export function setAprendizadoSource(fn) {
+  fonteAprendizado = fn;
+}
+
+function itensAprendizado(aprendizado) {
+  const src = aprendizado ?? fonteAprendizado;
+  try {
+    if (Array.isArray(src)) return src;
+    if (typeof src === 'function') return src() || [];
+    if (src && typeof src.list === 'function') return src.list() || [];
+    if (src && Array.isArray(src.aprendizado)) return src.aprendizado;
+  } catch {
+    /* sem aprendizado */
+  }
+  return [];
+}
 
 // Área do documento → módulo que também pode exibi-lo quando o Cérebro está desligado.
 const AREA_TO_MODULE = {
@@ -126,11 +149,21 @@ const short = (t, n = 56) => {
  * Resolve "tipo:id" → { ref, tipo, tipoNome, id, rotulo, detalhe, modulo } ou null
  * (ref inválida, registro inexistente ou módulo dono desligado).
  * `isEnabled(moduloId)` é opcional; sem ela tudo conta como ligado.
+ * `aprendizado` (opcional): lista/store dos registros da demo, para refs `aprendizado:<id>`
+ * (sem ela, usa a fonte registrada por setAprendizadoSource, isto é, ctx.learning).
  */
-export function resolveRef(data, ref, isEnabled = () => true) {
-  if (!data) return null;
+export function resolveRef(data, ref, isEnabled = () => true, aprendizado) {
   const p = parseRef(ref);
   if (!p) return null;
+  if (p.tipo === 'aprendizado') {
+    const item = itensAprendizado(aprendizado).find((x) => x && String(x.id) === p.id);
+    if (!item) return null;
+    return {
+      ref, tipo: 'aprendizado', tipoNome: REF_TYPES.aprendizado.nome, id: p.id,
+      rotulo: item.titulo || short(item.texto, 60), detalhe: item, modulo: 'visao-geral',
+    };
+  }
+  if (!data) return null;
   const on = (m) => {
     try {
       return !!isEnabled(m);

@@ -1,130 +1,130 @@
-// createAssistant(getCtx): o assistente que as telas usam (ctx.assistant, PLANO §5.4).
-// Tenta a IA real (capacidade `sample` via SampleProvider) e cai no motor determinístico
-// (local-engine.js) em qualquer falha, com um aviso curto. getCtx() devolve o ctx atual
-// (o setor pode mudar entre chamadas), então nada aqui guarda o pacote de dados.
+// createAssistant(getCtx): cliente fino da conversa (PLANO-V2 §5–§6). A IA e as ferramentas rodam no
+// servidor; aqui só há o envio (ctx.api.conversa, SSE) com o laço `continuar`, as sugestões e a busca
+// local (motor determinístico, incluindo o que a equipe registrou nesta demo).
+//
+//   perguntar({mensagens, modulo, perfil, autor, onTexto, onFerramenta, onAprendizado, signal})
+//     → Promise<{texto, fontes, modo, aviso}>     (texto com marcadores [[tipo:id]])
+//     onTexto(delta, acumulado, {reinicio?}) · onFerramenta({nome, rotulo}) · onAprendizado(item)
+//     Erros: {status, mensagem, abortado?, texto?} (ApiError de api.js).
+//   sugestoes(modulo, n) · buscar(termo, {perfil, limite})
 
-import { SampleProvider } from "../adapters/ai-provider.js";
-import { buildTools, refsDoResultado } from "./tools.js";
-import * as local from "./local-engine.js";
+import * as local from './local-engine.js';
 
-const HOJE = "2026-11-13";
-const AVISO_LOCAL = "Respondido pelo roteiro local: a IA não está disponível para esta visita.";
+const MAX_RODADAS = 5;
 
-/** Monta as instruções (primeiro turno user; não há system prompt na capacidade sample). */
-function instrucoes(ctx, { modulo, perfil } = {}) {
-  const empresa = ctx.empresa ?? ctx.data?.empresa?.nome ?? "a empresa";
-  const setor = ctx.sector?.nome ?? ctx.data?.setor ?? "";
-  const ativos = (ctx.features ?? []).map((f) => f.nome ?? f.id).filter(Boolean);
-  const areas = local.perfilAreas(ctx, perfil);
-  const perfilNome = perfil && typeof perfil === "object" ? perfil.nome : (ctx.data?.perfis_acesso ?? []).find((p) => p.id === perfil)?.nome;
-  return [
-    `Você é o assistente de IA da ${empresa}${setor ? `, uma indústria do setor ${setor}` : ""}. Dados fictícios de demonstração.`,
-    "Responda em português do Brasil, de forma curta e direta (até ~120 palavras), com o vocabulário do setor.",
-    "Use SOMENTE as ferramentas disponíveis para obter fatos; não invente números, nomes, prazos nem documentos.",
-    "Cite cada fato com a referência da fonte entre colchetes duplos, exatamente como a ferramenta devolveu no campo ref — ex.: [[op:OP-24518]], [[doc:DOC-PRO-012#t1]].",
-    "Se a resposta não estiver nos dados/ferramentas, diga que não encontrou nos dados desta demonstração e sugira o que perguntar. Não responda de conhecimento geral.",
-    "Números em formato pt-BR (1.234,5 · R$ 18,90 · 71,4%).",
-    ativos.length ? `Módulos ativos: ${ativos.join(", ")}.` : "",
-    modulo ? `Tela atual: ${modulo}.` : "",
-    perfilNome ? `Perfil de acesso do visitante: ${perfilNome} (áreas: ${(areas ?? []).join(", ") || "todas"}). Não revele dados fora dessas áreas.` : "",
-    `Hoje é ${ctx.today ?? HOJE}.`,
-  ].filter(Boolean).join("\n");
+/** SSE direto (mesmo contrato de api.conversa), para quando a casca não entrega ctx.api. */
+async function conversaDireta(id, payload, { onTexto, onFerramenta, onAprendizado, signal } = {}) {
+  const res = await fetch(`/api/demo/${encodeURIComponent(id)}/conversa`, {
+    method: 'POST', credentials: 'same-origin', signal,
+    headers: { 'content-type': 'application/json', accept: 'text/event-stream' },
+    body: JSON.stringify(payload),
+  }).catch((e) => { throw Object.assign(new Error('Sem conexão'), { status: 0, abortado: e?.name === 'AbortError' }); });
+  if (!res.ok) {
+    const j = await res.json().catch(() => ({}));
+    throw Object.assign(new Error(j.erro || `Erro ${res.status}`), { status: res.status, mensagem: j.erro });
+  }
+  const leitor = res.body.getReader();
+  const dec = new TextDecoder();
+  let buf = '';
+  let acumulado = '';
+  let fim = null;
+  let erro = null;
+  const evento = (bloco) => {
+    let nome = 'message';
+    const dados = [];
+    for (const l of bloco.split('\n')) {
+      if (l.startsWith('event:')) nome = l.slice(6).trim();
+      else if (l.startsWith('data:')) dados.push(l.slice(5).replace(/^ /, ''));
+    }
+    if (!dados.length) return;
+    let d;
+    try { d = JSON.parse(dados.join('\n')); } catch { return; }
+    if (nome === 'texto' && typeof d.delta === 'string') { acumulado += d.delta; onTexto?.(d.delta, acumulado); }
+    else if (nome === 'ferramenta') onFerramenta?.(d);
+    else if (nome === 'aprendizado' && d.item) onAprendizado?.(d.item);
+    else if (nome === 'fim') fim = d;
+    else if (nome === 'erro') erro = d;
+  };
+  for (;;) {
+    const { value, done } = await leitor.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true }).replace(/\r\n?/g, '\n');
+    let i;
+    while ((i = buf.indexOf('\n\n')) >= 0) { evento(buf.slice(0, i)); buf = buf.slice(i + 2); }
+  }
+  if (buf.trim()) evento(buf);
+  if (erro) throw Object.assign(new Error(erro.erro || 'Erro'), { status: Number(erro.status) || 500, mensagem: erro.erro, recuperavel: !!erro.recuperavel, texto: acumulado });
+  if (!fim) throw Object.assign(new Error('Resposta incompleta'), { status: 0, texto: acumulado });
+  return { ...fim, texto: fim.texto ?? acumulado };
 }
 
-const REF_RE = /\[\[\s*([a-z]+:[^\]]+?)\s*\]\]/gi;
+export function createAssistant(getCtx) {
+  const ctxAtual = () => (typeof getCtx === 'function' ? getCtx() : getCtx) || {};
 
-/** Extrai as refs citadas no texto, na ordem. */
-function refsCitadas(texto) {
-  const out = [];
-  let m;
-  REF_RE.lastIndex = 0;
-  while ((m = REF_RE.exec(texto))) { const r = m[1].trim(); if (!out.includes(r)) out.push(r); }
-  return out;
-}
+  /** ctx para o motor local, com o aprendizado da demo. */
+  const ctxMotor = () => {
+    const ctx = ctxAtual();
+    const aprendizado = ctx.learning?.list?.() ?? ctx.aprendizado ?? [];
+    return { ...ctx, aprendizado };
+  };
 
-/** Tira as marcações [[ref]] do texto mostrado (a fonte vira chip embaixo). */
-function limpaMarcacoes(texto) {
-  return String(texto ?? "").replace(REF_RE, "").replace(/\(\s*\)/g, "").replace(/[ \t]{2,}/g, " ").replace(/ +([,.;:!?])/g, "$1").trim();
-}
+  async function perguntar({ mensagens, modulo, perfil, autor, onTexto, onFerramenta, onAprendizado, signal } = {}) {
+    const ctx = ctxAtual();
+    const id = ctx.demo?.id ?? ctx.api?.demoId;
+    const conversa = typeof ctx.api?.conversa === 'function' ? ctx.api.conversa : conversaDireta;
+    const base = {};
+    if (modulo) base.modulo = modulo;
+    if (perfil) base.perfil = typeof perfil === 'object' ? perfil.id : perfil;
+    const nome = autor ?? (typeof ctx.autor === 'function' ? ctx.autor() : null);
+    if (nome && nome !== 'Você') base.autor = nome;
 
-export function createAssistant(getCtx, { provider } = {}) {
-  const prov = provider ?? new SampleProvider({ modelTier: "default" });
-  let preferencia = "ia";
-  let negado = false; // not_granted / sampling_disabled: sem IA pelo resto da visita
-  let disp = false; // capacidade sample detectada
-  const ouvintes = new Set();
+    let acumuladoAntes = ''; // texto das rodadas anteriores (só se a API devolver continuar ao cliente)
+    const handlers = {
+      signal,
+      onFerramenta,
+      onAprendizado,
+      onTexto: (delta, acumulado, extra) => {
+        const d = typeof delta === 'object' && delta ? delta.delta : delta;
+        const total = typeof acumulado === 'string' ? acumuladoAntes + acumulado : null;
+        onTexto?.(d ?? '', total, extra);
+      },
+    };
 
-  // Detecta a disponibilidade uma vez, sem chamar a IA.
-  Promise.resolve(prov.disponivel?.())
-    .then((v) => { disp = !!v; notifica(); })
-    .catch(() => { disp = false; notifica(); });
+    let r = await conversa(id, { ...base, mensagens }, handlers);
+    // api.js da casca já faz o laço `continuar`; este é só o cinto de segurança
+    for (let rodada = 1; r?.continuar && r.estado && rodada < MAX_RODADAS; rodada++) {
+      acumuladoAntes = r.texto ?? acumuladoAntes;
+      r = await conversa(id, { ...base, estado: r.estado }, handlers);
+    }
+    return {
+      texto: String(r?.texto ?? ''),
+      fontes: Array.isArray(r?.fontes) ? r.fontes : [],
+      modo: r?.modo ?? 'ia',
+      aviso: r?.aviso ?? null,
+    };
+  }
 
-  function notifica() { for (const cb of ouvintes) { try { cb(modo()); } catch {} } }
-  function modo() { return disp && !negado && preferencia === "ia" ? "ia" : "local"; }
-
-  function responderLocal(pergunta, opts, aviso) {
-    const ctx = getCtx();
-    const r = local.responder(ctx, pergunta, opts);
-    if (aviso) r.aviso = aviso;
-    if (typeof opts?.onText === "function" && !opts?.signal?.aborted) opts.onText(r.texto);
+  /** Compatibilidade com a v1 (ask devolve a resposta inteira; onText recebe o texto acumulado). */
+  async function ask(pergunta, { modulo, perfil, historico = [], onText, signal } = {}) {
+    let total = '';
+    const r = await perguntar({
+      mensagens: [...historico.slice(-10), { role: 'user', content: String(pergunta ?? '') }],
+      modulo, perfil, signal,
+      onTexto: (d, acum) => { total = acum ?? total + (d || ''); onText?.(total); },
+    });
     return r;
   }
 
-  async function ask(pergunta, opts = {}) {
-    const { modulo, perfil, historico = [], onText, signal } = opts;
-    const ctx = getCtx();
-    pergunta = String(pergunta ?? "").trim();
-    if (!pergunta) return { texto: "Escreva uma pergunta.", fontes: [], modo: "local" };
-
-    if (modo() !== "ia") return responderLocal(pergunta, { modulo, perfil, onText }, disp ? undefined : undefined);
-
-    const tools = buildTools(ctx, { perfil });
-    const usadas = new Set();
-    const toolsHook = tools.map((t) => ({
-      ...t,
-      execute: async (input) => {
-        const out = await t.execute(input);
-        for (const ref of refsDoResultado(out)) usadas.add(ref);
-        return out;
-      },
-    }));
-
-    let ultimoLimpo = "";
-    const onTextLimpo = onText ? (texto) => { ultimoLimpo = limpaMarcacoes(texto); onText(ultimoLimpo); } : undefined;
-
-    try {
-      const { texto } = await prov.responder({
-        instrucoes: instrucoes(ctx, { modulo, perfil }),
-        historico: historico.slice(-6),
-        pergunta,
-        tools: toolsHook,
-        onText: onTextLimpo,
-        signal,
-      });
-      const citadas = local.filtraRefs(ctx, refsCitadas(texto), 8);
-      const fontes = citadas.length ? citadas : local.filtraRefs(ctx, [...usadas], 6);
-      const limpo = limpaMarcacoes(texto);
-      if (onText && limpo !== ultimoLimpo && !signal?.aborted) onText(limpo);
-      return { texto: limpo, fontes, modo: "ia" };
-    } catch (e) {
-      const code = e?.code;
-      if (code === "cancelled") throw e;
-      if (code === "not_granted" || code === "sampling_disabled" || code === "not_declared" || code === "capability_disabled" || code === "tools_unavailable") {
-        negado = true; notifica();
-      }
-      const aviso = code === "rate_limited"
-        ? "Limite de uso da IA atingido nesta visita; respondendo pelo roteiro local."
-        : AVISO_LOCAL;
-      return responderLocal(pergunta, { modulo, perfil, onText }, aviso);
-    }
-  }
-
   return {
+    perguntar,
     ask,
-    sugestoes: (modulo) => local.sugestoes(getCtx(), modulo, 4),
-    buscar: (termo, o = {}) => local.buscar(getCtx(), termo, o),
-    modo,
-    setPreferencia: (p) => { if (p === "ia" || p === "local") { preferencia = p; notifica(); } },
-    onModeChange: (cb) => { if (typeof cb === "function") { ouvintes.add(cb); cb(modo()); return () => ouvintes.delete(cb); } return () => {}; },
+    sugestoes: (modulo, n = 4) => local.sugestoes(ctxMotor(), modulo, n),
+    buscar: (termo, o = {}) => local.buscar(ctxMotor(), termo, o),
+    responderLocal: (pergunta, o = {}) => local.responder(ctxMotor(), pergunta, o),
+    modo: () => (ctxAtual().ia?.disponivel ? 'ia' : 'local'),
+    setPreferencia: () => {},
+    onModeChange: (cb) => { try { cb?.(ctxAtual().ia?.disponivel ? 'ia' : 'local'); } catch { /* ok */ } return () => {}; },
   };
 }
+
+export default createAssistant;
