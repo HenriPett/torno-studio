@@ -105,3 +105,13 @@ Admin (cookie `ta`, 8 h):
 
 Menos coisas de uma vez; o cérebro no centro; um caminho claro para o "uau": perguntar → resposta com
 fonte → ensinar algo → perguntar de novo e ver a resposta usando o que foi ensinado.
+
+## 8. Regras para o front (demo/web)
+
+- `index.html` agora é um documento completo (`<!doctype html>`, `<meta name="robots" content="noindex, nofollow">`)
+  e é servido nas URLs `/demo/<id>` e `/admin`: **todo caminho de asset é absoluto** (`/demo-app/styles.css`,
+  `/demo-app/src/app.js`, `/demo-app/inter.woff2`); imports ES internos continuam relativos entre módulos.
+- O modo vem de `location.pathname`: `/admin` → painel; `/demo/<id>` → senha e depois a demo. Rotas internas
+  da demo no hash (`#producao`), como na v1.
+- Sem Google Fonts nem CDN (CSP `default-src 'self'`): fonte `@font-face` de `/demo-app/inter.woff2`.
+- Nada de `window.claude`: config e dados vêm de `GET /api/demo/<id>/estado`; o admin do Artifact sai.
