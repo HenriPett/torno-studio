@@ -150,15 +150,16 @@ function tileKpi(ctx, k) {
 function cartaoHoje(ctx, c) {
   const abrir = () => ctx.openRef?.(c.ref);
   return h('article', {
-    class: 'ini-hoje', tabIndex: 0, role: 'button', 'aria-label': `${c.area}: ${c.titulo}. ${c.texto}`,
+    // o cartão inteiro abre ao clicar (atalho de mouse); no teclado e no leitor de tela, os botões
+    // "Ver" e "Perguntar" dentro dele (um role=button com botões dentro é interativo aninhado).
+    class: 'ini-hoje',
     onClick: (e) => { if (!e.target.closest('button')) abrir(); },
-    onKeydown: (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); abrir(); } },
   },
   h('span', { class: 'ini-hoje__area' }, h('span', { class: ['ini-ponto', `is-${c.tom}`], 'aria-hidden': 'true' }), c.area),
   h('h3', { class: 'ini-hoje__titulo' }, c.titulo),
   h('p', { class: 'ini-hoje__texto' }, c.texto),
   h('span', { class: 'ini-hoje__acoes' },
-    h('button', { type: 'button', class: 'link-btn', onClick: abrir }, 'Ver ›'),
+    h('button', { type: 'button', class: 'link-btn', onClick: abrir, 'aria-label': `Ver: ${c.titulo}` }, 'Ver ›'),
     h('button', { type: 'button', class: 'link-btn link-btn--muted', onClick: () => ctx.perguntar?.(c.pergunta, { modulo: c.modulo }) }, 'Perguntar')));
 }
 

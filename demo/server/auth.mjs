@@ -67,7 +67,8 @@ export function leCookies(request) {
     const i = parte.indexOf('=');
     if (i < 0) continue;
     const k = parte.slice(0, i).trim();
-    if (k && !(k in out)) out[k] = decodeURIComponent(parte.slice(i + 1).trim());
+    if (!k || k in out) continue;
+    try { out[k] = decodeURIComponent(parte.slice(i + 1).trim()); } catch { /* cookie malformado: ignora */ }
   }
   return out;
 }

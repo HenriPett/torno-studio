@@ -67,7 +67,7 @@
   border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-lg);
 }
 .cv--painel .cv__form { box-shadow: var(--shadow-md); }
-.cv__form:focus-within { border-color: var(--border-strong); }
+.cv__form:focus-within { border-color: var(--focus); box-shadow: var(--shadow-lg), 0 0 0 3px color-mix(in srgb, var(--focus) 25%, transparent); }
 .cv__campo {
   flex: 1 1 auto; min-width: 0; resize: none; border: 0; outline: none; background: transparent; color: var(--text);
   font: inherit; font-size: 16px; line-height: 1.5; padding: 7px 0; max-height: 160px;

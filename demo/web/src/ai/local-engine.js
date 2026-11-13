@@ -749,8 +749,9 @@ export function perguntaDerivada(item, ctx) {
     return `O que preciso saber antes de programar ${art} ${item.maquina}?`;
   }
   if (item.tipo === "ocorrencia") return `O que aconteceu ${AREA_LOCAL[item.area] ?? "na operação"} hoje?`;
-  if (item.tipo === "documento") return `Qual é a regra para ${inicioTitulo(item.titulo)}?`;
-  return `O que a equipe sabe sobre ${inicioTitulo(item.titulo)}?`;
+  // entre aspas: o título costuma ser uma frase ("o forno 2 só aquece direito"), não um substantivo
+  if (item.tipo === "documento") return `Qual é a regra para “${inicioTitulo(item.titulo)}”?`;
+  return `O que a equipe sabe sobre “${inicioTitulo(item.titulo)}”?`;
 }
 
 const palavras4 = (s) => [...new Set(tokens(s).filter((t) => t.length >= 4 && !/\d/.test(t)))];
@@ -864,7 +865,7 @@ export function responder(ctx, pergunta, { modulo, perfil } = {}) {
   // mesmo formato do servidor (demo/server/local.mjs): título em negrito, autor e data, texto citado
   // (quando o título é só o começo do texto, não repete: vai o texto inteiro com o autor em negrito)
   const blocos = apr.map((a) => {
-    const quem = `Registrado nesta demo por ${a.autor || "Você"}${a.criado_em ? ` em ${f.data(String(a.criado_em).slice(0, 10))}` : ""}`;
+    const quem = `Registrado nesta demo por ${!a.autor || a.autor === "Você" ? "você" : a.autor}${a.criado_em ? ` em ${f.data(String(a.criado_em).slice(0, 10))}` : ""}`;
     const texto = frase(corta(a.texto, 600));
     const titulo = semPonto(a.titulo);
     if (!titulo || norm(a.texto).startsWith(norm(titulo).replace(/…$/, ""))) return `**${quem}:** ${texto} [[aprendizado:${a.id}]]`;

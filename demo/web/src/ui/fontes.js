@@ -112,7 +112,8 @@ export function cartaoFonte(ctx, ref, n, { realce = false } = {}) {
   const r = resolve(ctx, ref);
   if (!r) return null;
   if (r.tipo === 'aprendizado') return cartaoAprendido(r.detalhe, { ctx, n, realce });
-  const sistema = sistemaDaRef(r, ctx);
+  const sist = sistemaDaRef(r, ctx);
+  const sistema = sist && sist !== r.tipoNome ? sist : ''; // evita "Saber de operador · Saber de operador"
   const det = detalheDaRef(r, ctx);
   return h('button', {
     type: 'button', class: 'fonte', 'data-ref': ref,

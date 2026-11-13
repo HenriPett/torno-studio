@@ -32,6 +32,9 @@ const TIMEOUT_MS = 25000;
 export const modeloDe = (env) => String(env.DEMO_MODEL || MODELO_PADRAO).trim();
 export const iaInfo = (env) => ({ disponivel: !!env.ANTHROPIC_API_KEY, modelo: env.ANTHROPIC_API_KEY ? modeloDe(env) : null });
 
+/** Texto do visitante dentro do prompt: sem < > para não fechar/forjar o delimitador <aprendizado>. */
+const semTags = (t) => String(t ?? '').replace(/</g, '‹').replace(/>/g, '›');
+
 const REF_RE = /\[\[\s*([a-z]+:[^\]]+?)\s*\]\]/gi;
 export function refsCitadas(texto) {
   const out = [];
@@ -95,7 +98,7 @@ function sistema(ctx, demo, { modulo, perfil }) {
     p ? `Perfil de acesso do usuário: ${p.nome} (áreas: ${(p.areas ?? []).join(', ')}). Não revele dados fora dessas áreas.` : '',
     apr.length
       ? `Registrado nesta demo (${apr.length} mais recentes; use buscar_aprendizado para o texto completo):\n<aprendizado>\n` +
-        apr.map((a) => `- [[aprendizado:${a.id}]] ${a.tipo}, área ${a.area}${a.maquina ? `, máquina ${a.maquina}` : ''}, por ${a.autor} em ${String(a.criado_em).slice(0, 10)}: ${a.titulo} — ${corta(a.texto, 200)}`).join('\n') +
+        apr.map((a) => `- [[aprendizado:${a.id}]] ${a.tipo}, área ${a.area}${a.maquina ? `, máquina ${semTags(a.maquina)}` : ''}, por ${semTags(a.autor)} em ${String(a.criado_em).slice(0, 10)}: ${semTags(a.titulo)} — ${semTags(corta(a.texto, 200))}`).join('\n') +
         '\n</aprendizado>'
       : 'Ainda não há nada registrado nesta demo.',
   ].filter(Boolean).join('\n');

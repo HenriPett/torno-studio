@@ -440,12 +440,24 @@ teste('demo desativada ou expirada = "Link ou senha inválidos"; admin ainda abr
   assert.equal((await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha })).status, 401);
 });
 
+teste('entrar: depois de 20 senhas erradas na hora, até a certa dá a mesma resposta; cookie malformado não derruba', async () => {
+  await admin.req('PATCH', `/api/admin/demos/${demoId}`, { ativo: true, expira_em: null });
+  const outro = cliente();
+  const rs = await Promise.all(Array.from({ length: 20 }, () => outro.req('POST', `/api/demo/${demoId}/entrar`, { senha: 'errada' })));
+  assert.ok(rs.every((r) => r.status === 401));
+  const r = await outro.req('POST', `/api/demo/${demoId}/entrar`, { senha });
+  assert.equal(r.status, 401);
+  assert.deepEqual(await r.json(), { erro: 'Link ou senha inválidos' });
+  assert.equal((await cliente().req('GET', `/api/demo/${demoId}/estado`, undefined, { headers: { cookie: 'x=%E0%A4%A' } })).status, 401);
+});
+
 teste('DELETE da demo apaga aprendizado e uso', async () => {
   await visitante.req('POST', `/api/demo/${demoId}/aprendizado`, { tipo: 'nota', titulo: 'a', texto: 'b', area: 'gestao' }).catch(() => {});
   const r = await admin.req('DELETE', `/api/admin/demos/${demoId}`, undefined);
   assert.equal(r.status, 200);
   assert.deepEqual(await store.list(`aprendizado/${demoId}/`), []);
   assert.deepEqual(await store.list(`uso/${demoId}/`), []);
+  assert.deepEqual(await store.list(`tentativas/${demoId}/`), []);
   assert.equal(await store.get(`demo/${demoId}`), null);
 });
 

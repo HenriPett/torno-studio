@@ -60,7 +60,7 @@ export async function responderLocal(ctx, pergunta, { modulo, perfil, autor, reg
 
   const itens = apr.map((r) => (ctx.aprendizado ?? []).find((a) => `aprendizado:${a.id}` === r.ref)).filter(Boolean);
   const blocos = itens.slice(0, 2).map((a) =>
-    `**${a.titulo}** — Registrado nesta demo por ${a.autor} em ${dataBr(a.criado_em)}:\n${corta(a.texto, 600)} [[aprendizado:${a.id}]]`);
+    `**${a.titulo}** — Registrado nesta demo por ${!a.autor || a.autor === 'Você' ? 'você' : a.autor} em ${dataBr(a.criado_em)}:\n${corta(a.texto, 600)} [[aprendizado:${a.id}]]`);
   const nadaNaBase = /^Não encontrei isso nos dados desta demo/.test(base.texto) || !base.fontes.length;
   const texto = nadaNaBase ? blocos.join('\n\n') : `${blocos.join('\n\n')}\n\n**Nos dados da empresa:**\n${base.texto}`;
   const fontes = [...itens.slice(0, 2).map((a) => `aprendizado:${a.id}`), ...(nadaNaBase ? [] : base.fontes)];

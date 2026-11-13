@@ -587,7 +587,8 @@ export function progress(value, { tone, label } = {}) {
 export function phoneFrame(children) {
   return h('div', { class: 'phone-frame' },
     h('div', { class: 'phone-frame__notch', 'aria-hidden': 'true' }),
-    h('div', { class: 'phone-frame__screen' }, children));
+    // rolável: precisa receber foco para quem usa só o teclado (WCAG 2.1.1)
+    h('div', { class: 'phone-frame__screen', tabindex: '0', role: 'region', 'aria-label': 'Tela do celular' }, children));
 }
 
 /**

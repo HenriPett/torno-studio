@@ -116,7 +116,7 @@ export async function editaDemo(store, id, body) {
 export async function apagaDemo(store, id) {
   const d = await getDemo(store, id);
   if (!d) return false;
-  const chaves = [...await store.list(`aprendizado/${id}/`), ...await store.list(`uso/${id}/`)];
+  const chaves = [...await store.list(`aprendizado/${id}/`), ...await store.list(`uso/${id}/`), ...await store.list(`tentativas/${id}/`)];
   await Promise.all(chaves.map((k) => store.delete(k)));
   await store.delete(`demo/${id}`);
   return true;

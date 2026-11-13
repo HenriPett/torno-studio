@@ -244,8 +244,10 @@ export function render(root, { api, ui, fmt, themeToggle }) {
   }
 
   function campo(label, controle, { hint, obrigatorio } = {}) {
-    const id = controle.id || `adm-${Math.random().toString(36).slice(2, 8)}`;
-    controle.id = id;
+    // o rótulo aponta para o campo de verdade (o select fica dentro de um span .select-wrap)
+    const alvo = controle.matches?.('input, select, textarea') ? controle : controle.querySelector?.('input, select, textarea') || controle;
+    const id = alvo.id || `adm-${Math.random().toString(36).slice(2, 8)}`;
+    alvo.id = id;
     return h('div', { class: 'field' },
       h('label', { class: 'field__label', for: id }, label, obrigatorio ? h('span', { 'aria-hidden': 'true' }, ' *') : null),
       controle,

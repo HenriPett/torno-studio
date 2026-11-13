@@ -741,6 +741,8 @@ svg.icon { flex: none; }
 .how-list__side { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 13px; color: var(--text-muted); text-align: right; }
 .how-ask { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; }
 .how-ask .control { flex: 1 1 240px; }
+/* rótulo longo ("Perguntar como Supervisor de produção e PCP") não pode empurrar a página no celular */
+.how-ask .btn { max-width: 100%; min-width: 0; white-space: normal; text-align: left; padding-block: 8px; }
 .how-channels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .how-channel { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .how-channel h3 { font-size: var(--fs-h3); }
@@ -766,7 +768,7 @@ svg.icon { flex: none; }
   :root:not([data-theme="light"]) .wa__msg { background: #202c33; color: #e9edef; }
   :root:not([data-theme="light"]) .wa__msg--bot { background: #005c4b; }
 }
-.wa__hora { display: block; text-align: right; font-size: 11px; opacity: 0.6; margin-top: 2px; }
+.wa__hora { display: block; text-align: right; font-size: 11px; opacity: 0.75; margin-top: 2px; }
 .how-data { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .how-data li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.55; }
 .how-data svg { color: var(--text-muted); margin-top: 3px; }

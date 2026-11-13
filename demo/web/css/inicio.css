@@ -12,7 +12,7 @@
   border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-md);
   transition: border-color var(--dur-1) var(--ease);
 }
-.ini-campo:focus-within { border-color: var(--border-strong); }
+.ini-campo:focus-within { border-color: var(--focus); box-shadow: var(--shadow-md), 0 0 0 3px color-mix(in srgb, var(--focus) 25%, transparent); }
 .ini-campo__input { flex: 1 1 auto; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font: inherit; font-size: 17px; padding: 10px 0; }
 .ini-campo__input::placeholder { color: var(--text-muted); }
 .ini-campo__enviar {

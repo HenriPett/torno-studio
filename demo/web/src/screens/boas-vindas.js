@@ -42,7 +42,7 @@ export function renderBoasVindas(alvo, { ctx, onComecar } = {}) {
       onSubmit: (e) => { e.preventDefault(); comecar(); },
     },
     ctx.demo?.nome ? h('p', { class: 'welcome__for' }, `Demonstração preparada para ${ctx.demo.nome}`) : null,
-    h('h1', { class: 'welcome__title', id: 'bv-titulo' }, `Bem-vindo à ${String(ctx.empresa).replace(/\.$/, '')}.`),
+    h('h1', { class: 'welcome__title', id: 'bv-titulo' }, `Esta é a operação da ${String(ctx.empresa).replace(/\.$/, '')}.`),
     h('p', { class: 'welcome__lead' },
       `Uma indústria fictícia ${artigoSetor(d.setor)}${funcionarios ? ` com ${ctx.fmt.num(funcionarios)} pessoas` : ''}. `,
       'ERP, MES, fichas e procedimentos já estão no cérebro.'),

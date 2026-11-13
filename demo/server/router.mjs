@@ -2,6 +2,7 @@
 // Usado pela Netlify Function (netlify/functions/demo-api.mjs) e pelo servidor de dev (demo/scripts/serve.mjs).
 // Contrato: demo/PLANO-V2.md §5.
 
+import { randomBytes } from 'node:crypto';
 import {
   confereSenha, igualConstante, assina, confere, impressao, leCookies, cookie, apagaCookie, checaOrigem, espera,
 } from './auth.mjs';
@@ -18,6 +19,7 @@ const LIMITE_CONVERSA = 200 * 1024;
 const TTL_DEMO = 12 * 3600 * 1000;
 const TTL_ADMIN = 8 * 3600 * 1000;
 const ATRASO_FALHA = 400;
+const MAX_FALHAS_HORA = 20;
 const INVALIDO = 'Link ou senha inválidos';
 
 const BASE_HEADERS = {
@@ -55,7 +57,8 @@ async function leCorpo(request, limite) {
 /* Sessões                                                             */
 /* ------------------------------------------------------------------ */
 
-const segredoDe = (env) => env.DEMO_SESSION_SECRET || null;
+// Segredo curto = sessões forjáveis por força bruta: trata como ausente (falha fechado, 503).
+const segredoDe = (env) => (String(env.DEMO_SESSION_SECRET ?? '').length >= 32 ? env.DEMO_SESSION_SECRET : null);
 
 function sessaoAdmin(request, env) {
   const segredo = segredoDe(env);
@@ -86,13 +89,22 @@ async function rotaDemo(request, env, store, partes, deps) {
   const [id, recurso, sub] = partes;
   const m = request.method;
   const segredo = segredoDe(env);
-  if (!segredo) return erro(503, 'Configure DEMO_SESSION_SECRET na Netlify');
+  if (!segredo) return erro(503, 'Configure DEMO_SESSION_SECRET (32+ caracteres) na Netlify');
 
   if (recurso === 'entrar' && m === 'POST' && !sub) {
     const body = await leCorpo(request, LIMITE_CORPO);
     const d = ID_RE.test(id) ? await getDemo(store, id) : null;
+    // Limite de tentativas erradas por demo e por hora (a senha legível tem ~21 bits): passou do
+    // limite, responde igual a senha errada. Cada falha é uma chave própria (sem corrida de
+    // ler-somar-gravar entre requisições paralelas). Id inexistente não grava nada.
+    const hora = Math.floor(Date.now() / 3600e3);
+    const falhas = d ? (await store.list(`tentativas/${id}/${hora}-`)).length : 0;
     const ok = await confereSenha(typeof body.senha === 'string' ? body.senha.slice(0, 200) : '', d?.senha);
-    if (!ok || !disponivel(d)) { await espera(ATRASO_FALHA); return erro(401, INVALIDO); }
+    if (!ok || !disponivel(d) || falhas >= MAX_FALHAS_HORA) {
+      if (d && !ok) await store.set(`tentativas/${id}/${hora}-${randomBytes(6).toString('hex')}`, { em: new Date().toISOString() });
+      await espera(ATRASO_FALHA);
+      return erro(401, INVALIDO);
+    }
     const token = assina({ t: 'demo', id, sv: d.senha_v ?? 1 }, segredo, TTL_DEMO);
     return json({ ok: true }, 200, { 'set-cookie': cookie(request, `td_${id}`, token, TTL_DEMO / 1000) });
   }
@@ -135,7 +147,7 @@ async function rotaAdmin(request, env, store, partes) {
   const m = request.method;
   const segredo = segredoDe(env);
   if (!env.DEMO_ADMIN_PASSWORD) return erro(503, 'Configure DEMO_ADMIN_PASSWORD na Netlify');
-  if (!segredo) return erro(503, 'Configure DEMO_SESSION_SECRET na Netlify');
+  if (!segredo) return erro(503, 'Configure DEMO_SESSION_SECRET (32+ caracteres) na Netlify');
   const [r0, r1, r2, r3] = partes;
 
   if (r0 === 'entrar' && m === 'POST' && !r1) {
