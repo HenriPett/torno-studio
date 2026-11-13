@@ -11,26 +11,26 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias de alimentos e bebidas',
     title: 'Do lote à reclamação do SAC, a resposta com a fonte',
-    lead: 'A Torno reúne ERP, registros de BPF e APPCC, laudos, fórmulas e o histórico do SAC num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, manutenção e comercial. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno reúne ERP, registros de BPF e APPCC, laudos, fórmulas e o histórico do SAC num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, manutenção e comercial.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Plantas grandes, com muito registro para cruzar',
     body: [
-      'Santa Catarina tem mais unidades de alimentos com 250 ou mais pessoas ocupadas do que qualquer outra divisão da sua indústria (IBGE). Nessas plantas, um recall ou uma auditoria de cliente pede o caminho de um lote montado em horas.',
+      'Santa Catarina tem mais unidades de alimentos com 250 ou mais pessoas ocupadas do que qualquer outra divisão da sua indústria (IBGE). Nelas, um recall pede o caminho de um lote em horas.',
     ],
     refs: [[1]],
   },
   adoption: {
     useAI: 'cerca de 4 em 10',
     inProduction: 'cerca de 2 em 10',
-    reading: 'A maior parte do uso de IA no setor está no escritório. Na linha, na qualidade e na manutenção, poucas plantas começaram.',
+    reading: 'Cerca de 8 em 10 plantas ainda não usam IA na produção. Na linha, na qualidade e na manutenção, há espaço para sair na frente.',
     source: 1,
   },
   proofPoints: [
     {
       value: '5 mil h/mês',
-      label: 'de trabalho que a empresa estima poupar com um assistente de IA que acompanha 2.000 veículos de entrega',
+      label: 'de trabalho que a empresa estima poupar com um assistente que acompanha 2.000 veículos de entrega',
       context: 'Processadora de proteínas, segundo a empresa',
       area: 'Logística',
       source: 2,
@@ -38,7 +38,7 @@ export const setor: SectorLanding = {
     },
     {
       value: '−4%',
-      label: 'de consumo de energia nas plantas, com IA ajustando 76 equipamentos',
+      label: 'de energia nas plantas, com IA ajustando 76 equipamentos',
       context: 'Cervejaria, segundo a empresa',
       area: 'Utilidades e manutenção',
       source: 3,
@@ -47,29 +47,29 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Qualidade',
-        problem: 'Rastrear um lote cruza ERP, planilhas de recebimento, registros de produção e notas de expedição.',
+        problem: 'Rastrear um lote cruza ERP, planilhas de recebimento, produção e expedição.',
         whatWeDo: 'Um agente monta a árvore do lote, da matéria-prima ao cliente, com o registro de cada etapa.',
         measure: 'Tempo para fechar uma rastreabilidade de lote',
       },
       {
         area: 'Auditoria e BPF',
-        problem: 'Registros de higienização e de PCC ficam entre papel e planilha, e a auditoria de cliente toma dias.',
+        problem: 'Registros de higienização e de PCC ficam entre papel e planilha.',
         whatWeDo: 'Os registros entram numa base consultável e o agente reúne as evidências pedidas.',
         measure: 'Horas da equipe para preparar uma auditoria',
       },
       {
         area: 'SAC',
-        problem: 'A reclamação chega com o lote, e descobrir o que houve na linha e no turno exige procurar em vários lugares.',
+        problem: 'A reclamação chega com o lote, e o que houve na linha está em vários lugares.',
         whatWeDo: 'O agente liga a reclamação a lote, linha, turno e não conformidades da época.',
         measure: 'Tempo de resposta ao consumidor',
       },
       {
         area: 'PCP',
-        problem: 'Programar com perecíveis pede ver validade, carteira e capacidade ao mesmo tempo, e isso vive em planilha.',
+        problem: 'Validade, carteira e capacidade de linha vivem em planilhas separadas.',
         whatWeDo: 'O agente aponta o que vai vencer sem ordem de produção programada.',
         measure: 'Matéria-prima vencida ou descartada por mês',
       },
@@ -80,45 +80,45 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'Rastrear um lote leva o dia todo',
-        body: 'Para dizer de onde veio a matéria-prima e para onde o lote foi, a qualidade cruza ERP, planilhas de recebimento, produção e expedição.',
+        body: 'Dizer de onde veio a matéria-prima e para onde o lote foi exige cruzar quatro fontes.',
       },
       {
         title: 'Auditoria preparada à mão',
-        body: 'Higienização, monitoramento de PCC e verificações de BPF ficam entre papel e planilha. A auditoria de um cliente ocupa a equipe por dias.',
+        body: 'A auditoria de um cliente ocupa a equipe de qualidade por dias.',
       },
       {
         title: 'Reclamação do SAC longe da produção',
-        body: 'A reclamação chega com número de lote. Saber o que aconteceu naquela linha e naquele turno exige procurar em vários lugares.',
+        body: 'Saber o que aconteceu naquela linha e naquele turno exige procurar em vários lugares.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa indústria de alimentos',
-    intro: 'A primeira área sai do diagnóstico, pelo tempo que ela perde hoje. Os exemplos são ilustrativos.',
+    intro: 'Exemplos ilustrativos. O diagnóstico define por onde começar.',
     items: [
       {
         area: 'Qualidade e segurança dos alimentos',
         title: 'Rastreabilidade de lote numa pergunta',
-        body: 'Monta a árvore do lote, da matéria-prima ao cliente, e prepara o rascunho do relatório de investigação.',
-        example: '“Quais clientes receberam o lote 2411-B e quais lotes de matéria-prima entraram nele?”',
+        body: 'Monta a árvore do lote e o rascunho do relatório de investigação.',
+        example: '“Quais clientes receberam o lote 2411-B e que matérias-primas entraram nele?”',
       },
       {
         area: 'SAC',
         title: 'Reclamação ligada à linha e ao turno',
-        body: 'Cruza a reclamação com lote, linha e turno, e sugere a resposta a partir de textos aprovados pela qualidade.',
-        example: '“Houve outra reclamação de embalagem estufada do mesmo lote ou da mesma semana?”',
+        body: 'Sugere a resposta a partir de textos aprovados pela qualidade.',
+        example: '“Houve outra reclamação de embalagem estufada na mesma semana?”',
       },
       {
         area: 'PCP',
         title: 'Programação que enxerga a validade',
-        body: 'Consulta estoque por validade, carteira e capacidade de linha, e aponta o que vai vencer antes de ser usado.',
-        example: '“Que matérias-primas vencem nos próximos dez dias sem ordem de produção programada?”',
+        body: 'Cruza estoque por validade, carteira e capacidade de linha.',
+        example: '“Que matérias-primas vencem em dez dias sem ordem programada?”',
       },
       {
         area: 'P&D e formulação',
         title: 'Histórico de formulação consultável',
-        body: 'Fórmulas, testes de bancada e o motivo de cada mudança, com controle de quem vê cada receita.',
-        example: '“Por que trocamos o estabilizante da bebida láctea sabor morango e quando?”',
+        body: 'Fórmulas, testes e o motivo de cada mudança, com controle de quem vê cada receita.',
+        example: '“Por que trocamos o estabilizante da bebida láctea de morango?”',
       },
     ],
   },
@@ -135,7 +135,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa indústria de alimentos',
     body: [
-      'ERP, APPCC, BPF, laudos, fórmulas e SAC entram ligados pelo número do lote, que todas as fontes têm em comum. Cada resposta cita o registro de origem, e fórmulas ficam visíveis só para quem a empresa autorizar.',
+      'ERP, APPCC, BPF, laudos, fórmulas e SAC entram ligados pelo número do lote. Cada resposta cita o registro de origem, e fórmulas ficam visíveis só para quem a empresa autorizar.',
     ],
     inputs: [
       'Recebimento, OPs, lotes e expedição do ERP',
@@ -147,24 +147,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível numa planta com rastreabilidade manual',
-    intro: 'Uma indústria de alimentos leva horas para responder a uma consulta de rastreabilidade. Um piloto na qualidade poderia correr assim.',
+    intro: 'Uma consulta de rastreabilidade leva horas. Um piloto na qualidade poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Entrevistas com qualidade, PCP, SAC e TI. Cronometramos uma simulação de rastreabilidade e definimos o critério de sucesso.',
-      },
-      {
-        title: 'Base ligada pelo lote',
-        body: 'Leitura do ERP e das planilhas de recebimento e expedição, ligadas pelo lote. O APPCC entra numa segunda leva.',
-      },
-      {
-        title: 'Piloto na qualidade',
-        body: 'A equipe usa o assistente no dia a dia e numa nova simulação de recall. Respostas sem fonte suficiente vão para revisão humana.',
-      },
-      {
-        title: 'Próxima etapa',
-        body: 'Com o critério atingido, o SAC passa a usar a mesma base.',
-      },
+      { title: 'Diagnóstico', body: 'Cronometramos uma simulação de rastreabilidade e combinamos o critério de sucesso.' },
+      { title: 'Base ligada pelo lote', body: 'Leitura do ERP e das planilhas de recebimento e expedição. O APPCC entra depois.' },
+      { title: 'Piloto na qualidade', body: 'A equipe usa o assistente numa nova simulação de recall. Respostas sem fonte vão para revisão.' },
+      { title: 'Próxima etapa', body: 'Com o critério atingido, o SAC passa a usar a mesma base.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -175,20 +163,20 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Nossas fórmulas ficam seguras?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI. Fórmulas ficam restritas aos perfis que a empresa definir, o uso fica registrado e os dados não treinam modelos de terceiros.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI. Fórmulas ficam restritas aos perfis que a empresa definir, e os dados não treinam modelos de terceiros.',
     },
     {
       q: 'Precisamos trocar de ERP ou de sistema de qualidade?',
-      a: 'Não. Lemos o que já existe, seja TOTVS, SAP, Senior ou outro, e as planilhas da qualidade, pelo caminho que a TI aprovar.',
+      a: 'Não. Lemos o que já existe, seja TOTVS, SAP, Senior ou planilhas, pelo caminho que a TI aprovar.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quanto tempo a equipe leva hoje para rastrear um lote ou responder a uma auditoria. Saímos sabendo se o diagnóstico faz sentido e quem precisa estar nele.',
+    body: 'Conte quanto tempo a equipe leva hoje para rastrear um lote. Saímos sabendo se o diagnóstico faz sentido.',
   },
   sources: [
     {

@@ -11,20 +11,20 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para fabricantes de máquinas e equipamentos',
     title: 'Orçamento técnico e pós-venda com a história de cada máquina',
-    lead: 'A Torno reúne ERP, BOMs, desenhos, manuais, orçamentos antigos e chamados de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam orçamentação, engenharia, assistência e peças de reposição. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno reúne ERP, BOMs, desenhos, manuais, orçamentos antigos e chamados de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam orçamentação, engenharia, assistência e reposição.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Mais máquina importada na disputa',
     body: [
-      'Os importados já atendem 46% do consumo nacional de máquinas e equipamentos, segundo a Abimaq. Para o fabricante nacional, prazo de orçamento, reuso de projeto e pós-venda pesam na hora de fechar o pedido.',
+      'Os importados já atendem 46% do consumo nacional de máquinas e equipamentos, segundo a Abimaq. Para o fabricante nacional, prazo de orçamento e pós-venda pesam no fechamento do pedido.',
     ],
     refs: [[1]],
   },
   adoption: {
     useAI: 'cerca de 5 em 10',
     inProduction: 'cerca de 2 em 10',
-    reading: 'Mais da metade dos fabricantes já usa IA. Na produção, a maioria ainda não começou.',
+    reading: 'Cerca de metade dos fabricantes já usa IA. Na produção, a maioria ainda não começou.',
     source: 1,
   },
   proofPoints: [
@@ -55,29 +55,29 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Orçamentação',
-        problem: 'Cada cotação pede engenharia para achar a máquina parecida já feita, a BOM dela e o custo realizado.',
-        whatWeDo: 'Um agente encontra os projetos semelhantes e monta a base do orçamento para o orçamentista revisar.',
+        problem: 'Cada cotação pede engenharia para achar a máquina parecida, a BOM e o custo realizado.',
+        whatWeDo: 'Um agente encontra os projetos semelhantes e monta a base do orçamento para revisão.',
         measure: 'Dias para devolver um orçamento técnico',
       },
       {
         area: 'Engenharia sob encomenda',
-        problem: 'Desenhos e soluções antigas estão no PDM e na rede, e reaproveitar depende de quem lembra.',
+        problem: 'Reaproveitar desenhos antigos do PDM e da rede depende de quem lembra.',
         whatWeDo: 'O agente busca projetos por função, medida ou cliente e indica a revisão vigente.',
         measure: 'Horas de engenharia procurando projeto por pedido',
       },
       {
         area: 'Assistência técnica',
-        problem: 'O técnico em campo liga para a fábrica para saber a configuração entregue e a última intervenção.',
+        problem: 'O técnico em campo liga para a fábrica para saber a configuração entregue.',
         whatWeDo: 'A história da máquina pelo número de série chega ao celular do técnico.',
         measure: 'Ligações do campo para a engenharia por semana',
       },
       {
         area: 'Peças de reposição',
-        problem: 'O cliente manda foto ou código antigo, e identificar peça, revisão e estoque passa por três pessoas.',
+        problem: 'Identificar peça, revisão e estoque a partir de uma foto passa por três pessoas.',
         whatWeDo: 'O agente cruza número de série, BOM da época e estoque, e indica a alternativa atual.',
         measure: 'Tempo para responder a um pedido de peça',
       },
@@ -88,45 +88,45 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'Orçamento técnico que leva semanas',
-        body: 'Cada cotação pede engenharia para adaptar um projeto parecido. Achar a máquina semelhante, a BOM e o custo realizado consome dias.',
+        body: 'Achar a máquina semelhante, a BOM e o custo realizado consome dias de engenharia.',
       },
       {
         title: 'Técnico em campo liga para a fábrica',
-        body: 'Configuração entregue, manual da versão e última intervenção dependem de a engenharia atender o telefone.',
+        body: 'Configuração entregue e última intervenção dependem de a engenharia atender o telefone.',
       },
       {
         title: 'Peça de reposição identificada por foto',
-        body: 'O cliente manda uma foto ou um código antigo. Descobrir a peça, a revisão e o estoque passa por três pessoas.',
+        body: 'O cliente manda uma foto ou um código antigo, e a resposta demora.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham num fabricante de máquinas',
-    intro: 'Exemplos ilustrativos. No diagnóstico, priorizamos pelo impacto em prazo de orçamento e em atendimento.',
+    intro: 'Exemplos ilustrativos. O diagnóstico prioriza pelo impacto em prazo de orçamento e atendimento.',
     items: [
       {
         area: 'Orçamentação',
         title: 'Orçamento a partir de projetos parecidos',
-        body: 'Encontra máquinas semelhantes já vendidas, com BOM, horas de engenharia e custo realizado.',
-        example: '“Que transportadores de rolos acima de 12 m já fizemos e qual foi o custo realizado de cada um?”',
+        body: 'Máquinas semelhantes já vendidas, com BOM, horas de engenharia e custo realizado.',
+        example: '“Que transportadores de rolos acima de 12 m já fizemos e quanto custaram?”',
       },
       {
         area: 'Engenharia de produto',
         title: 'Reuso de projeto com a revisão certa',
-        body: 'Busca em desenhos, BOMs e memoriais por função, medida ou cliente, e indica a revisão vigente.',
+        body: 'Busca em desenhos, BOMs e memoriais por função, medida ou cliente.',
         example: '“Temos projeto de mesa giratória para 3 toneladas? Qual revisão está aprovada?”',
       },
       {
         area: 'Assistência técnica',
         title: 'A máquina do cliente pelo número de série',
-        body: 'Configuração entregue, manual da versão, diagramas e chamados anteriores no celular do técnico.',
-        example: '“Qual CLP e qual versão de software foram na máquina série 2219-034?”',
+        body: 'Configuração, manual da versão, diagramas e chamados anteriores.',
+        example: '“Qual CLP e qual software foram na máquina série 2219-034?”',
       },
       {
         area: 'Peças de reposição',
         title: 'Peça certa e estoque na mesma resposta',
-        body: 'Cruza número de série, BOM da época e estoque, com a alternativa atual quando o item saiu de linha.',
-        example: '“Qual o código atual da engrenagem que foi na série 2017-112? Temos em estoque?”',
+        body: 'Série, BOM da época e estoque, com a alternativa atual quando o item saiu de linha.',
+        example: '“Qual o código atual da engrenagem da série 2017-112? Temos em estoque?”',
       },
     ],
   },
@@ -139,7 +139,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta num fabricante de máquinas',
     body: [
-      'Pedidos, custos, desenhos, BOMs, orçamentos e chamados entram ligados pelo número de série e pelo pedido, para que cada máquina vendida tenha a sua história completa. As respostas citam a fonte, e custo e margem ficam com quem a diretoria autorizar.',
+      'Pedidos, custos, desenhos, BOMs, orçamentos e chamados entram ligados pelo número de série e pelo pedido. As respostas citam a fonte, e custo e margem ficam com quem a diretoria autorizar.',
     ],
     inputs: [
       'Pedidos, custos realizados e estoque do ERP',
@@ -151,24 +151,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível num fabricante com muitos pedidos sob encomenda',
-    intro: 'Um fabricante de equipamentos leva semanas para devolver orçamentos técnicos e perde cotações por prazo.',
+    intro: 'Orçamentos técnicos levam semanas e cotações se perdem por prazo. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Levantamos o tempo de resposta das últimas cotações e combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Base de projetos',
-        body: 'Pedidos dos últimos anos ligados a BOM, desenho, horas de engenharia e custo realizado.',
-      },
-      {
-        title: 'Piloto na orçamentação',
-        body: 'Os orçamentistas usam o assistente para montar a base do orçamento. A engenharia valida cada um antes de sair.',
-      },
-      {
-        title: 'Próxima etapa',
-        body: 'Com o critério atingido, a mesma base passa a atender a assistência técnica e as peças de reposição.',
-      },
+      { title: 'Diagnóstico', body: 'Levantamos o tempo de resposta das últimas cotações e combinamos o critério de sucesso.' },
+      { title: 'Base de projetos', body: 'Pedidos dos últimos anos ligados a BOM, desenho, horas e custo realizado.' },
+      { title: 'Piloto na orçamentação', body: 'Os orçamentistas montam a base do orçamento com o assistente, e a engenharia valida.' },
+      { title: 'Próxima etapa', body: 'Com o critério atingido, a mesma base atende assistência e reposição.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -179,24 +167,24 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Nossos desenhos e projetos ficam protegidos?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI. Desenhos, custos e margens ficam restritos por perfil, o uso fica registrado e os dados não treinam modelos de terceiros.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI. Desenhos, custos e margens ficam restritos por perfil e não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP e o nosso PDM?',
-      a: 'Lemos o ERP e o PDM já implantados, ou as pastas de rede da engenharia, pelo caminho que a TI aprovar.',
+      a: 'Lemos o ERP, o PDM ou as pastas de rede da engenharia, pelo caminho que a TI aprovar.',
     },
     {
       q: 'Quanto a engenharia precisa participar?',
-      a: 'A engenharia valida o que o assistente produz. Combinamos com ela um tempo semanal que não atrapalhe os projetos em andamento.',
+      a: 'Ela valida o que o assistente produz, num tempo semanal combinado que não atrapalhe os projetos.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quanto tempo leva hoje um orçamento técnico ou um atendimento de assistência. Saímos com uma ideia de onde o diagnóstico começaria.',
+    body: 'Conte quanto tempo leva hoje um orçamento técnico. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {

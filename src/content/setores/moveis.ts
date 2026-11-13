@@ -11,13 +11,13 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias de madeira e móveis',
     title: 'Pedido certo do representante à assistência técnica',
-    lead: 'A Torno junta ERP, catálogo, listas de peças, planos de corte e histórico de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam representantes, engenharia de produto, PCP e pós-venda. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno junta ERP, catálogo, listas de peças, planos de corte e histórico de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam representantes, engenharia, PCP e pós-venda.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Exportação em queda e mercado interno mais disputado',
     body: [
-      'As exportações de móveis e colchões para os Estados Unidos caíram 41,7% de janeiro a maio de 2026, segundo o Times Brasil. Voltar ao mercado interno pede atender lojistas e representantes rápido e entregar sem erro.',
+      'As exportações de móveis e colchões para os Estados Unidos caíram 41,7% de janeiro a maio de 2026, segundo o Times Brasil. No mercado interno, ganha quem atende lojistas rápido e entrega sem erro.',
     ],
     refs: [[1]],
   },
@@ -47,29 +47,29 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Representantes',
-        problem: 'Acabamento, prazo, preço da tabela e status do pedido passam pelo comercial interno, uma ligação de cada vez.',
+        problem: 'Acabamento, prazo, preço e status do pedido passam pelo comercial interno, uma ligação de cada vez.',
         whatWeDo: 'Um assistente responde ao representante com as regras comerciais e as permissões de cada um.',
         measure: 'Consultas de representantes ao comercial interno por dia',
       },
       {
         area: 'Engenharia de produto',
-        problem: 'Uma medida fora da regra no pedido de planejado vira peça cortada à toa e reentrega.',
+        problem: 'Uma medida fora da regra no pedido de planejado vira peça cortada à toa.',
         whatWeDo: 'O agente confere o pedido contra as regras de módulos, medidas e ferragens antes da produção.',
         measure: 'Pedidos de planejados com erro que chegam à produção',
       },
       {
         area: 'PCP e corte',
-        problem: 'O plano de corte com pedidos misturados e sobras depende de uma pessoa e de planilhas próprias.',
-        whatWeDo: 'O agente junta carteira, chapas, sobras e prazos para o programador montar o próximo plano.',
+        problem: 'O plano de corte com pedidos misturados e sobras depende de uma pessoa.',
+        whatWeDo: 'O agente junta carteira, chapas, sobras e prazos para o programador montar o plano.',
         measure: 'Aproveitamento de chapa por plano de corte',
       },
       {
         area: 'Assistência técnica',
-        problem: 'Achar o pedido, o acabamento e a peça de um móvel vendido há dois anos leva dias.',
+        problem: 'Achar a peça de um móvel vendido há dois anos leva dias.',
         whatWeDo: 'O agente encontra a peça certa pelo número do pedido ou pela etiqueta do móvel.',
         measure: 'Dias para identificar uma peça de reposição',
       },
@@ -80,45 +80,45 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'Representante liga para saber o básico',
-        body: 'Acabamento disponível, prazo, preço da tabela da região e status do pedido. Cada pergunta passa pelo comercial interno.',
+        body: 'Cada pergunta sobre acabamento, prazo ou pedido passa pelo comercial interno.',
       },
       {
         title: 'Pedido de planejado com erro de módulo',
-        body: 'Uma medida fora da regra ou uma ferragem incompatível vira peça cortada à toa, reentrega e cliente insatisfeito.',
+        body: 'Uma ferragem incompatível vira peça cortada à toa, reentrega e cliente insatisfeito.',
       },
       {
         title: 'Assistência técnica sem histórico',
-        body: 'O lojista pede uma peça para um móvel vendido há dois anos. Descobrir pedido, acabamento e peça leva dias.',
+        body: 'Descobrir pedido, acabamento e peça de um móvel antigo leva dias.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa fábrica de móveis',
-    intro: 'Exemplos ilustrativos, para linha seriada ou planejados. O diagnóstico define por onde começar.',
+    intro: 'Exemplos ilustrativos, para linha seriada ou planejados.',
     items: [
       {
         area: 'Comercial e representantes',
         title: 'Assistente para representantes e lojistas',
-        body: 'Prazo, acabamentos, preço por tabela e status do pedido, com as permissões de cada representante.',
+        body: 'Prazo, acabamentos, tabela e status do pedido, por perfil.',
         example: '“A cômoda 3040 em freijó com puxador preto tem entrega para dezembro?”',
       },
       {
         area: 'Engenharia de produto',
         title: 'Conferência do pedido de planejado',
-        body: 'Confere o pedido do lojista contra as regras de módulos, medidas e ferragens e aponta inconsistências.',
-        example: '“O pedido 9921 tem algum módulo fora das medidas permitidas para essa linha?”',
+        body: 'Aponta módulos, medidas e ferragens fora da regra.',
+        example: '“O pedido 9921 tem algum módulo fora das medidas permitidas?”',
       },
       {
         area: 'Assistência técnica',
-        title: 'Peça de reposição pelo histórico do pedido',
-        body: 'Encontra o pedido original, o acabamento e a peça certa pelo número do pedido ou pela etiqueta.',
+        title: 'Peça de reposição pelo histórico',
+        body: 'Pedido original, acabamento e peça certa pela etiqueta.',
         example: '“Qual a porta correta para o roupeiro do pedido 7120?”',
       },
       {
         area: 'Qualidade',
         title: 'Defeito ligado ao lote e ao fornecedor',
-        body: 'Liga reclamações de lojistas ao lote de chapa, ao fornecedor de ferragem ou de fita de borda e à linha.',
-        example: '“As reclamações de descolamento de fita de borda deste mês vêm de qual lote de fita?”',
+        body: 'Liga reclamações ao lote de chapa, à ferragem ou à fita de borda.',
+        example: '“O descolamento de fita de borda deste mês vem de qual lote?”',
       },
     ],
   },
@@ -131,7 +131,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa fábrica de móveis',
     body: [
-      'Pedidos, listas de peças, regras de módulos, catálogo, tabelas e chamados entram ligados pelo número do pedido e pelo código do produto. Representante, programador de corte e técnico consultam a mesma informação, cada um com o seu perfil.',
+      'Pedidos, listas de peças, regras de módulos, catálogo, tabelas e chamados entram ligados pelo pedido e pelo código do produto. Representante, programador de corte e técnico consultam a mesma base, cada um com o seu perfil.',
     ],
     inputs: [
       'Pedidos, carteira e estoque do ERP',
@@ -143,24 +143,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível numa fábrica de planejados com rede de representantes',
-    intro: 'Uma indústria de móveis vende por representantes e recebe muitos pedidos de planejados com erro de módulo.',
+    intro: 'Muitos pedidos de planejados chegam com erro de módulo. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Contamos os pedidos com erro dos últimos meses e o custo de cada reentrega, e combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Regras na base',
-        body: 'As regras de módulos, medidas e ferragens viram uma base revisada pela engenharia de produto.',
-      },
-      {
-        title: 'Piloto na entrada de pedidos',
-        body: 'Cada pedido de planejado passa pela conferência antes da produção. A engenharia decide os casos marcados.',
-      },
-      {
-        title: 'Expansão',
-        body: 'Com o critério atingido, o próprio representante confere o pedido antes de ele chegar à fábrica.',
-      },
+      { title: 'Diagnóstico', body: 'Contamos os pedidos com erro e o custo de cada reentrega.' },
+      { title: 'Regras na base', body: 'Regras de módulos, medidas e ferragens, revisadas pela engenharia de produto.' },
+      { title: 'Piloto na entrada de pedidos', body: 'Cada pedido passa pela conferência antes da produção, e a engenharia decide os casos marcados.' },
+      { title: 'Expansão', body: 'Com o critério atingido, o próprio representante confere o pedido antes de enviar.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -171,24 +159,24 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Os dados de preço e de lojistas ficam seguros?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI. Cada representante vê só a própria carteira e a tabela da sua região, o uso fica registrado e os dados não treinam modelos de terceiros.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI. Cada representante vê só a própria carteira e tabela, e os dados não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP e com o software de projeto dos lojistas?',
-      a: 'Lemos o ERP pelo caminho que a TI aprovar. O diagnóstico verifica se a conferência pode ler direto o arquivo que chega do software de projeto.',
+      a: 'Lemos o ERP pelo caminho que a TI aprovar. O diagnóstico verifica se dá para ler direto o arquivo do software de projeto.',
     },
     {
       q: 'Os representantes vão usar?',
-      a: 'O piloto responde a isso com números. Começamos com um grupo pequeno, num canal que eles já usam, e medimos o uso e as consultas que deixam de chegar ao comercial interno.',
+      a: 'O piloto responde com números. Começamos com um grupo pequeno, num canal que eles já usam, e medimos o uso.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quantos pedidos voltam por erro e quanto o comercial interno atende de representante por dia. Saímos com uma ideia de onde o diagnóstico começaria.',
+    body: 'Conte quantos pedidos voltam por erro. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {

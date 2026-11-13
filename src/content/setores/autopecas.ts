@@ -11,7 +11,7 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para fabricantes de autopeças e implementos',
     title: 'PPAP, 8D e programação da montadora sem caça a documento',
-    lead: 'A Torno junta ERP, programação EDI, APQP e PPAP, FMEA, planos de controle e 8D num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, engenharia e manutenção. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno junta ERP, programação EDI, PPAP, FMEA, planos de controle e 8D num cérebro da operação. Em cima dele, agentes de IA ajudam qualidade, PCP, engenharia e manutenção.',
     cta: 'Agendar diagnóstico',
   },
   context: {
@@ -24,7 +24,7 @@ export const setor: SectorLanding = {
   adoption: {
     useAI: 'cerca de 4 em 10',
     inProduction: 'cerca de 2 em 10',
-    reading: 'A maioria das fabricantes que usam IA ainda não a levou para a qualidade, a manutenção e o PCP.',
+    reading: 'Cerca de 8 em 10 fabricantes ainda não usam IA na produção, onde ficam a qualidade, a manutenção e o PCP.',
     source: 1,
   },
   proofPoints: [
@@ -47,30 +47,30 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Qualidade',
-        problem: 'O 8D tem prazo de montadora, e a equipe gasta o tempo procurando ocorrências parecidas, FMEA e plano de controle.',
+        problem: 'O 8D tem prazo de montadora, e o tempo vai em procurar ocorrências parecidas.',
         whatWeDo: 'Um agente reúne o histórico da peça e prepara o rascunho do 8D para o engenheiro revisar.',
         measure: 'Dias até a contenção e até o fechamento do 8D',
       },
       {
         area: 'PCP',
-        problem: 'A programação EDI muda toda semana, e o cruzamento com estoque e capacidade sai de planilha.',
-        whatWeDo: 'O agente compara a programação nova com a anterior e aponta o item que fica sem cobertura.',
-        measure: 'Horas por semana para replanejar depois de cada programação',
+        problem: 'A programação EDI muda toda semana, e o cruzamento com estoque sai de planilha.',
+        whatWeDo: 'O agente compara a programação nova com a anterior e aponta o item sem cobertura.',
+        measure: 'Horas por semana para replanejar',
       },
       {
         area: 'Engenharia',
-        problem: 'Trocar processo, ferramenta ou fornecedor pede saber que documentos do PPAP revisar, e isso depende de memória.',
-        whatWeDo: 'O agente lista os documentos afetados pela mudança, do FMEA ao pacote de PPAP.',
+        problem: 'Saber que documentos do PPAP revisar numa mudança depende de memória.',
+        whatWeDo: 'O agente lista os documentos afetados, do FMEA ao pacote de PPAP.',
         measure: 'Tempo para fechar uma mudança de engenharia',
       },
       {
         area: 'Sistema da qualidade',
         problem: 'Evidências da IATF 16949 ficam em pastas diferentes, e cada auditoria vira mutirão.',
-        whatWeDo: 'O agente encontra calibração, MSA e treinamento por requisito, com a fonte de cada evidência.',
+        whatWeDo: 'O agente encontra calibração, MSA e treinamento por requisito, com a fonte.',
         measure: 'Horas da equipe para preparar uma auditoria',
       },
     ],
@@ -80,45 +80,45 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'A programação muda toda semana',
-        body: 'Chega por EDI, mexe no firme e no previsto e precisa virar ordem de produção e de compra sem erro.',
+        body: 'Ela mexe no firme e no previsto e precisa virar ordem de produção e de compra sem erro.',
       },
       {
         title: '8D aberto com prazo de cliente',
-        body: 'A montadora pede contenção em horas e 8D em dias. Achar ocorrências parecidas, FMEA e plano de controle toma esse tempo.',
+        body: 'A montadora pede contenção em horas e 8D em dias.',
       },
       {
         title: 'Mudança que mexe no PPAP',
-        body: 'Trocar processo, ferramenta ou fornecedor pede revisar FMEA, plano de controle e instruções. Saber o que revisar depende de memória.',
+        body: 'Trocar processo, ferramenta ou fornecedor pede revisar FMEA, plano de controle e instruções.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa fabricante de autopeças',
-    intro: 'Exemplos ilustrativos. O que o agente produz é rascunho revisado por um responsável, dentro do sistema da qualidade da empresa.',
+    intro: 'Exemplos ilustrativos. O agente produz rascunho, revisado por um responsável dentro do sistema da qualidade.',
     items: [
       {
         area: 'Qualidade',
         title: '8D com histórico e FMEA à mão',
-        body: 'Encontra ocorrências parecidas, ações tomadas, FMEA e plano de controle, e prepara o rascunho do 8D.',
-        example: '“Já tivemos reclamação de rebarba no furo deste suporte? Qual foi a causa raiz no 8D?”',
+        body: 'Encontra ocorrências parecidas, ações tomadas, FMEA e plano de controle.',
+        example: '“Já tivemos rebarba no furo deste suporte? Qual foi a causa raiz?”',
       },
       {
         area: 'PCP e logística',
         title: 'Programação EDI virando plano',
-        body: 'Compara a programação nova com a anterior, o estoque e a capacidade, e aponta o que muda na produção e nas compras.',
-        example: '“O que mudou na programação desta semana e qual item fica sem cobertura?”',
+        body: 'Aponta o que muda na produção e nas compras a cada programação.',
+        example: '“Qual item fica sem cobertura com a programação desta semana?”',
       },
       {
         area: 'Engenharia e APQP',
         title: 'Gestão de mudança com rastreio',
-        body: 'Indica os documentos que precisam de revisão quando muda processo, ferramenta ou fornecedor.',
-        example: '“Se trocarmos o fornecedor da bucha, que documentos do PPAP desta peça precisam ser revisados?”',
+        body: 'Indica os documentos a revisar quando muda processo, ferramenta ou fornecedor.',
+        example: '“Se trocarmos o fornecedor da bucha, o que do PPAP precisa ser revisado?”',
       },
       {
         area: 'Manutenção e ferramentaria',
         title: 'Histórico de prensa e ferramenta',
-        body: 'Preventiva, ordens de serviço, golpes de ferramenta e falhas anteriores no celular do técnico.',
-        example: '“Quantos golpes a ferramenta 88-14 tem desde a última afiação e qual é o limite?”',
+        body: 'Preventiva, ordens de serviço e golpes de ferramenta no celular do técnico.',
+        example: '“Quantos golpes a ferramenta 88-14 tem desde a última afiação?”',
       },
     ],
   },
@@ -131,7 +131,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa fabricante de autopeças',
     body: [
-      'Programação, ordens, FMEA, planos de controle, PPAP, 8D e histórico de manutenção entram ligados pelo código da peça e pelo cliente, que é como a montadora cobra. Cada resposta cita documento e revisão, e o acesso segue o perfil de cada área.',
+      'Programação, ordens, FMEA, PPAP, 8D e manutenção entram ligados pelo código da peça e pelo cliente, que é como a montadora cobra. Cada resposta cita documento e revisão.',
     ],
     inputs: [
       'Programação EDI, ordens e estoque do ERP',
@@ -143,24 +143,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível numa fornecedora de montadoras',
-    intro: 'Uma fabricante de autopeças recebe reclamações com prazo curto, e a qualidade gasta a maior parte de cada 8D procurando histórico.',
+    intro: 'A qualidade gasta a maior parte de cada 8D procurando histórico. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Medimos o tempo dos últimos 8D até a contenção e até o fechamento, e combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Base da qualidade',
-        body: '8D anteriores, FMEA, planos de controle e reclamações organizados por peça e por cliente.',
-      },
-      {
-        title: 'Piloto na qualidade',
-        body: 'Os engenheiros usam o assistente nos 8D novos e revisam e assinam cada rascunho.',
-      },
-      {
-        title: 'Expansão',
-        body: 'Com o critério atingido, a mesma base passa a apoiar a gestão de mudança e a auditoria.',
-      },
+      { title: 'Diagnóstico', body: 'Medimos o tempo dos últimos 8D até a contenção e o fechamento.' },
+      { title: 'Base da qualidade', body: '8D anteriores, FMEA, planos de controle e reclamações organizados por peça e cliente.' },
+      { title: 'Piloto na qualidade', body: 'Os engenheiros usam o assistente nos 8D novos e assinam cada rascunho.' },
+      { title: 'Expansão', body: 'Com o critério atingido, a mesma base apoia a gestão de mudança e a auditoria.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -171,24 +159,24 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Os dados das montadoras ficam protegidos?',
-      a: 'Tratamos desenhos e programações como confidenciais. Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI, com acesso por perfil e registro de uso, e não treinam modelos de terceiros.',
+      a: 'Desenhos e programações ficam na sua infraestrutura ou numa nuvem aprovada pela TI, com acesso por perfil. Eles não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP e com o EDI?',
-      a: 'Lemos o ERP já implantado e as programações que chegam por EDI, pelo caminho que a TI aprovar.',
+      a: 'Lemos o ERP e as programações que chegam por EDI, pelo caminho que a TI aprovar.',
     },
     {
       q: 'A Torno é certificada IATF 16949?',
-      a: 'Não. A IATF 16949 certifica o sistema da qualidade da fábrica, e trabalhamos dentro dele. O que o assistente produz é rascunho, aprovado por quem a empresa designar.',
+      a: 'Não. A IATF 16949 certifica o sistema da qualidade da fábrica, e trabalhamos dentro dele. O assistente produz rascunho, aprovado por quem a empresa designar.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quantos 8D a qualidade abriu no último trimestre e onde o tempo foi gasto. Saímos com uma ideia de onde o diagnóstico começaria.',
+    body: 'Conte quantos 8D a qualidade abriu no último trimestre. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {

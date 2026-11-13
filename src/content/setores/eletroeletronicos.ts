@@ -11,13 +11,13 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias de material elétrico e eletroeletrônicos',
     title: 'Norma, ensaio e número de série consultados numa pergunta',
-    lead: 'A Torno junta ERP, engenharia, normas, ensaios, rastreabilidade de série e chamados de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam engenharia, qualidade, assistência e suprimentos. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno junta ERP, engenharia, normas, ensaios, rastreabilidade de série e chamados de assistência num cérebro da operação. Em cima dele, agentes de IA ajudam engenharia, qualidade e assistência.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Produto cada vez mais técnico',
     body: [
-      'A indústria elétrica e eletrônica faturou R$ 270,8 bilhões em 2025, segundo a Abinee. Cada produto responde a normas, ensaios e certificação, e a informação que libera um lote fica espalhada por muitos documentos.',
+      'A indústria elétrica e eletrônica faturou R$ 270,8 bilhões em 2025, segundo a Abinee. Cada produto responde a normas e ensaios, e a informação que libera um lote fica espalhada.',
     ],
     refs: [[1]],
   },
@@ -55,29 +55,29 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Engenharia de produto',
-        problem: 'Comercial, qualidade e assistência perguntam à engenharia qual norma se aplica e o que mudou entre revisões.',
-        whatWeDo: 'Um assistente responde a partir de especificações e ensaios aprovados, citando a revisão vigente.',
+        problem: 'Outras áreas perguntam à engenharia qual norma se aplica e o que mudou entre revisões.',
+        whatWeDo: 'Um assistente responde a partir de especificações e ensaios aprovados, citando a revisão.',
         measure: 'Horas por semana da engenharia respondendo outras áreas',
       },
       {
         area: 'Qualidade e ensaios',
-        problem: 'Lote de componente, teste final e firmware de cada número de série ficam em sistemas separados.',
-        whatWeDo: 'O agente cruza esses registros por número de série e prepara o rascunho da análise de causa.',
+        problem: 'Lote de componente, teste final e firmware de cada série ficam em sistemas separados.',
+        whatWeDo: 'O agente cruza os registros por número de série e prepara o rascunho da análise de causa.',
         measure: 'Tempo para achar a causa de uma reprovação no teste final',
       },
       {
         area: 'Normas e certificação',
-        problem: 'Uma nova edição de norma exige varrer à mão produtos, fichas, certificados e ensaios.',
+        problem: 'Uma nova edição de norma exige varrer produtos, certificados e ensaios à mão.',
         whatWeDo: 'O agente lista o que cita a edição anterior, para a engenharia decidir o que refazer.',
         measure: 'Tempo para levantar o impacto de uma mudança de norma',
       },
       {
         area: 'Assistência técnica',
-        problem: 'O técnico recebe a falha de campo sem a configuração, os testes de saída e as falhas parecidas.',
+        problem: 'O técnico recebe a falha de campo sem a configuração e os testes de saída.',
         whatWeDo: 'O histórico do equipamento pelo número de série chega ao celular do técnico.',
         measure: 'Tempo até o diagnóstico de um chamado de campo',
       },
@@ -88,15 +88,15 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'Engenharia consultada para tudo',
-        body: 'Comercial, assistência e qualidade perguntam qual norma se aplica, qual a revisão do produto e o que mudou entre versões.',
+        body: 'Comercial, assistência e qualidade dependem dela para saber norma, revisão e o que mudou.',
       },
       {
         title: 'Rastreabilidade de série em sistemas separados',
-        body: 'Lote de componente, teste final e firmware de cada número de série ficam em lugares diferentes.',
+        body: 'Componente, teste final e firmware de cada série ficam em lugares diferentes.',
       },
       {
         title: 'Nova edição de norma vira projeto à parte',
-        body: 'Descobrir quais produtos, fichas, certificados e ensaios uma mudança de norma afeta exige varredura manual.',
+        body: 'Descobrir o que uma mudança de norma afeta exige varredura manual.',
       },
     ],
   },
@@ -107,26 +107,26 @@ export const setor: SectorLanding = {
       {
         area: 'Engenharia de produto',
         title: 'Revisões, normas e decisões de projeto',
-        body: 'Busca em especificações, listas de materiais, ensaios e registros de mudança, citando a revisão vigente.',
-        example: '“Quais produtos usam o relé K-220 e que norma rege o ensaio de elevação de temperatura deles?”',
+        body: 'Busca em especificações, listas de materiais, ensaios e registros de mudança.',
+        example: '“Quais produtos usam o relé K-220 e que norma rege o ensaio deles?”',
       },
       {
         area: 'Qualidade e ensaios',
         title: 'Teste final e não conformidade por série',
-        body: 'Cruza teste final, lote de componentes e não conformidades por número de série.',
+        body: 'Cruza teste final, lote de componentes e não conformidades.',
         example: '“As falhas de isolação desta semana vieram de qual lote de transformador?”',
       },
       {
         area: 'Assistência técnica',
-        title: 'Histórico do equipamento pelo número de série',
-        body: 'Configuração, firmware, teste final e chamados anteriores no celular do técnico.',
-        example: '“O inversor série 24B-01877 saiu com qual firmware e já teve chamado?”',
+        title: 'Histórico do equipamento pela série',
+        body: 'Configuração, firmware e chamados anteriores no celular do técnico.',
+        example: '“O inversor 24B-01877 saiu com qual firmware e já teve chamado?”',
       },
       {
         area: 'Suprimentos',
         title: 'Componente em falta e alternativa aprovada',
-        body: 'Encontra alternativas já homologadas pela engenharia e os produtos afetados quando um componente falta.',
-        example: '“Se faltar o capacitor C-4471, que alternativa já foi aprovada e em quais placas?”',
+        body: 'Encontra alternativas já homologadas e os produtos afetados.',
+        example: '“Que alternativa ao capacitor C-4471 já foi aprovada e em quais placas?”',
       },
     ],
   },
@@ -139,7 +139,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa indústria eletroeletrônica',
     body: [
-      'Ordens, lotes de componentes, especificações, ensaios, testes finais e chamados entram ligados pelo número de série e pela revisão do produto. As normas entram com o controle de edição que a empresa já mantém, e cada resposta cita documento e revisão.',
+      'Ordens, componentes, especificações, ensaios, testes e chamados entram ligados pelo número de série e pela revisão do produto. Cada resposta cita documento e revisão.',
     ],
     inputs: [
       'Ordens, lotes e expedição por série do ERP ou do MES',
@@ -151,24 +151,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível numa fabricante com engenharia sobrecarregada',
-    intro: 'Numa indústria de equipamentos elétricos, a engenharia gasta boa parte da semana respondendo comercial, qualidade e assistência.',
+    intro: 'A engenharia gasta boa parte da semana respondendo outras áreas. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'A engenharia registra as consultas que recebe, de quem e sobre o quê. Combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Base técnica',
-        body: 'Especificações, revisões, ensaios e fichas aprovadas, com permissões por área.',
-      },
-      {
-        title: 'Piloto com comercial e assistência',
-        body: 'Essas áreas consultam o assistente antes da engenharia. O que ele não responde com fonte segue para a engenharia, como antes.',
-      },
-      {
-        title: 'Expansão',
-        body: 'Com o critério atingido, a qualidade passa a usar a rastreabilidade por série na mesma base.',
-      },
+      { title: 'Diagnóstico', body: 'A engenharia registra as consultas que recebe, de quem e sobre o quê.' },
+      { title: 'Base técnica', body: 'Especificações, revisões, ensaios e fichas aprovadas, com permissões por área.' },
+      { title: 'Piloto com comercial e assistência', body: 'Elas consultam o assistente primeiro. O que ele não responde com fonte segue para a engenharia.' },
+      { title: 'Expansão', body: 'Com o critério atingido, a qualidade passa a usar a rastreabilidade por série.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -179,24 +167,24 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Nossos projetos e firmware ficam protegidos?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI. Projetos, código e custos ficam restritos por perfil, o uso fica registrado e os dados não treinam modelos de terceiros.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI. Projetos, código e custos ficam restritos por perfil e não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP, MES e PLM?',
-      a: 'Lemos os sistemas já implantados pelo caminho que a TI aprovar, seja API, réplica do banco ou exportação agendada.',
+      a: 'Lemos os sistemas já implantados pelo caminho que a TI aprovar: API, réplica do banco ou exportação agendada.',
     },
     {
       q: 'Dá para confiar numa resposta sobre norma?',
-      a: 'O assistente responde só com os documentos da empresa e cita documento e revisão. Quando não encontra fonte, diz isso. Decisões de conformidade continuam com a engenharia.',
+      a: 'O assistente responde só com os documentos da empresa e cita a revisão. Quando não encontra fonte, diz isso. A decisão de conformidade segue com a engenharia.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quais perguntas mais chegam à sua engenharia e de quais áreas. Saímos com uma ideia de onde o diagnóstico começaria.',
+    body: 'Conte quais perguntas mais chegam à sua engenharia. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {

@@ -11,13 +11,13 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias de plásticos e embalagens',
     title: 'O setup que deu certo, à mão antes da próxima troca de molde',
-    lead: 'A Torno junta ERP, fichas de processo, histórico de setup, refugo e o saber dos preparadores num cérebro da operação. Em cima dele, agentes de IA atendem processo, PCP, qualidade e ferramentaria. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno junta ERP, fichas de processo, histórico de setup, refugo e o saber dos preparadores num cérebro da operação. Em cima dele, agentes de IA atendem processo, PCP, qualidade e ferramentaria.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'A IA chegou ao escritório antes de chegar à máquina',
     body: [
-      'Entre as indústrias brasileiras que usam IA, 87,9% a aplicam na administração (IBGE). Na injetora, na sopradora e na extrusora, o processo ainda vive nas fichas e na experiência de quem faz o setup.',
+      'Entre as indústrias brasileiras que usam IA, 87,9% a aplicam na administração (IBGE). Na injetora e na extrusora, o processo ainda vive nas fichas e na experiência de quem faz o setup.',
     ],
     refs: [[1]],
   },
@@ -28,14 +28,6 @@ export const setor: SectorLanding = {
     source: 1,
   },
   proofPoints: [
-    {
-      value: 'cerca de 1 em 5',
-      label: 'indústrias brasileiras usa IA na produção',
-      context: 'Indústria de transformação, todos os setores, segundo o IBGE',
-      area: 'Produção',
-      source: 0,
-      scope: 'vizinho',
-    },
     {
       value: 'mais de 80%',
       label: 'de acerto na previsão de falhas de qualidade, num piloto com IA',
@@ -55,29 +47,29 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Processo e setup',
-        problem: 'O molde só roda bem com o ajuste que um preparador conhece, e quando ele falta o setup demora.',
-        whatWeDo: 'Um agente traz a ficha, os últimos setups aprovados e as observações dos preparadores para cada molde e máquina.',
+        problem: 'O molde só roda bem com o ajuste que um preparador conhece.',
+        whatWeDo: 'Um agente traz a ficha, os últimos setups aprovados e as observações dos preparadores por molde e máquina.',
         measure: 'Tempo de setup e refugo de partida por turno',
       },
       {
         area: 'PCP',
-        problem: 'Purga, tempo de troca e peças descartadas ficam em apontamentos separados.',
+        problem: 'Purga, tempo de troca e descarte ficam em apontamentos separados.',
         whatWeDo: 'O agente cruza carteira, moldes e resina e sugere sequências que agrupam cores e materiais.',
         measure: 'Horas e material perdidos em troca de cor por semana',
       },
       {
         area: 'Ferramentaria',
-        problem: 'Ciclos, manutenções e problemas de cada molde estão entre ERP, planilhas e o caderno da ferramentaria.',
+        problem: 'Ciclos e manutenções de cada molde estão entre ERP, planilhas e caderno.',
         whatWeDo: 'A vida do molde fica numa consulta, no celular do ferramenteiro.',
         measure: 'Paradas não planejadas por molde',
       },
       {
         area: 'Comercial e qualidade',
-        problem: 'Comprador de embalagem pede ficha técnica, certificado da resina e laudo por lote, e o comercial depende da qualidade.',
+        problem: 'Cada pedido de laudo ou certificado da resina tira a qualidade do trabalho.',
         whatWeDo: 'O comercial libera documentos que a qualidade já aprovou, sem abrir chamado.',
         measure: 'Tempo para enviar um laudo ao cliente',
       },
@@ -88,45 +80,45 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'Cada preparador regula de um jeito',
-        body: 'O molde só roda bem com o ajuste que o preparador do turno B conhece. Quando ele falta, o setup demora e o refugo de partida sobe.',
+        body: 'Quando o preparador do turno B falta, o setup demora e o refugo de partida sobe.',
       },
       {
         title: 'Troca de cor e de resina sem conta fechada',
-        body: 'Purga, tempo de troca e descarte ficam em apontamentos separados. Fica difícil saber qual sequência perde menos.',
+        body: 'Fica difícil saber qual sequência perde menos.',
       },
       {
         title: 'Histórico do molde espalhado',
-        body: 'Manutenções, ciclos e problemas recorrentes de cada molde estão entre o ERP, planilhas e o caderno da ferramentaria.',
+        body: 'Problemas recorrentes de cada molde dependem de quem lembra.',
       },
     ],
   },
   areas: {
     title: 'Onde os agentes trabalham numa indústria de plásticos',
-    intro: 'Exemplos ilustrativos. No diagnóstico escolhemos a área em que o ganho é mais fácil de medir, muitas vezes o setup.',
+    intro: 'Exemplos ilustrativos. Muitas vezes o ganho mais fácil de medir está no setup.',
     items: [
       {
         area: 'Processo e setup',
         title: 'Parâmetros que funcionaram, por molde e máquina',
-        body: 'Ficha de processo, últimos setups aprovados e observações dos preparadores para cada molde, máquina e resina.',
-        example: '“Que parâmetros usamos no molde 214 na injetora 9 da última vez que rodou sem rebarba?”',
+        body: 'Ficha de processo, setups aprovados e observações dos preparadores.',
+        example: '“Que parâmetros usamos no molde 214 na injetora 9 quando rodou sem rebarba?”',
       },
       {
         area: 'PCP',
         title: 'Sequência com menos troca de cor',
-        body: 'Consulta carteira, moldes, máquinas e estoque de resina, e sugere sequências que agrupam cores e materiais.',
-        example: '“Qual sequência para a semana reduz as trocas de cor na linha de sopro?”',
+        body: 'Carteira, moldes, máquinas e estoque de resina numa consulta.',
+        example: '“Qual sequência da semana tem menos trocas de cor na linha de sopro?”',
       },
       {
         area: 'Qualidade',
         title: 'Refugo com causa registrada',
-        body: 'Reúne refugo, não conformidades e ações anteriores por item, molde e turno, e prepara o rascunho da análise.',
-        example: '“Qual o histórico de chupagem na tampa 38 mm e o que resolveu da última vez?”',
+        body: 'Refugo, não conformidades e ações anteriores por item, molde e turno.',
+        example: '“O que resolveu a chupagem na tampa 38 mm da última vez?”',
       },
       {
         area: 'Ferramentaria',
         title: 'Vida do molde na bancada',
-        body: 'Ciclos, preventivas, peças de reposição e desenhos do molde no celular do ferramenteiro.',
-        example: '“Quantos ciclos o molde 214 tem desde a última revisão e quais peças foram trocadas?”',
+        body: 'Ciclos, preventivas e peças de reposição do molde.',
+        example: '“Quantos ciclos o molde 214 tem desde a última revisão?”',
       },
     ],
   },
@@ -139,7 +131,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa transformadora',
     body: [
-      'Carteira, apontamentos, fichas de processo, histórico de moldes e refugo entram ligados por molde, máquina e item, as chaves que o chão de fábrica já usa. O saber dos preparadores entra em entrevistas revisadas por eles, e cada resposta cita a fonte.',
+      'Carteira, apontamentos, fichas de processo, moldes e refugo entram ligados por molde, máquina e item, as chaves que o chão de fábrica já usa. O saber dos preparadores entra em entrevistas revisadas por eles.',
     ],
     inputs: [
       'Carteira, OPs e apontamentos do ERP ou do MES',
@@ -151,24 +143,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível numa injetora com muitas trocas de molde',
-    intro: 'Uma indústria de injeção faz dezenas de setups por semana, e o tempo de cada um varia muito entre turnos.',
+    intro: 'Dezenas de setups por semana, com tempos que variam muito entre turnos. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Levantamos o tempo de setup e o refugo de partida por turno nas últimas semanas e combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Base de processo',
-        body: 'Fichas, apontamentos de setup e entrevistas com os preparadores de referência, por molde e máquina.',
-      },
-      {
-        title: 'Piloto numa célula',
-        body: 'Os preparadores consultam o assistente no tablet antes de cada setup e registram o que ajustaram.',
-      },
-      {
-        title: 'Expansão',
-        body: 'Com o critério atingido, a base se estende às outras células e à ferramentaria.',
-      },
+      { title: 'Diagnóstico', body: 'Levantamos tempo de setup e refugo de partida por turno e combinamos o critério de sucesso.' },
+      { title: 'Base de processo', body: 'Fichas, apontamentos de setup e entrevistas com os preparadores de referência.' },
+      { title: 'Piloto numa célula', body: 'Os preparadores consultam o assistente antes de cada setup e registram o ajuste.' },
+      { title: 'Expansão', body: 'Com o critério atingido, a base chega às outras células e à ferramentaria.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -179,24 +159,24 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Nossos parâmetros de processo ficam protegidos?',
-      a: 'Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI, com acesso por perfil e registro de uso, e não treinam modelos de terceiros.',
+      a: 'Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI, com acesso por perfil, e não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP e com o apontamento das máquinas?',
-      a: 'Lemos o ERP e o MES já implantados, pelo caminho que a TI aprovar. Onde o apontamento ainda é em papel, o diagnóstico avalia se vale começar por um registro simples.',
+      a: 'Lemos o ERP e o MES pelo caminho que a TI aprovar. Onde o apontamento é em papel, o diagnóstico avalia começar por um registro simples.',
     },
     {
       q: 'E o conhecimento dos preparadores mais antigos?',
-      a: 'Entrevistamos os preparadores de referência e acompanhamos setups. Eles revisam o que foi escrito, e cada ajuste fica com o nome de quem validou.',
+      a: 'Entrevistamos os preparadores e acompanhamos setups. Cada ajuste fica com o nome de quem validou.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
     title: 'Comece por uma conversa de 45 minutos',
-    body: 'Conte quantos setups a fábrica faz por semana e onde o refugo mais pesa. Saímos com uma ideia de onde o diagnóstico começaria.',
+    body: 'Conte quantos setups a fábrica faz por semana. Saímos com uma ideia de onde o diagnóstico começaria.',
   },
   sources: [
     {

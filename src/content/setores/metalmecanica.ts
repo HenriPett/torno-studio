@@ -11,19 +11,19 @@ export const setor: SectorLanding = {
   hero: {
     eyebrow: 'Para indústrias metalmecânicas',
     title: 'Orçamento por desenho sem esperar o veterano da usinagem',
-    lead: 'A Torno junta ERP, roteiros, apontamentos, desenhos de cliente, orçamentos antigos e registros de qualidade num cérebro da operação. Em cima dele, agentes de IA atendem orçamentação, PCP, qualidade e manutenção. Implantamos por etapas, com a sua TI.',
+    lead: 'A Torno junta ERP, roteiros, apontamentos, desenhos de cliente, orçamentos antigos e registros de qualidade num cérebro da operação. Em cima dele, agentes de IA atendem orçamentação, PCP e qualidade.',
     cta: 'Agendar diagnóstico',
   },
   context: {
     title: 'Muita informação por pedido',
     body: [
-      'Cada pedido começa com um desenho do cliente e termina com um certificado. No meio, orçamento, roteiro, programação e inspeção dependem de orçamentos antigos e da experiência de poucas pessoas.',
+      'Cada pedido começa com um desenho do cliente e termina com um certificado. No meio, orçamento, roteiro e inspeção dependem da experiência de poucas pessoas.',
     ],
   },
   adoption: {
     useAI: 'cerca de 3 a 5 em 10',
     inProduction: 'cerca de 2 a 4 em 10',
-    reading: 'A metalurgia está à frente, com cerca de metade usando IA. Em produtos de metal, onde está a usinagem sob encomenda, cerca de 3 em 10 usam, e cerca de 2 em 10 na produção.',
+    reading: 'Na metalurgia, cerca de metade usa IA. Em produtos de metal, onde fica a usinagem sob encomenda, cerca de 3 em 10, e cerca de 2 em 10 na produção.',
     source: 0,
   },
   proofPoints: [
@@ -46,29 +46,29 @@ export const setor: SectorLanding = {
   ],
   help: {
     title: 'Onde entramos e o que medimos',
-    intro: 'No piloto, medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
+    intro: 'Em cada piloto medimos o indicador da área antes e depois. O diagnóstico escolhe por onde começar.',
     items: [
       {
         area: 'Orçamentação',
-        problem: 'Orçar uma peça nova exige quem já fez algo parecido, e a cotação espera quando essa pessoa está na produção.',
+        problem: 'Orçar uma peça nova espera quem já fez algo parecido.',
         whatWeDo: 'Um agente lê o desenho, encontra peças semelhantes e traz roteiro, tempo apontado e custo realizado.',
         measure: 'Cotações respondidas no prazo pedido pelo cliente',
       },
       {
         area: 'PCP',
-        problem: 'O roteiro do ERP diz uma coisa, o apontamento mostra outra e a programação segue a experiência do encarregado.',
-        whatWeDo: 'O agente compara tempo padrão e apontado por operação e avisa quando uma ordem vai passar da data.',
+        problem: 'Roteiro do ERP e apontamento não batem, e a programação segue a experiência do encarregado.',
+        whatWeDo: 'O agente compara tempo padrão e apontado e avisa quando uma ordem vai passar da data.',
         measure: 'Ordens entregues na data prometida',
       },
       {
         area: 'Qualidade',
-        problem: 'Certificado de material, relatório dimensional e plano de controle são juntados à mão em cada pedido.',
-        whatWeDo: 'O agente monta o pacote de documentação do pedido e o rascunho do 8D quando há não conformidade.',
+        problem: 'Certificados e relatórios dimensionais são juntados à mão em cada pedido.',
+        whatWeDo: 'O agente monta o pacote de documentação do pedido e o rascunho do 8D.',
         measure: 'Horas para montar a documentação de um pedido',
       },
       {
         area: 'Processo e chão de fábrica',
-        problem: 'A mesma não conformidade volta em peças parecidas porque a ação anterior não chega a quem opera a máquina.',
+        problem: 'A ação anterior contra uma não conformidade não chega a quem opera a máquina.',
         whatWeDo: 'A ação tomada da última vez aparece para quem programa e para quem opera, com a fonte.',
         measure: 'Não conformidades repetidas em peças parecidas',
       },
@@ -79,15 +79,15 @@ export const setor: SectorLanding = {
     items: [
       {
         title: 'Orçamento por desenho depende de duas pessoas',
-        body: 'Tempo de usinagem, material, tratamento térmico e terceiros de uma peça nova pedem quem já fez algo parecido.',
+        body: 'Tempo de usinagem, material e terceiros de uma peça nova pedem quem já fez algo parecido.',
       },
       {
         title: 'Roteiro e tempo padrão desatualizados',
-        body: 'O roteiro do ERP diz uma coisa, o apontamento mostra outra e a programação segue a experiência do encarregado.',
+        body: 'O roteiro do ERP diz uma coisa e o apontamento mostra outra.',
       },
       {
         title: 'Retrabalho que volta',
-        body: 'A mesma não conformidade reaparece em peças parecidas porque a ação anterior não chega a quem opera a máquina.',
+        body: 'A mesma não conformidade reaparece em peças parecidas.',
       },
     ],
   },
@@ -98,26 +98,26 @@ export const setor: SectorLanding = {
       {
         area: 'Orçamentação',
         title: 'Cotação a partir de peças semelhantes',
-        body: 'Lê o desenho do cliente, encontra peças parecidas e traz roteiro, tempos apontados e custo realizado.',
-        example: '“Que flanges em aço 1045 acima de 300 mm de diâmetro já usinamos e quanto tempo levaram no torno CNC?”',
+        body: 'Peças parecidas com roteiro, tempos apontados e custo realizado.',
+        example: '“Que flanges em aço 1045 acima de 300 mm já usinamos e quanto levaram no torno CNC?”',
       },
       {
         area: 'PCP',
         title: 'Programação com o tempo que a fábrica faz',
-        body: 'Compara tempo padrão e apontado por operação e máquina, e avisa quando uma ordem vai passar da data.',
-        example: '“Quais ordens da caldeiraria estão paradas por falta de chapa e quais dependem de terceiro?”',
+        body: 'Tempo padrão e apontado por operação e máquina.',
+        example: '“Quais ordens da caldeiraria estão paradas por falta de chapa?”',
       },
       {
         area: 'Qualidade',
-        title: 'Documentação do pedido reunida num lugar',
-        body: 'Reúne certificados, relatórios dimensionais e inspeções do pedido, e prepara o rascunho do 8D.',
-        example: '“Monte o pacote de documentação do pedido 7731 com certificados de material e relatório dimensional.”',
+        title: 'Documentação do pedido num lugar',
+        body: 'Certificados, relatórios dimensionais e inspeções do pedido.',
+        example: '“Monte o pacote de documentação do pedido 7731.”',
       },
       {
         area: 'Manutenção',
         title: 'Histórico da máquina no chão de fábrica',
-        body: 'Manual, preventiva e ordens anteriores de cada centro de usinagem no celular do técnico.',
-        example: '“Qual foi a última falha no eixo-árvore do centro de usinagem 4 e o que foi trocado?”',
+        body: 'Manual, preventiva e ordens anteriores no celular do técnico.',
+        example: '“Qual foi a última falha no eixo-árvore do centro de usinagem 4?”',
       },
     ],
   },
@@ -130,7 +130,7 @@ export const setor: SectorLanding = {
   brain: {
     title: 'Como o cérebro da operação se monta numa metalmecânica',
     body: [
-      'Pedidos, roteiros, apontamentos, desenhos, orçamentos e registros de qualidade entram ligados por pedido, peça e máquina. Assim, a pergunta sobre uma peça nova encontra as parecidas, do orçamento à entrega. Custo e margem ficam com quem a empresa autorizar.',
+      'Pedidos, roteiros, apontamentos, desenhos, orçamentos e registros de qualidade entram ligados por pedido, peça e máquina. A pergunta sobre uma peça nova encontra as parecidas. Custo e margem ficam com quem a empresa autorizar.',
     ],
     inputs: [
       'Pedidos, roteiros, tempos padrão e apontamentos do ERP',
@@ -142,24 +142,12 @@ export const setor: SectorLanding = {
   },
   scenario: {
     title: 'Um cenário possível numa usinagem com fila de cotações',
-    intro: 'Uma metalmecânica recebe mais pedidos de cotação do que consegue orçar no prazo que o cliente pede.',
+    intro: 'Chegam mais pedidos de cotação do que dá para orçar no prazo. Um piloto poderia correr assim.',
     steps: [
-      {
-        title: 'Diagnóstico',
-        body: 'Levantamos as cotações dos últimos meses, quantas saíram no prazo e quanto cada uma levou. Combinamos o critério de sucesso.',
-      },
-      {
-        title: 'Base de peças já feitas',
-        body: 'Orçamentos antigos ligados a roteiro, apontamento e custo realizado, com desenhos indexados por material, forma e medida.',
-      },
-      {
-        title: 'Piloto com dois orçamentistas',
-        body: 'Eles usam o assistente nas cotações novas. Quando a peça é produzida, comparamos orçado e realizado.',
-      },
-      {
-        title: 'Próxima etapa',
-        body: 'Com o critério atingido, PCP e qualidade passam a usar a mesma base.',
-      },
+      { title: 'Diagnóstico', body: 'Levantamos quantas cotações saíram no prazo e quanto cada uma levou.' },
+      { title: 'Base de peças já feitas', body: 'Orçamentos antigos ligados a roteiro, apontamento e custo realizado.' },
+      { title: 'Piloto com dois orçamentistas', body: 'Eles usam o assistente nas cotações novas, e comparamos orçado e realizado.' },
+      { title: 'Próxima etapa', body: 'Com o critério atingido, PCP e qualidade passam a usar a mesma base.' },
     ],
     note: 'Cenário ilustrativo e hipotético, sem relação com uma empresa real.',
   },
@@ -170,19 +158,19 @@ export const setor: SectorLanding = {
   faq: [
     {
       q: 'Os desenhos dos nossos clientes ficam protegidos?',
-      a: 'Tratamos desenhos de cliente como sigilosos. Os dados ficam na infraestrutura da empresa ou numa nuvem aprovada pela TI, com acesso por perfil e registro de uso, e não treinam modelos de terceiros.',
+      a: 'Tratamos desenhos de cliente como sigilosos. Os dados ficam na sua infraestrutura ou numa nuvem aprovada pela TI, com acesso por perfil, e não treinam modelos de terceiros.',
     },
     {
       q: 'Funciona com o nosso ERP?',
-      a: 'Lemos o ERP já implantado, seja TOTVS, SAP, Senior ou outro, pelo caminho que a TI aprovar. Onde o apontamento é parcial ou em papel, o diagnóstico avalia o que dá para usar.',
+      a: 'Lemos o ERP já implantado pelo caminho que a TI aprovar. Onde o apontamento é parcial ou em papel, o diagnóstico avalia o que dá para usar.',
     },
     {
-      q: 'E o conhecimento dos programadores e encarregados mais antigos?',
-      a: 'Registramos em entrevistas e no acompanhamento do trabalho deles. Cada um revisa o que foi escrito, e quem chega consulta com a fonte e o nome de quem validou.',
+      q: 'E o conhecimento dos programadores mais antigos?',
+      a: 'Registramos em entrevistas e no acompanhamento do trabalho. Cada um revisa o que foi escrito e fica como fonte.',
     },
     {
       q: 'Quanto tempo leva e quanto custa?',
-      a: 'O diagnóstico está planejado para 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa depois dela tem proposta fechada, com prazo e critério de sucesso.',
+      a: 'O diagnóstico leva de 2 a 4 semanas. A conversa inicial não tem custo, e cada etapa tem proposta fechada.',
     },
   ],
   finalCta: {
