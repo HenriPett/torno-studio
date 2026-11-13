@@ -43,6 +43,8 @@ export interface ChromeCopy {
     illustration: string;
     source: string;
     bookingCta: string;
+    /** Microcopy ao lado do CTA de agenda: o botão marca a conversa inicial gratuita, não o diagnóstico (etapa paga). */
+    bookingNote: string;
   };
 }
 
@@ -88,6 +90,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
       illustration: 'Ilustração',
       source: 'Fonte',
       bookingCta: 'Agendar diagnóstico',
+      bookingNote: 'Começa por uma conversa de 45 min, sem custo.',
     },
   },
   en: {
@@ -131,6 +134,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
       illustration: 'Illustration',
       source: 'Source',
       bookingCta: 'Book a call',
+      bookingNote: 'Starts with a free 45-minute call.',
     },
   },
 };

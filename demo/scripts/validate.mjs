@@ -84,6 +84,7 @@ function validar(setor, d) {
       else if (tipo === 'arr') ok = isArr(v);
       else if (tipo === 'strarr') ok = isArr(v) && v.every(isStr);
       else if (tipo === 'obj') ok = isObj(v);
+      else if (tipo === 'bool') ok = typeof v === 'boolean';
       else if (tipo.startsWith('enum:')) {
         const nome = tipo.slice(5);
         ok = ENUM[nome].includes(v);
@@ -207,7 +208,15 @@ function validar(setor, d) {
     (x?.itens || []).forEach((it, j) => campos(`${r}.itens[${j}]`, it, { sku: 'str', quantidade: 'num', preco_unit: 'num' }));
   });
   const regras = lista('regras_comerciais');
-  regras.forEach((x, i) => campos(`regras_comerciais[${i}]`, x, { id: 'str', titulo: 'str', texto: 'str' }));
+  regras.forEach((x, i) => {
+    const r = `regras_comerciais[${i}] ${x?.id ?? ''}`;
+    campos(r, x, { id: 'str', titulo: 'str', texto: 'str', publica: 'bool?' });
+    // `publica: true` = o cliente pode ler no Portal: nada de alçada, gerente, diretoria nem meta
+    if (x?.publica === true && /al[çc]ada|gerente|diretor|\bmetas?\b|n[ãa]o confirmar|nunca prometer/i.test(`${x.titulo} ${x.texto}`)) {
+      err(`${r}: regra pública cita alçada, gerente, diretoria, meta ou instrução interna`);
+    }
+  });
+  if (regras.length && !regras.some((x) => x?.publica === true)) warn('regras_comerciais: nenhuma regra com publica:true (o Portal do cliente não terá condições comerciais)');
   const kpis = lista('kpis');
   kpis.forEach((x, i) => {
     const r = `kpis[${i}] ${x?.id ?? ''}`;

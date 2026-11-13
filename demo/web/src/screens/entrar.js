@@ -1,12 +1,14 @@
 // Tela de senha (UX §4.1). Também serve ao /admin (§4.11) com outro título e rótulo.
 // renderEntrar(alvo, {titulo, apoio, rotulo, aviso, nota, entrar(senha) → Promise, onSucesso()})
 // Erro 401/404 → "Link ou senha inválidos…"; rede/5xx → mensagem de "tente de novo". Sem alert().
+// O erro de senha recusada (401/403) leva a classe auth__error--senha: é o único que a dica esconde.
 
 import { h, icon, spinner } from '../ui.js';
 
 export function renderEntrar(alvo, {
   titulo = 'Esta demonstração é privada.',
-  apoio = 'Digite a senha que veio junto com o link.',
+  // o padrão diz o que vem depois da senha; o /admin passa apoio: null e não é afetado
+  apoio = 'Demonstração da Torno: uma IA que responde perguntas sobre a operação de uma fábrica, com a fonte de cada número. Digite a senha que veio com o link.',
   rotulo = 'Senha',
   aviso = null,
   nota = 'Não tem a senha? Peça a quem te enviou o link.',
@@ -62,6 +64,8 @@ export function renderEntrar(alvo, {
         erro.textContent = status === 401 || status === 404 || status === 403
           ? erroInvalido
           : 'Não conseguimos abrir a demonstração agora. Tente de novo em instantes.';
+        // só a senha recusada (401/403) some quando a dica de senha aparece (styles.css); rede/5xx fica
+        erro.classList.toggle('auth__error--senha', status === 401 || status === 403);
         erro.hidden = false;
         if (status === 401 || status === 404 || status === 403) {
           input.classList.add('is-invalid');

@@ -2,7 +2,7 @@
 // (absorve o antigo módulo de operadores; some com `operadores` desligado) e "Documentos" (busca local).
 // Exporta `drawersCerebro` (doc, saber, kpi, aprendizado) para a gaveta de ctx.openRef.
 import { h, icon, button, confirmInline, sparkline } from '../ui.js';
-import { normalize } from '../format.js';
+import { normalize, siglasNoTexto } from '../format.js';
 import { buscar as buscarLocal, perguntaDerivada } from '../ai/local-engine.js';
 import { TIPO_ROTULO } from '../learning.js';
 import { quando, cartaoFonte, atualizaQuandos } from '../ui/fontes.js';
@@ -288,7 +288,8 @@ export function render(el, ctx) {
     h('header', { class: 'cb-cab' },
       h('div', { class: 'cb-cab__textos' },
         h('h1', { class: 'cb-titulo' }, `Cérebro da ${empresa}`),
-        h('p', { class: 'cb-lead' }, 'Tudo o que a operação sabe, num lugar só. Cada resposta diz de onde veio.')),
+        // subtítulo fixo: explica o nome da marca ("cérebro da operação") para quem chega de fora
+        h('p', { class: 'cb-lead' }, 'Documentos, saber dos operadores e o que a sua equipe ensinou. É daqui que a IA tira as respostas.')),
       button('Ensinar o cérebro', { variant: 'primary', icone: 'lightbulb', onClick: () => ensinar(ctx, { origem: 'cerebro' }) })),
     numeros,
     aprendido.el,
@@ -354,6 +355,7 @@ function drawerKpi(info, ctx) {
   if (!k) return null;
   const ok = k.direcao === 'menor_melhor' ? k.valor <= k.meta : k.valor >= k.meta;
   const fontes = (k.fontes ?? []).map((r) => cartaoFonte(ctx, r, null)).filter(Boolean);
+  const siglas = siglasNoTexto(k.nome);
   let spark = null;
   try { spark = (k.tendencia ?? []).length > 1 ? sparkline(k.tendencia, { width: 400, height: 96, class: `cb-g__spark ${ok ? 'is-ok' : 'is-warn'}`, label: `Últimos ${k.tendencia.length} meses` }) : null; } catch { spark = null; }
   return {
@@ -364,6 +366,7 @@ function drawerKpi(info, ctx) {
         h('span', { class: 'cb-g__kpi-valor num' }, valorFmt(k.valor, k.unidade)),
         h('span', { class: ['cb-g__kpi-meta', ok ? 'is-ok' : 'is-warn'] }, `meta ${valorFmt(k.meta, k.unidade)} · ${ok ? 'dentro da meta' : 'fora da meta'}`)),
       spark ? h('div', { class: 'cb-g__spark-wrap' }, spark, h('span', { class: 'cb-g__spark-leg' }, `Últimos ${k.tendencia.length} meses`)) : null,
+      siglas.length ? secaoGaveta('O que a sigla quer dizer', fatos(siglas.map((x) => [x.sigla, cap(x.definicao)]))) : null,
       k.explicacao ? secaoGaveta('O que mudou', ...paragrafos(k.explicacao)) : null,
       (k.caminho ?? []).length ? secaoGaveta('Caminho até o dado', h('ol', { class: 'cb-g__passos' }, k.caminho.map((c) => h('li', null, c)))) : null,
       fontes.length ? secaoGaveta('Fontes', h('div', { class: 'cb-g__fontes' }, fontes)) : null),

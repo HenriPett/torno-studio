@@ -1936,7 +1936,8 @@
     {
       "id": "RC-13",
       "titulo": "Lote mínimo e cores especiais",
-      "texto": "Cor especial exige lote mínimo de 100 milheiros (ou 2.000 kg de filme). Masterbatch exclusivo de cliente é comprado sob pedido e o prazo começa na chegada dele."
+      "texto": "Cor especial exige lote mínimo de 100 milheiros (ou 2.000 kg de filme). Masterbatch exclusivo de cliente é comprado sob pedido e o prazo começa na chegada dele.",
+      "publica": true
     },
     {
       "id": "RC-14",
@@ -1951,7 +1952,8 @@
     {
       "id": "RC-16",
       "titulo": "Frete",
-      "texto": "Frete CIF para pedidos acima de R$ 15.000 em SC, PR e RS. Abaixo disso, FOB ou frete cobrado à parte."
+      "texto": "Frete CIF para pedidos acima de R$ 15.000 em SC, PR e RS. Abaixo disso, FOB ou frete cobrado à parte.",
+      "publica": true
     }
   ],
   "kpis": [

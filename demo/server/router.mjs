@@ -7,7 +7,7 @@ import {
   confereSenha, igualConstante, assina, confere, impressao, leCookies, cookie, apagaCookie, checaOrigem, espera,
 } from './auth.mjs';
 import {
-  getDemo, criaDemo, editaDemo, apagaDemo, listaDemos, registraAcesso, disponivel, publica, ErroValidacao, ID_RE,
+  getDemo, demoComAcessos, criaDemo, editaDemo, apagaDemo, listaDemos, registraAcesso, disponivel, publica, ErroValidacao, ID_RE,
 } from './demos.mjs';
 import { listaAprendizado, criaAprendizado, apagaAprendizado, zeraAprendizado } from './learning.mjs';
 import { conversa, iaInfo, ErroConversa } from './ai.mjs';
@@ -21,6 +21,7 @@ const TTL_ADMIN = 8 * 3600 * 1000;
 const ATRASO_FALHA = 400;
 const MAX_FALHAS_HORA = 20;
 const INVALIDO = 'Link ou senha inválidos';
+const DESATIVADO = 'Este link foi desativado ou expirou.';
 
 const BASE_HEADERS = {
   'cache-control': 'no-store',
@@ -78,7 +79,20 @@ async function sessaoDemo(request, env, store, id) {
   if (!d) return null;
   if (admin) return { demo: d, admin: true };
   if (!disponivel(d) || p.sv !== (d.senha_v ?? 1)) return null;
-  return { demo: d, admin: false };
+  // sessões de antes do sid: a impressão do próprio token faz o papel
+  return { demo: d, admin: false, sid: typeof p.sid === 'string' && /^[a-f0-9]{12}$/.test(p.sid) ? p.sid : impressao(segredo, leCookies(request)[`td_${id}`]).replace(/[^a-z0-9]/gi, '').slice(0, 12).toLowerCase() };
+}
+
+/**
+ * O cookie td_<id> é válido, assinado para esta demo e da senha atual, mas a demo existe e está
+ * desativada ou expirada? (só aí o /estado responde 410; qualquer outra falha continua 401)
+ */
+async function sessaoDeDemoIndisponivel(request, segredo, store, id) {
+  if (!ID_RE.test(id)) return false;
+  const p = confere(leCookies(request)[`td_${id}`], segredo);
+  if (!p || p.t !== 'demo' || p.id !== id) return false;
+  const d = await getDemo(store, id);
+  return !!d && !disponivel(d) && p.sv === (d.senha_v ?? 1);
 }
 
 /* ------------------------------------------------------------------ */
@@ -96,16 +110,28 @@ async function rotaDemo(request, env, store, partes, deps) {
     const d = ID_RE.test(id) ? await getDemo(store, id) : null;
     // Limite de tentativas erradas por demo e por hora (a senha legível tem ~21 bits): passou do
     // limite, responde igual a senha errada. Cada falha é uma chave própria (sem corrida de
-    // ler-somar-gravar entre requisições paralelas). Id inexistente não grava nada.
+    // ler-somar-gravar entre requisições paralelas). Id inexistente não grava nada. As janelas de
+    // horas anteriores não contam mais: são apagadas aqui mesmo.
     const hora = Math.floor(Date.now() / 3600e3);
-    const falhas = d ? (await store.list(`tentativas/${id}/${hora}-`)).length : 0;
+    let falhas = 0;
+    if (d) {
+      const chaves = await store.list(`tentativas/${id}/`);
+      const daHora = (k) => Number(k.split('/')[2]?.split('-')[0]);
+      const velhas = chaves.filter((k) => daHora(k) < hora);
+      falhas = chaves.filter((k) => daHora(k) >= hora).length;
+      if (velhas.length) await Promise.all(velhas.map((k) => store.delete(k).catch(() => {})));
+    }
     const ok = await confereSenha(typeof body.senha === 'string' ? body.senha.slice(0, 200) : '', d?.senha);
     if (!ok || !disponivel(d) || falhas >= MAX_FALHAS_HORA) {
       if (d && !ok) await store.set(`tentativas/${id}/${hora}-${randomBytes(6).toString('hex')}`, { em: new Date().toISOString() });
       await espera(ATRASO_FALHA);
+      // Senha certa, fora do limite de tentativas, mas a demo foi desativada ou expirou: 410, para a tela
+      // dizer isso (e não "senha errada"). Só quem sabe a senha descobre que o link existiu.
+      if (ok && falhas < MAX_FALHAS_HORA) return erro(410, DESATIVADO);
       return erro(401, INVALIDO);
     }
-    const token = assina({ t: 'demo', id, sv: d.senha_v ?? 1 }, segredo, TTL_DEMO);
+    // sid: identifica a sessão na contagem de acessos (um acesso por sessão a cada 10 min)
+    const token = assina({ t: 'demo', id, sv: d.senha_v ?? 1, sid: randomBytes(6).toString('hex') }, segredo, TTL_DEMO);
     return json({ ok: true }, 200, { 'set-cookie': cookie(request, `td_${id}`, token, TTL_DEMO / 1000) });
   }
   if (recurso === 'sair' && m === 'POST' && !sub) {
@@ -113,17 +139,24 @@ async function rotaDemo(request, env, store, partes, deps) {
   }
 
   const s = await sessaoDemo(request, env, store, id);
-  if (!s) { return erro(401, INVALIDO); }
+  if (!s) {
+    // C2: GET /estado com cookie válido e assinado para ESTA demo (a pessoa já tinha a senha), mas a demo foi
+    // desativada ou expirou → 410, para a tela final dizer isso. Sem cookie válido continua 401 (sem enumeração).
+    if (recurso === 'estado' && m === 'GET' && !sub && await sessaoDeDemoIndisponivel(request, segredo, store, id)) return erro(410, DESATIVADO);
+    return erro(401, INVALIDO);
+  }
   const { demo } = s;
 
   if (recurso === 'estado' && m === 'GET' && !sub) {
     const aprendizado = await listaAprendizado(store, id);
-    if (!s.admin) await registraAcesso(store, id);
+    if (!s.admin) await registraAcesso(store, id, s.sid);
     return json({
       demo: { id: demo.id, nome: demo.nome, setor: demo.setor, empresa_nome: demo.empresa_nome, modulos: demo.modulos },
       setor: pacote(demo.setor),
       aprendizado,
-      ia: iaInfo(env),
+      // C1: 'real' só com ANTHROPIC_API_KEY no servidor; sem ela a conversa é o motor local (o front não promete IA real)
+      ia: iaInfo(env).disponivel ? 'real' : 'local',
+      ia_modelo: iaInfo(env).modelo,
       admin: s.admin,
     });
   }
@@ -175,7 +208,7 @@ async function rotaAdmin(request, env, store, partes) {
   if (r0 === 'demos' && r1 && !r2) {
     if (!ID_RE.test(r1)) return erro(404, 'Demo não encontrada');
     if (m === 'GET') {
-      const d = await getDemo(store, r1);
+      const d = await demoComAcessos(store, r1);
       return d ? json({ ...publica(d), url: `/demo/${d.id}`, disponivel: disponivel(d) }) : erro(404, 'Demo não encontrada');
     }
     if (m === 'PATCH') {

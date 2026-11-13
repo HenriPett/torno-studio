@@ -40,6 +40,8 @@ const copy = getCopy(locale);
 const c = home[locale];
 const ids = c.ids;
 const cta = getChrome(locale).common.bookingCta;
+// O CTA marca a conversa inicial gratuita; o diagnóstico é a etapa paga seguinte.
+const bookingNote = getChrome(locale).common.bookingNote;
 const howWeWork = pathFor('howWeWork', locale);
 // Rótulos de interface das ilustrações (o conteúdo vem de home.ts).
 const ui = {
@@ -99,6 +101,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
         <div class="home-hero__copy">
           <SectionHeader as="h1" id={`${ids.hero}-title`} eyebrow={c.hero.eyebrow} title={c.hero.title} lead={c.hero.lead} accent>
             <BookingCta locale={locale} size="lg">{cta}</BookingCta>
+            <p class="home-hero__note">{bookingNote}</p>
             <a class="link link--arrow link--target" href={howWeWork}>{c.hero.secondary}</a>
           </SectionHeader>
           <ul class="home-hero__facts" role="list" data-hero-in>
@@ -113,6 +116,7 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
             tabsLabel={c.brain.demo.tabsLabel}
             items={[{ label: c.brain.demo.mockLabel, ...c.brain.mock }, ...c.brain.demo.items]}
           />
+          <p class="caption home-hero__demo-note">{c.hero.demoNote}</p>
         </div>
       </div>
     </Section>
@@ -278,7 +282,9 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
     </Section>
 
     <!-- 10. CTA final -->
-    <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} secondary={{ label: c.cta.secondary, href: pathFor('contact', locale) }} />
+    <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} secondary={{ label: c.cta.secondary, href: pathFor('contact', locale) }}>
+      {bookingNote}
+    </CtaBand>
   </main>
   <Footer locale={locale} routeId="home" />
 </Base>
@@ -307,6 +313,27 @@ const stats = c.proof.stats.map((s) => ({ ...s, source: { label: c.proof.statSou
 
   .home-hero__demo {
     min-inline-size: 0;
+  }
+
+  /* Microcopy do CTA (o diagnóstico é pago; o botão marca a conversa gratuita): no celular, logo abaixo do botão;
+     a partir de 640 px, numa linha própria abaixo do botão e do link. */
+  .home-hero__note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 40em) {
+    .home-hero__note {
+      order: 1;
+      flex-basis: 100%;
+    }
+  }
+
+  .home-hero__demo-note {
+    margin-block-start: var(--space-3);
+    color: var(--color-text-muted);
+    text-wrap: pretty;
   }
 
   /* Celular: o CTA do hero precisa ficar acima da faixa de consentimento na 1ª visita (CS-f, 360×640). */

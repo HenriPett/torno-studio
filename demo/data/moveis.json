@@ -2073,17 +2073,20 @@
     {
       "id": "RC-02",
       "titulo": "Pedido mínimo e frete",
-      "texto": "Pedido mínimo de R$ 8.000,00 para seriados. Frete CIF para Sul e Sudeste em pedidos acima de R$ 15.000,00; abaixo disso, frete FOB ou carga fracionada."
+      "texto": "Pedido mínimo de R$ 8.000,00 para seriados. Frete CIF para Sul e Sudeste em pedidos acima de R$ 15.000,00; abaixo disso, frete FOB ou carga fracionada.",
+      "publica": true
     },
     {
       "id": "RC-03",
       "titulo": "Prazo de entrega de seriados",
-      "texto": "Modelo com estoque acima do mínimo: embarque em até 5 dias úteis após a aprovação de crédito. Modelo abaixo do mínimo: o estoque fica reservado para pedidos já aprovados e o pedido novo entra com o prazo da próxima OP mais 3 dias úteis de expedição."
+      "texto": "Modelo com estoque acima do mínimo: embarque em até 5 dias úteis após a aprovação de crédito. Modelo abaixo do mínimo: o estoque fica reservado para pedidos já aprovados e o pedido novo entra com o prazo da próxima OP mais 3 dias úteis de expedição.",
+      "publica": true
     },
     {
       "id": "RC-04",
       "titulo": "Conferência técnica de planejados",
-      "texto": "Todo pedido de planejados passa pela conferência de módulos, medidas e ferragens da engenharia de produto antes do nesting. Pedido com item fora da regra volta ao lojista, e o prazo de 35 a 40 dias úteis conta a partir da aprovação."
+      "texto": "Todo pedido de planejados passa pela conferência de módulos, medidas e ferragens da engenharia de produto antes do nesting. Pedido com item fora da regra volta ao lojista, e o prazo de 35 a 40 dias úteis conta a partir da aprovação.",
+      "publica": true
     },
     {
       "id": "RC-05",
@@ -2093,7 +2096,8 @@
     {
       "id": "RC-06",
       "titulo": "Assistência técnica e garantia",
-      "texto": "Garantia de 1 ano para seriados e de 5 anos para ferragens dos planejados. Peça de reposição enviada em até 10 dias úteis após identificada. Acabamento descontinuado há mais de 3 anos: peça no acabamento mais próximo do catálogo."
+      "texto": "Garantia de 1 ano para seriados e de 5 anos para ferragens dos planejados. Peça de reposição enviada em até 10 dias úteis após identificada. Acabamento descontinuado há mais de 3 anos: peça no acabamento mais próximo do catálogo.",
+      "publica": true
     }
   ],
   "kpis": [
@@ -3220,7 +3224,7 @@
     {
       "modulo": "visao-geral",
       "pergunta": "O que eu preciso ver hoje?",
-      "resposta": "Há 4 OPs atrasadas (OP-71830, OP-71836, OP-71842 e OP-71838) e 3 pedidos de lojistas atrasados (PD-9902, PD-9910 e PD-9915). A BOR-02 está em alerta, a SEC-02 está parada e a CNC-01 está em preventiva. São 2 NCs abertas, incluindo a NC-2026-087, de severidade alta (descolamento de fita na cômoda 3040), e 3 em análise.",
+      "resposta": "Há 4 OPs atrasadas (OP-71830, OP-71836, OP-71842 e OP-71838) e 3 pedidos de lojistas atrasados (PD-9902, PD-9910 e PD-9915). A BOR-02 está em alerta, a SEC-02 está parada e a CNC-01 está em preventiva. São 5 não conformidades em aberto (2 abertas e 3 em análise), incluindo a NC-2026-087, de severidade alta (descolamento de fita na cômoda 3040).",
       "fontes": [
         "op:OP-71830",
         "op:OP-71836",
@@ -3312,7 +3316,7 @@
     {
       "modulo": "qualidade",
       "pergunta": "Quais NCs estão abertas e o que falta para fechar?",
-      "resposta": "Duas abertas. NC-2026-087 (alta): descolamento de fita na cômoda 3040; falta trocar resistência e termopar da BOR-02 (OS-4415), devolver o lote FB-2210 e incluir teste de primer no recebimento. NC-2026-088 (baixa): 6 roupeiros 4P sem kit de ferragens nas Lojas Sol Nascente; kits enviados e pesagem em 100% dos volumes. Em análise estão a NC-2026-081 (verniz), a NC-2026-083 (furação) e a NC-2026-084 (porta empenada).",
+      "resposta": "São 5 não conformidades em aberto (2 abertas e 3 em análise). As abertas: NC-2026-087 (alta): descolamento de fita na cômoda 3040; falta trocar resistência e termopar da BOR-02 (OS-4415), devolver o lote FB-2210 e incluir teste de primer no recebimento. NC-2026-088 (baixa): 6 roupeiros 4P sem kit de ferragens nas Lojas Sol Nascente; kits enviados e pesagem em 100% dos volumes. Em análise estão a NC-2026-081 (verniz), a NC-2026-083 (furação) e a NC-2026-084 (porta empenada).",
       "fontes": [
         "nc:NC-2026-087",
         "nc:NC-2026-088",

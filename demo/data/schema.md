@@ -28,7 +28,7 @@ Datas `AAAA-MM-DD`, data de referência ("hoje") **2026-11-13**. Moeda em reais 
 | `representantes` | 5-6 | `id nome regiao telefone(mascarado) meta_mes realizado_mes` |
 | `clientes` | 10-12 | `id nome cidade uf segmento representante→representantes condicao_pagamento limite_credito tabela_preco ultimo_pedido` |
 | `pedidos` | 12-15 | `id cliente→clientes representante→representantes data status(em_analise/aprovado/em_producao/faturado/entregue/atrasado) previsao_entrega ordem?→ordens itens[{sku preco_unit quantidade}] observacao` |
-| `regras_comerciais` | 5-6 | `id titulo texto` |
+| `regras_comerciais` | 5-6 | `id titulo texto publica?(booleano)` — `publica: true` só no que um cliente pode ler (ver abaixo) |
 | `kpis` | 6-8 | `id nome valor unidade meta direcao(maior_melhor/menor_melhor) area tendencia[12 números, último = valor] explicacao caminho[] fontes[]` |
 | `documentos` | 12-16 | `id titulo tipo(procedimento/norma/manual/ficha_tecnica/contrato/catalogo/email/chamado/planilha/instrucao) area origem(SharePoint/ERP/MES/E-mail/Pasta da qualidade/PLM/Planilha) atualizado acesso[áreas] trechos[{id secao texto}](2-4)` |
 | `saberes` | 8-10 | `id autor funcao tempo_casa_anos area maquina?→maquinas titulo dica validado_por data tags[]` |
@@ -39,6 +39,15 @@ Datas `AAAA-MM-DD`, data de referência ("hoje") **2026-11-13**. Moeda em reais 
 | `conversa_whatsapp` | 6-8 | `de(representante/assistente) hora(HH:MM) texto fontes[]` |
 | `marketing` | 4-6 | `id tipo(ficha_produto/conteudo_tecnico/resposta_cliente/post) titulo texto status(rascunho/em_revisao/aprovado) sku?→produtos fontes[]` |
 | `portal` | objeto | `titulo boas_vindas destaques[sku] avisos[{titulo texto}]` |
+
+## Regras comerciais públicas (`publica`)
+Campo opcional, booleano. `publica: true` marca o que um cliente pode ler no Portal do cliente: prazo de
+entrega padrão, pedido ou lote mínimo, frete, condição de pagamento padrão, garantia e política de troca.
+Sem o campo (ou `false`), a regra é interna: alçadas de desconto, nomes de gerente ou diretor, crédito,
+prioridade em ruptura, custo, reajuste e tabelas de preço de outros clientes. No Portal, motor local e
+ferramentas só enxergam as públicas (`visaoDoCliente`); o preço da tabela do cliente continua calculado
+pelas regras internas, sem expô-las. O validador recusa regra pública que cite alçada, gerente,
+diretoria, meta ou instrução interna ("não confirmar…", "nunca prometer…").
 
 ## Referências (`fontes`)
 Strings `tipo:id`: `doc:DOC-ID` ou `doc:DOC-ID#trechoId`, `op:`, `pedido:`, `sku:`, `nc:`, `os:`, `maq:`, `kpi:`,

@@ -2083,12 +2083,14 @@
     {
       "id": "RC-02",
       "titulo": "Validade mínima na entrega",
-      "texto": "Redes varejistas recebem com no mínimo 2/3 da vida útil (30 dias para bebidas lácteas, 80 dias para UHT). Distribuidores e atacados, no mínimo 1/2. Produto fora dessa regra só sai com aceite por escrito do comprador."
+      "texto": "Redes varejistas recebem com no mínimo 2/3 da vida útil (30 dias para bebidas lácteas, 80 dias para UHT). Distribuidores e atacados, no mínimo 1/2. Produto fora dessa regra só sai com aceite por escrito do comprador.",
+      "publica": true
     },
     {
       "id": "RC-03",
       "titulo": "Frete e pedido mínimo",
-      "texto": "Frete CIF para entregas acima de R$ 25.000 em SC, PR e RS e acima de R$ 40.000 em SP. Abaixo disso, frete FOB ou taxa de R$ 380 por entrega refrigerada."
+      "texto": "Frete CIF para entregas acima de R$ 25.000 em SC, PR e RS e acima de R$ 40.000 em SP. Abaixo disso, frete FOB ou taxa de R$ 380 por entrega refrigerada.",
+      "publica": true
     },
     {
       "id": "RC-04",
@@ -2098,12 +2100,14 @@
     {
       "id": "RC-05",
       "titulo": "Trocas e avarias",
-      "texto": "Troca de avaria só com foto e lote em até 5 dias da entrega. Não há devolução por vencimento de produto entregue dentro da RC-02. Reclamação de qualidade vai para o SAC, que abre a NC."
+      "texto": "Troca de avaria só com foto e lote em até 5 dias da entrega. Não há devolução por vencimento de produto entregue dentro da RC-02. Reclamação de qualidade vai para o SAC, que abre a NC.",
+      "publica": true
     },
     {
       "id": "RC-06",
       "titulo": "Preço industrial de leite em pó",
-      "texto": "Leite em pó 25 kg tem preço revisto todo mês conforme o custo do leite captado. Cotação vale por 7 dias corridos; depois, nova cotação."
+      "texto": "Leite em pó 25 kg tem preço revisto todo mês conforme o custo do leite captado. Cotação vale por 7 dias corridos; depois, nova cotação.",
+      "publica": true
     }
   ],
   "kpis": [

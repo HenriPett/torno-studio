@@ -7,15 +7,27 @@
 //     drawer(info, ctx) → { titulo, subtitulo, eyebrow, corpo: Node, acoes: Node|null } | null
 //     info = resolveRef(ref) (+ close/sheet, como o app.openRef passa) ou a string "tipo:id".
 //     drawerNode(out) junta corpo + ações num Node só.
+//     ctx.cliente (gaveta aberta do Portal, com ctxDoCliente de fontes.js): os dados já vêm na versão do
+//     cliente; as ações internas (resposta ao cliente, visita, proposta) e o "Ensinar" somem e a gaveta
+//     não mostra sugestão interna, meta de representante, limite de crédito, estoque mínimo nem preço de
+//     referência.
 //
 // Só usa o contrato do ctx (term, areaName, isEnabled, resolveRef, openRef, navigate, fmt, learning,
 // perguntar, ensinar, renderMarkdown, sheet, api, demo, ia). Qualquer peça ausente: o botão some.
 import * as ui from '../ui.js';
 import * as F from '../format.js';
+import { sistemaDoRef } from '../origem.js';
+import { precoNaTabela } from '../ai/local-engine.js';
 
 const h = (...a) => ui.h(...a);
 const BASE_FMT = F.fmt || F.default;
 const norm = (s) => (F.normalize || BASE_FMT.normalize)(s);
+/** "parada"/"parado" (format.js); sem o helper, cai na concordância local por gen(). */
+export const paradoDe = (ctx, o = {}) => {
+  if (typeof F.parado === 'function') return F.parado(ctx, o);
+  const txt = `parad${gen(T(ctx, 'maquina'))}${o.plural ? 's' : ''}`;
+  return o.maiuscula ? cap(txt) : txt;
+};
 
 function icon(name, o) {
   try { return ui.icon(name, o); } catch { return null; }
@@ -133,11 +145,21 @@ const STATUS = {
   planejado: ['Planejado', 'neutral'],
 };
 
+/** "B" → "turno B"; "3º" ou "3" → "3º turno"; "Noite" → "turno Noite"; já com "turno" fica como está. */
+export function nomeTurno(t) {
+  const s = String(t ?? '').trim();
+  if (!s) return 'turno';
+  if (/\bturno\b/i.test(s)) return s;
+  const ord = /^(\d+)\s*[º°o]?$/i.exec(s);
+  if (ord) return `${ord[1]}º turno`;
+  return `turno ${s}`;
+}
+
 export function statusInfo(status, ctx) {
   const s = STATUS[status];
   let label = s ? s[0] : cap(String(status ?? '').replace(/_/g, ' '));
-  // "Parada"/"Parado" conforme o termo de máquina do setor
-  if (ctx && (status === 'parada') && gen(T(ctx, 'maquina')) === 'o') label = 'Parado';
+  // "Parada"/"Parado" conforme o termo de máquina do setor (regra única em format.js)
+  if (ctx && status === 'parada') label = paradoDe(ctx, { maiuscula: true });
   return { label, tone: s ? s[1] : 'neutral' };
 }
 
@@ -507,7 +529,7 @@ export function areaPage({ ctx, modulo, titulo, subtitulo, numeros, depoisNumero
   };
   pintaFaixa();
   const registrar = can(ctx, 'ensinar')
-    ? btn('Registrar', { variant: 'secondary', icone: 'lightbulb', onClick: () => ensinar(ctx, { area: modulo, origem: `area:${modulo}` }) })
+    ? btn('Ensinar', { variant: 'secondary', icone: 'lightbulb', onClick: () => ensinar(ctx, { area: modulo, origem: `area:${modulo}` }) })
     : null;
   const el = h('div', { class: `ar-page ar-page--${modulo}` },
     areaSwitcher(ctx, modulo),
@@ -547,19 +569,24 @@ export function areaResumo(ctx, modulo) {
       }
       case 'manutencao': {
         const maqs = list(ctx, 'maquinas');
-        const g = gen(T(ctx, 'maquina'));
         const p = maqs.filter((m) => m.status === 'parada');
         const a = maqs.filter((m) => m.status === 'alerta');
-        if (p.length === 1) return { n: 1, tom: 'danger', frase: `${p[0].id} parad${g}` };
-        if (p.length > 1) return { n: p.length, tom: 'danger', frase: `${p.length} ${T(ctx, 'maquinas')} parad${g}s` };
+        if (p.length === 1) return { n: 1, tom: 'danger', frase: `${p[0].id} ${paradoDe(ctx)}` };
+        if (p.length > 1) return { n: p.length, tom: 'danger', frase: `${p.length} ${T(ctx, 'maquinas')} ${paradoDe(ctx, { plural: true })}` };
         if (a.length) return { n: a.length, tom: 'warn', frase: a.length === 1 ? `${a[0].id} em alerta` : `${a.length} ${T(ctx, 'maquinas')} em alerta` };
         return { n: 0, tom: null, frase: `${cap(T(ctx, 'maquinas'))} operando` };
       }
       case 'qualidade': {
-        const abertas = list(ctx, 'nao_conformidades').filter((n) => n.status !== 'encerrada');
-        const graves = abertas.filter((n) => n.severidade === 'alta');
+        // "abertas" = status aberta; "em análise" conta à parte (igual à página e à conversa)
+        const ncs = list(ctx, 'nao_conformidades');
+        const emAberto = ncs.filter((n) => n.status !== 'encerrada');
+        const abertas = ncs.filter((n) => n.status === 'aberta').length;
+        const analise = ncs.filter((n) => n.status === 'em_analise').length;
+        const graves = emAberto.filter((n) => n.severidade === 'alta');
         if (graves.length) return { n: graves.length, tom: 'danger', frase: `${graves.length} ${plural(graves.length, 'NC grave', 'NCs graves')}` };
-        return { n: abertas.length, tom: abertas.length ? 'warn' : null, frase: abertas.length ? `${abertas.length} ${plural(abertas.length, 'NC aberta', 'NCs abertas')}` : 'Nenhuma NC aberta' };
+        if (!emAberto.length) return { n: 0, tom: null, frase: 'Nenhuma NC aberta' };
+        const partes = [abertas ? `${abertas} ${plural(abertas, 'NC aberta', 'NCs abertas')}` : null, analise ? `${analise} ${abertas ? '' : `${plural(analise, 'NC', 'NCs')} `}em análise` : null].filter(Boolean);
+        return { n: emAberto.length, tom: 'warn', frase: partes.join(' e ') };
       }
       case 'comercial': {
         const n = list(ctx, 'pedidos').filter((p) => p.status === 'atrasado').length;
@@ -598,17 +625,9 @@ const REF_ICONE = {
   regra: 'scale', nc: 'shield-check', os: 'wrench', maq: 'cpu', kpi: 'chart', saber: 'users', integ: 'plug', aprendizado: 'lightbulb',
 };
 
+/** Sistema de origem do minicartão: a mesma regra do cartão de fonte e do rodapé da gaveta (origem.js). */
 function sistemaDe(ctx, r) {
-  switch (r.tipo) {
-    case 'doc': return r.detalhe?.doc?.origem || 'Documento';
-    case 'op': case 'turno': return list(ctx, 'integracoes').some((i) => i.tipo === 'MES') ? 'MES' : 'ERP';
-    case 'pedido': case 'sku': case 'cliente': case 'rep': case 'regra': return 'ERP';
-    case 'nc': return 'Qualidade';
-    case 'os': case 'maq': return 'Manutenção';
-    case 'saber': return 'Saber de operador';
-    case 'kpi': return 'Indicador';
-    default: return '';
-  }
+  try { return sistemaDoRef(ctx?.data ?? {}, r); } catch { return ''; }
 }
 
 function detalheCurto(ctx, r) {
@@ -616,7 +635,7 @@ function detalheCurto(ctx, r) {
   const f = fmtOf(ctx);
   switch (r.tipo) {
     case 'op': return `${statusInfo(d.status).label} · prazo ${f.date(d.prazo)}`;
-    case 'pedido': return `${statusInfo(d.status).label} · previsão ${f.date(d.previsao_entrega)}`;
+    case 'pedido': return `${statusInfo(d.status).label} · ${d.status === 'atrasado' ? 'nova previsão' : 'previsão'} ${f.date(d.previsao_entrega)}`;
     case 'nc': return `${statusInfo(d.status).label} · severidade ${statusInfo(d.severidade).label.toLowerCase()}`;
     case 'os': return `${statusInfo(d.status).label} · ${d.tecnico || f.date(d.data)}`;
     case 'maq': return statusInfo(d.status, ctx).label;
@@ -671,7 +690,8 @@ function bloco(tom, titulo, texto) {
 function gaveta(ctx, sheetApi, { titulo, subtitulo, eyebrow, topo, secoes, acoes, pergunta, modulo, area, maquina, origem }) {
   const corpo = h('div', { class: 'ar-drawer' });
   const lista = [];
-  for (const a of acoes || []) {
+  // versão do cliente (Portal): só "Perguntar"; as ações da equipe e o "Ensinar" ficam de fora
+  for (const a of (ctx?.cliente ? [] : acoes) || []) {
     lista.push(btn(a.label, {
       variant: a.variant || 'secondary', icone: a.icone,
       onClick: () => { fecharFolha(corpo, sheetApi); a.onClick(); },
@@ -683,7 +703,7 @@ function gaveta(ctx, sheetApi, { titulo, subtitulo, eyebrow, topo, secoes, acoes
       onClick: () => { fecharFolha(corpo, sheetApi); perguntar(ctx, pergunta, { modulo }); },
     }));
   }
-  if (can(ctx, 'ensinar')) {
+  if (!ctx?.cliente && can(ctx, 'ensinar')) {
     lista.push(btn('Ensinar algo sobre isto', {
       variant: lista.length ? 'ghost' : 'secondary', icone: 'lightbulb',
       onClick: () => { fecharFolha(corpo, sheetApi); ensinar(ctx, { area: area || modulo, maquina: maquina || null, origem }); },
@@ -793,15 +813,21 @@ function drawerOP(arg, ctx, sheetApi) {
   if (!o) return null;
   const f = fmtOf(ctx);
   const prod = produto(ctx, o.sku);
-  const risco = riscoOP(ctx, o);
+  const doCliente = !!ctx?.cliente;
+  const risco = doCliente ? null : riscoOP(ctx, o);
   const atrasoTxt = o.status !== 'concluida' && BASE_FMT.daysFromToday(o.prazo, today(ctx)) < 0;
   const ncs = list(ctx, 'nao_conformidades').filter((n) => n.sku === o.sku && n.status !== 'encerrada');
   const turnosOp = list(ctx, 'turnos').filter((t) => (t.resumo || '').includes(o.id) || (t.ocorrencias || []).some((x) => String(x).includes(o.id)));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
     titulo: `${o.id} · ${prod?.nome || o.sku}`,
-    eyebrow: `${cap(T(ctx, 'ordem'))} de produção`,
+    // o mesmo nome do cartão de fonte (REF_TYPES.op): "Ordem de produção", não "OP de produção"
+    eyebrow: r?.tipoNome || 'Ordem de produção',
     topo: [
-      topoStatus(statusBadge(o.status), h('span', { class: 'ar-dtop__meta' }, `${o.sku} · ${f.num(o.quantidade)} ${prod?.unidade || T(ctx, 'unidade')} · ${linhaNome(ctx, o.linha)}`)),
+      topoStatus(statusBadge(o.status), h('span', { class: 'ar-dtop__meta' }, [
+        o.sku,
+        o.quantidade != null ? `${f.num(o.quantidade)} ${prod?.unidade || T(ctx, 'unidade')}` : null,
+        doCliente ? null : linhaNome(ctx, o.linha),
+      ].filter(Boolean).join(' · '))),
       h('div', { class: 'ar-prog' },
         h('div', { class: 'ar-prog__nums' },
           h('strong', { class: 'num' }, `${o.progresso ?? 0}%`),
@@ -834,7 +860,7 @@ function drawerTurno(arg, ctx, sheetApi) {
   const refPct = t.produzido ? (t.refugo / t.produzido) * 100 : 0;
   const ops = list(ctx, 'ordens').filter((o) => (t.resumo || '').includes(o.id) || (t.ocorrencias || []).some((x) => String(x).includes(o.id)));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
-    titulo: `${t.turno} turno · ${linhaNome(ctx, t.linha)}`,
+    titulo: `${cap(nomeTurno(t.turno))} · ${linhaNome(ctx, t.linha)}`,
     subtitulo: f.dateLong ? f.dateLong(t.data) : f.date(t.data),
     eyebrow: 'Passagem de turno',
     topo: statRow([
@@ -847,7 +873,7 @@ function drawerTurno(arg, ctx, sheetApi) {
       (t.ocorrencias || []).length ? secao('Ocorrências para o próximo turno', h('ul', { class: 'ar-ul' }, t.ocorrencias.map((x) => h('li', null, x)))) : null,
       secao('Ligações', refCards(ctx, ops.map((o) => `op:${o.id}`))),
     ],
-    pergunta: `O que aconteceu no ${t.turno} turno de ${f.date(t.data)} em ${linhaNome(ctx, t.linha)}?`,
+    pergunta: `O que aconteceu no ${nomeTurno(t.turno)} de ${f.date(t.data)} em ${linhaNome(ctx, t.linha)}?`,
     modulo: 'producao', area: 'producao', origem: r.ref,
   });
 }
@@ -1096,6 +1122,31 @@ function drawerNC(arg, ctx, sheetApi) {
 // Comercial
 
 const totalPedido = (p) => (p.itens || []).reduce((s, i) => s + (i.quantidade || 0) * (i.preco_unit || 0), 0);
+
+/** "14/11" da observação ("Previsão original 14/11", "Entrega original 13/11") → AAAA-MM-DD, ou null. */
+function previsaoOriginal(p, ref) {
+  const m = /\b(?:previs[aã]o|entrega|prazo|data)\s+original\s+(?:de\s+|era\s+)?(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/i.exec(String(p?.observacao ?? ''));
+  if (!m) return null;
+  const ano = m[3] ? (m[3].length === 2 ? `20${m[3]}` : m[3]) : String(ref).slice(0, 4);
+  return `${ano}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+}
+
+/**
+ * Linha de previsão do pedido. Atrasado com data futura não é "previsão em 8 dias" em vermelho:
+ * é "nova previsão 21 nov (era 14 nov)". → {texto, vencida}
+ */
+function previsaoPedido(ctx, p) {
+  const f = fmtOf(ctx);
+  const dias = BASE_FMT.daysFromToday(p.previsao_entrega, today(ctx));
+  const vencida = dias != null && dias < 0 && !['entregue', 'faturado'].includes(p.status);
+  if (p.status === 'atrasado' && !vencida) {
+    const orig = previsaoOriginal(p, today(ctx));
+    const era = orig && orig !== p.previsao_entrega ? ` (era ${f.date(orig)})` : '';
+    return { texto: `nova previsão ${f.date(p.previsao_entrega)}${era}`, vencida: false };
+  }
+  return { texto: `previsão ${f.date(p.previsao_entrega)} (${f.rel(p.previsao_entrega, today(ctx))})`, vencida };
+}
+
 const curto = (nome) => String(nome || '').split(/\s+[—–-]\s+/)[0];
 
 function drawerPedido(arg, ctx, sheetApi) {
@@ -1107,6 +1158,7 @@ function drawerPedido(arg, ctx, sheetApi) {
   const rep = byId(ctx, 'representantes', p.representante);
   const op = p.ordem ? byId(ctx, 'ordens', p.ordem) : null;
   const atrasado = p.status === 'atrasado';
+  const previsao = previsaoPedido(ctx, p);
   const acoes = can(ctx, 'perguntar') ? [{
     label: `Escrever resposta ao ${T(ctx, 'cliente')}`, icone: 'message', variant: 'primary',
     onClick: () => perguntar(ctx, `Escreve uma resposta curta ao ${T(ctx, 'cliente')} ${curto(cli?.nome) || p.cliente} sobre o pedido ${p.id}: situação e previsão de entrega.`, { modulo: 'comercial' }),
@@ -1114,8 +1166,7 @@ function drawerPedido(arg, ctx, sheetApi) {
   return gaveta(ctx, folhaDe(arg, sheetApi), {
     titulo: `${p.id} · ${curto(cli?.nome) || p.cliente}`,
     eyebrow: 'Pedido',
-    topo: topoStatus(statusBadge(p.status), h('span', { class: `ar-dtop__meta num${atrasado ? ' ar-late' : ''}` },
-      `previsão ${f.date(p.previsao_entrega)} (${f.rel(p.previsao_entrega, today(ctx))})`)),
+    topo: topoStatus(statusBadge(p.status), h('span', { class: `ar-dtop__meta num${previsao.vencida ? ' ar-late' : ''}` }, previsao.texto)),
     secoes: [
       fatos([
         [cap(T(ctx, 'cliente')), cli?.nome || p.cliente],
@@ -1165,12 +1216,13 @@ function drawerCliente(arg, ctx, sheetApi) {
         [cap(T(ctx, 'representante')), rep?.nome || c.representante],
         ['Tabela de preço', c.tabela_preco],
         ['Pagamento', c.condicao_pagamento],
-        ['Limite de crédito', c.limite_credito != null ? f.money(c.limite_credito) : null],
+        // crédito é interno: no Portal (ctx.cliente) não aparece, nem que o dado venha
+        ['Limite de crédito', !ctx?.cliente && c.limite_credito != null ? f.money(c.limite_credito) : null],
         ['Último pedido', c.ultimo_pedido ? `${f.date(c.ultimo_pedido)} (${f.rel(c.ultimo_pedido, today(ctx))})` : null],
       ]),
       teamNotes(ctx, { ids: [c.id, curto(c.nome)] }),
       peds.length ? secao('Pedidos', h('div', { class: 'ar-minis' }, peds.slice(0, 6).map((p) =>
-        miniLinha(ctx, `pedido:${p.id}`, p.id, `previsão ${f.date(p.previsao_entrega)} · ${f.money(totalPedido(p))}`, statusBadge(p.status))))) : null,
+        miniLinha(ctx, `pedido:${p.id}`, p.id, `${p.status === 'atrasado' ? 'nova previsão' : 'previsão'} ${f.date(p.previsao_entrega)} · ${f.money(totalPedido(p))}`, statusBadge(p.status))))) : null,
     ],
     acoes: acoesVisita(ctx, {
       visita: `Prepara a visita à ${curto(c.nome)}${c.cidade ? ` em ${c.cidade}` : ''}.`,
@@ -1186,7 +1238,9 @@ function drawerRep(arg, ctx, sheetApi) {
   const rp = r?.detalhe;
   if (!rp) return null;
   const f = fmtOf(ctx);
-  const pct = rp.meta_mes ? (rp.realizado_mes / rp.meta_mes) * 100 : 0;
+  // versão do cliente: o representante vem sem meta nem realizado (e a gaveta não mostra "% da meta")
+  const temMeta = !ctx?.cliente && rp.meta_mes != null && rp.realizado_mes != null;
+  const pct = temMeta && rp.meta_mes ? (rp.realizado_mes / rp.meta_mes) * 100 : 0;
   const clientes = list(ctx, 'clientes').filter((c) => c.representante === rp.id);
   const abertos = list(ctx, 'pedidos').filter((p) => p.representante === rp.id && !['faturado', 'entregue'].includes(p.status));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
@@ -1194,10 +1248,10 @@ function drawerRep(arg, ctx, sheetApi) {
     eyebrow: cap(T(ctx, 'representante')),
     topo: topoStatus(h('span', { class: 'ar-dtop__meta' }, [rp.regiao, rp.telefone].filter(Boolean).join(' · '))),
     secoes: [
-      h('div', { class: 'ar-prog' },
+      temMeta ? h('div', { class: 'ar-prog' },
         h('div', { class: 'ar-prog__nums' }, h('strong', { class: 'num' }, f.pct(pct, 0)),
           h('span', { class: 'num' }, `${f.money(rp.realizado_mes, { compact: true })} de ${f.money(rp.meta_mes, { compact: true })} da meta do mês`)),
-        barra(pct)),
+        barra(pct)) : null,
       teamNotes(ctx, { ids: [rp.id, rp.nome] }),
       clientes.length ? secao(`${cap(T(ctx, 'clientes'))} (${clientes.length})`, h('div', { class: 'ar-minis' }, clientes.slice(0, 8).map((c) =>
         miniLinha(ctx, `cliente:${c.id}`, curto(c.nome), [c.cidade, c.segmento].filter(Boolean).join(' · '), null)))) : null,
@@ -1220,13 +1274,22 @@ function drawerSku(arg, ctx, sheetApi) {
   const f = fmtOf(ctx);
   const baixo = p.estoque < p.estoque_minimo;
   const ops = list(ctx, 'ordens').filter((o) => o.sku === p.sku && o.status !== 'concluida');
+  // versão do cliente: preço da tabela dele (como no catálogo do Portal) e "pronta entrega" em vez do estoque
+  const cli = ctx?.cliente ? byId(ctx, 'clientes', ctx.cliente) : null;
+  const pronta = p.estoque >= p.estoque_minimo && p.estoque > 0;
+  const situacao = cli
+    ? (pronta ? tag('Pronta entrega', 'ok') : null)
+    : (baixo ? tag('Abaixo do mínimo', 'warn') : tag('Estoque em dia', 'ok'));
   return gaveta(ctx, folhaDe(arg, sheetApi), {
     titulo: p.nome,
     eyebrow: cap(T(ctx, 'produto')),
-    topo: topoStatus(baixo ? tag('Abaixo do mínimo', 'warn') : tag('Estoque em dia', 'ok'), h('span', { class: 'ar-dtop__meta' }, [p.sku, p.familia].filter(Boolean).join(' · '))),
+    topo: topoStatus(situacao, h('span', { class: 'ar-dtop__meta' }, [p.sku, p.familia].filter(Boolean).join(' · '))),
     secoes: [
       p.descricao_comercial ? h('p', { class: 'ar-lead' }, p.descricao_comercial) : null,
-      fatos([
+      fatos(cli ? [
+        ['Preço', f.money(precoNaTabela(ctx, p, cli).preco)],
+        ['Prazo', p.prazo_dias != null ? `${p.prazo_dias} dias` : null],
+      ] : [
         ['Preço', f.money(p.preco)],
         ['Prazo', p.prazo_dias != null ? `${p.prazo_dias} dias` : null],
         ['Estoque', `${f.num(p.estoque)} ${p.unidade || ''}`.trim()],

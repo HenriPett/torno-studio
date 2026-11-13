@@ -8,9 +8,17 @@
 // [[tipo:id]] logo depois do id citado; `fontes` traz as mesmas refs na ordem.
 //
 // Contrato (usado pelo servidor e pelo front):
-//   responder(ctx, pergunta, {modulo, perfil}) → {texto, fontes, modo: "local"}
+//   responder(ctx, pergunta, {modulo, perfil, cliente}) → {texto, fontes, modo: "local"}
 //   buscar(ctx, termo, {perfil, limite}) → [{ref, titulo, trecho, area, score, aprendizado?}]
 //   perguntaDerivada(item, ctx?) → pergunta pronta que sempre casa com o item (UX §4.6.4)
+//   visaoDoCliente(ctx, clienteId) → ctx só com o que esse cliente pode ver (Portal do cliente), ou null
+//   precoNaTabela(ctx, produto, cliente) → {preco, tabela, base, pct, referencia, conhecida}
+//   clientePadraoDoPortal(data) → id do cliente que o Portal mostra primeiro
+//   motivoParaCliente(texto) → motivo de atraso genérico, sem códigos internos
+//   sugestoesDoPortal(ctx, clienteId, n) → perguntas sugeridas do Portal só com o que esse cliente vê
+//   contaNcs(ncs, {adj, negrito}) → "6 não conformidades em aberto (4 abertas e 2 em análise)"
+//   cortaDados(texto, n) → corte que não para logo antes de data ou número
+//   daTabela(nome) / pelaTabela(nome) → "da Tabela A" / "do Contrato anual"
 //   ctx = {data, empresa?, today?, isEnabled?, term?, resolveRef?, aprendizado?: [{id, tipo, titulo,
 //          texto, area, maquina, autor, origem, criado_em}]}
 
@@ -62,9 +70,40 @@ function contem(termo, lista) {
   return lista.some((p) => casa(termo, p));
 }
 
+/** Corta em até n caracteres numa fronteira de palavra; sem pontuação solta antes do "…" ("MAR-07,…", "com 6.…"). */
 export function corta(s, n = 240) {
   const t = String(s ?? "").replace(/\s+/g, " ").trim();
-  return t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, "") + "…" : t;
+  if (t.length <= n) return t;
+  let c = t.slice(0, n - 1);
+  if (/\S/.test(t[n - 1] ?? "")) c = c.replace(/\s+\S*$/, ""); // não deixa meia palavra (nem meio número)
+  return c.replace(/[\s.,;:!?—–-]+$/, "") + "…";
+}
+
+/**
+ * Corte para motivos, observações, ações e descrições: não deixa o "…" logo antes do dado útil ("nova
+ * previsão de…"). Se a frase em que o corte cai termina perto (até `folga` caracteres), vai até o fim
+ * dela; senão, se há data ou número logo depois do corte, corta depois do último deles na folga. Sem
+ * nada disso, é o corta() normal.
+ */
+export function cortaDados(s, n = 160, folga = 80) {
+  const t = String(s ?? "").replace(/\s+/g, " ").trim();
+  if (t.length <= n) return t;
+  const resto = t.slice(n);
+  const fimFrase = resto.search(/[.;!?](\s|$)/);
+  if (fimFrase >= 0 && fimFrase <= folga) {
+    const fim = n + fimFrase;
+    return fim >= t.length - 1 ? t : t.slice(0, fim).replace(/[\s,;:—–-]+$/, "") + "…";
+  }
+  let fim = -1;
+  for (const m of t.slice(0, n + folga).matchAll(/\d[\d.,/:%h°ºª×x-]*\d?%?/g)) {
+    const e = m.index + m[0].replace(/[.,:-]+$/, "").length;
+    if (e > n - 1) fim = e;
+  }
+  if (fim < 0) return corta(t, n);
+  // termina a palavra do número ("21/11", "6 t", "R$ 3.000,00") sem engolir a próxima
+  while (fim < t.length && /[\p{L}\p{N}]/u.test(t[fim])) fim++;
+  if (t.length - fim <= 12) return t;
+  return t.slice(0, fim).replace(/[\s,;:—–-]+$/, "") + "…";
 }
 
 /** Fecha a frase com um ponto só (nada de ".." nem ":." ). */
@@ -115,6 +154,33 @@ const STATUS = {
   rascunho: "rascunho", em_revisao: "em revisão",
 };
 export const statusLabel = (s) => STATUS[s] ?? String(s ?? "").replace(/_/g, " ");
+
+/**
+ * Contagem de não conformidades com a quebra por status, igual à da página de Qualidade:
+ * "6 não conformidades em aberto (4 abertas e 2 em análise)". `adj` ("grave") vai antes de "em aberto";
+ * `negrito` põe em negrito a parte principal ("**6 não conformidades em aberto** (4 abertas e 2 em análise)").
+ */
+export function contaNcs(ncs, { adj = "", negrito = false } = {}) {
+  const lista = (ncs ?? []).filter((x) => x && x.status !== "encerrada");
+  const n = lista.length;
+  const ab = lista.filter((x) => x.status === "aberta").length;
+  const an = lista.filter((x) => x.status === "em_analise").length;
+  const s = n === 1 ? "" : "s";
+  const principal = `${n} não conformidade${s}${adj ? ` ${adj}${s}` : ""} em aberto`;
+  const partes = [];
+  if (ab) partes.push(`${ab} aberta${ab === 1 ? "" : "s"}`);
+  if (an) partes.push(`${an} em análise`);
+  return `${negrito ? `**${principal}**` : principal}${partes.length ? ` (${partes.join(" e ")})` : ""}`;
+}
+
+/** "da Tabela A", "do Contrato anual" (de + artigo pelo gênero do nome da tabela). */
+export const daTabela = (tabela) => `${feminino(tabela) ? "da" : "do"} ${tabela}`;
+/** "pela Tabela A", "pelo Contrato anual". */
+export const pelaTabela = (tabela) => `${feminino(tabela) ? "pela" : "pelo"} ${tabela}`;
+
+const SEVERIDADE = { alta: "alta", media: "média", baixa: "baixa", critica: "crítica" };
+/** Severidade para o leitor: "media" → "média". */
+export const severidadeLabel = (s) => SEVERIDADE[norm(s)] ?? String(s ?? "").replace(/_/g, " ");
 
 /* ------------------------------------------------------------------ */
 /* Vocabulário do setor e gênero                                       */
@@ -210,6 +276,253 @@ export function docVisivel(ctx, doc, areas) {
 const aprendizadoVisivel = (a, areas) => !areas || !a.area || a.area === "gestao" || areas.includes(a.area);
 
 /* ------------------------------------------------------------------ */
+/* Portal do cliente                                                   */
+/* ------------------------------------------------------------------ */
+
+const COLECAO_REF = {
+  op: ["ordens", "id"], pedido: ["pedidos", "id"], nc: ["nao_conformidades", "id"], os: ["manutencao", "id"],
+  maq: ["maquinas", "id"], sku: ["produtos", "sku"], cliente: ["clientes", "id"], rep: ["representantes", "id"],
+  regra: ["regras_comerciais", "id"], saber: ["saberes", "id"], kpi: ["kpis", "id"], integ: ["integracoes", "id"],
+};
+
+/** A ref existe nestes dados? (sem olhar módulos) */
+function refNosDados(data, ref) {
+  const i = String(ref).indexOf(":");
+  if (i <= 0) return false;
+  const tipo = ref.slice(0, i), id = ref.slice(i + 1);
+  if (tipo === "doc") {
+    const [docId, trecho] = id.split("#");
+    const doc = by(data?.documentos, "id", docId);
+    return !!doc && (!trecho || (doc.trechos ?? []).some((t) => t.id === trecho));
+  }
+  if (tipo === "turno") return (data?.turnos ?? []).some((t) => `${t.data}|${t.turno}|${t.linha}` === id);
+  const c = COLECAO_REF[tipo];
+  return !!c && (data?.[c[0]] ?? []).some((r) => r?.[c[1]] === id);
+}
+
+/** Nome do cliente sem a cidade ("Moda Ponto Certo — Curitiba" → "Moda Ponto Certo"). */
+const nomeCurto = (nome) => String(nome ?? "").split(/\s+[—–-]\s+/)[0]
+  .replace(/\s*\([^)]*\)\s*$/, "").replace(/,?\s+(ltda|s\.?\s?a|me|eireli)\.?$/i, "").trim();
+
+// documentos que um cliente pode ler: manuais e catálogos liberados ao comercial (e-mails, contratos,
+// chamados e planilhas costumam ser de outro cliente ou internos)
+const DOC_DO_CLIENTE = new Set(["manual", "catalogo"]);
+
+// módulos que o Portal do cliente enxerga (se estiverem ligados na demo). "cerebro" entra só para a busca
+// nos documentos, que na visão do cliente já são só manuais e catálogos liberados a ele.
+const MODULOS_DO_CLIENTE = new Set(["portal", "comercial", "visao-geral", "producao", "cerebro"]);
+
+/**
+ * Motivo de atraso em linguagem de cliente: genérico, sem código interno (máquina, OS, NC, lote,
+ * facção, fornecedor). → "ajuste de qualidade em andamento", "atraso de fornecedor"… ou null.
+ */
+export function motivoParaCliente(texto) {
+  const n = norm(texto);
+  if (!n.trim()) return null;
+  const motivos = [];
+  if (/fornecedor|fundicao|chegou .{0,40}atrasad|\bfalta d[eo]\b|retid[oa] no recebimento|aguarda(ndo)? (o |a )?(lote|material|masterbatch|chapa|insumo|componente|reposicao)/.test(n)) motivos.push("atraso de fornecedor");
+  if (/\bncs?\b|nc-\d|nao[ -]conformidade|reprocess|reprovad|retrabalho|defeito|refeit|refaz|repint|retemper|reusinad|porosidade|descolamento|fora d[ae] especificac|segregad|rapport|chupagem|\bgeis\b|lixad/.test(n)) motivos.push("ajuste de qualidade em andamento");
+  if (/parad[ao]|quebr|manutenc|\bos-\d|preventiva|falha n[ao]|vibrac|vazamento|instavel|oscilando|cadencia|rotacao limitada|velocidade reduzida|embreagem|nao segura/.test(n)) motivos.push("manutenção de equipamento");
+  if (/programacao edi|subiu de/.test(n)) motivos.push("aumento de volume na programação");
+  if (!motivos.length) motivos.push("replanejamento da produção");
+  const t = lista3(motivos);
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
+// campos de crédito do cadastro do cliente (limite, saldo, bloqueio…): política interna, fora do Portal
+const CAMPO_DE_CREDITO = /credito|limite|saldo|inadimpl|bloque/i;
+
+const escapaRe = (t) => String(t).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+// o que sobra entre parênteses depois de tirar a máquina: só separadores ("/", ",", "ou", "e")
+const SEPARADOR = String.raw`(?:[\s,;/+&·]|(?<=^|\s)(?:ou|e)(?=\s|$))`;
+const SO_SEPARADOR = new RegExp(`^${SEPARADOR}*$`, "i");
+const SEP_INICIO = new RegExp(`^${SEPARADOR}+`, "i");
+const SEP_FIM = new RegExp(`${SEPARADOR}+$`, "i");
+
+/**
+ * Tira os códigos de máquina de um texto da ficha técnica, para o Portal do cliente:
+ * "Malharia (TEA-07)" → "Malharia"; "Tinturaria em 2 banhos (TIN-03 ou TIN-05)" → "Tinturaria em 2 banhos";
+ * "Injeção (INJ-09, molde 214)" → "Injeção (molde 214)"; "PRE-03 (progressiva)" → "progressiva";
+ * "Prensa: PRE-03" → "" (o rótulo que sobra sai junto). `re`: regex global dos ids de máquina.
+ * → texto limpo ("" quando era só máquina)
+ */
+function semMaquinas(txt, re) {
+  let t = String(txt ?? "");
+  re.lastIndex = 0;
+  if (!re.test(t)) return t;
+  const limpa = (x) => x.replace(re, " ").replace(/\s+/g, " ")
+    .replace(SEP_INICIO, "").replace(SEP_FIM, "")
+    .replace(/\s*([,;/])\s*(?:[,;/]\s*)+/g, "$1 ").trim();
+  // dentro dos parênteses: tira a máquina e os separadores que ficaram; parêntese vazio sai
+  t = t.replace(/\(([^()]*)\)/g, (_, dentro) => {
+    const r = limpa(dentro);
+    return r && !SO_SEPARADOR.test(r) ? `(${r})` : "";
+  });
+  t = limpa(t)
+    .replace(/(^|[,;]\s*)[^\s,;:()][^,;:()]*:\s*(?=$|[,;])/g, "$1") // rótulo sem valor ("Prensa:")
+    .replace(/\s+([,;:)])/g, "$1").replace(/\(\s+/g, "(").replace(/\s+/g, " ");
+  t = limpa(t).replace(/[,;:]+$/, "").trim();
+  const so = /^\(([^()]*)\)$/.exec(t); // sobrou só o parêntese: "(progressiva)" → "progressiva"
+  if (so) t = so[1].trim();
+  return SO_SEPARADOR.test(t) ? "" : t;
+}
+
+/** Ficha técnica para o Portal: roteiro e atributos sem códigos de máquina (o que era só máquina sai). */
+function fichaParaCliente(ficha, re) {
+  if (!ficha || typeof ficha !== "object") return ficha;
+  const out = { ...ficha };
+  if (Array.isArray(ficha.roteiro)) out.roteiro = ficha.roteiro.map((e) => (typeof e === "string" ? semMaquinas(e, re) : e)).filter((e) => e !== "");
+  if (ficha.atributos && typeof ficha.atributos === "object") {
+    out.atributos = Object.fromEntries(Object.entries(ficha.atributos)
+      .map(([k, v]) => [k, typeof v === "string" ? semMaquinas(v, re) : v])
+      .filter(([, v]) => v !== ""));
+  }
+  return out;
+}
+
+/**
+ * Portal do cliente: ctx com os dados filtrados para o cliente `clienteId` (só os pedidos dele, as
+ * ordens desses pedidos, ele mesmo e o representante dele, catálogo, as regras comerciais marcadas
+ * `publica: true` e manuais/catálogos que não citam outro cliente). Sem chão de fábrica, qualidade,
+ * manutenção, indicadores, regras internas (alçadas, crédito, gerentes) nem o aprendizado da equipe.
+ * Ordens e pedidos vêm na versão para o cliente: status, %, previsão e um motivo genérico de atraso
+ * (sem códigos de máquina, OS ou NC); o representante vem só com id, nome, região e telefone (sem meta,
+ * realizado nem nada derivado deles); as perguntas sugeridas vêm sem a resposta pronta (que usa a tabela
+ * de referência), para o motor responder com a tabela do cliente; o cadastro do cliente vem sem limite de
+ * crédito (nem outro campo de crédito); a ficha técnica dos produtos vem sem códigos de máquina no roteiro
+ * e nos atributos (fichaParaCliente). O preço da tabela dele sai das regras
+ * internas guardadas em ctx.regrasDePreco (fora de ctx.data: nenhuma busca nem ferramenta as lê).
+ * isEnabled só deixa passar MODULOS_DO_CLIENTE.
+ * → ctx (com ctx.cliente) ou null se o cliente não existe no pacote.
+ */
+export function visaoDoCliente(ctx, clienteId) {
+  const d = ctx?.data ?? {};
+  const cli = by(d.clientes, "id", clienteId);
+  if (!cli) return null;
+  const outros = (d.clientes ?? []).filter((c) => c.id !== cli.id).map((c) => norm(nomeCurto(c.nome))).filter((n) => n.length >= 5);
+  const citaOutro = (txt) => { const n = norm(txt); return outros.some((o) => n.includes(o)); };
+  const pedidosBrutos = (d.pedidos ?? []).filter((p) => p.cliente === cli.id);
+  const idsPv = new Set(pedidosBrutos.map((p) => p.id));
+  const idsOp = new Set(pedidosBrutos.map((p) => p.ordem).filter(Boolean));
+  const ordensBrutas = (d.ordens ?? []).filter((o) => idsOp.has(o.id) || (o.pedido && idsPv.has(o.pedido)));
+  const pedidoDaOrdem = (o) => pedidosBrutos.find((p) => p.ordem === o.id || p.id === o.pedido);
+  const ordens = ordensBrutas.map((o) => ({
+    id: o.id, sku: o.sku, linha: o.linha, status: o.status, progresso: o.progresso, prazo: o.prazo, pedido: o.pedido,
+    previsao_entrega: pedidoDaOrdem(o)?.previsao_entrega,
+    motivo_atraso: o.motivo_atraso || o.status === "atrasada" ? motivoParaCliente(o.motivo_atraso || "") : undefined,
+    historico: [],
+  }));
+  const pedidos = pedidosBrutos.map((p) => {
+    const { observacao, ...resto } = p;
+    if (p.status !== "atrasado") return resto; // a observação é interna (alçada, crédito, regra, histórico)
+    const o = p.ordem ? ordensBrutas.find((x) => x.id === p.ordem) : null;
+    const motivo = motivoParaCliente(o?.motivo_atraso || observacao || "");
+    return { ...resto, observacao: `Entrega reprogramada para ${f.data(p.previsao_entrega)}. Motivo: ${motivo.charAt(0).toLowerCase()}${motivo.slice(1)}.` };
+  });
+  const ids = (d.maquinas ?? []).map((m) => m.id).filter(Boolean).sort((a, b) => b.length - a.length);
+  const reMaq = ids.length ? new RegExp(`(?<![\\w-])(?:${ids.map(escapaRe).join("|")})(?![\\w])`, "g") : null;
+  const data = {
+    ...d,
+    clientes: [Object.fromEntries(Object.entries(cli).filter(([k]) => !CAMPO_DE_CREDITO.test(k)))],
+    produtos: reMaq ? (d.produtos ?? []).map((p) => (p?.ficha ? { ...p, ficha: fichaParaCliente(p.ficha, reMaq) } : p)) : d.produtos,
+    // só o que identifica e o contato: nada de meta, realizado ou % da meta
+    representantes: (d.representantes ?? []).filter((r) => r.id === cli.representante)
+      .map(({ id, nome, regiao, telefone }) => ({ id, nome, regiao, telefone })),
+    pedidos,
+    ordens,
+    documentos: (d.documentos ?? []).filter((doc) => DOC_DO_CLIENTE.has(doc.tipo)
+      && (doc.acesso ?? [doc.area]).includes("comercial")
+      && !citaOutro(`${doc.titulo} ${(doc.trechos ?? []).map((t) => t.texto).join(" ")}`)),
+    regras_comerciais: (d.regras_comerciais ?? []).filter((r) => r.publica === true && !citaOutro(`${r.titulo} ${r.texto}`)),
+    maquinas: [], manutencao: [], nao_conformidades: [], turnos: [], kpis: [], saberes: [], integracoes: [],
+    perfis_acesso: [], registro_uso: [], marketing: [], conversa_whatsapp: [],
+    perguntas_sugeridas: (d.perguntas_sugeridas ?? []).filter((p) => p.modulo === "portal")
+      .map(({ resposta, ...p }) => p),
+  };
+  const base = ctx;
+  return {
+    ...ctx, data, cliente: cli.id, aprendizado: [],
+    regrasDePreco: ctx?.regrasDePreco ?? d.regras_comerciais ?? [],
+    isEnabled: (m) => MODULOS_DO_CLIENTE.has(m) && ligado(base, m),
+    // a ref precisa existir na fatia do cliente E passar na checagem original (módulos ligados)
+    resolveRef: (ref) => typeof ref === "string" && refNosDados(data, ref) && refOk(base, ref),
+  };
+}
+
+/**
+ * Preço de um produto na tabela do cliente. Lê nas regras comerciais a diferença da tabela dele para a
+ * de referência ("Tabela A (redes) tem 6% a menos"). → {preco, tabela, base, pct, referencia, conhecida}
+ * referencia: o preço é o de referência (a tabela dele é a de referência ou nenhuma regra diz a
+ * diferença); conhecida: alguma regra fala dessa tabela.
+ */
+export function precoNaTabela(ctx, produto, cliente) {
+  const base = Number(produto?.preco);
+  const tabela = cliente?.tabela_preco ?? null;
+  const out = { preco: base, tabela, base, pct: 0, referencia: true, conhecida: false };
+  if (!tabela || isNaN(base)) return out;
+  const alvo = norm(tabela);
+  for (const r of ctx?.regrasDePreco ?? ctx?.data?.regras_comerciais ?? []) {
+    const txt = norm(r.texto);
+    let i = txt.indexOf(alvo);
+    while (i >= 0) {
+      const resto = txt.slice(i + alvo.length);
+      if (/^[a-z0-9]/.test(resto)) { i = txt.indexOf(alvo, i + 1); continue; } // "tabela a" dentro de "tabela atacado"
+      const trecho = resto.split(/[;.](?!\d)/)[0];
+      const m = /(\d+(?:,\d+)?)\s*% a (menos|mais)/.exec(trecho);
+      if (m) {
+        const pct = Number(m[1].replace(",", ".")) * (m[2] === "menos" ? -1 : 1);
+        return { ...out, preco: Math.round(base * (1 + pct / 100) * 100) / 100, pct, referencia: false, conhecida: true };
+      }
+      if (/referencia/.test(trecho.slice(0, 40))) return { ...out, conhecida: true };
+      i = txt.indexOf(alvo, i + 1);
+    }
+  }
+  return out;
+}
+
+// artigos e possessivos que não mudam a pergunta ("o meu pedido" = "meu pedido")
+const ARTIGO_OU_POSSESSIVO = /\b(?:o|a|os|as|um|uma|uns|umas|meu|minha|meus|minhas|seu|sua|seus|suas|nosso|nossa|nossos|nossas)\b/g;
+/** Chave para comparar perguntas sugeridas: minúsculas, sem acento, sem pontuação, artigos nem possessivos. */
+const chaveDaSugestao = (q) => norm(q).replace(/[^\w\s-]/g, " ").replace(ARTIGO_OU_POSSESSIVO, " ").replace(/\s+/g, " ").trim();
+
+/**
+ * Perguntas sugeridas do Portal para o cliente `clienteId`, tiradas da visão dele (visaoDoCliente): as
+ * sugeridas do portal cujas fontes e códigos citados (pedido, ordem, produto) são dele, depois
+ * "Quando chega o meu pedido …?" e "Quem é o meu representante?". Nunca a pergunta de outro cliente nem
+ * as da fábrica por dentro. → [pergunta]
+ */
+export function sugestoesDoPortal(ctx, clienteId, n = 3) {
+  const v = ctx?.cliente && ctx.cliente === clienteId ? ctx : visaoDoCliente(ctx, clienteId);
+  if (!v) return [];
+  const d = v.data;
+  const meus = new Set([
+    ...(d.pedidos ?? []).map((p) => norm(p.id)), ...(d.ordens ?? []).map((o) => norm(o.id)), ...(d.produtos ?? []).map((p) => norm(p.sku)),
+  ]);
+  const out = [];
+  const vistas = new Set(); // texto normalizado: "Quando chega meu pedido X?" = "Quando chega o meu pedido X?"
+  const add = (q) => {
+    if (!q || vistas.has(chaveDaSugestao(q))) return;
+    if ((norm(q).match(/\b[a-z]{1,5}-\d[\w-]*/g) ?? []).some((c) => !meus.has(c))) return; // código de outro cliente ou interno
+    out.push(q);
+    vistas.add(chaveDaSugestao(q));
+  };
+  for (const p of sugeridasLigadas(v)) if (p.modulo === "portal") add(p.pergunta);
+  const aberto = [...(d.pedidos ?? [])].filter((p) => !["entregue", "faturado"].includes(p.status))
+    .sort((a, b) => String(b.data).localeCompare(String(a.data)))[0];
+  if (aberto) add(`Quando chega o meu pedido ${aberto.id}?`);
+  if ((d.regras_comerciais ?? []).length) add("Quais são as condições de entrega e o pedido mínimo?");
+  if ((d.representantes ?? []).length) add(`Quem é o meu ${term(v, "representante")}?`);
+  return out.slice(0, n);
+}
+
+/** Cliente que o Portal mostra primeiro: o 1º com pedido ainda não entregue (ou o 1º da lista). */
+export function clientePadraoDoPortal(data) {
+  const cs = data?.clientes ?? [];
+  const ped = data?.pedidos ?? [];
+  return (cs.find((c) => ped.some((p) => p.cliente === c.id && p.status !== "entregue")) ?? cs[0])?.id ?? null;
+}
+
+/* ------------------------------------------------------------------ */
 /* Busca                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -276,7 +589,7 @@ export function buscar(ctx, termo, { perfil, limite = 8 } = {}) {
     if (!achados) continue;
     score = score * (0.5 + achados / q.length / 2);
     if (!refOk(ctx, it.ref)) continue;
-    const r = { ref: it.ref, titulo: it.titulo, trecho: corta(it.texto, 220), area: it.area, score: Math.round(score * 100) / 100 };
+    const r = { ref: it.ref, titulo: it.titulo, trecho: cortaDados(it.texto, 220), area: it.area, score: Math.round(score * 100) / 100 };
     if (it.aprendizado) r.aprendizado = true;
     res.push(r);
   }
@@ -336,6 +649,14 @@ function prazoTexto(ctx, iso) {
 function descreveOrdem(ctx, o) {
   const d = ctx.data;
   const p = by(d.produtos, "sku", o.sku);
+  if (ctx.cliente) { // Portal: status, %, previsão e motivo genérico (os dados já vêm assim de visaoDoCliente)
+    const linhas = [`${cita(o.id, `op:${o.id}`)}${p ? ` · ${p.nome}` : ""}: ${statusLabel(o.status)}, ${f.pct(o.progresso)} concluída.`];
+    if (o.previsao_entrega) linhas.push(`- Previsão de entrega do seu pedido: ${f.data(o.previsao_entrega)}.`);
+    if (o.motivo_atraso) linhas.push(`- **Motivo do atraso:** ${frase(o.motivo_atraso)}`);
+    const fontes = [`op:${o.id}`];
+    if (o.pedido) { linhas.push(`- Pedido ${cita(o.pedido, `pedido:${o.pedido}`)}.`); fontes.push(`pedido:${o.pedido}`); }
+    return { texto: linhas.join("\n"), fontes };
+  }
   const linha = by(d.linhas, "id", o.linha);
   const linhas = [
     `${cita(o.id, `op:${o.id}`)}${p ? ` · ${p.nome} (${o.sku})` : ""}: ${statusLabel(o.status)}, ${f.pct(o.progresso)} concluída.`,
@@ -366,8 +687,9 @@ function descrevePedido(ctx, pv) {
   if (pv.ordem && ligado(ctx, "producao")) {
     const o = by(d.ordens, "id", pv.ordem);
     if (o) {
-      linhas.push(`- ${term(ctx, "ordem")} ${cita(o.id, `op:${o.id}`)}: ${statusLabel(o.status)}, ${f.pct(o.progresso)}, prazo ${f.data(o.prazo)}` +
-        `${o.motivo_atraso ? `. ${frase(o.motivo_atraso)}` : "."}`);
+      const quando = ctx.cliente ? "" : `, prazo ${f.data(o.prazo)}`; // no Portal a data que vale é a previsão do pedido
+      const motivo = o.motivo_atraso && !(ctx.cliente && pv.observacao) ? `. ${frase(o.motivo_atraso)}` : "."; // no Portal o motivo já vai na observação
+      linhas.push(`- ${term(ctx, "ordem")} ${cita(o.id, `op:${o.id}`)}: ${statusLabel(o.status)}, ${f.pct(o.progresso)}${quando}${motivo}`);
       fontes.push(`op:${o.id}`);
     }
   }
@@ -378,9 +700,9 @@ function descrevePedido(ctx, pv) {
 
 function descreveNC(ctx, n) {
   const linhas = [
-    `${cita(n.id, `nc:${n.id}`)} (${f.data(n.data)}, origem ${n.origem}, severidade ${n.severidade}): ${statusLabel(n.status)}. ${frase(corta(n.descricao, 180))}`,
-    `- **Causa:** ${frase(corta(n.causa, 160))}`,
-    `- **Ação:** ${frase(corta(n.acao, 160))}`,
+    `${cita(n.id, `nc:${n.id}`)} (${f.data(n.data)}, origem ${n.origem}, severidade ${severidadeLabel(n.severidade)}): ${statusLabel(n.status)}. ${frase(cortaDados(n.descricao, 180))}`,
+    `- **Causa:** ${frase(cortaDados(n.causa, 160))}`,
+    `- **Ação:** ${frase(cortaDados(n.acao, 160))}`,
     `- **Responsável:** ${n.responsavel}`,
   ];
   return { texto: linhas.join("\n"), fontes: [`nc:${n.id}`] };
@@ -390,7 +712,7 @@ function descreveOS(ctx, os) {
   const m = by(ctx.data.maquinas, "id", os.maquina);
   const linhas = [
     `${cita(os.id, `os:${os.id}`)} · ${os.tipo} ${m ? `${em(ctx, "maquina").split(" ")[0]} ${m.id} (${m.nome})` : `em ${os.maquina}`}, ${f.data(os.data)}: ${statusLabel(os.status)}.`,
-    `- ${frase(corta(os.descricao, 200))}`,
+    `- ${frase(cortaDados(os.descricao, 200))}`,
     `- Técnico: ${os.tecnico}${os.duracao_h ? ` · ${f.num(os.duracao_h)} h` : ""}`,
   ];
   if (os.pecas?.length) linhas.push(`- Peças: ${os.pecas.join(", ")}`);
@@ -410,12 +732,12 @@ function descreveMaquina(ctx, m) {
   const fontes = [`maq:${m.id}`];
   const abertas = (d.manutencao ?? []).filter((o) => o.maquina === m.id && o.status !== "concluida");
   for (const o of abertas) {
-    linhas.push(`- OS em aberto ${cita(o.id, `os:${o.id}`)}: ${frase(corta(o.descricao, 120))}`);
+    linhas.push(`- OS em aberto ${cita(o.id, `os:${o.id}`)}: ${frase(cortaDados(o.descricao, 120))}`);
     fontes.push(`os:${o.id}`);
   }
   const ult = (d.manutencao ?? []).filter((o) => o.maquina === m.id).sort((a, b) => (b.data > a.data ? 1 : -1))[0];
   if (ult && !abertas.includes(ult)) {
-    linhas.push(`- Última OS: ${cita(ult.id, `os:${ult.id}`)} em ${f.data(ult.data)}: ${frase(corta(ult.descricao, 100))}`);
+    linhas.push(`- Última OS: ${cita(ult.id, `os:${ult.id}`)} em ${f.data(ult.data)}: ${frase(cortaDados(ult.descricao, 100))}`);
     fontes.push(`os:${ult.id}`);
   }
   if (ligado(ctx, "operadores")) {
@@ -431,8 +753,17 @@ function descreveMaquina(ctx, m) {
 function descreveProduto(ctx, p) {
   const d = ctx.data;
   const baixo = p.estoque < p.estoque_minimo;
+  const un = p.unidade === "peças" ? "peça" : p.unidade;
+  let preco = `**${f.money(p.preco)}** por ${un}`;
+  const cli = ctx.cliente ? by(d.clientes, "id", ctx.cliente) : null;
+  if (cli?.tabela_preco) { // Portal: o preço da tabela do cliente, não o de referência
+    const t = precoNaTabela(ctx, p, cli);
+    preco = t.conhecida
+      ? `${pelaTabela(t.tabela)}, **${f.money(t.preco)}** por ${un}`
+      : `**${f.money(p.preco)}** por ${un} no preço de referência (o ${daTabela(t.tabela)} sai na proposta do ${term(ctx, "representante")})`;
+  }
   const linhas = [
-    `${cita(p.sku, `sku:${p.sku}`)} · ${p.nome}: **${f.money(p.preco)}** por ${p.unidade === "peças" ? "peça" : p.unidade}, prazo padrão de ${p.prazo_dias} dias.`,
+    `${cita(p.sku, `sku:${p.sku}`)} · ${p.nome}: ${preco}, prazo padrão de ${p.prazo_dias} dias.`,
     `- Estoque: ${f.num(p.estoque)} ${p.unidade}${baixo ? `, **abaixo do mínimo** de ${f.num(p.estoque_minimo)}` : ` (mínimo ${f.num(p.estoque_minimo)})`}`,
   ];
   const fontes = [`sku:${p.sku}`];
@@ -448,7 +779,8 @@ function descreveCliente(ctx, c) {
   const d = ctx.data;
   const rep = by(d.representantes, "id", c.representante);
   const linhas = [
-    `**${c.nome}**[[cliente:${c.id}]] (${c.cidade}/${c.uf}, ${c.segmento}): condição ${c.condicao_pagamento}, ${c.tabela_preco}, limite de ${f.money(c.limite_credito)}.`,
+    // limite de crédito é interno: no Portal (ctx.cliente) não aparece, nem que o dado venha
+    `**${c.nome}**[[cliente:${c.id}]] (${c.cidade}/${c.uf}, ${c.segmento}): condição ${c.condicao_pagamento}, ${c.tabela_preco}${!ctx.cliente && c.limite_credito != null ? `, limite de ${f.money(c.limite_credito)}` : ""}.`,
     `- Último pedido em ${f.data(c.ultimo_pedido)}${rep ? `; ${term(ctx, "representante")}: ${rep.nome}` : ""}`,
   ];
   const pvs = (d.pedidos ?? []).filter((p) => p.cliente === c.id && !["entregue", "faturado"].includes(p.status)).slice(0, 3);
@@ -457,6 +789,10 @@ function descreveCliente(ctx, c) {
 }
 
 function descreveRep(ctx, r) {
+  if (ctx.cliente || r.meta_mes == null) { // Portal: só quem é e como falar com ele (sem meta nem realizado)
+    const quem = ctx.cliente ? `seu ${term(ctx, "representante")} (${r.regiao})` : `${term(ctx, "representante")} de ${r.regiao}`;
+    return { texto: `**${r.nome}**[[rep:${r.id}]], ${quem}. Contato ${r.telefone}.`, fontes: [`rep:${r.id}`] };
+  }
   const pct = r.meta_mes ? (r.realizado_mes / r.meta_mes) * 100 : null;
   return {
     texto: `**${r.nome}**[[rep:${r.id}]], ${term(ctx, "representante")} de ${r.regiao}: realizou **${f.money(r.realizado_mes)}** de ${f.money(r.meta_mes)} no mês (${f.pct(pct)} da meta). Contato ${r.telefone}.`,
@@ -560,7 +896,7 @@ function casaSugerida(ctx, pergunta, modulo) {
   for (const s of sugeridasLigadas(ctx)) {
     const sn = norm(s.pergunta).replace(/[^a-z0-9]+/g, " ").trim();
     let sc = sn === qn ? 1.5 : similaridade(q, tokens(s.pergunta));
-    if (idsQ.some((id) => !norm(s.pergunta + " " + s.resposta).includes(id))) continue;
+    if (idsQ.some((id) => !norm(`${s.pergunta} ${s.resposta ?? ""}`).includes(id))) continue;
     if (s.modulo === modulo) sc += 0.05;
     if (sc > melhorScore) { melhor = s; melhorScore = sc; }
   }
@@ -584,7 +920,7 @@ function atrasados(ctx, qn) {
     partes.push(`Há **${n} ${plural(n, ctx, "ordem", "ordens")} ${conc("atrasad", ctx, "ordem", n !== 1)}**:\n` +
       ops.slice(0, 6).map((o) => {
         const p = by(d.produtos, "sku", o.sku);
-        return `- ${cita(o.id, `op:${o.id}`)} · ${p?.nome ?? o.sku}: ${f.pct(o.progresso)}, prazo ${f.data(o.prazo)}${o.motivo_atraso ? `. ${frase(corta(o.motivo_atraso, 140))}` : "."}`;
+        return `- ${cita(o.id, `op:${o.id}`)} · ${p?.nome ?? o.sku}: ${f.pct(o.progresso)}, prazo ${f.data(o.prazo)}${o.motivo_atraso ? `. ${frase(cortaDados(o.motivo_atraso, 140))}` : "."}`;
       }).join("\n"));
     fontes.push(...ops.slice(0, 6).map((o) => `op:${o.id}`));
   };
@@ -607,31 +943,321 @@ function ncsAbertas(ctx) {
   if (!ligado(ctx, "qualidade")) return null;
   const ncs = (ctx.data.nao_conformidades ?? []).filter((n) => n.status !== "encerrada")
     .sort((a, b) => (SEV[a.severidade] ?? 3) - (SEV[b.severidade] ?? 3));
-  if (!ncs.length) return { texto: "Não há não conformidades abertas nos dados de hoje.", fontes: [] };
+  if (!ncs.length) return { texto: "Não há não conformidades em aberto nos dados de hoje.", fontes: [] };
   return {
-    texto: `Há **${ncs.length} não conformidade${ncs.length === 1 ? "" : "s"} em aberto**:\n` +
-      ncs.slice(0, 6).map((n) => `- ${cita(n.id, `nc:${n.id}`)} (${n.severidade}, ${statusLabel(n.status)}): ${semPonto(corta(n.descricao, 100))}. Responsável: ${n.responsavel}.`).join("\n"),
+    texto: `${contaNcs(ncs, { negrito: true })}:\n` +
+      ncs.slice(0, 6).map((n) => `- ${cita(n.id, `nc:${n.id}`)} (${severidadeLabel(n.severidade)}, ${statusLabel(n.status)}): ${frase(cortaDados(n.descricao, 100))} Responsável: ${n.responsavel}.`).join("\n"),
     fontes: ncs.slice(0, 6).map((n) => `nc:${n.id}`),
   };
 }
 
-function maquinasAlerta(ctx) {
+/** Linha/setor produtivo citado na pergunta ("na tinturaria") → registro de data.linhas, ou null. */
+function linhaDaPergunta(ctx, q) {
+  const genericas = new Set(["linha", "linhas", "setor", "planta", "final", "geral", "pecas", "producao"]);
+  return (ctx.data?.linhas ?? []).find((l) => tokens(l.nome).some((t) => t.length >= 5 && !genericas.has(t) && contem(t, q))) ?? null;
+}
+
+function maquinasAlerta(ctx, linha = null) {
   if (!ligado(ctx, "manutencao")) return null;
   const ordem = { parada: 0, alerta: 1, manutencao: 2 };
-  const ms = (ctx.data.maquinas ?? []).filter((m) => m.status !== "operando").sort((a, b) => (ordem[a.status] ?? 3) - (ordem[b.status] ?? 3));
-  if (!ms.length) return { texto: `Todas as ${term(ctx, "maquinas")} estão operando agora.`, fontes: [] };
+  const onde = linha ? ` ${em(ctx, "linha")} ${linha.nome}` : "";
+  const ms = (ctx.data.maquinas ?? []).filter((m) => m.status !== "operando" && (!linha || m.linha === linha.id))
+    .sort((a, b) => (ordem[a.status] ?? 3) - (ordem[b.status] ?? 3));
+  if (!ms.length) return { texto: `Todas as ${term(ctx, "maquinas")}${onde} estão operando agora.`, fontes: [] };
   const os = ctx.data.manutencao ?? [];
   const n = ms.length;
   return {
-    texto: `**${n} ${plural(n, ctx, "maquina", "maquinas")}** fora da operação normal:\n` +
+    texto: `**${n} ${plural(n, ctx, "maquina", "maquinas")}** fora da operação normal${onde}:\n` +
       ms.slice(0, 6).map((m) => {
         const o = os.find((x) => x.maquina === m.id && x.status !== "concluida");
-        return `- ${cita(m.id, `maq:${m.id}`)} · ${m.nome}: ${statusLabel(m.status)}${o ? `. ${cita(o.id, `os:${o.id}`)}: ${frase(corta(o.descricao, 100))}` : "."}`;
+        return `- ${cita(m.id, `maq:${m.id}`)} · ${m.nome}: ${statusLabel(m.status)}${o ? `. ${cita(o.id, `os:${o.id}`)}: ${frase(cortaDados(o.descricao, 100))}` : "."}`;
       }).join("\n"),
     fontes: ms.slice(0, 6).flatMap((m) => {
       const o = os.find((x) => x.maquina === m.id && x.status !== "concluida");
       return o ? [`maq:${m.id}`, `os:${o.id}`] : [`maq:${m.id}`];
     }),
+  };
+}
+
+/* "O que eu preciso ver hoje?" e variações: conclusão + 3 a 4 itens priorizados */
+
+// Só a pergunta inteira, sem área nem registro: "o que eu preciso ver hoje (na fábrica)?", "o que mais
+// preocupa na operação hoje?", "quais são os alertas do dia?"… Comparada com a pergunta normalizada
+// (sem acento, pontuação vira espaço). "O que mais preocupa na qualidade?" não casa: vai para a área.
+const R_ONDE = "(?: (?:na|da|para a|pra) (?:operacao|fabrica|empresa|planta|industria))?";
+const R_QUANDO = "(?: (?:hoje|agora|primeiro|do dia|de hoje))?";
+const RESUMO_DO_DIA = new RegExp("^(?:" + [
+  `o que (?:eu )?(?:preciso|devo|tenho que|vale) (?:ver|olhar|saber|acompanhar|priorizar)${R_QUANDO}${R_ONDE}${R_QUANDO}`,
+  `o que (?:mais )?(?:me )?preocupa(?:m)?${R_ONDE}${R_QUANDO}`,
+  `(?:quais (?:sao )?(?:os )?)?alertas? (?:do dia|de hoje)${R_ONDE}`,
+  `(?:quais (?:sao )?(?:as )?)?prioridades? (?:de|do|para|pra) (?:hoje|dia)${R_ONDE}`,
+  `(?:me (?:de|da|faz|faca|mostra) )?(?:um |o )?resumo do dia${R_ONDE}`,
+  `o que (?:esta|ta) pegando${R_ONDE}${R_QUANDO}`,
+  `o que (?:mais )?(?:pede|precisa de|merece) (?:a |minha |a minha )?atencao${R_ONDE}${R_QUANDO}`,
+  `onde (?:eu )?(?:devo |preciso )?(?:focar|me concentrar)${R_ONDE}${R_QUANDO}`,
+].join("|") + ")$");
+const textoLimpo = (p) => norm(p).replace(/[^a-z0-9]+/g, " ").trim();
+
+// Palavras que põem a pergunta numa área (fora do resumo geral). A ordem decide o empate.
+const AREA_PALAVRAS = [
+  ["qualidade", /\b(qualidade|nao conformidades?|ncs?|reclamac\w*|laboratorio|inspec\w*)\b/],
+  ["manutencao", /\b(manutenc\w*|maquinas?|equipamentos?|quebr\w*|preventivas?)\b/],
+  ["producao", /\b(producao|pcp|ops?|ordens?|programacao|turnos?|refugo)\b/],
+  ["comercial", /\b(comercial|vendas?|pedidos?|clientes?|entregas?|representantes?)\b/],
+  ["operadores", /\b(operadores?|chao de fabrica)\b/],
+  ["marketing", /\b(marketing|catalogo)\b/],
+];
+const AREA_RESUMO = { qualidade: "qualidade", manutencao: "manutencao", producao: "producao", comercial: "comercial" };
+
+/** Área citada na pergunta (pelo nome, pelo apelido ou pela palavra da máquina do setor), ou null. */
+function areaDaPergunta(ctx, qlimpo) {
+  for (const [area, re] of AREA_PALAVRAS) if (re.test(qlimpo)) return area;
+  const maq = textoLimpo(term(ctx, "maquina"));
+  if (maq && new RegExp(`\\b${escRe(maq)}s?\\b`).test(qlimpo)) return "manutencao";
+  return null;
+}
+
+/** A pergunta cita um registro (OP, PV, máquina, NC, OS…) ou uma área/setor produtivo? Então não é resumo geral. */
+function citaRegistroOuArea(ctx, p, areas) {
+  const qlimpo = textoLimpo(p);
+  if (/\b[a-z]{1,5}-\d/.test(norm(p)) || idsNaPergunta(ctx, p, areas).length) return true;
+  return !!areaDaPergunta(ctx, qlimpo) || !!linhaDaPergunta(ctx, tokens(p));
+}
+
+// "O que mais preocupa/pede atenção/está pegando…" dentro de uma área: vai para a lista daquela área.
+const PREOCUPACAO = /\b(preocupa\w*|atencao|alertas?|prioridades?|pegando|focar|resumo do dia|(preciso|devo) (ver|olhar)|(preciso|devo) saber hoje)\b/;
+
+/**
+ * "O que mais preocupa na qualidade?": a conclusão primeiro (a NC mais grave e por quê: severidade,
+ * origem, cliente afetado e quantidade/pedido em jogo), o próximo passo (responsável e ação em curso, dos
+ * dados) e depois a lista curta das outras em aberto, com a contagem por status.
+ */
+function preocupacaoQualidade(ctx) {
+  if (!ligado(ctx, "qualidade")) return null;
+  const d = ctx.data;
+  const ncs = (d.nao_conformidades ?? []).filter((n) => n.status !== "encerrada");
+  if (!ncs.length) return { texto: "Não há não conformidades em aberto nos dados de hoje.", fontes: [] };
+  const comPv = ligado(ctx, "comercial");
+  const clientes = (d.clientes ?? []).map((c) => ({ c, n: norm(nomeCurto(c.nome)) })).filter((x) => x.n.length >= 5);
+  const clienteCitado = (n) => clientes.find((x) => norm(n.descricao).includes(x.n))?.c ?? null;
+  const pedidosDoSku = (n) => (comPv ? (d.pedidos ?? []) : [])
+    .filter((p) => !["entregue", "faturado"].includes(p.status) && (p.itens ?? []).some((i) => i.sku === n.sku))
+    .sort((a, b) => String(a.previsao_entrega).localeCompare(String(b.previsao_entrega)));
+  const peso = (n) => [SEV[n.severidade] ?? 3, n.origem === "cliente" ? 0 : n.origem === "fornecedor" ? 1 : 2,
+    pedidosDoSku(n).length ? 0 : 1, n.status === "aberta" ? 0 : 1];
+  const ordem = [...ncs].sort((a, b) => {
+    const pa = peso(a), pb = peso(b);
+    for (let i = 0; i < pa.length; i++) if (pa[i] !== pb[i]) return pa[i] - pb[i];
+    return String(b.data).localeCompare(String(a.data));
+  });
+  const n = ordem[0];
+  const cli = clienteCitado(n);
+  const pvs = pedidosDoSku(n);
+  const pv = (cli && pvs.find((p) => p.cliente === cli.id)) ?? pvs[0] ?? null;
+  const cliPv = pv ? by(d.clientes, "id", pv.cliente) : null;
+  const fontes = [`nc:${n.id}`];
+
+  const porque = [`severidade ${severidadeLabel(n.severidade)}`];
+  if (n.origem === "cliente") porque.push(cli ? `reclamação ${artigoEmpresa(nomeCurto(cli.nome)) === "o" ? "do" : "da"} ${nomeCurto(cli.nome)}` : "reclamação de cliente");
+  else if (n.origem === "fornecedor") porque.push("problema de fornecedor");
+  else porque.push("detectada na produção");
+  const linhas = [`**A mais grave é a ${n.id}**[[nc:${n.id}]] (${porque.join(", ")}): ${frase(cortaDados(n.descricao, 200))}`];
+  if (pv) {
+    const qtd = (pv.itens ?? []).filter((i) => i.sku === n.sku).reduce((s2, i) => s2 + (i.quantidade ?? 0), 0);
+    const un = by(d.produtos, "sku", n.sku)?.unidade ?? term(ctx, "unidade");
+    const quem = cliPv ? ` de ${nomeCurto(cliPv.nome)}` : "";
+    linhas[0] += ` Está em jogo o pedido ${cita(pv.id, `pedido:${pv.id}`)}${quem}: ${f.num(qtd)} ${un}, entrega prevista para ${f.data(pv.previsao_entrega)}.`;
+    fontes.push(`pedido:${pv.id}`);
+  }
+  const acao = semPonto(cortaDados(n.acao, 160));
+  linhas.push("", `**Próximo passo:** confirmar com ${n.responsavel}, responsável, a ação em curso${pv ? ` antes da entrega do ${pv.id}` : ""}: ` +
+    `${acao.charAt(0).toLowerCase()}${acao.slice(1)}${/…$/.test(acao) ? "" : "."}`);
+  const outras = ordem.slice(1, 5);
+  if (outras.length) {
+    linhas.push("", `Ao todo, ${contaNcs(ncs, { negrito: true })}. As outras:`,
+      ...outras.map((x) => `- ${cita(x.id, `nc:${x.id}`)} (${severidadeLabel(x.severidade)}, ${statusLabel(x.status)}): ${frase(cortaDados(x.descricao, 90))}`));
+    if (ordem.length > 5) linhas.push(`- e mais ${ordem.length - 5}.`);
+    fontes.push(...outras.map((x) => `nc:${x.id}`));
+  } else {
+    linhas.push("", `É a única: ${contaNcs(ncs)}.`);
+  }
+  return { texto: linhas.join("\n"), fontes };
+}
+
+const LISTA_DE_NCS = /\b(ncs?|nao conformidades?)\b.*\babert/;
+
+/** Resposta de "o que preocupa" numa área: a NC mais grave, máquinas fora do normal, atrasos. */
+function resumoDaArea(ctx, area, q) {
+  if (area === "qualidade") return preocupacaoQualidade(ctx);
+  if (area === "manutencao") return maquinasAlerta(ctx, linhaDaPergunta(ctx, q));
+  if (area === "producao") return atrasados(ctx, "ordens atrasadas");
+  if (area === "comercial") return atrasados(ctx, "pedidos atrasados");
+  return null;
+}
+
+// Portal do cliente: perguntas sobre a fábrica por dentro (máquinas, qualidade, indicadores…)
+const INTERNO_DA_FABRICA = /\b(maquinas?|equipamentos?|manutenc\w*|quebr\w*|nao conformidades?|ncs?|refugo|oee|indicador\w*|kpis?|turnos?|operador\w*|custos?|margem|margens|metas?|qualidade|chao de fabrica)\b/;
+const perguntaInterna = (ctx, qlimpo) => INTERNO_DA_FABRICA.test(qlimpo) || areaDaPergunta(ctx, qlimpo) === "manutencao";
+
+/** Pergunta interna feita no Portal: frase educada, sem dados (nada de "todas as máquinas estão operando"). */
+function foraDoPortal(ctx) {
+  const d = ctx.data ?? {};
+  const cli = by(d.clientes, "id", ctx.cliente);
+  const rep = cli && by(d.representantes, "id", cli.representante);
+  const empresa = ctx.empresa || d.empresa?.nome || "empresa";
+  return {
+    texto: frase(`No portal você vê só os seus pedidos, o catálogo e as condições comerciais; isso fica com a equipe da ${empresa}`) +
+      (rep ? ` ${contatoRep(ctx, rep)}` : ""),
+    fontes: rep ? [`rep:${rep.id}`] : [],
+  };
+}
+
+const contatoRep = (ctx, rep) => `Se precisar, fale com ${rep.nome}, seu ${term(ctx, "representante")}: ${rep.telefone}.`;
+
+// Portal: pedido de desconto, crédito ou condição especial (as alçadas e a política de crédito são internas)
+const CONDICAO_ESPECIAL = /\b(descontos?|abatimentos?|bonificac\w*|credito|creditos|condic\w* especia\w*|negocia\w*|promoc\w*|preco melhor|melhor preco|baixar o preco)\b/;
+
+/** "Condições especiais são tratadas com o seu representante, {nome}." (+ contato), sem regra interna. */
+function condicaoEspecial(ctx) {
+  const d = ctx.data ?? {};
+  const cli = by(d.clientes, "id", ctx.cliente);
+  const rep = cli && by(d.representantes, "id", cli.representante);
+  const papel = term(ctx, "representante");
+  if (!rep) return { texto: `Condições especiais são tratadas com o seu ${papel}.`, fontes: [] };
+  return {
+    texto: `Condições especiais são tratadas com o seu ${papel}, **${rep.nome}**[[rep:${rep.id}]]. Contato: ${rep.telefone}.`,
+    fontes: [`rep:${rep.id}`],
+  };
+}
+
+/** Portal: o código citado não é de um pedido/ordem/produto deste cliente. */
+function naoEDoCliente(ctx, codigo) {
+  const d = ctx.data ?? {};
+  const cli = by(d.clientes, "id", ctx.cliente);
+  const rep = cli && by(d.representantes, "id", cli.representante);
+  return {
+    texto: `Não encontrei ${codigo.toUpperCase()} entre os seus pedidos. Confira o número${rep ? ` ou fale com ${rep.nome}, seu ${term(ctx, "representante")}: ${rep.telefone}` : ""}.`,
+    fontes: rep ? [`rep:${rep.id}`] : [],
+  };
+}
+
+const somaPedido = (pv) => (pv.itens ?? []).reduce((s, i) => s + (i.quantidade ?? 0) * (i.preco_unit ?? 0), 0);
+const lista3 = (xs) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} e ${xs.at(-1)}`);
+
+/**
+ * Resumo do dia para quem decide: uma frase de conclusão e até 4 itens (o que é, impacto e próximo
+ * passo), só com o que está no pacote. Prioridade: pedidos de cliente atrasados (os que vencem
+ * primeiro e valem mais), máquina parada, não conformidade grave, depois o que sobrar.
+ */
+function resumoDoDia(ctx, areas) {
+  const d = ctx.data ?? {};
+  const pode = (modulo, area) => ligado(ctx, modulo) && (!areas || areas.includes(area));
+  const comPv = pode("comercial", "comercial"), comOp = pode("producao", "producao");
+  const comMaq = pode("manutencao", "manutencao"), comNc = pode("qualidade", "qualidade");
+  const opsAtr = comOp ? (d.ordens ?? []).filter((o) => o.status === "atrasada") : [];
+  const pvsAtr = comPv
+    ? (d.pedidos ?? []).filter((p) => p.status === "atrasado")
+      .sort((a, b) => String(a.previsao_entrega).localeCompare(String(b.previsao_entrega)) || somaPedido(b) - somaPedido(a))
+    : [];
+  const ORD_MAQ = { parada: 0, alerta: 1, manutencao: 2 };
+  const maqs = comMaq ? (d.maquinas ?? []).filter((m) => m.status in ORD_MAQ).sort((a, b) => ORD_MAQ[a.status] - ORD_MAQ[b.status]) : [];
+  const ncs = comNc ? (d.nao_conformidades ?? []).filter((n) => n.status !== "encerrada" && n.severidade === "alta") : [];
+  const osAberta = (m) => (d.manutencao ?? []).filter((o) => o.maquina === m.id && o.status !== "concluida")
+    .sort((a, b) => String(b.data).localeCompare(String(a.data)))[0];
+  const ordem = term(ctx, "ordem");
+
+  const itemPedido = (pv) => {
+    const cli = by(d.clientes, "id", pv.cliente);
+    const nome = nomeCurto(cli?.nome) || pv.cliente;
+    const o = comOp && pv.ordem ? by(d.ordens, "id", pv.ordem) : null;
+    const refs = [`pedido:${pv.id}`];
+    let causa = "";
+    if (o) {
+      refs.push(`op:${o.id}`);
+      causa = ` Depende ${feminino(ordem) ? "da" : "do"} ${cita(o.id, `op:${o.id}`)}, em ${f.pct(o.progresso)}` +
+        `${o.motivo_atraso ? `: ${frase(cortaDados(o.motivo_atraso, 140))}` : "."}`;
+    } else if (pv.observacao) causa = ` ${frase(cortaDados(pv.observacao, 140))}`;
+    return {
+      ids: [pv.id, o?.id].filter(Boolean), refs,
+      comece: `pelo pedido ${pv.id} (${nome})`,
+      texto: `**Pedido ${pv.id}**[[pedido:${pv.id}]], de ${nome} (${f.money(somaPedido(pv))}): atrasado, entrega prevista para ${f.data(pv.previsao_entrega)}.` +
+        `${causa} **Próximo passo:** avisar ${nome} da nova data antes que a cobrança chegue.`,
+    };
+  };
+  const itemOrdem = (o) => {
+    const p = by(d.produtos, "sku", o.sku);
+    return {
+      ids: [o.id], refs: [`op:${o.id}`], comece: `pel${feminino(ordem) ? "a" : "o"} ${o.id}`,
+      texto: `**${o.id}**[[op:${o.id}]] (${p?.nome ?? o.sku}, ${f.num(o.quantidade)} ${p?.unidade ?? term(ctx, "unidade")}): ` +
+        `${conc("atrasad", ctx, "ordem", false)}, em ${f.pct(o.progresso)}, prazo era ${f.data(o.prazo)}.` +
+        `${o.motivo_atraso ? ` ${frase(cortaDados(o.motivo_atraso, 140))}` : ""} **Próximo passo:** fechar com o PCP a nova data.`,
+    };
+  };
+  const itemMaquina = (m) => {
+    const os = osAberta(m);
+    const presas = opsAtr.filter((o) => o.linha === m.linha);
+    const refs = [`maq:${m.id}`];
+    if (os) refs.push(`os:${os.id}`);
+    const art = artMaq(ctx);
+    const impacto = presas.length
+      ? ` Segura ${presas.length === 1 ? `${feminino(ordem) ? "a" : "o"} ${presas[0].id}, que está ${conc("atrasad", ctx, "ordem", false)}` : `${presas.length} ${term(ctx, "ordens")} ${conc("atrasad", ctx, "ordem", true)}`}.`
+      : "";
+    const osTxt = os ? ` ${cita(os.id, `os:${os.id}`)} (${os.tipo}) ${statusLabel(os.status)} desde ${f.data(os.data)}.` : "";
+    return {
+      ids: [m.id, os?.id].filter(Boolean), refs, comece: `pel${art} ${m.id}`,
+      texto: `**${m.nome}**[[maq:${m.id}]] (${m.id}): ${statusLabel(m.status)}.${osTxt}${impacto} ` +
+        `**Próximo passo:** ${os ? `pedir à manutenção a data de liberação da ${os.id}` : "abrir uma OS e avaliar o impacto na programação"}.`,
+    };
+  };
+  const itemNc = (n) => ({
+    ids: [n.id], refs: [`nc:${n.id}`], comece: `pela ${n.id}`,
+    texto: `**Não conformidade ${n.id}**[[nc:${n.id}]] (severidade alta, ${statusLabel(n.status)}): ${frase(cortaDados(n.descricao, 120))} ` +
+      `**Próximo passo:** acompanhar com ${n.responsavel} a ação em curso: ${frase(cortaDados(n.acao, 100)).replace(/^./, (c) => c.toLowerCase())}`,
+  });
+
+  // cotas por tipo para variar (2 pedidos, 1 máquina, 1 NC); o que faltar completa com o resto
+  const opsSemPedido = opsAtr.filter((o) => !pvsAtr.some((p) => p.ordem === o.id));
+  const filas = [
+    [pvsAtr.length ? pvsAtr : opsAtr, pvsAtr.length ? itemPedido : itemOrdem, 2],
+    [maqs, itemMaquina, 1],
+    [ncs, itemNc, 1],
+    [pvsAtr.length ? opsSemPedido : [], itemOrdem, 1],
+  ];
+  const itens = [], usados = new Set();
+  const textoJa = () => itens.map((i) => i.texto).join(" ");
+  const tenta = (reg, fn) => {
+    if (itens.length >= 4) return;
+    const it = fn(reg);
+    if (it.ids.some((id) => usados.has(id) || textoJa().includes(id))) return; // já coberto por outro item
+    it.ids.forEach((id) => usados.add(id));
+    itens.push(it);
+  };
+  for (const [regs, fn, cota] of filas) for (const r of regs.slice(0, cota)) tenta(r, fn);
+  for (const [regs, fn, cota] of filas) for (const r of regs.slice(cota)) tenta(r, fn);
+  if (!itens.length) {
+    if (!comPv && !comOp && !comMaq && !comNc) return null;
+    return { texto: `Nada fora do normal nos dados de hoje (${f.data(hoje(ctx))}): nenhum pedido ou ${ordem} com atraso, nenhuma ${term(ctx, "maquina")} parada e nenhuma não conformidade grave em aberto.`, fontes: [] };
+  }
+
+  // conclusão: o tamanho do problema e por onde começar
+  const partes = [];
+  if (pvsAtr.length) {
+    const total = pvsAtr.reduce((s, p) => s + somaPedido(p), 0);
+    partes.push(`${pvsAtr.length} ${pvsAtr.length === 1 ? "pedido atrasado" : "pedidos atrasados"} de ${term(ctx, pvsAtr.length === 1 ? "cliente" : "clientes")} (${f.money(total)})`);
+  } else if (opsAtr.length) {
+    partes.push(`${opsAtr.length} ${plural(opsAtr.length, ctx, "ordem", "ordens")} ${conc("atrasad", ctx, "ordem", opsAtr.length !== 1)}`);
+  }
+  const paradas = maqs.filter((m) => m.status === "parada");
+  if (paradas.length === 1) partes.push(`${artMaq(ctx)} ${paradas[0].id} ${conc("parad", ctx, "maquina", false)}`);
+  else if (paradas.length > 1) partes.push(`${paradas.length} ${term(ctx, "maquinas")} ${conc("parad", ctx, "maquina", true)}`);
+  if (ncs.length) partes.push(contaNcs(ncs, { adj: "grave" }));
+  const conclusao = partes.length
+    ? `**Hoje pedem atenção ${lista3(partes)}; comece ${itens[0].comece}.**`
+    : `**Hoje o ponto de atenção é ${itens[0].comece.replace(/^pel[oa] /, "")}.**`;
+
+  return {
+    texto: `${conclusao}\n\n${itens.map((it, i) => `${i + 1}. ${it.texto}`).join("\n")}`,
+    fontes: itens.flatMap((it) => it.refs),
   };
 }
 
@@ -711,7 +1337,7 @@ function intencoes(ctx, pergunta) {
   }
   const palavraMaq = norm(term(ctx, "maquina"));
   if (/parad|maquina|equipamento|quebr|alerta|manutenc/.test(qn) || qn.includes(palavraMaq)) {
-    const r = maquinasAlerta(ctx); if (r) return r;
+    const r = maquinasAlerta(ctx, linhaDaPergunta(ctx, q)); if (r) return r;
   }
   if (/oee|indicador|kpi|metas?\b/.test(qn)) {
     const ks = d.kpis ?? [];
@@ -732,26 +1358,117 @@ const AREA_LOCAL = {
   marketing: "no marketing", operadores: "no chão de fábrica", gestao: "na gestão",
 };
 
-/** 3–6 primeiras palavras do título, minúsculas (sem pontuação final). */
-function inicioTitulo(titulo) {
-  const ws = String(titulo ?? "").replace(/[.!?;:]+$/, "").split(/\s+/).filter(Boolean);
-  let n = Math.min(6, ws.length);
-  // não termina em preposição/artigo solto
+/**
+ * Trecho do título para a pergunta: até 10 palavras (sem terminar em preposição/artigo solto), sem
+ * pontuação final. Só a 1ª letra vira minúscula, e só se a palavra não for sigla ou código ("TIN-03",
+ * "OEE", "ΔE" ficam como estão). Cortado → reticências.
+ */
+function trechoTitulo(titulo) {
+  const ws = String(titulo ?? "").replace(/[.!?;:…]+$/, "").split(/\s+/).filter(Boolean);
+  let n = Math.min(10, ws.length);
   while (n > 3 && STOP.has(norm(ws[n - 1]))) n--;
-  return ws.slice(0, n).join(" ").toLowerCase();
+  const parte = ws.slice(0, n);
+  if (parte[0] && !/\d/.test(parte[0]) && !/^\p{Lu}{2,}/u.test(parte[0])) parte[0] = parte[0].charAt(0).toLowerCase() + parte[0].slice(1);
+  return parte.join(" ").replace(/[,;:—-]+$/, "") + (n < ws.length ? "…" : "");
 }
 
-/** Pergunta derivada de um registro (UX §4.6.4). Sempre casa com o próprio item em responder(). */
+// nome de empresa costuma ir no feminino ("a Moda Ponto Certo", "a Magazine Horizonte Sul": a empresa);
+// estas primeiras palavras pedem "o"
+const EMPRESA_MASCULINA = new Set(["atacado", "emporio", "armazem", "supermercado", "mercado", "grupo", "frigorifico",
+  "laticinio", "posto", "centro", "atelie", "bazar", "deposito", "hospital", "hotel", "restaurante", "condominio"]);
+const artigoEmpresa = (nome) => (EMPRESA_MASCULINA.has(norm(nome).split(/\s+/)[0]) ? "o" : "a");
+/** Nome de máquina sem o detalhe entre parênteses ("Jet HT de tingimento 3 (400 kg)" → "jet ht de tingimento 3"). */
+const nomeMaquina = (m) => norm(String(m?.nome ?? "").replace(/\s*\([^)]*\)/g, "")).trim();
+
+/**
+ * Registros do pacote citados no título ou no texto de um item do aprendizado, na ordem em que aparecem:
+ * códigos (OP, pedido, máquina, NC, OS, produto), nome de cliente e nome de máquina.
+ * → [{pos, tipo, id, rotulo, descreve()}] (rotulo: "a OP-24518", "o pedido PV-88213", "a Magazine Horizonte Sul").
+ */
+function entidadesCitadas(item, ctx) {
+  const d = ctx?.data;
+  if (!d) return [];
+  const alvo = norm(`${item.titulo ?? ""} ${item.texto ?? ""}`);
+  const ordem = term(ctx, "ordem"), produto = term(ctx, "produto");
+  const achados = [];
+  const add = (pos, tipo, id, rotulo, descreve) => {
+    const ja = achados.find((x) => x.tipo === tipo && x.id === id);
+    if (ja) { ja.pos = Math.min(ja.pos, pos); return; }
+    achados.push({ pos, tipo, id, rotulo, descreve });
+  };
+  const codigos = [
+    [d.ordens, "id", "op", ligado(ctx, "producao"), (id) => `${feminino(ordem) ? "a" : "o"} ${id}`, descreveOrdem],
+    [d.pedidos, "id", "pedido", ligado(ctx, "comercial"), (id) => `o pedido ${id}`, descrevePedido],
+    [d.maquinas, "id", "maq", ligado(ctx, "manutencao"), (id) => `${artMaq(ctx)} ${id}`, descreveMaquina],
+    [d.nao_conformidades, "id", "nc", ligado(ctx, "qualidade"), (id) => `a ${id}`, descreveNC],
+    [d.manutencao, "id", "os", ligado(ctx, "manutencao"), (id) => `a ${id}`, descreveOS],
+    [d.produtos, "sku", "sku", ligado(ctx, "comercial") || ligado(ctx, "portal"), (id) => `${feminino(produto) ? "a" : "o"} ${produto} ${id}`, descreveProduto],
+  ];
+  for (const [lista, campo, tipo, ok, rotulo, fn] of codigos) {
+    if (!ok) continue;
+    for (const r of lista ?? []) {
+      const id = r?.[campo];
+      if (!id || String(id).length < 4) continue;
+      const m = new RegExp(`(?<![a-z0-9-])${escRe(norm(id))}(?![a-z0-9])`).exec(alvo);
+      if (m) add(m.index, tipo, id, rotulo(id), () => fn(ctx, r));
+    }
+  }
+  if (ligado(ctx, "comercial")) {
+    for (const c of d.clientes ?? []) {
+      const curto = nomeCurto(c.nome), n = norm(curto);
+      let pos = n.length >= 5 ? new RegExp(`(?<![a-z0-9])${escRe(n)}(?![a-z0-9])`).exec(alvo)?.index ?? -1 : -1;
+      if (pos < 0) { // ao menos duas palavras fortes do nome ("Horizonte Sul" não basta; "Magazine Horizonte" sim)
+        const fortes = tokens(curto).filter((t) => t.length >= 4 && !["loja", "lojas", "comercio", "distribuidora", "ltda", "moda", "modas"].includes(t));
+        const pos2 = fortes.map((t) => new RegExp(`(?<![a-z0-9])${escRe(t)}(?![a-z0-9])`).exec(alvo)?.index ?? -1).filter((x) => x >= 0);
+        if (fortes.length >= 2 && pos2.length >= 2) pos = Math.min(...pos2);
+      }
+      if (pos >= 0) add(pos, "cliente", c.id, `${artigoEmpresa(curto)} ${curto}`, () => descreveCliente(ctx, c));
+    }
+  }
+  if (ligado(ctx, "manutencao")) {
+    for (const m of d.maquinas ?? []) {
+      const n = nomeMaquina(m);
+      const hit = n.length >= 8 ? new RegExp(`(?<![a-z0-9])${escRe(n)}(?![a-z0-9])`).exec(alvo) : null;
+      if (hit) add(hit.index, "maq", m.id, `${artMaq(ctx)} ${m.id}`, () => descreveMaquina(ctx, m));
+    }
+  }
+  return achados.sort((a, b) => a.pos - b.pos);
+}
+
+/**
+ * "Nos dados da empresa" de um item do aprendizado: os registros que ele cita (a máquina do campo
+ * `maquina`, depois os citados no texto: pedidos do cliente, a máquina, a OP…), até 2. null se não cita nada.
+ */
+function dadosDoItem(ctx, item) {
+  const ents = entidadesCitadas(item, ctx);
+  if (item.maquina && ligado(ctx, "manutencao")) {
+    const m = (ctx.data?.maquinas ?? []).find((x) => norm(x.id) === norm(item.maquina));
+    if (m && !ents.some((e) => e.tipo === "maq" && e.id === m.id)) ents.unshift({ tipo: "maq", id: m.id, descreve: () => descreveMaquina(ctx, m) });
+  }
+  if (!ents.length) return null;
+  const partes = ents.slice(0, 2).map((e) => e.descreve());
+  return { texto: partes.map((r) => r.texto).join("\n\n"), fontes: partes.flatMap((r) => r.fontes) };
+}
+
+/**
+ * Pergunta derivada de um registro (UX §4.6.4). Sempre casa com o próprio item em responder():
+ * aprendizadoDaPergunta() compara a pergunta com perguntaDerivada(item) (normalizada) e dá a maior nota
+ * a esse item. O teste "pergunta derivada casa com o próprio item" em demo/server/test.mjs confere isso.
+ */
 export function perguntaDerivada(item, ctx) {
   if (!item) return "";
   if (item.maquina) {
     const art = ctx ? artMaq(ctx) : "a";
     return `O que preciso saber antes de programar ${art} ${item.maquina}?`;
   }
+  // cita um registro do pacote (OP, pedido, máquina, NC, OS, produto) ou um cliente/máquina pelo nome:
+  // pergunta pela entidade ("…sobre a OP-24518?", "…sobre a Magazine Horizonte Sul?")
+  const ent = entidadesCitadas(item, ctx)[0];
+  if (ent) return `O que a equipe registrou sobre ${ent.rotulo}?`;
   if (item.tipo === "ocorrencia") return `O que aconteceu ${AREA_LOCAL[item.area] ?? "na operação"} hoje?`;
   // entre aspas: o título costuma ser uma frase ("o forno 2 só aquece direito"), não um substantivo
-  if (item.tipo === "documento") return `Qual é a regra para “${inicioTitulo(item.titulo)}”?`;
-  return `O que a equipe sabe sobre “${inicioTitulo(item.titulo)}”?`;
+  if (item.tipo === "documento") return `Qual é a regra para “${trechoTitulo(item.titulo)}”?`;
+  return `O que a equipe sabe sobre “${trechoTitulo(item.titulo)}”?`;
 }
 
 const palavras4 = (s) => [...new Set(tokens(s).filter((t) => t.length >= 4 && !/\d/.test(t)))];
@@ -792,15 +1509,61 @@ export function aprendizadoDaPergunta(ctx, pergunta, { modulo, perfil } = {}) {
 /* ------------------------------------------------------------------ */
 
 function responderBase(ctx, p, { modulo, perfil, areas, perfilOk }) {
-  // (a) pergunta sugerida (igual ou parecida); a resposta pronta só vale se o perfil vê todas as fontes
-  const s = casaSugerida(ctx, p, modulo);
+  const qlimpo = textoLimpo(p);
+  // (0) "o que eu preciso ver hoje?" e variações: resumo para quem decide (no lugar da lista de códigos).
+  // Só na visão geral (ou sem tela), sem registro nem área na pergunta; no Portal do cliente não (o
+  // resumo é da operação interna). Pergunta de área vai para a área em (b2).
+  if (!ctx.cliente && (!modulo || modulo === "visao-geral") && RESUMO_DO_DIA.test(qlimpo) && !citaRegistroOuArea(ctx, p, areas)) {
+    const r = resumoDoDia(ctx, areas); if (r) return r;
+  }
+
+  // (a) pergunta sugerida (igual ou parecida); a resposta pronta só vale se o perfil vê todas as fontes.
+  // No Portal as sugeridas vêm sem resposta pronta (visaoDoCliente): o motor calcula com os dados dele.
+  // "O que preocupa/pede atenção…" numa área (citada, ou a da tela) vai para a lista da área (b2), a
+  // menos que a sugerida seja da própria tela: a resposta pronta da visão geral não serve à qualidade.
+  const regs = idsNaPergunta(ctx, p, areas);
+  const areaPreocupa = !regs.length && PREOCUPACAO.test(qlimpo)
+    ? areaDaPergunta(ctx, qlimpo) ?? (linhaDaPergunta(ctx, tokens(p)) ? "manutencao" : null) ?? AREA_RESUMO[modulo] ?? null
+    : null;
+  let s = casaSugerida(ctx, p, modulo);
+  // "Quais não conformidades estão abertas?" não pega a resposta pronta de uma pergunta mais estreita
+  // ("…de cliente estão abertas?" → "Uma: …"): só a sugerida idêntica; senão a contagem completa do motor
+  if (s && LISTA_DE_NCS.test(qlimpo) && textoLimpo(s.pergunta) !== qlimpo) s = null;
   let negadaPorPerfil = false;
-  if (s && (s.fontes ?? []).every(perfilOk)) return { texto: formataRoteiro(s.resposta, s.fontes), fontes: s.fontes ?? [] };
-  if (s) negadaPorPerfil = true;
+  if (s?.resposta && !(areaPreocupa && s.modulo !== modulo)) {
+    if ((s.fontes ?? []).every(perfilOk)) return { texto: formataRoteiro(s.resposta, s.fontes), fontes: s.fontes ?? [] };
+    negadaPorPerfil = true;
+  }
 
   // (b) ID de registro
-  const regs = idsNaPergunta(ctx, p, areas);
   if (regs.length) return { texto: regs.map((r) => r.texto).join("\n\n"), fontes: regs.flatMap((r) => r.fontes) };
+
+  // (b1) Portal do cliente: código que não é dele, pergunta sobre a fábrica por dentro (fora do acesso
+  // dele, com educação) e "quem é o meu representante?"
+  if (ctx.cliente) {
+    const codigo = norm(p).match(/\b[a-z]{1,5}-\d[\w-]*/)?.[0];
+    if (codigo) return naoEDoCliente(ctx, codigo);
+    if (CONDICAO_ESPECIAL.test(qlimpo)) return condicaoEspecial(ctx);
+    if (perguntaInterna(ctx, qlimpo)) return foraDoPortal(ctx);
+    if (/\b(meus? pedidos?|minhas? (compras?|entregas?|encomendas?))\b/.test(qlimpo) && !/atras/.test(qlimpo)) {
+      const abertos = (ctx.data.pedidos ?? []).filter((x) => !["entregue", "faturado"].includes(x.status))
+        .sort((a, b) => String(b.data).localeCompare(String(a.data))).slice(0, 2);
+      if (abertos.length) {
+        const rs = abertos.map((x) => descrevePedido(ctx, x));
+        return { texto: rs.map((r) => r.texto).join("\n\n"), fontes: rs.flatMap((r) => r.fontes) };
+      }
+    }
+    if (/\b(representantes?|vendedor(a|es)?|com quem (eu )?falo)\b/.test(qlimpo) || qlimpo.includes(textoLimpo(term(ctx, "representante")))) {
+      const cli = by(ctx.data.clientes, "id", ctx.cliente);
+      const rep = cli && by(ctx.data.representantes, "id", cli.representante);
+      if (rep) return descreveRep(ctx, rep);
+    }
+  }
+
+  // (b2) a lista daquela área: NCs abertas, máquinas fora do normal, atrasos
+  if (areaPreocupa && (!areas || areas.includes(areaPreocupa))) {
+    const r = resumoDaArea(ctx, areaPreocupa, tokens(p)); if (r) return r;
+  }
 
   // (c) intenções simples e nomes de clientes/representantes
   const it = intencoes(ctx, p) ?? entidadePorNome(ctx, norm(p));
@@ -812,9 +1575,14 @@ function responderBase(ctx, p, { modulo, perfil, areas, perfilOk }) {
     .filter((r, i, arr) => r.score >= Math.max(2, arr[0].score * 0.4))
     .slice(0, 3);
   if (achados.length) {
-    const linhas = achados.map((r) => `- **${semPonto(r.titulo)}**[[${r.ref}]]: “${semPonto(corta(r.trecho, 200))}”`);
+    const linhas = achados.map((r) => `- **${semPonto(r.titulo)}**[[${r.ref}]]: “${semPonto(cortaDados(r.trecho, 200))}”`);
+    // no Portal quem lê é o cliente: as condições comerciais (públicas) e os manuais/catálogos da empresa
+    const empresa = ctx.empresa || ctx.data?.empresa?.nome || "empresa";
+    const abertura = !ctx.cliente
+      ? `Encontrei isto ${achados.length === 1 ? "num documento da operação" : "nos documentos da operação"}`
+      : achados.some((r) => r.ref.startsWith("regra:")) ? `Pelas condições comerciais da ${empresa}` : `Nos manuais e catálogos da ${empresa}`;
     return {
-      texto: `Encontrei isto ${achados.length === 1 ? "num documento da operação" : "nos documentos da operação"}:\n${linhas.join("\n")}`,
+      texto: `${abertura}:\n${linhas.join("\n")}`,
       fontes: achados.map((r) => r.ref), fraco: true,
     };
   }
@@ -836,8 +1604,13 @@ function limpaMarcadores(texto, fontes) {
   return String(texto).replace(/\[\[\s*([a-z]+:[^\]]+?)\s*\]\]/gi, (m, ref) => (fontes.includes(ref.trim()) ? m : ""));
 }
 
-/** → {texto, fontes, modo: "local"} */
-export function responder(ctx, pergunta, { modulo, perfil } = {}) {
+/** → {texto, fontes, modo: "local"}. Com `cliente` (Portal do cliente), só enxerga os dados dele. */
+export function responder(ctx, pergunta, { modulo, perfil, cliente } = {}) {
+  if (cliente) {
+    const visao = visaoDoCliente(ctx, cliente);
+    if (!visao) return { texto: "Não encontrei esse cliente nesta demo.", fontes: [], modo: "local" };
+    ctx = visao;
+  }
   const areas = perfilAreas(ctx, perfil);
   // "Ver como": documentos pelo acesso; saberes/NCs/regras pela área.
   const AREA_REF = { saber: "operadores", nc: "qualidade", regra: "comercial" };
@@ -857,9 +1630,21 @@ export function responder(ctx, pergunta, { modulo, perfil } = {}) {
   const p = String(pergunta ?? "").trim();
   if (!p || !ctx?.data) return pronto("Escreva uma pergunta sobre a operação desta demo.", []);
 
-  const base = responderBase(ctx, p, { modulo, perfil, areas, perfilOk });
+  let base = responderBase(ctx, p, { modulo, perfil, areas, perfilOk });
   const apr = aprendizadoDaPergunta(ctx, p, { modulo, perfil }).slice(0, 2);
   if (!apr.length) return pronto(base.texto, base.fontes);
+
+  // "Nos dados da empresa": os registros que o item cita (pedidos do cliente, a máquina, a OP) quando a
+  // pergunta é sobre o item (a derivada dele, ou cita a mesma entidade) ou a base não achou nada firme.
+  // Sem entidade no item, fica a resposta da pergunta (busca/intenção).
+  const doItem = dadosDoItem(ctx, apr[0]);
+  if (doItem) {
+    const qcmp = textoLimpo(p);
+    const sobreOItem = textoLimpo(perguntaDerivada(apr[0], ctx)) === qcmp;
+    const daPergunta = new Set(entidadesCitadas({ titulo: p }, ctx).map((e) => `${e.tipo}:${e.id}`));
+    const mesmaEntidade = entidadesCitadas(apr[0], ctx).some((e) => daPergunta.has(`${e.tipo}:${e.id}`));
+    if (sobreOItem || mesmaEntidade || base.vazio || base.fraco) base = doItem;
+  }
 
   // O que a equipe registrou vem primeiro, citado (UX §4.5.4: o laço do "uau" sem chave de API).
   // mesmo formato do servidor (demo/server/local.mjs): título em negrito, autor e data, texto citado

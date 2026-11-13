@@ -4,10 +4,11 @@
 // Pacote A. Telas de B e C são importadas dinamicamente; o que ainda não existir vira um stub de
 // mesma assinatura, para nada quebrar.
 
-import { fmt, TODAY } from './format.js';
+import { fmt, TODAY, parado } from './format.js';
 import {
-  FEATURES, FEATURE_BY_ID, AREA_IDS, isFeatureOn, normalizeModulos, enabledAreas, navItems, navOf, resolveRoute,
+  FEATURES, FEATURE_BY_ID, AREA_IDS, isFeatureOn, normalizeModulos, enabledAreas, navItems, navOf, resolveRoute, CONTATO_URL,
 } from './features.js';
+import { origemDoRef } from './origem.js';
 import { resolveRef as resolveRefData, REF_TYPES } from './adapters/data-source.js';
 import { api, ApiError, onNaoAutorizado } from './api.js';
 import * as ui from './ui.js';
@@ -119,6 +120,7 @@ let learning = null;
 let assistant = null;
 const B = { conversa: null, ensinar: null, markdown: null, learningMod: null };
 let drawerMap = {};
+let fontesMod = null; // ui/fontes.js: ctxDoCliente para as gavetas abertas do Portal (C3)
 let shellPronta = false;
 let reautenticando = false;
 
@@ -130,6 +132,10 @@ async function carregar({ silencioso = false } = {}) {
   } catch (err) {
     if (err instanceof ApiError && err.status === 401) {
       mostrarSenha();
+      return;
+    }
+    if (err instanceof ApiError && err.status === 410) {
+      telaLinkEncerrado(root());
       return;
     }
     if (err instanceof ApiError && (err.status === 404 || err.status === 403)) {
@@ -152,14 +158,40 @@ async function carregar({ silencioso = false } = {}) {
   }
 }
 
+// Contrato do POST /entrar: 401 = senha errada; 410 = senha certa, mas a demo foi desativada ou
+// expirou; 404 = o link não existe. Só 410/404 levam à tela final; 401 repetido só ganha uma dica.
+const RECUSAS_ATE_DICA = 3;
+const DICA_SENHA = 'Confira a senha na mensagem que você recebeu. Se continuar sem entrar, peça um novo link a quem te enviou.';
+
 async function mostrarSenha({ expirada = false } = {}) {
   const { renderEntrar } = await import('./screens/entrar.js');
   const alvo = expirada ? overlayReauth() : root();
-  renderEntrar(alvo, {
+  let recusas = 0;
+  const tela = renderEntrar(alvo, {
     titulo: 'Esta demonstração é privada.',
-    apoio: 'Digite a senha que veio junto com o link.',
+    // apoio: o padrão de entrar.js (diz o que vem depois da senha)
     aviso: expirada ? 'Sua sessão expirou. Digite a senha de novo.' : null,
-    entrar: (senha) => api.entrar(demoId, senha),
+    entrar: async (senha) => {
+      try {
+        const r = await api.entrar(demoId, senha);
+        recusas = 0;
+        return r;
+      } catch (err) {
+        const status = err instanceof ApiError ? err.status : 0;
+        if (status === 410 || status === 404) {
+          telaLinkEncerrado(alvo);
+          const fim = new Error('link encerrado');
+          fim.status = 0;
+          fim.encerrado = true;
+          throw fim;
+        }
+        if (status === 401) {
+          recusas += 1;
+          if (recusas >= RECUSAS_ATE_DICA) dicaSenha(tela?.el);
+        }
+        throw err;
+      }
+    },
     onSucesso: async () => {
       if (expirada) {
         fecharReauth();
@@ -167,7 +199,11 @@ async function mostrarSenha({ expirada = false } = {}) {
         try {
           const r = await api.estado(demoId);
           if (r && Array.isArray(r.aprendizado) && learning && typeof learning.replace === 'function') learning.replace(r.aprendizado);
-        } catch { /* segue com o que tem */ }
+        } catch (err) {
+          // link desativado com a sessão ainda válida (C2): a tela final, no lugar da demo
+          if (err instanceof ApiError && err.status === 410) linkEncerradoNaDemo();
+          /* outros erros: segue com o que tem */
+        }
       } else {
         await carregar();
       }
@@ -175,18 +211,87 @@ async function mostrarSenha({ expirada = false } = {}) {
   });
 }
 
+/** Dica no próprio formulário depois de várias senhas recusadas (uma vez só). */
+function dicaSenha(telaEl) {
+  const form = telaEl?.querySelector?.('.auth__form');
+  if (!form || form.querySelector('.auth__dica')) return;
+  const id = `dica-${Math.random().toString(36).slice(2, 8)}`;
+  const dica = h('p', { id, class: 'auth__notice auth__dica', role: 'status' }, DICA_SENHA);
+  const botao = form.querySelector('button[type="submit"]');
+  form.insertBefore(dica, botao);
+  const input = form.querySelector('input');
+  if (input) input.setAttribute('aria-describedby', `${input.getAttribute('aria-describedby') || ''} ${id}`.trim());
+}
+
+/** 410 com a demo montada: fecha gavetas e overlays e mostra a tela final no lugar do app. */
+function linkEncerradoNaDemo() {
+  shellPronta = false;
+  try { ui.closeAllSheets(); } catch { /* ok */ }
+  reauthEl?.remove();
+  reauthEl = null;
+  apresentacaoEl?.remove();
+  apresentacaoEl = null;
+  window.removeEventListener('hashchange', onHashChange);
+  document.removeEventListener('keydown', atalhos);
+  rodaCleanup();
+  telaLinkEncerrado(root());
+}
+
+/** Tela final quando o servidor diz que o link não vale mais (410/404). */
+function telaLinkEncerrado(alvo) {
+  const titulo = h('h1', { class: 'auth__title', tabindex: '-1' }, 'Este link foi desativado ou expirou.');
+  alvo.replaceChildren(h('main', { class: 'auth' },
+    h('div', { class: 'auth__card' },
+      h('div', { class: 'auth__brand' }, h('span', { class: 'wordmark' }, 'Torno')),
+      titulo,
+      h('p', { class: 'auth__lead' }, 'Peça um novo a quem te enviou.')),
+    h('p', { class: 'auth__foot' }, 'IA e software sob medida para a indústria · tornostudio.com')));
+  requestAnimationFrame(() => titulo.focus());
+}
+
+// ---------------------------------------------------------------------------
+// Overlays (reautenticação e "Rever a apresentação"): o app de fundo fica inerte (sem foco nem leitor
+// de tela) enquanto qualquer um deles estiver aberto, e o foco volta para onde estava ao fechar.
+
 let reauthEl = null;
+let apresentacaoEl = null;
+let focoAntesReauth = null;
+let focoAntesApresentacao = null;
+
+function atualizaInerte() {
+  if (el.app) el.app.inert = !!(reauthEl || apresentacaoEl);
+  // reautenticação por cima da apresentação: a apresentação também fica de fora do foco
+  if (apresentacaoEl) apresentacaoEl.inert = !!reauthEl;
+}
+/** Devolve o foco a `alvo`; se ele saiu da tela (ex.: a rota mudou), vai para `reserva`. */
+function devolveFoco(alvo, reserva = null) {
+  const pode = (n) => n && n.isConnected && typeof n.focus === 'function' && !n.closest?.('[inert]');
+  const destino = pode(alvo) ? alvo : pode(reserva) ? reserva : null;
+  if (destino) {
+    try { destino.focus({ preventScroll: true }); } catch { /* ok */ }
+  }
+}
+
 function overlayReauth() {
   if (!reauthEl) {
-    reauthEl = h('div', { class: 'reauth', style: { position: 'fixed', inset: '0', zIndex: '200', overflow: 'auto' } });
+    focoAntesReauth = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    reauthEl = h('div', {
+      class: 'reauth', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Entrar de novo na demonstração',
+      style: { position: 'fixed', inset: '0', zIndex: '200', overflow: 'auto' },
+    });
     document.body.appendChild(reauthEl);
   }
+  atualizaInerte();
   return reauthEl;
 }
 function fecharReauth() {
   reauthEl?.remove();
   reauthEl = null;
   reautenticando = false;
+  atualizaInerte();
+  const foco = focoAntesReauth;
+  focoAntesReauth = null;
+  devolveFoco(foco);
 }
 
 onNaoAutorizado((escopo) => {
@@ -202,23 +307,81 @@ async function iniciar(r) {
   modulos = normalizeModulos(r.demo.modulos);
   document.title = `${empresaNome()} · Demonstração`;
 
-  // módulos de B (com stubs), drawers de B e C, assistente
-  await Promise.all([carregarB(), carregarDrawers(), carregarAssistente()]);
+  // módulos de B (com stubs), drawers de B e C, assistente, roteiro do Início
+  await Promise.all([carregarB(), carregarDrawers(), carregarAssistente(), carregarRoteiro()]);
   learning = criarLearning(Array.isArray(r.aprendizado) ? r.aprendizado : []);
 
   if (!store.get(`td_bv_${demoId}`)) {
     const { renderBoasVindas } = await import('./screens/boas-vindas.js');
     renderBoasVindas(root(), {
       ctx: buildCtx(),
-      onComecar: (nome) => {
-        store.set(`td_bv_${demoId}`, '1');
-        if (nome != null) store.set(`td_autor_${demoId}`, nome.trim());
+      onComecar: (nome, { viaEsc = false } = {}) => {
+        // Esc fecha só desta vez: a apresentação volta no próximo acesso (e em Como funciona)
+        if (!viaEsc) store.set(`td_bv_${demoId}`, '1');
+        if (nome != null && nome.trim()) store.set(`td_autor_${demoId}`, nome.trim());
         montarApp();
       },
     });
     return;
   }
   montarApp();
+}
+
+/** Roteiro "Experimente em 3 passos": o ouvinte de 'torno:marco' vale para a demo inteira. */
+let roteiroMod = null;
+async function carregarRoteiro() {
+  roteiroMod = await tryImport('./ui/roteiro.js');
+  try { roteiroMod?.instalarRoteiro?.(demoId); } catch (err) { console.warn('[app] roteiro', err); }
+}
+
+/** "Rever a apresentação" (Como funciona): boas-vindas por cima do app, sem desmontar nada. */
+async function reverApresentacao() {
+  if (apresentacaoEl) return;
+  const mod = await tryImport('./screens/boas-vindas.js');
+  if (!mod || typeof mod.renderBoasVindas !== 'function' || apresentacaoEl) return;
+  focoAntesApresentacao = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  ui.closeAllSheets();
+  apresentacaoEl = h('div', { class: 'tela-sobre', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Apresentação da demonstração' });
+  document.body.appendChild(apresentacaoEl);
+  atualizaInerte();
+  let desliga = null;
+  desliga = mod.renderBoasVindas(apresentacaoEl, {
+    ctx: buildCtx(),
+    // o Esc do documento não fecha a apresentação enquanto a reautenticação estiver por cima
+    bloqueado: () => !!reauthEl,
+    onComecar: (nome) => {
+      if (nome != null && nome.trim()) store.set(`td_autor_${demoId}`, nome.trim());
+      store.set(`td_bv_${demoId}`, '1');
+      if (typeof desliga === 'function') desliga();
+      apresentacaoEl?.remove();
+      apresentacaoEl = null;
+      atualizaInerte();
+      const foco = focoAntesApresentacao;
+      focoAntesApresentacao = null;
+      try { roteiroMod?.mostrarRoteiro?.(); } catch { /* ok */ }
+      navigate('#inicio');
+      // depois da troca de rota: o botão de origem, se ainda existir; senão, o conteúdo
+      requestAnimationFrame(() => devolveFoco(foco, el.content));
+    },
+  });
+}
+
+/**
+ * C1: o /estado diz `ia: 'real' | 'local'` (quem responde nesta demo) e `ia_modelo` (o modelo, ou null).
+ * Versões anteriores mandavam {disponivel, modelo}. → {modo: 'real'|'local', disponivel, modelo}; sem o
+ * campo, 'local'.
+ * ctx.ia.modo decide o texto das boas-vindas e de Como funciona; ctx.ia.disponivel segue valendo
+ * para quem já lia o formato antigo (assistente, área).
+ */
+function iaDoEstado(r) {
+  const ia = r?.ia;
+  const modelo = typeof r?.ia_modelo === 'string' && r.ia_modelo ? r.ia_modelo : null; // /estado: ia_modelo ao lado de ia
+  if (ia === 'real' || ia === 'local') return { modo: ia, disponivel: ia === 'real', modelo };
+  if (ia && typeof ia === 'object') {
+    const modo = ia.modo === 'real' || ia.modo === 'local' ? ia.modo : ia.disponivel ? 'real' : 'local';
+    return { ...ia, modo, disponivel: modo === 'real', modelo: ia.modelo ?? modelo };
+  }
+  return { modo: 'local', disponivel: false, modelo };
 }
 
 function empresaNome() {
@@ -248,8 +411,9 @@ async function carregarB() {
 }
 
 async function carregarDrawers() {
-  const [c, b] = await Promise.all([tryImport('./ui/area-page.js'), tryImport('./modules/cerebro.js')]);
+  const [c, b, fo] = await Promise.all([tryImport('./ui/area-page.js'), tryImport('./modules/cerebro.js'), tryImport('./ui/fontes.js')]);
   drawerMap = { ...((c && c.drawers) || {}), ...((b && b.drawersCerebro) || {}) };
+  fontesMod = fo;
 }
 
 async function carregarAssistente() {
@@ -413,7 +577,7 @@ function buildCtx() {
     assistant,
     // v2
     demo: estado ? { ...estado.demo, modulos } : null,
-    ia: estado?.ia || { disponivel: false, modelo: null },
+    ia: iaDoEstado(estado),
     autor: () => autorSalvo() || 'Você',
     autorSalvo,
     setAutor: (nome) => store.set(`td_autor_${demoId}`, String(nome || '').trim()),
@@ -433,6 +597,8 @@ function buildCtx() {
     areaAtual,
     areas: enabledAreas(modulos || {}),
     REF_TYPES,
+    reverApresentacao,
+    contatoUrl: CONTATO_URL,
   };
 }
 
@@ -450,14 +616,21 @@ function montarApp() {
   el.bottom = h('ul', { class: 'bottombar__list' });
   el.content = h('main', { class: 'content', id: 'conteudo', tabindex: '-1' });
 
+  // "Dados fictícios" legível também no celular (antes virava "Fictícia" em 11 px sem fundo)
   const fict = h('span', {
     class: 'pill pill--fict', title: 'Empresa, pessoas e números inventados para esta demonstração',
-  }, h('span', { class: 'fict-long' }, 'Dados fictícios'), h('span', { class: 'fict-short' }, 'Fictícia'));
+  }, 'Dados fictícios');
 
   const ask = ui.button('Perguntar', {
     icone: 'search', class: 'topbar__ask', title: 'Perguntar (atalho: /)',
     onClick: () => abrirConversa(),
   });
+  ask.setAttribute('aria-label', 'Perguntar');
+  // CTA discreto de conversão (desktop): página de contato do site, em nova aba
+  const contato = h('a', {
+    class: 'topbar__cta', href: CONTATO_URL, target: '_blank', rel: 'noopener', title: 'Falar com a Torno (abre em nova aba)',
+  }, icon('message', { size: 16 }), h('span', { class: 'topbar__cta-label' }, 'Falar com a Torno'),
+  h('span', { class: 'sr-only' }, ' (abre em nova aba)'));
   const teach = ui.button('Ensinar', {
     icone: 'lightbulb', class: 'btn--teach', title: 'Ensinar o cérebro',
     onClick: () => ensinar({ area: areaAtual() || undefined, origem: 'topo' }),
@@ -471,14 +644,24 @@ function montarApp() {
         h('span', { class: 'topbar__divider', 'aria-hidden': 'true' }),
         h('div', { class: 'topbar__company' }, el.empresa, fict)),
       el.nav,
-      h('div', { class: 'topbar__actions' }, ask, teach, themeToggle({ class: 'topbar__theme' }))));
+      h('div', { class: 'topbar__actions' }, contato, ask, teach, themeToggle({ class: 'topbar__theme' }))));
 
   const bottombar = h('nav', { class: 'bottombar', 'aria-label': 'Principal' }, el.bottom);
-  app.append(h('a', { class: 'sr-only skip', href: '#conteudo' }, 'Pular para o conteúdo'), topbar, el.content, bottombar);
+  // o href "#conteudo" cairia no roteador (e voltaria ao #inicio): o clique só move o foco
+  const pular = h('a', {
+    class: 'sr-only skip', href: '#conteudo',
+    onClick: (e) => { e.preventDefault(); el.content.focus({ preventScroll: false }); el.content.scrollIntoView?.({ block: 'start' }); },
+  }, 'Pular para o conteúdo');
+  app.append(pular, topbar, el.content, bottombar);
   root().replaceChildren(app);
 
   desenharNav();
-  learning.subscribe(() => atualizarContador(true));
+  learning.subscribe(() => {
+    const antes = ultimaContagem;
+    atualizarContador(true);
+    // reserva do roteiro: um registro novo também conta como passo "ensino" (o evento torno:marco é o principal)
+    if (antes != null && contagemRegistros() > antes) { try { roteiroMod?.marcarPasso?.('ensino'); } catch { /* ok */ } }
+  });
 
   document.addEventListener('keydown', atalhos);
   document.addEventListener('click', fecharMenusFora);
@@ -499,6 +682,7 @@ function atalhos(e) {
   const t = e.target;
   if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
   if (document.documentElement.classList.contains('has-sheet')) return;
+  if (reauthEl || apresentacaoEl) return; // overlay aberto: o app de fundo está inerte
   e.preventDefault();
   abrirConversa();
 }
@@ -537,7 +721,6 @@ function atualizarContador(animar = false) {
 export function areaHint(id, d = data) {
   if (!d) return '';
   const vocab = d.vocabulario || {};
-  const fem = (s) => /a$/.test(String(s || '')) ;
   try {
     if (id === 'producao') {
       const n = (d.ordens || []).filter((o) => o.status === 'atrasada').length;
@@ -546,7 +729,7 @@ export function areaHint(id, d = data) {
     if (id === 'manutencao') {
       const ms = d.maquinas || [];
       const p = ms.find((m) => m.status === 'parada');
-      if (p) return `${p.id} ${fem(vocab.maquina) ? 'parada' : 'parado'}`;
+      if (p) return `${p.id} ${parado(d)}`;
       const a = ms.find((m) => m.status === 'alerta');
       return a ? `${a.id} em alerta` : 'Tudo operando';
     }
@@ -674,6 +857,9 @@ const ROTA_MODULO = {
 
 let renderToken = 0;
 let cleanup = null;
+// 1º render depois do boot: o foco fica onde o navegador o deixou, para que o 1º Tab caia no
+// "Pular para o conteúdo". Só as navegações seguintes levam o foco ao <main>.
+let primeiroRender = true;
 
 export function navigate(route) {
   const hash = route.startsWith('#') ? route : `#${route}`;
@@ -699,6 +885,8 @@ function onHashChange() {
 async function renderRota(rota, secao) {
   const token = ++renderToken;
   const mudou = rota !== rotaAtual || !el.content.firstChild;
+  const primeiro = primeiroRender;
+  primeiroRender = false;
   if (menuAberto) menuAberto.close();
   if (mudou) ui.closeAllSheets();
   rodaCleanup();
@@ -742,7 +930,7 @@ async function renderRota(rota, secao) {
     });
   } else if (mudou) {
     window.scrollTo(0, 0);
-    if (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected) {
+    if (!primeiro && (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected)) {
       el.content.focus({ preventScroll: true });
     }
   }
@@ -762,7 +950,7 @@ function rodaCleanup() {
 function emConstrucao() {
   return h('div', { class: 'empty-state' },
     icon('layers', { size: 22 }),
-    h('p', null, 'Esta parte da demonstração ainda está sendo preparada.'),
+    h('p', null, 'Esta área não entrou nesta demonstração.'),
     ui.button('Voltar ao início', { onClick: () => navigate('#inicio') }));
 }
 
@@ -774,8 +962,22 @@ const TIPO_AREA = {
   regra: 'comercial', nc: 'qualidade', os: 'manutencao', maq: 'manutencao', saber: 'operadores', doc: null, kpi: 'gestao',
 };
 
-function openRef(ref) {
-  const ctx = buildCtx();
+/**
+ * openRef(ref, {cliente}) → a folha aberta ou null. Com `cliente` (Portal, C3), o registro e a gaveta
+ * vêm da versão do cliente (ctxDoCliente de fontes.js, sobre visaoDoCliente): sem histórico interno,
+ * sem meta de representante, sem registros da equipe e sem as ações internas. Se essa versão não puder
+ * ser montada, a gaveta não abre (nunca cai nos dados internos).
+ */
+function openRef(ref, { cliente } = {}) {
+  let ctx = buildCtx();
+  if (cliente) {
+    const paraCliente = fontesMod && typeof fontesMod.ctxDoCliente === 'function' ? safe(() => fontesMod.ctxDoCliente(ctx, cliente)) : null;
+    if (!paraCliente) {
+      toast('Esse registro não faz parte desta demonstração.');
+      return null;
+    }
+    ctx = paraCliente;
+  }
   const resolved = ctx.resolveRef(ref);
   if (!resolved) {
     toast('Esse registro não faz parte desta demonstração.');
@@ -816,9 +1018,51 @@ function openRef(ref) {
     }
     s.setCorpo(corpo);
   }
-  if (acoes === 'padrao') s.setAcoes(acoesPadrao(resolved, s));
+  if (acoes === 'padrao') s.setAcoes(acoesPadrao(resolved, s, ctx));
   else s.setAcoes(acoes);
+  rodapeOrigem(s, resolved, ctx);
   return s;
+}
+
+/** "13 nov, 14:05" no fuso de quem vê (criado_em dos registros vem em UTC). */
+function dataHoraLocal(iso) {
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return '';
+  const dt = new Date(t);
+  const p = (n) => String(n).padStart(2, '0');
+  return fmt.datetime(`${dt.getFullYear()}-${p(dt.getMonth() + 1)}-${p(dt.getDate())}T${p(dt.getHours())}:${p(dt.getMinutes())}`);
+}
+
+/** Texto da linha de origem da gaveta (uma só, no rodapé), pela regra única de origem.js. */
+function textoOrigem(resolved, ctx) {
+  const o = safe(() => origemDoRef(ctx.data, resolved));
+  if (resolved.tipo === 'aprendizado') {
+    const autor = o?.autor && o.autor !== 'Você' ? o.autor : 'você';
+    return [`Registrado por ${autor} nesta demonstração`, dataHoraLocal(o?.criado_em) || null].filter(Boolean).join(' · ');
+  }
+  const origem = o?.sistema || o?.nome;
+  if (!origem) return '';
+  const em = o.atualizado ? ctx.fmt.date(o.atualizado) : o.sync ? ctx.fmt.datetime(o.sync) : '';
+  return [
+    `Origem: ${origem}`,
+    o.nota || null,
+    em ? `${o.erro ? 'última sincronização' : 'atualizado'} ${em}` : null,
+    'dado fictício',
+  ].filter(Boolean).join(' · ');
+}
+
+/** Rodapé fixo "Origem: ERP · atualizado 13 nov, 07:40 · dado fictício" (a única linha de origem da gaveta). */
+function rodapeOrigem(s, resolved, ctx) {
+  const texto = textoOrigem(resolved, ctx);
+  if (!texto) return;
+  const linha = h('p', { class: 'drawer-origem' },
+    icon(resolved.tipo === 'aprendizado' ? 'lightbulb' : resolved.tipo === 'saber' ? 'users' : 'database', { size: 14 }),
+    h('span', null, texto));
+  const poe = () => { s.footer.appendChild(linha); s.footer.hidden = false; };
+  // gavetas que trocam as ações depois (s.setAcoes) não apagam a linha de origem
+  const setAcoes = s.setAcoes;
+  s.setAcoes = (n) => { setAcoes(n); poe(); };
+  poe();
 }
 
 function refIcon(tipo) {
@@ -828,8 +1072,12 @@ function refIcon(tipo) {
   }[tipo] || 'file';
 }
 
-/** [Perguntar sobre isto] [Ensinar algo sobre isto] para qualquer registro. */
-export function acoesPadrao(resolved, s) {
+/**
+ * [Perguntar sobre isto] [Ensinar algo sobre isto] para qualquer registro. Na versão do cliente
+ * (ctx.cliente), a pergunta vai para o assistente do Portal (ctx.perguntar de ctxDoCliente) e não há Ensinar.
+ */
+export function acoesPadrao(resolved, s, ctx = null) {
+  const pergunta = ctx?.cliente && typeof ctx.perguntar === 'function' ? ctx.perguntar : perguntar;
   const d = resolved.detalhe || {};
   const area = resolved.tipo === 'aprendizado' ? d.area
     : resolved.tipo === 'doc' ? d.doc?.area : TIPO_AREA[resolved.tipo] || resolved.modulo;
@@ -840,13 +1088,14 @@ export function acoesPadrao(resolved, s) {
   return [
     ui.button('Perguntar sobre isto', {
       variant: 'primary', icone: 'search',
-      onClick: () => { s.close(); perguntar(`O que preciso saber sobre ${nome}?`, { modulo }); },
+      onClick: () => { s.close(); pergunta(`O que preciso saber sobre ${nome}?`, { modulo }); },
     }),
-    ui.button('Ensinar algo sobre isto', {
+    // no Portal (ctx.cliente) o cliente não ensina o cérebro da fábrica (o servidor também não registra)
+    ctx?.cliente ? null : ui.button('Ensinar algo sobre isto', {
       icone: 'lightbulb',
       onClick: () => { s.close(); ensinar({ area: area || undefined, maquina: maquina || undefined, origem: resolved.ref }); },
     }),
-  ];
+  ].filter(Boolean);
 }
 
 /** Gaveta genérica legível por tipo (nunca JSON cru). Herdada da v1, em tom calmo. */

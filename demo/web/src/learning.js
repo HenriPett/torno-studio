@@ -25,14 +25,21 @@ export const TIPOS_APRENDIZADO = [
 ];
 export const TIPO_ROTULO = Object.fromEntries(TIPOS_APRENDIZADO.map((t) => [t.id, t.rotulo]));
 
-/** Título gerado do texto: 1ª frase, cortada em 80 caracteres na última palavra inteira (UX §4.6.2). */
-export function tituloDoTexto(texto) {
+/**
+ * Título gerado do texto (UX §4.6.2): a 1ª frase; se passar de 80 caracteres, corta no fim de oração
+ * (vírgula, dois-pontos, travessão) ou na última palavra inteira, com "…". Só parte uma palavra quando
+ * ela sozinha passa do limite. Não mexe na capitalização.
+ */
+export function tituloDoTexto(texto, max = 80) {
   const t = String(texto ?? '').replace(/\s+/g, ' ').trim();
+  // fim de frase = pontuação seguida de espaço (não quebra em "3,5" nem dentro de "OP-24518")
   const primeira = (t.split(/(?<=[.!?;])\s/)[0] || t).replace(/[.!?;:,\s]+$/, '');
-  if (primeira.length <= 80) return primeira;
-  const corte = primeira.slice(0, 80);
-  const ultimoEspaco = corte.lastIndexOf(' ');
-  return `${(ultimoEspaco > 40 ? corte.slice(0, ultimoEspaco) : corte).replace(/[,;:\s]+$/, '')}…`;
+  if (primeira.length <= max) return primeira;
+  const corte = primeira.slice(0, max);
+  const oracao = Math.max(corte.lastIndexOf(', '), corte.lastIndexOf(': '), corte.lastIndexOf(' — '), corte.lastIndexOf(' – '));
+  const espaco = primeira.charAt(max) === ' ' ? max : corte.lastIndexOf(' ');
+  const fim = oracao >= max * 0.6 ? oracao : espaco > 0 ? espaco : max;
+  return `${primeira.slice(0, fim).replace(/[\s,;:—–-]+$/, '')}…`;
 }
 
 const ordena = (a, b) => String(b.criado_em ?? '').localeCompare(String(a.criado_em ?? '')) || String(b.id).localeCompare(String(a.id));

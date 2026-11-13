@@ -108,22 +108,32 @@ async function lerSSE(res, onEvento) {
 
 const MAX_RODADAS = 6;
 
+// Avisos curtos para quem está na demo quando a resposta não veio da IA (r.aviso; ver ai/assistant.js).
+// Únicos no front: ai/assistant.js importa daqui. O servidor tem a sua cópia de AVISO_LIMITE (ai.mjs).
+export const AVISO_LIMITE = 'A IA atingiu o limite de hoje desta demonstração; esta resposta veio do roteiro local.';
+export const AVISO_FALHA = 'A IA ficou indisponível por um instante; esta resposta veio do roteiro local.';
+
 /**
- * conversa(id, {mensagens|estado, modulo, perfil, autor, motor}, {onTexto, onFerramenta, onAprendizado, onFim, signal})
+ * conversa(id, {mensagens|estado, modulo, perfil, autor, cliente, motor}, {onTexto, onFerramenta, onAprendizado, onFim, signal})
  * → Promise<{texto, fontes, continuar:false, estado, modo, aviso, rodadas}>
  * Faz o laço `continuar` (reenvia {estado} até continuar:false). Em erro recuperável, repete a
- * rodada com motor:"local" (uma vez). onTexto(delta, textoAcumulado). Erros: ApiError.
+ * rodada com motor:"local" (uma vez) e devolve `aviso` (o do servidor, ou AVISO_LIMITE/AVISO_FALHA).
+ * `cliente` (id CLI-…, Portal do cliente) vai no corpo: o servidor só usa os dados desse cliente
+ * (modulo "portal" sem cliente → 400). No portal, cada mensagem de `mensagens` leva `cliente` também:
+ * o servidor só aproveita do histórico a sequência final marcada com o mesmo cliente.
+ * onTexto(delta, textoAcumulado). Erros: ApiError.
  */
 async function conversa(id, payload = {}, handlers = {}) {
   const { onTexto, onFerramenta, onAprendizado, onFim, signal } = handlers;
   const base = {};
-  for (const k of ['modulo', 'perfil', 'autor', 'motor']) if (payload[k] != null) base[k] = payload[k];
+  for (const k of ['modulo', 'perfil', 'autor', 'cliente', 'motor']) if (payload[k] != null) base[k] = payload[k];
   let corpo = payload.estado ? { ...base, estado: payload.estado } : { ...base, mensagens: payload.mensagens || [] };
   const corpoOriginal = corpo;
   let textoTotal = '';
   const fontes = [];
   let ultimo = null;
   let tentouLocal = payload.motor === 'local';
+  let avisoTroca = null; // a IA falhou e a rodada foi refeita pelo motor local
 
   for (let rodada = 0; rodada < MAX_RODADAS; rodada += 1) {
     let res;
@@ -173,6 +183,7 @@ async function conversa(id, payload = {}, handlers = {}) {
       if (erroEv.recuperavel && !tentouLocal) {
         // reenvia o corpo original pelo roteiro local; o texto parcial é descartado
         tentouLocal = true;
+        avisoTroca = /limite/i.test(String(erroEv.erro || '')) ? AVISO_LIMITE : AVISO_FALHA;
         const tinhaTexto = !!textoTotal;
         textoTotal = '';
         fontes.length = 0;
@@ -197,7 +208,7 @@ async function conversa(id, payload = {}, handlers = {}) {
     continuar: false,
     estado: ultimo ? ultimo.estado : undefined,
     modo: ultimo ? ultimo.modo : undefined,
-    aviso: ultimo ? ultimo.aviso : undefined,
+    aviso: (ultimo && ultimo.aviso) || avisoTroca || undefined,
     rodadas: ultimo ? ultimo.rodada : undefined,
   };
 }
@@ -212,10 +223,14 @@ export const api = {
   ApiError,
   onNaoAutorizado,
 
-  /** POST /entrar → {ok}. 401/404 = "Link ou senha inválidos". */
+  /** POST /entrar → {ok}. 401 = "Link ou senha inválidos"; 410 = senha certa, mas o link foi desativado ou expirou. */
   entrar: (id, senha) => req('POST', `${D(id)}/entrar`, { senha }, { escopo: null }),
   sair: (id) => req('POST', `${D(id)}/sair`, {}, { escopo: null }),
-  /** GET /estado → {demo, setor, aprendizado, ia, admin?}. 401 sem cookie. */
+  /**
+   * GET /estado → {demo, setor, aprendizado, ia: 'real'|'local', ia_modelo, admin?}. `ia` é 'real' só com
+   * ANTHROPIC_API_KEY no servidor. 401 sem cookie válido; 410 {erro:'Este link foi desativado ou expirou.'}
+   * com cookie válido desta demo, mas a demo desativada ou expirada.
+   */
   estado: (id, { signal } = {}) => req('GET', `${D(id)}/estado`, undefined, { signal, escopo: null }),
 
   aprendizado: {

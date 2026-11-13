@@ -139,8 +139,11 @@ export const NAV = [
   { id: 'cerebro', nome: 'Cérebro', icone: 'brain', rota: '#cerebro', modulo: 'cerebro' },
   { id: 'areas', nome: 'Áreas', icone: 'grid', rota: '#areas' },
   { id: 'portal', nome: 'Portal do cliente', nomeCurto: 'Portal', icone: 'store', rota: '#portal', modulo: 'portal' },
-  { id: 'como-funciona', nome: 'Como funciona', nomeCurto: 'Mais', icone: 'more', rota: '#como-funciona' },
+  { id: 'como-funciona', nome: 'Como funciona', nomeCurto: 'Como funciona', icone: 'info', rota: '#como-funciona' },
 ];
+
+/** Página de contato do site (CTA "Falar com a Torno"). Não usar /diagnostico/: é landing de anúncio. */
+export const CONTATO_URL = 'https://tornostudio.com/contact/';
 
 /** Normaliza {id:bool} com dependências aplicadas. */
 export function normalizeModulos(raw) {

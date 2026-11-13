@@ -39,7 +39,15 @@ export interface HomeIds {
 export interface HomeContent {
   /** Âncoras das seções (o header linka `solutions`: #solucoes / #solutions). */
   ids: HomeIds;
-  hero: { eyebrow: string; title: string; lead: string; secondary: string; facts: string[] };
+  hero: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    secondary: string;
+    facts: string[];
+    /** Linha abaixo do mock do hero: a demonstração acontece na conversa inicial (sem link para a demo). */
+    demoNote: string;
+  };
   brain: {
     eyebrow: string;
     title: string;
@@ -120,9 +128,10 @@ export const home: Record<Locale, HomeContent> = {
     hero: {
       eyebrow: 'IA e software sob medida para a indústria',
       title: 'IA aplicada à operação industrial, desenhada para a sua fábrica.',
-      lead: 'Juntamos os dados e o conhecimento da operação num cérebro da empresa e colocamos agentes de IA nas áreas que mais perdem tempo, por etapas.',
+      lead: 'Juntamos os dados e o conhecimento da fábrica num cérebro da operação e colocamos agentes de IA nas áreas que mais perdem tempo, por etapas.',
       secondary: 'Ver como trabalhamos',
       facts: ['Para indústrias de médio e grande porte', 'Proposta fechada por etapa', 'Código e dados em nome da empresa'],
+      demoNote: 'Na conversa inicial, mostramos o cérebro da operação funcionando numa fábrica fictícia do seu setor.',
     },
     brain: {
       eyebrow: 'O cérebro da operação',
@@ -221,7 +230,7 @@ export const home: Record<Locale, HomeContent> = {
         {
           eyebrow: 'Comercial e representantes',
           title: 'Preço, prazo e estoque sem esperar retorno',
-          body: 'Status de pedido, estoque e prazo numa pergunta, dentro das regras comerciais.',
+          body: 'Status de pedido, estoque e prazo no WhatsApp do representante, só da carteira dele.',
         },
         {
           eyebrow: 'Marketing e catálogo',
@@ -236,7 +245,7 @@ export const home: Record<Locale, HomeContent> = {
         {
           eyebrow: 'Conhecimento dos operadores',
           title: 'O que 20 anos de casa ensinam, registrado',
-          body: 'Ajustes de máquina e causas de defeito registrados com quem sabe, para treinar quem chega.',
+          body: 'Quem sabe registra o ajuste ou a causa do defeito. A partir daí, as respostas citam esse registro, com o nome de quem ensinou.',
         },
         {
           eyebrow: 'Gestão',
@@ -344,7 +353,7 @@ export const home: Record<Locale, HomeContent> = {
     },
     cta: {
       title: 'Vamos olhar a sua operação.',
-      text: 'Uma conversa de 45 minutos, sem custo, para entender o problema. Se houver encaixe, o próximo passo é o diagnóstico.',
+      text: 'Primeiro entendemos o problema. Se houver encaixe, o próximo passo é o diagnóstico.',
       secondary: 'Outras formas de contato',
     },
     adoption: {
@@ -430,9 +439,10 @@ export const home: Record<Locale, HomeContent> = {
     hero: {
       eyebrow: 'Custom AI and software for manufacturers',
       title: 'Applied AI for industrial operations, designed for your plant.',
-      lead: 'We bring your operations data and know-how into one company brain and put AI agents to work where time is lost, in stages.',
+      lead: 'We bring your plant’s data and know-how into one operations brain and put AI agents to work where time is lost, in stages.',
       secondary: 'See how we work',
       facts: ['For mid-size and large manufacturers', 'Fixed proposal per stage', 'Code and data in your name'],
+      demoNote: 'In the first call, we show the operations brain at work in a fictional plant from your sector.',
     },
     brain: {
       eyebrow: 'The operations brain',
@@ -516,10 +526,10 @@ export const home: Record<Locale, HomeContent> = {
         { eyebrow: 'Production and planning', title: 'Order, routing and shift in one query', body: 'Work order history, shift summaries and delay alerts before the promised date.' },
         { eyebrow: 'Quality', title: 'Every deviation with its history', body: 'Past non-conformances and actions, draft 8D reports, batches checked against spec.' },
         { eyebrow: 'Maintenance', title: 'The right manual on the technician’s phone', body: 'History, manual and procedure in the hands of whoever is at the machine.' },
-        { eyebrow: 'Sales and reps', title: 'Price, lead time and stock without waiting', body: 'Order status, stock and lead time in one question, within commercial rules.' },
+        { eyebrow: 'Sales and reps', title: 'Price, lead time and stock without waiting', body: 'Order status, stock and lead time in the rep’s WhatsApp, for their own accounts only.' },
         { eyebrow: 'Marketing and catalog', title: 'Product sheets from approved data', body: 'Catalog and technical content written from engineering data and reviewed by its owner.' },
         { eyebrow: 'Procurement', title: 'Supplier, lead time and usage at a glance', body: 'Price and lead time per supplier, stock coverage and open orders before negotiating.' },
-        { eyebrow: 'Operator know-how', title: 'What 20 years on the floor teach, recorded', body: 'Machine adjustments and defect causes recorded with the people who know, to train new staff.' },
+        { eyebrow: 'Operator know-how', title: 'What 20 years on the floor teach, recorded', body: 'Experienced people record the machine adjustment or the cause of a defect. From then on, answers cite that record and who taught it.' },
         { eyebrow: 'Management', title: 'Indicators explained in plain words', body: 'Why scrap went up this week, with the path back to the source data.' },
       ],
     },
@@ -601,7 +611,7 @@ export const home: Record<Locale, HomeContent> = {
     },
     cta: {
       title: 'Let’s look at your operation.',
-      text: 'A free 45-minute call to understand the problem. If there is a fit, the next step is the assessment.',
+      text: 'First we understand the problem. If there is a fit, the next step is the assessment.',
       secondary: 'Other ways to reach us',
     },
     adoption: {

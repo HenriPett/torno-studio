@@ -116,6 +116,8 @@ const process = [
             asker="Pergunta de exemplo"
             caption="Pergunta, resposta e documentos são fictícios. Cada resposta indica a ficha, a ordem ou o registro de onde saiu."
           />
+          {/* Demonstração só na conversa inicial (sem link para a demo). Cita apenas o setor desta página. */}
+          <p class="caption sector-hero__demo-note">Quer ver com dados do setor de {setor.sectorName}? Mostramos na conversa inicial.</p>
         </div>
       </div>
     </Section>
@@ -306,6 +308,12 @@ const process = [
 
   .sector-hero__demo {
     min-inline-size: 0;
+  }
+
+  .sector-hero__demo-note {
+    margin-block-start: var(--space-3);
+    color: var(--color-text-muted);
+    text-wrap: pretty;
   }
 
   @media (max-width: 30em) {

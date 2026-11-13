@@ -1,8 +1,14 @@
 // Portal do cliente (UX §4.9): prova de "software sob medida", numa moldura de janela para não
 // confundir com a ferramenta interna. Troca de {cliente}, saudação, condições, um aviso, pedidos
 // dele, "Repetir último pedido" (rascunho, sem carrinho), catálogo com o preço da tabela e o
-// assistente do {cliente} (a conversa via ctx.perguntar, módulo portal).
+// assistente do {cliente} (a conversa via ctx.perguntar, módulo portal). O cliente escolhido vai no
+// corpo da conversa (definirClientePortal → campo `cliente`, gravado em cada mensagem) e o servidor
+// responde só com os dados dele. Preço do catálogo: o da tabela do cliente (precoNaTabela). Cada cliente
+// tem a sua conversa (ui/conversa.js): trocar o "Ver como" troca a conversa do painel. As sugestões saem
+// da visão do cliente (sugestoesDoPortal) e as gavetas abrem na versão dele (openRef(ref, {cliente})).
 import { h } from '../ui.js';
+import { definirClientePortal } from '../ai/assistant.js';
+import { clientePadraoDoPortal, precoNaTabela, sugestoesDoPortal, daTabela } from '../ai/local-engine.js';
 import * as ui from '../ui.js';
 import {
   ensureAreaCss, statusBadge, areaAssistant, T, cap, fmtOf, curto, tag,
@@ -38,9 +44,7 @@ export function render(el, ctx) {
     el.replaceChildren(h('div', { class: 'ar-page' }, h('p', { class: 'ar-empty' }, `Nenhum ${tCli} nos dados desta demonstração.`)));
     return undefined;
   }
-  if (!clientes.some((c) => c.id === escolhido[setorId])) {
-    escolhido[setorId] = (clientes.find((c) => pedidosDe(c.id).some((p) => p.status !== 'entregue')) || clientes[0]).id;
-  }
+  if (!clientes.some((c) => c.id === escolhido[setorId])) escolhido[setorId] = clientePadraoDoPortal(d) || clientes[0].id;
 
   const host = h('div', { class: 'pt-host' });
   const seletor = h('select', { class: 'pt-select', id: 'pt-cliente', 'aria-label': `Ver como ${tCli}` },
@@ -50,6 +54,7 @@ export function render(el, ctx) {
 
   function desenha() {
     const cli = clientes.find((c) => c.id === escolhido[setorId]) || clientes[0];
+    definirClientePortal(cli.id);
     const rep = (d.representantes || []).find((r) => r.id === cli.representante);
     const meus = pedidosDe(cli.id);
     const ultimo = meus[0];
@@ -68,7 +73,7 @@ export function render(el, ctx) {
     });
 
     const linhaPedido = (p) => h('li', null, h('button', {
-      type: 'button', class: 'pt-ped', onClick: () => ctx.openRef?.(`pedido:${p.id}`),
+      type: 'button', class: 'pt-ped', onClick: () => ctx.openRef?.(`pedido:${p.id}`, { cliente: cli.id }),
     },
     h('strong', { class: 'ar-id' }, p.id),
     statusBadge(p.status),
@@ -77,25 +82,23 @@ export function render(el, ctx) {
 
     const destaques = new Set(portal.destaques || []);
     const catalogo = [...produtos].sort((a, b) => Number(destaques.has(b.sku)) - Number(destaques.has(a.sku))).slice(0, 6);
+    const tabelaConhecida = !!produtos[0] && precoNaTabela(ctx, produtos[0], cli).conhecida;
     const cartao = (p) => {
       const pronta = p.estoque >= p.estoque_minimo && p.estoque > 0;
-      return h('button', { type: 'button', class: 'pt-prod', onClick: () => ctx.openRef?.(`sku:${p.sku}`) },
+      return h('button', { type: 'button', class: 'pt-prod', onClick: () => ctx.openRef?.(`sku:${p.sku}`, { cliente: cli.id }) },
         h('span', { class: 'pt-prod__sku' }, p.sku),
         h('span', { class: 'pt-prod__nome' }, p.nome),
-        h('span', { class: 'pt-prod__preco num' }, f.money(p.preco), h('span', { class: 'pt-prod__un' }, ` / ${singular(p.unidade)}`)),
+        h('span', { class: 'pt-prod__preco num' }, f.money(precoNaTabela(ctx, p, cli).preco), h('span', { class: 'pt-prod__un' }, ` / ${singular(p.unidade)}`)),
         pronta ? tag('Pronta entrega', 'ok') : h('span', { class: 'pt-prod__prazo' }, `Prazo ${p.prazo_dias} dias`));
     };
 
-    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas)
-    const sugestoes = [
-      ...(d.perguntas_sugeridas || []).filter((p) => p.modulo === 'portal').map((p) => p.pergunta),
-      ultimo ? `Quando chega o meu pedido ${ultimo.id}?` : null,
-    ].filter(Boolean).slice(0, 3);
-    const comCliente = (t) => (t.toLowerCase().includes(nomeCli.toLowerCase()) ? t : `${t} (sou ${tCli} ${nomeCli})`);
+    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas). Sugestões da visão deste
+    // cliente (a pergunta pronta de outro cliente ou da fábrica por dentro não aparece aqui).
+    const sugestoes = sugestoesDoPortal({ ...ctx, aprendizado: [] }, cli.id, 3);
     const podePerguntar = typeof ctx.perguntar === 'function';
     const enviar = (t) => {
       const q = String(t || '').trim();
-      if (q && podePerguntar) ctx.perguntar(comCliente(q), { modulo: 'portal', painel: true });
+      if (q && podePerguntar) ctx.perguntar(q, { modulo: 'portal', painel: true });
     };
     const campo = h('input', { type: 'text', class: 'pt-ask__input', placeholder: 'Quando chega meu pedido?', 'aria-label': 'Pergunte ao portal', autocomplete: 'off' });
     const pergunte = podePerguntar ? h('section', { class: 'pt-ask', 'aria-label': 'Pergunte' },
@@ -124,11 +127,13 @@ export function render(el, ctx) {
           pergunte),
         h('section', { class: 'pt-catalogo', 'aria-label': 'Catálogo' },
           h('h3', { class: 'pt-h3' }, `Catálogo (${catalogo.length})`),
-          h('p', { class: 'pt-muted' }, `Preços da ${cli.tabela_preco || 'sua tabela'}, sem impostos.`),
+          h('p', { class: 'pt-muted' }, tabelaConhecida || !cli.tabela_preco
+            ? `Preços ${cli.tabela_preco ? daTabela(cli.tabela_preco) : 'da sua tabela'}, sem impostos.`
+            : `Preços de referência, sem impostos; os preços ${daTabela(cli.tabela_preco)} vêm na proposta do ${T(ctx, 'representante')}.`),
           h('div', { class: 'pt-prods' }, catalogo.map(cartao)))));
 
     host.replaceChildren(janela,
-      areaAssistant(ctx, { modulo: 'portal', nome: 'pedidos e catálogo', sugestoes, prefixo: comCliente }));
+      areaAssistant(ctx, { modulo: 'portal', nome: 'pedidos e catálogo', sugestoes }));
     const bar = host.querySelector('.ar-assist');
     if (bar) bar.classList.add('pt-assist-m');
   }

@@ -42,8 +42,9 @@ export function render(root, { api, ui, fmt, themeToggle }) {
 
   function mensagemPronta(d, senha) {
     const nome = primeiroNome(d.nome);
-    return `Olá${nome ? `, ${nome}` : ''}! Segue a demonstração que preparei para vocês:\n${urlAbs(d)}\nSenha: ${senha}\n`
-      + `É uma fábrica fictícia de ${minusc(setorNome(d.setor))}: dá para perguntar, conferir a fonte e ensinar algo ao sistema.`;
+    return `Olá${nome ? `, ${nome}` : ''}! Segue a demonstração que preparei para vocês:\n${urlAbs(d)}\nSenha: ${senha}\n\n`
+      + `É uma fábrica fictícia do seu setor (${minusc(setorNome(d.setor))}), onde você pergunta, confere de onde veio cada resposta e ensina algo à IA.\n\n`
+      + 'Quando quiser, agendamos 45 minutos para ver isso com os dados da sua operação.';
   }
 
   async function copiar(texto, btn) {
@@ -90,6 +91,7 @@ export function render(root, { api, ui, fmt, themeToggle }) {
   }
   function diasRestantes(iso) {
     if (!iso) return '';
+    if (Date.parse(iso) < Date.now()) return 'expirado'; // a opção "Expirado" só aparece nesse caso
     const dias = Math.round((Date.parse(iso) - Date.now()) / 86400000);
     if (dias <= 7) return '7';
     if (dias <= 30) return '30';
@@ -263,7 +265,8 @@ export function render(root, { api, ui, fmt, themeToggle }) {
   const wrapSelect = (sel) => h('span', { class: 'select-wrap' }, sel, icon('chevron-down', { size: 16, class: 'select-wrap__chev' }));
 
   function selectExpira(valor) {
-    const sel = h('select', { class: 'select' }, EXPIRA.map((o) => h('option', { value: o.value, selected: o.value === valor }, o.label)));
+    const ops = valor === 'expirado' ? [{ value: 'expirado', label: 'Expirado' }, ...EXPIRA] : EXPIRA;
+    const sel = h('select', { class: 'select' }, ops.map((o) => h('option', { value: o.value, selected: o.value === valor }, o.label)));
     sel.value = valor;
     return sel;
   }
@@ -548,11 +551,17 @@ export function render(root, { api, ui, fmt, themeToggle }) {
 
   function formEdicao(d, { onCancel, onSave }) {
     const nome = h('input', { class: 'input', type: 'text', maxlength: '120', value: d.nome });
-    const empresa = h('input', { class: 'input', type: 'text', maxlength: '120', value: d.empresa_nome || '', placeholder: setorEmpresa(d.setor) });
+    // Nome da empresa: vazio quando é o padrão do setor (o padrão aparece como placeholder). Só vai no
+    // PATCH se foi editado ou se difere do padrão do setor escolhido; assim, trocar o setor troca o nome.
+    const personalizado = d.empresa_nome && d.empresa_nome !== setorEmpresa(d.setor) ? d.empresa_nome : '';
+    const empresa = h('input', { class: 'input', type: 'text', maxlength: '120', value: personalizado, placeholder: setorEmpresa(d.setor) });
+    let empresaEditada = false;
+    empresa.addEventListener('input', () => { empresaEditada = true; });
     const setor = selectSetor(d.setor, (v) => { empresa.placeholder = setorEmpresa(v); });
     const mods = editorModulos(d.modulos);
     const expira = selectExpira(d.expira_em ? diasRestantes(d.expira_em) : '');
     const expiraOriginal = expira.value;
+    const expirado = expiraOriginal === 'expirado';
     const nota = h('textarea', { class: 'textarea', rows: '2', maxlength: '2000' });
     nota.value = d.nota || '';
     const erro = erroLinha();
@@ -562,17 +571,21 @@ export function render(root, { api, ui, fmt, themeToggle }) {
       onSubmit: async (e) => {
         e.preventDefault();
         if (!nome.value.trim()) { erro.mostra('Informe o prospect.'); return; }
-        const patch = { nome: nome.value.trim(), setor: setor.value, empresa_nome: empresa.value.trim(), modulos: mods.valor(), nota: nota.value.trim() };
-        if (expira.value !== expiraOriginal) patch.expira_em = expiraParaData(expira.value);
+        const patch = { nome: nome.value.trim(), setor: setor.value, modulos: mods.valor(), nota: nota.value.trim() };
+        const emp = empresa.value.trim();
+        if (empresaEditada || (emp && emp !== setorEmpresa(setor.value))) patch.empresa_nome = emp;
+        if (expira.value !== expiraOriginal && expira.value !== 'expirado') patch.expira_em = expiraParaData(expira.value);
         salvar.disabled = true;
         try { await onSave(patch); } catch (err) { erro.mostra(err?.mensagem || 'Não deu para salvar.'); salvar.disabled = false; }
       },
     },
     erro,
     h('div', { class: 'adm-grid' }, campo('Prospect', nome, { obrigatorio: true }), campo('Setor', wrapSelect(setor))),
-    campo('Nome da empresa na demo', empresa),
+    campo('Nome da empresa na demo', empresa, { hint: 'Vazio = nome padrão do setor.' }),
     mods,
-    h('div', { class: 'adm-grid' }, campo('Expira', wrapSelect(expira), { hint: 'Mude só se quiser um novo prazo a partir de hoje.' }), campo('Nota interna', nota)),
+    h('div', { class: 'adm-grid' }, campo('Expira', wrapSelect(expira), {
+      hint: expirado ? `Expirou em ${dataCurta(d.expira_em)}. Escolha um novo prazo para reabrir o link.` : 'Mude só se quiser um novo prazo a partir de hoje.',
+    }), campo('Nota interna', nota)),
     h('div', { class: 'adm-actions' }, salvar, ui.button('Cancelar', { variant: 'ghost', onClick: onCancel })));
   }
 

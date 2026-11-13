@@ -1,6 +1,8 @@
 // Ensinar o cérebro (UX §4.6): gaveta com o formulário e a confirmação "O cérebro aprendeu".
 //
 //   abrirEnsinar(ctx, {area, maquina, tipo, origem, texto}) → {el, close}
+//   areaDoTexto(ctx, texto) → 'comercial' | 'manutencao' | 'qualidade' | 'producao' | null (área sugerida
+//     pelo que a pessoa escreve; o select segue a sugestão até ela mexer nele)
 //   perguntaDerivada(item, ctx)  (reexportada do motor local: a mesma pergunta que o motor sempre casa)
 //
 // Grava via ctx.learning.add (otimista, learning.js). Depois de gravar, a gaveta troca de conteúdo
@@ -9,7 +11,8 @@
 import { h, icon, button, segmented, spinner, sheet as uiSheet } from '../ui.js';
 import { perguntaDerivada } from '../ai/local-engine.js';
 import { TIPOS_APRENDIZADO, tituloDoTexto } from '../learning.js';
-import { cartaoAprendido } from './fontes.js';
+import { cartaoAprendido, marco } from './fontes.js';
+import { normalize } from '../format.js';
 
 export { perguntaDerivada };
 
@@ -65,6 +68,65 @@ export function fraseAprendeu(ctx, item) {
   return `A partir de agora, as respostas sobre ${nome} levam isso em conta.`;
 }
 
+// ---------------------------------------------------------------------------
+// Área sugerida pelo texto: cliente ou pedido → comercial; máquina ou OS → manutenção; NC → qualidade;
+// OP → produção. Vale a citação que aparece primeiro no texto (empate: nessa ordem).
+
+const ORDEM_AREAS = ['comercial', 'manutencao', 'qualidade', 'producao'];
+const escapaRe = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** Id como palavra inteira ("OP-24518", "TIN-03"), sem casar dentro de outro id. */
+const reId = (id) => new RegExp(`(^|[^\\p{L}\\p{N}-])${escapaRe(id)}(?![\\p{L}\\p{N}])`, 'iu');
+/** Nome normalizado como expressão inteira ("magazine horizonte sul"). */
+const reNome = (nome) => new RegExp(`(^|[^\\p{L}\\p{N}])${escapaRe(nome)}(?![\\p{L}\\p{N}])`, 'u');
+/** "Moda Ponto Certo — Curitiba" → "moda ponto certo"; "Tear circular 7 (malha 30.1)" → "tear circular 7". */
+function nomeBase(nome) {
+  const n = normalize(String(nome ?? '').split(/\s+[—–]\s+/)[0].replace(/\([^)]*\)/g, ' '))
+    .replace(/[\s,]+(ltda\.?|s\.?\s?a\.?|s\/a|eireli|me|epp)$/i, '')
+    .replace(/\s+/g, ' ').trim();
+  return n.length >= 5 ? n : '';
+}
+
+const indices = new WeakMap();
+function indiceDe(data) {
+  if (!data || typeof data !== 'object') return [];
+  if (indices.has(data)) return indices.get(data);
+  const lista = (k) => (Array.isArray(data[k]) ? data[k] : []);
+  const ids = (k) => lista(k).map((x) => x?.id).filter(Boolean);
+  const nomes = (k) => lista(k).map((x) => nomeBase(x?.nome)).filter(Boolean);
+  const os = Array.isArray(data.manutencao) ? data.manutencao : lista('ordens_servico');
+  const idx = [
+    { area: 'comercial', ids: [...ids('clientes'), ...ids('pedidos')], nomes: nomes('clientes') },
+    { area: 'manutencao', ids: [...ids('maquinas'), ...os.map((x) => x?.id).filter(Boolean)], nomes: nomes('maquinas'), sigla: /(^|[^\p{L}])OS(?![\p{L}])/u },
+    { area: 'qualidade', ids: ids('nao_conformidades'), nomes: [], sigla: /(^|[^\p{L}])NCs?(?![\p{L}])/u },
+    { area: 'producao', ids: ids('ordens'), nomes: [], sigla: /(^|[^\p{L}])OPs?(?![\p{L}])/u },
+  ].map((g) => ({ ...g, reIds: g.ids.map(reId), reNomes: g.nomes.map(reNome) }));
+  indices.set(data, idx);
+  return idx;
+}
+
+/** Área sugerida pelo texto, entre as `permitidas` (todas, se omitido). → id da área ou null. */
+export function areaDoTexto(ctx, texto, permitidas = null) {
+  const bruto = String(texto ?? '');
+  if (bruto.trim().length < 2) return null;
+  const norm = normalize(bruto);
+  let melhor = null;
+  for (const g of indiceDe(ctx?.data)) {
+    if (permitidas && !permitidas.includes(g.area)) continue;
+    let pos = Infinity;
+    const mede = (re, alvo) => {
+      const m = re.exec(alvo);
+      if (m) pos = Math.min(pos, m.index + (m[1] ? m[1].length : 0));
+    };
+    for (const re of g.reIds) mede(re, bruto);
+    for (const re of g.reNomes) mede(re, norm);
+    if (g.sigla) mede(g.sigla, bruto); // sigla em maiúsculas ("os" minúsculo é artigo)
+    if (pos === Infinity) continue;
+    const ordem = ORDEM_AREAS.indexOf(g.area);
+    if (!melhor || pos < melhor.pos || (pos === melhor.pos && ordem < melhor.ordem)) melhor = { area: g.area, pos, ordem };
+  }
+  return melhor?.area ?? null;
+}
+
 function svgCheck() {
   const NS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(NS, 'svg');
@@ -79,6 +141,18 @@ function svgCheck() {
   return svg;
 }
 
+/* Rascunho na sessionStorage: se a sessão cair (401) no meio da digitação, o texto volta ao reabrir. */
+const chaveRascunho = (ctx) => `td_ens_rascunho_${ctx?.demo?.id ?? ctx?.api?.demoId ?? 'demo'}`;
+function leRascunho(ctx) {
+  try { return sessionStorage.getItem(chaveRascunho(ctx)) || ''; } catch { return ''; }
+}
+function gravaRascunho(ctx, texto) {
+  try {
+    if (String(texto ?? '').trim()) sessionStorage.setItem(chaveRascunho(ctx), texto);
+    else sessionStorage.removeItem(chaveRascunho(ctx));
+  } catch { /* sem storage */ }
+}
+
 function abrirFolha(ctx, opts) {
   const fn = typeof ctx?.sheet === 'function' ? ctx.sheet : uiSheet;
   return fn({ lado: 'direita', classe: 'sheet--ensinar', ...opts });
@@ -89,8 +163,12 @@ function abrirFolha(ctx, opts) {
  */
 export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto = '' } = {}) {
   const areas = areasEnsinaveis(ctx);
-  const areaIni = areas.some((a) => a.value === area) ? area
-    : areas.some((a) => a.value === 'producao') ? 'producao' : areas[0]?.value ?? 'gestao';
+  const areaValida = (a) => (a && areas.some((x) => x.value === a) ? a : null);
+  let daTela = null;
+  try { daTela = typeof ctx?.areaAtual === 'function' ? ctx.areaAtual() : null; } catch { /* sem área */ }
+  // área de quem abriu (gaveta, página de área) → área da tela atual → produção → a primeira
+  const areaIni = areaValida(area) ?? areaValida(daTela) ?? areaValida('producao') ?? areas[0]?.value ?? 'gestao';
+  const idsAreas = areas.map((a) => a.value);
   const maquinas = ctx?.data?.maquinas ?? [];
   const folha = abrirFolha(ctx, {
     titulo: 'Ensinar o cérebro',
@@ -113,11 +191,41 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
       id: idTexto, class: 'ens__texto', rows: '5', maxlength: String(MAX), autofocus: true,
       placeholder: placeholderDe(ctx, tipoAtual), 'aria-describedby': `${idTexto}-c`,
     });
-    campo.value = prev.texto ?? texto ?? '';
+    // ordem: o que veio de "Ensinar outra coisa" → texto pedido por quem abriu → rascunho salvo
+    const rascunho = prev.texto == null && !texto ? leRascunho(ctx) : '';
+    campo.value = prev.texto ?? (texto || rascunho);
+    const avisoRascunho = h('p', { class: 'ens__dica ens__rascunho', hidden: !rascunho }, 'Recuperamos o texto que você estava escrevendo.');
     const contador = h('span', { class: 'ens__contador num', id: `${idTexto}-c`, 'aria-live': 'polite' });
 
-    const selArea = h('select', { class: 'ens__select', id: `${idTexto}-a` },
-      areas.map((a) => h('option', { value: a.value, selected: a.value === (prev.area ?? areaIni) }, a.label)));
+    // a área segue o texto (areaDoTexto) até a pessoa mexer no select
+    let areaTocada = !!prev.areaTocada;
+    const areaBase = areaTocada ? (prev.area ?? areaIni) : areaIni;
+    const selArea = h('select', { class: 'ens__select', id: `${idTexto}-a`, 'aria-describedby': `${idTexto}-as` },
+      areas.map((a) => h('option', { value: a.value, selected: a.value === areaBase }, a.label)));
+    const dicaArea = h('p', { class: 'ens__dica', id: `${idTexto}-as`, 'aria-live': 'polite', hidden: true }, 'Sugerida pelo que você escreveu.');
+    /**
+     * Seleciona `valor` no select de Área: valor, opção selecionada e o atributo `selected` (o que o
+     * leitor de tela e a árvore de acessibilidade leem) passam a dizer a mesma área. Antes só o
+     * `value` mudava e o `<option selected>` da área inicial ("PCP e programação") continuava marcado.
+     */
+    function marcaArea(valor) {
+      for (const o of selArea.options) {
+        const sim = o.value === valor;
+        o.defaultSelected = sim;
+        o.selected = sim;
+      }
+      if (selArea.value !== valor) selArea.value = valor;
+    }
+    function sugereArea() {
+      if (areaTocada) return;
+      const inferida = areaDoTexto(ctx, campo.value, idsAreas);
+      const alvo = inferida ?? areaBase;
+      if (selArea.value !== alvo || !selArea.selectedOptions[0]?.defaultSelected) {
+        marcaArea(alvo);
+        mostraMaquina();
+      }
+      dicaArea.hidden = !(inferida && inferida !== areaBase);
+    }
     const selMaq = h('select', { class: 'ens__select', id: `${idTexto}-m` },
       h('option', { value: '' }, 'Nenhuma'),
       maquinas.map((m) => h('option', { value: m.id, selected: m.id === (prev.maquina ?? maquina) }, `${m.id} · ${m.nome}`)));
@@ -141,9 +249,10 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
       btnEnviar.disabled = enviando || n < MIN || campo.value.length > MAX;
       dica.hidden = !(n > 0 && n < MIN);
     }
-    campo.addEventListener('input', valida);
-    selArea.addEventListener('change', mostraMaquina);
+    campo.addEventListener('input', () => { valida(); sugereArea(); gravaRascunho(ctx, campo.value); avisoRascunho.hidden = true; });
+    selArea.addEventListener('change', () => { areaTocada = true; dicaArea.hidden = true; marcaArea(selArea.value); mostraMaquina(); });
     mostraMaquina();
+    sugereArea();
     valida();
 
     const form = h('form', {
@@ -168,7 +277,9 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
         btnEnviar.replaceChildren(spinner({ size: 16 }), h('span', { class: 'btn__label' }, 'Ensinando…'));
         try {
           const item = await ctx.learning.add(dados);
-          confirmacao(item, dados);
+          gravaRascunho(ctx, '');
+          marco('ensino');
+          confirmacao(item, { ...dados, areaTocada });
         } catch (err) {
           enviando = false;
           for (const c of [campo, selArea, selMaq, autor]) c.disabled = false;
@@ -186,10 +297,10 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
     },
     h('fieldset', { class: 'ens__campo ens__campo--tipo' }, h('legend', null, 'O que é?'), seg),
     h('div', { class: 'ens__campo' },
-      h('label', { for: idTexto }, 'O que o cérebro precisa saber?'), campo,
+      h('label', { for: idTexto }, 'O que o cérebro precisa saber?'), avisoRascunho, campo,
       h('div', { class: 'ens__linha-contador' }, dica, contador)),
     h('div', { class: 'ens__duas' },
-      h('div', { class: 'ens__campo' }, h('label', { for: selArea.id }, 'Área'), selArea),
+      h('div', { class: 'ens__campo' }, h('label', { for: selArea.id }, 'Área'), selArea, dicaArea),
       campoMaq),
     h('div', { class: 'ens__campo' }, h('label', { for: autor.id }, 'Registrado por'), autor),
     erro,
@@ -214,7 +325,7 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
           onClick: () => { folha.close(); ctx?.perguntar?.(pergunta, { modulo: AREAS_DE_MODULO.includes(item.area) ? item.area : undefined }); },
         }),
         h('div', { class: 'ens-ok__sec' },
-          button('Ensinar outra coisa', { variant: 'secondary', icone: 'lightbulb', onClick: () => formulario({ tipo: dados.tipo, area: dados.area, autor: dados.autor === 'Você' ? '' : dados.autor }) }),
+          button('Ensinar outra coisa', { variant: 'secondary', icone: 'lightbulb', onClick: () => formulario({ tipo: dados.tipo, area: dados.area, areaTocada: dados.areaTocada, autor: dados.autor === 'Você' ? '' : dados.autor }) }),
           button('Fechar', { variant: 'ghost', onClick: () => folha.close() }))));
     folha.setTitulo('', null);
     folha.setCorpo(corpo);

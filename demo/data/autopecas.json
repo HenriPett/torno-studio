@@ -1849,7 +1849,8 @@
     {
       "id": "RC-03",
       "titulo": "Mudança de processo, ferramenta ou fornecedor",
-      "texto": "Nenhuma mudança vai para peça embarcada sem notificação ao cliente e, quando exigido pelo manual do cliente, nova submissão de PPAP aprovada."
+      "texto": "Nenhuma mudança vai para peça embarcada sem notificação ao cliente e, quando exigido pelo manual do cliente, nova submissão de PPAP aprovada.",
+      "publica": true
     },
     {
       "id": "RC-04",
@@ -1859,7 +1860,8 @@
     {
       "id": "RC-05",
       "titulo": "Pedido mínimo e prazo na reposição",
-      "texto": "Pedido mínimo de R$ 5.000 para distribuidores de reposição. Item com estoque acima do mínimo sai em até 2 dias úteis; abaixo do mínimo, o prazo vem da OP no ERP."
+      "texto": "Pedido mínimo de R$ 5.000 para distribuidores de reposição. Item com estoque acima do mínimo sai em até 2 dias úteis; abaixo do mínimo, o prazo vem da OP no ERP.",
+      "publica": true
     },
     {
       "id": "RC-06",

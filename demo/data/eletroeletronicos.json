@@ -1978,12 +1978,14 @@
     {
       "id": "RC-03",
       "titulo": "Pedido mínimo e frete",
-      "texto": "Pedido mínimo de R$ 3.000 para distribuidores. Frete CIF para pedidos acima de R$ 15.000 nas regiões Sul e Sudeste; abaixo disso, FOB."
+      "texto": "Pedido mínimo de R$ 3.000 para distribuidores. Frete CIF para pedidos acima de R$ 15.000 nas regiões Sul e Sudeste; abaixo disso, FOB.",
+      "publica": true
     },
     {
       "id": "RC-04",
       "titulo": "Garantia",
-      "texto": "Motores: 24 meses a partir da nota fiscal. Inversores e painéis: 18 meses. Chamado de garantia só é aberto com número de série."
+      "texto": "Motores: 24 meses a partir da nota fiscal. Inversores e painéis: 18 meses. Chamado de garantia só é aberto com número de série.",
+      "publica": true
     },
     {
       "id": "RC-05",
@@ -1993,7 +1995,8 @@
     {
       "id": "RC-06",
       "titulo": "Painéis sob encomenda",
-      "texto": "Centros de controle de motores e painéis sob projeto exigem entrada de 30% e aprovação do projeto elétrico pelo cliente antes da liberação da OP."
+      "texto": "Centros de controle de motores e painéis sob projeto exigem entrada de 30% e aprovação do projeto elétrico pelo cliente antes da liberação da OP.",
+      "publica": true
     }
   ],
   "kpis": [

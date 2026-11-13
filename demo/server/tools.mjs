@@ -3,7 +3,7 @@
 // devolve dados pequenos, sempre com `ref` para a IA citar. Só entram ferramentas de módulos
 // ligados; com perfil, só o que as áreas dele podem ver. Toda busca inclui o aprendizado.
 
-import { buscarTudo, buscaAprendizado, corta, ligado, perfilAreas, statusLabel, filtraRefs, norm, tokens, refOk } from "./motor.mjs";
+import { buscarTudo, buscaAprendizado, corta, cortaDados, ligado, perfilAreas, statusLabel, severidadeLabel, precoNaTabela, filtraRefs, norm, tokens, refOk, daTabela } from "./motor.mjs";
 
 const MAX = 8;
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -28,12 +28,20 @@ function limpa(ctx, obj, ligacoes) {
   return obj;
 }
 
+// Portal do cliente (ctx.cliente, de visaoDoCliente): só o que um cliente pode consultar. Os dados já
+// chegam filtrados para ele; esta lista tira as ferramentas internas (fábrica, qualidade, aprendizado).
+const FERRAMENTAS_DO_CLIENTE = new Set([
+  "buscar_documentos", "consultar_pedidos", "consultar_ordens", "consultar_estoque_preco",
+  "consultar_clientes_representantes", "regras_comerciais",
+]);
+
 const schema = (props, required) => ({ type: "object", properties: props, ...(required ? { required } : {}) });
 const s = (description) => ({ type: "string", description });
 
 /**
  * @param ctx  contexto da tela (PLANO §5.2)
  * @param opts {perfil, registrar}: perfil = id de data.perfis_acesso (ou {areas}); registrar(item) → item salvo
+ *   Com ctx.cliente (visaoDoCliente, Portal do cliente), só as ferramentas de FERRAMENTAS_DO_CLIENTE.
  * @returns [{name, description, inputSchema, execute, modulo}]
  */
 export function buildTools(ctx, { perfil, registrar } = {}) {
@@ -112,6 +120,12 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       if (input?.id) r = r.filter((o) => igual(o.id, input.id));
       if (input?.status) r = r.filter((o) => igual(o.status, input.status));
       if (input?.sku) r = r.filter((o) => igual(o.sku, input.sku));
+      // Portal (ctx.cliente): os dados já vêm na versão do cliente (visaoDoCliente): status, %, previsão do
+      // pedido e motivo genérico; sem quantidade da OP, linha, início nem eventos internos
+      if (ctx?.cliente) return lista(r.map((o) => limpa(ctx, {
+        ref: `op:${o.id}`, id: o.id, sku: o.sku, produto: produto(o.sku)?.nome, status: statusLabel(o.status), progresso: o.progresso,
+        previsao_entrega: o.previsao_entrega ?? undefined, motivo_atraso: o.motivo_atraso ?? undefined, pedido: o.pedido,
+      }, { pedido: "pedido" })));
       return lista(r.map((o) => limpa(ctx, {
         ref: `op:${o.id}`, id: o.id, sku: o.sku, produto: produto(o.sku)?.nome, quantidade: o.quantidade,
         linha: (d.linhas ?? []).find((l) => l.id === o.linha)?.nome ?? o.linha, inicio: o.inicio, prazo: o.prazo,
@@ -151,7 +165,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       if (input?.status) r = r.filter((n) => igual(n.status, input.status));
       if (input?.termo) r = r.filter((n) => contemTexto(`${n.descricao} ${n.causa} ${n.acao}`, input.termo));
       return lista(r.map((n) => ({
-        ref: `nc:${n.id}`, id: n.id, data: n.data, sku: n.sku, origem: n.origem, severidade: n.severidade,
+        ref: `nc:${n.id}`, id: n.id, data: n.data, sku: n.sku, origem: n.origem, severidade: severidadeLabel(n.severidade),
         status: statusLabel(n.status), descricao: corta(n.descricao, 220), causa: corta(n.causa, 160),
         acao: corta(n.acao, 160), responsavel: n.responsavel, tem_8d: !!n.oito_d,
       })));
@@ -188,6 +202,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     inputSchema: schema({ id: s("ex.: PV-88213"), cliente: s("id (CLI-…) ou nome"), status: s("status do pedido") }),
     execute(input) {
       let r = d.pedidos ?? [];
+      if (ctx?.cliente) r = r.filter((p) => p.cliente === ctx.cliente); // Portal: só os pedidos dele
       if (input?.id) r = r.filter((p) => igual(p.id, input.id));
       if (input?.cliente) r = r.filter((p) => igual(p.cliente, input.cliente) || contemTexto(cliente(p.cliente)?.nome ?? "", input.cliente));
       if (input?.status) r = r.filter((p) => igual(p.status, input.status));
@@ -196,7 +211,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
         previsao_entrega: p.previsao_entrega, ordem: p.ordem,
         itens: (p.itens ?? []).slice(0, 5).map((i) => ({ sku: i.sku, produto: produto(i.sku)?.nome, quantidade: i.quantidade, preco_unit: i.preco_unit })),
         total: Math.round((p.itens ?? []).reduce((s2, i) => s2 + i.quantidade * i.preco_unit, 0) * 100) / 100,
-        observacao: corta(p.observacao, 160) || undefined,
+        observacao: cortaDados(p.observacao, 160) || undefined,
       }, { ordem: "op" })));
     },
   });
@@ -209,8 +224,16 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       let r = d.produtos ?? [];
       if (input?.sku) r = r.filter((p) => igual(p.sku, input.sku));
       if (input?.termo) r = r.filter((p) => contemTexto(`${p.nome} ${p.familia} ${p.sku}`, input.termo));
+      // Portal: o preço da tabela do cliente (regras comerciais), não o de referência
+      const cli = ctx?.cliente ? cliente(ctx.cliente) : null;
+      const preco = (p) => {
+        if (!cli) return { preco: p.preco };
+        const t = precoNaTabela(ctx, p, cli);
+        return t.conhecida ? { preco: t.preco, tabela: t.tabela }
+          : { preco_referencia: p.preco, tabela: t.tabela, observacao_preco: `O preço ${daTabela(t.tabela)} sai na proposta do representante.` };
+      };
       return lista(r.map((p) => ({
-        ref: `sku:${p.sku}`, sku: p.sku, nome: p.nome, familia: p.familia, unidade: p.unidade, preco: p.preco,
+        ref: `sku:${p.sku}`, sku: p.sku, nome: p.nome, familia: p.familia, unidade: p.unidade, ...preco(p),
         estoque: p.estoque, estoque_minimo: p.estoque_minimo, abaixo_do_minimo: p.estoque < p.estoque_minimo, prazo_dias: p.prazo_dias,
       })));
     },
@@ -218,17 +241,22 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
 
   add("comercial", {
     name: "consultar_clientes_representantes",
-    description: "Consulta clientes (condição de pagamento, limite de crédito, tabela de preço, último pedido) e representantes (região, meta e realizado do mês). Filtre por id (CLI-… ou REP-…) ou termo no nome/cidade/região. Itens {ref, tipo, ...}.",
+    description: ctx?.cliente
+      ? "Consulta o cadastro do cliente (condição de pagamento, tabela de preço, último pedido) e o representante dele (nome, região, telefone). Itens {ref, tipo, ...}."
+      : "Consulta clientes (condição de pagamento, limite de crédito, tabela de preço, último pedido) e representantes (região, meta e realizado do mês). Filtre por id (CLI-… ou REP-…) ou termo no nome/cidade/região. Itens {ref, tipo, ...}.",
     inputSchema: schema({ id: s("CLI-… ou REP-…"), termo: s("nome, cidade ou região") }),
     execute(input) {
       const cs = (d.clientes ?? []).map((c) => ({
         ref: `cliente:${c.id}`, tipo: "cliente", id: c.id, nome: c.nome, cidade: `${c.cidade}/${c.uf}`, segmento: c.segmento,
-        representante: c.representante, condicao_pagamento: c.condicao_pagamento, limite_credito: c.limite_credito,
+        representante: c.representante, condicao_pagamento: c.condicao_pagamento,
+        // limite de crédito é interno: fora do Portal do cliente (a visão do cliente já vem sem ele)
+        ...(ctx?.cliente ? {} : { limite_credito: c.limite_credito }),
         tabela_preco: c.tabela_preco, ultimo_pedido: c.ultimo_pedido,
       }));
       const rs = (d.representantes ?? []).map((r) => ({
         ref: `rep:${r.id}`, tipo: "representante", id: r.id, nome: r.nome, regiao: r.regiao, telefone: r.telefone,
-        meta_mes: r.meta_mes, realizado_mes: r.realizado_mes,
+        // meta e realizado do mês são internos: fora do Portal do cliente
+        ...(ctx?.cliente ? {} : { meta_mes: r.meta_mes, realizado_mes: r.realizado_mes }),
       }));
       let r = [...cs, ...rs];
       if (input?.id) r = r.filter((x) => igual(x.id, input.id));
@@ -237,12 +265,19 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     },
   });
 
+  // Portal (ctx.cliente): d.regras_comerciais já vem só com as públicas (visaoDoCliente: publica:true), sem
+  // alçadas, crédito nem nomes de gerente; a descrição também não promete descontos
   add("comercial", {
     name: "regras_comerciais",
-    description: "Lista as regras comerciais aprovadas (descontos, alçadas, prazos, condições). Retorna {ref, id, titulo, texto}.",
+    description: ctx?.cliente
+      ? "Condições comerciais que o cliente pode ler (prazo de entrega padrão, pedido mínimo, frete, condição de pagamento, garantia e trocas). Desconto, crédito e condições especiais não estão aqui: são tratados com o representante. Retorna {ref, id, titulo, texto}."
+      : "Lista as regras comerciais aprovadas (descontos, alçadas, prazos, condições). Retorna {ref, id, titulo, texto, publica}.",
     inputSchema: schema({}),
     execute() {
-      return lista((d.regras_comerciais ?? []).map((r) => ({ ref: `regra:${r.id}`, id: r.id, titulo: r.titulo, texto: corta(r.texto, 300) })));
+      return lista((d.regras_comerciais ?? []).map((r) => ({
+        ref: `regra:${r.id}`, id: r.id, titulo: r.titulo, texto: cortaDados(r.texto, 300),
+        ...(ctx?.cliente ? {} : { publica: r.publica === true }),
+      })));
     },
   });
 
@@ -329,7 +364,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     },
   });
 
-  return tools;
+  return ctx?.cliente ? tools.filter((t) => FERRAMENTAS_DO_CLIENTE.has(t.name)) : tools;
 }
 
 /** Junta os campos `ref` de um resultado de ferramenta (para citar quando a IA não cita). */

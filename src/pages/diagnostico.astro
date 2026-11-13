@@ -17,11 +17,14 @@ import Steps from '../components/ds/Steps.astro';
 import StatGrid from '../components/ds/StatGrid.astro';
 import Faq from '../components/ds/Faq.astro';
 import BookingCta from '../components/ui/BookingCta.astro';
+import { getChrome } from '../content/chrome';
 import { getCopy } from '../lib/i18n';
 
 const locale = 'pt-BR';
 const copy = getCopy(locale).diagnostico;
 if (!copy) throw new Error('SiteCopy pt-BR sem diagnostico');
+// O botão marca a conversa inicial gratuita; o diagnóstico é a etapa paga seguinte.
+const bookingNote = getChrome(locale).common.bookingNote;
 ---
 
 <Base locale={locale} routeId="diagnostico" title={copy.meta.title} description={copy.meta.description}>
@@ -30,6 +33,7 @@ if (!copy) throw new Error('SiteCopy pt-BR sem diagnostico');
     <Section id="inicio" labelledby="inicio-title" class="diag-hero" reveal={false}>
       <SectionHeader as="h1" id="inicio-title" eyebrow={copy.hero.eyebrow} title={copy.hero.title} lead={copy.hero.lead} accent>
         <BookingCta locale={locale} size="lg">{copy.hero.cta}</BookingCta>
+        <p class="diag-hero__note">{bookingNote}</p>
       </SectionHeader>
       <ul class="diag-facts" role="list">
         {copy.hero.facts.map((fact) => <li>{fact}</li>)}
@@ -111,6 +115,19 @@ if (!copy) throw new Error('SiteCopy pt-BR sem diagnostico');
 
     :global(.diag-hero) :global(.ds-sh__lead) {
       font-size: var(--text-lead);
+    }
+  }
+
+  /* Microcopy do CTA, na linha de baixo do botão. */
+  .diag-hero__note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 40em) {
+    .diag-hero__note {
+      flex-basis: 100%;
     }
   }
 

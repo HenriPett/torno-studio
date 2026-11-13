@@ -1,24 +1,33 @@
-// A conversa com o cérebro (UX §4.5): uma só conversa por sessão, mostrada em #conversa (página) e no
-// painel das áreas. Streaming com linhas de ferramenta, Markdown seguro, fontes numeradas, Parar,
-// erros, Copiar, "Ensinar algo sobre isso" e o registro pela conversa ("anota que…").
+// A conversa com o cérebro (UX §4.5): a conversa interna da sessão, mostrada em #conversa (página) e no
+// painel das áreas, e uma conversa própria por cliente do Portal (painel do portal). Streaming com linhas
+// de ferramenta, Markdown seguro, fontes numeradas, Parar, erros, Copiar, "Ensinar algo sobre isso" (fora
+// do Portal) e o registro pela conversa ("anota que…").
+//
+// Conversas ("fios"): 'interna' (todas as telas internas) e 'portal:<CLI-…>' (o Portal, por cliente do
+// "Ver como"). Cada fio tem a sua chave no sessionStorage (chaveDaConversa): td_conv_<demo> e
+// td_conv_<demo>:portal:<cliente>. O painel do portal mostra só o fio do cliente escolhido agora e troca
+// de fio quando o "Ver como" muda (aoTrocarClientePortal); a conversa interna nunca mostra o portal.
 //
 // API (a casca usa createConversa se existir):
-//   createConversa(getCtx) → { perguntar(texto, {modulo, perfil, enviar=true, painel}), render(el, ctx), nova() }
+//   createConversa(getCtx) → { perguntar(texto, {modulo, perfil, enviar=true, painel}), enviar(texto, {modulo, perfil, cliente}), render(el, ctx), nova(), mensagensDe({modulo, cliente}) }
 //   perguntar(ctx, texto, opts) · render(el, ctx) · sugestoesInicio(ctx, n) · montarConversa(el, ctx, {modo, modulo})
+//   fioDaConversa({modulo, cliente}) · chaveDaConversa(demoId, {modulo, cliente}) · sugestoesDoPainel(ctx, modulo, cliente, n)
 
 import { h, icon, button, iconButton, toast, copyText, sheet as uiSheet } from '../ui.js';
 import { renderMarkdown, criaCitas, textoParaCopiar, markdownToText, refsDoTexto } from './markdown.js';
-import { blocoFontes, citeNodeLigado, rotulosParaCopiar, cartaoAprendido, atualizaQuandos } from './fontes.js';
+import { blocoFontes, citeNodeLigado, rotulosParaCopiar, atualizaQuandos, marco, ctxDoCliente } from './fontes.js';
 import { abrirEnsinar, perguntaDerivada } from './ensinar.js';
-import { createAssistant } from '../ai/assistant.js';
+import { createAssistant, clientePortalAtual, aoTrocarClientePortal } from '../ai/assistant.js';
 import * as motor from '../ai/local-engine.js';
+import { CONTATO_URL } from '../features.js';
 
 /* ------------------------------------------------------------------ */
 /* Estado da conversa (um por sessão)                                  */
 /* ------------------------------------------------------------------ */
 
 const S = {
-  msgs: [], // {id, role, texto, fontes, estado, ferramentas, aprendidos, desfeitos, modulo, pergunta, erro}
+  // fio → mensagens {id, role, texto, fontes, estado, ferramentas, aprendidos, desfeitos, modulo, cliente, pergunta, erro, aviso}
+  fios: new Map(),
   ativo: null, // {id, ctl}
   perfil: null,
   limite: false,
@@ -32,32 +41,68 @@ const ouvintes = new Set();
 let seq = 0;
 const novoId = () => `m${Date.now().toString(36)}${(seq++).toString(36)}`;
 
-function avisa(msgId, tipo = 'msg') {
+/** avisa as views: `fio` = conversa da mensagem (null = todas, ex.: reset geral). */
+function avisa(msgId, tipo = 'msg', fio = null) {
   for (const fn of [...ouvintes]) {
-    try { fn(msgId, tipo); } catch (e) { console.error('[conversa] view', e); }
+    try { fn(msgId, tipo, fio); } catch (e) { console.error('[conversa] view', e); }
   }
 }
 
-const chaveSessao = () => (S.demoId ? `td_conv_${S.demoId}` : null);
-function salva() {
-  const k = chaveSessao();
+const FIO_INTERNO = 'interna';
+/** Conversa de uma pergunta: 'portal:<cliente>' no Portal (com cliente), senão 'interna'. */
+export function fioDaConversa({ modulo, cliente } = {}) {
+  return modulo === 'portal' && typeof cliente === 'string' && cliente ? `portal:${cliente}` : FIO_INTERNO;
+}
+/** Chave no sessionStorage: td_conv_<demo> (interna) ou td_conv_<demo>:portal:<cliente>. null sem demo. */
+export function chaveDaConversa(demoId, opts = {}) {
+  if (!demoId) return null;
+  const fio = fioDaConversa(opts);
+  return fio === FIO_INTERNO ? `td_conv_${demoId}` : `td_conv_${demoId}:${fio}`;
+}
+const chaveDoFio = (fio) => (fio === FIO_INTERNO
+  ? chaveDaConversa(S.demoId)
+  : chaveDaConversa(S.demoId, { modulo: 'portal', cliente: fio.slice('portal:'.length) }));
+const fioDaMsg = (m) => fioDaConversa({ modulo: m?.modulo, cliente: m?.cliente });
+
+const revive = (lista) => lista.map((m) => ({ desfeitos: [], ...m, estado: m.estado === 'streaming' ? 'parado' : m.estado }));
+
+/** Mensagens de um fio (carrega do sessionStorage na primeira vez). */
+function msgsDo(fio) {
+  let lista = S.fios.get(fio);
+  if (lista) return lista;
+  lista = [];
+  const k = S.demoId ? chaveDoFio(fio) : null;
+  if (k && fio !== FIO_INTERNO) {
+    try {
+      const j = JSON.parse(sessionStorage.getItem(k) || 'null');
+      if (j && Array.isArray(j.msgs)) lista = revive(j.msgs.filter((m) => m?.modulo === 'portal' && fioDaMsg(m) === fio));
+    } catch { /* ignora */ }
+  }
+  S.fios.set(fio, lista);
+  return lista;
+}
+
+function salva(fio = FIO_INTERNO) {
+  const k = S.demoId ? chaveDoFio(fio) : null;
   if (!k) return;
   try {
-    const msgs = S.msgs.filter((m) => m.estado !== 'streaming').slice(-30)
-      .map(({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta }) => ({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta }));
-    sessionStorage.setItem(k, JSON.stringify({ msgs, perfil: S.perfil }));
+    const msgs = msgsDo(fio).filter((m) => m.estado !== 'streaming').slice(-30)
+      .map(({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, cliente, pergunta, aviso }) => ({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, cliente, pergunta, aviso }));
+    sessionStorage.setItem(k, JSON.stringify(fio === FIO_INTERNO ? { msgs, perfil: S.perfil } : { msgs }));
   } catch { /* sem storage */ }
 }
 function restaura(ctx) {
   const id = ctx?.demo?.id ?? ctx?.api?.demoId ?? null;
   if (!id || S.demoId === id) return;
   S.demoId = id;
+  if (msgsDo(FIO_INTERNO).length) return;
   try {
-    const j = JSON.parse(sessionStorage.getItem(chaveSessao()) || 'null');
-    if (j && Array.isArray(j.msgs) && !S.msgs.length) {
-      S.msgs = j.msgs.map((m) => ({ desfeitos: [], ...m, estado: m.estado === 'streaming' ? 'parado' : m.estado }));
+    const j = JSON.parse(sessionStorage.getItem(chaveDaConversa(id)) || 'null');
+    if (j && Array.isArray(j.msgs)) {
+      // sessões antigas misturavam o portal na conversa interna: ali só fica o que é interno
+      S.fios.set(FIO_INTERNO, revive(j.msgs.filter((m) => m?.modulo !== 'portal')));
       S.perfil = j.perfil ?? null;
-      S.respostas = S.msgs.filter((m) => m.role === 'assistant' && m.estado === 'ok').length;
+      S.respostas = msgsDo(FIO_INTERNO).filter((m) => m.role === 'assistant' && m.estado === 'ok').length;
     }
   } catch { /* ignora */ }
 }
@@ -110,7 +155,12 @@ export function sugestoesInicio(ctx, n = 4) {
   return out.slice(0, n);
 }
 
-function sugestoesModulo(ctx, modulo, n = 3) {
+/**
+ * Sugestões do painel. No Portal saem da visão do cliente (sugestoesDoPortal → visaoDoCliente): só os
+ * pedidos dele e as condições públicas, nunca o pedido de outro cliente nem a fábrica por dentro.
+ */
+export function sugestoesDoPainel(ctx, modulo, cliente, n = 3) {
+  if (modulo === 'portal') return cliente ? motor.sugestoesDoPortal({ ...ctx, aprendizado: [] }, cliente, n) : [];
   return motor.sugestoes({ ...ctx, aprendizado: [] }, modulo, n);
 }
 
@@ -157,12 +207,18 @@ function contextoEnsinar(ctx, m) {
 /* Envio                                                               */
 /* ------------------------------------------------------------------ */
 
-function historicoParaApi(ate) {
+/**
+ * Histórico que vai junto da pergunta (até 10 mensagens), tirado do fio da pergunta. No Portal do cliente
+ * o fio já é só desse cliente; cada turno vai marcado com `cliente` (o servidor descarta o que não vier assim).
+ */
+function historicoParaApi(lista, ate, { cliente } = {}) {
   const out = [];
-  for (const m of S.msgs) {
+  for (const m of lista) {
     if (m.id === ate) break;
-    if (m.role === 'user') out.push({ role: 'user', content: m.texto });
-    else if (m.estado === 'ok' && m.texto) out.push({ role: 'assistant', content: m.texto });
+    if (cliente && (m.modulo !== 'portal' || m.cliente !== cliente)) continue;
+    const marca = cliente ? { cliente } : {};
+    if (m.role === 'user') out.push({ role: 'user', content: m.texto, ...marca });
+    else if (m.estado === 'ok' && m.texto) out.push({ role: 'assistant', content: m.texto, ...marca });
     else if (out.length && out.at(-1).role === 'user') out.pop(); // pergunta sem resposta não vai
   }
   return out.slice(-10);
@@ -172,42 +228,59 @@ function parar() {
   if (S.ativo) { try { S.ativo.ctl.abort(); } catch { /* ok */ } }
 }
 
-async function enviar(ctx, texto, { modulo, perfil } = {}) {
+/** Cliente de uma pergunta do Portal: o informado (mensagem refeita) → o do "Ver como" agora → o padrão do portal. */
+function clienteDoPortal(ctx, cliente) {
+  const existe = (id) => !!id && (ctx?.data?.clientes ?? []).some((c) => c.id === id);
+  if (existe(cliente)) return cliente;
+  const atual = clientePortalAtual();
+  if (existe(atual)) return atual;
+  return motor.clientePadraoDoPortal(ctx?.data) ?? cliente ?? atual ?? null;
+}
+
+async function enviar(ctx, texto, { modulo, perfil, cliente } = {}) {
   const pergunta = String(texto ?? '').trim();
   if (!pergunta || S.limite) return null;
   restaura(ctx);
   if (S.ativo) parar();
-  const u = { id: novoId(), role: 'user', texto: pergunta, modulo };
-  const a = { id: novoId(), role: 'assistant', texto: '', fontes: [], estado: 'streaming', ferramentas: [], aprendidos: [], desfeitos: [], modulo, pergunta, perfil: perfil ?? S.perfil };
-  S.msgs.push(u, a);
+  // o cliente fica gravado na própria mensagem: "Tentar de novo" e a sessão recarregada usam o mesmo
+  const cli = modulo === 'portal' ? clienteDoPortal(ctx, cliente) : null;
+  const fio = fioDaConversa({ modulo, cliente: cli });
+  const lista = msgsDo(fio);
+  const u = { id: novoId(), role: 'user', texto: pergunta, modulo, cliente: cli };
+  const a = { id: novoId(), role: 'assistant', texto: '', fontes: [], estado: 'streaming', ferramentas: [], aprendidos: [], desfeitos: [], modulo, cliente: cli, pergunta, perfil: perfil ?? S.perfil };
+  lista.push(u, a);
   const ctl = new AbortController();
   S.ativo = { id: a.id, ctl };
-  avisa(u.id, 'novo');
-  avisa(a.id, 'novo');
+  avisa(u.id, 'novo', fio);
+  avisa(a.id, 'novo', fio);
 
-  const mensagens = [...historicoParaApi(u.id), { role: 'user', content: pergunta }];
+  const marca = cli ? { cliente: cli } : {};
+  const mensagens = [...historicoParaApi(lista, u.id, marca), { role: 'user', content: pergunta, ...marca }];
   const assistant = assistenteDe(ctx);
   try {
     const r = await assistant.perguntar({
-      mensagens, modulo, perfil: a.perfil, signal: ctl.signal,
+      mensagens, modulo, perfil: a.perfil, ...marca, signal: ctl.signal,
       onTexto: (delta, acumulado, extra) => {
-        if (extra?.reinicio) { a.texto = ''; avisa(a.id); return; }
+        if (extra?.reinicio) { a.texto = ''; avisa(a.id, 'msg', fio); return; }
         a.texto = typeof acumulado === 'string' ? acumulado : a.texto + (delta || '');
-        avisa(a.id);
+        avisa(a.id, 'msg', fio);
       },
-      onFerramenta: (f) => { a.ferramentas.push({ nome: f?.nome, rotulo: f?.rotulo }); avisa(a.id); },
+      onFerramenta: (f) => { a.ferramentas.push({ nome: f?.nome, rotulo: f?.rotulo }); avisa(a.id, 'msg', fio); },
       onAprendizado: (item) => {
         if (!item?.id) return;
         a.aprendidos.push(item);
         const L = ctx.learning;
         try { if (typeof L?.receber === 'function') L.receber(item); else L?.add?.(item); } catch (e) { console.error(e); }
-        avisa(a.id);
+        marco('ensino');
+        avisa(a.id, 'msg', fio);
       },
     });
     a.texto = r.texto || a.texto;
     a.fontes = r.fontes ?? [];
+    a.aviso = typeof r.aviso === 'string' && r.aviso.trim() ? r.aviso.trim() : null;
     a.estado = 'ok';
     S.respostas += 1;
+    marco('pergunta');
     // "Usado em {n} respostas": aprendizado citado (no texto ou nas fontes)
     const usados = [...new Set([...a.fontes, ...refsDoTexto(a.texto)])].filter((x) => x.startsWith('aprendizado:')).map((x) => x.slice(12));
     if (usados.length) ctx.learning?.marcarUso?.(usados);
@@ -225,30 +298,35 @@ async function enviar(ctx, texto, { modulo, perfil } = {}) {
     }
   } finally {
     if (S.ativo?.id === a.id) S.ativo = null;
-    avisa(a.id, 'fim');
-    salva();
+    avisa(a.id, 'fim', fio);
+    salva(fio);
   }
   return a;
 }
 
 function tentarDeNovo(ctx, a) {
-  const i = S.msgs.findIndex((m) => m.id === a.id);
+  const fio = fioDaMsg(a);
+  const lista = msgsDo(fio);
+  const i = lista.findIndex((m) => m.id === a.id);
   if (i < 1) return;
-  const u = S.msgs[i - 1];
-  S.msgs.splice(i - 1, 2);
-  avisa(null, 'reset');
-  enviar(ctx, u.texto, { modulo: a.modulo, perfil: a.perfil });
+  const u = lista[i - 1];
+  lista.splice(i - 1, 2);
+  avisa(null, 'reset', fio);
+  enviar(ctx, u.texto, { modulo: a.modulo, perfil: a.perfil, cliente: a.cliente ?? u.cliente });
 }
 
-function novaConversa(ctx) {
+function novaConversa(ctx, fio = FIO_INTERNO) {
   parar();
-  const antes = { msgs: S.msgs, perfil: S.perfil };
-  S.msgs = [];
+  const antes = { msgs: msgsDo(fio), perfil: S.perfil };
+  S.fios.set(fio, []);
   S.limite = false;
-  avisa(null, 'reset');
-  salva();
+  avisa(null, 'reset', fio);
+  salva(fio);
   toast('Nova conversa.', {
-    acao: { label: 'Desfazer', onClick: () => { if (!S.msgs.length) { S.msgs = antes.msgs; S.perfil = antes.perfil; avisa(null, 'reset'); salva(); } } },
+    acao: {
+      label: 'Desfazer',
+      onClick: () => { if (!msgsDo(fio).length) { S.fios.set(fio, antes.msgs); S.perfil = antes.perfil; avisa(null, 'reset', fio); salva(fio); } },
+    },
     duration: 6000,
   });
 }
@@ -300,8 +378,8 @@ function cartaoRegistroConversa(ctx, m, item) {
           try {
             await ctx.learning?.remove?.(item.id);
             (m.desfeitos ||= []).push(item.id);
-            avisa(m.id);
-            salva();
+            avisa(m.id, 'msg', fioDaMsg(m));
+            salva(fioDaMsg(m));
           } catch {
             b.disabled = false;
             toast('Não conseguimos desfazer agora. Tente de novo.');
@@ -311,10 +389,16 @@ function cartaoRegistroConversa(ctx, m, item) {
   return box;
 }
 
+/** Cliente do Portal de uma mensagem (C3: fontes na versão desse cliente), ou undefined fora do portal. */
+const clienteDaMsg = (m) => (m?.modulo === 'portal' && m.cliente ? m.cliente : undefined);
+
 function corpoResposta(ctx, m, raiz) {
   const streaming = m.estado === 'streaming';
-  const citas = criaCitas({ ctx });
-  const citeNode = citeNodeLigado(raiz, ctx);
+  const cliente = clienteDaMsg(m);
+  // no Portal, a numeração só aceita o que resolve na versão do cliente (nunca nos dados internos)
+  const ctxCitas = cliente ? ctxDoCliente(ctx, cliente) : ctx;
+  const citas = ctxCitas ? criaCitas({ ctx: ctxCitas }) : criaCitas({ aceita: () => false });
+  const citeNode = citeNodeLigado(raiz, ctx, { cliente });
   const partes = [];
   const semTexto = !m.texto;
   const tools = linhasFerramenta(m, streaming && semTexto);
@@ -329,25 +413,42 @@ function corpoResposta(ctx, m, raiz) {
       h('p', null, 'Não consegui responder agora.'),
       button('Tentar de novo', { variant: 'secondary', size: 'sm', icone: 'refresh', onClick: () => tentarDeNovo(ctx, m) })));
   } else if (m.estado === 'limite') {
-    partes.push(h('p', { class: 'cv-erro cv-erro--limite' }, 'Esta demonstração chegou ao limite de perguntas de hoje. Amanhã ela volta; se quiser continuar agora, fale com quem te enviou o link.'));
+    partes.push(h('p', { class: 'cv-erro cv-erro--limite' },
+      h('span', null, 'Esta demonstração chegou ao limite de perguntas de hoje. Amanhã ela volta; se quiser continuar agora, fale com quem te enviou o link.'),
+      linkContato()));
   } else if (m.estado === 'ok') {
-    const fontes = blocoFontes({ ctx, refs: m.fontes ?? [], citas, learning: ctx.learning });
+    if (m.aviso) partes.push(notaAviso(m.aviso));
+    const fontes = blocoFontes({ ctx, refs: m.fontes ?? [], citas, learning: ctx.learning, cliente });
     if (fontes) partes.push(fontes);
     partes.push(acoesResposta(ctx, m, citas));
   }
   return partes;
 }
 
+function linkContato() {
+  return h('a', { class: 'cv-contato', href: CONTATO_URL, target: '_blank', rel: 'noopener' }, 'Falar com a Torno');
+}
+
+/** Aviso do servidor (limite diário da IA, resposta pelo roteiro local): nota discreta sob a resposta. */
+function notaAviso(texto) {
+  return h('p', { class: 'cv-nota cv-aviso', role: 'note' },
+    icon('info', { size: 14 }),
+    h('span', null, texto),
+    /limite/i.test(texto) ? linkContato() : null);
+}
+
 function acoesResposta(ctx, m, citas) {
   const copiar = button('Copiar', {
     variant: 'ghost', size: 'sm', icone: 'copy', class: 'cv-acao',
     onClick: async () => {
-      const rot = rotulosParaCopiar(ctx, citas.ordem.length ? citas.ordem : m.fontes ?? [], citas);
+      const rot = rotulosParaCopiar(ctx, citas.ordem.length ? citas.ordem : m.fontes ?? [], citas, { cliente: clienteDaMsg(m) });
       await copyText(textoParaCopiar(m.texto, rot));
       copiar.replaceChildren(icon('check', { size: 16 }), h('span', { class: 'btn__label' }, 'Copiado'));
       setTimeout(() => { copiar.replaceChildren(icon('copy', { size: 16 }), h('span', { class: 'btn__label' }, 'Copiar')); }, 1500);
     },
   });
+  // no Portal o cliente não ensina o cérebro da fábrica (o servidor também não registra): só Copiar
+  if (ctx?.cliente || m?.modulo === 'portal') return h('div', { class: 'cv-acoes' }, copiar);
   const dica = !S.dicaUsada && S.respostas <= 1;
   const ensinarBtn = button('Ensinar algo sobre isso', {
     variant: 'ghost', size: 'sm', icone: 'lightbulb', class: ['cv-acao', dica && 'has-dica'].filter(Boolean).join(' '),
@@ -379,10 +480,17 @@ function noPergunta(m) {
 
 /**
  * montarConversa(el, ctx, {modo: 'pagina'|'painel', modulo}) → {el, destroy, focus, enviar}
+ * Com modulo 'portal', a view mostra a conversa do cliente escolhido agora no "Ver como" e troca de
+ * conversa quando ele muda; as outras views mostram a conversa interna.
  */
 export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
   restaura(ctx);
   const pagina = modo === 'pagina';
+  const portal = modulo === 'portal';
+  const clienteDaView = () => (portal ? clienteDoPortal(ctx, null) : null);
+  const fioDaView = () => fioDaConversa({ modulo, cliente: clienteDaView() });
+  const msgs = () => msgsDo(fioDaView());
+  const opcoesEnvio = () => ({ modulo, perfil: S.perfil, ...(portal ? { cliente: clienteDaView() } : {}) });
   const nos = new Map();
   let raf = 0;
   const pendentes = new Set();
@@ -407,7 +515,7 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
       campo.value = '';
       S.rascunho = '';
       autoAltura();
-      enviar(ctx, t, { modulo, perfil: S.perfil });
+      enviar(ctx, t, opcoesEnvio());
     },
   }, campo, btnEnviar);
   campo.addEventListener('keydown', (e) => {
@@ -423,7 +531,7 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
   const barra = pagina ? h('div', { class: 'cv__barra' },
     h('button', { type: 'button', class: 'cv__voltar', onClick: () => ctx.navigate?.('#inicio') }, icon('chevron-left', { size: 18 }), h('span', null, 'Início')),
     seloPerfil,
-    button('Nova conversa', { variant: 'ghost', size: 'sm', icone: 'plus', class: 'cv__nova', onClick: () => novaConversa(ctx) })) : null;
+    button('Nova conversa', { variant: 'ghost', size: 'sm', icone: 'plus', class: 'cv__nova', onClick: () => novaConversa(ctx, fioDaView()) })) : null;
 
   const raiz = h('div', { class: ['cv', `cv--${modo}`] }, barra, pagina ? null : seloPerfil, vazio, log, vivo, compositor);
   host.replaceChildren(raiz);
@@ -450,15 +558,15 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
   }
 
   function pintaVazio() {
-    const temMsgs = S.msgs.length > 0;
+    const temMsgs = msgs().length > 0;
     vazio.hidden = temMsgs;
     raiz.classList.toggle('is-vazia', !temMsgs);
     if (temMsgs) return;
-    const sug = pagina ? sugestoesInicio(ctx).map((s) => s.texto) : sugestoesModulo(ctx, modulo, 3);
+    const sug = pagina ? sugestoesInicio(ctx).map((s) => s.texto) : sugestoesDoPainel(ctx, modulo, clienteDaView(), 3);
     vazio.replaceChildren(
       pagina ? h('h1', { class: 'cv__titulo' }, `Pergunte à operação da ${empresaCurta(ctx)}`) : null,
       sug.length ? h('div', { class: 'cv__sugestoes', role: 'group', 'aria-label': 'Perguntas sugeridas' },
-        sug.map((s) => h('button', { type: 'button', class: 'pill-sug', title: s, onClick: () => enviar(ctx, s, { modulo, perfil: S.perfil }) }, h('span', null, s)))) : null);
+        sug.map((s) => h('button', { type: 'button', class: 'pill-sug', title: s, onClick: () => enviar(ctx, s, opcoesEnvio()) }, h('span', null, s)))) : null);
   }
 
   const pertoDoFim = () => {
@@ -474,7 +582,7 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
   };
 
   function desenha(id) {
-    const m = S.msgs.find((x) => x.id === id);
+    const m = msgs().find((x) => x.id === id);
     if (!m) return;
     const novo = m.role === 'user' ? noPergunta(m) : noResposta(ctx, m);
     const velho = nos.get(id);
@@ -486,13 +594,14 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
   function redesenhaTudo() {
     nos.clear();
     log.replaceChildren();
-    for (const m of S.msgs) desenha(m.id);
+    for (const m of msgs()) desenha(m.id);
     pintaVazio();
     pintaCompositor();
     pintaPerfil();
   }
 
-  const ouvinte = (id, tipo) => {
+  const ouvinte = (id, tipo, fio) => {
+    if (fio && fio !== fioDaView()) return; // mensagem de outra conversa (interna × portal, outro cliente)
     if (tipo === 'reset') { redesenhaTudo(); return; }
     if (tipo === 'novo') {
       const estavaPerto = true;
@@ -508,7 +617,7 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
       const perto = pertoDoFim();
       desenha(id);
       pintaCompositor();
-      const m = S.msgs.find((x) => x.id === id);
+      const m = msgs().find((x) => x.id === id);
       if (m?.estado === 'ok') {
         const n = nos.get(id)?.querySelectorAll('.fontes .fonte').length ?? 0;
         vivo.textContent = `Resposta pronta, ${n} ${n === 1 ? 'fonte' : 'fontes'}. ${markdownToText(m.texto).slice(0, 400)}`;
@@ -529,11 +638,13 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
     }
   };
   ouvintes.add(ouvinte);
+  // Portal: trocou o "Ver como" → mostra a conversa daquele cliente
+  const offCliente = portal ? aoTrocarClientePortal(() => redesenhaTudo()) : null;
 
   // a lista de aprendizado mudou (desfazer, apagar no Cérebro): fontes e sugestões se ajustam
   const offLearning = ctx.learning?.subscribe?.((_, ev) => {
     if (ev?.tipo === 'uso') return;
-    if (!S.msgs.length) pintaVazio();
+    if (!msgs().length) pintaVazio();
   });
 
   const relogio = setInterval(() => atualizaQuandos(raiz), 30000);
@@ -541,18 +652,19 @@ export function montarConversa(host, ctx, { modo = 'pagina', modulo } = {}) {
   campo.value = S.rascunho || '';
   redesenhaTudo();
   autoAltura();
-  if (S.focar || (!S.msgs.length && desktop())) {
+  if (S.focar || (!msgs().length && desktop())) {
     S.focar = false;
     requestAnimationFrame(() => { try { campo.focus({ preventScroll: true }); } catch { /* ok */ } });
   }
-  if (S.msgs.length) requestAnimationFrame(() => rolaAoFim(false));
+  if (msgs().length) requestAnimationFrame(() => rolaAoFim(false));
 
   const api = {
     el: raiz,
     focus: () => campo.focus(),
-    enviar: (t) => enviar(ctx, t, { modulo, perfil: S.perfil }),
+    enviar: (t) => enviar(ctx, t, opcoesEnvio()),
     destroy() {
       ouvintes.delete(ouvinte);
+      if (typeof offCliente === 'function') offCliente();
       if (raf) cancelAnimationFrame(raf);
       clearInterval(relogio);
       if (typeof offLearning === 'function') offLearning();
@@ -583,12 +695,15 @@ function abrirPainel(ctx, modulo) {
   return { folha, view: v };
 }
 
-/** ctx.perguntar(texto, {modulo, perfil, enviar = true, painel}) */
+/**
+ * ctx.perguntar(texto, {modulo, perfil, enviar = true, painel}). O Portal sempre abre no painel (a
+ * conversa dele é a do cliente, não a interna da página #conversa).
+ */
 export function perguntar(ctx, texto, { modulo, perfil, enviar: enviarJa = true, painel = false } = {}) {
   restaura(ctx);
   if (perfil !== undefined) S.perfil = perfil || null;
   const t = String(texto ?? '').trim();
-  if (painel) {
+  if (painel || modulo === 'portal') {
     const { view } = abrirPainel(ctx, modulo);
     if (t && enviarJa) view.enviar(t);
     return;
@@ -608,8 +723,13 @@ export function createConversa(getCtx) {
     perguntar: (texto, opts) => perguntar(ctxDe(), texto, opts),
     render: (el, ctx) => render(el, ctx || ctxDe()),
     nova: () => novaConversa(ctxDe()),
+    /** envia sem abrir tela (o fio sai de {modulo, cliente}); → Promise da mensagem de resposta */
+    enviar: (texto, opts = {}) => enviar(ctxDe(), texto, opts),
     parar,
-    get mensagens() { return S.msgs.slice(); },
+    /** a conversa interna (as telas internas) */
+    get mensagens() { restaura(ctxDe()); return msgsDo(FIO_INTERNO).slice(); },
+    /** a conversa de um fio: {modulo:'portal', cliente} → a do cliente no Portal; sem nada → a interna */
+    mensagensDe: (opts = {}) => { restaura(ctxDe()); return msgsDo(fioDaConversa(opts)).slice(); },
   };
 }
 

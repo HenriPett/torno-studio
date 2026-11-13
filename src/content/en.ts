@@ -12,7 +12,7 @@ export const en: SiteCopy = {
     home: {
       title: '{brand} | Custom AI and software for manufacturers',
       description:
-        'We bring your operations data and know-how into one company brain and put AI agents to work in each area of the plant, rolled out in stages with your IT.',
+        'We bring your company’s data and know-how into one operations brain and put AI agents to work in each area of the plant, rolled out in stages with your IT.',
     },
     privacy: {
       title: 'Privacy | {brand}',
@@ -48,7 +48,7 @@ export const en: SiteCopy = {
 
   consent: {
     regionLabel: "Cookie notice",
-    text: "I use measurement and ad cookies only if you accept.",
+    text: "We use measurement and ad cookies only if you accept.",
     policyLink: "Privacy policy",
     accept: "Accept",
     reject: "Decline",
@@ -74,7 +74,7 @@ export const en: SiteCopy = {
         advertising: {
           name: "Advertising",
           description:
-            "Loads the Google Ads tag, which sets cookies to measure how my ads perform and notes when a call is booked. Your name, email and booking details are never sent to Google.",
+            "Loads the Google Ads tag, which sets cookies to measure how our ads perform and notes when a call is booked. Your name, email and booking details are never sent to Google.",
           vendors: [{ label: "Google Ads cookies", url: "https://policies.google.com/technologies/ads" }],
         },
       },
@@ -94,53 +94,53 @@ export const en: SiteCopy = {
     sections: [
       {
         title: "Summary",
-        body: "This site presents my work. It has no sign-up and no forms. I use measurement and advertising cookies only if you accept them in the cookie notice; declining changes nothing on the site. This policy follows the EU General Data Protection Regulation (GDPR) and Brazil's data protection law (LGPD).",
+        body: "This site presents Torno's work. It has no sign-up and no forms. We use measurement and advertising cookies only if you accept them in the cookie notice; declining changes nothing on the site. This policy follows the EU General Data Protection Regulation (GDPR) and Brazil's data protection law (LGPD).",
       },
       {
         title: "Who handles your data",
-        body: "The controller is the company named at the end of this page, through which I provide the services described here. As a small processing agent under Brazilian rules, it has not appointed a data protection officer. Privacy requests and complaints go to the contact email below, which reaches me directly.",
+        body: "The controller is the company named at the end of this page, through which we provide the services described here. As a small processing agent under Brazilian rules, it has not appointed a data protection officer. Privacy requests and complaints go to the contact email below, which reaches Torno directly.",
       },
       {
         title: "What data is processed",
-        body: "Technical logs: Netlify, which hosts the site and acts as a processor on my behalf, records data about each request, such as IP address, date and time, page requested, referring page, browser and approximate country. I don't keep my own copy of these logs. I count visits to the diagnostic page and to the sector presentation pages in aggregate (one number per page per day), without cookies and without storing IP address or browser (legitimate interests, LGPD Art. 7, IX; GDPR Art. 6(1)(f)). Booking and email: only what you choose to share, such as your name, email, what you'd like to discuss and your answer to \"How did you find me?\" on the Calendly form. With your Measurement consent: the Calendly scheduler opens inside the site, and where your visit came from is passed to it, meaning the 5 UTM parameters of the campaign that brought you (source, medium, campaign, content and term); I never pass on individual identifiers, such as an ad click ID. With your Advertising consent: Google Ads sets cookies and identifiers in your browser to measure how my ads perform. If you accepted both categories and book a call inside the site, Google Ads receives a conversion notice, without your name, email or booking details.",
+        body: "Technical logs: Netlify, which hosts the site and acts as a processor on our behalf, records data about each request, such as IP address, date and time, page requested, referring page, browser and approximate country. We don't keep our own copy of these logs. We count visits to the diagnostic page and to the sector presentation pages in aggregate (one number per page per day), without cookies and without storing IP address or browser (legitimate interests, LGPD Art. 7, IX; GDPR Art. 6(1)(f)). Booking and email: only what you choose to share, such as your name, email, what you'd like to discuss and your answer to \"How did you find me?\" on the Calendly form. With your Measurement consent: the Calendly scheduler opens inside the site, and where your visit came from is passed to it, meaning the 5 UTM parameters of the campaign that brought you (source, medium, campaign, content and term); we never pass on individual identifiers, such as an ad click ID. With your Advertising consent: Google Ads sets cookies and identifiers in your browser to measure how our ads perform. If you accepted both categories and book a call inside the site, Google Ads receives a conversion notice, without your name, email or booking details.",
       },
       {
         title: "Why, and on what legal basis",
-        body: "Technical logs keep the site running and secure: legitimate interests (GDPR Art. 6(1)(f); LGPD Art. 7, IX). Booking and email data, including your answer to the Calendly question, let me schedule and hold the call and prepare a proposal at your request: steps prior to entering a contract (GDPR Art. 6(1)(b); LGPD Art. 7, V). The embedded Calendly scheduler, passing on where your visit came from, advertising cookies and the conversion notice to Google Ads rely on your consent (GDPR Art. 6(1)(a); LGPD Art. 7, I), which you can withdraw at any time. Where Brazilian law requires me to keep something, such as tax records, the basis is legal obligation under the LGPD (Art. 7, II) and, under the GDPR, my legitimate interest in complying with it (Art. 6(1)(f)).",
+        body: "Technical logs keep the site running and secure: legitimate interests (GDPR Art. 6(1)(f); LGPD Art. 7, IX). Booking and email data, including your answer to the Calendly question, let us schedule and hold the call and prepare a proposal at your request: steps prior to entering a contract (GDPR Art. 6(1)(b); LGPD Art. 7, V). The embedded Calendly scheduler, passing on where your visit came from, advertising cookies and the conversion notice to Google Ads rely on your consent (GDPR Art. 6(1)(a); LGPD Art. 7, I), which you can withdraw at any time. Where Brazilian law requires us to keep something, such as tax records, the basis is legal obligation under the LGPD (Art. 7, II) and, under the GDPR, our legitimate interest in complying with it (Art. 6(1)(f)).",
       },
       {
         title: "Cookies and browser storage",
-        body: "Nothing from third parties loads before you choose. Necessary: I store your cookie choice and, if you change it, your theme preference in your browser; neither leaves your device. Measurement: the scheduler opens inside the site in a Calendly frame, which applies Calendly's own policy and cookies and may load third-party tools Calendly uses, including advertising ones, such as Google Analytics, Facebook, Segment, Braze, OneTrust, Stripe and reCAPTCHA. As soon as the frame opens, before your choice in Calendly's own notice, these tools may receive your IP address and the page address; where your visit came from is kept only for this browser session. Without Measurement, the button opens Calendly's own page. Advertising: loads the Google Ads tag, which sets cookies to measure how my ads perform. The full list is in the table below.",
+        body: "Nothing from third parties loads before you choose. Necessary: we store your cookie choice and, if you change it, your theme preference in your browser; neither leaves your device. Measurement: the scheduler opens inside the site in a Calendly frame, which applies Calendly's own policy and cookies and may load third-party tools Calendly uses, including advertising ones, such as Google Analytics, Facebook, Segment, Braze, OneTrust, Stripe and reCAPTCHA. As soon as the frame opens, before your choice in Calendly's own notice, these tools may receive your IP address and the page address; where your visit came from is kept only for this browser session. Without Measurement, the button opens Calendly's own page. Advertising: loads the Google Ads tag, which sets cookies to measure how our ads perform. The full list is in the table below.",
       },
       {
         title: "Who your data is shared with",
-        body: "Only with the providers that make the site, contact and ad measurement work, and only for that: Netlify (hosting); Calendly (scheduling), which opens inside the site only with your Measurement consent and otherwise on Calendly's own page; either way, Calendly's privacy and cookie policy applies; and Google, which hosts my email and, with your Advertising consent, runs Google Ads. Each follows its own privacy policy. I don't sell data. Authorities receive data only under a lawful request.",
+        body: "Only with the providers that make the site, contact and ad measurement work, and only for that: Netlify (hosting); Calendly (scheduling), which opens inside the site only with your Measurement consent and otherwise on Calendly's own page; either way, Calendly's privacy and cookie policy applies; and Google, which hosts our email and, with your Advertising consent, runs Google Ads. Each follows its own privacy policy. We don't sell data. Authorities receive data only under a lawful request.",
       },
       {
         title: "International transfers",
-        body: "I'm based in Brazil. Netlify and Google process data in the United States, and Calendly may also process it outside your country. These transfers rely on the providers' data protection commitments, such as the EU-U.S. Data Privacy Framework or Standard Contractual Clauses.",
+        body: "We're based in Brazil. Netlify and Google process data in the United States, and Calendly may also process it outside your country. These transfers rely on the providers' data protection commitments, such as the EU-U.S. Data Privacy Framework or Standard Contractual Clauses.",
       },
       {
         title: "How long data is kept",
-        body: "Technical access logs are kept by Netlify under its own retention period; I don't store them separately. Google Ads data is kept under Google's policy, and each cookie lasts as long as the table below shows. Your cookie choice is stored in your browser for 6 months; after that, the notice appears again. Messages and booking data are kept while needed for the conversation. If it becomes a contract, I keep what the law requires for the legal period; if not, I delete it once it's no longer needed or when you ask.",
+        body: "Technical access logs are kept by Netlify under its own retention period; we don't store them separately. Google Ads data is kept under Google's policy, and each cookie lasts as long as the table below shows. Your cookie choice is stored in your browser for 6 months; after that, the notice appears again. Messages and booking data are kept while needed for the conversation. If it becomes a contract, we keep what the law requires for the legal period; if not, we delete it once it's no longer needed or when you ask.",
       },
       {
         title: "Your rights",
-        body: "You can ask to access, correct or delete your data, to restrict or object to its processing (including processing based on legitimate interests), and to receive it in a portable format. You can withdraw or change your consent at any time under \"Cookie preferences\", in the footer of every page. I reply within 15 days through the contact below. You can also complain to your local data protection authority, or to Brazil's ANPD.",
+        body: "You can ask to access, correct or delete your data, to restrict or object to its processing (including processing based on legitimate interests), and to receive it in a portable format. You can withdraw or change your consent at any time under \"Cookie preferences\", in the footer of every page. We reply within 15 days through the contact below. You can also complain to your local data protection authority, or to Brazil's ANPD.",
       },
       {
         title: "Security",
-        body: "The site is static, served over HTTPS only, and keeps no personal data in a database of its own. Access to the provider accounts is restricted to me.",
+        body: "The site is static, served over HTTPS only, and keeps no personal data in a database of its own. Access to the provider accounts is restricted to Torno.",
       },
       {
         title: "Changes to this policy",
-        body: "When this policy changes, I update the date at the top of the page.",
+        body: "When this policy changes, we update the date at the top of the page.",
       },
     ],
     contact: {
       title: 'Contact',
       controllerLabel: 'Controller',
-      linkedinFallback: { lead: 'For any request about your data, message me on', label: 'LinkedIn' },
+      linkedinFallback: { lead: 'For any request about your data, message us on', label: 'LinkedIn' },
     },
     backLink: 'Back to the home page',
     cookies: {

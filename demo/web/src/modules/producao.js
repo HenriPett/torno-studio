@@ -1,9 +1,9 @@
-// Produção (UX §4.8): {ordens} atrasadas · % no prazo · em produção; último turno; lista de
+// Produção (UX §4.8): {ordens} atrasadas · % das em andamento sem atraso · em produção; último turno; lista de
 // {ordens} com selo de registros da equipe; detalhe na gaveta `op` (ui/area-page.js).
 import { h } from '../ui.js';
 import {
   areaPage, listSection, statusBadge, seloRegistros, notesFor, learnItems, barra, origemDados,
-  cap, T, gen, fmtOf, riscoOP,
+  cap, T, gen, fmtOf, riscoOP, nomeTurno,
 } from '../ui/area-page.js';
 
 const RANK = { atrasada: 0, em_producao: 1, planejada: 2, concluida: 3 };
@@ -27,10 +27,12 @@ export function render(el, ctx) {
   const O = T(ctx, 'ordens');
   const g = gen(ordem);
 
+  // "em andamento" = em produção ou atrasada (nem planejada, nem concluída). O tile mostra a parte
+  // delas sem atraso hoje; não é o KPI de entregas no prazo do Início (histórico de 30 dias).
   const atrasadas = ordens.filter((o) => o.status === 'atrasada').length;
-  const ativas = ordens.filter((o) => o.status !== 'planejada');
-  const noPrazo = ativas.length ? Math.round(((ativas.length - atrasadas) / ativas.length) * 100) : null;
   const emProd = ordens.filter((o) => o.status === 'em_producao').length;
+  const andamento = atrasadas + emProd;
+  const semAtraso = andamento ? Math.round((emProd / andamento) * 100) : null;
 
   // último turno → link que abre a gaveta do turno
   const turno = [...(d.turnos || [])].sort((a, b) => String(b.data).localeCompare(String(a.data)) || String(b.turno).localeCompare(String(a.turno)))[0];
@@ -38,7 +40,7 @@ export function render(el, ctx) {
     h('button', {
       type: 'button', class: 'ar-link',
       onClick: () => ctx.openRef?.(`turno:${turno.data}|${turno.turno}|${turno.linha}`),
-    }, `Último turno: ${turno.turno} turno de ${f.date(turno.data)} · ${linhaBy[turno.linha]?.nome || turno.linha} · ${f.num(turno.produzido)} ${T(ctx, 'unidade')} · ${f.pct(turno.produzido ? (turno.refugo / turno.produzido) * 100 : 0)} de refugo ›`)) : null;
+    }, `Último turno: ${nomeTurno(turno.turno)} de ${f.date(turno.data)} · ${linhaBy[turno.linha]?.nome || turno.linha} · ${f.num(turno.produzido)} ${T(ctx, 'unidade')} · ${f.pct(turno.produzido ? (turno.refugo / turno.produzido) * 100 : 0)} de refugo ›`)) : null;
 
   let notas = learnItems(ctx);
   const nNotas = (o) => notesFor(ctx, { ids: [o.id] }, notas).length;
@@ -82,7 +84,7 @@ export function render(el, ctx) {
     subtitulo: [`${cap(O)}, turnos e ${T(ctx, 'linhas')}`, origemDados(ctx, 'producao')].filter(Boolean).join(' · '),
     numeros: [
       { valor: f.num(atrasadas), rotulo: `${O} atrasad${g}s`, tom: atrasadas ? 'danger' : 'ok' },
-      { valor: noPrazo == null ? '—' : `${noPrazo}%`, rotulo: 'no prazo' },
+      { valor: semAtraso == null ? '—' : `${semAtraso}%`, rotulo: `d${g}s ${O} em andamento sem atraso` },
       { valor: f.num(emProd), rotulo: 'em produção' },
     ],
     depoisNumeros: ultimoTurno,

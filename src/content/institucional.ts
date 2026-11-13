@@ -594,6 +594,8 @@ export interface ContactContent {
     eyebrow: string;
     title: string;
     booking: { title: string; body: string };
+    /** Demonstração na conversa inicial, com dados fictícios. Sem link: o acesso é enviado em privado. */
+    demo: { title: string; body: string };
     email: { title: string; body: string };
     linkedin: { title: string; body: string; label: string };
   };
@@ -619,6 +621,10 @@ export const contact: Record<Locale, ContactContent> = {
       eyebrow: 'Canais',
       title: 'Escolha como prefere começar.',
       booking: { title: 'Agenda', body: 'Escolha um horário para a conversa inicial. A confirmação chega por e-mail.' },
+      demo: {
+        title: 'Demonstração',
+        body: 'Mostramos ao vivo, com dados fictícios do seu setor. Depois, enviamos um acesso privado para a sua equipe testar.',
+      },
       email: { title: 'E-mail', body: 'Para mandar contexto antes da conversa ou pedir um acordo de confidencialidade.' },
       linkedin: { title: 'LinkedIn', body: 'Página da empresa, com novidades e artigos.', label: 'Torno no LinkedIn' },
     },
@@ -664,6 +670,7 @@ export const contact: Record<Locale, ContactContent> = {
       eyebrow: 'Channels',
       title: 'Choose how you want to start.',
       booking: { title: 'Calendar', body: 'Pick a time for the intro call. Confirmation arrives by email.' },
+      demo: { title: 'Demo', body: 'We show it live, with fictional data from your sector. Afterwards, we send private access for your team to try it.' },
       email: { title: 'Email', body: 'To send context before the call or ask for an NDA.' },
       linkedin: { title: 'LinkedIn', body: 'Company page, with news and articles.', label: 'Torno on LinkedIn' },
     },

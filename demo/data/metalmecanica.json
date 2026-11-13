@@ -1972,17 +1972,20 @@
     {
       "id": "RC-04",
       "titulo": "Mudança de material ou especificação",
-      "texto": "Troca de material, tratamento ou tolerância só com aprovação por escrito da engenharia do cliente e revisão do desenho. O comercial não aceita substituição combinada por telefone."
+      "texto": "Troca de material, tratamento ou tolerância só com aprovação por escrito da engenharia do cliente e revisão do desenho. O comercial não aceita substituição combinada por telefone.",
+      "publica": true
     },
     {
       "id": "RC-05",
       "titulo": "Ferramental",
-      "texto": "Estampos, matrizes e dispositivos dedicados são cobrados à parte ou amortizados em 12 meses; passam a ser do cliente após a quitação."
+      "texto": "Estampos, matrizes e dispositivos dedicados são cobrados à parte ou amortizados em 12 meses; passam a ser do cliente após a quitação.",
+      "publica": true
     },
     {
       "id": "RC-06",
       "titulo": "Lote mínimo",
-      "texto": "Lote mínimo de 50 peças usinadas, 5.000 estampadas e 300 forjadas. Abaixo disso, a cotação inclui o custo de setup."
+      "texto": "Lote mínimo de 50 peças usinadas, 5.000 estampadas e 300 forjadas. Abaixo disso, a cotação inclui o custo de setup.",
+      "publica": true
     }
   ],
   "kpis": [
