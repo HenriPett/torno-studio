@@ -138,7 +138,7 @@ function secaoAprendido(ctx, { area } = {}) {
         button('Ensinar o cérebro', { variant: 'secondary', icone: 'lightbulb', onClick: () => ensinar(ctx, { origem: 'cerebro' }) })));
       return;
     }
-    sec.replaceChildren(titulo, filtro, h('div', { class: 'cb-regs' }, itens.map((it) => cartaoRegistro(ctx, it))));
+    sec.replaceChildren(...[titulo, filtro, h('div', { class: 'cb-regs' }, itens.map((it) => cartaoRegistro(ctx, it)))].filter(Boolean));
   }
   pinta();
   return { el: sec, pinta };

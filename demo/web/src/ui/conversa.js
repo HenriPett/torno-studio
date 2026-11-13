@@ -149,7 +149,7 @@ function contextoEnsinar(ctx, m) {
     if (!maquina) maquina = r.tipo === 'maq' ? d.id : (r.tipo === 'os' || r.tipo === 'saber' || r.tipo === 'aprendizado') ? d.maquina || null : null;
     if (area && maquina) break;
   }
-  if (maquina && area !== 'manutencao' && area !== 'producao' && area !== 'operadores') area = 'manutencao';
+  if (maquina && area !== 'operadores') area = 'manutencao';
   return { area: area || AREA_DO_MODULO[m.modulo] || undefined, maquina: maquina || undefined, origem: 'resposta' };
 }
 
@@ -319,7 +319,7 @@ function corpoResposta(ctx, m, raiz) {
   const semTexto = !m.texto;
   const tools = linhasFerramenta(m, streaming && semTexto);
   if (tools) partes.push(tools);
-  if (m.texto) partes.push(renderMarkdown(m.texto, { ctx, parcial: streaming, cursor: streaming && !reduzMovimento() ? true : streaming, citas, citeNode, class: 'cv-md' }));
+  if (m.texto) partes.push(renderMarkdown(m.texto, { ctx, parcial: streaming, cursor: streaming, citas, citeNode, class: 'cv-md' }));
   for (const item of m.aprendidos ?? []) partes.push(cartaoRegistroConversa(ctx, m, item));
 
   if (m.estado === 'parado') {

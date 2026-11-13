@@ -90,9 +90,14 @@ export function cartaoAprendido(item, { ctx, n, estatico = false, realce = false
     n ? h('span', { class: 'fonte__n num' }, String(n)) : null,
     icon('lightbulb', { size: 14 }),
     h('span', null, `Registrado por ${quem} · `, h('span', { class: 'fonte__quando', 'data-quando': item?.criado_em || '' }, quando(item?.criado_em))));
+  // linha 3 = começo do texto; se o título já é o começo do texto, mostra o que vem depois dele
+  const titulo = item?.titulo || curto(item?.texto, 60);
+  const tituloBase = String(titulo).replace(/…$/, '');
+  let resto = String(item?.texto ?? '');
+  if (resto.startsWith(tituloBase)) resto = resto.slice(tituloBase.length).replace(/^[\s.,;:!?…—-]+/, '');
   const filhos = [linha1,
-    h('span', { class: 'fonte__l2' }, item?.titulo || curto(item?.texto, 60)),
-    h('span', { class: 'fonte__l3' }, curto(item?.texto, 110))];
+    h('span', { class: 'fonte__l2' }, titulo),
+    resto.length > 2 ? h('span', { class: 'fonte__l3' }, curto(resto.charAt(0).toUpperCase() + resto.slice(1), 110)) : null];
   const cls = ['fonte', 'fonte--aprendido', realce && 'is-new'];
   if (estatico) return h('div', { class: cls, 'data-ref': `aprendizado:${item?.id}` }, ...filhos);
   return h('button', {

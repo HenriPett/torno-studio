@@ -862,8 +862,14 @@ export function responder(ctx, pergunta, { modulo, perfil } = {}) {
 
   // O que a equipe registrou vem primeiro, citado (UX §4.5.4: o laço do "uau" sem chave de API).
   // mesmo formato do servidor (demo/server/local.mjs): título em negrito, autor e data, texto citado
-  const blocos = apr.map((a) =>
-    `**${semPonto(a.titulo)}** — Registrado nesta demo por ${a.autor || "Você"}${a.criado_em ? ` em ${f.data(String(a.criado_em).slice(0, 10))}` : ""}:\n${frase(corta(a.texto, 600))} [[aprendizado:${a.id}]]`);
+  // (quando o título é só o começo do texto, não repete: vai o texto inteiro com o autor em negrito)
+  const blocos = apr.map((a) => {
+    const quem = `Registrado nesta demo por ${a.autor || "Você"}${a.criado_em ? ` em ${f.data(String(a.criado_em).slice(0, 10))}` : ""}`;
+    const texto = frase(corta(a.texto, 600));
+    const titulo = semPonto(a.titulo);
+    if (!titulo || norm(a.texto).startsWith(norm(titulo).replace(/…$/, ""))) return `**${quem}:** ${texto} [[aprendizado:${a.id}]]`;
+    return `**${titulo}** — ${quem}:\n${texto} [[aprendizado:${a.id}]]`;
+  });
   const refsApr = apr.map((a) => `aprendizado:${a.id}`);
   if (base.vazio || base.fraco) return pronto(blocos.join("\n\n"), refsApr, 10);
   return pronto(`${blocos.join("\n\n")}\n\n**Nos dados da empresa:**\n\n${base.texto}`, [...refsApr, ...base.fontes], 10);
