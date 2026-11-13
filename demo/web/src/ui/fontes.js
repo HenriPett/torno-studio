@@ -4,8 +4,8 @@
 //   cartaoFonte(ctx, ref, n, {realce}) → <button> cartão de 72 px (ou null se a ref não resolve)
 //   cartaoAprendido(item, {ctx, estatico}) → cartão "Registrado por {autor} · agora"
 //   citeNodeLigado(raiz, ctx) → fábrica de sobrescritos: hover/foco destaca o cartão, clique abre a gaveta
-//   sistemaDaRef(resolved, ctx) · origemDaRef(resolved, ctx) · quando(iso) · rotulosParaCopiar(ctx, refs, citas)
-//   abrirFonte(ctx, ref) → abre a gaveta com o rodapé "Origem: …" e dispara o marco 'fonte'
+//   sistemaDaRef(resolved, ctx) (origem: origemDoRef de origem.js) · quando(iso) · rotulosParaCopiar(ctx, refs, citas)
+//   abrirFonte(ctx, ref) → abre a gaveta (o rodapé "Origem: …" é do openRef) e dispara o marco 'fonte'
 //   marco(tipo) → window 'torno:marco' {tipo} (roteiro guiado do Início)
 //   partesDoRegistro(item) → {titulo, corpo} sem repetir o título nem mexer na capitalização
 
@@ -13,7 +13,7 @@ import { h, icon } from '../ui.js';
 import { fmt } from '../format.js';
 import { statusLabel } from '../ai/local-engine.js';
 import { tituloDoTexto } from '../learning.js';
-import { origemDoRef, rotuloSistema } from '../origem.js';
+import { origemDoRef, sistemaDoRef } from '../origem.js';
 
 const ICONE = {
   doc: 'file', op: 'factory', turno: 'clock', pedido: 'box', sku: 'box', cliente: 'building', rep: 'user', regra: 'scale',
@@ -48,30 +48,6 @@ export function marco(tipo) {
   try { window.dispatchEvent(new CustomEvent('torno:marco', { detail: { tipo } })); } catch { /* sem window */ }
 }
 
-/*
- * Origem de cada tipo de registro, ligada às integrações do próprio pacote (ctx.data.integracoes).
- * 1º: origemDoRef de origem.js (a mesma regra do Início: casa pelo que a integração diz que traz).
- * 2º: integração do tipo certo (ex.: MES para turno, planilha de manutenção para OS); se ela ainda não
- *     está conectada, o que a própria integração diz sobre onde o dado está hoje ("ERP / planilha").
- * Sem nada disso, fica um rótulo de área, sem inventar sistema.
- */
-const REGRAS_ORIGEM = {
-  op: [{ tipo: /^MES$/ }, { tipo: /^ERP$/ }],
-  turno: [{ tipo: /^MES$/ }, { tipo: /^Planilhas?$/, obs: /turno|parada/i }],
-  pedido: [{ tipo: /^ERP$/ }],
-  sku: [{ tipo: /^ERP$/ }],
-  cliente: [{ tipo: /^ERP$/ }],
-  rep: [{ tipo: /^ERP$/ }],
-  regra: [{ tipo: /^ERP$/ }],
-  nc: [{ tipo: /^Qualidade$/ }],
-  os: [{ tipo: /^Manuten/ }, { tipo: /^Planilhas?$/, obs: /manuten|preventiva/i }],
-  maq: [{ tipo: /^Manuten/ }, { tipo: /^Planilhas?$/, obs: /manuten|preventiva/i }],
-};
-const SEM_INTEGRACAO = { nc: 'registros da qualidade', os: 'registros da manutenção', maq: 'registros da manutenção' };
-/** Sistemas que o texto de uma integração não conectada aponta como origem de hoje ("estão no ERP e em planilha"). */
-const SISTEMAS_CITADOS = [[/\bERP\b/, 'ERP'], [/\bMES\b/, 'MES'], [/planilhas?\b/i, 'planilha'], [/e-?mail/i, 'e-mail'], [/sharepoint/i, 'SharePoint'], [/\bpapel\b/i, 'papel']];
-
-const conectada = (i) => (i?.status === 'conectado' || i?.status === 'sincronizando' || i?.status === 'erro') && !!i?.ultima_sync;
 const fmtDe = (ctx) => ctx?.fmt ?? fmt;
 const hojeDe = (ctx) => ctx?.today ?? ctx?.data?.data_referencia ?? fmt.TODAY;
 /** "07:40" se for hoje nos dados; senão "12 nov, 18:30". */
@@ -80,107 +56,27 @@ function horaSync(iso, ctx) {
   const f = fmtDe(ctx);
   return String(iso).slice(0, 10) === hojeDe(ctx) && f.time(iso) ? f.time(iso) : f.datetime(iso);
 }
-const deIntegracao = (i) => ({ sistema: rotuloSistema(i), nome: i.nome, sync: i.ultima_sync ?? null, erro: i.status === 'erro' });
 
-/**
- * De onde vem o registro, segundo o pacote:
- * → {sistema (curto, para o cartão), nome (completo, para a gaveta), sync (AAAA-MM-DDTHH:MM),
- *    atualizado (data do próprio registro, ex. documento), nota (ex.: integração planejada), erro} | null
- */
-export function origemDaRef(r, ctx) {
-  const d = r?.detalhe ?? {};
-  const data = ctx?.data ?? {};
-  const integ = data.integracoes ?? [];
-  switch (r?.tipo) {
-    case 'doc': {
-      if (!d.doc?.origem) return null;
-      const o = origemDoRef(data, r);
-      return { sistema: d.doc.origem, nome: o?.integ?.nome || d.doc.origem, atualizado: d.doc.atualizado ?? null };
-    }
-    case 'saber': return { sistema: '', nome: [d.autor ? `relato de ${d.autor}` : 'relato de operador', d.funcao].filter(Boolean).join(', ') };
-    case 'kpi': {
-      const o = origemDoRef(data, r);
-      if (o?.integ) return deIntegracao(o.integ);
-      const passos = [...new Set((d.caminho ?? []).map((c) => String(c).split('›')[0].trim()).filter((c) => c && !/^c[aá]lculo/i.test(c)))];
-      return passos.length ? { sistema: passos[0], nome: passos.join(', ') } : null;
-    }
-    case 'integ': return { sistema: '', nome: 'painel de integrações', sync: d.ultima_sync ?? null };
-    default: break;
-  }
-  const o = origemDoRef(data, r);
-  if (o?.integ) return deIntegracao(o.integ);
-  for (const regra of REGRAS_ORIGEM[r?.tipo] ?? []) {
-    const i = integ.find((x) => regra.tipo.test(x.tipo ?? '') && (!regra.obs || regra.obs.test(x.observacao ?? '')));
-    if (!i) continue;
-    if (conectada(i)) return deIntegracao(i);
-    // integração ainda não conectada: o dado vem de onde a própria integração diz que ele está hoje
-    const citados = SISTEMAS_CITADOS.filter(([re]) => re.test(i.observacao ?? '')).map(([, n]) => n);
-    if (citados.length) {
-      return { sistema: citados.join(' / '), nome: citados.join(' / '), nota: `${i.nome}: integração ${i.status === 'planejado' ? 'prevista' : statusLabel(i.status)}` };
-    }
-  }
-  const area = SEM_INTEGRACAO[r?.tipo];
-  return area ? { sistema: '', nome: area } : null;
-}
-
-/** Sistema de origem de uma fonte (linha 1 do cartão). */
-export function sistemaDaRef(r, ctx) {
-  const o = origemDaRef(r, ctx);
-  if (o?.sistema) return o.sistema;
-  switch (r?.tipo) {
-    case 'doc': return 'Documento';
-    case 'nc': return 'Qualidade';
-    case 'os': case 'maq': return 'Manutenção';
-    case 'saber': return 'Saber de operador';
-    case 'kpi': return 'Indicador';
-    case 'integ': return 'Integrações';
-    default: return '';
-  }
-}
+/** Sistema de origem de uma fonte (linha 1 do cartão): a regra única de origem.js. */
+export const sistemaDaRef = (r, ctx) => sistemaDoRef(ctx?.data ?? {}, r);
 
 /** "MES · sincronizado 07:40" (linha 1 do cartão, depois do tipo). '' quando repetiria o tipo. */
 function linhaOrigem(r, ctx) {
-  const o = origemDaRef(r, ctx);
+  const o = origemDoRef(ctx?.data ?? {}, r);
   const sist = o?.sistema || sistemaDaRef(r, ctx);
   if (!sist || sist === r?.tipoNome) return ''; // evita "Saber de operador · Saber de operador"
   if (!o?.sync) return sist;
   return `${sist} · ${o.erro ? 'última sincronização' : 'sincronizado'} ${horaSync(o.sync, ctx)}`;
 }
 
-/** Rodapé da gaveta: "Origem: {sistema} · atualizado {data hora} · dado fictício". */
-export function rodapeOrigem(r, ctx) {
-  if (!r) return null;
-  const f = fmtDe(ctx);
-  let texto;
-  if (r.tipo === 'aprendizado') {
-    const autor = r.detalhe?.autor && r.detalhe.autor !== 'Você' ? r.detalhe.autor : 'você';
-    texto = `Origem: registrado nesta demonstração por ${autor} · ${quando(r.detalhe?.criado_em)}`;
-  } else {
-    const o = origemDaRef(r, ctx);
-    const em = o?.sync ? f.datetime(o.sync) : o?.atualizado ? f.date(o.atualizado) : '';
-    texto = [
-      `Origem: ${o?.nome || sistemaDaRef(r, ctx) || 'pacote da demonstração'}`,
-      o?.nota || null,
-      em ? `${o?.erro ? 'última sincronização' : 'atualizado'} ${em}` : null,
-      'dado fictício',
-    ].filter(Boolean).join(' · ');
-  }
-  return h('p', { class: 'fonte-origem' }, icon('plug', { size: 14 }), h('span', null, texto));
-}
-
 /**
- * Abre a gaveta de uma fonte (cartão ou sobrescrito), acrescenta o rodapé de origem e avisa o
- * roteiro guiado. → a folha aberta ou null.
+ * Abre a gaveta de uma fonte (cartão ou sobrescrito) e avisa o roteiro guiado. A linha "Origem: …"
+ * fica no rodapé que o próprio openRef põe (app.js). → a folha aberta ou null.
  */
 export function abrirFonte(ctx, ref) {
   let s = null;
   try { s = ctx?.openRef?.(ref) ?? null; } catch (e) { console.error('[fontes] openRef', e); }
   if (!s) return null;
-  const corpo = s.body ?? null;
-  if (corpo && !corpo.querySelector(':scope > .fonte-origem')) {
-    const rod = rodapeOrigem(resolve(ctx, ref), ctx);
-    if (rod) corpo.append(rod);
-  }
   marco('fonte');
   return s;
 }
@@ -248,6 +144,26 @@ export function partesDoRegistro(item) {
   return { titulo, corpo: igual ? '' : texto };
 }
 
+/**
+ * Título de registro com corte visual (line-clamp 2): se mesmo assim ele não couber, a linha 3 passa
+ * a mostrar o texto completo, para que título + corpo nunca pulem um trecho no meio.
+ */
+function vigiaTituloCortado(l2, l3, resto, completo) {
+  if (!completo || typeof window === 'undefined') return;
+  const confere = () => {
+    if (!l2.isConnected) return;
+    const cortado = l2.scrollHeight > l2.clientHeight + 1;
+    const texto = cortado ? completo : resto;
+    if (l3.textContent !== texto) l3.textContent = texto;
+    l3.hidden = !texto;
+    l3.classList.toggle('is-completo', cortado);
+    if (cortado) l2.title = l2.textContent;
+    else l2.removeAttribute('title');
+  };
+  if (typeof ResizeObserver === 'function') new ResizeObserver(confere).observe(l2);
+  else requestAnimationFrame(confere);
+}
+
 /** Cartão de um registro aprendido (fonte, confirmação e listas). */
 export function cartaoAprendido(item, { ctx, n, estatico = false, realce = false, onClick } = {}) {
   const autor = item?.autor || 'Você';
@@ -256,11 +172,13 @@ export function cartaoAprendido(item, { ctx, n, estatico = false, realce = false
     n ? h('span', { class: 'fonte__n num' }, String(n)) : null,
     icon('lightbulb', { size: 14 }),
     h('span', null, `Registrado por ${quem} · `, h('span', { class: 'fonte__quando', 'data-quando': item?.criado_em || '' }, quando(item?.criado_em))));
-  // linha 2 = título; linha 3 = o que o título não mostrou do texto
+  // linha 2 = título (até 2 linhas); linha 3 = o que o título não mostrou do texto
   const { titulo, corpo } = partesDoRegistro(item);
-  const filhos = [linha1,
-    h('span', { class: 'fonte__l2' }, titulo),
-    corpo ? h('span', { class: 'fonte__l3' }, curto(corpo, estatico ? 220 : 110)) : null];
+  const l2 = h('span', { class: 'fonte__l2' }, titulo);
+  const resto = corpo ? curto(corpo, estatico ? 220 : 110) : '';
+  const l3 = h('span', { class: 'fonte__l3', hidden: !resto }, resto);
+  vigiaTituloCortado(l2, l3, resto, String(item?.texto ?? '').replace(/\s+/g, ' ').trim());
+  const filhos = [linha1, l2, l3];
   const cls = ['fonte', 'fonte--aprendido', realce && 'is-new'];
   if (estatico) return h('div', { class: cls, 'data-ref': `aprendizado:${item?.id}` }, ...filhos);
   return h('button', {

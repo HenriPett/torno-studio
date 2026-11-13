@@ -9,7 +9,7 @@
 
 import * as motor from '../web/src/ai/local-engine.js';
 
-export const { responder, buscar, tokens, norm, corta, f, ligado, refOk, filtraRefs, perfilAreas, statusLabel, visaoDoCliente } = motor;
+export const { responder, buscar, tokens, norm, corta, f, ligado, refOk, filtraRefs, perfilAreas, statusLabel, severidadeLabel, precoNaTabela, visaoDoCliente } = motor;
 
 function casa(t, p) {
   if (t === p) return true;

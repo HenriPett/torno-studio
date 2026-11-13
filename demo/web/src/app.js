@@ -133,6 +133,10 @@ async function carregar({ silencioso = false } = {}) {
       mostrarSenha();
       return;
     }
+    if (err instanceof ApiError && err.status === 410) {
+      telaLinkEncerrado(root());
+      return;
+    }
     if (err instanceof ApiError && (err.status === 404 || err.status === 403)) {
       telaInvalida();
       return;
@@ -153,41 +157,36 @@ async function carregar({ silencioso = false } = {}) {
   }
 }
 
-// Senha que já abriu a demo nesta aba (só em memória, nunca gravada). Serve para reconhecer, na
-// reautenticação, que a senha certa foi recusada: o link foi desativado, expirou ou teve a senha trocada.
-let senhaQueAbriu = null;
-let recusasReauth = 0;
-const RECUSAS_ATE_ENCERRAR = 3;
+// Contrato do POST /entrar: 401 = senha errada; 410 = senha certa, mas a demo foi desativada ou
+// expirou; 404 = o link não existe. Só 410/404 levam à tela final; 401 repetido só ganha uma dica.
+const RECUSAS_ATE_DICA = 3;
+const DICA_SENHA = 'Confira a senha na mensagem que você recebeu. Se continuar sem entrar, peça um novo link a quem te enviou.';
 
 async function mostrarSenha({ expirada = false } = {}) {
   const { renderEntrar } = await import('./screens/entrar.js');
   const alvo = expirada ? overlayReauth() : root();
-  renderEntrar(alvo, {
+  let recusas = 0;
+  const tela = renderEntrar(alvo, {
     titulo: 'Esta demonstração é privada.',
     // apoio: o padrão de entrar.js (diz o que vem depois da senha)
     aviso: expirada ? 'Sua sessão expirou. Digite a senha de novo.' : null,
     entrar: async (senha) => {
       try {
         const r = await api.entrar(demoId, senha);
-        senhaQueAbriu = senha;
-        recusasReauth = 0;
+        recusas = 0;
         return r;
       } catch (err) {
-        const recusada = err instanceof ApiError && [401, 403, 404].includes(err.status);
-        if (expirada && recusada) {
-          recusasReauth += 1;
-          // o servidor responde igual para senha errada e link desativado (401); 403/404, a senha que
-          // já abriu a demo ou várias recusas seguidas indicam que o link não vale mais
-          const encerrado = err.status === 403 || err.status === 404
-            || (senhaQueAbriu != null && senha === senhaQueAbriu)
-            || recusasReauth >= RECUSAS_ATE_ENCERRAR;
-          if (encerrado) {
-            telaLinkEncerrado(alvo);
-            const fim = new Error('link encerrado');
-            fim.status = 0;
-            fim.encerrado = true;
-            throw fim;
-          }
+        const status = err instanceof ApiError ? err.status : 0;
+        if (status === 410 || status === 404) {
+          telaLinkEncerrado(alvo);
+          const fim = new Error('link encerrado');
+          fim.status = 0;
+          fim.encerrado = true;
+          throw fim;
+        }
+        if (status === 401) {
+          recusas += 1;
+          if (recusas >= RECUSAS_ATE_DICA) dicaSenha(tela?.el);
         }
         throw err;
       }
@@ -207,42 +206,73 @@ async function mostrarSenha({ expirada = false } = {}) {
   });
 }
 
-/** Tela final quando a senha certa é recusada: o link não vale mais. Sem laço de "senha inválida". */
+/** Dica no próprio formulário depois de várias senhas recusadas (uma vez só). */
+function dicaSenha(telaEl) {
+  const form = telaEl?.querySelector?.('.auth__form');
+  if (!form || form.querySelector('.auth__dica')) return;
+  const id = `dica-${Math.random().toString(36).slice(2, 8)}`;
+  const dica = h('p', { id, class: 'auth__notice auth__dica', role: 'status' }, DICA_SENHA);
+  const botao = form.querySelector('button[type="submit"]');
+  form.insertBefore(dica, botao);
+  const input = form.querySelector('input');
+  if (input) input.setAttribute('aria-describedby', `${input.getAttribute('aria-describedby') || ''} ${id}`.trim());
+}
+
+/** Tela final quando o servidor diz que o link não vale mais (410/404). */
 function telaLinkEncerrado(alvo) {
   const titulo = h('h1', { class: 'auth__title', tabindex: '-1' }, 'Este link foi desativado ou expirou.');
   alvo.replaceChildren(h('main', { class: 'auth' },
     h('div', { class: 'auth__card' },
       h('div', { class: 'auth__brand' }, h('span', { class: 'wordmark' }, 'Torno')),
       titulo,
-      h('p', { class: 'auth__lead' }, 'Peça um novo a quem te enviou.'),
-      h('p', { class: 'auth__note' },
-        h('button', {
-          type: 'button', class: 'link-btn',
-          onClick: () => { recusasReauth = 0; mostrarSenha({ expirada: true }); },
-        }, 'Recebeu uma senha nova? Digite aqui'))),
+      h('p', { class: 'auth__lead' }, 'Peça um novo a quem te enviou.')),
     h('p', { class: 'auth__foot' }, 'IA e software sob medida para a indústria · tornostudio.com')));
   requestAnimationFrame(() => titulo.focus());
 }
 
+// ---------------------------------------------------------------------------
+// Overlays (reautenticação e "Rever a apresentação"): o app de fundo fica inerte (sem foco nem leitor
+// de tela) enquanto qualquer um deles estiver aberto, e o foco volta para onde estava ao fechar.
+
 let reauthEl = null;
+let apresentacaoEl = null;
+let focoAntesReauth = null;
+let focoAntesApresentacao = null;
+
+function atualizaInerte() {
+  if (el.app) el.app.inert = !!(reauthEl || apresentacaoEl);
+  // reautenticação por cima da apresentação: a apresentação também fica de fora do foco
+  if (apresentacaoEl) apresentacaoEl.inert = !!reauthEl;
+}
+/** Devolve o foco a `alvo`; se ele saiu da tela (ex.: a rota mudou), vai para `reserva`. */
+function devolveFoco(alvo, reserva = null) {
+  const pode = (n) => n && n.isConnected && typeof n.focus === 'function' && !n.closest?.('[inert]');
+  const destino = pode(alvo) ? alvo : pode(reserva) ? reserva : null;
+  if (destino) {
+    try { destino.focus({ preventScroll: true }); } catch { /* ok */ }
+  }
+}
+
 function overlayReauth() {
   if (!reauthEl) {
+    focoAntesReauth = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     reauthEl = h('div', {
       class: 'reauth', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Entrar de novo na demonstração',
       style: { position: 'fixed', inset: '0', zIndex: '200', overflow: 'auto' },
     });
     document.body.appendChild(reauthEl);
   }
-  // o app de fundo fica inerte (sem foco nem leitor de tela) enquanto o overlay está aberto
-  if (el.app) el.app.inert = true;
+  atualizaInerte();
   return reauthEl;
 }
 function fecharReauth() {
   reauthEl?.remove();
   reauthEl = null;
   reautenticando = false;
-  recusasReauth = 0;
-  if (el.app) el.app.inert = false;
+  atualizaInerte();
+  const foco = focoAntesReauth;
+  focoAntesReauth = null;
+  devolveFoco(foco);
 }
 
 onNaoAutorizado((escopo) => {
@@ -286,27 +316,33 @@ async function carregarRoteiro() {
 }
 
 /** "Rever a apresentação" (Como funciona): boas-vindas por cima do app, sem desmontar nada. */
-let apresentacaoEl = null;
 async function reverApresentacao() {
   if (apresentacaoEl) return;
   const mod = await tryImport('./screens/boas-vindas.js');
-  if (!mod || typeof mod.renderBoasVindas !== 'function') return;
+  if (!mod || typeof mod.renderBoasVindas !== 'function' || apresentacaoEl) return;
+  focoAntesApresentacao = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   ui.closeAllSheets();
   apresentacaoEl = h('div', { class: 'tela-sobre', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Apresentação da demonstração' });
   document.body.appendChild(apresentacaoEl);
-  if (el.app) el.app.inert = true;
+  atualizaInerte();
   let desliga = null;
   desliga = mod.renderBoasVindas(apresentacaoEl, {
     ctx: buildCtx(),
+    // o Esc do documento não fecha a apresentação enquanto a reautenticação estiver por cima
+    bloqueado: () => !!reauthEl,
     onComecar: (nome) => {
       if (nome != null && nome.trim()) store.set(`td_autor_${demoId}`, nome.trim());
       store.set(`td_bv_${demoId}`, '1');
       if (typeof desliga === 'function') desliga();
       apresentacaoEl?.remove();
       apresentacaoEl = null;
-      if (el.app) el.app.inert = false;
+      atualizaInerte();
+      const foco = focoAntesApresentacao;
+      focoAntesApresentacao = null;
       try { roteiroMod?.mostrarRoteiro?.(); } catch { /* ok */ }
       navigate('#inicio');
+      // depois da troca de rota: o botão de origem, se ainda existir; senão, o conteúdo
+      requestAnimationFrame(() => devolveFoco(foco, el.content));
     },
   });
 }
@@ -931,14 +967,40 @@ function openRef(ref) {
   return s;
 }
 
-/** Rodapé fixo "Origem: ERP · atualizado 13/11, 07:40 · dado fictício", quando dá para mapear. */
-function rodapeOrigem(s, resolved, ctx) {
-  if (['aprendizado', 'saber', 'integ'].includes(resolved.tipo)) return;
+/** "13 nov, 14:05" no fuso de quem vê (criado_em dos registros vem em UTC). */
+function dataHoraLocal(iso) {
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return '';
+  const dt = new Date(t);
+  const p = (n) => String(n).padStart(2, '0');
+  return fmt.datetime(`${dt.getFullYear()}-${p(dt.getMonth() + 1)}-${p(dt.getDate())}T${p(dt.getHours())}:${p(dt.getMinutes())}`);
+}
+
+/** Texto da linha de origem da gaveta (uma só, no rodapé), pela regra única de origem.js. */
+function textoOrigem(resolved, ctx) {
   const o = safe(() => origemDoRef(ctx.data, resolved));
-  if (!o || !o.sistema) return;
+  if (resolved.tipo === 'aprendizado') {
+    const autor = o?.autor && o.autor !== 'Você' ? o.autor : 'você';
+    return [`Registrado por ${autor} nesta demonstração`, dataHoraLocal(o?.criado_em) || null].filter(Boolean).join(' · ');
+  }
+  const origem = o?.sistema || o?.nome;
+  if (!origem) return '';
+  const em = o.atualizado ? ctx.fmt.date(o.atualizado) : o.sync ? ctx.fmt.datetime(o.sync) : '';
+  return [
+    `Origem: ${origem}`,
+    o.nota || null,
+    em ? `${o.erro ? 'última sincronização' : 'atualizado'} ${em}` : null,
+    'dado fictício',
+  ].filter(Boolean).join(' · ');
+}
+
+/** Rodapé fixo "Origem: ERP · atualizado 13 nov, 07:40 · dado fictício" (a única linha de origem da gaveta). */
+function rodapeOrigem(s, resolved, ctx) {
+  const texto = textoOrigem(resolved, ctx);
+  if (!texto) return;
   const linha = h('p', { class: 'drawer-origem' },
-    icon('database', { size: 14 }),
-    h('span', null, `Origem: ${o.sistema} · atualizado ${o.quandoLongo} · dado fictício`));
+    icon(resolved.tipo === 'aprendizado' ? 'lightbulb' : resolved.tipo === 'saber' ? 'users' : 'database', { size: 14 }),
+    h('span', null, texto));
   const poe = () => { s.footer.appendChild(linha); s.footer.hidden = false; };
   // gavetas que trocam as ações depois (s.setAcoes) não apagam a linha de origem
   const setAcoes = s.setAcoes;

@@ -12,6 +12,7 @@
 // perguntar, ensinar, renderMarkdown, sheet, api, demo, ia). Qualquer peça ausente: o botão some.
 import * as ui from '../ui.js';
 import * as F from '../format.js';
+import { sistemaDoRef } from '../origem.js';
 
 const h = (...a) => ui.h(...a);
 const BASE_FMT = F.fmt || F.default;
@@ -619,17 +620,9 @@ const REF_ICONE = {
   regra: 'scale', nc: 'shield-check', os: 'wrench', maq: 'cpu', kpi: 'chart', saber: 'users', integ: 'plug', aprendizado: 'lightbulb',
 };
 
+/** Sistema de origem do minicartão: a mesma regra do cartão de fonte e do rodapé da gaveta (origem.js). */
 function sistemaDe(ctx, r) {
-  switch (r.tipo) {
-    case 'doc': return r.detalhe?.doc?.origem || 'Documento';
-    case 'op': case 'turno': return list(ctx, 'integracoes').some((i) => i.tipo === 'MES') ? 'MES' : 'ERP';
-    case 'pedido': case 'sku': case 'cliente': case 'rep': case 'regra': return 'ERP';
-    case 'nc': return 'Qualidade';
-    case 'os': case 'maq': return 'Manutenção';
-    case 'saber': return 'Saber de operador';
-    case 'kpi': return 'Indicador';
-    default: return '';
-  }
+  try { return sistemaDoRef(ctx?.data ?? {}, r); } catch { return ''; }
 }
 
 function detalheCurto(ctx, r) {

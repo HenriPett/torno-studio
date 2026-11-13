@@ -10,15 +10,16 @@ import { h, icon, button, iconButton, toast, copyText, sheet as uiSheet } from '
 import { renderMarkdown, criaCitas, textoParaCopiar, markdownToText, refsDoTexto } from './markdown.js';
 import { blocoFontes, citeNodeLigado, rotulosParaCopiar, atualizaQuandos, marco } from './fontes.js';
 import { abrirEnsinar, perguntaDerivada } from './ensinar.js';
-import { createAssistant } from '../ai/assistant.js';
+import { createAssistant, clientePortalAtual } from '../ai/assistant.js';
 import * as motor from '../ai/local-engine.js';
+import { CONTATO_URL } from '../features.js';
 
 /* ------------------------------------------------------------------ */
 /* Estado da conversa (um por sessão)                                  */
 /* ------------------------------------------------------------------ */
 
 const S = {
-  msgs: [], // {id, role, texto, fontes, estado, ferramentas, aprendidos, desfeitos, modulo, pergunta, erro, aviso}
+  msgs: [], // {id, role, texto, fontes, estado, ferramentas, aprendidos, desfeitos, modulo, cliente, pergunta, erro, aviso}
   ativo: null, // {id, ctl}
   perfil: null,
   limite: false,
@@ -44,7 +45,7 @@ function salva() {
   if (!k) return;
   try {
     const msgs = S.msgs.filter((m) => m.estado !== 'streaming').slice(-30)
-      .map(({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta, aviso }) => ({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta, aviso }));
+      .map(({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, cliente, pergunta, aviso }) => ({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, cliente, pergunta, aviso }));
     sessionStorage.setItem(k, JSON.stringify({ msgs, perfil: S.perfil }));
   } catch { /* sem storage */ }
 }
@@ -157,12 +158,18 @@ function contextoEnsinar(ctx, m) {
 /* Envio                                                               */
 /* ------------------------------------------------------------------ */
 
-function historicoParaApi(ate) {
+/**
+ * Histórico que vai junto da pergunta (até 10 mensagens). No Portal do cliente, só os turnos do portal
+ * desse mesmo cliente, cada um marcado com `cliente`: o servidor descarta o que não vier marcado assim.
+ */
+function historicoParaApi(ate, { cliente } = {}) {
   const out = [];
   for (const m of S.msgs) {
     if (m.id === ate) break;
-    if (m.role === 'user') out.push({ role: 'user', content: m.texto });
-    else if (m.estado === 'ok' && m.texto) out.push({ role: 'assistant', content: m.texto });
+    if (cliente && (m.modulo !== 'portal' || m.cliente !== cliente)) continue;
+    const marca = cliente ? { cliente } : {};
+    if (m.role === 'user') out.push({ role: 'user', content: m.texto, ...marca });
+    else if (m.estado === 'ok' && m.texto) out.push({ role: 'assistant', content: m.texto, ...marca });
     else if (out.length && out.at(-1).role === 'user') out.pop(); // pergunta sem resposta não vai
   }
   return out.slice(-10);
@@ -172,24 +179,36 @@ function parar() {
   if (S.ativo) { try { S.ativo.ctl.abort(); } catch { /* ok */ } }
 }
 
-async function enviar(ctx, texto, { modulo, perfil } = {}) {
+/** Cliente de uma pergunta do Portal: o informado (mensagem refeita) → o do "Ver como" agora → o padrão do portal. */
+function clienteDoPortal(ctx, cliente) {
+  const existe = (id) => !!id && (ctx?.data?.clientes ?? []).some((c) => c.id === id);
+  if (existe(cliente)) return cliente;
+  const atual = clientePortalAtual();
+  if (existe(atual)) return atual;
+  return motor.clientePadraoDoPortal(ctx?.data) ?? cliente ?? atual ?? null;
+}
+
+async function enviar(ctx, texto, { modulo, perfil, cliente } = {}) {
   const pergunta = String(texto ?? '').trim();
   if (!pergunta || S.limite) return null;
   restaura(ctx);
   if (S.ativo) parar();
-  const u = { id: novoId(), role: 'user', texto: pergunta, modulo };
-  const a = { id: novoId(), role: 'assistant', texto: '', fontes: [], estado: 'streaming', ferramentas: [], aprendidos: [], desfeitos: [], modulo, pergunta, perfil: perfil ?? S.perfil };
+  // o cliente fica gravado na própria mensagem: "Tentar de novo" e a sessão recarregada usam o mesmo
+  const cli = modulo === 'portal' ? clienteDoPortal(ctx, cliente) : null;
+  const u = { id: novoId(), role: 'user', texto: pergunta, modulo, cliente: cli };
+  const a = { id: novoId(), role: 'assistant', texto: '', fontes: [], estado: 'streaming', ferramentas: [], aprendidos: [], desfeitos: [], modulo, cliente: cli, pergunta, perfil: perfil ?? S.perfil };
   S.msgs.push(u, a);
   const ctl = new AbortController();
   S.ativo = { id: a.id, ctl };
   avisa(u.id, 'novo');
   avisa(a.id, 'novo');
 
-  const mensagens = [...historicoParaApi(u.id), { role: 'user', content: pergunta }];
+  const marca = cli ? { cliente: cli } : {};
+  const mensagens = [...historicoParaApi(u.id, marca), { role: 'user', content: pergunta, ...marca }];
   const assistant = assistenteDe(ctx);
   try {
     const r = await assistant.perguntar({
-      mensagens, modulo, perfil: a.perfil, signal: ctl.signal,
+      mensagens, modulo, perfil: a.perfil, ...marca, signal: ctl.signal,
       onTexto: (delta, acumulado, extra) => {
         if (extra?.reinicio) { a.texto = ''; avisa(a.id); return; }
         a.texto = typeof acumulado === 'string' ? acumulado : a.texto + (delta || '');
@@ -240,7 +259,7 @@ function tentarDeNovo(ctx, a) {
   const u = S.msgs[i - 1];
   S.msgs.splice(i - 1, 2);
   avisa(null, 'reset');
-  enviar(ctx, u.texto, { modulo: a.modulo, perfil: a.perfil });
+  enviar(ctx, u.texto, { modulo: a.modulo, perfil: a.perfil, cliente: a.cliente ?? u.cliente });
 }
 
 function novaConversa(ctx) {
@@ -344,9 +363,8 @@ function corpoResposta(ctx, m, raiz) {
   return partes;
 }
 
-const CONTATO_TORNO = 'https://tornostudio.com/contact/';
 function linkContato() {
-  return h('a', { class: 'cv-contato', href: CONTATO_TORNO, target: '_blank', rel: 'noopener' }, 'Falar com a Torno');
+  return h('a', { class: 'cv-contato', href: CONTATO_URL, target: '_blank', rel: 'noopener' }, 'Falar com a Torno');
 }
 
 /** Aviso do servidor (limite diário da IA, resposta pelo roteiro local): nota discreta sob a resposta. */

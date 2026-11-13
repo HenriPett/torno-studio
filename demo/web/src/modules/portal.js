@@ -2,9 +2,11 @@
 // confundir com a ferramenta interna. Troca de {cliente}, saudação, condições, um aviso, pedidos
 // dele, "Repetir último pedido" (rascunho, sem carrinho), catálogo com o preço da tabela e o
 // assistente do {cliente} (a conversa via ctx.perguntar, módulo portal). O cliente escolhido vai no
-// corpo da conversa (definirClientePortal → campo `cliente`) e o servidor responde só com os dados dele.
+// corpo da conversa (definirClientePortal → campo `cliente`, gravado em cada mensagem) e o servidor
+// responde só com os dados dele. Preço do catálogo: o da tabela do cliente (precoNaTabela).
 import { h } from '../ui.js';
 import { definirClientePortal } from '../ai/assistant.js';
+import { clientePadraoDoPortal, precoNaTabela } from '../ai/local-engine.js';
 import * as ui from '../ui.js';
 import {
   ensureAreaCss, statusBadge, areaAssistant, T, cap, fmtOf, curto, tag,
@@ -40,9 +42,7 @@ export function render(el, ctx) {
     el.replaceChildren(h('div', { class: 'ar-page' }, h('p', { class: 'ar-empty' }, `Nenhum ${tCli} nos dados desta demonstração.`)));
     return undefined;
   }
-  if (!clientes.some((c) => c.id === escolhido[setorId])) {
-    escolhido[setorId] = (clientes.find((c) => pedidosDe(c.id).some((p) => p.status !== 'entregue')) || clientes[0]).id;
-  }
+  if (!clientes.some((c) => c.id === escolhido[setorId])) escolhido[setorId] = clientePadraoDoPortal(d) || clientes[0].id;
 
   const host = h('div', { class: 'pt-host' });
   const seletor = h('select', { class: 'pt-select', id: 'pt-cliente', 'aria-label': `Ver como ${tCli}` },
@@ -80,12 +80,13 @@ export function render(el, ctx) {
 
     const destaques = new Set(portal.destaques || []);
     const catalogo = [...produtos].sort((a, b) => Number(destaques.has(b.sku)) - Number(destaques.has(a.sku))).slice(0, 6);
+    const tabelaConhecida = !!produtos[0] && precoNaTabela(ctx, produtos[0], cli).conhecida;
     const cartao = (p) => {
       const pronta = p.estoque >= p.estoque_minimo && p.estoque > 0;
       return h('button', { type: 'button', class: 'pt-prod', onClick: () => ctx.openRef?.(`sku:${p.sku}`) },
         h('span', { class: 'pt-prod__sku' }, p.sku),
         h('span', { class: 'pt-prod__nome' }, p.nome),
-        h('span', { class: 'pt-prod__preco num' }, f.money(p.preco), h('span', { class: 'pt-prod__un' }, ` / ${singular(p.unidade)}`)),
+        h('span', { class: 'pt-prod__preco num' }, f.money(precoNaTabela(ctx, p, cli).preco), h('span', { class: 'pt-prod__un' }, ` / ${singular(p.unidade)}`)),
         pronta ? tag('Pronta entrega', 'ok') : h('span', { class: 'pt-prod__prazo' }, `Prazo ${p.prazo_dias} dias`));
     };
 
@@ -129,7 +130,9 @@ export function render(el, ctx) {
           pergunte),
         h('section', { class: 'pt-catalogo', 'aria-label': 'Catálogo' },
           h('h3', { class: 'pt-h3' }, `Catálogo (${catalogo.length})`),
-          h('p', { class: 'pt-muted' }, `Preços da ${cli.tabela_preco || 'sua tabela'}, sem impostos.`),
+          h('p', { class: 'pt-muted' }, tabelaConhecida || !cli.tabela_preco
+            ? `Preços da ${cli.tabela_preco || 'sua tabela'}, sem impostos.`
+            : `Preços de referência, sem impostos; os da ${cli.tabela_preco} vêm na proposta do ${T(ctx, 'representante')}.`),
           h('div', { class: 'pt-prods' }, catalogo.map(cartao)))));
 
     host.replaceChildren(janela,

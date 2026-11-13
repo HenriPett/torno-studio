@@ -3,7 +3,7 @@
 // devolve dados pequenos, sempre com `ref` para a IA citar. Só entram ferramentas de módulos
 // ligados; com perfil, só o que as áreas dele podem ver. Toda busca inclui o aprendizado.
 
-import { buscarTudo, buscaAprendizado, corta, ligado, perfilAreas, statusLabel, filtraRefs, norm, tokens, refOk } from "./motor.mjs";
+import { buscarTudo, buscaAprendizado, corta, ligado, perfilAreas, statusLabel, severidadeLabel, precoNaTabela, filtraRefs, norm, tokens, refOk } from "./motor.mjs";
 
 const MAX = 8;
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -120,6 +120,12 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       if (input?.id) r = r.filter((o) => igual(o.id, input.id));
       if (input?.status) r = r.filter((o) => igual(o.status, input.status));
       if (input?.sku) r = r.filter((o) => igual(o.sku, input.sku));
+      // Portal (ctx.cliente): os dados já vêm na versão do cliente (visaoDoCliente): status, %, previsão do
+      // pedido e motivo genérico; sem quantidade da OP, linha, início nem eventos internos
+      if (ctx?.cliente) return lista(r.map((o) => limpa(ctx, {
+        ref: `op:${o.id}`, id: o.id, sku: o.sku, produto: produto(o.sku)?.nome, status: statusLabel(o.status), progresso: o.progresso,
+        previsao_entrega: o.previsao_entrega ?? undefined, motivo_atraso: o.motivo_atraso ?? undefined, pedido: o.pedido,
+      }, { pedido: "pedido" })));
       return lista(r.map((o) => limpa(ctx, {
         ref: `op:${o.id}`, id: o.id, sku: o.sku, produto: produto(o.sku)?.nome, quantidade: o.quantidade,
         linha: (d.linhas ?? []).find((l) => l.id === o.linha)?.nome ?? o.linha, inicio: o.inicio, prazo: o.prazo,
@@ -159,7 +165,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       if (input?.status) r = r.filter((n) => igual(n.status, input.status));
       if (input?.termo) r = r.filter((n) => contemTexto(`${n.descricao} ${n.causa} ${n.acao}`, input.termo));
       return lista(r.map((n) => ({
-        ref: `nc:${n.id}`, id: n.id, data: n.data, sku: n.sku, origem: n.origem, severidade: n.severidade,
+        ref: `nc:${n.id}`, id: n.id, data: n.data, sku: n.sku, origem: n.origem, severidade: severidadeLabel(n.severidade),
         status: statusLabel(n.status), descricao: corta(n.descricao, 220), causa: corta(n.causa, 160),
         acao: corta(n.acao, 160), responsavel: n.responsavel, tem_8d: !!n.oito_d,
       })));
@@ -218,8 +224,16 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       let r = d.produtos ?? [];
       if (input?.sku) r = r.filter((p) => igual(p.sku, input.sku));
       if (input?.termo) r = r.filter((p) => contemTexto(`${p.nome} ${p.familia} ${p.sku}`, input.termo));
+      // Portal: o preço da tabela do cliente (regras comerciais), não o de referência
+      const cli = ctx?.cliente ? cliente(ctx.cliente) : null;
+      const preco = (p) => {
+        if (!cli) return { preco: p.preco };
+        const t = precoNaTabela(ctx, p, cli);
+        return t.conhecida ? { preco: t.preco, tabela: t.tabela }
+          : { preco_referencia: p.preco, tabela: t.tabela, observacao_preco: `O preço da ${t.tabela} sai na proposta do representante.` };
+      };
       return lista(r.map((p) => ({
-        ref: `sku:${p.sku}`, sku: p.sku, nome: p.nome, familia: p.familia, unidade: p.unidade, preco: p.preco,
+        ref: `sku:${p.sku}`, sku: p.sku, nome: p.nome, familia: p.familia, unidade: p.unidade, ...preco(p),
         estoque: p.estoque, estoque_minimo: p.estoque_minimo, abaixo_do_minimo: p.estoque < p.estoque_minimo, prazo_dias: p.prazo_dias,
       })));
     },
@@ -237,7 +251,8 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
       }));
       const rs = (d.representantes ?? []).map((r) => ({
         ref: `rep:${r.id}`, tipo: "representante", id: r.id, nome: r.nome, regiao: r.regiao, telefone: r.telefone,
-        meta_mes: r.meta_mes, realizado_mes: r.realizado_mes,
+        // meta e realizado do mês são internos: fora do Portal do cliente
+        ...(ctx?.cliente ? {} : { meta_mes: r.meta_mes, realizado_mes: r.realizado_mes }),
       }));
       let r = [...cs, ...rs];
       if (input?.id) r = r.filter((x) => igual(x.id, input.id));

@@ -109,6 +109,7 @@ async function lerSSE(res, onEvento) {
 const MAX_RODADAS = 6;
 
 // Avisos curtos para quem está na demo quando a resposta não veio da IA (r.aviso; ver ai/assistant.js).
+// Únicos no front: ai/assistant.js importa daqui. O servidor tem a sua cópia de AVISO_LIMITE (ai.mjs).
 export const AVISO_LIMITE = 'A IA atingiu o limite de hoje desta demonstração; esta resposta veio do roteiro local.';
 export const AVISO_FALHA = 'A IA ficou indisponível por um instante; esta resposta veio do roteiro local.';
 
@@ -117,7 +118,9 @@ export const AVISO_FALHA = 'A IA ficou indisponível por um instante; esta respo
  * → Promise<{texto, fontes, continuar:false, estado, modo, aviso, rodadas}>
  * Faz o laço `continuar` (reenvia {estado} até continuar:false). Em erro recuperável, repete a
  * rodada com motor:"local" (uma vez) e devolve `aviso` (o do servidor, ou AVISO_LIMITE/AVISO_FALHA).
- * `cliente` (id CLI-…, Portal do cliente) vai no corpo: o servidor só usa os dados desse cliente.
+ * `cliente` (id CLI-…, Portal do cliente) vai no corpo: o servidor só usa os dados desse cliente
+ * (modulo "portal" sem cliente → 400). No portal, cada mensagem de `mensagens` leva `cliente` também:
+ * o servidor só aproveita do histórico a sequência final marcada com o mesmo cliente.
  * onTexto(delta, textoAcumulado). Erros: ApiError.
  */
 async function conversa(id, payload = {}, handlers = {}) {
@@ -220,7 +223,7 @@ export const api = {
   ApiError,
   onNaoAutorizado,
 
-  /** POST /entrar → {ok}. 401/404 = "Link ou senha inválidos". */
+  /** POST /entrar → {ok}. 401 = "Link ou senha inválidos"; 410 = senha certa, mas o link foi desativado ou expirou. */
   entrar: (id, senha) => req('POST', `${D(id)}/entrar`, { senha }, { escopo: null }),
   sair: (id) => req('POST', `${D(id)}/sair`, {}, { escopo: null }),
   /** GET /estado → {demo, setor, aprendizado, ia, admin?}. 401 sem cookie. */

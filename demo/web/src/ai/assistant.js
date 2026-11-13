@@ -18,20 +18,22 @@
 //                           "A IA ficou indisponível por um instante; esta resposta veio do roteiro local."
 //                         Sem chave de API (demo inteira no roteiro local) não há aviso por resposta.
 //
-// Portal do cliente: com modulo "portal", o corpo leva `cliente` (id CLI-… do pacote): o parâmetro
-// `cliente` de perguntar() ou, se ausente, o cliente escolhido na tela do portal (definirClientePortal).
+// Portal do cliente: com modulo "portal", o corpo leva `cliente` (id CLI-… do pacote). Quem chama passa
+// o cliente explicitamente (ui/conversa.js grava o da mensagem e o reusa no "Tentar de novo" e depois de
+// recarregar); sem ele, vale o escolhido agora no "Ver como" (clientePortalAtual) e, por último, o
+// cliente padrão do portal: nunca uma pergunta do portal sai sem cliente (o servidor recusaria com 400).
 // O servidor valida o id e responde só com os dados desse cliente.
 
 import * as local from './local-engine.js';
+import { AVISO_LIMITE, AVISO_FALHA } from '../api.js';
 
 const MAX_RODADAS = 5;
-const AVISO_LIMITE = 'A IA atingiu o limite de hoje desta demonstração; esta resposta veio do roteiro local.';
-const AVISO_FALHA = 'A IA ficou indisponível por um instante; esta resposta veio do roteiro local.';
 
-// Cliente escolhido no "Ver como" do Portal do cliente (modules/portal.js). Vale para as perguntas com
-// modulo "portal", inclusive as feitas na conversa aberta a partir do portal.
+// Cliente escolhido agora no "Ver como" do Portal do cliente (modules/portal.js). Só um valor padrão no
+// momento do envio: a mensagem guarda o seu próprio cliente.
 let clientePortal = null;
 export function definirClientePortal(id) { clientePortal = typeof id === 'string' && id ? id : null; }
+export const clientePortalAtual = () => clientePortal;
 
 /** SSE direto (mesmo contrato de api.conversa), para quando a casca não entrega ctx.api. */
 async function conversaDireta(id, payload, { onTexto, onFerramenta, onAprendizado, signal } = {}) {
@@ -98,7 +100,8 @@ export function createAssistant(getCtx) {
     if (perfil) base.perfil = typeof perfil === 'object' ? perfil.id : perfil;
     const nome = autor ?? (typeof ctx.autor === 'function' ? ctx.autor() : null);
     if (nome && nome !== 'Você') base.autor = nome;
-    const cli = cliente ?? (modulo === 'portal' ? clientePortal : null);
+    const doPacote = (id) => (id && (ctx.data?.clientes ?? []).some((c) => c.id === id) ? id : null);
+    const cli = cliente ?? (modulo === 'portal' ? doPacote(clientePortal) ?? local.clientePadraoDoPortal(ctx.data) ?? clientePortal : null);
     if (cli) base.cliente = cli;
 
     let acumuladoAntes = ''; // texto das rodadas anteriores (só se a API devolver continuar ao cliente)

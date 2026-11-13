@@ -21,6 +21,7 @@ const TTL_ADMIN = 8 * 3600 * 1000;
 const ATRASO_FALHA = 400;
 const MAX_FALHAS_HORA = 20;
 const INVALIDO = 'Link ou senha inválidos';
+const DESATIVADO = 'Este link foi desativado ou expirou.';
 
 const BASE_HEADERS = {
   'cache-control': 'no-store',
@@ -78,7 +79,8 @@ async function sessaoDemo(request, env, store, id) {
   if (!d) return null;
   if (admin) return { demo: d, admin: true };
   if (!disponivel(d) || p.sv !== (d.senha_v ?? 1)) return null;
-  return { demo: d, admin: false };
+  // sessões de antes do sid: a impressão do próprio token faz o papel
+  return { demo: d, admin: false, sid: typeof p.sid === 'string' && /^[a-f0-9]{12}$/.test(p.sid) ? p.sid : impressao(segredo, leCookies(request)[`td_${id}`]).replace(/[^a-z0-9]/gi, '').slice(0, 12).toLowerCase() };
 }
 
 /* ------------------------------------------------------------------ */
@@ -111,9 +113,13 @@ async function rotaDemo(request, env, store, partes, deps) {
     if (!ok || !disponivel(d) || falhas >= MAX_FALHAS_HORA) {
       if (d && !ok) await store.set(`tentativas/${id}/${hora}-${randomBytes(6).toString('hex')}`, { em: new Date().toISOString() });
       await espera(ATRASO_FALHA);
+      // Senha certa, fora do limite de tentativas, mas a demo foi desativada ou expirou: 410, para a tela
+      // dizer isso (e não "senha errada"). Só quem sabe a senha descobre que o link existiu.
+      if (ok && falhas < MAX_FALHAS_HORA) return erro(410, DESATIVADO);
       return erro(401, INVALIDO);
     }
-    const token = assina({ t: 'demo', id, sv: d.senha_v ?? 1 }, segredo, TTL_DEMO);
+    // sid: identifica a sessão na contagem de acessos (um acesso por sessão a cada 10 min)
+    const token = assina({ t: 'demo', id, sv: d.senha_v ?? 1, sid: randomBytes(6).toString('hex') }, segredo, TTL_DEMO);
     return json({ ok: true }, 200, { 'set-cookie': cookie(request, `td_${id}`, token, TTL_DEMO / 1000) });
   }
   if (recurso === 'sair' && m === 'POST' && !sub) {
@@ -126,7 +132,7 @@ async function rotaDemo(request, env, store, partes, deps) {
 
   if (recurso === 'estado' && m === 'GET' && !sub) {
     const aprendizado = await listaAprendizado(store, id);
-    if (!s.admin) await registraAcesso(store, id);
+    if (!s.admin) await registraAcesso(store, id, s.sid);
     return json({
       demo: { id: demo.id, nome: demo.nome, setor: demo.setor, empresa_nome: demo.empresa_nome, modulos: demo.modulos },
       setor: pacote(demo.setor),

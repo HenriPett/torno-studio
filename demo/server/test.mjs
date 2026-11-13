@@ -9,8 +9,9 @@ import os from 'node:os';
 import path from 'node:path';
 import { handle } from './router.mjs';
 import { FileStore } from './store.mjs';
-import { criaCtx, SETOR_IDS } from './catalogo.mjs';
+import { criaCtx, SETOR_IDS, pacote } from './catalogo.mjs';
 import { AVISO_LIMITE } from './ai.mjs';
+import { buildTools } from './tools.mjs';
 import * as motor from '../web/src/ai/local-engine.js';
 import { api, AVISO_FALHA } from '../web/src/api.js';
 import { createAssistant, definirClientePortal } from '../web/src/ai/assistant.js';
@@ -488,6 +489,154 @@ teste('front (api.js + assistant.js): cliente do portal vai no corpo; troca sile
   }
 });
 
+/* ---------------- Portal do cliente: acesso, dados internos, preço, cliente e histórico ---------------- */
+
+/** Códigos internos de um pacote: máquinas, OS e NCs (não podem aparecer para o cliente). */
+const codigosInternos = (d) => [...(d.maquinas ?? []).map((m) => m.id), ...(d.manutencao ?? []).map((o) => o.id), ...(d.nao_conformidades ?? []).map((n) => n.id)];
+const achaCodigo = (txt, codigos) => codigos.find((c) => new RegExp(`(?<![\\w-])${c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`).test(txt))
+  ?? (/\b(NC|OS)-\d/.exec(txt)?.[0] ?? null);
+
+teste('portal (motor local): pergunta interna vira "fora do seu acesso" (não "todas as máquinas estão operando")', async () => {
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const cli = motor.clientePadraoDoPortal(ctx.data);
+    const v = motor.visaoDoCliente(ctx, cli);
+    for (const m of ['manutencao', 'qualidade', 'operadores', 'marketing', 'integracoes', 'seguranca']) assert.equal(v.isEnabled(m), false, `${setor}: ${m}`);
+    for (const m of ['portal', 'comercial', 'visao-geral', 'producao']) assert.equal(v.isEnabled(m), true, `${setor}: ${m}`);
+    for (const q of ['Tem alguma máquina parada?', 'Qual o OEE da fábrica?', 'Quais não conformidades estão abertas?', 'O que mais preocupa na qualidade?']) {
+      const r = motor.responder(ctx, q, { modulo: 'portal', cliente: cli });
+      assert.match(r.texto, /^No portal você vê só os seus pedidos, o catálogo e as condições comerciais; isso fica com a equipe da /, `${setor}: ${q} → ${r.texto}`);
+      assert.ok(!/operando|não conformidade/i.test(r.texto), r.texto);
+      assert.ok(r.fontes.every((f) => f.startsWith('rep:')), r.fontes.join(' '));
+    }
+  }
+  // com a produção desligada, o portal também não a enxerga
+  const semProd = criaCtx({ setor: 'textil', modulos: { producao: false } }, []);
+  assert.equal(motor.visaoDoCliente(semProd, 'CLI-1042').isEnabled('producao'), false);
+});
+
+teste('portal: nenhum código de máquina, OS ou NC nem meta do representante em ferramenta ou resposta local (8 setores)', async () => {
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const codigos = codigosInternos(ctx.data);
+    for (const c of ctx.data.clientes) {
+      const v = motor.visaoDoCliente(ctx, c.id);
+      const tools = Object.fromEntries(buildTools(v, {}).map((t) => [t.name, t]));
+      const saidas = [
+        tools.consultar_ordens?.execute({}), tools.consultar_pedidos?.execute({}), tools.consultar_pedidos?.execute({ status: 'atrasado' }),
+        tools.consultar_clientes_representantes?.execute({}), tools.consultar_estoque_preco?.execute({}), tools.regras_comerciais?.execute({}),
+        tools.buscar_documentos?.execute({ consulta: 'pedido atraso entrega' }), tools.buscar_documentos?.execute({ consulta: 'máquina manutenção qualidade' }),
+      ];
+      for (const s of saidas) {
+        const txt = JSON.stringify(s ?? {});
+        assert.equal(achaCodigo(txt, codigos), null, `${setor}/${c.id}: ferramenta vazou ${achaCodigo(txt, codigos)}: ${txt.slice(0, 300)}`);
+        assert.ok(!/meta_mes|realizado_mes|ultimo_evento/.test(txt), `${setor}/${c.id}: ${txt.slice(0, 200)}`);
+      }
+      const perguntas = [
+        'Onde está o meu pedido?', 'Quais pedidos estão atrasados?', 'Por que meu pedido atrasou?', 'Tem alguma máquina parada?',
+        'Quem é meu representante?', ...v.data.pedidos.map((p) => `Onde está o pedido ${p.id}?`), ...v.data.ordens.map((o) => `Como está a ${o.id}?`),
+        ...v.data.perguntas_sugeridas.map((p) => p.pergunta),
+      ];
+      for (const q of perguntas) {
+        const r = motor.responder(ctx, q, { modulo: 'portal', cliente: c.id });
+        assert.equal(achaCodigo(r.texto, codigos), null, `${setor}/${c.id}: "${q}" vazou ${achaCodigo(r.texto, codigos)}: ${r.texto}`);
+        assert.ok(!/\bmeta\b|realizou/.test(r.texto), `${setor}/${c.id}: "${q}": ${r.texto}`);
+      }
+    }
+  }
+  // o motivo vira genérico, com status, % e nova previsão
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, []);
+  const r = motor.responder(ctx, 'Onde está o meu pedido PV-88213?', { modulo: 'portal', cliente: 'CLI-1042' });
+  assert.match(r.texto, /atrasado, previsão de entrega 21\/11/);
+  assert.match(r.texto, /ajuste de qualidade em andamento/i);
+  assert.ok(!/TIN-03|OS-7731|reprocesso|ΔE/.test(r.texto), r.texto);
+  const op = buildTools(motor.visaoDoCliente(ctx, 'CLI-1050'), {}).find((t) => t.name === 'consultar_ordens').execute({});
+  assert.deepEqual(op.itens.map((o) => [o.id, o.status, o.progresso, o.previsao_entrega, o.motivo_atraso]),
+    [['OP-24522', 'atrasada', 71, '2026-11-19', 'Ajuste de qualidade em andamento']]);
+  assert.equal(motor.motivoParaCliente('Tecido estampado chegou 6 dias atrasado e com rapport deslocado (NC-2026-122)'), 'Atraso de fornecedor e ajuste de qualidade em andamento');
+  // fora do portal, os dados internos continuam completos
+  const interno = buildTools(ctx, {}).find((t) => t.name === 'consultar_clientes_representantes').execute({ id: 'REP-01' });
+  assert.equal(interno.itens[0].meta_mes, 920000);
+});
+
+teste('portal: preço pela tabela do cliente (sem a resposta pronta da Tabela B)', async () => {
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, []);
+  const Q = 'Quero recomprar a camiseta básica 2381. Tem pronta entrega?';
+  const v = motor.visaoDoCliente(ctx, 'CLI-1044');
+  assert.ok(v.data.perguntas_sugeridas.length && v.data.perguntas_sugeridas.every((p) => p.resposta === undefined), 'sugeridas sem resposta pronta');
+  let r = motor.responder(ctx, Q, { modulo: 'portal', cliente: 'CLI-1044' }); // Tabela A: 6% a menos
+  assert.match(r.texto, /pela Tabela A, \*\*R\$\s17,77\*\*/);
+  assert.ok(!/Tabela B|18,90/.test(r.texto), r.texto);
+  r = motor.responder(ctx, Q, { modulo: 'portal', cliente: 'CLI-1042' }); // Tabela B: a de referência
+  assert.match(r.texto, /pela Tabela B, \*\*R\$\s18,90\*\*/);
+  r = motor.responder(ctx, Q, { modulo: 'portal', cliente: 'CLI-1049' }); // Atacado: 12% a menos
+  assert.match(r.texto, /pela Tabela Atacado, \*\*R\$\s16,63\*\*/);
+  const t = buildTools(v, {}).find((x) => x.name === 'consultar_estoque_preco').execute({ sku: 'SI-2381' });
+  assert.deepEqual([t.itens[0].preco, t.itens[0].tabela], [17.77, 'Tabela A']);
+  // tabela sem regra de diferença: preço de referência, dito assim
+  const mov = criaCtx({ setor: 'moveis', modulos: {} }, []);
+  const cli = mov.data.clientes[0];
+  const p = motor.precoNaTabela(mov, mov.data.produtos[0], cli);
+  assert.equal(p.preco, mov.data.produtos[0].preco);
+  // fora do portal, a pergunta sugerida segue com a resposta pronta
+  assert.match(motor.responder(ctx, Q, { modulo: 'comercial' }).texto, /Tabela B, R\$ 18,90/);
+});
+
+teste('portal (servidor): modulo portal sem cliente → 400; histórico só com turnos marcados do mesmo cliente', async () => {
+  let r = await visitante.req('POST', `/api/demo/${demoId}/conversa`, { mensagens: [{ role: 'user', content: ATRASADOS }], modulo: 'portal' });
+  assert.equal(r.status, 400);
+  assert.match((await r.json()).erro, /cliente/i);
+  const ia = cliente(ENV_IA);
+  ia.pote[`td_${demoId}`] = visitante.pote[`td_${demoId}`];
+  const vistos = [];
+  const fim = () => sseAnthropic([
+    ['content_block_start', { index: 0, content_block: { type: 'text', text: '' } }],
+    ['content_block_delta', { index: 0, delta: { type: 'text_delta', text: 'ok' } }],
+    ['content_block_stop', { index: 0 }], ['message_delta', { delta: { stop_reason: 'end_turn' } }],
+  ]);
+  const ff = fetchFalso([(b) => { vistos.push(b.messages); return fim(); }, (b) => { vistos.push(b.messages); return fim(); }]);
+  const M = (role, content, cli) => ({ role, content, ...(cli ? { cliente: cli } : {}) });
+  const mensagens = [
+    M('user', 'Pergunta interna'), M('assistant', 'PV-88227 da Magazine atrasado'),
+    M('user', 'Pergunta de outro cliente', 'CLI-1050'), M('assistant', 'Resposta de outro cliente', 'CLI-1050'),
+    M('user', 'Onde está o meu pedido?', 'CLI-1042'), M('assistant', 'O PV-88213 chega em 21/11.', 'CLI-1042'),
+    M('user', 'E as joggers vão junto?', 'CLI-1042'),
+  ];
+  await leSSE(await ia.req('POST', `/api/demo/${demoId}/conversa`, { mensagens, modulo: 'portal', cliente: 'CLI-1042' }, { fetch: ff }));
+  assert.deepEqual(vistos[0], [
+    { role: 'user', content: 'Onde está o meu pedido?' }, { role: 'assistant', content: 'O PV-88213 chega em 21/11.' },
+    { role: 'user', content: 'E as joggers vão junto?' },
+  ], 'só a sequência final marcada com o mesmo cliente, sem a marca no que vai para a API');
+  // a marca de outro cliente no meio corta o histórico dali para trás
+  const mistura = [...mensagens.slice(4, 6), M('user', 'Outra', 'CLI-1050'), M('assistant', 'x', 'CLI-1050'), M('user', 'E agora?', 'CLI-1042')];
+  await leSSE(await ia.req('POST', `/api/demo/${demoId}/conversa`, { mensagens: mistura, modulo: 'portal', cliente: 'CLI-1042' }, { fetch: ff }));
+  assert.deepEqual(vistos[1], [{ role: 'user', content: 'E agora?' }]);
+});
+
+teste('front (assistant.js): pergunta do portal sem cliente usa o cliente padrão do portal (nunca os dados completos)', async () => {
+  const fetchOriginal = globalThis.fetch;
+  try {
+    globalThis.fetch = fetchPelo(visitante, ENV);
+    definirClientePortal(null);
+    const data = pacote('textil');
+    const padrao = motor.clientePadraoDoPortal(data);
+    const ass = createAssistant(() => ({ demo: { id: demoId }, api, data }));
+    const r = await ass.perguntar({ mensagens: [{ role: 'user', content: ATRASADOS }], modulo: 'portal' });
+    const meus = data.pedidos.filter((p) => p.cliente === padrao).map((p) => p.id);
+    const outros = data.pedidos.filter((p) => p.cliente !== padrao && p.status === 'atrasado').map((p) => p.id);
+    assert.ok(outros.length && outros.every((id) => !r.texto.includes(id)), r.texto);
+    assert.ok(r.texto.includes(meus.find((id) => data.pedidos.find((p) => p.id === id).status === 'atrasado') ?? 'Nenhum'), r.texto);
+    // cliente explícito vence o "Ver como" atual (o "Tentar de novo" e a sessão recarregada passam o da mensagem)
+    definirClientePortal('CLI-1050');
+    const r2 = await ass.perguntar({ mensagens: [{ role: 'user', content: ATRASADOS }], modulo: 'portal', cliente: 'CLI-1042' });
+    assert.match(r2.texto, /PV-88213/);
+    assert.ok(!/PV-88227/.test(r2.texto));
+  } finally {
+    definirClientePortal(null);
+    globalThis.fetch = fetchOriginal;
+  }
+});
+
 /* ---------------- Motor local: resumo do dia e pergunta derivada ---------------- */
 
 teste('motor local: "o que eu preciso ver hoje?" vem com conclusão, 3–4 itens com impacto e próximo passo', async () => {
@@ -540,6 +689,79 @@ teste('pergunta derivada casa com o próprio item em responder()', async () => {
     assert.match(motor.perguntaDerivada(itens[3], ctx), /^O que a equipe sabe sobre “umidade baixa no salão quebra o fio penteado no inverno…”\?$/);
     assert.match(motor.perguntaDerivada(itens[4], ctx), /^Qual é a regra para “OEE conta setup/);
   }
+});
+
+teste('motor local: resumo do dia não sequestra pergunta de área, de registro nem de outra tela', async () => {
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, []);
+  const RESUMO = /^\*\*Hoje .*; comece /;
+  for (const [q, modulo] of [['O que eu preciso ver hoje?', 'visao-geral'], ['O que eu preciso ver hoje?', undefined], ['O que mais preocupa na operação hoje?', undefined], ['Onde devo focar hoje?', 'visao-geral']]) {
+    assert.match(motor.responder(ctx, q, { modulo }).texto, RESUMO, `${q} (${modulo})`);
+  }
+  // registro citado → o registro
+  let r = motor.responder(ctx, 'O que eu preciso saber sobre a TIN-03 hoje?', { modulo: 'qualidade' });
+  assert.ok(!RESUMO.test(r.texto) && r.fontes.includes('maq:TIN-03'), r.texto);
+  // área citada → a lista da área
+  r = motor.responder(ctx, 'O que mais preocupa na qualidade?', { modulo: 'qualidade' });
+  assert.ok(!RESUMO.test(r.texto), r.texto);
+  assert.match(r.texto, /não conformidades? em aberto/);
+  assert.ok(r.fontes.every((f) => f.startsWith('nc:')), r.fontes.join(' '));
+  r = motor.responder(ctx, 'Qual máquina pede atenção na tinturaria?', {});
+  assert.ok(!RESUMO.test(r.texto), r.texto);
+  assert.match(r.texto, /fora da operação normal no setor produtivo Tinturaria/);
+  assert.ok(r.fontes.includes('maq:TIN-03') && !r.fontes.includes('maq:TEA-12'), r.fontes.join(' '));
+  // a mesma pergunta geral feita na tela de uma área vai para a área, não para o resumo (nem a resposta pronta da visão geral)
+  r = motor.responder(ctx, 'O que eu preciso ver hoje?', { modulo: 'qualidade' });
+  assert.ok(!RESUMO.test(r.texto) && r.fontes.every((f) => f.startsWith('nc:')), r.texto);
+  r = motor.responder(ctx, 'O que mais preocupa hoje?', { modulo: 'manutencao' });
+  assert.ok(r.fontes.every((f) => /^(maq|os):/.test(f)) && r.fontes.length, r.texto);
+});
+
+teste('motor local: severidade e status para o leitor; corte sem pontuação antes do "…"', async () => {
+  for (const setor of SETOR_IDS) {
+    const ctx = criaCtx({ setor, modulos: {} }, []);
+    const r = motor.responder(ctx, 'Quais não conformidades estão abertas?', { modulo: 'qualidade' });
+    assert.ok(!/\(media, |\bem_analise\b|severidade media/.test(r.texto), `${setor}: ${r.texto}`);
+    for (const n of ctx.data.nao_conformidades.slice(0, 3)) {
+      const t = motor.responder(ctx, `Me fale da ${n.id}`, {}).texto;
+      assert.ok(!/severidade media\b/.test(t), t);
+      assert.ok(!/[,.;:]…/.test(t), `${setor}: ${t}`);
+    }
+    for (const q of ['O que eu preciso ver hoje?', 'Quais máquinas estão paradas?', 'Quais ordens estão atrasadas?']) {
+      const t = motor.responder(ctx, q, { modulo: 'visao-geral' }).texto;
+      assert.ok(!/[,.;:]…/.test(t), `${setor}: ${q}: ${t}`);
+    }
+  }
+  assert.match(motor.responder(criaCtx({ setor: 'textil', modulos: {} }, []), 'Quais não conformidades estão abertas?', {}).texto, /\(média, aberta\)|\(média, em análise\)/);
+  assert.equal(motor.corta('contra o padrão MAR-07, puxando o tom', 26), 'contra o padrão MAR-07…');
+  assert.equal(motor.corta('estoque com 6.200 peças', 17), 'estoque com…');
+  assert.equal(motor.corta('estoque com 6. peças', 15), 'estoque com 6…');
+  assert.equal(motor.severidadeLabel('media'), 'média');
+});
+
+teste('motor local: registro que cita cliente/máquina/pedido pelo nome usa essas entidades em "Nos dados da empresa"', async () => {
+  const t = 'O cliente Magazine Horizonte Sul exige aviso de atraso com 5 dias de antecedência, senão aplica multa de 2%.';
+  const item = { id: '0000000000009-mhsul1', tipo: 'nota', titulo: t.slice(0, 78), texto: t, area: 'comercial', autor: 'Bia', origem: 'formulario', criado_em: '2026-11-13T10:00:00.000Z' };
+  const maq = { id: '0000000000008-jet003', tipo: 'saber', titulo: 'O Jet HT de tingimento 3 precisa de purga extra no inverno', texto: 'Purgar 2 min a mais.', area: 'producao', autor: 'Bia', criado_em: '2026-11-12T10:00:00.000Z' };
+  const ctx = criaCtx({ setor: 'textil', modulos: {} }, [maq, item]);
+  const q = motor.perguntaDerivada(item, ctx);
+  assert.equal(q, 'O que a equipe registrou sobre a Magazine Horizonte Sul?');
+  for (const modulo of [undefined, 'comercial']) {
+    const r = motor.responder(ctx, q, { modulo });
+    assert.equal(r.fontes[0], `aprendizado:${item.id}`);
+    const dados = r.texto.split('**Nos dados da empresa:**')[1] ?? '';
+    assert.match(dados, /Magazine Horizonte Sul\*\*\[\[cliente:CLI-1050\]\]/);
+    assert.match(dados, /PV-88227/, 'os pedidos daquele cliente');
+    for (const op of ['OP-24518', 'OP-24530', 'OP-24535']) assert.ok(!dados.includes(op), `não lista todas as OPs atrasadas: ${dados}`);
+  }
+  // máquina citada pelo nome → pergunta e dados pela máquina
+  assert.equal(motor.perguntaDerivada(maq, ctx), 'O que a equipe registrou sobre a TIN-03?');
+  const r = motor.responder(ctx, motor.perguntaDerivada(maq, ctx), {});
+  assert.equal(r.fontes[0], `aprendizado:${maq.id}`);
+  assert.ok(r.fontes.includes('maq:TIN-03'), r.fontes.join(' '));
+  // sem entidade no registro: a parte da empresa continua sendo a resposta da pergunta
+  const solto = { ...item, id: '0000000000007-solto1', titulo: 'Umidade baixa quebra o fio penteado', texto: 'Ligar a umidificação antes do turno.' };
+  const r2 = motor.responder(criaCtx({ setor: 'textil', modulos: {} }, [solto]), motor.perguntaDerivada(solto, ctx), {});
+  assert.equal(r2.fontes[0], `aprendizado:${solto.id}`);
 });
 
 teste('teto diário: passa do limite → resposta local com aviso', async () => {
@@ -596,17 +818,24 @@ teste('PATCH nova_senha:true invalida a senha e a sessão antigas', async () => 
   senha = j.senha;
 });
 
-teste('demo desativada ou expirada = "Link ou senha inválidos"; admin ainda abre', async () => {
+teste('demo desativada ou expirada: senha certa → 410 "link desativado"; senha errada continua 401; admin ainda abre', async () => {
+  const DESATIVADO = { erro: 'Este link foi desativado ou expirou.' };
   await admin.req('PATCH', `/api/admin/demos/${demoId}`, { ativo: false });
   let r = await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha });
-  assert.equal(r.status, 401);
+  assert.equal(r.status, 410);
+  assert.deepEqual(await r.json(), DESATIVADO);
+  r = await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha: 'errada' });
+  assert.equal(r.status, 401, 'quem só errou a senha não vê a tela de link desativado');
   assert.deepEqual(await r.json(), { erro: 'Link ou senha inválidos' });
   assert.equal((await visitante.req('GET', `/api/demo/${demoId}/estado`)).status, 401);
   r = await admin.req('GET', `/api/demo/${demoId}/estado`);
   assert.equal(r.status, 200);
   assert.equal((await r.json()).admin, true);
   await admin.req('PATCH', `/api/admin/demos/${demoId}`, { ativo: true, expira_em: '2020-01-01' });
-  assert.equal((await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha })).status, 401);
+  r = await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha });
+  assert.equal(r.status, 410);
+  assert.deepEqual(await r.json(), DESATIVADO);
+  assert.equal((await visitante.req('POST', `/api/demo/${demoId}/entrar`, { senha: 'errada' })).status, 401);
 });
 
 teste('entrar: depois de 20 senhas erradas na hora, até a certa dá a mesma resposta; cookie malformado não derruba', async () => {
@@ -617,13 +846,18 @@ teste('entrar: depois de 20 senhas erradas na hora, até a certa dá a mesma res
   const r = await outro.req('POST', `/api/demo/${demoId}/entrar`, { senha });
   assert.equal(r.status, 401);
   assert.deepEqual(await r.json(), { erro: 'Link ou senha inválidos' });
+  // no limite de tentativas, a senha certa de uma demo desativada também é 401 (não revela o 410)
+  await admin.req('PATCH', `/api/admin/demos/${demoId}`, { ativo: false });
+  assert.equal((await outro.req('POST', `/api/demo/${demoId}/entrar`, { senha })).status, 401);
+  await admin.req('PATCH', `/api/admin/demos/${demoId}`, { ativo: true });
   assert.equal((await cliente().req('GET', `/api/demo/${demoId}/estado`, undefined, { headers: { cookie: 'x=%E0%A4%A' } })).status, 401);
 });
 
 teste('acessos concorrentes não desfazem o PATCH do admin (ativo, senha, expira_em)', async () => {
   const { demo: dc, senha: s0 } = await (await admin.req('POST', '/api/admin/demos', { nome: 'Corrida', setor: 'textil' })).json();
-  let senhaAtual = s0, oks = 0;
+  let senhaAtual = s0, oks = 0, sessoesComAcesso = 0;
   for (let rodada = 0; rodada < 5; rodada++) {
+    let oksDaRodada = 0;
     const v = cliente();
     assert.equal((await v.req('POST', `/api/demo/${dc.id}/entrar`, { senha: senhaAtual })).status, 200);
     // ondas de 15 GET /estado em paralelo enquanto o PATCH desativa, troca a senha e muda o prazo
@@ -632,8 +866,10 @@ teste('acessos concorrentes não desfazem o PATCH do admin (ativo, senha, expira
       .finally(() => { feito = true; });
     do {
       const rs = await Promise.all(Array.from({ length: 15 }, () => v.req('GET', `/api/demo/${dc.id}/estado`)));
-      oks += rs.filter((r) => r.status === 200).length;
+      oksDaRodada += rs.filter((r) => r.status === 200).length;
     } while (!feito);
+    oks += oksDaRodada;
+    if (oksDaRodada) sessoesComAcesso++;
     const rp = await patch;
     const { senha: nova } = await rp.json();
     const reg = await store.get(`demo/${dc.id}`);
@@ -646,15 +882,99 @@ teste('acessos concorrentes não desfazem o PATCH do admin (ativo, senha, expira
   }
   const reg = await store.get(`demo/${dc.id}`);
   assert.equal(reg.acessos, 0, 'o registro da demo não é regravado por acesso');
+  // um acesso por sessão a cada 10 min: os GETs paralelos de cada rodada (mesma sessão) contam uma vez
   const d = (await (await admin.req('GET', '/api/admin/demos')).json()).find((x) => x.id === dc.id);
-  assert.equal(d.acessos, oks, 'listagem soma os acessos');
-  assert.ok(oks > 0 && Date.parse(d.ultimo_acesso) > Date.now() - 60e3);
+  assert.ok(oks > sessoesComAcesso, 'houve GETs paralelos na mesma sessão');
+  assert.equal(d.acessos, sessoesComAcesso, 'listagem soma os acessos (um por sessão)');
+  assert.ok(sessoesComAcesso > 0 && Date.parse(d.ultimo_acesso) > Date.now() - 60e3);
   const um = await (await admin.req('GET', `/api/admin/demos/${dc.id}`)).json();
-  assert.equal(um.acessos, oks);
+  assert.equal(um.acessos, sessoesComAcesso);
   const { demo: aposPatch } = await (await admin.req('PATCH', `/api/admin/demos/${dc.id}`, { nota: 'x' })).json();
-  assert.equal(aposPatch.acessos, oks, 'resposta do PATCH traz os acessos agregados');
+  assert.equal(aposPatch.acessos, sessoesComAcesso, 'resposta do PATCH traz os acessos agregados');
   assert.equal((await admin.req('DELETE', `/api/admin/demos/${dc.id}`, undefined)).status, 200);
   assert.deepEqual(await store.list(`acessos/${dc.id}/`), []);
+});
+
+/** sid da sessão de demo (payload do cookie td_<id>). */
+const sidDe = (c, id) => JSON.parse(Buffer.from(decodeURIComponent(c.pote[`td_${id}`]).split('.')[0], 'base64url')).sid;
+
+teste('acessos: um por sessão a cada 10 min; outra sessão conta; janela anterior com menos de 10 min não grava', async () => {
+  const { demo: da, senha: sa } = await (await admin.req('POST', '/api/admin/demos', { nome: 'Acessos', setor: 'textil' })).json();
+  const v1 = cliente(), v2 = cliente();
+  assert.equal((await v1.req('POST', `/api/demo/${da.id}/entrar`, { senha: sa })).status, 200);
+  assert.equal((await v2.req('POST', `/api/demo/${da.id}/entrar`, { senha: sa })).status, 200);
+  for (let i = 0; i < 3; i++) assert.equal((await v1.req('GET', `/api/demo/${da.id}/estado`)).status, 200);
+  await Promise.all(Array.from({ length: 5 }, () => v2.req('GET', `/api/demo/${da.id}/estado`)));
+  let chaves = await store.list(`acessos/${da.id}/`);
+  assert.equal(chaves.length, 2, chaves.join(' '));
+  const s1 = sidDe(v1, da.id);
+  assert.match(s1, /^[a-f0-9]{12}$/);
+  assert.ok(chaves.some((k) => k.endsWith(`-${s1}`)));
+  // janela anterior: com acesso há 5 min não grava; há 11 min grava
+  const J = 10 * 60 * 1000, agora = Date.now(), janela = Math.floor(agora / J) * J;
+  await store.delete(chaves.find((k) => k.endsWith(`-${s1}`)));
+  const ant = `acessos/${da.id}/${String(janela - J).padStart(13, '0')}-${s1}`;
+  await store.set(ant, { em: new Date(agora - 5 * 60 * 1000).toISOString() });
+  await v1.req('GET', `/api/demo/${da.id}/estado`);
+  assert.equal((await store.list(`acessos/${da.id}/`)).length, 2, 'menos de 10 min desde o último: não grava');
+  await store.set(ant, { em: new Date(agora - 11 * 60 * 1000).toISOString() });
+  await v1.req('GET', `/api/demo/${da.id}/estado`);
+  assert.equal((await store.list(`acessos/${da.id}/`)).length, 3, 'mais de 10 min: grava');
+  await admin.req('DELETE', `/api/admin/demos/${da.id}`, undefined);
+});
+
+teste('acessos: a listagem do admin compacta as chaves antigas em acessos_resumo/<id> sem contar duas vezes', async () => {
+  const { demo: dk } = await (await admin.req('POST', '/api/admin/demos', { nome: 'Compacta', setor: 'textil' })).json();
+  const hora = Date.now() - 3 * 3600e3;
+  for (let i = 0; i < 7; i++) await store.set(`acessos/${dk.id}/${String(hora + i * 60e3).padStart(13, '0')}-velha${i}0`, { em: new Date(hora + i * 60e3).toISOString() });
+  await store.set(`acessos/${dk.id}/${String(hora - 1).padStart(13, '0')}-abcd1234`, { em: new Date(hora - 1).toISOString() }); // formato antigo
+  const recente = `acessos/${dk.id}/${String(Date.now()).padStart(13, '0')}-recente01`;
+  await store.set(recente, { em: new Date().toISOString() });
+  const lista = async () => (await (await admin.req('GET', '/api/admin/demos')).json()).find((x) => x.id === dk.id);
+  let d = await lista();
+  assert.equal(d.acessos, 9);
+  assert.deepEqual(await store.list(`acessos/${dk.id}/`), [recente], 'as somadas foram apagadas; a recente fica');
+  const resumo = await store.get(`acessos_resumo/${dk.id}`);
+  assert.equal(resumo.total, 8);
+  assert.equal(resumo.ultimo_acesso, new Date(hora + 6 * 60e3).toISOString());
+  d = await lista();
+  assert.equal(d.acessos, 9, 'listar de novo não soma de novo');
+  assert.equal((await (await admin.req('GET', `/api/admin/demos/${dk.id}`)).json()).acessos, 9);
+  // apagar que falhou depois de gravar o resumo: a chave que ficou (<= ate) não conta de novo e é limpa
+  const sobra = `acessos/${dk.id}/${String(hora + 60e3).padStart(13, '0')}-velha10`;
+  await store.set(sobra, { em: 'x' });
+  assert.equal((await lista()).acessos, 9);
+  assert.deepEqual(await store.list(`acessos/${dk.id}/`), [recente]);
+  // chaves órfãs (demo que não existe mais) somem na listagem
+  await store.set('acessos/zzzzzzzzzzzz/0000000000001-orfa0001', { em: 'x' });
+  await store.set('aprendizado/zzzzzzzzzzzz/0000000000001-orfa01', { id: 'x' });
+  await lista();
+  assert.deepEqual([...await store.list('acessos/zzzzzzzzzzzz/'), ...await store.list('aprendizado/zzzzzzzzzzzz/')], []);
+  await admin.req('DELETE', `/api/admin/demos/${dk.id}`, undefined);
+  assert.equal(await store.get(`acessos_resumo/${dk.id}`), null);
+});
+
+teste('apagar demo: lotes de 50 e demo/<id> sai primeiro (falha no meio não deixa o link vivo)', async () => {
+  const { demo: dx, senha: sx } = await (await admin.req('POST', '/api/admin/demos', { nome: 'Apagar', setor: 'textil' })).json();
+  for (let i = 0; i < 120; i++) await store.set(`acessos/${dx.id}/${String(1e12 + i).padStart(13, '0')}-k${String(i).padStart(7, '0')}`, { em: 'x' });
+  // store que conta deleções simultâneas e falha na 70ª
+  let ativos = 0, maxAtivos = 0, n = 0;
+  const falha = Object.create(store);
+  falha.delete = async (k) => {
+    n++;
+    if (n === 70) throw new Error('falha simulada');
+    ativos++; maxAtivos = Math.max(maxAtivos, ativos);
+    try { await store.delete(k); } finally { ativos--; }
+  };
+  falha.list = (p) => store.list(p); falha.get = (k) => store.get(k); falha.set = (k, v) => store.set(k, v);
+  const r = await handle(new Request(`${ORIGEM}/api/admin/demos/${dx.id}`, { method: 'DELETE', headers: { origin: ORIGEM, cookie: `ta=${admin.pote.ta}` } }), { env: ENV, store: falha });
+  assert.equal(r.status, 500);
+  assert.equal(await store.get(`demo/${dx.id}`), null, 'o registro da demo saiu antes da falha');
+  assert.ok(maxAtivos <= 50, `no máximo 50 deleções ao mesmo tempo (${maxAtivos})`);
+  assert.equal((await cliente().req('POST', `/api/demo/${dx.id}/entrar`, { senha: sx })).status, 401, 'o link não está vivo');
+  // a listagem limpa o que sobrou
+  await admin.req('GET', '/api/admin/demos');
+  assert.deepEqual(await store.list(`acessos/${dx.id}/`), []);
 });
 
 teste('entrar apaga as janelas de tentativas de horas anteriores', async () => {

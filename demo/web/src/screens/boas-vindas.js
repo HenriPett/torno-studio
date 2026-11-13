@@ -1,6 +1,8 @@
 // Boas-vindas (UX §4.2): uma tela, uma vez por demo (localStorage["td_bv_<id>"], gravado pelo app.js).
-// renderBoasVindas(alvo, {ctx, onComecar(nome, {viaEsc})}) — nome opcional vira o autor dos registros.
+// renderBoasVindas(alvo, {ctx, onComecar(nome, {viaEsc}), bloqueado()}) — nome opcional vira o autor dos registros.
 // Esc fecha só desta vez (o app não grava td_bv); "Rever a apresentação" em Como funciona reabre.
+// O Esc é ignorado enquanto `bloqueado()` for verdadeiro (ex.: reautenticação aberta por cima) ou quando
+// o foco está em outro diálogo fora desta tela.
 // Explica o produto em uma frase, só com os sistemas que existem em `integracoes` do pacote.
 
 import { h, icon } from '../ui.js';
@@ -12,7 +14,7 @@ function artigoSetor(setor) {
   return `de ${s.charAt(0).toLowerCase()}${s.slice(1)}`;
 }
 
-export function renderBoasVindas(alvo, { ctx, onComecar } = {}) {
+export function renderBoasVindas(alvo, { ctx, onComecar, bloqueado } = {}) {
   const d = ctx.data || {};
   const funcionarios = d.empresa?.funcionarios;
   const nomeId = 'bv-nome';
@@ -29,7 +31,12 @@ export function renderBoasVindas(alvo, { ctx, onComecar } = {}) {
     onComecar?.(nome.value, { viaEsc });
   };
   const onKey = (e) => {
-    if (e.key === 'Escape') comecar({ viaEsc: true });
+    if (e.key !== 'Escape' || e.defaultPrevented) return;
+    if (typeof bloqueado === 'function' && bloqueado()) return;
+    // outro diálogo por cima (foco fora desta tela): o Esc é dele
+    const t = e.target;
+    if (t instanceof Node && t !== document.body && t !== document.documentElement && !alvo.contains(t)) return;
+    comecar({ viaEsc: true });
   };
 
   // "A Torno ligou o ERP, o MES, os documentos e o WhatsApp dela numa IA…" (só o que o pacote tem)

@@ -8,6 +8,8 @@
 // Sem chave (ou com `motor:"local"`): motor local no mesmo formato (um `texto` + `fim`).
 // Portal do cliente: `cliente` no corpo (id CLI-… do pacote, validado aqui) faz a conversa inteira enxergar
 // só os dados desse cliente (visaoDoCliente no motor e nas ferramentas; sem aprendizado nem registro).
+// `modulo:"portal"` sem `cliente` → 400. O histórico do portal só leva as mensagens marcadas com o mesmo
+// `cliente` (historicoDoPortal).
 //
 // Eventos: texto {delta} · ferramenta {nome, rotulo} · aprendizado {item} ·
 //          fim {texto, fontes, continuar, estado?, rodada, modo, aviso?} · erro {erro, recuperavel}
@@ -27,6 +29,7 @@ const MAX_RODADAS = 5;
 const MAX_TOKENS = 1200;
 const ESTADO_TTL = 15 * 60 * 1000;
 const MAX_HIST = 16;
+const MAX_HIST_PORTAL = 6; // turnos anteriores do portal (3 perguntas e 3 respostas)
 const MAX_MSG = 4000;
 const MAX_TOOL_RESULT = 12000;
 const TIMEOUT_MS = 25000;
@@ -140,6 +143,23 @@ function limpaHistorico(mensagens) {
   out = out.slice(-MAX_HIST);
   while (out.length && out[0].role !== 'user') out.shift();
   if (!out.length || out.at(-1).role !== 'user') throw new ErroConversa('A última mensagem deve ser do usuário');
+  return out;
+}
+
+/**
+ * Portal do cliente: a pergunta atual (a última mensagem) e, antes dela, só a sequência final de mensagens
+ * marcadas com `cliente` igual ao da pergunta, até MAX_HIST_PORTAL. A primeira mensagem sem a marca (ou de
+ * outro cliente) corta o histórico: as telas internas e o "Ver como" de outro cliente não entram, então a
+ * IA não recebe pedidos de outros clientes nem dados internos que estavam na conversa.
+ */
+function historicoDoPortal(mensagens, cliente) {
+  if (!Array.isArray(mensagens) || !mensagens.length) return mensagens;
+  const out = [mensagens.at(-1)];
+  for (let i = mensagens.length - 2; i >= 0 && out.length <= MAX_HIST_PORTAL; i--) {
+    const m = mensagens[i];
+    if (!m || m.cliente !== cliente) break;
+    out.unshift(m);
+  }
   return out;
 }
 
@@ -284,10 +304,10 @@ export async function conversa({ request, env, store, demo, body, segredo, fetch
       }
       cliente = body.cliente;
     }
-    let mensagens = limpaHistorico(body?.mensagens);
-    // Portal do cliente: só a pergunta atual. O histórico da conversa é o mesmo das telas internas (ou de
-    // outro cliente do "Ver como") e levaria dados de outros clientes para a IA.
-    if (cliente) mensagens = mensagens.slice(-1);
+    // Pergunta do Portal sem cliente: recusa (responder com os dados internos completos seria vazar tudo)
+    if (body?.modulo === 'portal' && !cliente) throw new ErroConversa('Escolha o cliente do portal antes de perguntar');
+    // Portal do cliente: o histórico só leva os turnos do portal desse mesmo cliente (ver historicoDoPortal)
+    const mensagens = limpaHistorico(cliente ? historicoDoPortal(body?.mensagens, cliente) : body?.mensagens);
     st = { k: 'estado', demo: demo.id, rodada: 0, modulo, perfil, autor, cliente, mensagens, texto: '', usadas: [] };
   }
 
