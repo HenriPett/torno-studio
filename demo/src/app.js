@@ -159,6 +159,8 @@ async function loadSectorThen(after) {
     console.warn(`[dados] setor ${id} indisponível`, err);
     setState({ data: null, dataError: err.status === 404 ? 'faltando' : 'erro' });
   }
+  // o nome da empresa e o vocabulário vêm do pacote recém-carregado: atualiza a casca
+  if (el.shell) renderShell();
   if (typeof after === 'function') after();
 }
 

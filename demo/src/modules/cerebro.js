@@ -304,7 +304,7 @@ export function render(el, ctx) {
             { key: 'area', label: 'Área', render: (r) => areaName(r.area) },
             { key: 'origem', label: 'Origem' },
             { key: 'atualizado', label: 'Atualizado', render: (r) => fmt.date(r.atualizado) },
-            { key: 'acesso', label: 'Quem pode ver', render: (r) => (r.acesso || []).map(areaName).join(', ') },
+            { key: 'acesso', label: 'Quem pode ver', render: (r) => h('span', { class: 'cb-who' }, (r.acesso || []).map(areaName).join(', ')) },
             {
               key: 'vis',
               label: p ? `Para ${p.nome}` : 'Visível',

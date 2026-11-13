@@ -1,12 +1,39 @@
 /* Telas: Cérebro (cb-), Comercial (com-), Marketing (mkt-), Operadores (op-).
    Só variáveis do núcleo; nada de cor literal. */
 
+/* O núcleo (styles.css) expõe as cores sem o prefixo --color- e não define --space-*:
+   aliases locais, só dentro destas telas, apontando para os tokens do núcleo. */
+.cb-page, .com-page, .mkt-page, .op-page {
+  --color-bg: var(--bg);
+  --color-bg-muted: var(--bg-muted);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-text: var(--accent-text);
+  --color-ok-text: var(--ok-text);
+  --color-ok-subtle: var(--ok-subtle);
+  --color-warn-text: var(--warn-text);
+  --color-warn-subtle: var(--warn-subtle);
+  --color-danger-text: var(--danger-text);
+  --color-danger-subtle: var(--danger-subtle);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
+  --space-6: 24px; --space-7: 32px; --space-8: 40px; --space-9: 48px; --space-10: 64px;
+}
+
 .cb-page, .com-page, .mkt-page, .op-page {
   display: grid;
   gap: var(--space-5);
   min-width: 0;
 }
 .cb-page > *, .com-page > *, .mkt-page > *, .op-page > * { min-width: 0; }
+:is(.cb-page, .com-page, .mkt-page, .op-page) :is(.tabs, .tabs__panel) { min-width: 0; max-width: 100%; }
 
 .com-num, .mkt-num, .op-num, .cb-bar-num, .com-tile-value, .mkt-tile-value, .op-stat-value { font-variant-numeric: tabular-nums; }
 .com-muted, .mkt-muted, .op-muted { color: var(--color-text-muted); }
@@ -104,7 +131,7 @@
 .cb-bar { display: grid; grid-template-columns: minmax(90px, 40%) 1fr auto; gap: var(--space-3); align-items: center; font-size: 0.875rem; }
 .cb-bar > * { min-width: 0; }
 .cb-bar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cb-bar-track { height: 8px; border-radius: 999px; background: var(--color-bg-muted); overflow: hidden; }
+.cb-bar-track { display: block; height: 8px; border-radius: 999px; background: var(--color-bg-muted); overflow: hidden; }
 .cb-bar-fill { display: block; height: 100%; border-radius: 999px; background: var(--color-accent); }
 .cb-bar-num { font-weight: 600; min-width: 2ch; text-align: right; }
 .cb-integ { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
@@ -120,6 +147,7 @@
 .cb-visible-count { color: var(--color-text-muted); font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
 .cb-doc-title { display: grid; gap: 2px; min-width: 12rem; }
 .cb-doc-title small { color: var(--color-text-muted); }
+.cb-who { display: block; min-width: 14rem; white-space: normal; font-size: 0.8125rem; color: var(--color-text-muted); }
 .cb-vis { display: inline-flex; align-items: center; gap: var(--space-1); font-size: 0.8125rem; font-weight: 600; white-space: nowrap; }
 .cb-vis svg { width: 14px; height: 14px; }
 .cb-vis-ok { color: var(--color-ok-text); }
