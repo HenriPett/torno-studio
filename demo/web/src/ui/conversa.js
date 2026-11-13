@@ -8,7 +8,7 @@
 
 import { h, icon, button, iconButton, toast, copyText, sheet as uiSheet } from '../ui.js';
 import { renderMarkdown, criaCitas, textoParaCopiar, markdownToText, refsDoTexto } from './markdown.js';
-import { blocoFontes, citeNodeLigado, rotulosParaCopiar, cartaoAprendido, atualizaQuandos } from './fontes.js';
+import { blocoFontes, citeNodeLigado, rotulosParaCopiar, atualizaQuandos, marco } from './fontes.js';
 import { abrirEnsinar, perguntaDerivada } from './ensinar.js';
 import { createAssistant } from '../ai/assistant.js';
 import * as motor from '../ai/local-engine.js';
@@ -18,7 +18,7 @@ import * as motor from '../ai/local-engine.js';
 /* ------------------------------------------------------------------ */
 
 const S = {
-  msgs: [], // {id, role, texto, fontes, estado, ferramentas, aprendidos, desfeitos, modulo, pergunta, erro}
+  msgs: [], // {id, role, texto, fontes, estado, ferramentas, aprendidos, desfeitos, modulo, pergunta, erro, aviso}
   ativo: null, // {id, ctl}
   perfil: null,
   limite: false,
@@ -44,7 +44,7 @@ function salva() {
   if (!k) return;
   try {
     const msgs = S.msgs.filter((m) => m.estado !== 'streaming').slice(-30)
-      .map(({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta }) => ({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta }));
+      .map(({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta, aviso }) => ({ id, role, texto, fontes, estado, ferramentas, aprendidos, modulo, pergunta, aviso }));
     sessionStorage.setItem(k, JSON.stringify({ msgs, perfil: S.perfil }));
   } catch { /* sem storage */ }
 }
@@ -201,13 +201,16 @@ async function enviar(ctx, texto, { modulo, perfil } = {}) {
         a.aprendidos.push(item);
         const L = ctx.learning;
         try { if (typeof L?.receber === 'function') L.receber(item); else L?.add?.(item); } catch (e) { console.error(e); }
+        marco('ensino');
         avisa(a.id);
       },
     });
     a.texto = r.texto || a.texto;
     a.fontes = r.fontes ?? [];
+    a.aviso = typeof r.aviso === 'string' && r.aviso.trim() ? r.aviso.trim() : null;
     a.estado = 'ok';
     S.respostas += 1;
+    marco('pergunta');
     // "Usado em {n} respostas": aprendizado citado (no texto ou nas fontes)
     const usados = [...new Set([...a.fontes, ...refsDoTexto(a.texto)])].filter((x) => x.startsWith('aprendizado:')).map((x) => x.slice(12));
     if (usados.length) ctx.learning?.marcarUso?.(usados);
@@ -329,13 +332,29 @@ function corpoResposta(ctx, m, raiz) {
       h('p', null, 'Não consegui responder agora.'),
       button('Tentar de novo', { variant: 'secondary', size: 'sm', icone: 'refresh', onClick: () => tentarDeNovo(ctx, m) })));
   } else if (m.estado === 'limite') {
-    partes.push(h('p', { class: 'cv-erro cv-erro--limite' }, 'Esta demonstração chegou ao limite de perguntas de hoje. Amanhã ela volta; se quiser continuar agora, fale com quem te enviou o link.'));
+    partes.push(h('p', { class: 'cv-erro cv-erro--limite' },
+      h('span', null, 'Esta demonstração chegou ao limite de perguntas de hoje. Amanhã ela volta; se quiser continuar agora, fale com quem te enviou o link.'),
+      linkContato()));
   } else if (m.estado === 'ok') {
+    if (m.aviso) partes.push(notaAviso(m.aviso));
     const fontes = blocoFontes({ ctx, refs: m.fontes ?? [], citas, learning: ctx.learning });
     if (fontes) partes.push(fontes);
     partes.push(acoesResposta(ctx, m, citas));
   }
   return partes;
+}
+
+const CONTATO_TORNO = 'https://tornostudio.com/contact/';
+function linkContato() {
+  return h('a', { class: 'cv-contato', href: CONTATO_TORNO, target: '_blank', rel: 'noopener' }, 'Falar com a Torno');
+}
+
+/** Aviso do servidor (limite diário da IA, resposta pelo roteiro local): nota discreta sob a resposta. */
+function notaAviso(texto) {
+  return h('p', { class: 'cv-nota cv-aviso', role: 'note' },
+    icon('info', { size: 14 }),
+    h('span', null, texto),
+    /limite/i.test(texto) ? linkContato() : null);
 }
 
 function acoesResposta(ctx, m, citas) {

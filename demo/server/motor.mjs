@@ -1,7 +1,7 @@
 // Ponte para o motor local ÚNICO do projeto: demo/web/src/ai/local-engine.js (mantido pelo front).
 // Contrato usado aqui: responder(ctx, pergunta, {modulo, perfil}) → {texto, fontes, modo};
-// buscar(ctx, termo, {perfil}); e os utilitários exportados (tokens, norm, corta, f, ligado, refOk,
-// filtraRefs, perfilAreas, statusLabel). O servidor não edita nem copia esse arquivo.
+// buscar(ctx, termo, {perfil}); visaoDoCliente(ctx, clienteId) (Portal do cliente); e os utilitários
+// exportados (tokens, norm, corta, f, ligado, refOk, filtraRefs, perfilAreas, statusLabel). O servidor não edita nem copia esse arquivo.
 //
 // O aprendizado da demo: enquanto o motor do front não ler ctx.aprendizado, o servidor busca nele aqui
 // (mesma fórmula de pontuação do motor) e junta com a busca do motor; se o motor passar a devolver
@@ -9,7 +9,7 @@
 
 import * as motor from '../web/src/ai/local-engine.js';
 
-export const { responder, buscar, tokens, norm, corta, f, ligado, refOk, filtraRefs, perfilAreas, statusLabel } = motor;
+export const { responder, buscar, tokens, norm, corta, f, ligado, refOk, filtraRefs, perfilAreas, statusLabel, visaoDoCliente } = motor;
 
 function casa(t, p) {
   if (t === p) return true;

@@ -6,7 +6,8 @@
 .ini--so-pergunta { min-height: calc(100vh - var(--topbar-h) - 160px); justify-content: center; }
 .ini-hero { width: 100%; max-width: var(--read-max); margin: 0 auto; padding-top: 4vh; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
 .ini-data { font-size: 14px; color: var(--text-muted); }
-.ini-titulo { font-size: var(--fs-hero); font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; margin-bottom: 12px; }
+.ini-titulo { font-size: var(--fs-hero); font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; margin-bottom: 0; }
+.ini-apoio { font-size: 15px; line-height: 1.5; color: var(--text-muted); max-width: 56ch; text-wrap: pretty; margin-bottom: 8px; }
 .ini-campo {
   display: flex; align-items: center; gap: 8px; width: 100%; min-height: 64px; padding: 8px 8px 8px 20px;
   border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-md);
@@ -26,7 +27,7 @@
 .ini-sugestoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; }
 .ini-sugestoes .pill-sug { max-width: min(100%, 360px); }
 .ini-ensinar { align-self: center; margin-top: 4px; }
-.ini.is-saindo .ini-titulo, .ini.is-saindo .ini-sugestoes, .ini.is-saindo .ini-sec { opacity: 0; transition: opacity var(--dur-1) var(--ease); }
+.ini.is-saindo .ini-titulo, .ini.is-saindo .ini-apoio, .ini.is-saindo .ini-sugestoes, .ini.is-saindo .ini-sec, .ini.is-saindo .rt { opacity: 0; transition: opacity var(--dur-1) var(--ease); }
 
 .ini-sec { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .ini-sec__cab { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
@@ -48,6 +49,11 @@
 .ini-hoje__titulo { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
 .ini-hoje__texto { font-size: 14px; color: var(--text-muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .ini-hoje__acoes { display: flex; gap: 20px; margin-top: auto; padding-top: 6px; }
+.ini-hoje__titulo abbr[title] { text-decoration: underline dotted var(--border-strong); text-underline-offset: 3px; cursor: help; }
+
+/* origem do dado: "ERP · 07:40" */
+.ini-origem { font-size: var(--fs-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.ini-hoje__origem { margin-top: 2px; }
 
 .ini-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .ini-kpi {
@@ -64,11 +70,13 @@
 .ini-kpi__meta svg { flex: none; }
 .ini-kpi__meta.is-ok svg { color: var(--ok-text); }
 .ini-kpi__meta.is-warn svg { color: var(--warn-text); }
+.ini-kpi__origem { margin-top: 2px; }
 
 @media (max-width: 1023px) {
   .ini { gap: 32px; }
   .ini-hero { padding-top: 8px; align-items: stretch; text-align: left; gap: 12px; }
-  .ini-titulo { font-size: 28px; margin-bottom: 4px; }
+  .ini-titulo { font-size: 28px; margin-bottom: 0; }
+  .ini-apoio { font-size: 14px; margin-bottom: 4px; }
   .ini-campo { min-height: 56px; padding-left: 16px; }
   .ini-campo__input { font-size: 16px; }
   .ini-sugestoes { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 4px; width: auto; scrollbar-width: none; }

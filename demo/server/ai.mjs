@@ -6,6 +6,8 @@
 // proibidas via tool_choice none). `estado` = mensagens no formato da API (com tool_use/tool_result e
 // os blocos de thinking intactos) + o system congelado, assinado com HMAC (o cliente não adultera).
 // Sem chave (ou com `motor:"local"`): motor local no mesmo formato (um `texto` + `fim`).
+// Portal do cliente: `cliente` no corpo (id CLI-… do pacote, validado aqui) faz a conversa inteira enxergar
+// só os dados desse cliente (visaoDoCliente no motor e nas ferramentas; sem aprendizado nem registro).
 //
 // Eventos: texto {delta} · ferramenta {nome, rotulo} · aprendizado {item} ·
 //          fim {texto, fontes, continuar, estado?, rodada, modo, aviso?} · erro {erro, recuperavel}
@@ -13,10 +15,10 @@
 // não citou nada, as refs que as ferramentas devolveram). O front troca [[ref]] por ¹ ² ligados às fontes.
 
 import { assina, confere } from './auth.mjs';
-import { criaCtx, MODULO_IDS, moduloLigado } from './catalogo.mjs';
+import { criaCtx, pacote, MODULO_IDS, moduloLigado } from './catalogo.mjs';
 import { buildTools, paraApi, validaEntrada, rotulo, refsDoResultado } from './tools.mjs';
 import { responderLocal } from './local.mjs';
-import { filtraRefs, corta } from './motor.mjs';
+import { filtraRefs, corta, visaoDoCliente } from './motor.mjs';
 import { listaAprendizado, criaAprendizado } from './learning.mjs';
 
 export const MODELO_PADRAO = 'claude-sonnet-5-5';
@@ -28,6 +30,8 @@ const MAX_HIST = 16;
 const MAX_MSG = 4000;
 const MAX_TOOL_RESULT = 12000;
 const TIMEOUT_MS = 25000;
+/** fim.aviso quando o teto diário manda a pergunta para o motor local (o front mostra abaixo da resposta). */
+export const AVISO_LIMITE = 'A IA atingiu o limite de hoje desta demonstração; esta resposta veio do roteiro local.';
 
 export const modeloDe = (env) => String(env.DEMO_MODEL || MODELO_PADRAO).trim();
 export const iaInfo = (env) => ({ disponivel: !!env.ANTHROPIC_API_KEY, modelo: env.ANTHROPIC_API_KEY ? modeloDe(env) : null });
@@ -68,7 +72,7 @@ function canalSSE() {
 /* Prompt                                                              */
 /* ------------------------------------------------------------------ */
 
-function sistema(ctx, demo, { modulo, perfil }) {
+function sistema(ctx, demo, { modulo, perfil, cliente }) {
   const d = ctx.data, e = d.empresa ?? {};
   const voc = Object.entries(d.vocabulario ?? {}).map(([k, v]) => `${k} = ${v}`).join('; ');
   const fixo = [
@@ -78,6 +82,9 @@ function sistema(ctx, demo, { modulo, perfil }) {
     '',
     'Como responder:',
     '- Português do Brasil, curto e direto (até ~150 palavras, salvo se pedirem mais), com o vocabulário do setor.',
+    '- Quem lê é diretor ou dono da fábrica. Comece pela conclusão, em uma frase: o que importa e o que fazer. Depois, no máximo 3 a 5 pontos de apoio.',
+    '- Traga o impacto sempre que os dados tiverem: prazo, cliente afetado, quantidade, valor em R$, horas paradas.',
+    '- Não liste códigos sem dizer o que são. Na primeira vez que citar um código interno, acompanhe-o de uma descrição curta, ex.: "a TIN-03 (jet de tingimento 3)".',
     `- Vocabulário da empresa: ${voc}.`,
     '- Markdown simples: **negrito**, listas com "-", no máximo uma tabela pequena (até 6 linhas). Sem títulos, sem HTML, sem emojis.',
     '- Use SOMENTE as ferramentas para obter fatos. Não invente números, nomes, prazos nem documentos. Se não encontrar, diga que não achou nos dados desta demonstração e sugira uma pergunta que dá para responder. Não responda com conhecimento geral fora da operação da empresa.',
@@ -92,11 +99,16 @@ function sistema(ctx, demo, { modulo, perfil }) {
   const ativos = ctx.features.map((f) => f.nome).join(', ');
   const p = perfil ? (d.perfis_acesso ?? []).find((x) => x.id === perfil) : null;
   const apr = (ctx.aprendizado ?? []).slice(-20).reverse();
+  const cli = cliente ? (d.clientes ?? []).find((c) => c.id === cliente) : null;
+  const t = (k) => ctx.term?.(k) ?? k;
   const dinamico = [
     `Módulos ativos nesta demo: ${ativos}. Não fale de áreas cujos módulos estão desligados.`,
     modulo ? `Tela atual do usuário: ${modulo}.` : '',
     p ? `Perfil de acesso do usuário: ${p.nome} (áreas: ${(p.areas ?? []).join(', ')}). Não revele dados fora dessas áreas.` : '',
-    apr.length
+    cli ? `Portal do cliente: quem pergunta é o ${t('cliente')} ${semTags(cli.nome)} (${cli.id}). Responda como o portal da ${ctx.empresa} responderia a ele, tratando-o por "você": ` +
+      `só os pedidos dele, as ${t('ordens')} desses pedidos, o catálogo e as condições comerciais. Nunca cite outros ${t('clientes')} nem dados internos da fábrica ` +
+      '(custos, não conformidades, manutenção, indicadores). As ferramentas já devolvem só os dados dele.' : '',
+    cli ? '' : apr.length
       ? `Registrado nesta demo (${apr.length} mais recentes; use buscar_aprendizado para o texto completo):\n<aprendizado>\n` +
         apr.map((a) => `- [[aprendizado:${a.id}]] ${a.tipo}, área ${a.area}${a.maquina ? `, máquina ${semTags(a.maquina)}` : ''}, por ${semTags(a.autor)} em ${String(a.criado_em).slice(0, 10)}: ${semTags(a.titulo)} — ${semTags(corta(a.texto, 200))}`).join('\n') +
         '\n</aprendizado>'
@@ -265,15 +277,33 @@ export async function conversa({ request, env, store, demo, body, segredo, fetch
     const modulo = MODULO_IDS.includes(body?.modulo) && moduloLigado(demo.modulos, body.modulo) ? body.modulo : null;
     const perfil = typeof body?.perfil === 'string' ? body.perfil.slice(0, 40) : null;
     const autor = typeof body?.autor === 'string' ? body.autor.replace(/[\u0000-\u001f]/g, '').trim().slice(0, 60) || null : null;
-    st = { k: 'estado', demo: demo.id, rodada: 0, modulo, perfil, autor, mensagens: limpaHistorico(body?.mensagens), texto: '', usadas: [] };
+    let cliente = null;
+    if (body?.cliente != null && body.cliente !== '') {
+      if (typeof body.cliente !== 'string' || !(pacote(demo.setor)?.clientes ?? []).some((c) => c.id === body.cliente)) {
+        throw new ErroConversa('Cliente desconhecido nesta demo');
+      }
+      cliente = body.cliente;
+    }
+    let mensagens = limpaHistorico(body?.mensagens);
+    // Portal do cliente: só a pergunta atual. O histórico da conversa é o mesmo das telas internas (ou de
+    // outro cliente do "Ver como") e levaria dados de outros clientes para a IA.
+    if (cliente) mensagens = mensagens.slice(-1);
+    st = { k: 'estado', demo: demo.id, rodada: 0, modulo, perfil, autor, cliente, mensagens, texto: '', usadas: [] };
   }
 
   let aprendizado = await listaAprendizado(store, demo.id);
-  const ctxDe = () => criaCtx(demo, aprendizado);
+  // Portal do cliente: tudo (motor local, ferramentas, fontes) vê só a fatia desse cliente
+  const ctxDe = () => {
+    const c = criaCtx(demo, aprendizado);
+    if (!st.cliente) return c;
+    const v = visaoDoCliente(c, st.cliente);
+    if (!v) throw new ErroConversa('Cliente desconhecido nesta demo');
+    return v;
+  };
   let ctx = ctxDe();
   const perfil = st.perfil && (ctx.data.perfis_acesso ?? []).some((p) => p.id === st.perfil) ? st.perfil : null;
   const canal = canalSSE();
-  const registrar = async (input) => {
+  const registrar = st.cliente ? undefined : async (input) => { // o cliente não ensina o cérebro da fábrica
     const item = await criaAprendizado(store, demo.id, { ...input, autor: st.autor ?? input.autor }, 'conversa');
     aprendizado = [...aprendizado, item];
     canal.envia('aprendizado', { item });
@@ -303,7 +333,7 @@ export async function conversa({ request, env, store, demo, body, segredo, fetch
         canal.envia('texto', { delta: r.texto });
         canal.envia('fim', {
           texto: r.texto, fontes: filtraRefs(ctxDe(), r.fontes, 8), continuar: false, rodada: 1, modo: 'local',
-          aviso: 'Esta demo chegou ao limite de perguntas à IA por hoje; respondi pelo roteiro local. Amanhã a IA volta.',
+          aviso: AVISO_LIMITE,
         });
         return;
       }
@@ -312,7 +342,7 @@ export async function conversa({ request, env, store, demo, body, segredo, fetch
         return;
       }
 
-      if (!comEstado) st.system = sistema(ctx, demo, { modulo: st.modulo, perfil });
+      if (!comEstado) st.system = sistema(ctx, demo, { modulo: st.modulo, perfil, cliente: st.cliente });
       const tools = buildTools(ctx, { perfil, registrar });
       const rodada = st.rodada + 1;
       const ultima = rodada >= MAX_RODADAS;

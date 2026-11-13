@@ -4,10 +4,11 @@
 // Pacote A. Telas de B e C são importadas dinamicamente; o que ainda não existir vira um stub de
 // mesma assinatura, para nada quebrar.
 
-import { fmt, TODAY } from './format.js';
+import { fmt, TODAY, parado } from './format.js';
 import {
-  FEATURES, FEATURE_BY_ID, AREA_IDS, isFeatureOn, normalizeModulos, enabledAreas, navItems, navOf, resolveRoute,
+  FEATURES, FEATURE_BY_ID, AREA_IDS, isFeatureOn, normalizeModulos, enabledAreas, navItems, navOf, resolveRoute, CONTATO_URL,
 } from './features.js';
+import { origemDoRef } from './origem.js';
 import { resolveRef as resolveRefData, REF_TYPES } from './adapters/data-source.js';
 import { api, ApiError, onNaoAutorizado } from './api.js';
 import * as ui from './ui.js';
@@ -152,14 +153,45 @@ async function carregar({ silencioso = false } = {}) {
   }
 }
 
+// Senha que já abriu a demo nesta aba (só em memória, nunca gravada). Serve para reconhecer, na
+// reautenticação, que a senha certa foi recusada: o link foi desativado, expirou ou teve a senha trocada.
+let senhaQueAbriu = null;
+let recusasReauth = 0;
+const RECUSAS_ATE_ENCERRAR = 3;
+
 async function mostrarSenha({ expirada = false } = {}) {
   const { renderEntrar } = await import('./screens/entrar.js');
   const alvo = expirada ? overlayReauth() : root();
   renderEntrar(alvo, {
     titulo: 'Esta demonstração é privada.',
-    apoio: 'Digite a senha que veio junto com o link.',
+    // apoio: o padrão de entrar.js (diz o que vem depois da senha)
     aviso: expirada ? 'Sua sessão expirou. Digite a senha de novo.' : null,
-    entrar: (senha) => api.entrar(demoId, senha),
+    entrar: async (senha) => {
+      try {
+        const r = await api.entrar(demoId, senha);
+        senhaQueAbriu = senha;
+        recusasReauth = 0;
+        return r;
+      } catch (err) {
+        const recusada = err instanceof ApiError && [401, 403, 404].includes(err.status);
+        if (expirada && recusada) {
+          recusasReauth += 1;
+          // o servidor responde igual para senha errada e link desativado (401); 403/404, a senha que
+          // já abriu a demo ou várias recusas seguidas indicam que o link não vale mais
+          const encerrado = err.status === 403 || err.status === 404
+            || (senhaQueAbriu != null && senha === senhaQueAbriu)
+            || recusasReauth >= RECUSAS_ATE_ENCERRAR;
+          if (encerrado) {
+            telaLinkEncerrado(alvo);
+            const fim = new Error('link encerrado');
+            fim.status = 0;
+            fim.encerrado = true;
+            throw fim;
+          }
+        }
+        throw err;
+      }
+    },
     onSucesso: async () => {
       if (expirada) {
         fecharReauth();
@@ -175,18 +207,42 @@ async function mostrarSenha({ expirada = false } = {}) {
   });
 }
 
+/** Tela final quando a senha certa é recusada: o link não vale mais. Sem laço de "senha inválida". */
+function telaLinkEncerrado(alvo) {
+  const titulo = h('h1', { class: 'auth__title', tabindex: '-1' }, 'Este link foi desativado ou expirou.');
+  alvo.replaceChildren(h('main', { class: 'auth' },
+    h('div', { class: 'auth__card' },
+      h('div', { class: 'auth__brand' }, h('span', { class: 'wordmark' }, 'Torno')),
+      titulo,
+      h('p', { class: 'auth__lead' }, 'Peça um novo a quem te enviou.'),
+      h('p', { class: 'auth__note' },
+        h('button', {
+          type: 'button', class: 'link-btn',
+          onClick: () => { recusasReauth = 0; mostrarSenha({ expirada: true }); },
+        }, 'Recebeu uma senha nova? Digite aqui'))),
+    h('p', { class: 'auth__foot' }, 'IA e software sob medida para a indústria · tornostudio.com')));
+  requestAnimationFrame(() => titulo.focus());
+}
+
 let reauthEl = null;
 function overlayReauth() {
   if (!reauthEl) {
-    reauthEl = h('div', { class: 'reauth', style: { position: 'fixed', inset: '0', zIndex: '200', overflow: 'auto' } });
+    reauthEl = h('div', {
+      class: 'reauth', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Entrar de novo na demonstração',
+      style: { position: 'fixed', inset: '0', zIndex: '200', overflow: 'auto' },
+    });
     document.body.appendChild(reauthEl);
   }
+  // o app de fundo fica inerte (sem foco nem leitor de tela) enquanto o overlay está aberto
+  if (el.app) el.app.inert = true;
   return reauthEl;
 }
 function fecharReauth() {
   reauthEl?.remove();
   reauthEl = null;
   reautenticando = false;
+  recusasReauth = 0;
+  if (el.app) el.app.inert = false;
 }
 
 onNaoAutorizado((escopo) => {
@@ -202,23 +258,57 @@ async function iniciar(r) {
   modulos = normalizeModulos(r.demo.modulos);
   document.title = `${empresaNome()} · Demonstração`;
 
-  // módulos de B (com stubs), drawers de B e C, assistente
-  await Promise.all([carregarB(), carregarDrawers(), carregarAssistente()]);
+  // módulos de B (com stubs), drawers de B e C, assistente, roteiro do Início
+  await Promise.all([carregarB(), carregarDrawers(), carregarAssistente(), carregarRoteiro()]);
   learning = criarLearning(Array.isArray(r.aprendizado) ? r.aprendizado : []);
 
   if (!store.get(`td_bv_${demoId}`)) {
     const { renderBoasVindas } = await import('./screens/boas-vindas.js');
     renderBoasVindas(root(), {
       ctx: buildCtx(),
-      onComecar: (nome) => {
-        store.set(`td_bv_${demoId}`, '1');
-        if (nome != null) store.set(`td_autor_${demoId}`, nome.trim());
+      onComecar: (nome, { viaEsc = false } = {}) => {
+        // Esc fecha só desta vez: a apresentação volta no próximo acesso (e em Como funciona)
+        if (!viaEsc) store.set(`td_bv_${demoId}`, '1');
+        if (nome != null && nome.trim()) store.set(`td_autor_${demoId}`, nome.trim());
         montarApp();
       },
     });
     return;
   }
   montarApp();
+}
+
+/** Roteiro "Experimente em 3 passos": o ouvinte de 'torno:marco' vale para a demo inteira. */
+let roteiroMod = null;
+async function carregarRoteiro() {
+  roteiroMod = await tryImport('./ui/roteiro.js');
+  try { roteiroMod?.instalarRoteiro?.(demoId); } catch (err) { console.warn('[app] roteiro', err); }
+}
+
+/** "Rever a apresentação" (Como funciona): boas-vindas por cima do app, sem desmontar nada. */
+let apresentacaoEl = null;
+async function reverApresentacao() {
+  if (apresentacaoEl) return;
+  const mod = await tryImport('./screens/boas-vindas.js');
+  if (!mod || typeof mod.renderBoasVindas !== 'function') return;
+  ui.closeAllSheets();
+  apresentacaoEl = h('div', { class: 'tela-sobre', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Apresentação da demonstração' });
+  document.body.appendChild(apresentacaoEl);
+  if (el.app) el.app.inert = true;
+  let desliga = null;
+  desliga = mod.renderBoasVindas(apresentacaoEl, {
+    ctx: buildCtx(),
+    onComecar: (nome) => {
+      if (nome != null && nome.trim()) store.set(`td_autor_${demoId}`, nome.trim());
+      store.set(`td_bv_${demoId}`, '1');
+      if (typeof desliga === 'function') desliga();
+      apresentacaoEl?.remove();
+      apresentacaoEl = null;
+      if (el.app) el.app.inert = false;
+      try { roteiroMod?.mostrarRoteiro?.(); } catch { /* ok */ }
+      navigate('#inicio');
+    },
+  });
 }
 
 function empresaNome() {
@@ -433,6 +523,8 @@ function buildCtx() {
     areaAtual,
     areas: enabledAreas(modulos || {}),
     REF_TYPES,
+    reverApresentacao,
+    contatoUrl: CONTATO_URL,
   };
 }
 
@@ -450,14 +542,21 @@ function montarApp() {
   el.bottom = h('ul', { class: 'bottombar__list' });
   el.content = h('main', { class: 'content', id: 'conteudo', tabindex: '-1' });
 
+  // "Dados fictícios" legível também no celular (antes virava "Fictícia" em 11 px sem fundo)
   const fict = h('span', {
     class: 'pill pill--fict', title: 'Empresa, pessoas e números inventados para esta demonstração',
-  }, h('span', { class: 'fict-long' }, 'Dados fictícios'), h('span', { class: 'fict-short' }, 'Fictícia'));
+  }, 'Dados fictícios');
 
   const ask = ui.button('Perguntar', {
     icone: 'search', class: 'topbar__ask', title: 'Perguntar (atalho: /)',
     onClick: () => abrirConversa(),
   });
+  ask.setAttribute('aria-label', 'Perguntar');
+  // CTA discreto de conversão (desktop): página de contato do site, em nova aba
+  const contato = h('a', {
+    class: 'topbar__cta', href: CONTATO_URL, target: '_blank', rel: 'noopener', title: 'Falar com a Torno (abre em nova aba)',
+  }, icon('message', { size: 16 }), h('span', { class: 'topbar__cta-label' }, 'Falar com a Torno'),
+  h('span', { class: 'sr-only' }, ' (abre em nova aba)'));
   const teach = ui.button('Ensinar', {
     icone: 'lightbulb', class: 'btn--teach', title: 'Ensinar o cérebro',
     onClick: () => ensinar({ area: areaAtual() || undefined, origem: 'topo' }),
@@ -471,14 +570,24 @@ function montarApp() {
         h('span', { class: 'topbar__divider', 'aria-hidden': 'true' }),
         h('div', { class: 'topbar__company' }, el.empresa, fict)),
       el.nav,
-      h('div', { class: 'topbar__actions' }, ask, teach, themeToggle({ class: 'topbar__theme' }))));
+      h('div', { class: 'topbar__actions' }, contato, ask, teach, themeToggle({ class: 'topbar__theme' }))));
 
   const bottombar = h('nav', { class: 'bottombar', 'aria-label': 'Principal' }, el.bottom);
-  app.append(h('a', { class: 'sr-only skip', href: '#conteudo' }, 'Pular para o conteúdo'), topbar, el.content, bottombar);
+  // o href "#conteudo" cairia no roteador (e voltaria ao #inicio): o clique só move o foco
+  const pular = h('a', {
+    class: 'sr-only skip', href: '#conteudo',
+    onClick: (e) => { e.preventDefault(); el.content.focus({ preventScroll: false }); el.content.scrollIntoView?.({ block: 'start' }); },
+  }, 'Pular para o conteúdo');
+  app.append(pular, topbar, el.content, bottombar);
   root().replaceChildren(app);
 
   desenharNav();
-  learning.subscribe(() => atualizarContador(true));
+  learning.subscribe(() => {
+    const antes = ultimaContagem;
+    atualizarContador(true);
+    // reserva do roteiro: um registro novo também conta como passo "ensino" (o evento torno:marco é o principal)
+    if (antes != null && contagemRegistros() > antes) { try { roteiroMod?.marcarPasso?.('ensino'); } catch { /* ok */ } }
+  });
 
   document.addEventListener('keydown', atalhos);
   document.addEventListener('click', fecharMenusFora);
@@ -499,6 +608,7 @@ function atalhos(e) {
   const t = e.target;
   if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
   if (document.documentElement.classList.contains('has-sheet')) return;
+  if (reauthEl || apresentacaoEl) return; // overlay aberto: o app de fundo está inerte
   e.preventDefault();
   abrirConversa();
 }
@@ -537,7 +647,6 @@ function atualizarContador(animar = false) {
 export function areaHint(id, d = data) {
   if (!d) return '';
   const vocab = d.vocabulario || {};
-  const fem = (s) => /a$/.test(String(s || '')) ;
   try {
     if (id === 'producao') {
       const n = (d.ordens || []).filter((o) => o.status === 'atrasada').length;
@@ -546,7 +655,7 @@ export function areaHint(id, d = data) {
     if (id === 'manutencao') {
       const ms = d.maquinas || [];
       const p = ms.find((m) => m.status === 'parada');
-      if (p) return `${p.id} ${fem(vocab.maquina) ? 'parada' : 'parado'}`;
+      if (p) return `${p.id} ${parado(d)}`;
       const a = ms.find((m) => m.status === 'alerta');
       return a ? `${a.id} em alerta` : 'Tudo operando';
     }
@@ -762,7 +871,7 @@ function rodaCleanup() {
 function emConstrucao() {
   return h('div', { class: 'empty-state' },
     icon('layers', { size: 22 }),
-    h('p', null, 'Esta parte da demonstração ainda está sendo preparada.'),
+    h('p', null, 'Esta área não entrou nesta demonstração.'),
     ui.button('Voltar ao início', { onClick: () => navigate('#inicio') }));
 }
 
@@ -818,7 +927,23 @@ function openRef(ref) {
   }
   if (acoes === 'padrao') s.setAcoes(acoesPadrao(resolved, s));
   else s.setAcoes(acoes);
+  rodapeOrigem(s, resolved, ctx);
   return s;
+}
+
+/** Rodapé fixo "Origem: ERP · atualizado 13/11, 07:40 · dado fictício", quando dá para mapear. */
+function rodapeOrigem(s, resolved, ctx) {
+  if (['aprendizado', 'saber', 'integ'].includes(resolved.tipo)) return;
+  const o = safe(() => origemDoRef(ctx.data, resolved));
+  if (!o || !o.sistema) return;
+  const linha = h('p', { class: 'drawer-origem' },
+    icon('database', { size: 14 }),
+    h('span', null, `Origem: ${o.sistema} · atualizado ${o.quandoLongo} · dado fictício`));
+  const poe = () => { s.footer.appendChild(linha); s.footer.hidden = false; };
+  // gavetas que trocam as ações depois (s.setAcoes) não apagam a linha de origem
+  const setAcoes = s.setAcoes;
+  s.setAcoes = (n) => { setAcoes(n); poe(); };
+  poe();
 }
 
 function refIcon(tipo) {

@@ -1,8 +1,10 @@
 // Portal do cliente (UX §4.9): prova de "software sob medida", numa moldura de janela para não
 // confundir com a ferramenta interna. Troca de {cliente}, saudação, condições, um aviso, pedidos
 // dele, "Repetir último pedido" (rascunho, sem carrinho), catálogo com o preço da tabela e o
-// assistente do {cliente} (a conversa via ctx.perguntar, módulo portal).
+// assistente do {cliente} (a conversa via ctx.perguntar, módulo portal). O cliente escolhido vai no
+// corpo da conversa (definirClientePortal → campo `cliente`) e o servidor responde só com os dados dele.
 import { h } from '../ui.js';
+import { definirClientePortal } from '../ai/assistant.js';
 import * as ui from '../ui.js';
 import {
   ensureAreaCss, statusBadge, areaAssistant, T, cap, fmtOf, curto, tag,
@@ -50,6 +52,7 @@ export function render(el, ctx) {
 
   function desenha() {
     const cli = clientes.find((c) => c.id === escolhido[setorId]) || clientes[0];
+    definirClientePortal(cli.id);
     const rep = (d.representantes || []).find((r) => r.id === cli.representante);
     const meus = pedidosDe(cli.id);
     const ultimo = meus[0];
@@ -86,16 +89,18 @@ export function render(el, ctx) {
         pronta ? tag('Pronta entrega', 'ok') : h('span', { class: 'pt-prod__prazo' }, `Prazo ${p.prazo_dias} dias`));
     };
 
-    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas)
+    // Pergunte (desktop: coluna; celular: barra recolhida como nas áreas). Só sugestões que falam de
+    // registros deste cliente (a pergunta pronta de outro cliente não teria resposta aqui).
+    const meusIds = new Set([`cliente:${cli.id}`, ...meus.map((p) => `pedido:${p.id}`), ...meus.filter((p) => p.ordem).map((p) => `op:${p.ordem}`)]);
+    const doCliente = (p) => (p.fontes || []).every((r) => !/^(pedido|cliente|op):/.test(r) || meusIds.has(r));
     const sugestoes = [
-      ...(d.perguntas_sugeridas || []).filter((p) => p.modulo === 'portal').map((p) => p.pergunta),
+      ...(d.perguntas_sugeridas || []).filter((p) => p.modulo === 'portal' && doCliente(p)).map((p) => p.pergunta),
       ultimo ? `Quando chega o meu pedido ${ultimo.id}?` : null,
     ].filter(Boolean).slice(0, 3);
-    const comCliente = (t) => (t.toLowerCase().includes(nomeCli.toLowerCase()) ? t : `${t} (sou ${tCli} ${nomeCli})`);
     const podePerguntar = typeof ctx.perguntar === 'function';
     const enviar = (t) => {
       const q = String(t || '').trim();
-      if (q && podePerguntar) ctx.perguntar(comCliente(q), { modulo: 'portal', painel: true });
+      if (q && podePerguntar) ctx.perguntar(q, { modulo: 'portal', painel: true });
     };
     const campo = h('input', { type: 'text', class: 'pt-ask__input', placeholder: 'Quando chega meu pedido?', 'aria-label': 'Pergunte ao portal', autocomplete: 'off' });
     const pergunte = podePerguntar ? h('section', { class: 'pt-ask', 'aria-label': 'Pergunte' },
@@ -128,7 +133,7 @@ export function render(el, ctx) {
           h('div', { class: 'pt-prods' }, catalogo.map(cartao)))));
 
     host.replaceChildren(janela,
-      areaAssistant(ctx, { modulo: 'portal', nome: 'pedidos e catálogo', sugestoes, prefixo: comCliente }));
+      areaAssistant(ctx, { modulo: 'portal', nome: 'pedidos e catálogo', sugestoes }));
     const bar = host.querySelector('.ar-assist');
     if (bar) bar.classList.add('pt-assist-m');
   }

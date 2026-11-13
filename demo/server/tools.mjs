@@ -28,12 +28,20 @@ function limpa(ctx, obj, ligacoes) {
   return obj;
 }
 
+// Portal do cliente (ctx.cliente, de visaoDoCliente): só o que um cliente pode consultar. Os dados já
+// chegam filtrados para ele; esta lista tira as ferramentas internas (fábrica, qualidade, aprendizado).
+const FERRAMENTAS_DO_CLIENTE = new Set([
+  "buscar_documentos", "consultar_pedidos", "consultar_ordens", "consultar_estoque_preco",
+  "consultar_clientes_representantes", "regras_comerciais",
+]);
+
 const schema = (props, required) => ({ type: "object", properties: props, ...(required ? { required } : {}) });
 const s = (description) => ({ type: "string", description });
 
 /**
  * @param ctx  contexto da tela (PLANO §5.2)
  * @param opts {perfil, registrar}: perfil = id de data.perfis_acesso (ou {areas}); registrar(item) → item salvo
+ *   Com ctx.cliente (visaoDoCliente, Portal do cliente), só as ferramentas de FERRAMENTAS_DO_CLIENTE.
  * @returns [{name, description, inputSchema, execute, modulo}]
  */
 export function buildTools(ctx, { perfil, registrar } = {}) {
@@ -188,6 +196,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     inputSchema: schema({ id: s("ex.: PV-88213"), cliente: s("id (CLI-…) ou nome"), status: s("status do pedido") }),
     execute(input) {
       let r = d.pedidos ?? [];
+      if (ctx?.cliente) r = r.filter((p) => p.cliente === ctx.cliente); // Portal: só os pedidos dele
       if (input?.id) r = r.filter((p) => igual(p.id, input.id));
       if (input?.cliente) r = r.filter((p) => igual(p.cliente, input.cliente) || contemTexto(cliente(p.cliente)?.nome ?? "", input.cliente));
       if (input?.status) r = r.filter((p) => igual(p.status, input.status));
@@ -329,7 +338,7 @@ export function buildTools(ctx, { perfil, registrar } = {}) {
     },
   });
 
-  return tools;
+  return ctx?.cliente ? tools.filter((t) => FERRAMENTAS_DO_CLIENTE.has(t.name)) : tools;
 }
 
 /** Junta os campos `ref` de um resultado de ferramenta (para citar quando a IA não cita). */

@@ -1,4 +1,6 @@
 // CRUD das demos (PLANO-V2 §4 e §5). Registro: demo/<id>.
+// Acessos do visitante: uma chave por acesso em acessos/<id>/<ts>-<rand> (nunca regrava demo/<id>, para
+// não sobrescrever uma edição do admin feita ao mesmo tempo); a listagem agrega contagem e último acesso.
 
 import { randomBytes, randomInt } from 'node:crypto';
 import { hashSenha } from './auth.mjs';
@@ -110,33 +112,55 @@ export async function editaDemo(store, id, body) {
   if (senha) { d.senha = await hashSenha(senha); d.senha_v = (d.senha_v ?? 1) + 1; } // senha_v invalida sessões antigas
   d.atualizado_em = new Date().toISOString();
   await store.set(`demo/${id}`, d);
-  return senha ? { demo: publica(d), senha } : { demo: publica(d) };
+  const demo = publica(comAcessos(d, await store.list(`acessos/${id}/`))); // o painel mescla a resposta na linha
+  return senha ? { demo, senha } : { demo };
 }
 
 export async function apagaDemo(store, id) {
   const d = await getDemo(store, id);
   if (!d) return false;
-  const chaves = [...await store.list(`aprendizado/${id}/`), ...await store.list(`uso/${id}/`), ...await store.list(`tentativas/${id}/`)];
+  const chaves = (await Promise.all(['aprendizado', 'uso', 'tentativas', 'acessos'].map((p) => store.list(`${p}/${id}/`)))).flat();
   await Promise.all(chaves.map((k) => store.delete(k)));
   await store.delete(`demo/${id}`);
   return true;
 }
 
+/** Hora (ms) de uma chave acessos/<id>/<ts>-<rand>, ou NaN. */
+const tsDaChave = (k) => Number(String(k).split('/')[2]?.split('-')[0]);
+
+/** Junta os campos legados do registro (acessos, ultimo_acesso) com as chaves de acesso. */
+function comAcessos(d, chaves) {
+  let ultimo = d.ultimo_acesso ?? null;
+  for (const k of chaves) {
+    const t = tsDaChave(k);
+    if (Number.isFinite(t) && (!ultimo || t > Date.parse(ultimo))) ultimo = new Date(t).toISOString();
+  }
+  return { ...d, acessos: (d.acessos ?? 0) + chaves.length, ultimo_acesso: ultimo };
+}
+
+/** Demo com a contagem de acessos agregada (GET /api/admin/demos/<id>). */
+export async function demoComAcessos(store, id) {
+  const d = await getDemo(store, id);
+  return d ? comAcessos(d, await store.list(`acessos/${id}/`)) : null;
+}
+
 export async function listaDemos(store) {
-  const [chaves, apr] = await Promise.all([store.list('demo/'), store.list('aprendizado/')]);
+  const [chaves, apr, acessos] = await Promise.all([store.list('demo/'), store.list('aprendizado/'), store.list('acessos/')]);
   const qtd = {};
   for (const k of apr) { const id = k.split('/')[1]; qtd[id] = (qtd[id] ?? 0) + 1; }
+  const porDemo = {};
+  for (const k of acessos) { const id = k.split('/')[1]; (porDemo[id] ??= []).push(k); }
   const demos = (await Promise.all(chaves.map((k) => store.get(k)))).filter(Boolean);
   return demos
     .sort((a, b) => (b.criado_em ?? '').localeCompare(a.criado_em ?? ''))
-    .map((d) => ({ ...publica(d), aprendizado_qtd: qtd[d.id] ?? 0, url: `/demo/${d.id}`, disponivel: disponivel(d) }));
+    .map((d) => ({ ...publica(comAcessos(d, porDemo[d.id] ?? [])), aprendizado_qtd: qtd[d.id] ?? 0, url: `/demo/${d.id}`, disponivel: disponivel(d) }));
 }
 
-/** Conta um acesso (cada GET /estado de visitante). */
+/**
+ * Conta um acesso (cada GET /estado de visitante). Grava só uma chave nova; o registro da demo não é
+ * lido nem regravado aqui (antes, ler-somar-gravar desfazia um PATCH do admin feito no mesmo instante).
+ */
 export async function registraAcesso(store, id) {
-  const d = await getDemo(store, id); // relê para não sobrescrever uma edição do admin
-  if (!d) return;
-  d.acessos = (d.acessos ?? 0) + 1;
-  d.ultimo_acesso = new Date().toISOString();
-  await store.set(`demo/${id}`, d);
+  if (!ID_RE.test(String(id))) return;
+  await store.set(`acessos/${id}/${String(Date.now()).padStart(13, '0')}-${randomBytes(4).toString('hex')}`, { em: new Date().toISOString() });
 }

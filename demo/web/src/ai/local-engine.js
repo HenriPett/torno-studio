@@ -8,9 +8,10 @@
 // [[tipo:id]] logo depois do id citado; `fontes` traz as mesmas refs na ordem.
 //
 // Contrato (usado pelo servidor e pelo front):
-//   responder(ctx, pergunta, {modulo, perfil}) → {texto, fontes, modo: "local"}
+//   responder(ctx, pergunta, {modulo, perfil, cliente}) → {texto, fontes, modo: "local"}
 //   buscar(ctx, termo, {perfil, limite}) → [{ref, titulo, trecho, area, score, aprendizado?}]
 //   perguntaDerivada(item, ctx?) → pergunta pronta que sempre casa com o item (UX §4.6.4)
+//   visaoDoCliente(ctx, clienteId) → ctx só com o que esse cliente pode ver (Portal do cliente), ou null
 //   ctx = {data, empresa?, today?, isEnabled?, term?, resolveRef?, aprendizado?: [{id, tipo, titulo,
 //          texto, area, maquina, autor, origem, criado_em}]}
 
@@ -208,6 +209,76 @@ export function docVisivel(ctx, doc, areas) {
 }
 
 const aprendizadoVisivel = (a, areas) => !areas || !a.area || a.area === "gestao" || areas.includes(a.area);
+
+/* ------------------------------------------------------------------ */
+/* Portal do cliente                                                   */
+/* ------------------------------------------------------------------ */
+
+const COLECAO_REF = {
+  op: ["ordens", "id"], pedido: ["pedidos", "id"], nc: ["nao_conformidades", "id"], os: ["manutencao", "id"],
+  maq: ["maquinas", "id"], sku: ["produtos", "sku"], cliente: ["clientes", "id"], rep: ["representantes", "id"],
+  regra: ["regras_comerciais", "id"], saber: ["saberes", "id"], kpi: ["kpis", "id"], integ: ["integracoes", "id"],
+};
+
+/** A ref existe nestes dados? (sem olhar módulos) */
+function refNosDados(data, ref) {
+  const i = String(ref).indexOf(":");
+  if (i <= 0) return false;
+  const tipo = ref.slice(0, i), id = ref.slice(i + 1);
+  if (tipo === "doc") {
+    const [docId, trecho] = id.split("#");
+    const doc = by(data?.documentos, "id", docId);
+    return !!doc && (!trecho || (doc.trechos ?? []).some((t) => t.id === trecho));
+  }
+  if (tipo === "turno") return (data?.turnos ?? []).some((t) => `${t.data}|${t.turno}|${t.linha}` === id);
+  const c = COLECAO_REF[tipo];
+  return !!c && (data?.[c[0]] ?? []).some((r) => r?.[c[1]] === id);
+}
+
+/** Nome do cliente sem a cidade ("Moda Ponto Certo — Curitiba" → "Moda Ponto Certo"). */
+const nomeCurto = (nome) => String(nome ?? "").split(/\s+[—–-]\s+/)[0]
+  .replace(/\s*\([^)]*\)\s*$/, "").replace(/,?\s+(ltda|s\.?\s?a|me|eireli)\.?$/i, "").trim();
+
+// documentos que um cliente pode ler: manuais e catálogos liberados ao comercial (e-mails, contratos,
+// chamados e planilhas costumam ser de outro cliente ou internos)
+const DOC_DO_CLIENTE = new Set(["manual", "catalogo"]);
+
+/**
+ * Portal do cliente: ctx com os dados filtrados para o cliente `clienteId` (só os pedidos dele, as
+ * ordens desses pedidos, ele mesmo e o representante dele, catálogo, regras comerciais e manuais/
+ * catálogos que não citam outro cliente). Sem chão de fábrica, qualidade, manutenção, indicadores nem
+ * o aprendizado da equipe. → ctx (com ctx.cliente) ou null se o cliente não existe no pacote.
+ */
+export function visaoDoCliente(ctx, clienteId) {
+  const d = ctx?.data ?? {};
+  const cli = by(d.clientes, "id", clienteId);
+  if (!cli) return null;
+  const outros = (d.clientes ?? []).filter((c) => c.id !== cli.id).map((c) => norm(nomeCurto(c.nome))).filter((n) => n.length >= 5);
+  const citaOutro = (txt) => { const n = norm(txt); return outros.some((o) => n.includes(o)); };
+  const pedidos = (d.pedidos ?? []).filter((p) => p.cliente === cli.id);
+  const idsPv = new Set(pedidos.map((p) => p.id));
+  const idsOp = new Set(pedidos.map((p) => p.ordem).filter(Boolean));
+  const data = {
+    ...d,
+    clientes: [cli],
+    representantes: (d.representantes ?? []).filter((r) => r.id === cli.representante),
+    pedidos,
+    ordens: (d.ordens ?? []).filter((o) => idsOp.has(o.id) || (o.pedido && idsPv.has(o.pedido))),
+    documentos: (d.documentos ?? []).filter((doc) => DOC_DO_CLIENTE.has(doc.tipo)
+      && (doc.acesso ?? [doc.area]).includes("comercial")
+      && !citaOutro(`${doc.titulo} ${(doc.trechos ?? []).map((t) => t.texto).join(" ")}`)),
+    regras_comerciais: (d.regras_comerciais ?? []).filter((r) => !citaOutro(`${r.titulo} ${r.texto}`)),
+    maquinas: [], manutencao: [], nao_conformidades: [], turnos: [], kpis: [], saberes: [], integracoes: [],
+    perfis_acesso: [], registro_uso: [], marketing: [], conversa_whatsapp: [],
+    perguntas_sugeridas: (d.perguntas_sugeridas ?? []).filter((p) => p.modulo === "portal"),
+  };
+  const base = ctx;
+  return {
+    ...ctx, data, cliente: cli.id, aprendizado: [],
+    // a ref precisa existir na fatia do cliente E passar na checagem original (módulos ligados)
+    resolveRef: (ref) => typeof ref === "string" && refNosDados(data, ref) && refOk(base, ref),
+  };
+}
 
 /* ------------------------------------------------------------------ */
 /* Busca                                                               */
@@ -635,6 +706,134 @@ function maquinasAlerta(ctx) {
   };
 }
 
+/* "O que eu preciso ver hoje?" e variações: conclusão + 3 a 4 itens priorizados */
+
+const RESUMO_DO_DIA = new RegExp([
+  "\\b(preciso|devo|tenho que|vale) (ver|olhar|saber|acompanhar|priorizar)\\b.*\\bhoje\\b",
+  "\\bmais preocupa", "\\bpreocupa(m)?\\b.*\\bhoje\\b", "\\balertas? do dia\\b", "\\bprioridades? (de|do|para) hoje\\b",
+  "\\bresumo do dia\\b", "\\bo que (esta|ta) pegando\\b", "\\bpede(m)? atencao\\b", "\\bonde (eu )?(devo )?focar\\b",
+].join("|"));
+
+const somaPedido = (pv) => (pv.itens ?? []).reduce((s, i) => s + (i.quantidade ?? 0) * (i.preco_unit ?? 0), 0);
+const lista3 = (xs) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} e ${xs.at(-1)}`);
+
+/**
+ * Resumo do dia para quem decide: uma frase de conclusão e até 4 itens (o que é, impacto e próximo
+ * passo), só com o que está no pacote. Prioridade: pedidos de cliente atrasados (os que vencem
+ * primeiro e valem mais), máquina parada, não conformidade grave, depois o que sobrar.
+ */
+function resumoDoDia(ctx, areas) {
+  const d = ctx.data ?? {};
+  const pode = (modulo, area) => ligado(ctx, modulo) && (!areas || areas.includes(area));
+  const comPv = pode("comercial", "comercial"), comOp = pode("producao", "producao");
+  const comMaq = pode("manutencao", "manutencao"), comNc = pode("qualidade", "qualidade");
+  const opsAtr = comOp ? (d.ordens ?? []).filter((o) => o.status === "atrasada") : [];
+  const pvsAtr = comPv
+    ? (d.pedidos ?? []).filter((p) => p.status === "atrasado")
+      .sort((a, b) => String(a.previsao_entrega).localeCompare(String(b.previsao_entrega)) || somaPedido(b) - somaPedido(a))
+    : [];
+  const ORD_MAQ = { parada: 0, alerta: 1, manutencao: 2 };
+  const maqs = comMaq ? (d.maquinas ?? []).filter((m) => m.status in ORD_MAQ).sort((a, b) => ORD_MAQ[a.status] - ORD_MAQ[b.status]) : [];
+  const ncs = comNc ? (d.nao_conformidades ?? []).filter((n) => n.status !== "encerrada" && n.severidade === "alta") : [];
+  const osAberta = (m) => (d.manutencao ?? []).filter((o) => o.maquina === m.id && o.status !== "concluida")
+    .sort((a, b) => String(b.data).localeCompare(String(a.data)))[0];
+  const ordem = term(ctx, "ordem");
+
+  const itemPedido = (pv) => {
+    const cli = by(d.clientes, "id", pv.cliente);
+    const nome = nomeCurto(cli?.nome) || pv.cliente;
+    const o = comOp && pv.ordem ? by(d.ordens, "id", pv.ordem) : null;
+    const refs = [`pedido:${pv.id}`];
+    let causa = "";
+    if (o) {
+      refs.push(`op:${o.id}`);
+      causa = ` Depende ${feminino(ordem) ? "da" : "do"} ${cita(o.id, `op:${o.id}`)}, em ${f.pct(o.progresso)}` +
+        `${o.motivo_atraso ? `: ${frase(corta(o.motivo_atraso, 140))}` : "."}`;
+    } else if (pv.observacao) causa = ` ${frase(corta(pv.observacao, 140))}`;
+    return {
+      ids: [pv.id, o?.id].filter(Boolean), refs,
+      comece: `pelo pedido ${pv.id} (${nome})`,
+      texto: `**Pedido ${pv.id}**[[pedido:${pv.id}]], de ${nome} (${f.money(somaPedido(pv))}): atrasado, entrega prevista para ${f.data(pv.previsao_entrega)}.` +
+        `${causa} **Próximo passo:** avisar ${nome} da nova data antes que a cobrança chegue.`,
+    };
+  };
+  const itemOrdem = (o) => {
+    const p = by(d.produtos, "sku", o.sku);
+    return {
+      ids: [o.id], refs: [`op:${o.id}`], comece: `pel${feminino(ordem) ? "a" : "o"} ${o.id}`,
+      texto: `**${o.id}**[[op:${o.id}]] (${p?.nome ?? o.sku}, ${f.num(o.quantidade)} ${p?.unidade ?? term(ctx, "unidade")}): ` +
+        `${conc("atrasad", ctx, "ordem", false)}, em ${f.pct(o.progresso)}, prazo era ${f.data(o.prazo)}.` +
+        `${o.motivo_atraso ? ` ${frase(corta(o.motivo_atraso, 140))}` : ""} **Próximo passo:** fechar com o PCP a nova data.`,
+    };
+  };
+  const itemMaquina = (m) => {
+    const os = osAberta(m);
+    const presas = opsAtr.filter((o) => o.linha === m.linha);
+    const refs = [`maq:${m.id}`];
+    if (os) refs.push(`os:${os.id}`);
+    const art = artMaq(ctx);
+    const impacto = presas.length
+      ? ` Segura ${presas.length === 1 ? `${feminino(ordem) ? "a" : "o"} ${presas[0].id}, que está ${conc("atrasad", ctx, "ordem", false)}` : `${presas.length} ${term(ctx, "ordens")} ${conc("atrasad", ctx, "ordem", true)}`}.`
+      : "";
+    const osTxt = os ? ` ${cita(os.id, `os:${os.id}`)} (${os.tipo}) ${statusLabel(os.status)} desde ${f.data(os.data)}.` : "";
+    return {
+      ids: [m.id, os?.id].filter(Boolean), refs, comece: `pel${art} ${m.id}`,
+      texto: `**${m.nome}**[[maq:${m.id}]] (${m.id}): ${statusLabel(m.status)}.${osTxt}${impacto} ` +
+        `**Próximo passo:** ${os ? `pedir à manutenção a data de liberação da ${os.id}` : "abrir uma OS e avaliar o impacto na programação"}.`,
+    };
+  };
+  const itemNc = (n) => ({
+    ids: [n.id], refs: [`nc:${n.id}`], comece: `pela ${n.id}`,
+    texto: `**Não conformidade ${n.id}**[[nc:${n.id}]] (severidade alta, ${statusLabel(n.status)}): ${frase(corta(n.descricao, 120))} ` +
+      `**Próximo passo:** acompanhar com ${n.responsavel} a ação em curso: ${frase(corta(n.acao, 100)).replace(/^./, (c) => c.toLowerCase())}`,
+  });
+
+  // cotas por tipo para variar (2 pedidos, 1 máquina, 1 NC); o que faltar completa com o resto
+  const opsSemPedido = opsAtr.filter((o) => !pvsAtr.some((p) => p.ordem === o.id));
+  const filas = [
+    [pvsAtr.length ? pvsAtr : opsAtr, pvsAtr.length ? itemPedido : itemOrdem, 2],
+    [maqs, itemMaquina, 1],
+    [ncs, itemNc, 1],
+    [pvsAtr.length ? opsSemPedido : [], itemOrdem, 1],
+  ];
+  const itens = [], usados = new Set();
+  const textoJa = () => itens.map((i) => i.texto).join(" ");
+  const tenta = (reg, fn) => {
+    if (itens.length >= 4) return;
+    const it = fn(reg);
+    if (it.ids.some((id) => usados.has(id) || textoJa().includes(id))) return; // já coberto por outro item
+    it.ids.forEach((id) => usados.add(id));
+    itens.push(it);
+  };
+  for (const [regs, fn, cota] of filas) for (const r of regs.slice(0, cota)) tenta(r, fn);
+  for (const [regs, fn, cota] of filas) for (const r of regs.slice(cota)) tenta(r, fn);
+  if (!itens.length) {
+    if (!comPv && !comOp && !comMaq && !comNc) return null;
+    return { texto: `Nada fora do normal nos dados de hoje (${f.data(hoje(ctx))}): nenhum pedido ou ${ordem} com atraso, nenhuma ${term(ctx, "maquina")} parada e nenhuma não conformidade grave em aberto.`, fontes: [] };
+  }
+
+  // conclusão: o tamanho do problema e por onde começar
+  const partes = [];
+  if (pvsAtr.length) {
+    const total = pvsAtr.reduce((s, p) => s + somaPedido(p), 0);
+    partes.push(`${pvsAtr.length} ${pvsAtr.length === 1 ? "pedido atrasado" : "pedidos atrasados"} de ${term(ctx, pvsAtr.length === 1 ? "cliente" : "clientes")} (${f.money(total)})`);
+  } else if (opsAtr.length) {
+    partes.push(`${opsAtr.length} ${plural(opsAtr.length, ctx, "ordem", "ordens")} ${conc("atrasad", ctx, "ordem", opsAtr.length !== 1)}`);
+  }
+  const paradas = maqs.filter((m) => m.status === "parada");
+  if (paradas.length === 1) partes.push(`${artMaq(ctx)} ${paradas[0].id} ${conc("parad", ctx, "maquina", false)}`);
+  else if (paradas.length > 1) partes.push(`${paradas.length} ${term(ctx, "maquinas")} ${conc("parad", ctx, "maquina", true)}`);
+  if (ncs.length) partes.push(`${ncs.length} não conformidade${ncs.length === 1 ? "" : "s"} grave${ncs.length === 1 ? "" : "s"} em aberto`);
+  const conclusao = partes.length
+    ? `**Hoje pedem atenção ${lista3(partes)}; comece ${itens[0].comece}.**`
+    : `**Hoje o ponto de atenção é ${itens[0].comece.replace(/^pel[oa] /, "")}.**`;
+
+  return {
+    texto: `${conclusao}\n\n${itens.map((it, i) => `${i + 1}. ${it.texto}`).join("\n")}`,
+    fontes: itens.flatMap((it) => it.refs),
+  };
+}
+
 function kpiPorNome(ctx, q) {
   let melhor = null, ms = 0;
   for (const k of ctx.data.kpis ?? []) {
@@ -732,26 +931,65 @@ const AREA_LOCAL = {
   marketing: "no marketing", operadores: "no chão de fábrica", gestao: "na gestão",
 };
 
-/** 3–6 primeiras palavras do título, minúsculas (sem pontuação final). */
-function inicioTitulo(titulo) {
-  const ws = String(titulo ?? "").replace(/[.!?;:]+$/, "").split(/\s+/).filter(Boolean);
-  let n = Math.min(6, ws.length);
-  // não termina em preposição/artigo solto
+/**
+ * Trecho do título para a pergunta: até 10 palavras (sem terminar em preposição/artigo solto), sem
+ * pontuação final. Só a 1ª letra vira minúscula, e só se a palavra não for sigla ou código ("TIN-03",
+ * "OEE", "ΔE" ficam como estão). Cortado → reticências.
+ */
+function trechoTitulo(titulo) {
+  const ws = String(titulo ?? "").replace(/[.!?;:…]+$/, "").split(/\s+/).filter(Boolean);
+  let n = Math.min(10, ws.length);
   while (n > 3 && STOP.has(norm(ws[n - 1]))) n--;
-  return ws.slice(0, n).join(" ").toLowerCase();
+  const parte = ws.slice(0, n);
+  if (parte[0] && !/\d/.test(parte[0]) && !/^\p{Lu}{2,}/u.test(parte[0])) parte[0] = parte[0].charAt(0).toLowerCase() + parte[0].slice(1);
+  return parte.join(" ").replace(/[,;:—-]+$/, "") + (n < ws.length ? "…" : "");
 }
 
-/** Pergunta derivada de um registro (UX §4.6.4). Sempre casa com o próprio item em responder(). */
+/** Primeiro código de registro do pacote citado no título ou no texto do item → "a OP-24518", "o pedido PV-88213". */
+function codigoCitado(item, ctx) {
+  const d = ctx?.data;
+  if (!d) return null;
+  const alvo = norm(`${item.titulo ?? ""} ${item.texto ?? ""}`);
+  const ordem = term(ctx, "ordem"), produto = term(ctx, "produto");
+  const fontes = [
+    [d.ordens, "id", ligado(ctx, "producao"), (id) => `${feminino(ordem) ? "a" : "o"} ${id}`],
+    [d.pedidos, "id", ligado(ctx, "comercial"), (id) => `o pedido ${id}`],
+    [d.maquinas, "id", ligado(ctx, "manutencao"), (id) => `${artMaq(ctx)} ${id}`],
+    [d.nao_conformidades, "id", ligado(ctx, "qualidade"), (id) => `a ${id}`],
+    [d.manutencao, "id", ligado(ctx, "manutencao"), (id) => `a ${id}`],
+    [d.produtos, "sku", ligado(ctx, "comercial") || ligado(ctx, "portal"), (id) => `${feminino(produto) ? "a" : "o"} ${produto} ${id}`],
+  ];
+  let melhor = null;
+  for (const [lista, campo, ok, rotulo] of fontes) {
+    if (!ok) continue;
+    for (const r of lista ?? []) {
+      const id = r?.[campo];
+      if (!id || String(id).length < 4) continue;
+      const m = new RegExp(`(?<![a-z0-9-])${escRe(norm(id))}(?![a-z0-9])`).exec(alvo);
+      if (m && (!melhor || m.index < melhor.pos)) melhor = { pos: m.index, texto: rotulo(id) };
+    }
+  }
+  return melhor?.texto ?? null;
+}
+
+/**
+ * Pergunta derivada de um registro (UX §4.6.4). Sempre casa com o próprio item em responder():
+ * aprendizadoDaPergunta() compara a pergunta com perguntaDerivada(item) (normalizada) e dá a maior nota
+ * a esse item. O teste "pergunta derivada casa com o próprio item" em demo/server/test.mjs confere isso.
+ */
 export function perguntaDerivada(item, ctx) {
   if (!item) return "";
   if (item.maquina) {
     const art = ctx ? artMaq(ctx) : "a";
     return `O que preciso saber antes de programar ${art} ${item.maquina}?`;
   }
+  // cita um registro do pacote (OP, pedido, máquina, NC, OS, produto): pergunta pelo código
+  const cod = codigoCitado(item, ctx);
+  if (cod) return `O que a equipe registrou sobre ${cod}?`;
   if (item.tipo === "ocorrencia") return `O que aconteceu ${AREA_LOCAL[item.area] ?? "na operação"} hoje?`;
   // entre aspas: o título costuma ser uma frase ("o forno 2 só aquece direito"), não um substantivo
-  if (item.tipo === "documento") return `Qual é a regra para “${inicioTitulo(item.titulo)}”?`;
-  return `O que a equipe sabe sobre “${inicioTitulo(item.titulo)}”?`;
+  if (item.tipo === "documento") return `Qual é a regra para “${trechoTitulo(item.titulo)}”?`;
+  return `O que a equipe sabe sobre “${trechoTitulo(item.titulo)}”?`;
 }
 
 const palavras4 = (s) => [...new Set(tokens(s).filter((t) => t.length >= 4 && !/\d/.test(t)))];
@@ -792,6 +1030,10 @@ export function aprendizadoDaPergunta(ctx, pergunta, { modulo, perfil } = {}) {
 /* ------------------------------------------------------------------ */
 
 function responderBase(ctx, p, { modulo, perfil, areas, perfilOk }) {
+  // (0) "o que eu preciso ver hoje?" e variações: resumo para quem decide (no lugar da lista de códigos)
+  // (no Portal do cliente não: o resumo é da operação interna)
+  if (!ctx.cliente && RESUMO_DO_DIA.test(norm(p))) { const r = resumoDoDia(ctx, areas); if (r) return r; }
+
   // (a) pergunta sugerida (igual ou parecida); a resposta pronta só vale se o perfil vê todas as fontes
   const s = casaSugerida(ctx, p, modulo);
   let negadaPorPerfil = false;
@@ -836,8 +1078,13 @@ function limpaMarcadores(texto, fontes) {
   return String(texto).replace(/\[\[\s*([a-z]+:[^\]]+?)\s*\]\]/gi, (m, ref) => (fontes.includes(ref.trim()) ? m : ""));
 }
 
-/** → {texto, fontes, modo: "local"} */
-export function responder(ctx, pergunta, { modulo, perfil } = {}) {
+/** → {texto, fontes, modo: "local"}. Com `cliente` (Portal do cliente), só enxerga os dados dele. */
+export function responder(ctx, pergunta, { modulo, perfil, cliente } = {}) {
+  if (cliente) {
+    const visao = visaoDoCliente(ctx, cliente);
+    if (!visao) return { texto: "Não encontrei esse cliente nesta demo.", fontes: [], modo: "local" };
+    ctx = visao;
+  }
   const areas = perfilAreas(ctx, perfil);
   // "Ver como": documentos pelo acesso; saberes/NCs/regras pela área.
   const AREA_REF = { saber: "operadores", nc: "qualidade", regra: "comercial" };

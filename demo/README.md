@@ -43,7 +43,7 @@ que também aparece no Cérebro e na página da área.
 
 ```bash
 DEMO_ADMIN_PASSWORD=admin-dev node demo/scripts/serve.mjs 4400   # http://localhost:4400/admin
-node demo/server/test.mjs                                          # API (20 testes)
+node demo/server/test.mjs                                          # API e motor local (28 testes)
 node demo/web/src/ui/markdown.test.mjs                             # Markdown das respostas
 node demo/scripts/validate.mjs                                     # 8 pacotes de dados
 ```

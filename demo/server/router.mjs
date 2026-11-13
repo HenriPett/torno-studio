@@ -7,7 +7,7 @@ import {
   confereSenha, igualConstante, assina, confere, impressao, leCookies, cookie, apagaCookie, checaOrigem, espera,
 } from './auth.mjs';
 import {
-  getDemo, criaDemo, editaDemo, apagaDemo, listaDemos, registraAcesso, disponivel, publica, ErroValidacao, ID_RE,
+  getDemo, demoComAcessos, criaDemo, editaDemo, apagaDemo, listaDemos, registraAcesso, disponivel, publica, ErroValidacao, ID_RE,
 } from './demos.mjs';
 import { listaAprendizado, criaAprendizado, apagaAprendizado, zeraAprendizado } from './learning.mjs';
 import { conversa, iaInfo, ErroConversa } from './ai.mjs';
@@ -96,9 +96,17 @@ async function rotaDemo(request, env, store, partes, deps) {
     const d = ID_RE.test(id) ? await getDemo(store, id) : null;
     // Limite de tentativas erradas por demo e por hora (a senha legível tem ~21 bits): passou do
     // limite, responde igual a senha errada. Cada falha é uma chave própria (sem corrida de
-    // ler-somar-gravar entre requisições paralelas). Id inexistente não grava nada.
+    // ler-somar-gravar entre requisições paralelas). Id inexistente não grava nada. As janelas de
+    // horas anteriores não contam mais: são apagadas aqui mesmo.
     const hora = Math.floor(Date.now() / 3600e3);
-    const falhas = d ? (await store.list(`tentativas/${id}/${hora}-`)).length : 0;
+    let falhas = 0;
+    if (d) {
+      const chaves = await store.list(`tentativas/${id}/`);
+      const daHora = (k) => Number(k.split('/')[2]?.split('-')[0]);
+      const velhas = chaves.filter((k) => daHora(k) < hora);
+      falhas = chaves.filter((k) => daHora(k) >= hora).length;
+      if (velhas.length) await Promise.all(velhas.map((k) => store.delete(k).catch(() => {})));
+    }
     const ok = await confereSenha(typeof body.senha === 'string' ? body.senha.slice(0, 200) : '', d?.senha);
     if (!ok || !disponivel(d) || falhas >= MAX_FALHAS_HORA) {
       if (d && !ok) await store.set(`tentativas/${id}/${hora}-${randomBytes(6).toString('hex')}`, { em: new Date().toISOString() });
@@ -175,7 +183,7 @@ async function rotaAdmin(request, env, store, partes) {
   if (r0 === 'demos' && r1 && !r2) {
     if (!ID_RE.test(r1)) return erro(404, 'Demo não encontrada');
     if (m === 'GET') {
-      const d = await getDemo(store, r1);
+      const d = await demoComAcessos(store, r1);
       return d ? json({ ...publica(d), url: `/demo/${d.id}`, disponivel: disponivel(d) }) : erro(404, 'Demo não encontrada');
     }
     if (m === 'PATCH') {

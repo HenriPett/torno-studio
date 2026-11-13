@@ -6,7 +6,8 @@ import { h, icon, spinner } from '../ui.js';
 
 export function renderEntrar(alvo, {
   titulo = 'Esta demonstração é privada.',
-  apoio = 'Digite a senha que veio junto com o link.',
+  // o padrão diz o que vem depois da senha; o /admin passa apoio: null e não é afetado
+  apoio = 'Demonstração da Torno: uma IA que responde perguntas sobre a operação de uma fábrica, com a fonte de cada número. Digite a senha que veio com o link.',
   rotulo = 'Senha',
   aviso = null,
   nota = 'Não tem a senha? Peça a quem te enviou o link.',

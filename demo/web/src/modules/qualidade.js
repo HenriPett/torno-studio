@@ -1,4 +1,5 @@
-// Qualidade (UX §4.8): NCs abertas · graves · encerradas em 30 dias; lista de NCs; gaveta `nc`
+// Qualidade (UX §4.8): NCs abertas · em análise · graves (as mesmas contas da conversa, que diz
+// "3 abertas e 3 em análise"); lista de NCs; gaveta `nc`
 // com 8D registrado ou [Gerar rascunho de 8D] transmitido no corpo da gaveta.
 import { h } from '../ui.js';
 import {
@@ -14,12 +15,13 @@ export function render(el, ctx) {
   const d = ctx.data || {};
   const ncs = d.nao_conformidades || [];
   const prodBy = Object.fromEntries((d.produtos || []).map((p) => [p.sku, p]));
-  const aberta = (n) => n.status !== 'encerrada';
-  const grave = (n) => aberta(n) && n.severidade === 'alta';
+  // "em aberto" = ainda não encerrada (aberta + em análise); os números separam as duas
+  const emAberto = (n) => n.status !== 'encerrada';
+  const grave = (n) => emAberto(n) && n.severidade === 'alta';
 
-  const nAbertas = ncs.filter(aberta).length;
+  const nAbertas = ncs.filter((n) => n.status === 'aberta').length;
+  const nAnalise = ncs.filter((n) => n.status === 'em_analise').length;
   const nGraves = ncs.filter(grave).length;
-  const enc30 = ncs.filter((n) => n.status === 'encerrada' && f.daysFromToday(n.data, ctx.today) >= -30).length;
 
   let notas = learnItems(ctx);
   const nNotas = (n) => notesFor(ctx, { ids: [n.id] }, notas).length;
@@ -27,7 +29,7 @@ export function render(el, ctx) {
   const lista = listSection({
     rotulo: 'Não conformidades',
     filtros: [
-      { id: 'abertas', label: 'Abertas', fn: aberta },
+      { id: 'abertas', label: 'Em aberto', fn: emAberto },
       { id: 'graves', label: 'Graves', fn: grave },
       { id: 'todas', label: 'Todas', fn: () => true },
     ],
@@ -55,9 +57,9 @@ export function render(el, ctx) {
     titulo: ctx.areaName?.('qualidade') || 'Qualidade',
     subtitulo: ['Não conformidades, causas e 8D', origemDados(ctx, 'qualidade')].filter(Boolean).join(' · '),
     numeros: [
-      { valor: f.num(nAbertas), rotulo: nAbertas === 1 ? 'NC aberta' : 'NCs abertas', tom: nGraves ? 'danger' : nAbertas ? 'warn' : 'ok' },
-      { valor: f.num(nGraves), rotulo: nGraves === 1 ? 'grave' : 'graves' },
-      { valor: f.num(enc30), rotulo: 'encerradas em 30 dias' },
+      { valor: f.num(nAbertas), rotulo: nAbertas === 1 ? 'NC aberta' : 'NCs abertas', tom: nGraves ? 'danger' : nAbertas + nAnalise ? 'warn' : 'ok' },
+      { valor: f.num(nAnalise), rotulo: 'em análise' },
+      { valor: f.num(nGraves), rotulo: nGraves === 1 ? 'grave em aberto' : 'graves em aberto' },
     ],
     corpo: lista.el,
   });

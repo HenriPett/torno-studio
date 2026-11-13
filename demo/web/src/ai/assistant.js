@@ -2,15 +2,36 @@
 // servidor; aqui só há o envio (ctx.api.conversa, SSE) com o laço `continuar`, as sugestões e a busca
 // local (motor determinístico, incluindo o que a equipe registrou nesta demo).
 //
-//   perguntar({mensagens, modulo, perfil, autor, onTexto, onFerramenta, onAprendizado, signal})
+//   perguntar({mensagens, modulo, perfil, autor, cliente, onTexto, onFerramenta, onAprendizado, signal})
 //     → Promise<{texto, fontes, modo, aviso}>     (texto com marcadores [[tipo:id]])
 //     onTexto(delta, acumulado, {reinicio?}) · onFerramenta({nome, rotulo}) · onAprendizado(item)
 //     Erros: {status, mensagem, abortado?, texto?} (ApiError de api.js).
 //   sugestoes(modulo, n) · buscar(termo, {perfil, limite})
+//
+// Resposta de perguntar():
+//   modo  "ia" | "local"  quem respondeu.
+//   aviso string | null   frase curta em PT-BR para mostrar junto da resposta quando ela veio do roteiro
+//                         local em vez da IA; null quando não há o que avisar. Casos:
+//                         - teto diário da demo (vem do servidor em fim.aviso):
+//                           "A IA atingiu o limite de hoje desta demonstração; esta resposta veio do roteiro local."
+//                         - troca silenciosa depois de erro recuperável da IA (api.js / conversaDireta):
+//                           "A IA ficou indisponível por um instante; esta resposta veio do roteiro local."
+//                         Sem chave de API (demo inteira no roteiro local) não há aviso por resposta.
+//
+// Portal do cliente: com modulo "portal", o corpo leva `cliente` (id CLI-… do pacote): o parâmetro
+// `cliente` de perguntar() ou, se ausente, o cliente escolhido na tela do portal (definirClientePortal).
+// O servidor valida o id e responde só com os dados desse cliente.
 
 import * as local from './local-engine.js';
 
 const MAX_RODADAS = 5;
+const AVISO_LIMITE = 'A IA atingiu o limite de hoje desta demonstração; esta resposta veio do roteiro local.';
+const AVISO_FALHA = 'A IA ficou indisponível por um instante; esta resposta veio do roteiro local.';
+
+// Cliente escolhido no "Ver como" do Portal do cliente (modules/portal.js). Vale para as perguntas com
+// modulo "portal", inclusive as feitas na conversa aberta a partir do portal.
+let clientePortal = null;
+export function definirClientePortal(id) { clientePortal = typeof id === 'string' && id ? id : null; }
 
 /** SSE direto (mesmo contrato de api.conversa), para quando a casca não entrega ctx.api. */
 async function conversaDireta(id, payload, { onTexto, onFerramenta, onAprendizado, signal } = {}) {
@@ -68,7 +89,7 @@ export function createAssistant(getCtx) {
     return { ...ctx, aprendizado };
   };
 
-  async function perguntar({ mensagens, modulo, perfil, autor, onTexto, onFerramenta, onAprendizado, signal } = {}) {
+  async function perguntar({ mensagens, modulo, perfil, autor, cliente, onTexto, onFerramenta, onAprendizado, signal } = {}) {
     const ctx = ctxAtual();
     const id = ctx.demo?.id ?? ctx.api?.demoId;
     const conversa = typeof ctx.api?.conversa === 'function' ? ctx.api.conversa : conversaDireta;
@@ -77,6 +98,8 @@ export function createAssistant(getCtx) {
     if (perfil) base.perfil = typeof perfil === 'object' ? perfil.id : perfil;
     const nome = autor ?? (typeof ctx.autor === 'function' ? ctx.autor() : null);
     if (nome && nome !== 'Você') base.autor = nome;
+    const cli = cliente ?? (modulo === 'portal' ? clientePortal : null);
+    if (cli) base.cliente = cli;
 
     let acumuladoAntes = ''; // texto das rodadas anteriores (só se a API devolver continuar ao cliente)
     const handlers = {
@@ -90,7 +113,17 @@ export function createAssistant(getCtx) {
       },
     };
 
-    let r = await conversa(id, { ...base, mensagens }, handlers);
+    let r;
+    let avisoTroca = null;
+    try {
+      r = await conversa(id, { ...base, mensagens }, handlers);
+    } catch (err) {
+      // api.js já refaz pelo motor local; aqui só o caminho direto (sem ctx.api) precisa disso
+      if (conversa !== conversaDireta || !err?.recuperavel || err?.abortado || signal?.aborted) throw err;
+      avisoTroca = /limite/i.test(String(err.mensagem ?? err.message ?? '')) ? AVISO_LIMITE : AVISO_FALHA;
+      if (err.texto) onTexto?.('', '', { reinicio: true });
+      r = await conversa(id, { ...base, mensagens, motor: 'local' }, handlers);
+    }
     // api.js da casca já faz o laço `continuar`; este é só o cinto de segurança
     for (let rodada = 1; r?.continuar && r.estado && rodada < MAX_RODADAS; rodada++) {
       acumuladoAntes = r.texto ?? acumuladoAntes;
@@ -100,7 +133,7 @@ export function createAssistant(getCtx) {
       texto: String(r?.texto ?? ''),
       fontes: Array.isArray(r?.fontes) ? r.fontes : [],
       modo: r?.modo ?? 'ia',
-      aviso: r?.aviso ?? null,
+      aviso: r?.aviso || avisoTroca || null,
     };
   }
 

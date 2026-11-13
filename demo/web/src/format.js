@@ -117,5 +117,97 @@ export function normalize(texto) {
     .trim();
 }
 
-export const fmt = { num, money, pct, date, dateLong, time, datetime, rel, daysFromToday, normalize, TODAY };
+// ---------------------------------------------------------------------------
+// Concordância com o vocabulário do pacote
+
+/**
+ * Gênero de um termo do vocabulário do pacote: 'a' para feminino ("máquina", "OP", "célula"),
+ * 'o' para masculino ("equipamento", "setor produtivo"). Olha só a primeira palavra.
+ */
+export function generoTermo(termo) {
+  const w = normalize(termo).split(/\s+/)[0] || '';
+  if (/^(op|ops|os|nc|ncs|ordem|ordens)$/.test(w)) return 'a';
+  if (/(cao|coes|sao|soes|dade|dades|gem|gens)$/.test(w)) return 'a';
+  return /as?$/.test(w) && !/(ema|emas|eta|etas)$/.test(w) && !/^dias?$/.test(w) ? 'a' : 'o';
+}
+
+/** Termo de máquina do pacote a partir de ctx (com term()), do pacote, do vocabulário ou de texto. */
+function termoMaquina(fonte) {
+  if (typeof fonte === 'string') return fonte;
+  if (fonte && typeof fonte.term === 'function') {
+    try { return fonte.term('maquina') || 'máquina'; } catch { return 'máquina'; }
+  }
+  const vocab = fonte?.vocabulario || fonte?.data?.vocabulario || fonte;
+  return (vocab && typeof vocab.maquina === 'string' && vocab.maquina) || 'máquina';
+}
+
+/**
+ * "parada" ou "parado", concordando com o termo de máquina do pacote (vocabulario.maquina).
+ * É a regra única da demo: Início, menu Áreas e selo da área devem usar este helper, para o mesmo
+ * equipamento não aparecer como "TEA-12 parado" num lugar e "TEA-12 parada" em outro.
+ *   fonte: ctx (com term()), o pacote do setor, o objeto vocabulario ou o termo em texto.
+ *   {plural: true} → "paradas"/"parados"; {maiuscula: true} → "Parada"/"Parado" (para selos).
+ * Ex.: parado(ctx) → "parada" no têxtil ("máquina"), "parado" em alimentos ("equipamento").
+ * Também disponível como ctx.fmt.parado.
+ */
+export function parado(fonte, { plural = false, maiuscula = false } = {}) {
+  const g = generoTermo(termoMaquina(fonte));
+  const txt = `parad${g}${plural ? 's' : ''}`;
+  return maiuscula ? `P${txt.slice(1)}` : txt;
+}
+
+// ---------------------------------------------------------------------------
+// Glossário de siglas (Início, indicadores, gaveta do indicador)
+
+/** Siglas da operação com uma explicação curta, para quem não é do chão de fábrica. */
+export const GLOSSARIO = {
+  OEE: 'eficiência global do equipamento: quanto do tempo disponível virou peça boa',
+  OTIF: 'pedidos entregues completos e no prazo',
+  PPM: 'peças com defeito a cada milhão',
+  FPY: 'peças aprovadas de primeira, sem retrabalho',
+  MTTR: 'tempo médio para consertar uma máquina parada',
+  NC: 'não conformidade: um problema de qualidade registrado',
+  OP: 'ordem de produção',
+  OS: 'ordem de serviço da manutenção',
+  PCP: 'planejamento e controle da produção',
+  APQP: 'planejamento da qualidade de um produto novo',
+  '8D': 'método de 8 passos para resolver um problema de qualidade',
+};
+
+// Sigla isolada (aceita plural "OPs", "NCs"); não pega códigos como "OP-24518" ou "OS-7731".
+const SIGLA_RE = new RegExp(`(^|[^\\p{L}\\d-])(${Object.keys(GLOSSARIO).join('|')})(s?)(?![\\p{L}\\d]|-\\d)`, 'gu');
+
+/**
+ * Quebra o texto em pedaços: strings e {sigla, texto, definicao} para cada sigla do glossário.
+ * Quem desenha decide como mostrar (ex.: <abbr title>).
+ */
+export function partesComSiglas(texto) {
+  const src = String(texto ?? '');
+  const out = [];
+  let ultimo = 0;
+  for (const m of src.matchAll(SIGLA_RE)) {
+    const ini = m.index + m[1].length;
+    if (ini > ultimo) out.push(src.slice(ultimo, ini));
+    out.push({ sigla: m[2], texto: m[2] + m[3], definicao: GLOSSARIO[m[2]] });
+    ultimo = ini + m[2].length + m[3].length;
+  }
+  if (ultimo < src.length) out.push(src.slice(ultimo));
+  return out;
+}
+
+/** Siglas do glossário presentes no texto, sem repetir: [{sigla, definicao}]. */
+export function siglasNoTexto(texto) {
+  const vistas = new Map();
+  for (const p of partesComSiglas(texto)) if (typeof p === 'object' && !vistas.has(p.sigla)) vistas.set(p.sigla, p.definicao);
+  return [...vistas].map(([sigla, definicao]) => ({ sigla, definicao }));
+}
+
+/** "OTIF: pedidos entregues completos e no prazo. OEE: …" (para title/aria). '' se não houver sigla. */
+export function explicaSiglas(texto) {
+  return siglasNoTexto(texto).map((s) => `${s.sigla}: ${s.definicao}.`).join(' ');
+}
+
+export const fmt = {
+  num, money, pct, date, dateLong, time, datetime, rel, daysFromToday, normalize, TODAY, parado, generoTermo, explicaSiglas,
+};
 export default fmt;

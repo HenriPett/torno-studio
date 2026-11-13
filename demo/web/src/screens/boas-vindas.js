@@ -1,7 +1,10 @@
 // Boas-vindas (UX §4.2): uma tela, uma vez por demo (localStorage["td_bv_<id>"], gravado pelo app.js).
-// renderBoasVindas(alvo, {ctx, onComecar(nome)}) — nome opcional vira o autor dos registros.
+// renderBoasVindas(alvo, {ctx, onComecar(nome, {viaEsc})}) — nome opcional vira o autor dos registros.
+// Esc fecha só desta vez (o app não grava td_bv); "Rever a apresentação" em Como funciona reabre.
+// Explica o produto em uma frase, só com os sistemas que existem em `integracoes` do pacote.
 
 import { h, icon } from '../ui.js';
+import { sistemasDoPacote, listaSistemas } from '../origem.js';
 
 function artigoSetor(setor) {
   const s = String(setor || '').trim();
@@ -19,15 +22,20 @@ export function renderBoasVindas(alvo, { ctx, onComecar } = {}) {
   });
 
   let feito = false;
-  const comecar = () => {
+  const comecar = ({ viaEsc = false } = {}) => {
     if (feito) return;
     feito = true;
     document.removeEventListener('keydown', onKey);
-    onComecar?.(nome.value);
+    onComecar?.(nome.value, { viaEsc });
   };
   const onKey = (e) => {
-    if (e.key === 'Escape') comecar();
+    if (e.key === 'Escape') comecar({ viaEsc: true });
   };
+
+  // "A Torno ligou o ERP, o MES, os documentos e o WhatsApp dela numa IA…" (só o que o pacote tem)
+  const sistemas = listaSistemas(sistemasDoPacote(d));
+  const pessoas = funcionarios ? `, com ${ctx.fmt.num(funcionarios)} pessoas` : '';
+  const ligou = sistemas ? `A Torno ligou ${sistemas} dela numa IA` : 'A Torno ligou os sistemas dela numa IA';
 
   const botao = h('button', { type: 'submit', class: 'btn btn--primary btn--lg btn--block' }, h('span', { class: 'btn__label' }, 'Começar'));
   const passos = [
@@ -44,10 +52,14 @@ export function renderBoasVindas(alvo, { ctx, onComecar } = {}) {
     ctx.demo?.nome ? h('p', { class: 'welcome__for' }, `Demonstração preparada para ${ctx.demo.nome}`) : null,
     h('h1', { class: 'welcome__title', id: 'bv-titulo' }, `Esta é a operação da ${String(ctx.empresa).replace(/\.$/, '')}.`),
     h('p', { class: 'welcome__lead' },
-      `Uma indústria fictícia ${artigoSetor(d.setor)}${funcionarios ? ` com ${ctx.fmt.num(funcionarios)} pessoas` : ''}. `,
-      'ERP, MES, fichas e procedimentos já estão no cérebro.'),
+      `Uma indústria fictícia ${artigoSetor(d.setor)}${pessoas}. `,
+      `${ligou} que responde qualquer pergunta da operação, mostra de onde tirou cada número e aprende com o que a equipe ensina.`),
+    h('p', { class: 'welcome__def' },
+      'Esse conjunto de dados, documentos e saber da equipe é o que chamamos de ', h('strong', null, 'cérebro da operação'), '.'),
     h('ul', { class: 'welcome__steps' }, passos.map(([ic, forte, resto]) => h('li', null,
       icon(ic, { size: 20 }), h('span', null, h('strong', null, forte), ` ${resto}`)))),
+    h('p', { class: 'welcome__ia' }, icon('info', { size: 18 }),
+      h('span', null, 'As respostas são geradas na hora por IA, lendo só os dados fictícios desta empresa.')),
     h('div', { class: 'field' },
       h('label', { class: 'field__label', for: nomeId }, 'Como devemos chamar você? (opcional)'),
       nome,

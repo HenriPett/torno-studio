@@ -9,7 +9,7 @@
 import { h, icon, button, segmented, spinner, sheet as uiSheet } from '../ui.js';
 import { perguntaDerivada } from '../ai/local-engine.js';
 import { TIPOS_APRENDIZADO, tituloDoTexto } from '../learning.js';
-import { cartaoAprendido } from './fontes.js';
+import { cartaoAprendido, marco } from './fontes.js';
 
 export { perguntaDerivada };
 
@@ -79,6 +79,18 @@ function svgCheck() {
   return svg;
 }
 
+/* Rascunho na sessionStorage: se a sessão cair (401) no meio da digitação, o texto volta ao reabrir. */
+const chaveRascunho = (ctx) => `td_ens_rascunho_${ctx?.demo?.id ?? ctx?.api?.demoId ?? 'demo'}`;
+function leRascunho(ctx) {
+  try { return sessionStorage.getItem(chaveRascunho(ctx)) || ''; } catch { return ''; }
+}
+function gravaRascunho(ctx, texto) {
+  try {
+    if (String(texto ?? '').trim()) sessionStorage.setItem(chaveRascunho(ctx), texto);
+    else sessionStorage.removeItem(chaveRascunho(ctx));
+  } catch { /* sem storage */ }
+}
+
 function abrirFolha(ctx, opts) {
   const fn = typeof ctx?.sheet === 'function' ? ctx.sheet : uiSheet;
   return fn({ lado: 'direita', classe: 'sheet--ensinar', ...opts });
@@ -113,7 +125,10 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
       id: idTexto, class: 'ens__texto', rows: '5', maxlength: String(MAX), autofocus: true,
       placeholder: placeholderDe(ctx, tipoAtual), 'aria-describedby': `${idTexto}-c`,
     });
-    campo.value = prev.texto ?? texto ?? '';
+    // ordem: o que veio de "Ensinar outra coisa" → texto pedido por quem abriu → rascunho salvo
+    const rascunho = prev.texto == null && !texto ? leRascunho(ctx) : '';
+    campo.value = prev.texto ?? (texto || rascunho);
+    const avisoRascunho = h('p', { class: 'ens__dica ens__rascunho', hidden: !rascunho }, 'Recuperamos o texto que você estava escrevendo.');
     const contador = h('span', { class: 'ens__contador num', id: `${idTexto}-c`, 'aria-live': 'polite' });
 
     const selArea = h('select', { class: 'ens__select', id: `${idTexto}-a` },
@@ -141,7 +156,7 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
       btnEnviar.disabled = enviando || n < MIN || campo.value.length > MAX;
       dica.hidden = !(n > 0 && n < MIN);
     }
-    campo.addEventListener('input', valida);
+    campo.addEventListener('input', () => { valida(); gravaRascunho(ctx, campo.value); avisoRascunho.hidden = true; });
     selArea.addEventListener('change', mostraMaquina);
     mostraMaquina();
     valida();
@@ -168,6 +183,8 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
         btnEnviar.replaceChildren(spinner({ size: 16 }), h('span', { class: 'btn__label' }, 'Ensinando…'));
         try {
           const item = await ctx.learning.add(dados);
+          gravaRascunho(ctx, '');
+          marco('ensino');
           confirmacao(item, dados);
         } catch (err) {
           enviando = false;
@@ -186,7 +203,7 @@ export function abrirEnsinar(ctx, { area, maquina, tipo = 'saber', origem, texto
     },
     h('fieldset', { class: 'ens__campo ens__campo--tipo' }, h('legend', null, 'O que é?'), seg),
     h('div', { class: 'ens__campo' },
-      h('label', { for: idTexto }, 'O que o cérebro precisa saber?'), campo,
+      h('label', { for: idTexto }, 'O que o cérebro precisa saber?'), avisoRascunho, campo,
       h('div', { class: 'ens__linha-contador' }, dica, contador)),
     h('div', { class: 'ens__duas' },
       h('div', { class: 'ens__campo' }, h('label', { for: selArea.id }, 'Área'), selArea),

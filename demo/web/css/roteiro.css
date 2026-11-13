@@ -1,0 +1,50 @@
+/* Roteiro "Experimente em 3 passos" do Início (src/ui/roteiro.js). Só tokens de styles.css. */
+
+.rt {
+  display: flex; flex-direction: column; gap: 14px; width: 100%; min-width: 0; padding: 20px;
+  border: 1px solid var(--border-subtle); border-radius: var(--r-lg); background: var(--surface);
+}
+.rt[hidden] { display: none; }
+.rt__cab { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; min-width: 0; }
+.rt__cab-textos { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; min-width: 0; }
+.rt__titulo { font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.01em; }
+.rt__progresso { font-size: var(--fs-sm); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.rt__fechar { width: 36px; height: 36px; margin: -8px -8px 0 0; flex: none; }
+
+.rt__barra { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+.rt__seg { height: 4px; border-radius: var(--r-full); background: var(--border-subtle); transition: background var(--dur-2) var(--ease); }
+.rt__seg.is-feito { background: var(--ok-text); }
+
+.rt__passos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.rt-passo { display: flex; align-items: flex-start; gap: 10px; min-width: 0; }
+.rt-passo__marca {
+  flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  border: 1px solid var(--border); color: var(--text-muted); font-size: var(--fs-xs); font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.rt-passo.is-atual .rt-passo__marca { border-color: var(--text); color: var(--text); }
+.rt-passo.is-feito .rt-passo__marca { border-color: transparent; background: var(--ok-subtle); color: var(--ok-text); }
+.rt-passo__corpo { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+.rt-passo__titulo { font-size: 15px; font-weight: 600; line-height: 24px; }
+.rt-passo.is-feito .rt-passo__titulo { color: var(--text-muted); }
+.rt-passo__texto { font-size: var(--fs-sm); line-height: 1.45; color: var(--text-muted); }
+.rt__btn { margin-top: 6px; max-width: 100%; min-width: 0; white-space: normal; text-align: left; line-height: 1.3; padding-block: 6px; }
+.rt__btn .btn__label { overflow-wrap: anywhere; }
+
+/* recolhido depois dos 3 passos */
+.rt.is-concluido { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 12px 16px; }
+.rt.is-concluido .rt__cab { order: 0; flex: 1 1 auto; align-items: center; }
+.rt.is-concluido .rt__titulo, .rt.is-concluido .rt__barra { display: none; }
+.rt.is-concluido .rt__progresso { font-size: 14px; font-weight: 600; color: var(--ok-text); }
+.rt.is-concluido .rt__passos { display: block; order: 1; flex: 1 1 100%; }
+.rt__fim { font-size: var(--fs-sm); color: var(--text-muted); }
+.rt.is-concluido .rt__fechar { margin: -6px -8px -6px 0; }
+
+@media (max-width: 1023px) {
+  .rt { padding: 16px; }
+  .rt__passos { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .rt__btn { min-height: 40px; }
+  .rt__fechar { width: 40px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rt__seg { transition: none; }
+}

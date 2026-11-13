@@ -3,13 +3,15 @@
 // Conteúdo reaproveitado de modules/integracoes.js, modules/seguranca.js, do celular do técnico
 // (manutencao.js) e do WhatsApp do representante (comercial.js). Pacote A.
 
-import { h, icon, badge, select, phoneFrame, statusInfo } from '../ui.js';
+import { h, icon, badge, select, phoneFrame, statusInfo, button } from '../ui.js';
 import { normalize } from '../format.js';
+import { CONTATO_URL } from '../features.js';
 
 const STATUS_INT = {
   conectado: ['Conectado', 'ok'],
   sincronizando: ['Sincronizando', 'accent'],
-  erro: ['Erro', 'danger'],
+  // integração com falha está sendo religada: aviso, não erro (o resto do cérebro segue respondendo)
+  erro: ['Reconectando', 'warn'],
   planejado: ['Planejado', 'neutral'],
 };
 
@@ -61,7 +63,7 @@ function deOndeVem(ctx) {
   const agora = Math.max(minutos(`${ctx.today}T10:00`), (syncs.length ? Math.max(...syncs) : 0) + 5);
   const fmt = ctx.fmt;
   return secao('respostas', 'De onde vêm as respostas',
-    h('p', { class: 'how__lead' }, `Nada é copiado à mão: o cérebro lê os sistemas que a ${ctx.empresaCurta || ctx.empresa} já usa.`),
+    h('p', { class: 'how__lead' }, `O cérebro lê os sistemas que a ${ctx.empresaCurta || ctx.empresa} já usa.`),
     conectores.length
       ? h('ul', { class: 'how-list' }, conectores.map((c) => {
         const [label, tone] = STATUS_INT[c.status] || [statusInfo(c.status).label, 'neutral'];
@@ -100,7 +102,7 @@ function quemVe(ctx) {
   }, icon('user', { size: 18 }), btnLabel);
   pinta();
   return secao('quem-ve', 'Quem vê o quê',
-    h('p', { class: 'how__lead' }, 'Cada pessoa só vê as áreas do seu perfil. A mesma pergunta tem respostas diferentes para o PCP e para a diretoria.'),
+    h('p', { class: 'how__lead' }, 'Cada pessoa só vê as áreas do seu perfil. A mesma pergunta tem respostas diferentes para o planejamento e para a diretoria.'),
     perfis.length ? h('ul', { class: 'how-list' }, perfis.map((p) => h('li', null,
       h('span', { class: 'how-list__icon', 'aria-hidden': 'true' }, icon('users', { size: 18 })),
       h('div', { class: 'how-list__main' },
@@ -183,8 +185,15 @@ function demonstracao() {
   return secao('demonstracao', 'Isto é uma demonstração',
     h('div', { class: 'how-demo' },
       h('p', { class: 'how__lead' },
-        'Empresa, pessoas e números foram inventados. Num projeto real, o cérebro é montado com os sistemas, documentos e permissões da sua empresa, começando por um diagnóstico.'),
-      h('p', null, h('a', { href: '/diagnostico/', target: '_blank', rel: 'noopener' }, 'Conversar com a Torno ›'))));
+        'Num projeto real, o cérebro é montado com os sistemas, documentos e permissões da sua empresa, começando por um diagnóstico.'),
+      h('p', null, linkContato({ class: 'btn btn--primary' }))));
+}
+
+/** "Falar com a Torno": página de contato do site, em nova aba. */
+function linkContato({ class: cls } = {}) {
+  return h('a', { class: cls, href: CONTATO_URL, target: '_blank', rel: 'noopener' },
+    h('span', { class: 'btn__label' }, 'Falar com a Torno'), icon('external', { size: 16 }),
+    h('span', { class: 'sr-only' }, ' (abre em nova aba)'));
 }
 
 export function render(el, ctx) {
@@ -192,7 +201,12 @@ export function render(el, ctx) {
     h('header', { class: 'page-header' },
       h('div', { class: 'page-header__text' },
         h('h1', { class: 'page-title' }, 'Como funciona'),
-        h('p', { class: 'page-subtitle' }, 'De onde vêm as respostas, quem vê o quê e onde a equipe pergunta.'))),
+        h('p', { class: 'page-subtitle' }, 'De onde vêm as respostas, quem vê o quê e onde a equipe pergunta.')),
+      typeof ctx.reverApresentacao === 'function'
+        ? button('Rever a apresentação', { icone: 'undo', onClick: () => ctx.reverApresentacao() })
+        : null),
+    h('p', { class: 'how-transparencia' }, icon('info', { size: 18 }),
+      h('span', null, 'Empresa, pessoas e números são fictícios. A IA é real e só lê estes dados.')),
     ctx.isEnabled('integracoes') ? deOndeVem(ctx) : null,
     ctx.isEnabled('seguranca') ? quemVe(ctx) : null,
     ondePergunta(ctx),

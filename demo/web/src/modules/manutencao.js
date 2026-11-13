@@ -4,7 +4,7 @@
 import { h } from '../ui.js';
 import {
   areaPage, listSection, statusBadge, seloRegistros, notesFor, learnItems, origemDados,
-  cap, T, gen, fmtOf,
+  cap, T, gen, fmtOf, paradoDe,
 } from '../ui/area-page.js';
 
 const RANK = { parada: 0, alerta: 1, manutencao: 2, operando: 3 };
@@ -59,7 +59,7 @@ export function render(el, ctx) {
     titulo: ctx.areaName?.('manutencao') || 'Manutenção',
     subtitulo: [`${cap(M)}, ordens de serviço e preventivas`, origemDados(ctx, 'manutencao')].filter(Boolean).join(' · '),
     numeros: [
-      { valor: f.num(paradas), rotulo: `parad${g}s`, tom: paradas ? 'danger' : 'ok' },
+      { valor: f.num(paradas), rotulo: paradoDe(ctx, { plural: paradas !== 1 }), tom: paradas ? 'danger' : 'ok' },
       { valor: f.num(alerta), rotulo: 'em alerta' },
       { valor: f.num(osAbertas), rotulo: `${osAbertas === 1 ? 'OS aberta' : 'OS abertas'}` },
     ],
