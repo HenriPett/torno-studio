@@ -6,7 +6,7 @@ prospects: escolhe-se o setor do cliente, ligam-se só os módulos que interessa
 demo funcionando, com ou sem IA real.
 
 - Sem etapa de build: HTML, módulos ES e JSON. Roda em qualquer servidor estático.
-- Publicada como Artifact privado do claude.ai (o "link aleatório").
+- Publicada como Artifact privado do claude.ai (o "link aleatório"): https://claude.ai/artifact/NuBtJUKT9uBr6mo2PA8dA6. Para republicar, publique `demo/index.html` com os arquivos de `css/`, `src/`, `data/` e `styles.css` e as capacidades `{db: {rules: [{path: "config", read: "view", write: "admin"}]}, user: {}, sample: {}}`.
 - Fica fora do site: o Astro não lê `demo/` (o `tsconfig.json` exclui a pasta).
 
 ## Rodar localmente
