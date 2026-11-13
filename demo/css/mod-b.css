@@ -490,3 +490,9 @@
   .com-dl-totals { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-1) var(--space-3); }
   .com-dl-totals dd { margin: 0; }
 }
+
+/* Textos longos e chips de fonte nunca alargam o cartão. */
+.op-card-title, .op-title-btn, .op-dica, .mkt-prod-name, .com-rep-name { overflow-wrap: anywhere; }
+.op-meta, .op-card-foot { min-width: 0; }
+:is(.cb-page, .com-page, .mkt-page, .op-page) .ref-chip { max-width: 100%; min-width: 0; }
+:is(.cb-page, .com-page, .mkt-page, .op-page) .ref-chip__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

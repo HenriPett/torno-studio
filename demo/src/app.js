@@ -17,6 +17,7 @@ let assistant = null;
 const moduleCache = new Map(); // id → módulo importado (ou {erro})
 let currentCleanup = null;
 let mountedContext = null;
+let renderToken = 0; // invalida renders em corrida (um await pode terminar depois de outro render começar)
 let sectorMeta = []; // de sectors.json
 
 const el = {};
@@ -104,10 +105,11 @@ async function boot() {
   assistant = await loadAssistant();
   setState({ mode: assistant.modo ? assistant.modo() : 'local' });
 
-  // 4. setor efetivo + dados
+  // 4. setor efetivo + dados (sem renderizar a rota aqui: onHashChange faz o primeiro render,
+  //    para não disparar dois renderRoute em corrida no boot)
   resolveSector();
   renderShell();
-  await loadSectorThen(renderRoute);
+  await loadSectorThen();
 
   window.addEventListener('hashchange', onHashChange);
   onHashChange();
@@ -374,6 +376,7 @@ function runCleanup() {
 }
 
 async function renderRoute() {
+  const token = ++renderToken; // este render passa a ser o atual; os anteriores viram obsoletos
   runCleanup();
   const s = getState();
   el.topTitle.textContent = s.route === 'admin' ? 'Administração da demo' : (FEATURE_BY_ID[s.route]?.nome || 'Visão geral');
@@ -383,6 +386,7 @@ async function renderRoute() {
     el.content.replaceChildren();
     try {
       const mod = await import('./admin.js');
+      if (token !== renderToken) return; // outro render começou enquanto o admin.js carregava
       const ctx = {
         ...buildCtx(), store: configStore, config: normalizeConfig(getState().config),
         applyConfig, reloadSector: () => loadSectorThen(renderRoute),
@@ -391,6 +395,7 @@ async function renderRoute() {
       const out = mod.render(el.content, ctx);
       if (typeof out === 'function') currentCleanup = out;
     } catch (err) {
+      if (token !== renderToken) return;
       console.error('[admin] falha', err);
       renderModuleError('admin', err);
     }
@@ -416,6 +421,7 @@ async function renderRoute() {
   mountedContext = ctx;
   try {
     const mod = await loadModule(s.route);
+    if (token !== renderToken) return; // import demorou: um render mais novo assumiu
     if (mod.erro) {
       renderModuleError(s.route, mod.erro);
     } else if (typeof mod.render === 'function') {
@@ -427,6 +433,7 @@ async function renderRoute() {
       renderModuleError(s.route, new Error('o módulo não exporta render(el, ctx)'));
     }
   } catch (err) {
+    if (token !== renderToken) return;
     console.error(`[módulo ${s.route}] erro ao renderizar`, err);
     renderModuleError(s.route, err);
   }
