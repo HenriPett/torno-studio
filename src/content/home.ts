@@ -81,6 +81,25 @@ export interface HomeContent {
   fit: { eyebrow: string; title: string; yesTitle: string; yes: string[]; noTitle: string; no: string[] };
   faq: { eyebrow: string; title: string; items: FaqEntry[] };
   cta: { title: string; text: string; secondary: string };
+  /** Contrato 2026-11-13: adoção de IA na indústria (IBGE) e onde entramos. Renderizado pelo HomePage. */
+  adoption?: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    /** Série para gráfico: ex. [{label:'2022', value:16.9, display:'16,9%'}, {label:'2024', value:41.9, display:'41,9%'}]. */
+    series: { label: string; value: number; display: string }[];
+    /** Números de apoio com fonte. */
+    facts: { value: string; label: string; source: { label: string; href: string } }[];
+    note: string;
+  };
+  impact?: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    /** Resultados públicos anonimizados, com fonte. */
+    items: { value: string; label: string; context: string; area: string; source: { label: string; href: string }; scope: 'industria' | 'global' }[];
+    note: string;
+  };
 }
 
 export const MUNDOLOGISTICA_URL = 'https://mundologistica.com.br/noticias/loopt-ia-terminais-de-conteineres';
