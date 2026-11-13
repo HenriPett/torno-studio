@@ -204,24 +204,27 @@ export function render(el, ctx) {
   const tipoBtns = h('div', { class: 'mkt-seg', role: 'group', 'aria-label': 'Tipo de dúvida' });
 
   function gerarResposta(p, tipo) {
+    const cod = normalize(p.nome).includes(normalize(p.sku)) ? '' : ` (código ${p.sku})`;
     const attrs = Object.entries(p.ficha?.atributos || {});
     const specs = p.ficha?.especificacoes || [];
     const partes = [];
     if (tipo === 'spec') {
-      partes.push(`Olá! Sobre o ${p.nome} (código ${p.sku}):`);
+      partes.push(`Olá! Sobre o ${p.nome}${cod}:`);
       if (attrs.length) partes.push(attrs.map(([k, v]) => `${k}: ${v}`).join('; ') + '.');
       if (specs.length) partes.push(`Controlamos na produção: ${specs.map((e) => `${e.caracteristica.toLowerCase()} ${spec(e)}`).join('; ')}.`);
       if (!attrs.length && !specs.length) partes.push('A ficha técnica ainda não tem atributos liberados; vou confirmar com a engenharia.');
       partes.push('Posso enviar a ficha técnica completa, se quiser.');
     } else if (tipo === 'prazo') {
       const baixo = p.estoque < p.estoque_minimo;
-      partes.push(`Olá! O ${p.nome} (${p.sku}) tem prazo padrão de ${p.prazo_dias} dias.`);
-      partes.push(baixo
+      partes.push(`Olá! O ${p.nome}${cod} tem prazo padrão de ${p.prazo_dias} dias.`);
+      partes.push(!(p.estoque > 0)
+        ? 'Não temos em estoque agora: é fabricado sob pedido, então vale esse prazo a partir da confirmação.'
+        : baixo
         ? `No momento o estoque está baixo (${fmt.num(p.estoque)} ${p.unidade || T('unidade')}), então para volumes maiores conte com o prazo de produção.`
         : `Hoje temos ${fmt.num(p.estoque)} ${p.unidade || T('unidade')} em estoque, então quantidades menores podem sair antes.`);
       partes.push(`Preço de tabela: ${fmt.money(p.preco)} por ${p.unidade || T('unidade')}. Condições e desconto, o seu ${T('representante')} confirma.`);
     } else {
-      partes.push(`Olá! Sobre cuidados e uso do ${p.nome} (${p.sku}):`);
+      partes.push(`Olá! Sobre cuidados e uso do ${p.nome}${cod}:`);
       if (p.descricao_comercial) partes.push(p.descricao_comercial);
       const uso = [...attrs.filter(([k, v]) => RE_USO.test(normalize(`${k} ${v}`))).map(([k, v]) => `${k}: ${v}`),
         ...specs.filter((e) => RE_USO.test(normalize(e.caracteristica))).map((e) => `${e.caracteristica}: ${spec(e)}`)];

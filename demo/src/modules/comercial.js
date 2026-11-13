@@ -486,7 +486,6 @@ export function render(el, ctx) {
 
   // ---------- WhatsApp ----------
   function abaWhats() {
-    const r0 = reps[0];
     let sugs = [];
     try { sugs = (ctx.assistant?.sugestoes?.('comercial') || []).slice(0, 4); } catch { sugs = []; }
     let painel;
@@ -512,7 +511,7 @@ export function render(el, ctx) {
         card({
           titulo: 'Como funciona',
           corpo: h('ol', { class: 'com-steps' },
-            h('li', null, `${r0 ? r0.nome : `O ${T('representante')}`} manda a dúvida no WhatsApp, do jeito que falaria com o escritório.`),
+            h('li', null, `O ${T('representante')} manda a dúvida no WhatsApp, do jeito que falaria com o escritório.`),
             h('li', null, 'O assistente consulta estoque, preço, prazo e pedidos no ERP, só da carteira dele.'),
             h('li', null, 'A resposta sai em segundos e cita de onde veio cada número.'),
             h('li', null, 'Desconto fora da regra vira pedido de aprovação, não promessa.')),

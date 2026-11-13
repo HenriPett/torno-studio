@@ -86,7 +86,7 @@ export function render(el, ctx) {
     h('div', { class: 'cb-intro-icon', 'aria-hidden': 'true' }, icon('brain')),
     h('div', { class: 'cb-intro-text' },
       h('p', { class: 'cb-intro-lead' },
-        `Um só lugar para perguntar sobre a ${ctx.empresa || d.empresa?.nome || 'empresa'}. `,
+        `Um só lugar para perguntar sobre a ${String(ctx.empresa || d.empresa?.nome || 'empresa').replace(/\.$/, '')}. `,
         'O cérebro reúne ERP, MES, planilhas, fichas técnicas, procedimentos, normas, NCs, contratos, ',
         'catálogos, e-mails e chamados. Cada pessoa só consulta o que a área dela pode ver, e toda resposta vem com a fonte.'),
       h('ul', { class: 'cb-intro-nums' },
