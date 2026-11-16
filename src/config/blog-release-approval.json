@@ -2134,6 +2134,32 @@
           "sha256": "00fa0ab61055ab852aeca86787c773ea0a33cf9e12f0560afd99702baaf82e4b"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261116-estrutura-produto-bom",
+      "intentId": "buyer-bill-of-materials-product-structure-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/estrutura-produto-bom-sistema-aceite/",
+      "contentRevision": "2410a79d390863c7997d5384181dd7d23a83e427c1b51d467272a8b09eb176ae",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-16T15:33:49Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-16T15:32:49Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-16-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): NO-GO às 2026-11-16T15:24:45Z (arredondamento 0,46 → 22,5 inexistente; frase absoluta sobre ausência de norma), corrigida pelo autor junto com notas não bloqueantes (calendário do exemplo recuado 35 dias, '30 RF-100 que sobrarem' alinhado, Senior 5.10.3 descontinuada em 30/09/2025); re-revisão GO às 2026-11-16T15:32:49Z com aritmética, datas, figura e hashes conferidos; diff final sujeito a revisão final independente. Fontes abertas em 16/11/2026: ISO 10007:2017 (catálogo ISO); SAP Help (refugo de componente, fantasma, finalidade da lista, mudança com número de modificação, releitura de dados mestres, itens alternativos); Microsoft Learn (versões de BOM, tipos de linha e fantasma, cálculo de refugo, princípios de baixa, mudanças de última hora); Odoo 18 (ECO, listas multinível e kits) e Odoo latest (consumo flexível); Senior 5.10.3 (engenharia de produto). Não lidos: texto da ISO 10007; dicionário APICS/ASCM; SAP 1610 e Odoo 19 (robots). Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-bom-vista-explodida-baloes.svg",
+          "sha256": "44d2df1490e80d35dcd193bf3edfd15037bdd757a8ca121ba357499015a034b2"
+        },
+        {
+          "path": "torno-bom-regua-revisoes-op.svg",
+          "sha256": "61e5957f3f480f3533cba3585894fa6f4a24ed855e556e51da6ad31fb14fb4be"
+        }
+      ]
     }
   ]
 }
