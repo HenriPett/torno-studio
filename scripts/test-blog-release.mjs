@@ -83,6 +83,7 @@ const expected = [
   ['torno-artigo-pt-20261113-assistente-ia-documentos', '/blog/assistente-ia-documentos-internos-testar-respostas/', '4182729c32fb08e9363882de5a7d364881711be153264b98e72c867cb1400d67', ['torno-assistente-arquivo-vigente.svg', 'torno-assistente-boletim-prova.svg']],
   ['torno-artigo-pt-20261113-oee-sistema', '/blog/oee-sistema-calculo-definicoes-aceite/', '8ed5607fb42df4393215b6e48cc75a480375428609c8d766001d982b341f22bd', ['torno-oee-manometro-tres-regras.svg', 'torno-oee-ampulheta-turno.svg']],
   ['torno-artigo-pt-20261113-manutencao-preventiva-sistema', '/blog/manutencao-preventiva-sistema-mtbf-mttr-aceite/', '70a3c1a6083a6f8e3e24a8f7729a7bebf9934de61958c231233ded61318c809d', ['torno-preventiva-horimetro-calendario.svg', 'torno-preventiva-linha-tempo-mtbf.svg']],
+  ['torno-artigo-pt-20261116-nao-conformidade-sistema', '/blog/nao-conformidade-rnc-sistema-acao-corretiva-aceite/', '8f1e9140350faaa5206842a9aa443dfc4f343d31f842c2fc1c920f457f3ebb4b', ['torno-rnc-etiqueta-segregado.svg', 'torno-rnc-carimbos-disposicao.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

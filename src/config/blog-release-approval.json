@@ -2108,6 +2108,32 @@
           "sha256": "3ee2717989503dcad87577e5d802d027e1836bccf203ed8a64ba3970338dff1d"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261116-nao-conformidade-sistema",
+      "intentId": "buyer-nonconformity-corrective-action-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/nao-conformidade-rnc-sistema-acao-corretiva-aceite/",
+      "contentRevision": "8f1e9140350faaa5206842a9aa443dfc4f343d31f842c2fc1c920f457f3ebb4b",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-16T11:42:04Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-16T11:36:05Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-16-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-16T11:36:05Z sem bloqueios; notas não bloqueantes aplicadas pelo autor (correção × ação corretiva, RDC 665 art. 120 V a VII e art. 119, Global ACI, causa do exemplo sem contador de vida, ISO 9000:2026, fonte DNV GL para 8.7/10.2, concordância, folgas das figuras); SVGs re-renderizados e hashes conferidos; diff final sujeito a revisão final independente. Fontes abertas em 16/11/2026: ISO 9001:2026 (iso.org/standard/9001, publicada em 16/09/2026); ISO 9001:2015 (catálogo ISO); ISO 9000:2015 (cópia Public.Resource.Org, verbetes 3.12.x legíveis); DIN Media (DIN EN ISO 9000:2026-09); DQS (transição); RDC 665/2022 arts. 115–120 e retificação de 25/05/2022; guia DNV GL ISO 9001:2015; Microsoft Learn (Dynamics 365 non-conformance); SAP Help (notificações de qualidade); Odoo 17 Quality. Não lidos: textos pagos da ISO 9001, ISO 9000:2026, IATF 16949; ISO OBP; guias ISO/TC 176 (proxy); catálogo ABNT. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta; não é parecer de certificação."
+      },
+      "assets": [
+        {
+          "path": "torno-rnc-etiqueta-segregado.svg",
+          "sha256": "daec8a995ccae07206cc422fe4bde58f32119728daf6b70aa5813740f6d84bd8"
+        },
+        {
+          "path": "torno-rnc-carimbos-disposicao.svg",
+          "sha256": "00fa0ab61055ab852aeca86787c773ea0a33cf9e12f0560afd99702baaf82e4b"
+        }
+      ]
     }
   ]
 }
