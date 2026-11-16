@@ -2160,6 +2160,32 @@
           "sha256": "61e5957f3f480f3533cba3585894fa6f4a24ed855e556e51da6ad31fb14fb4be"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261116-mrp-necessidade-materiais",
+      "intentId": "buyer-mrp-material-requirements-planning-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/mrp-calculo-necessidade-materiais-sistema-aceite/",
+      "contentRevision": "b846764710fa74688c224913e4a60d1808ce038d7b473dba0ef98909d744a954",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-16T21:33:12Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-16T21:31:49Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-16-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-16T21:28:06Z sem bloqueantes, com aritmética e calendário refeitos em Python (feriado de 20/11) e 15 de 16 fontes reabertas; 6 notas não bloqueantes aplicadas pelo autor (FAQ do Odoo, link e claim das mensagens de ação, bibliografia de Orlicky, nome das margens, limit da cerca de cobertura, horário do PC 7702); re-revisão GO às 2026-11-16T21:31:49Z com hash conferido; diff final sujeito a revisão final independente. Fontes abertas em 16/11/2026: SAP Help 4.6C (cálculo da necessidade líquida, procedimento do MRP, cálculo e procedimentos de lote, lote fixo); Microsoft Learn Dynamics 365 (mensagens de ação, firmar pedidos planejados, vinculação do estoque de segurança, cerca de cobertura, calendários, margens de segurança, configurações padrão de pedido) e Business Central (parâmetros de planejamento); Odoo 18 (regras de reposição) e Odoo master (MPS); Senior X (MRP); Agência Senado (Lei 14.759/2023). Livro de Orlicky citado só pela bibliografia (catálogo TAMU), não lido. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-mrp-registro-caderno.svg",
+          "sha256": "2f36216830774ecc9f8d76ceb4c9601ea55d56f9d618b07fe9c52f0ceae13127"
+        },
+        {
+          "path": "torno-mrp-serrote-estoque-projetado.svg",
+          "sha256": "c398683b65aa2952a6896037208e075ad21f4a5fbf85f0ea5bf03bcfa705bb2e"
+        }
+      ]
     }
   ]
 }
