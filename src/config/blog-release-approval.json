@@ -2238,6 +2238,32 @@
           "sha256": "7e77a01456047a8f24c8c09ec72810074a663746c1700a3f2630407bebb2c6dd"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261117-orcamento-usinagem",
+      "intentId": "buyer-job-shop-quote-costing-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/orcamento-usinagem-cotacao-pecas-sistema-aceite/",
+      "contentRevision": "08416c1d2a2317e96a194db6f59aeb33a925890926392def4721b8d90543be21",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-17T21:27:16Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-17T21:26:27Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-17-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-17T21:26:27Z, sem bloqueantes; correções aplicadas pelo revisor (concordância; piso de margem de 15% definido no exemplo para tornar verificável o critério da alteração manual do preço, margem resultante R$ 995,00 = 9,6%). Exemplo refeito em Python com Decimal (46 peças por barra, R$ 15,46 por peça, hora R$ 180, faixas 50/200/1.000 a R$ 70,95/58,27/55,95, quatro entregas 15,8%, revisão C 41 peças, OP 7310 R$ 8.725,24 e margem 13,1%) e figuras conferidas. Fontes abertas em 17/11/2026: Business Central (standard cost), Odoo 18 (MO costs), SAP 4.6C (quantity structure), Senior 5.10.3 (formação de preço, descontinuada em 30/09/2025), CVM Deliberação 575/2009 (CPC 16), Sebrae/PR (markup divisor) e Código Civil arts. 427, 428 e 431 em reprodução de terceiro (Planalto bloqueado). Revisão final independente: ver registro ROTINA-2026-11-17-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; não é parecer fiscal, contábil ou jurídico; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-orcamento-barra-cortes.svg",
+          "sha256": "8e039a34bb15ab1f3fb6de1e3d3564c55c0475fc6424f75458768f235535abc3"
+        },
+        {
+          "path": "torno-orcamento-preco-quantidade.svg",
+          "sha256": "c114fa0ec831f43694197ae4027cfb38009788fdac429159092f98aa2f1b2722"
+        }
+      ]
     }
   ]
 }
