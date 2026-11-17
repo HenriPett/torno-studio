@@ -2212,6 +2212,32 @@
           "sha256": "7ab2dc336ce4b6d1d906b6d440f93f8f05a28b0bd48c853f2938e4413f055bf0"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261117-industrializacao-terceiros",
+      "intentId": "buyer-subcontracting-third-party-processing-stock-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/industrializacao-terceiros-remessa-retorno-sistema-aceite/",
+      "contentRevision": "e4814dbdc3b15f0e55c5b2257aa844a1c1900c1ff42106c67923b0414ce32167",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-17T15:45:57Z",
+      "reviewedBy": "Revisor final independente (agente Claude opus, não redator nem revisor factual)",
+      "reviewedAt": "2026-11-17T15:45:28Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-17-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): NO-GO às 2026-11-17T15:32:23Z porque a modelagem do material em terceiros como recebimento programado aparecia como \"forma usual\" sem fonte; corrigido pelo autor (rotulado como recomendação da Torno, com o contraexemplo do SAP) e 6 notas não bloqueantes aplicadas (RC 24786/2021 como caso em cadeia, CFOP 1.124 completo, limite do RIPI, saldo de SR-125-Z, débito do refugo acima da tolerância, 990 planejados); re-revisão GO às 2026-11-17T15:37:37Z com hashes conferidos. Exemplo refeito em Python (saldo 513, 13 sem explicação, cobrança R$ 186 × R$ 180, MRP 495, prazos de 180 dias). Fontes abertas em 17/11/2026: RICMS-SP arts. 402 e 409; Respostas à Consulta SEFAZ-SP 24786/2021 e 34218/2026; tabela de CFOP da SEF-SC; SC SRRF10 10.015/2020 (NetCPA) e art. 43 do RIPI (publicação original na Câmara, lida pelo revisor); Guia Prático EFD ICMS/IPI 3.2.3 (cópia de terceiro); Senior X Bloco K; estudo de caso da Receita Estadual do PR; documentação de fornecedor (Business Central, SAP, Odoo 17, TOTVS). Revisão final independente (agente Claude opus, não redator nem revisor factual): NO-GO às 2026-11-17T15:42:57Z por cronologia impossível num critério de aceite (saldo de 13 em 14/11, antes do retorno de 17/11); corrigido pelo autor (saldo de 400 em 14/11, saldos 400 → 25 → 13, saldo total 900 com 400 na NF 4501, limite do RIPI alinhado, CFOP 5.124 para serviços e mercadorias do industrializador); GO de conteúdo às 2026-11-17T15:45:28Z com linha do tempo refeita em Python e test:blog 80/80 em cópia com este hash. Aprovação anterior (15:38:07Z, hash 9e01e9cf…) substituída por esta. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; não é parecer fiscal; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-industrializacao-extrato-terceiros.svg",
+          "sha256": "3ebb7c3e907a4b34eae43f1108cc6bf362c214a2f994d38bd31a807147d34646"
+        },
+        {
+          "path": "torno-industrializacao-rota-balanca.svg",
+          "sha256": "7e77a01456047a8f24c8c09ec72810074a663746c1700a3f2630407bebb2c6dd"
+        }
+      ]
     }
   ]
 }

@@ -87,6 +87,7 @@ const expected = [
   ['torno-artigo-pt-20261116-estrutura-produto-bom', '/blog/estrutura-produto-bom-sistema-aceite/', '2410a79d390863c7997d5384181dd7d23a83e427c1b51d467272a8b09eb176ae', ['torno-bom-vista-explodida-baloes.svg', 'torno-bom-regua-revisoes-op.svg']],
   ['torno-artigo-pt-20261116-mrp-necessidade-materiais', '/blog/mrp-calculo-necessidade-materiais-sistema-aceite/', 'b846764710fa74688c224913e4a60d1808ce038d7b473dba0ef98909d744a954', ['torno-mrp-registro-caderno.svg', 'torno-mrp-serrote-estoque-projetado.svg']],
   ['torno-artigo-pt-20261117-programacao-producao', '/blog/programacao-producao-sequenciamento-capacidade-sistema-aceite/', '3762833fbb8912e2c330e2ff71db49afce1c2dcd9d42726dfa3b4d1b44516ed4', ['torno-programacao-quadro-magnetico.svg', 'torno-programacao-trem-setups.svg']],
+  ['torno-artigo-pt-20261117-industrializacao-terceiros', '/blog/industrializacao-terceiros-remessa-retorno-sistema-aceite/', 'e4814dbdc3b15f0e55c5b2257aa844a1c1900c1ff42106c67923b0414ce32167', ['torno-industrializacao-extrato-terceiros.svg', 'torno-industrializacao-rota-balanca.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
