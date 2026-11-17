@@ -2186,6 +2186,32 @@
           "sha256": "c398683b65aa2952a6896037208e075ad21f4a5fbf85f0ea5bf03bcfa705bb2e"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261117-programacao-producao",
+      "intentId": "buyer-production-scheduling-finite-capacity-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/programacao-producao-sequenciamento-capacidade-sistema-aceite/",
+      "contentRevision": "3762833fbb8912e2c330e2ff71db49afce1c2dcd9d42726dfa3b4d1b44516ed4",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-17T11:45:27Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-17T11:44:54Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-17-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): NO-GO às 2026-11-17T11:37:29Z por critério de desempate não declarado na linha da regra de menor tempo; corrigido pelo autor (desempate pela necessidade declarado para os empates de 90 e 120 min) com 4 notas não bloqueantes aplicadas (instituição e ano das notas de Bonn inferidos da URL, folga de 210 min, rótulo de troca no quadro, leitura da página do Dynamics 365); re-revisão GO às 2026-11-17T11:44:54Z com hashes conferidos. Exemplo refeito em Python (carga 78,1%, seis regras, 5.040 sequências, quebra de máquina, tinta azul). Fontes abertas em 17/11/2026: Microsoft Learn Dynamics 365 (capacidade finita, job scheduling, operations scheduling, master plans) e Business Central (centros de trabalho e máquina); Odoo 18 (centros de trabalho); SAP Help (setup dependente da sequência; lotes dependentes da sequência, SCM 7.0 EhP1); Senior X (programação de produção); notas de aula de Tim Nieberg (or.uni-bonn.de) sobre SPT e EDD. Diff final sujeito a revisão final independente. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-programacao-quadro-magnetico.svg",
+          "sha256": "a30944ee1fe0c64216aecec3753173f9c52d502ed224907ec2f62cf134db1a4c"
+        },
+        {
+          "path": "torno-programacao-trem-setups.svg",
+          "sha256": "7ab2dc336ce4b6d1d906b6d440f93f8f05a28b0bd48c853f2938e4413f055bf0"
+        }
+      ]
     }
   ]
 }

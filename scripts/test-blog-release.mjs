@@ -86,6 +86,7 @@ const expected = [
   ['torno-artigo-pt-20261116-nao-conformidade-sistema', '/blog/nao-conformidade-rnc-sistema-acao-corretiva-aceite/', '8f1e9140350faaa5206842a9aa443dfc4f343d31f842c2fc1c920f457f3ebb4b', ['torno-rnc-etiqueta-segregado.svg', 'torno-rnc-carimbos-disposicao.svg']],
   ['torno-artigo-pt-20261116-estrutura-produto-bom', '/blog/estrutura-produto-bom-sistema-aceite/', '2410a79d390863c7997d5384181dd7d23a83e427c1b51d467272a8b09eb176ae', ['torno-bom-vista-explodida-baloes.svg', 'torno-bom-regua-revisoes-op.svg']],
   ['torno-artigo-pt-20261116-mrp-necessidade-materiais', '/blog/mrp-calculo-necessidade-materiais-sistema-aceite/', 'b846764710fa74688c224913e4a60d1808ce038d7b473dba0ef98909d744a954', ['torno-mrp-registro-caderno.svg', 'torno-mrp-serrote-estoque-projetado.svg']],
+  ['torno-artigo-pt-20261117-programacao-producao', '/blog/programacao-producao-sequenciamento-capacidade-sistema-aceite/', '3762833fbb8912e2c330e2ff71db49afce1c2dcd9d42726dfa3b4d1b44516ed4', ['torno-programacao-quadro-magnetico.svg', 'torno-programacao-trem-setups.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
