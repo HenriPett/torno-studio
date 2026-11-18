@@ -2316,6 +2316,36 @@
           "sha256": "af41e3a4208b8aa0c6f919d345a99e9073f96ac201685888340cc9d4613d16ca"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261118-kanban-producao",
+      "intentId": "buyer-kanban-pull-replenishment-cards-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/kanban-producao-cartoes-reposicao-sistema-aceite/",
+      "contentRevision": "d312ad91029378ee26423b63972f2b24b4370d28f4d6de301799c221d4cd5b55",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-18T21:25:55Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-18T21:25:04Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-18-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-18T21:25:04Z, sem bloqueantes; correções aplicadas pelo revisor (frase 17/18/19 cartões separada entre regra de arredondamento e forma (C − 1) do Oracle; regra de alerta do exemplo alinhada ao critério de aceite — completa 2 dias úteis; rótulo do supermercado reposicionado na planta SVG). Exemplo refeito em Python (17,16→18; 2,2→3; 1,1→2; 20,02→21; 12,87→13; auditoria 18 × 17; dias da semana conferidos). Fontes reabertas em 18/11/2026: Lean Enterprise Institute (verbete Kanban), Toyota (TPS), Akturk e Erhun (IJPR 1999), Co e Moosa (IIE Transactions 1997, resumo), Oracle EBS MRP User's Guide (Kanban Planning, documentação de fornecedor), SAP Help (documentação de fornecedor), AllAboutLean. Revisão final independente: ver registro ROTINA-2026-11-18-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não prescreve fator de segurança, tamanho de contêiner nem número de cartões; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-kanban-planta-circuitos.svg",
+          "sha256": "b6416793277f540da927ad7a68e3999b29c43a962389aab5c34fbcbaa86501b0"
+        },
+        {
+          "path": "torno-kanban-cartao-substituido.svg",
+          "sha256": "262a5f19a98ef2b9fef0365929459e96465c6531e94f85a871517925d43d7f62"
+        },
+        {
+          "path": "torno-kanban-quadro-redimensionamento.svg",
+          "sha256": "2f1c2e2367e22f486ad073392f59398f0038a9934796e747b619a4bcb43edc13"
+        }
+      ]
     }
   ]
 }

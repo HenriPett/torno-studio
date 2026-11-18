@@ -91,6 +91,7 @@ const expected = [
   ['torno-artigo-pt-20261117-orcamento-usinagem', '/blog/orcamento-usinagem-cotacao-pecas-sistema-aceite/', '08416c1d2a2317e96a194db6f59aeb33a925890926392def4721b8d90543be21', ['torno-orcamento-barra-cortes.svg', 'torno-orcamento-preco-quantidade.svg']],
   ['torno-artigo-pt-20261118-calibracao-instrumentos', '/blog/calibracao-instrumentos-medicao-sistema-aceite/', 'da8cd73ed0336f5848f6bec589c6b792429c07682e93c54761184c04fd08345e', ['torno-calibracao-faixa-ema.svg', 'torno-calibracao-janela-impacto.svg']],
   ['torno-artigo-pt-20261118-inspecao-recebimento', '/blog/inspecao-recebimento-amostragem-nqa-sistema-aceite/', 'ef4cfb700aadd26f8c4d3330bbce2a1df6de389bc212c7ca1e2ab5b875538ba1', ['torno-inspecao-grade-amostra.svg', 'torno-inspecao-chave-regimes.svg']],
+  ['torno-artigo-pt-20261118-kanban-producao', '/blog/kanban-producao-cartoes-reposicao-sistema-aceite/', 'd312ad91029378ee26423b63972f2b24b4370d28f4d6de301799c221d4cd5b55', ['torno-kanban-planta-circuitos.svg', 'torno-kanban-cartao-substituido.svg', 'torno-kanban-quadro-redimensionamento.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
