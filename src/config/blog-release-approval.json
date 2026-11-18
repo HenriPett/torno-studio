@@ -2264,6 +2264,32 @@
           "sha256": "c114fa0ec831f43694197ae4027cfb38009788fdac429159092f98aa2f1b2722"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261118-calibracao-instrumentos",
+      "intentId": "buyer-measuring-instrument-calibration-control-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/calibracao-instrumentos-medicao-sistema-aceite/",
+      "contentRevision": "da8cd73ed0336f5848f6bec589c6b792429c07682e93c54761184c04fd08345e",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-18T11:39:59Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-18T11:39:19Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-18-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-18T11:39:19Z, sem bloqueantes; correções aplicadas pelo revisor (gênero de EMA na figura e no alt; ponto de 50 mm também na zona de dúvida; 'garante' suavizado; ressalva sobre liberar lotes por amostra de 5 peças; data de vencimento × bloqueio; cláusula 7.1.5.2 citada como reprodução pública; ILAC-G8 pela cópia NITE com texto original em inglês; ILAC-G24/OIML D10 de 2007 com indicação da revisão de 2022). Exemplo refeito em Python com Decimal (|erro|+U por ponto contra EMA 0,004 mm, 3 de 5 pontos fora, janela 05/10–10/11 com 1.200 peças, limiar 39,9875, 700 peças suspeitas). Fontes abertas em 18/11/2026: iso.org (ISO 9001:2026), reprodução da 7.1.5.2, VIM (JCGM), curso Inmetro/Enap, OIML D10:2007, ILAC-P14:09/2020, ILAC-G8:09/2019 (NITE), UKAS LAB 48 ed. 5, página RBC/Inmetro, documentos IPT/Cgcre, SAP Help 4.6C. Revisão final independente: ver registro ROTINA-2026-11-18-0815-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; não é parecer normativo, metrológico ou de certificação; não prescreve intervalo, EMA ou regra de decisão; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-calibracao-faixa-ema.svg",
+          "sha256": "2b73af79134381d033e969cad1135c0ed89d55583115d970f29fbdcbc060ffc8"
+        },
+        {
+          "path": "torno-calibracao-janela-impacto.svg",
+          "sha256": "731761b9c5021ac0b7d44c90ac0ee5ae087f912e0c17de516d7ba9b3d56f775a"
+        }
+      ]
     }
   ]
 }

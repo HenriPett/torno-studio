@@ -89,6 +89,7 @@ const expected = [
   ['torno-artigo-pt-20261117-programacao-producao', '/blog/programacao-producao-sequenciamento-capacidade-sistema-aceite/', '3762833fbb8912e2c330e2ff71db49afce1c2dcd9d42726dfa3b4d1b44516ed4', ['torno-programacao-quadro-magnetico.svg', 'torno-programacao-trem-setups.svg']],
   ['torno-artigo-pt-20261117-industrializacao-terceiros', '/blog/industrializacao-terceiros-remessa-retorno-sistema-aceite/', 'e4814dbdc3b15f0e55c5b2257aa844a1c1900c1ff42106c67923b0414ce32167', ['torno-industrializacao-extrato-terceiros.svg', 'torno-industrializacao-rota-balanca.svg']],
   ['torno-artigo-pt-20261117-orcamento-usinagem', '/blog/orcamento-usinagem-cotacao-pecas-sistema-aceite/', '08416c1d2a2317e96a194db6f59aeb33a925890926392def4721b8d90543be21', ['torno-orcamento-barra-cortes.svg', 'torno-orcamento-preco-quantidade.svg']],
+  ['torno-artigo-pt-20261118-calibracao-instrumentos', '/blog/calibracao-instrumentos-medicao-sistema-aceite/', 'da8cd73ed0336f5848f6bec589c6b792429c07682e93c54761184c04fd08345e', ['torno-calibracao-faixa-ema.svg', 'torno-calibracao-janela-impacto.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
