@@ -2290,6 +2290,32 @@
           "sha256": "731761b9c5021ac0b7d44c90ac0ee5ae087f912e0c17de516d7ba9b3d56f775a"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261118-inspecao-recebimento",
+      "intentId": "buyer-receiving-inspection-sampling-plan-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/inspecao-recebimento-amostragem-nqa-sistema-aceite/",
+      "contentRevision": "ef4cfb700aadd26f8c4d3330bbce2a1df6de389bc212c7ca1e2ab5b875538ba1",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-18T15:31:21Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-18T15:30:42Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-18-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-18T15:30:42Z, sem bloqueantes; correções aplicadas pelo revisor (regra 4.7.4 da MIL-STD-105E completada com as quatro condições de volta do atenuado ao normal, no corpo e no claim; Re 6 do severo explicitado como derivado de Re = Ac + 1, pois a vinheta AQLSchemes só dá n e Ac; limite da confirmação independente dos planos registrado). Exemplo refeito em Python (regimes lote a lote RC-01 a RC-11, 3/11 lotes rejeitados, 49/2.200 defeituosas, RC-04 4.848 + 152, Pa binomial n = 200 com Ac 7 e Ac 5; hipergeométrica difere < 0,6 p.p.). Fontes reabertas em 18/11/2026: MIL-STD-105E (DTIC), vinheta e página CRAN do AQLSchemes, NIST/SEMATECH e-Handbook 6.2.x, ASQ, iso.org (ISO 9001:2026 e ISO 2859-1:2026), reprodução da ISO 9001:2015 8.4, SAP Learning (documentação de fornecedor), Quality Magazine, dissertação EESC-USP. Revisão final independente: ver registro ROTINA-2026-11-18-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, dois SVGs, registros e metadados editoriais; exemplo fictício; não é parecer normativo nem de certificação; não prescreve NQA, nível de inspeção nem plano de amostragem; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-inspecao-grade-amostra.svg",
+          "sha256": "324d060495ac9896dd759d886b4a4952fa2a802695c9456ac9a18fce0455ec5e"
+        },
+        {
+          "path": "torno-inspecao-chave-regimes.svg",
+          "sha256": "af41e3a4208b8aa0c6f919d345a99e9073f96ac201685888340cc9d4613d16ca"
+        }
+      ]
     }
   ]
 }
