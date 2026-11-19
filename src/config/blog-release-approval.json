@@ -2346,6 +2346,36 @@
           "sha256": "2f1c2e2367e22f486ad073392f59398f0038a9934796e747b619a4bcb43edc13"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261119-cep-cartas-controle",
+      "intentId": "buyer-spc-control-charts-capability-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/cep-controle-estatistico-processo-cartas-sistema-aceite/",
+      "contentRevision": "0ff9eb020e15f51c2dcf7f5dc5c1d7cb6ae11bdbc1161fa0543027e528100391",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-19T11:41:30Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-19T11:40:17Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-19-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-19T11:40:17Z, sem bloqueantes; correções aplicadas pelo revisor (regras de tendência Western Electric com a redação literal do NIST; testes 1 a 4 'disponíveis' nas cartas R/S/MR conforme Minitab; critério de aceite da regra 2 de 3 recortado nos subgrupos 26 a 30; legenda da carta X̄-R corrigida). Exemplo refeito em Python (X̄̄ 20,00395; R̄ 0,02272; LSC 20,0171; LIC 19,9908; LSC(R) 0,0481; Cp 1,71; Cpk 1,57; Pp 1,65; Ppk 1,52; Shapiro-Wilk p 0,72; X̄31 20,0198; R33 0,054). Fontes reabertas em 19/11/2026: NIST/SEMATECH e-Handbook 6.1.6, 6.3.2, 6.3.2.1, 6.3.3, 6.3.3.1; resumos ISO 7870-2:2023 e ISO 22514-2:2026; Minitab Support (documentação de fornecedor); SAS/QC 13.1. Revisão final independente: ver registro ROTINA-2026-11-19-0815-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não prescreve regras de sinal, tamanho de subgrupo nem metas de Cpk; sem revisão pessoal atribuída a Henrique; não recomenda fornecedor nem ferramenta."
+      },
+      "assets": [
+        {
+          "path": "torno-cep-carta-xbar-r.svg",
+          "sha256": "6c655791f0336e6d35887fc13586534d6172b6d12581cddc8b497a53b1789e18"
+        },
+        {
+          "path": "torno-cep-duas-reguas.svg",
+          "sha256": "b22caa303a28376f194f0572c4a46657f8a5f0ab66c2612e3113c4983e91c09e"
+        },
+        {
+          "path": "torno-cep-registro-reacao.svg",
+          "sha256": "d1eb207c0fbd93bb50448c20d56d1f4a86cab5e3f6543742bb7fe10491e056ba"
+        }
+      ]
     }
   ]
 }

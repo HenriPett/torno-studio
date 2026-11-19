@@ -92,6 +92,7 @@ const expected = [
   ['torno-artigo-pt-20261118-calibracao-instrumentos', '/blog/calibracao-instrumentos-medicao-sistema-aceite/', 'da8cd73ed0336f5848f6bec589c6b792429c07682e93c54761184c04fd08345e', ['torno-calibracao-faixa-ema.svg', 'torno-calibracao-janela-impacto.svg']],
   ['torno-artigo-pt-20261118-inspecao-recebimento', '/blog/inspecao-recebimento-amostragem-nqa-sistema-aceite/', 'ef4cfb700aadd26f8c4d3330bbce2a1df6de389bc212c7ca1e2ab5b875538ba1', ['torno-inspecao-grade-amostra.svg', 'torno-inspecao-chave-regimes.svg']],
   ['torno-artigo-pt-20261118-kanban-producao', '/blog/kanban-producao-cartoes-reposicao-sistema-aceite/', 'd312ad91029378ee26423b63972f2b24b4370d28f4d6de301799c221d4cd5b55', ['torno-kanban-planta-circuitos.svg', 'torno-kanban-cartao-substituido.svg', 'torno-kanban-quadro-redimensionamento.svg']],
+  ['torno-artigo-pt-20261119-cep-cartas-controle', '/blog/cep-controle-estatistico-processo-cartas-sistema-aceite/', '0ff9eb020e15f51c2dcf7f5dc5c1d7cb6ae11bdbc1161fa0543027e528100391', ['torno-cep-carta-xbar-r.svg', 'torno-cep-duas-reguas.svg', 'torno-cep-registro-reacao.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
