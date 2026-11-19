@@ -2406,6 +2406,36 @@
           "sha256": "dd9c08bbb5dee7e49c0c86d85c2478d6dc42f57da473fd1e234dd3f757dde177"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261119-avaliacao-fornecedores",
+      "intentId": "buyer-supplier-qualification-performance-rating-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/avaliacao-fornecedores-iqf-homologacao-sistema-aceite/",
+      "contentRevision": "6c89223de1328a30c05aea8cb45bde8093ed50f7248e06ba8f5d75084f9567ae",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-19T21:32:21Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-19T21:31:37Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-19-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-19T21:31:37Z, sem bloqueantes; correções aplicadas pelo revisor (checked_at das fontes trocados pelos horários reais de reabertura; paráfrase da 8.4.2 alinhada à reprodução da Auditor Training Online; 'proporcional' removido; quatro frases que soavam como experiência própria reescritas; cenário de troca de pesos na tabela de aceite corrigido para soma 100 e vigência no período seguinte). Exemplo refeito em Python (IQF = 0,50·Q + 0,35·E + 0,15·R: 97,08 / 71,25 / 51,25; data original 58,125 → 58,13; concessão 77,50; reavaliação 96,11; validade 18/04 + 180 dias = 15/10). Fontes reabertas em 19/11/2026: ISO 9001:2015 8.4 via Auditor Training Online (norma paga não lida, declarado); iso.org ISO 9001 (edição 2026); SAP Learning e SAP Help 4.6C; Senior X e Senior 5.10.3; Microsoft Business Central Block vendors; TCC Fatec Botucatu 2014; Revista Produção Online 2013; gov.br certidões (180 dias, limitação declarada). Revisão final independente: ver registro ROTINA-2026-11-19-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; sem parecer de certificação; não prescreve pesos nem notas; não recomenda software nem fornecedor; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-fornecedores-boletim-iqf.svg",
+          "sha256": "bd16174a45e5ec07b962522e53ac81ebd9790504794681658636cfbeabae16bc"
+        },
+        {
+          "path": "torno-fornecedores-validade-documentos.svg",
+          "sha256": "b3fe2af751ae29fd0eba3b41d9d0b19923df0de33ecb6f135b59e012ad7d0cf4"
+        },
+        {
+          "path": "torno-fornecedores-semaforo-situacoes.svg",
+          "sha256": "651cf91d4442f212cff630c40312161a196f2c9cc77129fff4172265c9a86762"
+        }
+      ]
     }
   ]
 }
