@@ -2376,6 +2376,36 @@
           "sha256": "d1eb207c0fbd93bb50448c20d56d1f4a86cab5e3f6543742bb7fe10491e056ba"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261119-custo-producao",
+      "intentId": "buyer-production-costing-standard-actual-variance-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/custo-producao-padrao-real-rateio-sistema-aceite/",
+      "contentRevision": "0ca73dd38076983f1409277f26d7566f993ac66feaf774a65af42ce56f370da8",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-19T15:32:03Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-19T15:29:56Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-19-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-19T15:29:56Z, sem bloqueantes; correções aplicadas pelo revisor (sinal de igual indevido entre total e valor unitário na cascata; 'R$ 51,1820 com quatro casas' na tabela de aceite). Exemplo refeito em Python (padrão R$ 48,00; OP 7001 real R$ 51.182, variação R$ 3.182 = 615 + 375 + 212 + 540 + 360 + 1.080; não absorvido R$ 9.000; OP 7002 saldo R$ 27.088 × padrão equivalente R$ 26.520). Fontes reabertas em 19/11/2026: CPC 16 (R1) via Resolução CVM 99/2022 (LegisWeb) e Deliberação CVM 575/2009; Receita Federal, Perguntas e Respostas IRPJ 2021 cap. VIII (008, 012, 013, 014); Microsoft Business Central (variance, production order posting, cost components, finished production order costs); SAP Help Variance Categories; Odoo 18.0 Manufacturing order costs. Texto dos arts. 301–309 do Decreto 9.580/2018 não aberto (limitação declarada no artigo). Revisão final independente: ver registro ROTINA-2026-11-19-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; sem parecer contábil ou fiscal; não recomenda método de custeio nem fornecedor; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-custo-cascata-variacoes.svg",
+          "sha256": "98d77d8938ebcf4bdf1e728c4d89fa14c1c8a8598d47ddad549cbca9aac4cf36"
+        },
+        {
+          "path": "torno-custo-balde-capacidade.svg",
+          "sha256": "15b9858e2324617d0427268331a19e0cf261c597c791f14af8dcabf0f7922709"
+        },
+        {
+          "path": "torno-custo-ordem-corte.svg",
+          "sha256": "dd9c08bbb5dee7e49c0c86d85c2478d6dc42f57da473fd1e234dd3f757dde177"
+        }
+      ]
     }
   ]
 }
