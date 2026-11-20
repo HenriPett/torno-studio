@@ -2466,6 +2466,40 @@
           "sha256": "0ab47853113d7a019dd2c6cf7a1ebe3bd82d962a57422892841b5789c6560771"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261120-regua-cobranca",
+      "intentId": "buyer-receivables-dunning-collection-rules-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/regua-cobranca-inadimplencia-sistema-aceite/",
+      "contentRevision": "34c8a2ee3bde6eb256fc18d4699f108f3358d0cc81acf459da4bae7cf7d4edda",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-20T15:32:30Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-20T15:31:43Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-20-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-20T15:31:43Z, sem bloqueantes; correções aplicadas pelo revisor (CDC art. 71 'interfira com'; opt-out do WhatsApp tratado como recomendação da Meta, não exigência; CC art. 408 completo no resumo da fonte; data da Lei 14.905/2024; legenda do mostrador '1 marca do anel ≈ 1 dia'). Exemplo refeito em Python (Decimal): T-4512 4.800 + 96,00 + 16,00 = 4.912,00 (armadilha de contar desde 02/11: 4.913,60); T-4521 parcial 1.000 = 26,80 encargos + 973,20 principal, saldo 226,80, quitação 227,33; T-4518 acordo 3.083,00; datas e feriados (02/11, 15/11, 20/11) conferidos. Revisão final independente: ver registro ROTINA-2026-11-20-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, quatro SVGs, registros e metadados editoriais; exemplo fictício; sem parecer jurídico; não recomenda bureau, banco, cartório, plataforma nem fornecedor; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-cobranca-mostrador-regua.svg",
+          "sha256": "3c9dadca5ac44eb943e53cc8614037189ca5244e06dc5f6c614dadabaa8e1c94"
+        },
+        {
+          "path": "torno-cobranca-interruptores.svg",
+          "sha256": "8a4141cc3609c0f49dd2a8f9995ff683addc08a0ae0ff5ccb41679b6007a4eec"
+        },
+        {
+          "path": "torno-cobranca-titulo-corte.svg",
+          "sha256": "77dc3fc34b07e20b25a785ebb5e641af84591080cda26f267a88bada31c7ec93"
+        },
+        {
+          "path": "torno-cobranca-escada-decisao.svg",
+          "sha256": "99e7b11b05f90f05120cc7913ed9ce315b84e821f3715655a98cdf003fe9f669"
+        }
+      ]
     }
   ]
 }
