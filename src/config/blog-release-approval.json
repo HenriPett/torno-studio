@@ -2436,6 +2436,36 @@
           "sha256": "651cf91d4442f212cff630c40312161a196f2c9cc77129fff4172265c9a86762"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261120-apontamento-producao",
+      "intentId": "buyer-shop-floor-production-reporting-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/apontamento-producao-chao-fabrica-sistema-aceite/",
+      "contentRevision": "15d3d2b0e3993488084ee86239c1b7274dbbaa78067efe40f5ed759d885e8403",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-20T11:46:29Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-20T11:44:58Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-20-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-20T11:44:58Z, sem bloqueantes; correções aplicadas pelo revisor (reversão de consumo no Business Central; estorno F909AOP da Senior; Bloco K como fronteira sem chamar as tabelas de 'apontamento'; 'usually' da SAP preservado; tolerância SAP como boa + retrabalho; ISA-95 com título oficial e só fatos institucionais). checked_at das 13 fontes trocados pelos horários reais de reabertura. Exemplo refeito em Python (Decimal): turno 480 min; simultâneo 275 min dividido 137,5/137,5; operador 104 = 450 min (armadilha 725); operação 20 máquina 625 min, mão de obra 564,5 min; 202 = 191 + 11 → estorno 190 + 12; barra 258,00 / 252,50 / 238,75 kg. Revisão final independente: ver registro ROTINA-2026-11-20-0815-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda MES, software nem fornecedor; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-apontamento-regua-turno.svg",
+          "sha256": "b31a347ba8ef8b301ae7f26e171f9c886cd78a76067e620022b07773f4ea43ea"
+        },
+        {
+          "path": "torno-apontamento-razao-pecas.svg",
+          "sha256": "67794dc8a93a92ed55cd9ef3cb46f35f73ccb6392def89a8066cb0f759a6694a"
+        },
+        {
+          "path": "torno-apontamento-pilhas-consumo.svg",
+          "sha256": "0ab47853113d7a019dd2c6cf7a1ebe3bd82d962a57422892841b5789c6560771"
+        }
+      ]
     }
   ]
 }

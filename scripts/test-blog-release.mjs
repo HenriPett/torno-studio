@@ -95,6 +95,7 @@ const expected = [
   ['torno-artigo-pt-20261119-cep-cartas-controle', '/blog/cep-controle-estatistico-processo-cartas-sistema-aceite/', '0ff9eb020e15f51c2dcf7f5dc5c1d7cb6ae11bdbc1161fa0543027e528100391', ['torno-cep-carta-xbar-r.svg', 'torno-cep-duas-reguas.svg', 'torno-cep-registro-reacao.svg']],
   ['torno-artigo-pt-20261119-custo-producao', '/blog/custo-producao-padrao-real-rateio-sistema-aceite/', '0ca73dd38076983f1409277f26d7566f993ac66feaf774a65af42ce56f370da8', ['torno-custo-cascata-variacoes.svg', 'torno-custo-balde-capacidade.svg', 'torno-custo-ordem-corte.svg']],
   ['torno-artigo-pt-20261119-avaliacao-fornecedores', '/blog/avaliacao-fornecedores-iqf-homologacao-sistema-aceite/', '6c89223de1328a30c05aea8cb45bde8093ed50f7248e06ba8f5d75084f9567ae', ['torno-fornecedores-boletim-iqf.svg', 'torno-fornecedores-validade-documentos.svg', 'torno-fornecedores-semaforo-situacoes.svg']],
+  ['torno-artigo-pt-20261120-apontamento-producao', '/blog/apontamento-producao-chao-fabrica-sistema-aceite/', '15d3d2b0e3993488084ee86239c1b7274dbbaa78067efe40f5ed759d885e8403', ['torno-apontamento-regua-turno.svg', 'torno-apontamento-razao-pecas.svg', 'torno-apontamento-pilhas-consumo.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
