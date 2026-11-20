@@ -97,6 +97,7 @@ const expected = [
   ['torno-artigo-pt-20261119-avaliacao-fornecedores', '/blog/avaliacao-fornecedores-iqf-homologacao-sistema-aceite/', '6c89223de1328a30c05aea8cb45bde8093ed50f7248e06ba8f5d75084f9567ae', ['torno-fornecedores-boletim-iqf.svg', 'torno-fornecedores-validade-documentos.svg', 'torno-fornecedores-semaforo-situacoes.svg']],
   ['torno-artigo-pt-20261120-apontamento-producao', '/blog/apontamento-producao-chao-fabrica-sistema-aceite/', '15d3d2b0e3993488084ee86239c1b7274dbbaa78067efe40f5ed759d885e8403', ['torno-apontamento-regua-turno.svg', 'torno-apontamento-razao-pecas.svg', 'torno-apontamento-pilhas-consumo.svg']],
   ['torno-artigo-pt-20261120-regua-cobranca', '/blog/regua-cobranca-inadimplencia-sistema-aceite/', '34c8a2ee3bde6eb256fc18d4699f108f3358d0cc81acf459da4bae7cf7d4edda', ['torno-cobranca-mostrador-regua.svg', 'torno-cobranca-interruptores.svg', 'torno-cobranca-titulo-corte.svg', 'torno-cobranca-escada-decisao.svg']],
+  ['torno-artigo-pt-20261120-reajuste-contratos', '/blog/reajuste-contratos-indice-ipca-igpm-sistema-aceite/', '0d62f4a1b9292d1fa44d5c4b8d15693915db7918e1a9e4ba46b8e1c42322fbe0', ['torno-reajuste-ampulheta-defasagem.svg', 'torno-reajuste-conta-certo-errado.svg', 'torno-reajuste-calendario-aniversarios.svg', 'torno-reajuste-indice-negativo-trilhos.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

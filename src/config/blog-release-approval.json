@@ -2500,6 +2500,40 @@
           "sha256": "99e7b11b05f90f05120cc7913ed9ce315b84e821f3715655a98cdf003fe9f669"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261120-reajuste-contratos",
+      "intentId": "buyer-recurring-contract-index-adjustment-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/reajuste-contratos-indice-ipca-igpm-sistema-aceite/",
+      "contentRevision": "0d62f4a1b9292d1fa44d5c4b8d15693915db7918e1a9e4ba46b8e1c42322fbe0",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-20T21:27:03Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-20T21:26:11Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-20-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-20T21:26:11Z, sem bloqueantes; correções aplicadas pelo revisor (primeira pessoa sobre a pesquisa reescrita de forma impessoal; data prevista de 11/12/2026 para o IPCA de novembro citada pela Agência Gov e defasagem marcada como limitada aos casos citados; colunas de taxas fictícias; INPC fiel ao IBGE; generalizações sem fonte removidas; FAQ como recomendação da Torno). Contas refeitas em Python (Decimal): contrato A 3,56% e R$ 2.568,29 (armadilhas 2.566,80 / 2.568,17 / 2.569,53); contrato B 1.140,23 / 1.197,24 / 1.207,50; contrato C 350,00 / 4.793,20 / 4.063,80; dias da semana conferidos. Integrador: claim do exemplo alinhado ao corpo (escolhas do exemplo, não recomendação). Revisão final independente: ver registro ROTINA-2026-11-20-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, quatro SVGs, registros e metadados editoriais; exemplo fictício com taxas inventadas; sem parecer jurídico; não recomenda índice, banco, fonte de dados nem fornecedor; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-reajuste-ampulheta-defasagem.svg",
+          "sha256": "5a30b7aea6f21601bdd92fcc9441c8b51ccb53afe0557d9416fc2bd2b986f6ff"
+        },
+        {
+          "path": "torno-reajuste-conta-certo-errado.svg",
+          "sha256": "b747290d9eaeaf9c1280657418538aa1b4cf926b18fcdf860ad55b01e785753e"
+        },
+        {
+          "path": "torno-reajuste-calendario-aniversarios.svg",
+          "sha256": "72b3a5f434a95d522c67c43362229294dfa09dae19cf00be91b97c87be75e52d"
+        },
+        {
+          "path": "torno-reajuste-indice-negativo-trilhos.svg",
+          "sha256": "a8c279fbd2f1aac58b11311a8c1fffab99b7c1645ca62034a89f6ae35cc66d09"
+        }
+      ]
     }
   ]
 }
