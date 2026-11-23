@@ -2594,6 +2594,36 @@
           "sha256": "890884d8ce37c241f144208cb03c5996d23ef726eb726285923aa9d0de99b698"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261123-boleto-registro-remessa-retorno",
+      "intentId": "buyer-boleto-issuance-cnab-remittance-return-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/boleto-sistema-remessa-retorno-cnab-aceite/",
+      "contentRevision": "c4a723fd4f02d02205ad9730c09e7c4afdb83ef355c45065ce270f6ce5c6227e",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-23T21:34:01Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-23T21:32:22Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-23-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-23T21:32:22Z; correções: retorno do pagamento pelo QR Code Pix (por padrão movimento 09 com ocorrência 09 no manual Santander v8.3; parametrizável para 06/61 ou 09/92) com novo critério de aceite; validade vencida do manual Núclea v12.0 explicitada na baixa por decurso; 'sujeito a análise' do Itaú restrito à API; voz em primeira pessoa; alt do SVG de trilhos. Contas refeitas em Python (Decimal): dígitos módulo 11 dos nossos números 1041–1046 (3,1,0,8,6,4); T-8801 juros 1,61/dia truncados, multa 97,00, total 4.950,22, líquido 4.947,32; carteira 13.165,40, principal recebido 12.213,40, em aberto 640,00, líquido 12.299,12. Revisão final independente: ver registro ROTINA-2026-11-23-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda banco, plataforma de cobrança nem fornecedor; sem orientação jurídica, contábil ou fiscal individual; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-boleto-anatomia.svg",
+          "sha256": "4a8e3b5d06eb07b1dd2c1e3485021cea39b7f7e83a388bf8a76c5f5496e15f41"
+        },
+        {
+          "path": "torno-boleto-matriz-retorno.svg",
+          "sha256": "4791c54d93db7140664359ab77e0a7aa06fc339596cb9d2f41d8104067712412"
+        },
+        {
+          "path": "torno-boleto-trilhos-titulo.svg",
+          "sha256": "7c46427b0b371d4d4be00d7e95f4bb4378b18973372d02d88c783afbc3a3d661"
+        }
+      ]
     }
   ]
 }

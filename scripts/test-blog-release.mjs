@@ -100,6 +100,7 @@ const expected = [
   ['torno-artigo-pt-20261120-reajuste-contratos', '/blog/reajuste-contratos-indice-ipca-igpm-sistema-aceite/', '0d62f4a1b9292d1fa44d5c4b8d15693915db7918e1a9e4ba46b8e1c42322fbe0', ['torno-reajuste-ampulheta-defasagem.svg', 'torno-reajuste-conta-certo-errado.svg', 'torno-reajuste-calendario-aniversarios.svg', 'torno-reajuste-indice-negativo-trilhos.svg']],
   ['torno-artigo-pt-20261123-conferencia-nfe-pedido', '/blog/conferencia-nfe-entrada-pedido-compra-sistema-aceite/', '086a724624e7ac5f8d6b81184e475f5c5d3b6f5c52734eeed1ad3021df9afeae', ['torno-conferencia-tres-vias-sobrepostas.svg', 'torno-conferencia-balanca-quantidade.svg', 'torno-conferencia-matriz-tolerancias.svg']],
   ['torno-artigo-pt-20261123-separacao-pedidos-expedicao', '/blog/separacao-pedidos-conferencia-expedicao-sistema-aceite/', '7dec6c31f0fbc649102035ddb2b29fa607188d334ef3839c02268c808453c0fd', ['torno-separacao-planta-rota.svg', 'torno-separacao-raio-x-volume.svg', 'torno-separacao-docas-romaneio.svg']],
+  ['torno-artigo-pt-20261123-boleto-registro-remessa-retorno', '/blog/boleto-sistema-remessa-retorno-cnab-aceite/', 'c4a723fd4f02d02205ad9730c09e7c4afdb83ef355c45065ce270f6ce5c6227e', ['torno-boleto-anatomia.svg', 'torno-boleto-matriz-retorno.svg', 'torno-boleto-trilhos-titulo.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
