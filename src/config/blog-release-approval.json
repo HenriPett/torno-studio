@@ -2564,6 +2564,36 @@
           "sha256": "90bc65445b719627d9575b5e823cd389e9c93ecf55e4bed204d784c9ac83eaa1"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261123-separacao-pedidos-expedicao",
+      "intentId": "buyer-order-picking-packing-shipping-check-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/separacao-pedidos-conferencia-expedicao-sistema-aceite/",
+      "contentRevision": "7dec6c31f0fbc649102035ddb2b29fa607188d334ef3839c02268c808453c0fd",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-23T15:27:55Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-23T15:26:52Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-23-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-23T15:26:52Z, sem bloqueantes; correções: ambiguidade 15 disjuntores/18 unidades; URL do RICMS/SC Anexo 11 trocada por endereço que abriu; hipótese do art. 11, § 1º, I (contingência) no front matter; checked_at das 10 fontes ajustado para 15:25Z; rótulo do SVG raio-x afastado da bancada. Integrador acrescentou nota sobre a tolerância de 0,07 kg ser maior que o peso de uma FT-20. Contas refeitas em Python (Decimal): PV 5101 R$ 1.759,60, corte R$ 115,50 = 6,56% (pedido a R$ 1.644,10), simulação 10,94%; volume 3,56 kg, tolerância 0,07 kg, lido 3,32 kg (−6,74%), após reabertura 3,55 kg; romaneio 27,97/27,96 kg, sem PV 5102 16,67 kg; NF-e R$ 3.350,90; acuracidade 85,71% por linha e 92,37% por unidade; corte 2,24% das unidades e 14,29% das linhas; 02/12/2026 quarta-feira. Revisão final independente: ver registro ROTINA-2026-11-23-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda WMS, ERP nem fornecedor; sem orientação fiscal individual; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-separacao-planta-rota.svg",
+          "sha256": "aca05a149fc508b6633062fe6b03ebef700f013fe63ea917169e70949cde8f5c"
+        },
+        {
+          "path": "torno-separacao-raio-x-volume.svg",
+          "sha256": "4c2162536819222f90bb97b1c010c7d4214dfe39100ff1990993a3ea78ce6cb3"
+        },
+        {
+          "path": "torno-separacao-docas-romaneio.svg",
+          "sha256": "890884d8ce37c241f144208cb03c5996d23ef726eb726285923aa9d0de99b698"
+        }
+      ]
     }
   ]
 }
