@@ -2534,6 +2534,36 @@
           "sha256": "a8c279fbd2f1aac58b11311a8c1fffab99b7c1645ca62034a89f6ae35cc66d09"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261123-conferencia-nfe-pedido",
+      "intentId": "buyer-purchase-invoice-three-way-match-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/conferencia-nfe-entrada-pedido-compra-sistema-aceite/",
+      "contentRevision": "086a724624e7ac5f8d6b81184e475f5c5d3b6f5c52734eeed1ad3021df9afeae",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-23T11:39:52Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-23T11:39:01Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-23-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-23T11:39:01Z, sem bloqueantes; correções aplicadas pelo revisor (prazos antigos da página de Goiás qualificados como anteriores ao Ajuste SINIEF 14/2026, sem afirmar que não valem; exemplo da Microsoft como despesa de frete e manuseio; afirmação correspondente no front matter; dois SVGs com rótulos afastados das bordas). Fontes reabertas entre 11:34 e 11:35Z (checked_at ajustado pelo integrador para 11:35Z); portal da NF-e e CONFAZ recusados pelo proxy, declarado no texto. Contas refeitas em Python (Decimal): PC 7712 R$ 19.660,00; NF-e 45.210 R$ 12.487,00; barra 615 contra 610 = 0,82% (limite 3,05 kg), após repesagem 615 contra 612 = 0,49% (limite 3,06 kg); pastilha 2,38% (limite R$ 42,42), R$ 60,00; frete R$ 180,00; valor que bate R$ 12.198,00, diferença R$ 289,00; após acerto R$ 12.247,00; NF-e 45.388 R$ 7.462,00; acumulado 0,25% (limite 6,01 kg); sem fator 923,81%; prazos 21/12/2026, 05/01/2027, 04/02/2027; dias da semana conferidos. Revisão final independente: ver registro ROTINA-2026-11-23-0815-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda ERP, sistema de compras nem fornecedor; sem orientação tributária individual; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-conferencia-tres-vias-sobrepostas.svg",
+          "sha256": "d849cc8886cd8c978320c3fca2010cdcf802a813faae469ff09e6df7c26622a2"
+        },
+        {
+          "path": "torno-conferencia-balanca-quantidade.svg",
+          "sha256": "962d41f40ab1dd3d37af7b4bbb84da82c8bff9b090e2c180d102cc34a8b7742d"
+        },
+        {
+          "path": "torno-conferencia-matriz-tolerancias.svg",
+          "sha256": "90bc65445b719627d9575b5e823cd389e9c93ecf55e4bed204d784c9ac83eaa1"
+        }
+      ]
     }
   ]
 }
