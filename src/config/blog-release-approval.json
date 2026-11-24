@@ -2624,6 +2624,36 @@
           "sha256": "7c46427b0b371d4d4be00d7e95f4bb4378b18973372d02d88c783afbc3a3d661"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261124-certificado-digital-a1-sistema",
+      "intentId": "buyer-digital-certificate-a1-expiry-renewal-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/certificado-digital-a1-vencimento-sistema-aceite/",
+      "contentRevision": "30b5fdbe852d29df418e7c5db2f1dcec508620a693bab3f8407bc0d909fb032c",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-24T11:48:00Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-24T11:46:29Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-24-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-24T11:46:29Z; correções: códigos 280–298 declarados como confirmados só no manual do modelo 77 (apenas a 213 confirmada para modelos 55/65, na NT 2026.001 v1.02b, com a exceção do PAA); item 6.1.1.8 do DOC-ICP-04 restrito a chaves de funcionários; v8.3 incorpora as Resoluções 211 e 212; modelo 77 explicitado no texto, legenda, alt e SVG da árvore; experiência pessoal sem fonte removida. Datas do exemplo refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-24-0815-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda autoridade certificadora, prestador de serviço de confiança, emissor fiscal nem fornecedor; sem orientação jurídica, contábil ou fiscal individual; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-certificado-cofre-chaveiro.svg",
+          "sha256": "a73fe3cc8193eed8c6042ea7a8af3f78a75c4f648f09a759121532f06ac21f50"
+        },
+        {
+          "path": "torno-certificado-arvore-falha.svg",
+          "sha256": "06efb84e8f672c46dde5bda7d5d9c4c74acb234d122cb8a837de70173c5e5dc8"
+        },
+        {
+          "path": "torno-certificado-linha-validade.svg",
+          "sha256": "cb2376c098e69d1a026fccd96568b5fbe45ae6e09f44435f2c2b15caee6b402e"
+        }
+      ]
     }
   ]
 }
