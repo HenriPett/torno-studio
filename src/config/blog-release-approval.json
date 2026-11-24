@@ -2654,6 +2654,36 @@
           "sha256": "cb2376c098e69d1a026fccd96568b5fbe45ae6e09f44435f2c2b15caee6b402e"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261124-ordem-servico-assistencia-tecnica",
+      "intentId": "buyer-service-order-field-service-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/ordem-servico-assistencia-tecnica-sistema-aceite/",
+      "contentRevision": "94d4497e8916b41fe55622641774d98be0420dd21c35b0e0113d915bfb6a1176",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-24T15:31:00Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-24T15:29:31Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-24-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-24T15:29:31Z; correções: recomendação da Torno separada do texto legal (a lei diz o que a empresa deve ao cliente, não como o sistema funciona); bloqueios do orçamento declarados como escolha de modelagem; paráfrase do Dynamics 365 sem \"só\"; art. 20 completo (\"e quando cabível\", \"imediata\", \"monetariamente atualizada\") e retorno em garantia registra a opção do cliente entre as do art. 20; garantia legal não depende do termo escrito (art. 24) no alt e nos SVGs da anatomia e do relógio. Datas e contas do exemplo refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-24-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda sistema, aplicativo nem fornecedor; sem orientação jurídica, contábil ou fiscal individual; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-os-anatomia-ordem.svg",
+          "sha256": "ceff0b6450239d364064d2222f2e65c856f2b086f5ee09194717870a1859ac24"
+        },
+        {
+          "path": "torno-os-mapa-dia-tecnico.svg",
+          "sha256": "68da08e2c605937ca124998eee87496942fdcdb9db1fae8a088c6980e91228bb"
+        },
+        {
+          "path": "torno-os-relogio-garantia.svg",
+          "sha256": "4e6ff76a64cf997e4b8fa8dd1586b60d8fcae9da014e3c9d89e4537fa11ba7d1"
+        }
+      ]
     }
   ]
 }

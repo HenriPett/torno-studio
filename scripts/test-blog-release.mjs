@@ -102,6 +102,7 @@ const expected = [
   ['torno-artigo-pt-20261123-separacao-pedidos-expedicao', '/blog/separacao-pedidos-conferencia-expedicao-sistema-aceite/', '7dec6c31f0fbc649102035ddb2b29fa607188d334ef3839c02268c808453c0fd', ['torno-separacao-planta-rota.svg', 'torno-separacao-raio-x-volume.svg', 'torno-separacao-docas-romaneio.svg']],
   ['torno-artigo-pt-20261123-boleto-registro-remessa-retorno', '/blog/boleto-sistema-remessa-retorno-cnab-aceite/', 'c4a723fd4f02d02205ad9730c09e7c4afdb83ef355c45065ce270f6ce5c6227e', ['torno-boleto-anatomia.svg', 'torno-boleto-matriz-retorno.svg', 'torno-boleto-trilhos-titulo.svg']],
   ['torno-artigo-pt-20261124-certificado-digital-a1-sistema', '/blog/certificado-digital-a1-vencimento-sistema-aceite/', '30b5fdbe852d29df418e7c5db2f1dcec508620a693bab3f8407bc0d909fb032c', ['torno-certificado-cofre-chaveiro.svg', 'torno-certificado-arvore-falha.svg', 'torno-certificado-linha-validade.svg']],
+  ['torno-artigo-pt-20261124-ordem-servico-assistencia-tecnica', '/blog/ordem-servico-assistencia-tecnica-sistema-aceite/', '94d4497e8916b41fe55622641774d98be0420dd21c35b0e0113d915bfb6a1176', ['torno-os-anatomia-ordem.svg', 'torno-os-mapa-dia-tecnico.svg', 'torno-os-relogio-garantia.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
