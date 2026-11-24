@@ -2684,6 +2684,36 @@
           "sha256": "4e6ff76a64cf997e4b8fa8dd1586b60d8fcae9da014e3c9d89e4537fa11ba7d1"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261124-requisicao-cotacao-compras",
+      "intentId": "buyer-purchase-requisition-quotation-po-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/requisicao-cotacao-pedido-compra-sistema-aceite/",
+      "contentRevision": "2505dd6d9b518ede387f98e35b661efb82fdc67b2a02219f1308ae3c588efd8e",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-24T21:22:43Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-24T21:21:22Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-24-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-24T21:21:22Z; correções: alçada do aumento de preço alinhada entre lista, tabela de alterações, exemplo e critério de aceite (um nível acima, diretor); paráfrase do Odoo (comparação por linha de produto, escolha com o botão); Dynamics 365 \"tipo de solicitação\"; valor presente \"na data de referência\"; \"camada legal mais visível\"; selo dos três SVGs reposicionado. Fontes (Microsoft Learn ×3, Odoo 18 ×2, Lei 14.133/2021) reabertas; contas e datas refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-24-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda ERP, sistema de compras, portal de cotação nem fornecedor; sem orientação tributária, contábil ou jurídica individual; Lei 14.133/2021 citada só como referência do setor público; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-compras-envelopes-abertura.svg",
+          "sha256": "00c41eac9c69b74b9f3c3770c7a4757d4ba69d73d41fb00e5f68ef215d32cb9a"
+        },
+        {
+          "path": "torno-compras-balanca-propostas.svg",
+          "sha256": "0f9bf3698de10da804765bd11d1dab5307ceab6cc0b2045191527d1ee11fc77d"
+        },
+        {
+          "path": "torno-compras-escada-alcadas.svg",
+          "sha256": "6f2b68230940a7b102cb475f4a5367bcf58d503e57e075d4e83549dd7d3361ee"
+        }
+      ]
     }
   ]
 }
