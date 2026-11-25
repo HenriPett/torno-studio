@@ -104,6 +104,7 @@ const expected = [
   ['torno-artigo-pt-20261124-certificado-digital-a1-sistema', '/blog/certificado-digital-a1-vencimento-sistema-aceite/', '30b5fdbe852d29df418e7c5db2f1dcec508620a693bab3f8407bc0d909fb032c', ['torno-certificado-cofre-chaveiro.svg', 'torno-certificado-arvore-falha.svg', 'torno-certificado-linha-validade.svg']],
   ['torno-artigo-pt-20261124-ordem-servico-assistencia-tecnica', '/blog/ordem-servico-assistencia-tecnica-sistema-aceite/', '94d4497e8916b41fe55622641774d98be0420dd21c35b0e0113d915bfb6a1176', ['torno-os-anatomia-ordem.svg', 'torno-os-mapa-dia-tecnico.svg', 'torno-os-relogio-garantia.svg']],
   ['torno-artigo-pt-20261124-requisicao-cotacao-compras', '/blog/requisicao-cotacao-pedido-compra-sistema-aceite/', '2505dd6d9b518ede387f98e35b661efb82fdc67b2a02219f1308ae3c588efd8e', ['torno-compras-envelopes-abertura.svg', 'torno-compras-balanca-propostas.svg', 'torno-compras-escada-alcadas.svg']],
+  ['torno-artigo-pt-20261125-controle-epi-ficha-entrega', '/blog/controle-epi-ficha-entrega-sistema-aceite/', 'a8c86384191d0858f15c1965554d627a09810a1f246f4b1695c4fb69a6d85848', ['torno-epi-recibo-entrega.svg', 'torno-epi-silhueta-mudanca-funcao.svg', 'torno-epi-escaninhos-tamanhos.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

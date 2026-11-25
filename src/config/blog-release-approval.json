@@ -2714,6 +2714,36 @@
           "sha256": "6f2b68230940a7b102cb475f4a5367bcf58d503e57e075d4e83549dd7d3361ee"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261125-controle-epi-ficha-entrega",
+      "intentId": "buyer-ppe-control-delivery-record-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/controle-epi-ficha-entrega-sistema-aceite/",
+      "contentRevision": "a8c86384191d0858f15c1965554d627a09810a1f246f4b1695c4fb69a6d85848",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-25T11:43:26Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-25T11:42:33Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — manhã\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-25-0815-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-25T11:42:33Z; correções: periodicidade mensal do dicionário de metadados do CAEPI e recomendação de comparação diária da validade lida; exemplo de 10/11 como virada de data (não sincronização); 20/10 como data de recebimento do lote; NR-6 6.5.1.2/6.5.1.2.1, 6.5.2 f e 6.5.4 alinhados à letra da norma; NR-01 1.5.4.4.6 reescrito perto do texto; LGPD art. 11, II com a ressalva de consentimento; limite do eSocial explicitado (sem nomes de campo); dois SVGs ajustados. Fontes (NR-6, NR-01, MTE perguntas sobre EPI, dicionário CAEPI v2.0, índice/MOS eSocial S-1.3, LGPD) reabertas; datas e contas refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-25-0815-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda software de SST, EPI, fabricante nem fornecedor; sem orientação jurídica ou de segurança e saúde do trabalho individual; o sistema não substitui o profissional de segurança do trabalho; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-epi-recibo-entrega.svg",
+          "sha256": "33eebba126fd023063d45a136db5d9385c9e0e96d0662815921985a6edfff3aa"
+        },
+        {
+          "path": "torno-epi-silhueta-mudanca-funcao.svg",
+          "sha256": "6f8525aee0891ba65c22e0460c486376416e05c8c60067b3f0d8cbbcf825ab83"
+        },
+        {
+          "path": "torno-epi-escaninhos-tamanhos.svg",
+          "sha256": "39e7409470cacdf54e016eaefee33b23dd38d8ca7545869a6d6848dd0e93f013"
+        }
+      ]
     }
   ]
 }
