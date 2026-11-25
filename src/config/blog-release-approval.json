@@ -2744,6 +2744,36 @@
           "sha256": "39e7409470cacdf54e016eaefee33b23dd38d8ca7545869a6d6848dd0e93f013"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261125-gestao-frota-veiculos",
+      "intentId": "buyer-fleet-management-fuel-fines-documents-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/gestao-frota-abastecimento-multas-sistema-aceite/",
+      "contentRevision": "cb918f3a97bfdaf160bb3931b45d30e05a0f1e0951f0346b5a66f476a5043a16",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-25T15:37:17Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-25T15:36:43Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-25-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-25T15:36:43Z; correções: art. 159 do CTB atualizado pela Lei 15.428/2026 (CNH física ou digital a critério do candidato ou condutor; renovação automática pelo RNPC não dispensa exames), com fonte própria; art. 148-A, § 8º, restrito ao exame do caput, com o periódico pelas sanções do § 5º e dos arts. 165-B e 165-D; parágrafo único do art. 165-B (após o 30º dia) explicitado; Res. Contran 918 compilada lida (só alterações da Res. 991/2023 nos arts. 25 e 27). Fontes (Leis 14.071/2020, 14.229/2021, 14.599/2023, 15.428/2026, MP 1.327/2025, Res. 918 integral e compilada, gov.br CRLV-e e SNE, CLT art. 462 em cópia do Senado, LGPD) reabertas; datas e contas refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-25-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda software de frota, rastreador, cartão-combustível, locadora, seguradora, oficina, posto nem fornecedor; sem orientação jurídica, trabalhista ou de trânsito individual; desconto em salário só como decisão registrada do RH e do jurídico; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-frota-envelope-prazo.svg",
+          "sha256": "8f0cbd6ccc3c0b42709690e6adc15dcb081adb392bd857128f5b87a040115fa1"
+        },
+        {
+          "path": "torno-frota-bomba-consumo.svg",
+          "sha256": "d8dd900d5729595662a909154d54f6cc5b2b495b881dc8102c32cb33e94fb14d"
+        },
+        {
+          "path": "torno-frota-parabrisa-documentos.svg",
+          "sha256": "18504001386ccea90f9da4b0e3475a99148175e5f60286a851521c78612fc3ca"
+        }
+      ]
     }
   ]
 }
