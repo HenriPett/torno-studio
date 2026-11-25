@@ -2774,6 +2774,36 @@
           "sha256": "18504001386ccea90f9da4b0e3475a99148175e5f60286a851521c78612fc3ca"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261125-ponto-eletronico-rep-p",
+      "intentId": "buyer-electronic-time-clock-rep-p-portaria-671-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/ponto-eletronico-rep-p-portaria-671-sistema-aceite/",
+      "contentRevision": "8e252e611653aa7c8cb35b6ca1d5bdc4cde30a2514d82b5a63fbd593596cf9f3",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-25T21:38:48Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-25T21:38:05Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-25-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-25T21:38:05Z; correções: AEJ (não o AFD) substituiu AFDT e ACJEF (P18 das Perguntas e Respostas do MTE); conteúdo do comprovante pelo art. 79 (texto original), não pelo Anexo IX; item 6.1 do Anexo IX (local da prestação ou estabelecimento de vínculo, sem geolocalização); item 12 \"intervalo de tempo determinado\"; NSR por estabelecimento retirado; atestado assinado pelo responsável legal; marcação offline não obrigatória no REP-P (P52); exemplo da segunda 09/11 ajustado para intervalo de 1 h sem mudar totais; fonte do texto original da Portaria 671 acrescentada. Fontes (Perguntas e Respostas do MTE, página do REP, leiautes AFD v004 e AEJ v002, Portaria 1.486/2022, Decreto 10.854/2021, Leis 13.874/2019 e 13.467/2017, CLT art. 58, LGPD, Observatório Nacional, leiautes eSocial S-1.3) reabertas; contas refeitas em Python. Redação compilada vigente dos arts. 73–100 da Portaria 671 não lida (limite declarado no texto). Revisão final independente: ver registro ROTINA-2026-11-25-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda software de ponto, REP, fornecedor nem contabilidade; sem orientação jurídica ou trabalhista individual; banco de horas, tolerância e geolocalização como decisões registradas do RH e do jurídico; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-ponto-fita-tratamento.svg",
+          "sha256": "a16971334c5f8f7d9546c8ef3d966a617b9946305ccff97ac2121b77c67dc0b3"
+        },
+        {
+          "path": "torno-ponto-cartao-semana.svg",
+          "sha256": "34e5bd904323f09a8d931c0f90cac8250ac6a744d454b3aaa2163c9c9e48ff31"
+        },
+        {
+          "path": "torno-ponto-raio-geolocalizacao.svg",
+          "sha256": "1f296316254720a2eb0420b76d6d13a8e0157e35f8bc2ddadeb89b1e20f1c9e1"
+        }
+      ]
     }
   ]
 }
