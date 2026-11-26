@@ -2834,6 +2834,36 @@
           "sha256": "40924ce259e9a3e945c6b8c9151c902a8f4792bdcac758322c7a96e56590a8d0"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261126-controle-ferias-sistema",
+      "intentId": "buyer-vacation-control-hr-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/controle-ferias-periodo-aquisitivo-sistema-aceite/",
+      "contentRevision": "8b110922dd06963792a13091d7bde05bb12c1e3cf15d873cba4a49d2c93e4d94",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-26T15:36:20Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-26T15:35:36Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-26-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-26T15:35:36Z; correções: alterações posteriores da CLT nos arts. 131, II e III (Leis 8.921/1994 e 8.726/1993) e 133, § 3º (Lei 9.016/1995) declaradas e com fonte; feriados de 12/10 (Lei 6.802/1980) e 20/11 (Lei 14.759/2023) com fonte; alinhamento dos rótulos na figura do quebra-cabeça; alt da régua igual à legenda. Fontes (Lei 13.467/2017, DL 1.535/1977, Lei 7.414/1985, CF art. 7º XVII, notícia do STF da ADPF 501, Súmula 81 do TST, gov.br férias coletivas, Lei 662/1949, leiautes do eSocial S-1.3) reabertas; contas e datas refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-26-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda sistema de folha, ponto ou RH nem fornecedor; sem orientação jurídica, trabalhista ou sindical individual; classificação de faltas, afastamentos, calendário, repouso, pagamento e eSocial como decisões registradas do RH, do jurídico e do contador; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-ferias-regua-dois-anos.svg",
+          "sha256": "a4507effbfd1145fffc61c1acf04a9117a14b39123fe3f53bb41cb1effa90186"
+        },
+        {
+          "path": "torno-ferias-calendario-abril-2027.svg",
+          "sha256": "16f38565f97a8f686e4325b45adc1fb468aee222b697b276759ea57de1813c50"
+        },
+        {
+          "path": "torno-ferias-quebra-cabeca-dias.svg",
+          "sha256": "e1402c170e012073bb3a0db04e08b9419ed904c88fc5a66419fe573cde9032dd"
+        }
+      ]
     }
   ]
 }
