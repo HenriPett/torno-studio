@@ -2864,6 +2864,36 @@
           "sha256": "e1402c170e012073bb3a0db04e08b9419ed904c88fc5a66419fe573cde9032dd"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261126-reembolso-despesas-sistema",
+      "intentId": "buyer-employee-expense-reimbursement-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/reembolso-despesas-funcionarios-sistema-aceite/",
+      "contentRevision": "d892bcd0799f50fc51b25c2d9b09a6688caf193dda07be1911e3606bf508c7c6",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-26T21:32:47Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-26T21:32:10Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-26-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-26T21:32:10Z; correções: nota de hospedagem e estacionamento tratada como nota de serviço do ISS (LC 116/2003, itens 9.01 e 11.01), não NF-e/NFC-e; citações da Sefaz-RS ajustadas ao texto (documento fiscal hábil; representação simplificada); afirmações sem fonte lida retiradas ou reescritas; coerência do adiantamento de setembro. Fontes (Lei 13.467/2017, Lei 1.999/1953, CLT art. 462, Sefaz RS/PR/SP/PE, LGPD, LC 116/2003) reabertas; contas e dias da semana refeitos em Python. Revisão final independente: ver registro ROTINA-2026-11-26-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda sistema de despesas, cartão, agência nem fornecedor; sem orientação jurídica, trabalhista, tributária ou contábil individual; tipos de verba, desconto em folha, comprovantes exigidos, valor por km e prazo de guarda como decisões registradas do contador, do jurídico, do RH e da direção; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-reembolso-balanca-adiantamento.svg",
+          "sha256": "44822dcc14ce3f054edc949545717abf0052d74f8cb455eb7f39e5d7150616ee"
+        },
+        {
+          "path": "torno-reembolso-cupom-anotado.svg",
+          "sha256": "db681de631c151871c3b3e790c614ecd0c26836a9c54a224dba8942d10674d8b"
+        },
+        {
+          "path": "torno-reembolso-mapa-quilometragem.svg",
+          "sha256": "1671ff126db924c1c8a8000ea5bb2d27e0c6119bce32efb19d245c7ced2316e8"
+        }
+      ]
     }
   ]
 }

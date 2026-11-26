@@ -109,6 +109,7 @@ const expected = [
   ['torno-artigo-pt-20261125-ponto-eletronico-rep-p', '/blog/ponto-eletronico-rep-p-portaria-671-sistema-aceite/', '8e252e611653aa7c8cb35b6ca1d5bdc4cde30a2514d82b5a63fbd593596cf9f3', ['torno-ponto-fita-tratamento.svg', 'torno-ponto-cartao-semana.svg', 'torno-ponto-raio-geolocalizacao.svg']],
   ['torno-artigo-pt-20261126-controle-patrimonial-ativo-imobilizado', '/blog/controle-patrimonial-ativo-imobilizado-sistema-aceite/', '93d5a9e1a8c5ce0204971c2307d1dace93942e0a8b667d152cb2af619849cfb9', ['torno-patrimonio-grafico-contabil-fiscal.svg', 'torno-patrimonio-planta-inventario.svg', 'torno-patrimonio-plaqueta-ficha-vida.svg']],
   ['torno-artigo-pt-20261126-controle-ferias-sistema', '/blog/controle-ferias-periodo-aquisitivo-sistema-aceite/', '8b110922dd06963792a13091d7bde05bb12c1e3cf15d873cba4a49d2c93e4d94', ['torno-ferias-regua-dois-anos.svg', 'torno-ferias-calendario-abril-2027.svg', 'torno-ferias-quebra-cabeca-dias.svg']],
+  ['torno-artigo-pt-20261126-reembolso-despesas-sistema', '/blog/reembolso-despesas-funcionarios-sistema-aceite/', 'd892bcd0799f50fc51b25c2d9b09a6688caf193dda07be1911e3606bf508c7c6', ['torno-reembolso-balanca-adiantamento.svg', 'torno-reembolso-cupom-anotado.svg', 'torno-reembolso-mapa-quilometragem.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
