@@ -107,6 +107,7 @@ const expected = [
   ['torno-artigo-pt-20261125-controle-epi-ficha-entrega', '/blog/controle-epi-ficha-entrega-sistema-aceite/', 'a8c86384191d0858f15c1965554d627a09810a1f246f4b1695c4fb69a6d85848', ['torno-epi-recibo-entrega.svg', 'torno-epi-silhueta-mudanca-funcao.svg', 'torno-epi-escaninhos-tamanhos.svg']],
   ['torno-artigo-pt-20261125-gestao-frota-veiculos', '/blog/gestao-frota-abastecimento-multas-sistema-aceite/', 'cb918f3a97bfdaf160bb3931b45d30e05a0f1e0951f0346b5a66f476a5043a16', ['torno-frota-envelope-prazo.svg', 'torno-frota-bomba-consumo.svg', 'torno-frota-parabrisa-documentos.svg']],
   ['torno-artigo-pt-20261125-ponto-eletronico-rep-p', '/blog/ponto-eletronico-rep-p-portaria-671-sistema-aceite/', '8e252e611653aa7c8cb35b6ca1d5bdc4cde30a2514d82b5a63fbd593596cf9f3', ['torno-ponto-fita-tratamento.svg', 'torno-ponto-cartao-semana.svg', 'torno-ponto-raio-geolocalizacao.svg']],
+  ['torno-artigo-pt-20261126-controle-patrimonial-ativo-imobilizado', '/blog/controle-patrimonial-ativo-imobilizado-sistema-aceite/', '93d5a9e1a8c5ce0204971c2307d1dace93942e0a8b667d152cb2af619849cfb9', ['torno-patrimonio-grafico-contabil-fiscal.svg', 'torno-patrimonio-planta-inventario.svg', 'torno-patrimonio-plaqueta-ficha-vida.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
