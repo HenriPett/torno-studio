@@ -2924,6 +2924,36 @@
           "sha256": "8c9b21af3c193d0f8bf1f9354ea15ec78594b3e62e4e700d8523a48231adbaff"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261127-controle-documentos-sistema",
+      "intentId": "buyer-document-control-quality-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/controle-documentos-qualidade-lista-mestra-sistema-aceite/",
+      "contentRevision": "d6d256d35cab29d954208e975edc251e3445c5f01b3184a33988dcc24532d8fe",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-27T15:31:38Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-27T15:31:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — meio-dia\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-27-1200-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-27T15:31Z; correções: data da situação do gaveteiro para 07/12/2026 (guarda da rev. 01 só existe após a distribuição do lote em 04/12); folha devolvida em 02/12 sem data de guarda ainda desconhecida; dado de saúde na LGPD remetido aos arts. 5º, II e 11; guia de informação documentada descrito como atribuído ao ISO/TC 176/SC2 (cópia IAQG sem o nome do comitê); alts enxugados e coerentes com as legendas. Fontes (páginas da ISO e edição 2026, reproduções da cláusula 7.5, RDC 665/2022, RDC 658/2022, MP 2.200-2, Lei 14.063/2020, Decreto 10.278/2020, LGPD) reabertas; datas do exemplo refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-27-1200-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não recomenda software de GED, de gestão da qualidade nem de assinatura; não é parecer de certificação nem regulatório; ISO 9001 só pelo que é público (páginas da ISO, guia do ISO/TC 176/SC2, reprodução de terceiro); RDCs 665/2022 e 658/2022 como exemplos regulados; sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-documentos-arvore-revisoes.svg",
+          "sha256": "b16a992171c05ff9d5f4ed0d9df0d05b86425767df073605b57ce724f8113ebf"
+        },
+        {
+          "path": "torno-documentos-carimbos-copias.svg",
+          "sha256": "c950e7febe787662cdd7d7e6dfacee014ff6b19d56cf7d4f29226c280a12460d"
+        },
+        {
+          "path": "torno-documentos-gaveteiro-estados.svg",
+          "sha256": "9384110c46488e4e5d2218b1a1148445b08e7bb61748256a3081e87ecea8337c"
+        }
+      ]
     }
   ]
 }
