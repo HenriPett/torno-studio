@@ -112,6 +112,7 @@ const expected = [
   ['torno-artigo-pt-20261126-reembolso-despesas-sistema', '/blog/reembolso-despesas-funcionarios-sistema-aceite/', 'd892bcd0799f50fc51b25c2d9b09a6688caf193dda07be1911e3606bf508c7c6', ['torno-reembolso-balanca-adiantamento.svg', 'torno-reembolso-cupom-anotado.svg', 'torno-reembolso-mapa-quilometragem.svg']],
   ['torno-artigo-pt-20261127-controle-treinamentos-nr-sistema', '/blog/controle-treinamentos-nr-validade-reciclagem-sistema-aceite/', 'db689256f21024bb6796f691fb658d65fc9e103867c9e114b65f16e7130bdc4c', ['torno-treinamentos-matriz-calor.svg', 'torno-treinamentos-semaforo-escala.svg', 'torno-treinamentos-cracha-habilitacoes.svg']],
   ['torno-artigo-pt-20261127-controle-documentos-sistema', '/blog/controle-documentos-qualidade-lista-mestra-sistema-aceite/', 'd6d256d35cab29d954208e975edc251e3445c5f01b3184a33988dcc24532d8fe', ['torno-documentos-arvore-revisoes.svg', 'torno-documentos-carimbos-copias.svg', 'torno-documentos-gaveteiro-estados.svg']],
+  ['torno-artigo-pt-20261127-gestao-contratos-vencimento', '/blog/gestao-contratos-vencimento-renovacao-sistema-aceite/', '8fe8a6e495f26b1aa6e3ef6723cd689a9eda2023f81db948d7dcb1c9f66b04bc', ['torno-contratos-trilho-renovacao.svg', 'torno-contratos-despertadores-aviso.svg', 'torno-contratos-pasta-sanfonada.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));

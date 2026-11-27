@@ -2954,6 +2954,36 @@
           "sha256": "9384110c46488e4e5d2218b1a1148445b08e7bb61748256a3081e87ecea8337c"
         }
       ]
+    },
+    {
+      "contentId": "torno-artigo-pt-20261127-gestao-contratos-vencimento",
+      "intentId": "buyer-contract-management-expiry-renewal-system-acceptance-pt",
+      "locale": "pt-BR",
+      "path": "/blog/gestao-contratos-vencimento-renovacao-sistema-aceite/",
+      "contentRevision": "8fe8a6e495f26b1aa6e3ef6723cd689a9eda2023f81db948d7dcb1c9f66b04bc",
+      "approvedBy": "Integrador editorial (autorização do usuário)",
+      "approvedAt": "2026-11-27T21:48:55Z",
+      "reviewedBy": "Revisor factual independente (agente Claude opus, não redator)",
+      "reviewedAt": "2026-11-27T21:36:00Z",
+      "authorizationEvidence": {
+        "userAuthorization": "Rotina agendada \"Blogs SEO — tarde\" de Henrique (escopo: commit e push editorial na main) e autorização permanente registrada em 04/11/2026, atualizada em 07/11/2026; execução 2026-11-27-1800-claude.",
+        "review": "Revisão factual independente (agente Claude opus, não redator): GO às 2026-11-27T21:36Z; correções: art. 421-A com a redação da lei (elementos concretos que justifiquem afastar a presunção); MP 2.200-2 art. 10 § 1º (presunção sobre as declarações constantes do documento); Decreto 10.278 art. 6º (pessoa a quem o documento for oposto); desligamento do responsável movido de 20/11/2026 (feriado nacional) para 19/11/2026 no texto, alt, tabela e SVG; SVG da pasta com posições-palete. Arts. 107, 132, 205, 206, 421/421-A, MP 2.200-2, Decreto 10.278 e LGPD conferidos no Planalto; arts. 422, 472, 473, 598 e 599 citados por reprodução da Projuris, declarado no texto (texto oficial além do art. 288 não carregou na ferramenta). Datas do exemplo refeitas em Python. Revisão final independente: ver registro ROTINA-2026-11-27-1800-claude.md. Sem revisão pessoal atribuída a Henrique.",
+        "scope": "Somente artigo, três SVGs, registros e metadados editoriais; exemplo fictício; não é parecer jurídico; não recomenda software de gestão de contratos, ERP nem serviço de assinatura; Código Civil citado pelo que foi lido (Planalto até o art. 288, Lei 13.874/2019 e reproduções da Projuris); sem revisão pessoal atribuída a Henrique."
+      },
+      "assets": [
+        {
+          "path": "torno-contratos-trilho-renovacao.svg",
+          "sha256": "2dc7f64787ce103f067007a889fabd607b5da6c43207b70e74edd7f4c05e0470"
+        },
+        {
+          "path": "torno-contratos-despertadores-aviso.svg",
+          "sha256": "6dc70125ebc119681fe040d24d97081afbf0be0a050dc5e0a64bbf4855fb33f5"
+        },
+        {
+          "path": "torno-contratos-pasta-sanfonada.svg",
+          "sha256": "83c50adb7f76a15878bddb8af2cd8a64d88fcb839af903b6e8a6b3ee18dfd772"
+        }
+      ]
     }
   ]
 }
