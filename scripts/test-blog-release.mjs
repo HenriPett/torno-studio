@@ -110,6 +110,7 @@ const expected = [
   ['torno-artigo-pt-20261126-controle-patrimonial-ativo-imobilizado', '/blog/controle-patrimonial-ativo-imobilizado-sistema-aceite/', '93d5a9e1a8c5ce0204971c2307d1dace93942e0a8b667d152cb2af619849cfb9', ['torno-patrimonio-grafico-contabil-fiscal.svg', 'torno-patrimonio-planta-inventario.svg', 'torno-patrimonio-plaqueta-ficha-vida.svg']],
   ['torno-artigo-pt-20261126-controle-ferias-sistema', '/blog/controle-ferias-periodo-aquisitivo-sistema-aceite/', '8b110922dd06963792a13091d7bde05bb12c1e3cf15d873cba4a49d2c93e4d94', ['torno-ferias-regua-dois-anos.svg', 'torno-ferias-calendario-abril-2027.svg', 'torno-ferias-quebra-cabeca-dias.svg']],
   ['torno-artigo-pt-20261126-reembolso-despesas-sistema', '/blog/reembolso-despesas-funcionarios-sistema-aceite/', 'd892bcd0799f50fc51b25c2d9b09a6688caf193dda07be1911e3606bf508c7c6', ['torno-reembolso-balanca-adiantamento.svg', 'torno-reembolso-cupom-anotado.svg', 'torno-reembolso-mapa-quilometragem.svg']],
+  ['torno-artigo-pt-20261127-controle-treinamentos-nr-sistema', '/blog/controle-treinamentos-nr-validade-reciclagem-sistema-aceite/', 'db689256f21024bb6796f691fb658d65fc9e103867c9e114b65f16e7130bdc4c', ['torno-treinamentos-matriz-calor.svg', 'torno-treinamentos-semaforo-escala.svg', 'torno-treinamentos-cracha-habilitacoes.svg']],
 ];
 const expectedById = new Map(expected.map(([id, path, contentHash, assets]) => [id, { id, path, contentHash, assets }]));
 const expectedUrls = new Set([...baselinePaths, ...blogIndices, ...expected.map(([, path]) => path)].map((path) => origin + path));
